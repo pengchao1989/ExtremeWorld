@@ -6,17 +6,17 @@
     android:padding="@dimen/activity_horizontal_margin"
     android:background="@color/primary">
 
-    <TextView
+    <EditText
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:singleLine="true"
-        android:hint="@string/name"
+        android:hint="@string/account_name"
         android:layout_marginTop="120dp"
         style="@style/contentEditText"/>
 
-    <TextView
+    <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

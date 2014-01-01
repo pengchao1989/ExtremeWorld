@@ -31,6 +31,7 @@
     <string name="welcome">welcome</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
+    <string name="account_name">用户名/手机号</string>
     <string name="logging">正在登录</string>
     <string name="phone_login">手机登录</string>
     <string name="qq_login">QQ登陆</string>

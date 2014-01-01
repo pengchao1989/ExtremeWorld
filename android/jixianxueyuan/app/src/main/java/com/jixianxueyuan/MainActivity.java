@@ -12,12 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.openaccount.ui.ui.LoginActivity;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.jixianxueyuan.activity.LoginActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.app.Mine;
@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
         //requestLogin();
     }
 
-    @OnClick(R.id.account_login)void onAccoutLogin(){
+    @OnClick(R.id.account_login)void onAccountLogin(){
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
     }

@@ -30,7 +30,7 @@ public class ServerMethod {
 
     public static final String handshake(){return method_url_none + "handshake";};
     public static final String account_qq_login() { return method_url_none + hobby + "account/qq_login";};
-    public static final String login(){return method_url_none + hobby + "login";};
+    public static final String login(){return method_url_none + hobby + "account/login";};
     public static final String verification_code(){return method_url_none + "verification_code";};
     public static final String verification_code_check(){return method_url_none + "verification_code/check";};
     public static final String invite(){return method_url_none + "invite";};

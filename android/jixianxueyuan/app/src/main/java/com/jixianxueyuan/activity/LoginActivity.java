@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.sdk.android.AlibabaSDK;
@@ -36,9 +37,9 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.user_name)
-    TextView userName;
+    EditText userName;
     @BindView(R.id.password)
-    TextView password;
+    EditText password;
     @BindView(R.id.login)
     Button login;
 
@@ -50,7 +51,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OnClick(R.id.login)void onLoginClick(){
-
+        requestLogin();
     }
 
 
