@@ -54,6 +54,7 @@
 
 
         <LinearLayout
+            android:id="@+id/qq_login_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -104,7 +105,14 @@
         </LinearLayout>
 
 
-
+        <TextView
+            android:id="@+id/account_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="账号密码登录"/>
 
     </RelativeLayout>
 

@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.openaccount.ui.ui.LoginActivity;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -171,6 +172,11 @@ public class MainActivity extends Activity {
 
         requestQQOpenId();
         //requestLogin();
+    }
+
+    @OnClick(R.id.account_login)void onAccoutLogin(){
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        finish();
     }
 
     private void requestHandshake() {

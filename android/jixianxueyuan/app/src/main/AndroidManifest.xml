@@ -87,6 +87,7 @@
             android:theme="@style/AppThemeMain"
             >
         </activity>
+        <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.FlexibleSpaceWithImageWithViewPagerTabActivity"/>
         <activity android:name=".activity.CreateTopicPreActivity"/>
         <activity android:name=".activity.TopicDetailActivity"/>
