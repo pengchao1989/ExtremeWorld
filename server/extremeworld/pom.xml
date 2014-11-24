@@ -4,7 +4,7 @@
 	<parent>
     <artifactId>springside-project</artifactId>
     <groupId>org.springside</groupId>
-    <version>4.2.3-SNAPSHOT</version>
+    <version>4.3.0-SNAPSHOT</version>
   </parent>
 	<groupId>com.yumfee</groupId>
 	<artifactId>extremeworld</artifactId>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>4.2.3-SNAPSHOT</springside.version>
+		<springside.version>4.3.0-SNAPSHOT</springside.version>
 		<spring.version>4.0.2.RELEASE</spring.version>
 		<hibernate.version>4.3.1.Final</hibernate.version>
 		<spring-data-jpa.version>1.4.4.RELEASE</spring-data-jpa.version>
@@ -342,6 +342,11 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- TEST end -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
