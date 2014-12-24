@@ -22,6 +22,11 @@ public class TopicService
 		return topicDao.findOne(id);
 	}
 	
+	public void saveTopic(Topic entity)
+	{
+		topicDao.save(entity);
+	}
+	
 	public List<Topic> getAllTopic()
 	{
 		return (List<Topic>) topicDao.findAll();
