@@ -2,7 +2,13 @@ package com.yumfee.extremeworld.entity;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -11,6 +17,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tb_topic")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorValue("1")
 public class Topic extends IdEntity
 {
 	private String title;
@@ -22,7 +31,8 @@ public class Topic extends IdEntity
 	private int status;
 	private String ip;
 	
-	private User createUser;
+	private UserInfo createUser;
+	
 	public String getTitle()
 	{
 		return title;
@@ -94,11 +104,11 @@ public class Topic extends IdEntity
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	public User getCreateUser()
+	public UserInfo getCreateUser()
 	{
 		return createUser;
 	}
-	public void setCreateUser(User createUser)
+	public void setCreateUser(UserInfo createUser)
 	{
 		this.createUser = createUser;
 	}

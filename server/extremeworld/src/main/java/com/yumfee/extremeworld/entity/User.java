@@ -9,8 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableList;
 
 @Entity
 @Table(name = "tb_user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends IdEntity {
 	private String loginName;
 	private String name;
@@ -32,8 +33,6 @@ public class User extends IdEntity {
 	private String salt;
 	private String roles;
 	private Date registerDate;
-
-	private UserInfo userInfo;
 	
 	public User() {
 	}
@@ -110,19 +109,6 @@ public class User extends IdEntity {
 
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
-	}
-	
-	
-	@OneToOne
-	@JoinColumn(name = "id")
-	public UserInfo getUserInfo()
-	{
-		return userInfo;
-	}
-
-	public void setUserInfo(UserInfo userInfo)
-	{
-		this.userInfo = userInfo;
 	}
 
 	@Override

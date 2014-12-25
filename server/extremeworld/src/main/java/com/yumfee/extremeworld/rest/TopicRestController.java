@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Topic;
-import com.yumfee.extremeworld.service.topic.TopicService;
+import com.yumfee.extremeworld.service.TopicService;
 
 
 @RestController

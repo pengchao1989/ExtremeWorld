@@ -1,18 +1,17 @@
 package com.yumfee.extremeworld.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "tb_user_info")
-public class UserInfo
+@PrimaryKeyJoinColumn(name = "userId")
+public class UserInfo extends User
 {
-	private long userId;
+	//private long userId;
 	private String nickName;
 	private String gender;
 	private String birth;
@@ -21,17 +20,14 @@ public class UserInfo
 	private String qq;
 	private String weixin;
 	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getUserId()
+/*	public long getUserId()
 	{
 		return userId;
 	}
 	public void setUserId(long userId)
 	{
 		this.userId = userId;
-	}
+	}*/
 	public String getNickName()
 	{
 		return nickName;
