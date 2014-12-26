@@ -17,6 +17,7 @@ public class Site extends IdEntity
 	private String longitude;
 	private String latitude;
 	private Date createTime;
+	
 	public String getName()
 	{
 		return name;
