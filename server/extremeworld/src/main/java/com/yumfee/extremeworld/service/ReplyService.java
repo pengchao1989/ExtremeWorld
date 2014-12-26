@@ -1,5 +1,7 @@
 package com.yumfee.extremeworld.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,11 @@ public class ReplyService
 	public Reply getReply(long id)
 	{
 		return replyDao.findOne(id);
+	}
+	
+	public List<Reply> getAll()
+	{
+		return (List<Reply>) replyDao.findAll();
 	}
 	
 }
