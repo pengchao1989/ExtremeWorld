@@ -8,6 +8,6 @@ import com.yumfee.extremeworld.entity.Reply;
 
 public interface ReplyDao extends PagingAndSortingRepository<Reply, Long>
 {
-	Page<Reply> findByTopicId(Long id, Pageable pageRequest);
-	Page<Reply> findByUserId(Long id,  Pageable pageRequest);
+/*	Page<Reply> findByTopicId(Long id, Pageable pageRequest);
+	Page<Reply> findByUserId(Long id,  Pageable pageRequest);*/
 }
