@@ -1,7 +1,10 @@
 package com.yumfee.extremeworld.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -9,10 +12,22 @@ import javax.persistence.Table;
 @Table(name = "tb_city_group")
 public class CityGroup extends IdEntity
 {
+	private String name;
 	private String description;
 	private String frontImg;
 	private City city;
 	
+	private List<Site> sites;
+	
+	
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 	public String getDescription()
 	{
 		return description;
@@ -41,5 +56,17 @@ public class CityGroup extends IdEntity
 	{
 		this.city = city;
 	}
+	
+	@OneToMany(mappedBy = "cityGroup")
+	public List<Site> getSites()
+	{
+		return sites;
+	}
+	public void setSites(List<Site> sites)
+	{
+		this.sites = sites;
+	}
+	
+	
 	
 }

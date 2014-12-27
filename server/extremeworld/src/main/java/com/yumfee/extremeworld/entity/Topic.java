@@ -2,7 +2,6 @@ package com.yumfee.extremeworld.entity;
 
 import java.util.Date;
 
-import javax.persistence.Basic;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;

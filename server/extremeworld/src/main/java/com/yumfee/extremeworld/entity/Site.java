@@ -3,6 +3,9 @@ package com.yumfee.extremeworld.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,8 @@ public class Site extends IdEntity
 	private String longitude;
 	private String latitude;
 	private Date createTime;
+	
+	private CityGroup cityGroup;
 	
 	public String getName()
 	{
@@ -81,6 +86,17 @@ public class Site extends IdEntity
 	public void setCreateTime(Date createTime)
 	{
 		this.createTime = createTime;
+	}
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="city_group_id")
+	public CityGroup getCityGroup()
+	{
+		return cityGroup;
+	}
+	public void setCityGroup(CityGroup cityGroup)
+	{
+		this.cityGroup = cityGroup;
 	}
 	
 	
