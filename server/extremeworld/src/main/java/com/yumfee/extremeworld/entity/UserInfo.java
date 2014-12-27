@@ -1,6 +1,12 @@
 package com.yumfee.extremeworld.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -18,6 +24,8 @@ public class UserInfo extends User
 	private String description;
 	private String qq;
 	private String weixin;
+	
+	private List<Interest> interests = new ArrayList<Interest>();
 	
 	public String getNickName()
 	{
@@ -76,7 +84,22 @@ public class UserInfo extends User
 		this.weixin = weixin;
 	}
 	
-	
+	//关系维护端,mappedBy属性定义了userinfo为双向关系的维护端
+	//@ManyToMany(mappedBy = "userInfos")
+	//关系被维护端
+	//referencedColumnName指向对象的列名
+	@ManyToMany()
+	@JoinTable(name = "tb_user_interest",
+	joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "userId" ) },
+	inverseJoinColumns = { @JoinColumn(name="interest_id", referencedColumnName = "id") })
+	public List<Interest> getInterests()
+	{
+		return interests;
+	}
+	public void setInterests(List<Interest> interests)
+	{
+		this.interests = interests;
+	}
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

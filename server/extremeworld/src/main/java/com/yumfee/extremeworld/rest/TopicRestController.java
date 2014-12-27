@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.service.TopicService;
+import com.yumfee.extrmeworld.rest.dto.TopicDTO;
 
 
 @RestController
@@ -26,13 +28,15 @@ public class TopicRestController
 	TopicService topicService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<Topic> list()
+	public List<TopicDTO> list()
 	{
-		return topicService.getAllTopic();
+		List<TopicDTO> topicDTOlist= BeanMapper.mapList(topicService.getAllTopic(), TopicDTO.class);
+		
+		return topicDTOlist;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public Topic get(@PathVariable("id") Long id)
+	public TopicDTO get(@PathVariable("id") Long id)
 	{
 		Topic topic = topicService.getTopic(id);
 		if(topic == null)
@@ -41,7 +45,9 @@ public class TopicRestController
 			logger.warn(message);
 			throw new RestException(HttpStatus.NOT_FOUND, message);
 		}
-		return topic;
+		
+		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);
+		return topicDto;
 	}
 	
 }

@@ -25,7 +25,7 @@ import com.google.common.collect.ImmutableList;
 @Entity
 @Table(name = "tb_user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User extends IdEntity {
+public class User  extends IdEntity{
 	private String loginName;
 	private String name;
 	private String plainPassword;
