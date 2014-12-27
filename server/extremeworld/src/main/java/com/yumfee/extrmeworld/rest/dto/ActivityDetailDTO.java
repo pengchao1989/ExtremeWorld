@@ -1,28 +1,18 @@
-package com.yumfee.extremeworld.entity;
+package com.yumfee.extrmeworld.rest.dto;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
-@Table(name = "tb_activity_detail")
-public class ActivityDetail extends IdEntity
+@XmlRootElement(name = "ActivityDetail")
+public class ActivityDetailDTO
 {
 	private String content;
 	private String frontImg;
 	private Date beginTime;
 	private Date endTime;
-	
-	private Activity activity;
-	private Site site;
-	
 	
 	public String getContent()
 	{
@@ -57,28 +47,6 @@ public class ActivityDetail extends IdEntity
 	public void setEndTime(Date endTime)
 	{
 		this.endTime = endTime;
-	}
-	
-	@OneToOne(fetch=FetchType.LAZY, mappedBy="activityDetail")
-	public Activity getActivity()
-	{
-		return activity;
-	}
-	public void setActivity(Activity activity)
-	{
-		this.activity = activity;
-	}
-	
-	
-	@ManyToOne
-	@JoinColumn(name = "site_id")
-	public Site getSite()
-	{
-		return site;
-	}
-	public void setSite(Site site)
-	{
-		this.site = site;
 	}
 	
 	
