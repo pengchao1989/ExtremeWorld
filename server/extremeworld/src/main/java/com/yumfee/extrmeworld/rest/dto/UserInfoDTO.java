@@ -21,6 +21,7 @@ public class UserInfoDTO
 	private String description;
 	
 	private List<UserInterestDTO> interests;
+	private List<SiteDTO> sites;
 	
 	public Long getId()
 	{
@@ -111,7 +112,13 @@ public class UserInfoDTO
 	{
 		this.interests = interests;
 	}
-	
-	
+	public List<SiteDTO> getSites()
+	{
+		return sites;
+	}
+	public void setSites(List<SiteDTO> sites)
+	{
+		this.sites = sites;
+	}
 	
 }

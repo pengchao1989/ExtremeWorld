@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Province;
 import com.yumfee.extremeworld.service.ProvinceService;
+import com.yumfee.extrmeworld.rest.dto.ProvinceDTO;
 
 @RestController
 @RequestMapping(value = "/api/v1/province")
@@ -24,9 +26,13 @@ public class ProvinceRestController
 	
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<Province> list()
+	public List<ProvinceDTO> list()
 	{
-		return provinceService.getAll();
+		List<Province> provinceEntitys = provinceService.getAll();
+		
+		List<ProvinceDTO> provinceDTOs = BeanMapper.mapList(provinceEntitys, ProvinceDTO.class);
+		
+		return provinceDTOs;
 	}
 
 }

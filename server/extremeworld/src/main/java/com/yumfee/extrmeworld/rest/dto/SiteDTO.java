@@ -1,18 +1,8 @@
-package com.yumfee.extremeworld.entity;
+package com.yumfee.extrmeworld.rest.dto;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "tb_site")
-public class Site extends IdEntity
+public class SiteDTO
 {
 	private String name;
 	private String description;
@@ -22,10 +12,6 @@ public class Site extends IdEntity
 	private String longitude;
 	private String latitude;
 	private Date createTime;
-	
-	private CityGroup cityGroup;
-	private List<UserInfo> userInfos;
-	
 	public String getName()
 	{
 		return name;
@@ -90,31 +76,6 @@ public class Site extends IdEntity
 	{
 		this.createTime = createTime;
 	}
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="city_group_id")
-	public CityGroup getCityGroup()
-	{
-		return cityGroup;
-	}
-	public void setCityGroup(CityGroup cityGroup)
-	{
-		this.cityGroup = cityGroup;
-	}
-	
-	//关系被维护端
-	@ManyToMany(mappedBy = "sites")
-	public List<UserInfo> getUserInfos()
-	{
-		return userInfos;
-	}
-	public void setUserInfos(List<UserInfo> userInfos)
-	{
-		this.userInfos = userInfos;
-	}
-	
-	
-	
 	
 	
 }

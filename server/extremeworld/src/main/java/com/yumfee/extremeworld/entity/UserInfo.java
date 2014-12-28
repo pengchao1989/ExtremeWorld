@@ -26,6 +26,7 @@ public class UserInfo extends User
 	private String weixin;
 	
 	private List<Interest> interests = new ArrayList<Interest>();
+	private List<Site> sites = new ArrayList<Site>();
 	
 	public String getNickName()
 	{
@@ -100,6 +101,20 @@ public class UserInfo extends User
 	{
 		this.interests = interests;
 	}
+	
+	@ManyToMany()
+	@JoinTable(name = "tb_user_site",
+	joinColumns = { @JoinColumn(name="user_id", referencedColumnName= "userId")},
+	inverseJoinColumns = { @JoinColumn(name="site_id", referencedColumnName = "id") })
+	public List<Site> getSites()
+	{
+		return sites;
+	}
+	public void setSites(List<Site> sites)
+	{
+		this.sites = sites;
+	}
+	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
