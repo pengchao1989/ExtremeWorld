@@ -4,7 +4,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <div id="header">
 	<div id="title">
-	    <h1><a href="${ctx}">QuickStart示例</a><small>--TodoList应用演示</small>
+	    <h1><a href="${ctx}">最炫滑板圈</a><small>--无下限跳票</small>
 	    <shiro:user>
 			<div class="btn-group pull-right">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
