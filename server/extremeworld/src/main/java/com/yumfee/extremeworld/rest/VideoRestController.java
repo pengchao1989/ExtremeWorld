@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.VideoService;
+import com.yumfee.extrmeworld.rest.dto.VideoDTO;
 
 @RestController
 @RequestMapping(value = "/api/v1/video")
@@ -23,8 +25,11 @@ public class VideoRestController
 	VideoService videoService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<Video> list()
+	public List<VideoDTO> list()
 	{
-		return videoService.getAll();
+		List<Video> videoEntityList = videoService.getAll();
+		
+		List<VideoDTO> videoDTOs = BeanMapper.mapList(videoEntityList, VideoDTO.class);
+		return videoDTOs;
 	}
 }

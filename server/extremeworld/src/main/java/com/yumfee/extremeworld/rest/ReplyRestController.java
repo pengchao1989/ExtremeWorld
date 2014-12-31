@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.service.ReplyService;
+import com.yumfee.extrmeworld.rest.dto.ReplyDTO;
 
 @RestController
 @RequestMapping(value = "/api/v1/reply")
@@ -23,12 +25,12 @@ public class ReplyRestController
 	private ReplyService replyService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<Reply> list()
+	public List<ReplyDTO> list()
 	{
-		return replyService.getAll();
+		List<Reply> replyEntityList = replyService.getAll();
+		
+		List<ReplyDTO> replyDTOs = BeanMapper.mapList(replyEntityList, ReplyDTO.class);
+		return replyDTOs;
 	}
-	
-	
-	
 	
 }

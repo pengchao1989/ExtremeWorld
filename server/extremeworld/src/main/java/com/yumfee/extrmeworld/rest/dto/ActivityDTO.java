@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Activity")
 public class ActivityDTO
 {
-
+	private Long id;
 	private String title;
 	private String content;
 	private int imageCount;
@@ -16,6 +16,16 @@ public class ActivityDTO
 	private int status;
 	
 	private ActivityDetailDTO activityDetail;
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
 
 	public String getTitle()
 	{
