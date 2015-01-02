@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -32,6 +34,7 @@ public class Topic extends IdEntity
 	
 	private UserInfo createUser;
 	
+	@NotBlank
 	public String getTitle()
 	{
 		return title;
@@ -56,6 +59,7 @@ public class Topic extends IdEntity
 	{
 		this.imageCount = imageCount;
 	}
+	@NotBlank
 	public int getReplyCount()
 	{
 		return replyCount;
