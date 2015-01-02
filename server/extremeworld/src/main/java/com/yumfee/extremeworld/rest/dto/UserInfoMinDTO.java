@@ -1,4 +1,4 @@
-package com.yumfee.extrmeworld.rest.dto;
+package com.yumfee.extremeworld.rest.dto;
 
 public class UserInfoMinDTO
 {

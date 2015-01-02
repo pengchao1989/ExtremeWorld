@@ -12,8 +12,8 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.CityGroup;
+import com.yumfee.extremeworld.rest.dto.CityGroupDTO;
 import com.yumfee.extremeworld.service.CityGroupService;
-import com.yumfee.extrmeworld.rest.dto.CityGroupDTO;
 
 @RestController
 @RequestMapping(value = "/api/v1/city_group")

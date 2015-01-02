@@ -12,8 +12,8 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Province;
+import com.yumfee.extremeworld.rest.dto.ProvinceDTO;
 import com.yumfee.extremeworld.service.ProvinceService;
-import com.yumfee.extrmeworld.rest.dto.ProvinceDTO;
 
 @RestController
 @RequestMapping(value = "/api/v1/province")

@@ -22,8 +22,8 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.service.TopicService;
-import com.yumfee.extrmeworld.rest.dto.TopicDTO;
 
 
 @RestController

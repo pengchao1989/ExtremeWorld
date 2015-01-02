@@ -12,8 +12,8 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Activity;
+import com.yumfee.extremeworld.rest.dto.ActivityDTO;
 import com.yumfee.extremeworld.service.ActivityService;
-import com.yumfee.extrmeworld.rest.dto.ActivityDTO;
 
 @RestController
 @RequestMapping(value = "/api/v1/activity")

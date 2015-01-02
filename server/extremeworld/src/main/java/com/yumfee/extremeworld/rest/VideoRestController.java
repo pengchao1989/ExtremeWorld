@@ -12,8 +12,8 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Video;
+import com.yumfee.extremeworld.rest.dto.VideoDTO;
 import com.yumfee.extremeworld.service.VideoService;
-import com.yumfee.extrmeworld.rest.dto.VideoDTO;
 
 @RestController
 @RequestMapping(value = "/api/v1/video")
