@@ -3,6 +3,10 @@ package com.yumfee.extremeworld.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,9 +36,30 @@ public class TopicService
 		return (List<Topic>) topicDao.findAll();
 	}
 	
+	public Page<Topic> getAllTopic(int pageNumber, int pageSize,
+			String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		return topicDao.findAll(pageRequest);
+	}
+	
 	@Autowired
 	public void setTopicDao(TopicDao topicDao)
 	{
 		this.topicDao = topicDao;
+	}
+	
+	/**
+	 * 创建分页请求.
+	 */
+	private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
+		Sort sort = null;
+		if ("auto".equals(sortType)) {
+			sort = new Sort(Direction.DESC, "id");
+		} else if ("title".equals(sortType)) {
+			sort = new Sort(Direction.ASC, "title");
+		}
+
+		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}
 }

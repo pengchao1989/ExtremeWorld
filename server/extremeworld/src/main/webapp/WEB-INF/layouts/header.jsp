@@ -2,10 +2,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<div id="headerSection">
+				<div class="container">
+				
+					<div class="span3 logo">
+						<h1><a href="${ctx}">ExtremeWorld</a></h1>
+					</div>
+					
+
+					<div class="navbar">
+
+
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li><a href="#download">讨论</a></li>
+								<li><a href="#shopAttention">视频</a></li>
+								<li><a href="#recentpostSection">场地</a></li>
+								<li><a href="#contactSection">Support</a></li>
+							</ul>
+						</div>
+
+						<button type="button" class="btn btn-navbar"
+							data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+				</div>
+			</div>
 <div id="header">
 	<div id="title">
-	    <h1><a href="${ctx}">ExtremeWorld</a><small>--无下限跳票</small>
-	    <shiro:user>
+	    
+			
+			<shiro:user>
 			<div class="btn-group pull-right">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 					<i class="icon-user"></i> <shiro:principal property="name"/>
