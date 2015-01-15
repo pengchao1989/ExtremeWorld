@@ -19,7 +19,7 @@
 	<div class="list-group bs-callout bs-callout-info">
 		<tbody>
 		<c:forEach items="${topics.content}" var="topic">
-				<a href="#" class="list-group-item">
+				<a href="${ctx}/topic/${topic.id}" target="_blank" class="list-group-item">
 					<span class="badge">14</span>
 					<h4 class="list-group-item-heading">${topic.title}</h4>
 					<p class="list-group-item-text">...</p>

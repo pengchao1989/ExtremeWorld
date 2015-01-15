@@ -3,6 +3,10 @@ package com.yumfee.extremeworld.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,4 +32,11 @@ public class ReplyService
 		return (List<Reply>) replyDao.findAll();
 	}
 	
+	public Page<Reply> getAll(int pageNumber, int pageSize)
+	{
+		PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize);
+		return replyDao.findAll(pageRequest);
+	}
+	
+
 }

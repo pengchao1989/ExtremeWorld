@@ -8,15 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.yumfee.extremeworld.entity.Task;
+import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.entity.UserInfo;
+import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -28,6 +29,9 @@ public class TopicController
 	
 	@Autowired
 	private TopicService topicService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(
@@ -54,6 +58,27 @@ public class TopicController
 		topicService.saveTopic(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
 		return "redirect:/topic/";
+	}
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public String detail(@PathVariable("id") Long id, 
+			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
+			Model model, ServletRequest request)
+	{
+		//第一页显示主题内容
+		if(pageNumber==1)
+		{
+			
+		}
+		Topic topic = topicService.getTopic(id);
+		
+		Page<Reply> replys = replyService.getAll(pageNumber, pageSize);
+		
+		model.addAttribute("topic",topic);
+		model.addAttribute("replys", replys);
+		return "topic/topicDetail";
 	}
 	
 	/**
