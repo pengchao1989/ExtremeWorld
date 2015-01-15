@@ -32,7 +32,7 @@ public class Topic extends IdEntity
 	private int status;
 	private String ip;
 	
-	private UserInfo createUser;
+	private User user;
 	
 	@NotBlank
 	public String getTitle()
@@ -59,7 +59,6 @@ public class Topic extends IdEntity
 	{
 		this.imageCount = imageCount;
 	}
-	@NotBlank
 	public int getReplyCount()
 	{
 		return replyCount;
@@ -107,13 +106,13 @@ public class Topic extends IdEntity
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	public UserInfo getCreateUser()
+	public User getUser()
 	{
-		return createUser;
+		return user;
 	}
-	public void setCreateUser(UserInfo createUser)
+	public void setUser(User user)
 	{
-		this.createUser = createUser;
+		this.user = user;
 	}
 	
 }

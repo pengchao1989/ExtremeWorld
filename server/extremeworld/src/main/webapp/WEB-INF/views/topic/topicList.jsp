@@ -30,15 +30,17 @@
 	
 	<tags:pagination page="${topics}" paginationSize="5"/>
 	
+	<form action="${ctx}/topic"  method="post"  class="form-horizontal">
+		<section id="edit">
+			<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
+			<br/>
+			<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
+			<br/>
+			<input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;	
+		</section>
+	</form>	
 	
-	
-	<section id="edit">
-		<input type="text" id="task_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
-		<br/>
-		<textarea id="txt-content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
-		<br/>
-		<input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;	
-	</section>
+
 	
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/module.js"></script>
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/hotkeys.js"></script>

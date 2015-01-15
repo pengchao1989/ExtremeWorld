@@ -15,7 +15,7 @@
 
 						<div class="nav-collapse">
 							<ul class="nav">
-								<li><a href="#download">讨论</a></li>
+								<li><a href="topic">讨论</a></li>
 								<li><a href="#shopAttention">视频</a></li>
 								<li><a href="#recentpostSection">场地</a></li>
 								<li><a href="#contactSection">Support</a></li>

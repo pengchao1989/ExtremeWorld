@@ -17,7 +17,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @PrimaryKeyJoinColumn(name = "userId")
 public class UserInfo extends User
 {
-	private String nickName;
 	private String gender;
 	private String birth;
 	private String avatar;
@@ -28,14 +27,6 @@ public class UserInfo extends User
 	private List<Interest> interests = new ArrayList<Interest>();
 	private List<Site> sites = new ArrayList<Site>();
 	
-	public String getNickName()
-	{
-		return nickName;
-	}
-	public void setNickName(String nickName)
-	{
-		this.nickName = nickName;
-	}
 	public String getGender()
 	{
 		return gender;
