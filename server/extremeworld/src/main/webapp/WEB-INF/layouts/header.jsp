@@ -6,7 +6,7 @@
 				<div class="container">
 				
 					<div class="span3 logo">
-						<h1><a href="${ctx}">ExtremeWorld</a></h1>
+						<h1><a href="${ctx}">${name}</a></h1>
 					</div>
 					
 
@@ -17,7 +17,7 @@
 							<ul class="nav">
 								<li><a href="topic">讨论</a></li>
 								<li><a href="#shopAttention">视频</a></li>
-								<li><a href="#recentpostSection">场地</a></li>
+								<li><a href="site">场地</a></li>
 								<li><a href="#contactSection">Support</a></li>
 							</ul>
 						</div>
