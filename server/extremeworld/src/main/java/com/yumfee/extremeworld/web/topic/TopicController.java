@@ -25,7 +25,7 @@ import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 @RequestMapping(value = "/topic")
 public class TopicController
 {
-	private static final String PAGE_SIZE = "3";
+	private static final String PAGE_SIZE = "10";
 	
 	@Autowired
 	private TopicService topicService;

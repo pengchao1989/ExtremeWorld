@@ -15,10 +15,12 @@
 <body>
 	<br />
 	<br />
-	<div >
-		<tbody>
+	<div class="container">
+	
+	<div class="row">
+			<tbody>
 			<c:forEach items="${sites.content}" var="site" varStatus="status">
-					<div >
+			
 						<div class="col-sm-6 col-md-4">
 							<div class="thumbnail">
 								<img data-src="holder.js/300x300" alt="..."src="${site.frontImg}">
@@ -31,13 +33,17 @@
 								</div>
 							</div>
 						</div>
-					</div>
 					
 					<c:if test="${status.count%3==0}">
-						<tr/>
+						</br>
 					</c:if>
 			</c:forEach>
 		</tbody>
+	</div>
+
+		
+	<tags:pagination page="${sites}" paginationSize="5" />
+		
 	</div>
 	<br/>
 
@@ -53,7 +59,7 @@
 	</div>
 
 
-	<tags:pagination page="${sites}" paginationSize="5" />
+	
 
 <script type="text/javascript">
     

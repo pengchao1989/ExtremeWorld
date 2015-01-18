@@ -34,7 +34,7 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="main-container" id="main-container">
 		<%@ include file="/WEB-INF/layouts/header.jsp"%>
 		<div id="content">
 			<sitemesh:body/>

@@ -26,7 +26,7 @@
 			<a href="#" class="navbar-brand">
 				<small>
 					<i class="fa fa-leaf"></i>
-					ExtremeWorld
+					极限学院
 				</small>
 			</a>
 
@@ -37,6 +37,7 @@
 			<!-- /section:basics/navbar.toggle -->
 		</div>
 
+	<shiro:user>
 		<!-- #section:basics/navbar.dropdown -->
 		<div class="navbar-buttons navbar-header pull-right" role="navigation">
 			<ul class="nav ace-nav">
@@ -330,34 +331,24 @@
 								Logout
 							</a>
 						</li>
+						
+						<li class="divider"></li>
+						
+						<li>
+							<a href="${ctx}/api">
+								<i class="ace-icon fa fa-power-off"></i>
+								APIs
+							</a>
+						</li>
+						
 					</ul>
 				</li>
 
 				<!-- /section:basics/navbar.user_menu -->
 			</ul>
 		</div>
-
+	</shiro:user>
 		<!-- /section:basics/navbar.dropdown -->
 	</div><!-- /.navbar-container -->
 </div>
 </div>
-
-	<div id="title">
-			<shiro:user>
-			<div class="btn-group pull-right">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i> <shiro:principal property="name"/>
-					<span class="caret"></span>
-				</a>
-			
-				<ul class="dropdown-menu">
-					<shiro:hasRole name="admin">
-						<li><a href="${ctx}/admin/user">Admin Users</a></li>
-						<li class="divider"></li>
-					</shiro:hasRole>
-					<li><a href="${ctx}/api">APIs</a></li>
-				</ul>
-			</div>
-		</shiro:user>
-		</h1>
-	</div>

@@ -16,30 +16,25 @@
 	<br/>
 	<br/>
 	
-	<div class="main-container" id="main-container">
+	<div class="container">
 	
 	
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
 		<tbody>
 		<c:forEach items="${topics.content}" var="topic">
 				<a href="${ctx}/topic/${topic.id}" target="_blank" class="list-group-item">
 					<span class="badge">14</span>
-					<h4 class="list-group-item-heading">${topic.title}</h4>
+					<h3 class="list-group-item-heading">${topic.title}</h3>
 					<p class="list-group-item-text">...</p>
 				</a>
 		</c:forEach>
 		</tbody>
 	</div>
-	</div>
 
 	
-	<dir class="row col-sm-offset-3">
-		<tags:pagination page="${topics}" paginationSize="5"/>
-	</dir>
+	<tags:pagination page="${topics}" paginationSize="5"/>
 	
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
 			<form class="form-horizontal" action="${ctx}/topic"  method="post"  class="form-horizontal">
 				<section id="edit">
 					<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
@@ -49,7 +44,6 @@
 					<input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;	
 				</section>
 			</form>	
-		</div>
 	</div>
 	
 

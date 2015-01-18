@@ -11,24 +11,31 @@
 </head>
 <body>
 
-	<div class="page-header">
-		<h1>${topic.title}</h1>
-		<p>${topic.content}</p>
+
+							
+	<div class="container">
+		<div class="row">
 		
+			<div class="widget-header widget-header-flat">
+				<h4 class="widget-title smaller">
+					<i class="ace-icon fa fa-quote-left smaller-80"></i>
+					<h1>${topic.title}</h1>
+					<p class="lead">${topic.content}</p>
+				</h4>
+			</div>
+		
+			<div class="list-group bs-callout bs-callout-info">
+				<tbody>
+				<c:forEach items="${replys.content}" var="reply">
+						<a href="${ctx}/topic/${topic.id}" target="_blank" class="list-group-item">
+							<span class="badge">14</span>
+							<h4 class="list-group-item-heading">${reply.content}</h4>
+						</a>
+				</c:forEach>
+				</tbody>
+			</div>
+		</div>
 	</div>
-
-	<div class="list-group bs-callout bs-callout-info">
-		<tbody>
-		<c:forEach items="${replys.content}" var="reply">
-				<a href="${ctx}/topic/${topic.id}" target="_blank" class="list-group-item">
-					<span class="badge">14</span>
-					<h4 class="list-group-item-heading">${reply.content}</h4>
-					<p class="list-group-item-text">...</p>
-				</a>
-		</c:forEach>
-		</tbody>
-	</div>
-
-
+		
 </body>
 </html>
