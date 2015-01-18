@@ -3,6 +3,8 @@ package com.yumfee.extremeworld.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,12 @@ public class VideoService
 	public List<Video> getAll()
 	{
 		return (List<Video>) videoDao.findAll();
+	}
+	
+	public Page<Video> getAll(int pageNumber, int pageSize)
+	{
+		PageRequest pageRequest = new PageRequest(pageNumber, pageSize);
+		return videoDao.findAll(pageRequest);
 	}
 	
 	@Autowired

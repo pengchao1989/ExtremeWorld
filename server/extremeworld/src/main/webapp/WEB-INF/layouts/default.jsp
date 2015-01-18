@@ -25,6 +25,10 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/font-awesome-4.2.0/css/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/static/simditor-2.0.4/styles/simditor.css" />
 
+<!-- ace -->
+<link rel="stylesheet" type="text/css" href="${ctx}/static/ace/assets/css/ace-fonts.css" >
+<link rel="stylesheet" href="${ctx}/static/ace/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+
 
 <sitemesh:head/>
 </head>

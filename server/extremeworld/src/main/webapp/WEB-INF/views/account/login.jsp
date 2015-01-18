@@ -8,9 +8,11 @@
 <html>
 <head>
 	<title>登录页</title>
+	
+	<link rel="stylesheet" href="${ctx}/static/ace/assets/css/ace-rtl.css" />
 </head>
 
-<body>
+<body  class="login-layout">
 	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
 	<%
 	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
@@ -40,7 +42,6 @@
 				<label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我</label>
 				<br>
 				<input id="submit_btn" class="btn btn-primary" type="submit" value="登录"/> <a class="btn" href="${ctx}/register">注册</a>
-			 	<span class="help-block">(管理员: <b>admin/admin</b>, 普通用户: <b>user/user</b>)</span>
 			</div>
 		</div>
 	</form>

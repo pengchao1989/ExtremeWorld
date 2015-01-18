@@ -12,10 +12,15 @@
 
 
 </head>
-<body>
+<body class="no-skin">
 	<br/>
 	<br/>
-	<div class="list-group bs-callout bs-callout-info">
+	
+	<div class="main-container" id="main-container">
+	
+	
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
 		<tbody>
 		<c:forEach items="${topics.content}" var="topic">
 				<a href="${ctx}/topic/${topic.id}" target="_blank" class="list-group-item">
@@ -26,19 +31,29 @@
 		</c:forEach>
 		</tbody>
 	</div>
+	</div>
+
 	
-	<tags:pagination page="${topics}" paginationSize="5"/>
+	<dir class="row col-sm-offset-3">
+		<tags:pagination page="${topics}" paginationSize="5"/>
+	</dir>
 	
-	<form action="${ctx}/topic"  method="post"  class="form-horizontal">
-		<section id="edit">
-			<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
-			<br/>
-			<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
-			<br/>
-			<input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;	
-		</section>
-	</form>	
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<form class="form-horizontal" action="${ctx}/topic"  method="post"  class="form-horizontal">
+				<section id="edit">
+					<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
+					<br/>
+					<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
+					<br/>
+					<input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;	
+				</section>
+			</form>	
+		</div>
+	</div>
 	
+
+	</div>
 
 	
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/module.js"></script>
