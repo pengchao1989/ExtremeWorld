@@ -1,1 +1,10 @@
 /* header */
+
+div.reply_body {
+margin-left: 20px;
+border-style: ridge
+}
+
+.tools{
+	right="5px"
+}
