@@ -17,6 +17,8 @@ public class SubReply extends IdEntity
 	private Date createTime;
 	
 	private UserInfo userInfo;
+	
+	private SubReply preSubReply;
 
 	public String getContent()
 	{
@@ -50,6 +52,20 @@ public class SubReply extends IdEntity
 	{
 		this.userInfo = userInfo;
 	}
+
+	@ManyToOne
+	@JoinColumn(name = "pid")
+	public SubReply getPreSubReply()
+	{
+		return preSubReply;
+	}
+
+	public void setPreSubReply(SubReply preSubReply)
+	{
+		this.preSubReply = preSubReply;
+	}
+	
+	
 	
 	
 	

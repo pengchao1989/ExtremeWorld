@@ -4,7 +4,7 @@
 		<!-- #section:basics/footer -->
 		<div class="footer-content">
 			<span class="bigger-120"> <span class="blue bolder">ExtremeWorld</span>
-				Application &copy; 2015
+				Application &copy; 2015  蜀ICP备14031715号
 			</span> &nbsp; &nbsp; <span class="action-buttons"> <a href="#">
 					<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
 			</a> <a href="#"> <i

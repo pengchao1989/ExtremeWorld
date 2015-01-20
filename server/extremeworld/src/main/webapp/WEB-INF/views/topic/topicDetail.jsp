@@ -64,6 +64,10 @@
 									<div>
 										<img class="pull-left" alt="Alex Doe's avatar" src="${ctx}/static/ace/assets/avatars/avatar5.png" />
 										<a href="#"> ${subreply.userInfo.name} </a>
+										<c:if test="${subreply.preSubReply  != null}">
+										回复
+											<a href="#"> ${subreply.preSubReply.userInfo.name}</a>
+										</c:if>
 											${subreply.content}
 										<div class="time">
 											<i class="ace-icon fa fa-clock-o bigger-110"></i>

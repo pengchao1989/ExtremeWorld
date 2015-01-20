@@ -356,6 +356,11 @@
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>sdk</artifactId>
+			<version>[6.1.7, 6.999]</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
