@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Topic extends IdEntity
 {
 	private String title;
+	private String excerpt;
 	private String content;
 	private int imageCount;
 	private int replyCount;
@@ -42,6 +43,14 @@ public class Topic extends IdEntity
 	public void setTitle(String title)
 	{
 		this.title = title;
+	}
+	public String getExcerpt()
+	{
+		return excerpt;
+	}
+	public void setExcerpt(String excerpt)
+	{
+		this.excerpt = excerpt;
 	}
 	public String getContent()
 	{

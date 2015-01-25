@@ -24,7 +24,7 @@ public class UserInfo extends User
 	private String qq;
 	private String weixin;
 	
-	private List<Interest> interests = new ArrayList<Interest>();
+	private List<Hobby> hobbys = new ArrayList<Hobby>();
 	private List<Site> sites = new ArrayList<Site>();
 	
 	public String getGender()
@@ -81,16 +81,16 @@ public class UserInfo extends User
 	//关系被维护端
 	//referencedColumnName指向对象的列名
 	@ManyToMany()
-	@JoinTable(name = "tb_user_interest",
+	@JoinTable(name = "tb_user_hobby",
 	joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "userId" ) },
-	inverseJoinColumns = { @JoinColumn(name="interest_id", referencedColumnName = "id") })
-	public List<Interest> getInterests()
+	inverseJoinColumns = { @JoinColumn(name="hobby_id", referencedColumnName = "id") })
+	public List<Hobby> getHobbys()
 	{
-		return interests;
+		return hobbys;
 	}
-	public void setInterests(List<Interest> interests)
+	public void setHobbys(List<Hobby> interests)
 	{
-		this.interests = interests;
+		this.hobbys = interests;
 	}
 	
 	@ManyToMany()

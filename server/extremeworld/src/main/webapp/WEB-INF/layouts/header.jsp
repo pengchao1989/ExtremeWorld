@@ -3,8 +3,6 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-
-
 <!-- ace settings handler -->
 <div id="navbar" class="navbar navbar-default">
 <script src="${ctx}/static/ace/assets/js/ace-extra.js"></script>
