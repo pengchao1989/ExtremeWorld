@@ -35,7 +35,8 @@
 		<div class="row">
 			<tbody>
 			<c:forEach items="${replys.content}" var="reply">
-				<div class="itemdiv dialogdiv">
+			<div class="well well-lg">
+				<div class="itemdiv commentdiv">
 					<div class="user">
 						<img alt="Alexa's Avatar" src="${ctx}/static/ace/assets/avatars/avatar1.png" />
 					</div>
@@ -49,7 +50,7 @@
 						<div class="clearfix">
 							<a class="user" href="#">${reply.userInfo.name}</a>
 						</div>
-						<div class="text">${reply.content}</div>
+						<h4 class="green smaller">${reply.content}</h4>
 			
 						<div class="tools action-buttons">
 							<a id="newReply" class="btn btn-minier btn-info">
@@ -57,43 +58,38 @@
 							</a>
 						</div>
 						
-						<!-- 子回复 -->
-						<div>
-							<c:forEach items="${reply.subReplys}" var="subreply">
-								<div class="profile-activity ">
-									<div>
-										<img class="pull-left" alt="Alex Doe's avatar" src="${ctx}/static/ace/assets/avatars/avatar5.png" />
-										<a href="#"> ${subreply.userInfo.name} </a>
-										<c:if test="${subreply.preSubReply  != null}">
-										回复
-											<a href="#"> ${subreply.preSubReply.userInfo.name}</a>
-										</c:if>
-											${subreply.content}
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o bigger-110"></i>
-											an hour ago
-										</div>
-									</div>
-	
-									<div class="tools action-buttons">
-										<a href="#" class="blue">
-											<i class="ace-icon fa fa-comment bigger-125"></i>
-										</a>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-						
-						
-						
 					</div>
 				</div>
+				
+				<!-- 子回复 -->
+				<div style="padding-left: 5%">
+					<c:forEach items="${reply.subReplys}" var="subreply">
+						<div class="profile-activity ">
+							<div>
+								<img class="pull-left" alt="Alex Doe's avatar" src="${ctx}/static/ace/assets/avatars/avatar5.png" />
+								<a href="#"> ${subreply.userInfo.name} </a>
+								<c:if test="${subreply.preSubReply  != null}">
+								回复
+									<a href="#"> ${subreply.preSubReply.userInfo.name}</a>
+								</c:if>
+									${subreply.content}
+								<div class="time">
+									<i class="ace-icon fa fa-clock-o bigger-110"></i>
+									an hour ago
+								</div>
+							</div>
 
-
-			</c:forEach>
-			</tbody>
-		</div>
+						</div>
+					</c:forEach>
+				</div>
+						
+						
+			</div>		
+					
+		</c:forEach>
+		</tbody>
 	</div>
+</div>
 	
 		
 
