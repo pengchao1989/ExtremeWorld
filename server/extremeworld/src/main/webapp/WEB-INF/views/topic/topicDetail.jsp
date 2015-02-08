@@ -91,6 +91,12 @@
 	</div>
 </div>
 	
+	
+	<form method="post" action="http://upload.qiniu.com/" enctype="multipart/form-data">
+		  <input name="token" type="hidden" value="iKeYoaf3toQqqFfpdvNX5VBXX9qTL7FDN6GwcQj:O4jOrUPzqiJCmj462sZsBHDkQ6E=:eyJzY29wZSI6ImV4dHJlbWUiLCJyZXR1cm5VcmwiOiJodHRwOi8vbG9jYWxob3N0OjgwMjMvZXh0cmVtZXdvcmxkL3RvcGljLzUiLCJyZXR1cm5Cb2R5IjoieyAgICAgXCJmb29cIjogXCJiYXJcIiwgICAgIFwibmFtZVwiOiAkKGZuYW1lKSwgICAgIFwic2l6ZVwiOiAkKGZzaXplKSwgICAgIFwidHlwZVwiOiAkKG1pbWVUeXBlKSwgICAgIFwiaGFzaFwiOiAkKGV0YWcpLCAgICAgXCJ3XCI6ICQoaW1hZ2VJbmZvLndpZHRoKSwgICAgIFwiaFwiOiAkKGltYWdlSW5mby5oZWlnaHQpLCAgICAgXCJjb2xvclwiOiAkKGV4aWYuQ29sb3JTcGFjZS52YWwpIH0iLCJkZWFkbGluZSI6MTQyMjQxMzg4OX0=">
+		  <input name="file" type="file" />
+		  <input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;
+	</form>
 		
 
 </body>
