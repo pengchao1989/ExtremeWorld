@@ -16,6 +16,7 @@ public class TopicDTO
 	private int replyCount;
 	private Date createTime;
 	private int status;
+	private String videoSource;
 	
 	private UserInfoMinDTO createUser;
 	
@@ -76,6 +77,14 @@ public class TopicDTO
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+	public String getVideoSource()
+	{
+		return videoSource;
+	}
+	public void setVideoSource(String videoSource)
+	{
+		this.videoSource = videoSource;
 	}
 	public UserInfoMinDTO getCreateUser()
 	{
