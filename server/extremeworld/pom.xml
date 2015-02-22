@@ -361,6 +361,14 @@
 			<artifactId>sdk</artifactId>
 			<version>[6.1.7, 6.999]</version>
 		</dependency>
+		<dependency>
+			<groupId>com.lordofthejars</groupId>
+			<artifactId>nosqlunit-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
