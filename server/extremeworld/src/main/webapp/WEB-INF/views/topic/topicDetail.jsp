@@ -32,6 +32,13 @@
 			</div>
 		</div>
 		
+		<c:if test="${topic.videoSource != null}">
+			<div class="row">
+				<video src="http://7vilxo.com1.z0.glb.clouddn.com/video_test.mp4" controls="controls"></video>
+			</div>
+		</c:if>
+
+		
 		<div class="row">
 			<tbody>
 			<c:forEach items="${replys.content}" var="reply">

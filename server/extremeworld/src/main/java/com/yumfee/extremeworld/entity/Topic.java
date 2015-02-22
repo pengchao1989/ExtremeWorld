@@ -32,6 +32,7 @@ public class Topic extends IdEntity
 	private Date updateTime;
 	private int status;
 	private String ip;
+	private String videoSource;
 	
 	private User user;
 	
@@ -111,6 +112,16 @@ public class Topic extends IdEntity
 	public void setIp(String ip)
 	{
 		this.ip = ip;
+	}
+	
+	public String getVideoSource()
+	{
+		return videoSource;
+	}
+
+	public void setVideoSource(String videoSource)
+	{
+		this.videoSource = videoSource;
 	}
 	
 	@ManyToOne
