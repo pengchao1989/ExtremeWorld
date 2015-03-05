@@ -1,5 +1,7 @@
 package com.yumfee.extremeworld.service;
 
+import java.util.List;
+
 import com.yumfee.extremeworld.modules.nosql.redis.JedisTemplate;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPool;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPoolBuilder;
@@ -20,5 +22,15 @@ public class RedisTestService
 	{
 		
 		return jedisTemplate.get(key);
+	}
+	
+	public List<String> getValues(String...keys)
+	{
+		return jedisTemplate.mget(keys);
+	}
+	
+	public Long incr(String key)
+	{
+		return jedisTemplate.incr(key);
 	}
 }
