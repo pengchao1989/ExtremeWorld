@@ -8,10 +8,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="description" content="User login page" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		
 <link rel="stylesheet" href="${ctx}/static/ace/assets/css/ace-rtl.css" />
 <title>Insert title here</title>
 </head>
-<body class="login-layout">
+<body >
+
+<div class="login-layout">
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
@@ -250,6 +255,7 @@
 		</div><!-- /.main-content -->
 	</div><!-- /.main-container -->
 
+</div>
 	<!-- basic scripts -->
 
 	<!--[if !IE]> -->
@@ -307,5 +313,6 @@
 		 
 		});
 	</script>
+	
 </body>
 </html>
