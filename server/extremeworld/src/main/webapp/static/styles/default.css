@@ -8,3 +8,7 @@ border-style: ridge
 .tools{
 	right="5px"
 }
+
+.light-login {
+  background: #dfe0e2;
+}

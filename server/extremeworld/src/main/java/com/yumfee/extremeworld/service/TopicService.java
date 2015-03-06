@@ -28,6 +28,7 @@ public class TopicService
 	
 	public void saveTopic(Topic entity)
 	{
+		entity.setExcerpt(entity.getTitle());
 		topicDao.save(entity);
 	}
 	

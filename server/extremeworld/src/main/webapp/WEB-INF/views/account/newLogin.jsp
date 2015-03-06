@@ -16,7 +16,7 @@
 </head>
 <body >
 
-<div class="login-layout">
+<div class="login-layout blur-login">
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
