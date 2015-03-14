@@ -12,27 +12,59 @@
 
 
 </head>
-<body class="no-skin">
-	<br/>
-	<br/>
-	
-	<div class="container">
-	
-	
-	<div class="row">
-		<tbody>
-		<c:forEach items="${topics.content}" var="topic">
-				<a href="${ctx}/topic/${topic.id}" target="_blank" class="list-group-item">
-					<span class="badge">14</span>
-					<h3 class="list-group-item-heading">${topic.title}</h3>
-					<p class="list-group-item-text">...</p>
-				</a>
-		</c:forEach>
-		</tbody>
-	</div>
+<body>
 
-	
-	<tags:pagination page="${topics}" paginationSize="5"/>
+	<br/>
+
+	<div class="container">
+
+		<div class="row main_content">
+			<tbody>
+				<ul class="media-list">
+					<c:forEach items="${topics.content}" var="topic">
+						<li class="media">
+								<div class="media-left">
+									<a href="#"> <img class="media-object avatar" src="${ctx}/static/ace/assets/avatars/avatar1.png" alt="..."></a>
+									
+								</div>
+								<div class="media-body">
+									<a href="${ctx}/topic/${topic.id}" target="_blank"> 
+									
+									<div class="row">
+										<div class="col-md-6">
+											<h3 class="list-group-item-heading">${topic.title}</h3>
+											<a>${topic.user.name}</a> 
+										</div>
+										
+										<div class="col-md-2">
+												<p class="views">${topic.replyCount}</p>
+												<p>回复</p>
+										</div>
+										
+										<div class="col-md-2">
+											<p class="views">99</p>
+											<p>查看</p>
+										</div>
+										
+										<div class="col-md-2">
+											<p>2015-03-15 17:22</p>
+											<p>2015-03-15 17:22</p>
+										</div>
+
+									</div>
+									
+
+										
+									</a>
+								</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</tbody>
+		</div>
+
+
+		<tags:pagination page="${topics}" paginationSize="5"/>
 	
 	<div class="row">
 			<form class="form-horizontal" action="${ctx}/topic"  method="post"  class="form-horizontal">
@@ -41,7 +73,7 @@
 					<br/>
 					<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
 					<br/>
-					<input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;	
+					<input id="submit_btn" class="btn btn-primary" type="submit" value="发布"/>&nbsp;	
 				</section>
 			</form>	
 	</div>

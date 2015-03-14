@@ -37,13 +37,11 @@
 </head>
 
 <body>
-	<div class="main-container" id="main-container">
 		<%@ include file="/WEB-INF/layouts/header.jsp"%>
 		<div id="content">
 			<sitemesh:body/>
 		</div>
 		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
-	</div>
 	<script src="${ctx}/static/bootstrap/3/js/bootstrap.min.js" type="text/javascript"></script>
 	
 </body>

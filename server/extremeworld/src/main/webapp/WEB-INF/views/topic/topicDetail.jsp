@@ -21,16 +21,27 @@
 </head>
 <body>
 					
-	<div class="container">
+	<div class="container main_content">
 	
-		<div class="row">
-			<div class="widget-header widget-header-flat">
-				<h4 class="widget-title smaller">
-					<h1>${topic.title}</h1>
-					<p class="lead">${topic.content}</p>
-				</h4>
+	<div class="reply_list_head">
+		<h1>${topic.title}</h1>
+		<div class="media">
+			<div class="media-left">
+				<a href="#"> <img class="media-object" src="${ctx}/static/ace/assets/avatars/avatar1.png" alt="..."></a>
+			</div>
+			
+			<div class="media-body">
+				<a href="#">${topic.user.name}</a>
+				<p>${topic.createTime}</p>
+				<br/>
+				<h4>${topic.content}</h4>
 			</div>
 		</div>
+	</div>
+	
+		
+	
+
 		
 		<c:if test="${topic.videoSource != null}">
 			<div class="row">
@@ -40,61 +51,53 @@
 
 		
 		<div class="row">
-			<tbody>
 			<c:forEach items="${replys.content}" var="reply">
-			<div class="well well-lg">
-				<div class="itemdiv commentdiv">
-					<div class="user">
-						<img alt="Alexa's Avatar" src="${ctx}/static/ace/assets/avatars/avatar1.png" />
+			<div class="reply_list_item">
+				<div class="media">
+					<div class="media-left">
+						<img class="media-object avatar"  alt="Alexa's Avatar" src="${ctx}/static/ace/assets/avatars/avatar1.png" />
 					</div>
 			
-					<div class="body">
-						<div class="time">
-							<i class="ace-icon fa fa-clock-o"></i>
-							${reply.createTime}
+					<div class="row media-body">
+					
+						<div class="col-md-10"> 
+							<a href="#">${reply.userInfo.name}</a>
+							<p>${reply.createTime}</p>
+							<h4>${reply.content}</h4>
 						</div>
-			
-						<div class="clearfix">
-							<a class="user" href="#">${reply.userInfo.name}</a>
-						</div>
-						<h4 class="green smaller">${reply.content}</h4>
-			
-						<div class="tools action-buttons">
-							<a id="newReply" class="btn btn-minier btn-info">
-								<i class="icon-only ace-icon fa fa-share"></i>
-							</a>
-						</div>
-						
+					<div class="col-md-2">
+						<p>1楼</p>
+						<a href="#">回复</a>
+					</div>
+
 					</div>
 				</div>
 				
 				<!-- 子回复 -->
 				<div style="padding-left: 5%">
 					<c:forEach items="${reply.subReplys}" var="subreply">
-						<div class="profile-activity ">
-							<div>
-								<img class="pull-left" alt="Alex Doe's avatar" src="${ctx}/static/ace/assets/avatars/avatar5.png" />
+						<div class="media">
+							<div class="media-left">
+								<img class="media-object avatar" alt="Alex Doe's avatar" src="${ctx}/static/ace/assets/avatars/avatar5.png" />
+							</div>
+							
+							<div class="media-body">
 								<a href="#"> ${subreply.userInfo.name} </a>
 								<c:if test="${subreply.preSubReply  != null}">
-								回复
-									<a href="#"> ${subreply.preSubReply.userInfo.name}</a>
+									回复<a href="#"> ${subreply.preSubReply.userInfo.name}</a>
 								</c:if>
 									${subreply.content}
-								<div class="time">
-									<i class="ace-icon fa fa-clock-o bigger-110"></i>
-									an hour ago
+								<div class="row">
+									<p>${subreply.createTime}</p>
 								</div>
 							</div>
-
 						</div>
 					</c:forEach>
 				</div>
 						
 						
 			</div>		
-					
 		</c:forEach>
-		</tbody>
 	</div>
 </div>
 	

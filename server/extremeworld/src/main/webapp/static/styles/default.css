@@ -12,3 +12,29 @@ border-style: ridge
 .light-login {
   background: #dfe0e2;
 }
+
+.avatar{
+	border-radius: 50%;
+}
+
+div.main_content{
+	padding-top: 20px;
+	background: #fff;
+}
+
+div.reply_list_head{
+	padding-bottom:20px;
+}
+
+div.reply_list_item{
+	padding-left:20px;
+	padding-bottom:10px;
+	padding-top:10px;
+	border-width:1px;
+	border-top-style:ridge;
+	border-color:#C0C0C0;
+}
+
+p.views{
+	font-size:1.5em;
+}

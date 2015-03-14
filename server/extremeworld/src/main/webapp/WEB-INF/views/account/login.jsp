@@ -8,43 +8,40 @@
 <html>
 <head>
 	<title>登录页</title>
-	
-	<link rel="stylesheet" href="${ctx}/static/ace/assets/css/ace-rtl.css" />
 </head>
 
-<body  class="login-layout">
-	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
-	<%
-	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-	if(error != null){
-	%>
-		<div class="alert alert-error input-medium controls">
-			<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
-		</div>
-	<%
-	}
-	%>
-		<div class="control-group">
-			<label for="username" class="control-label">名称:</label>
-			<div class="controls">
-				<input type="text" id="username" name="username"  value="${username}" class="input-medium required"/>
+<body>
+<div class="container">
+
+	<form  action="${ctx}/login" method="post" class="form-signin">
+		<%
+		String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+		if(error != null){
+		%>
+			<div class="alert alert-error input-medium controls">
+				<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
 			</div>
-		</div>
-		<div class="control-group">
-			<label for="password" class="control-label">密码:</label>
-			<div class="controls">
-				<input type="password" id="password" name="password" class="input-medium required"/>
-			</div>
-		</div>
+		<%
+		}
+		%>
+		
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<label for="inputEmail" class="sr-only">Email address</label>
+		<input type="text" id="username" name="username"  value="${username}" class="form-control" placeholder="Email address" required autofocus/>
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
+
 				
-		<div class="control-group">
-			<div class="controls">
+			<div class="checkbox">
 				<label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我</label>
-				<br>
-				<input id="submit_btn" class="btn btn-primary" type="submit" value="登录"/> <a class="btn" href="${ctx}/register">注册</a>
 			</div>
-		</div>
+			
+			 <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			 <a class="btn" href="${ctx}/register">注册</a>
+			
 	</form>
+</div>
+
 
 	<script>
 		$(document).ready(function() {
