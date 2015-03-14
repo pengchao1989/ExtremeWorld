@@ -20,10 +20,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">讨论</a></li>
-        <li><a href="#">视频</a></li>
-        <li><a href="#">教程</a></li>
-        <li><a href="#">场地</a></li>
+        <li><a href="${ctx}/topic">讨论</a></li>
+        <li><a href="${ctx}/video">视频</a></li>
+        <li><a href="${ctx}/course">教程</a></li>
+        <li><a href="${ctx}/site">场地</a></li>
         <li><a href="#">同城</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">更多 <span class="caret"></span></a>
