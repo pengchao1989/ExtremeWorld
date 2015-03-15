@@ -22,7 +22,8 @@ public class Reply extends IdEntity
 	private List<SubReply> subReplys = new ArrayList<SubReply>();
 	
 	private UserInfo userInfo;
-
+	private Topic topic;
+	
 	public String getContent()
 	{
 		return content;
@@ -58,7 +59,7 @@ public class Reply extends IdEntity
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	public UserInfo getUserInfo()
+	public User getUserInfo()
 	{
 		return userInfo;
 	}
@@ -67,6 +68,19 @@ public class Reply extends IdEntity
 	{
 		this.userInfo = userInfo;
 	}
+
+	@ManyToOne
+	@JoinColumn(name = "topic_id")
+	public Topic getTopic()
+	{
+		return topic;
+	}
+
+	public void setTopic(Topic topic)
+	{
+		this.topic = topic;
+	}
+	
 	
 	
 	

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
@@ -67,6 +68,7 @@ public class TopicController
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
 			Model model, ServletRequest request)
 	{
+		
 		//第一页显示主题内容
 		if(pageNumber==1)
 		{
@@ -74,11 +76,32 @@ public class TopicController
 		}
 		Topic topic = topicService.getTopic(id);
 		
-		Page<Reply> replys = replyService.getAll(pageNumber, pageSize);
+		Page<Reply> replys = replyService.getAll(id,pageNumber, pageSize);
 		
 		model.addAttribute("topic",topic);
 		model.addAttribute("replys", replys);
 		return "topic/topicDetail";
+	}
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.POST)
+	public String createReply(@PathVariable("id") Long topicId, @Valid Reply newReply, RedirectAttributes redirectAttributes)
+	{
+		
+		newReply.setId(null);
+		
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(getCurrentUserId());
+		Topic topic = new Topic();
+		topic.setId(topicId);
+		
+		newReply.setUserInfo(userInfo);
+		newReply.setTopic(topic);
+		
+		replyService.saveReply(newReply);
+		
+		
+		
+		return "redirect:/topic/"+ topicId;
 	}
 	
 	/**

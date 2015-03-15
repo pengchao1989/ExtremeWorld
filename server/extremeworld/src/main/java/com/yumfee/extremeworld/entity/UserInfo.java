@@ -27,6 +27,11 @@ public class UserInfo extends User
 	private List<Hobby> hobbys = new ArrayList<Hobby>();
 	private List<Site> sites = new ArrayList<Site>();
 	
+/*	public UserInfo(Long id)
+	{
+		super(id);
+	}*/
+	
 	public String getGender()
 	{
 		return gender;

@@ -13,9 +13,7 @@
 
 </head>
 <body>
-	<br />
-	<br />
-	<div class="container">
+	<div class="container main_content">
 	
 	<div class="row">
 			<tbody>
@@ -23,13 +21,10 @@
 			
 						<div class="col-sm-6 col-md-4">
 							<div class="thumbnail">
-								<img data-src="holder.js/300x300" alt="..."src="${site.frontImg}">
+								<img data-src="holder.js/150x150" alt="..."src="${site.frontImg}">
 								<div class="caption">
 									<h3>${site.name}</h3>
 									<p>${site.description}</p>
-									<p>
-										<a href="${ctx}/site/${site.id}"  class="btn btn-default" target="_blank" >Button</a> 
-									</p>
 								</div>
 							</div>
 						</div>
@@ -58,8 +53,6 @@
 	
 	</div>
 
-
-	
 
 <script type="text/javascript">
     

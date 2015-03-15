@@ -14,9 +14,7 @@
 </head>
 <body>
 
-	<br/>
-
-	<div class="container">
+	<div class="container main_content">
 
 		<div class="row main_content">
 			<tbody>
