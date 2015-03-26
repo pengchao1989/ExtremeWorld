@@ -5,6 +5,8 @@
  *******************************************************************************/
 package com.yumfee.extremeworld.web.account;
 
+import javax.servlet.ServletRequest;
+
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +25,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/login")
 public class LoginController {
 
+	
 	@RequestMapping(method = RequestMethod.GET)
-	public String login() {
+	public String login(@RequestParam(value="#access_token" , defaultValue="") String accessToken,
+			@RequestParam(value="expires_in", defaultValue = "" ) String expires_in,
+			Model model, ServletRequest request) {
+		
+		model.addAttribute("accessToken", accessToken);
+		
+		if(accessToken != null && accessToken.length() > 0 )
+		{
+			return "account/qqlogin";
+		}
+		
 		return "account/login";
 	}
 

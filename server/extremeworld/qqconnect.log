@@ -1,0 +1,659 @@
+5744 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [NONE]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_, user1_.id as id1_12_1_, user1_.login_name as login_na2_12_1_, user1_.name as name3_12_1_, user1_.password as password4_12_1_, user1_.register_date as register5_12_1_, user1_.roles as roles6_12_1_, user1_.salt as salt7_12_1_, user1_1_.avatar as avatar1_14_1_, user1_1_.birth as birth2_14_1_, user1_1_.description as descript3_14_1_, user1_1_.gender as gender4_14_1_, user1_1_.qq as qq5_14_1_, user1_1_.weixin as weixin6_14_1_, case when user1_1_.user_id is not null then 1 when user1_.id is not null then 0 end as clazz_1_ from tb_topic video0_ left outer join tb_user user1_ on video0_.user_id=user1_.id left outer join tb_user_info user1_1_ on user1_.id=user1_1_.user_id where video0_.id=? and video0_.type=3
+5744 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@633fd91]
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5744 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5745 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@97a145b]
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.loginName
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.name
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.password
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.registerDate
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.roles
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.salt
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.avatar
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.birth
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.description
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.gender
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.hobbys
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.qq
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.sites
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.weixin
+5745 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5745 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5746 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5746 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+          - JOIN (JoinDefinedByMetadata(user)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.User)
+                - SQL table alias mapping - user1_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_12_1_}
+
+5746 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [READ]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_, user1_.id as id1_12_1_, user1_.login_name as login_na2_12_1_, user1_.name as name3_12_1_, user1_.password as password4_12_1_, user1_.register_date as register5_12_1_, user1_.roles as roles6_12_1_, user1_.salt as salt7_12_1_, user1_1_.avatar as avatar1_14_1_, user1_1_.birth as birth2_14_1_, user1_1_.description as descript3_14_1_, user1_1_.gender as gender4_14_1_, user1_1_.qq as qq5_14_1_, user1_1_.weixin as weixin6_14_1_, case when user1_1_.user_id is not null then 1 when user1_.id is not null then 0 end as clazz_1_ from tb_topic video0_ left outer join tb_user user1_ on video0_.user_id=user1_.id left outer join tb_user_info user1_1_ on user1_.id=user1_1_.user_id where video0_.id=? and video0_.type=3
+5746 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@157ec23b]
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5747 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1dd74143]
+5747 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5747 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5748 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5748 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5748 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [UPGRADE]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3 for update
+5748 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@526a9908]
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5748 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5749 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5749 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@47ac613b]
+5749 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5749 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5749 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5749 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5749 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [UPGRADE_NOWAIT]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3 for update
+5749 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@60d6fdd4]
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5750 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@60a19573]
+5750 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5750 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5751 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5751 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5751 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [UPGRADE_SKIPLOCKED]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3 for update
+5751 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@44a085e5]
+5751 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5752 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@619f2afc]
+5752 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5752 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5752 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5753 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5753 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [FORCE]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3 for update
+5753 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@df921b1]
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5753 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5754 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5754 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2152ab30]
+5755 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5755 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5755 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5755 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5755 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [PESSIMISTIC_READ]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3 lock in share mode
+5756 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3902bd2c]
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5756 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5757 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@eb6ec6]
+5757 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5757 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5757 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5758 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5758 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [PESSIMISTIC_WRITE]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3 for update
+5758 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@34d45ec0]
+5758 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5758 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5758 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5758 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5759 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5759 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5759 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5759 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5759 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5759 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5759 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@727320fa]
+5759 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5759 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5760 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5760 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5760 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [PESSIMISTIC_FORCE_INCREMENT]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3 for update
+5760 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2935fd2c]
+5760 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5760 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5761 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3ce443f9]
+5761 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5761 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5761 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5761 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5762 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [OPTIMISTIC]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3
+5762 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@57fbc06f]
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : excerpt
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : imageCount
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : ip
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : replyCount
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : status
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : title
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : updateTime
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5762 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@62b790a5]
+5762 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : videoSource
+5762 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5763 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5763 DEBUG [2015-03-27 01:27:33]  LoadPlan(entity=com.yumfee.extremeworld.entity.Video)
+    - Returns
+       - EntityReturnImpl(entity=com.yumfee.extremeworld.entity.Video, querySpaceUid=<gen:0>, path=com.yumfee.extremeworld.entity.Video)
+          - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:1>, path=com.yumfee.extremeworld.entity.Video.user)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=com.yumfee.extremeworld.entity.Video)
+          - SQL table alias mapping - video0_
+          - alias suffix - 0_
+          - suffixed key columns - {id2_11_0_}
+
+5763 DEBUG [2015-03-27 01:27:33]  Static select for entity com.yumfee.extremeworld.entity.Video [OPTIMISTIC_FORCE_INCREMENT]: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3
+5764 DEBUG [2015-03-27 01:27:33]  Static select for action ACTION_MERGE on entity com.yumfee.extremeworld.entity.Video: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3
+5764 DEBUG [2015-03-27 01:27:33]  Static select for action ACTION_REFRESH on entity com.yumfee.extremeworld.entity.Video: select video0_.id as id2_11_0_, video0_.content as content3_11_0_, video0_.create_time as create_t4_11_0_, video0_.excerpt as excerpt5_11_0_, video0_.image_count as image_co6_11_0_, video0_.ip as ip7_11_0_, video0_.reply_count as reply_co8_11_0_, video0_.status as status9_11_0_, video0_.title as title10_11_0_, video0_.update_time as update_11_11_0_, video0_.user_id as user_id13_11_0_, video0_.video_source as video_s12_11_0_ from tb_topic video0_ where video0_.id=? and video0_.type=3
+5786 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@21da4b5f]
+5787 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@551e4c6d]
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : address
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : cityGroup
+5793 DEBUG [2015-03-27 01:27:33]  Property path deemed to be circular : cityGroup
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : description
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : frontImg
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : latitude
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : longitude
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : name
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : type
+5793 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : userInfos
+5793 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5801 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5805 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.CityGroup.sites)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.CityGroup.sites, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.CityGroup.sites])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.Site, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.CityGroup.sites].<elements>)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.CityGroup.sites)
+          - SQL table alias mapping - sites0_
+          - alias suffix - 0_
+          - suffixed key columns - {city_gr10_3_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_8_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.Site)
+                - SQL table alias mapping - sites0_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_8_1_}
+
+5808 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.CityGroup.sites: select sites0_.city_group_id as city_gr10_3_0_, sites0_.id as id1_8_0_, sites0_.id as id1_8_1_, sites0_.address as address2_8_1_, sites0_.city_group_id as city_gr10_8_1_, sites0_.create_time as create_t3_8_1_, sites0_.description as descript4_8_1_, sites0_.front_img as front_im5_8_1_, sites0_.latitude as latitude6_8_1_, sites0_.longitude as longitud7_8_1_, sites0_.name as name8_8_1_, sites0_.type as type9_8_1_ from tb_site sites0_ where sites0_.city_group_id=?
+5809 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@64920dc2]
+5809 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@59a79443]
+5809 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5809 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5809 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply
+5809 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:2> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@67531e3a]
+5810 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.content
+5810 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.createTime
+5810 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.preSubReply
+5810 DEBUG [2015-03-27 01:27:33]  Property path deemed to be circular : preSubReply.preSubReply
+5810 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo
+5810 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:3> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1d50a7ca]
+5810 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.loginName
+5810 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.name
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.password
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.registerDate
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.roles
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.salt
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.avatar
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.birth
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.description
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.gender
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.hobbys
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.qq
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.sites
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : preSubReply.userInfo.weixin
+5811 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : userInfo
+5811 DEBUG [2015-03-27 01:27:33]  Property path deemed to be circular : userInfo
+5812 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5813 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5814 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.Reply.subReplys)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.Reply.subReplys, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.Reply.subReplys])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.SubReply, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.Reply.subReplys].<elements>)
+             - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.SubReply, querySpaceUid=<gen:2>, path=[com.yumfee.extremeworld.entity.Reply.subReplys].<elements>.preSubReply)
+                - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.UserInfo, querySpaceUid=<gen:3>, path=[com.yumfee.extremeworld.entity.Reply.subReplys].<elements>.preSubReply.userInfo)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.Reply.subReplys)
+          - SQL table alias mapping - subreplys0_
+          - alias suffix - 0_
+          - suffixed key columns - {reply_id6_7_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_9_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.SubReply)
+                - SQL table alias mapping - subreplys0_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_9_1_}
+                - JOIN (JoinDefinedByMetadata(preSubReply)) : <gen:1> -> <gen:2>
+                   - EntityQuerySpaceImpl(uid=<gen:2>, entity=com.yumfee.extremeworld.entity.SubReply)
+                      - SQL table alias mapping - subreply1_
+                      - alias suffix - 2_
+                      - suffixed key columns - {id1_9_2_}
+                      - JOIN (JoinDefinedByMetadata(userInfo)) : <gen:2> -> <gen:3>
+                         - EntityQuerySpaceImpl(uid=<gen:3>, entity=com.yumfee.extremeworld.entity.UserInfo)
+                            - SQL table alias mapping - userinfo2_
+                            - alias suffix - 3_
+                            - suffixed key columns - {id1_12_3_}
+
+5817 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.Reply.subReplys: select subreplys0_.reply_id as reply_id6_7_0_, subreplys0_.id as id1_9_0_, subreplys0_.id as id1_9_1_, subreplys0_.content as content2_9_1_, subreplys0_.create_time as create_t3_9_1_, subreplys0_.pid as pid4_9_1_, subreplys0_.user_id as user_id5_9_1_, subreply1_.id as id1_9_2_, subreply1_.content as content2_9_2_, subreply1_.create_time as create_t3_9_2_, subreply1_.pid as pid4_9_2_, subreply1_.user_id as user_id5_9_2_, userinfo2_.user_id as id1_12_3_, userinfo2_1_.login_name as login_na2_12_3_, userinfo2_1_.name as name3_12_3_, userinfo2_1_.password as password4_12_3_, userinfo2_1_.register_date as register5_12_3_, userinfo2_1_.roles as roles6_12_3_, userinfo2_1_.salt as salt7_12_3_, userinfo2_.avatar as avatar1_14_3_, userinfo2_.birth as birth2_14_3_, userinfo2_.description as descript3_14_3_, userinfo2_.gender as gender4_14_3_, userinfo2_.qq as qq5_14_3_, userinfo2_.weixin as weixin6_14_3_ from tb_sub_reply subreplys0_ left outer join tb_sub_reply subreply1_ on subreplys0_.pid=subreply1_.id left outer join tb_user_info userinfo2_ on subreply1_.user_id=userinfo2_.user_id left outer join tb_user userinfo2_1_ on userinfo2_.user_id=userinfo2_1_.id where subreplys0_.reply_id=?
+5817 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@2e766822]
+5818 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3003e580]
+5818 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : content
+5819 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5819 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : name
+5819 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user
+5820 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:2> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3c8a7e38]
+5820 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.loginName
+5820 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.name
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.password
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.registerDate
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.roles
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.salt
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.avatar
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.birth
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.description
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.gender
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.hobbys
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.qq
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.sites
+5821 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : user.weixin
+5822 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5822 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5824 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.CourseTaxonomy.courses)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.CourseTaxonomy.courses, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.CourseTaxonomy.courses])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.Course, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.CourseTaxonomy.courses].<elements>)
+             - EntityAttributeFetchImpl(entity=com.yumfee.extremeworld.entity.User, querySpaceUid=<gen:2>, path=[com.yumfee.extremeworld.entity.CourseTaxonomy.courses].<elements>.user)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.CourseTaxonomy.courses)
+          - SQL table alias mapping - courses0_
+          - alias suffix - 0_
+          - suffixed key columns - {taxonomy6_5_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_4_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.Course)
+                - SQL table alias mapping - courses0_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_4_1_}
+                - JOIN (JoinDefinedByMetadata(user)) : <gen:1> -> <gen:2>
+                   - EntityQuerySpaceImpl(uid=<gen:2>, entity=com.yumfee.extremeworld.entity.User)
+                      - SQL table alias mapping - user1_
+                      - alias suffix - 2_
+                      - suffixed key columns - {id1_12_2_}
+
+5824 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.CourseTaxonomy.courses: select courses0_.taxonomy_id as taxonomy6_5_0_, courses0_.id as id1_4_0_, courses0_.id as id1_4_1_, courses0_.content as content2_4_1_, courses0_.create_time as create_t3_4_1_, courses0_.name as name4_4_1_, courses0_.user_id as user_id5_4_1_, user1_.id as id1_12_2_, user1_.login_name as login_na2_12_2_, user1_.name as name3_12_2_, user1_.password as password4_12_2_, user1_.register_date as register5_12_2_, user1_.roles as roles6_12_2_, user1_.salt as salt7_12_2_, user1_1_.avatar as avatar1_14_2_, user1_1_.birth as birth2_14_2_, user1_1_.description as descript3_14_2_, user1_1_.gender as gender4_14_2_, user1_1_.qq as qq5_14_2_, user1_1_.weixin as weixin6_14_2_, case when user1_1_.user_id is not null then 1 when user1_.id is not null then 0 end as clazz_2_ from tb_course courses0_ left outer join tb_user user1_ on courses0_.user_id=user1_.id left outer join tb_user_info user1_1_ on user1_.id=user1_1_.user_id where courses0_.taxonomy_id=?
+5824 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@10a98392]
+5824 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@30839e44]
+5824 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : loginName
+5824 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : name
+5824 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : password
+5824 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : registerDate
+5824 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : roles
+5824 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : salt
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : avatar
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : birth
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : description
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : gender
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : hobbys
+5825 DEBUG [2015-03-27 01:27:33]  Property path deemed to be circular : hobbys
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : qq
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : sites
+5825 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : weixin
+5825 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5827 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5828 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.Hobby.userInfos)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.Hobby.userInfos, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.Hobby.userInfos])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.UserInfo, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.Hobby.userInfos].<elements>)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.Hobby.userInfos)
+          - SQL table alias mapping - userinfos0_
+          - alias suffix - 0_
+          - suffixed key columns - {hobby_id2_6_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_12_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.UserInfo)
+                - SQL table alias mapping - userinfo1_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_12_1_}
+
+5828 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.Hobby.userInfos: select userinfos0_.hobby_id as hobby_id2_6_0_, userinfos0_.user_id as user_id1_13_0_, userinfo1_.user_id as id1_12_1_, userinfo1_1_.login_name as login_na2_12_1_, userinfo1_1_.name as name3_12_1_, userinfo1_1_.password as password4_12_1_, userinfo1_1_.register_date as register5_12_1_, userinfo1_1_.roles as roles6_12_1_, userinfo1_1_.salt as salt7_12_1_, userinfo1_.avatar as avatar1_14_1_, userinfo1_.birth as birth2_14_1_, userinfo1_.description as descript3_14_1_, userinfo1_.gender as gender4_14_1_, userinfo1_.qq as qq5_14_1_, userinfo1_.weixin as weixin6_14_1_ from tb_user_hobby userinfos0_ inner join tb_user_info userinfo1_ on userinfos0_.user_id=userinfo1_.user_id left outer join tb_user userinfo1_1_ on userinfo1_.user_id=userinfo1_1_.id where userinfos0_.hobby_id=?
+5829 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@ceddaf8]
+5829 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3d90eeb3]
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : loginName
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : name
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : password
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : registerDate
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : roles
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : salt
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : avatar
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : birth
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : description
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : gender
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : hobbys
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : qq
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : sites
+5829 DEBUG [2015-03-27 01:27:33]  Property path deemed to be circular : sites
+5829 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : weixin
+5830 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5830 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5830 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.Site.userInfos)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.Site.userInfos, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.Site.userInfos])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.UserInfo, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.Site.userInfos].<elements>)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.Site.userInfos)
+          - SQL table alias mapping - userinfos0_
+          - alias suffix - 0_
+          - suffixed key columns - {site_id2_8_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_12_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.UserInfo)
+                - SQL table alias mapping - userinfo1_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_12_1_}
+
+5830 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.Site.userInfos: select userinfos0_.site_id as site_id2_8_0_, userinfos0_.user_id as user_id1_15_0_, userinfo1_.user_id as id1_12_1_, userinfo1_1_.login_name as login_na2_12_1_, userinfo1_1_.name as name3_12_1_, userinfo1_1_.password as password4_12_1_, userinfo1_1_.register_date as register5_12_1_, userinfo1_1_.roles as roles6_12_1_, userinfo1_1_.salt as salt7_12_1_, userinfo1_.avatar as avatar1_14_1_, userinfo1_.birth as birth2_14_1_, userinfo1_.description as descript3_14_1_, userinfo1_.gender as gender4_14_1_, userinfo1_.qq as qq5_14_1_, userinfo1_.weixin as weixin6_14_1_ from tb_user_site userinfos0_ inner join tb_user_info userinfo1_ on userinfos0_.user_id=userinfo1_.user_id left outer join tb_user userinfo1_1_ on userinfo1_.user_id=userinfo1_1_.id where userinfos0_.site_id=?
+5830 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@1d6d1d42]
+5831 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@27329d2a]
+5833 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : cityName
+5833 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : cityGroup
+5834 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5834 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5834 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.Province.citys)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.Province.citys, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.Province.citys])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.City, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.Province.citys].<elements>)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.Province.citys)
+          - SQL table alias mapping - citys0_
+          - alias suffix - 0_
+          - suffixed key columns - {province3_1_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_0_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.City)
+                - SQL table alias mapping - citys0_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_0_1_}
+
+5835 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.Province.citys: select citys0_.province_id as province3_1_0_, citys0_.id as id1_0_0_, citys0_.id as id1_0_1_, citys0_.city_name as city_nam2_0_1_ from s_city citys0_ where citys0_.province_id=?
+5835 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@5afbd567]
+5836 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6993c8df]
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : address
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : cityGroup
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : description
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : frontImg
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : latitude
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : longitude
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : name
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : type
+5838 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : userInfos
+5839 DEBUG [2015-03-27 01:27:33]  Property path deemed to be circular : userInfos
+5839 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5839 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5841 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.UserInfo.sites)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.UserInfo.sites, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.UserInfo.sites])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.Site, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.UserInfo.sites].<elements>)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.UserInfo.sites)
+          - SQL table alias mapping - sites0_
+          - alias suffix - 0_
+          - suffixed key columns - {user_id1_12_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_8_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.Site)
+                - SQL table alias mapping - site1_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_8_1_}
+
+5841 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.UserInfo.sites: select sites0_.user_id as user_id1_12_0_, sites0_.site_id as site_id2_15_0_, site1_.id as id1_8_1_, site1_.address as address2_8_1_, site1_.city_group_id as city_gr10_8_1_, site1_.create_time as create_t3_8_1_, site1_.description as descript4_8_1_, site1_.front_img as front_im5_8_1_, site1_.latitude as latitude6_8_1_, site1_.longitude as longitud7_8_1_, site1_.name as name8_8_1_, site1_.type as type9_8_1_ from tb_user_site sites0_ inner join tb_site site1_ on sites0_.site_id=site1_.id where sites0_.user_id=?
+5841 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.CollectionQuerySpaceImpl@36baa049]
+5841 DEBUG [2015-03-27 01:27:33]  Adding QuerySpace : uid = <gen:1> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@41184371]
+5841 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : createTime
+5841 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : description
+5841 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : name
+5841 DEBUG [2015-03-27 01:27:33]  Visiting attribute path : userInfos
+5841 DEBUG [2015-03-27 01:27:33]  Property path deemed to be circular : userInfos
+5841 DEBUG [2015-03-27 01:27:33]  Building LoadPlan...
+5842 DEBUG [2015-03-27 01:27:33]  processing queryspace <gen:0>
+5842 DEBUG [2015-03-27 01:27:33]  LoadPlan(collection=com.yumfee.extremeworld.entity.UserInfo.hobbys)
+    - Returns
+       - CollectionReturnImpl(collection=com.yumfee.extremeworld.entity.UserInfo.hobbys, querySpaceUid=<gen:0>, path=[com.yumfee.extremeworld.entity.UserInfo.hobbys])
+          - (collection element) CollectionFetchableElementEntityGraph(entity=com.yumfee.extremeworld.entity.Hobby, querySpaceUid=<gen:1>, path=[com.yumfee.extremeworld.entity.UserInfo.hobbys].<elements>)
+    - QuerySpaces
+       - CollectionQuerySpaceImpl(uid=<gen:0>, collection=com.yumfee.extremeworld.entity.UserInfo.hobbys)
+          - SQL table alias mapping - hobbys0_
+          - alias suffix - 0_
+          - suffixed key columns - {user_id1_12_0_}
+          - entity-element alias suffix - 1_
+          - 1_entity-element suffixed key columns - id1_6_1_
+          - JOIN (JoinDefinedByMetadata(elements)) : <gen:0> -> <gen:1>
+             - EntityQuerySpaceImpl(uid=<gen:1>, entity=com.yumfee.extremeworld.entity.Hobby)
+                - SQL table alias mapping - hobby1_
+                - alias suffix - 1_
+                - suffixed key columns - {id1_6_1_}
+
+5842 DEBUG [2015-03-27 01:27:33]  Static select for collection com.yumfee.extremeworld.entity.UserInfo.hobbys: select hobbys0_.user_id as user_id1_12_0_, hobbys0_.hobby_id as hobby_id2_13_0_, hobby1_.id as id1_6_1_, hobby1_.create_time as create_t2_6_1_, hobby1_.description as descript3_6_1_, hobby1_.name as name4_6_1_ from tb_user_hobby hobbys0_ inner join tb_hobby hobby1_ on hobbys0_.hobby_id=hobby1_.id where hobbys0_.user_id=?
+6014 DEBUG [2015-03-27 01:27:33]  Initializing SessionFactoryRegistry : org.hibernate.internal.SessionFactoryRegistry@591a4f8e
+6014 DEBUG [2015-03-27 01:27:33]  Registering SessionFactory: 2a02adb6-148d-4038-b2fd-0f469d3b87ad (<unnamed>)
+6014 DEBUG [2015-03-27 01:27:33]  Not binding SessionFactory to JNDI, no JNDI name configured
+6014 DEBUG [2015-03-27 01:27:33]  Instantiated session factory
+6015 DEBUG [2015-03-27 01:27:33]  Checking 0 named HQL queries
+6015 DEBUG [2015-03-27 01:27:33]  Checking 0 named SQL queries
+6023 DEBUG [2015-03-27 01:27:33]  Statistics initialized [enabled=false]
+6028 DEBUG [2015-03-27 01:27:33]  No actions specified; doing nothing
+6114 DEBUG [2015-03-27 01:27:33]  Initializing EntityManagerFactoryRegistry : org.hibernate.jpa.internal.EntityManagerFactoryRegistry@3d0cac1f
+6114 DEBUG [2015-03-27 01:27:33]  Registering EntityManagerFactory: default 
+6377 DEBUG [2015-03-27 01:27:34]  Mark transaction for rollback
+6547 DEBUG [2015-03-27 01:27:34]  parse() - HQL: delete from com.yumfee.extremeworld.entity.Task task where task.user.id=?1
+6561 DEBUG [2015-03-27 01:27:34]  --- HQL AST ---
+ \-[DELETE] Node: 'delete'
+    +-[FROM] Node: 'FROM'
+    |  \-[RANGE] Node: 'RANGE'
+    |     +-[DOT] Node: '.'
+    |     |  +-[DOT] Node: '.'
+    |     |  |  +-[DOT] Node: '.'
+    |     |  |  |  +-[DOT] Node: '.'
+    |     |  |  |  |  +-[IDENT] Node: 'com'
+    |     |  |  |  |  \-[IDENT] Node: 'yumfee'
+    |     |  |  |  \-[IDENT] Node: 'extremeworld'
+    |     |  |  \-[IDENT] Node: 'entity'
+    |     |  \-[IDENT] Node: 'Task'
+    |     \-[ALIAS] Node: 'task'
+    \-[WHERE] Node: 'where'
+       \-[EQ] Node: '='
+          +-[DOT] Node: '.'
+          |  +-[DOT] Node: '.'
+          |  |  +-[IDENT] Node: 'task'
+          |  |  \-[IDENT] Node: 'user'
+          |  \-[IDENT] Node: 'id'
+          \-[PARAM] Node: '?'
+             \-[NUM_INT] Node: '1'
+
+6562 DEBUG [2015-03-27 01:27:34]  throwQueryException() : no errors
+6596 DEBUG [2015-03-27 01:27:34]  delete << begin [level=1, statement=delete]
+6625 DEBUG [2015-03-27 01:27:34]  FromClause{level=1} : com.yumfee.extremeworld.entity.Task (task) -> task0_
+6627 DEBUG [2015-03-27 01:27:34]  Resolved : task -> id
+6629 DEBUG [2015-03-27 01:27:34]  getDataType() : user -> org.hibernate.type.ManyToOneType(com.yumfee.extremeworld.entity.User)
+6629 DEBUG [2015-03-27 01:27:34]  dereferenceShortcut() : property id in com.yumfee.extremeworld.entity.Task does not require a join.
+6629 DEBUG [2015-03-27 01:27:34]  Unresolved property path is now 'user.id'
+6629 DEBUG [2015-03-27 01:27:34]  Resolved : task.user -> user_id
+6629 DEBUG [2015-03-27 01:27:34]  getDataType() : user.id -> org.hibernate.type.LongType@5e3a39cd
+6630 DEBUG [2015-03-27 01:27:34]  Resolved : task.user.id -> user_id
+6634 DEBUG [2015-03-27 01:27:34]  delete : finishing up [level=1, statement=delete]
+6638 DEBUG [2015-03-27 01:27:34]  delete >> end [level=1, statement=delete]
+6638 DEBUG [2015-03-27 01:27:34]  --- SQL AST ---
+ \-[DELETE] DeleteStatement: 'delete'  querySpaces (tb_task)
+    +-[FROM] FromClause: 'FROM' FromClause{level=1, fromElementCounter=1, fromElements=1, fromElementByClassAlias=[task], fromElementByTableAlias=[task0_], fromElementsByPath=[], collectionJoinFromElementsByPath=[], impliedElements=[]}
+    |  \-[FROM_FRAGMENT] FromElement: 'tb_task' FromElement{explicit,not a collection join,not a fetch join,fetch non-lazy properties,classAlias=task,role=null,tableName=tb_task,tableAlias=task0_,origin=null,columns={,className=com.yumfee.extremeworld.entity.Task}}
+    \-[WHERE] SqlNode: 'where'
+       \-[EQ] BinaryLogicOperatorNode: '='
+          +-[DOT] DotNode: 'user_id' {propertyName=id,dereferenceType=PRIMITIVE,getPropertyPath=user.id,path=task.user.id,tableAlias=task0_,className=com.yumfee.extremeworld.entity.Task,classAlias=task}
+          |  +-[DOT] DotNode: 'user_id' {propertyName=id,dereferenceType=UNKNOWN,getPropertyPath=user.id,path=task.user,tableAlias=task0_,className=com.yumfee.extremeworld.entity.Task,classAlias=task}
+          |  |  +-[ALIAS_REF] IdentNode: 'id' {alias=task, className=com.yumfee.extremeworld.entity.Task, tableAlias=task0_}
+          |  |  \-[IDENT] IdentNode: 'user' {originalText=user}
+          |  \-[IDENT] IdentNode: 'id' {originalText=id}
+          \-[NAMED_PARAM] ParameterNode: '?' {name=1, expectedType=org.hibernate.type.LongType@5e3a39cd}
+
+6639 DEBUG [2015-03-27 01:27:34]  throwQueryException() : no errors
+6653 DEBUG [2015-03-27 01:27:34]  throwQueryException() : no errors
+6762 DEBUG [2015-03-27 01:27:34]  Mark transaction for rollback
+7882 DEBUG [2015-03-27 01:27:35]  Mark transaction for rollback
+8132 DEBUG [2015-03-27 01:27:35]  Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+8132 DEBUG [2015-03-27 01:27:35]  Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+8133 DEBUG [2015-03-27 01:27:35]  Setting custom MessageInterpolator of type org.springframework.validation.beanvalidation.LocaleContextMessageInterpolator
+8134 DEBUG [2015-03-27 01:27:35]  Setting custom ConstraintValidatorFactory of type org.springframework.validation.beanvalidation.SpringConstraintValidatorFactory
+8137 DEBUG [2015-03-27 01:27:35]  Setting custom ParameterNameProvider of type com.sun.proxy.$Proxy60
+8138 DEBUG [2015-03-27 01:27:35]  Trying to load META-INF/validation.xml for XML based Validator configuration.
+8139 DEBUG [2015-03-27 01:27:35]  No META-INF/validation.xml found. Using annotation based configuration only.
+8143 DEBUG [2015-03-27 01:27:35]  Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+8143 DEBUG [2015-03-27 01:27:35]  Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+8143 DEBUG [2015-03-27 01:27:35]  Setting custom MessageInterpolator of type org.springframework.validation.beanvalidation.LocaleContextMessageInterpolator
+8143 DEBUG [2015-03-27 01:27:35]  Setting custom ConstraintValidatorFactory of type org.springframework.validation.beanvalidation.SpringConstraintValidatorFactory
+8143 DEBUG [2015-03-27 01:27:35]  Setting custom ParameterNameProvider of type com.sun.proxy.$Proxy60
+8144 DEBUG [2015-03-27 01:27:35]  Trying to load META-INF/validation.xml for XML based Validator configuration.
+8144 DEBUG [2015-03-27 01:27:35]  No META-INF/validation.xml found. Using annotation based configuration only.
