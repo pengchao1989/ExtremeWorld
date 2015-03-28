@@ -13,7 +13,7 @@ import com.qiniu.api.rs.PutPolicy;
 
 @RestController
 @RequestMapping(value = "/api/v1/uptoken")
-public class Uptoken
+public class UptokenRestController
 {
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public Token getUptoken() throws AuthException, JSONException

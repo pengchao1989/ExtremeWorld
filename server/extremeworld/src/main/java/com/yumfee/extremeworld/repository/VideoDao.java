@@ -6,5 +6,5 @@ import com.yumfee.extremeworld.entity.Video;
 
 public interface VideoDao extends PagingAndSortingRepository<Video, Long>
 {
-
+	
 }

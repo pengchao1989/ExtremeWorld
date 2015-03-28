@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +12,13 @@
 </head>
 <body>
 	<div class="container main_content">
+	
+		<ul class="media-list">
+			<c:forEach items="${videos.content}" var="video">
+				<a href="${ctx}/video/${video.id}" target="_blank">${video.title} }</a>
+			</c:forEach>
+		</ul>
+	
 		<button id="getData" class="btn btn-primary">GET_TOKEN</button>
 		<p id="result">result</p>
 		
@@ -31,7 +40,7 @@
 			  $("#getData").click(function(){
 
 				  
-				    $.get("/extremeworld/api/v1/uptoken",function(data, status){
+				    $.get("${ctx}/api/v1/uptoken",function(data, status){
 
 				     	alert("Data: " + data + "\nStatus: " + status);
 				     	

@@ -83,6 +83,7 @@ public class TopicController
 		return "topic/topicDetail";
 	}
 	
+	//子回复
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
 	public String createReply(@PathVariable("id") Long topicId, @Valid Reply newReply, RedirectAttributes redirectAttributes)
 	{
