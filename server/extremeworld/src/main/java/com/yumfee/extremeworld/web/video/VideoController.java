@@ -75,6 +75,14 @@ public class VideoController
 	{
 		User user = new User(getCurrentUserId());
 		newVideo.setUser(user);
+		newVideo.setImageCount(0);
+		newVideo.setReplyCount(0);
+		newVideo.setStatus(1);
+		newVideo.setExcerpt(newVideo.getContent());
+		
+		videoService.saveVideo(newVideo);
+		
+		redirectAttributes.addFlashAttribute("message", "发布视频成功");
 		return "redirect:/task/";
 	}
 	
