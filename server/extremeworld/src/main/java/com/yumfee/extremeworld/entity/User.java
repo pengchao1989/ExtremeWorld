@@ -33,6 +33,7 @@ public class User  extends IdEntity{
 	private String salt;
 	private String roles;
 	private Date registerDate;
+	private String qqOpenId;
 	
 	public User() {
 	}
@@ -109,6 +110,18 @@ public class User  extends IdEntity{
 
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
+	}
+
+	
+
+	public String getQqOpenId()
+	{
+		return qqOpenId;
+	}
+
+	public void setQqOpenId(String qqOpenId)
+	{
+		this.qqOpenId = qqOpenId;
 	}
 
 	@Override

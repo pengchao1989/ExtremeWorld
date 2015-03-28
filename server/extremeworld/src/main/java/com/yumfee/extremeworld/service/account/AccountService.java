@@ -47,30 +47,44 @@ public class AccountService {
 		return (List<User>) userDao.findAll();
 	}
 
-	public User getUser(Long id) {
+	public User getUser(Long id) 
+	{
 		return userDao.findOne(id);
 	}
 
-	public User findUserByLoginName(String loginName) {
+	public User findUserByLoginName(String loginName) 
+	{
 		return userDao.findByLoginName(loginName);
 	}
 
-	public void registerUser(User user) {
-		entryptPassword(user);
+	public User findUserByQqOpenId(String qqOpenId)
+	{
+		return userDao.findByQqOpenId(qqOpenId);
+	}
+	
+	public void registerUser(User user) 
+	{
+		//entryptPassword(user); 
+		user.setPassword("ccc");
+		user.setSalt("salt");
+		
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
 
 		userDao.save(user);
 	}
 
-	public void updateUser(User user) {
-		if (StringUtils.isNotBlank(user.getPlainPassword())) {
+	public void updateUser(User user) 
+	{
+		if (StringUtils.isNotBlank(user.getPlainPassword())) 
+		{
 			entryptPassword(user);
 		}
 		userDao.save(user);
 	}
 
-	public void deleteUser(Long id) {
+	public void deleteUser(Long id) 
+	{
 		if (isSupervisor(id)) {
 			logger.warn("操作员{}尝试删除超级管理员用户", getCurrentUserName());
 			throw new ServiceException("不能删除超级管理员用户");
@@ -83,14 +97,16 @@ public class AccountService {
 	/**
 	 * 判断是否超级管理员.
 	 */
-	private boolean isSupervisor(Long id) {
+	private boolean isSupervisor(Long id) 
+	{
 		return id == 1;
 	}
 
 	/**
 	 * 取出Shiro中的当前用户LoginName.
 	 */
-	private String getCurrentUserName() {
+	private String getCurrentUserName() 
+	{
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		return user.loginName;
 	}
@@ -98,25 +114,29 @@ public class AccountService {
 	/**
 	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
 	 */
-	private void entryptPassword(User user) {
+	private void entryptPassword(User user) 
+	{
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
-		user.setSalt(Encodes.encodeHex(salt));
+		user.setSalt(/*Encodes.encodeHex(salt)*/"123");
 
 		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
 	}
 
 	@Autowired
-	public void setUserDao(UserDao userDao) {
+	public void setUserDao(UserDao userDao) 
+	{
 		this.userDao = userDao;
 	}
 
 	@Autowired
-	public void setTaskDao(TaskDao taskDao) {
+	public void setTaskDao(TaskDao taskDao) 
+	{
 		this.taskDao = taskDao;
 	}
 
-	public void setClock(Clock clock) {
+	public void setClock(Clock clock) 
+	{
 		this.clock = clock;
 	}
 }

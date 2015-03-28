@@ -29,7 +29,8 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String login(@RequestParam(value="#access_token" , defaultValue="") String accessToken,
 			@RequestParam(value="expires_in", defaultValue = "" ) String expires_in,
-			Model model, ServletRequest request) {
+			Model model, ServletRequest request) 
+	{
 		
 		model.addAttribute("accessToken", accessToken);
 		
@@ -42,7 +43,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
+	public String fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) 
+	{
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
 		return "account/login";
 	}

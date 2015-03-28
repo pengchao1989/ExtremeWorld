@@ -10,4 +10,5 @@ import com.yumfee.extremeworld.entity.User;
 
 public interface UserDao extends PagingAndSortingRepository<User, Long> {
 	User findByLoginName(String loginName);
+	User findByQqOpenId(String qqOpenId);
 }
