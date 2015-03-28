@@ -22,9 +22,11 @@
 							"playlist":[
 								{
 									"video":document.getElementById("video-1"),
+									"comments":"${ctx}/static/abplayer/comment-otsukimi.xml"
 								},
 								{
 									"video":document.getElementById("video-2"),
+									"comments":"${ctx}/static/abplayer/comment-science.xml"
 								}
 							]
 						},
@@ -56,7 +58,7 @@
 			<div class="media">
 				<div class="media-left">
 					<a href="#"> <img class="media-object"
-						src="${ctx}/static/ace/assets/avatars/avatar1.png" alt="..."></a>
+						src="http://7u2nc3.com1.z0.glb.clouddn.com/${topic.user.avatar}" alt="..."></a>
 				</div>
 
 				<div class="media-body">
