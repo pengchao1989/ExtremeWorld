@@ -21,7 +21,6 @@ import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
-import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.account.AccountService;
 
 @Controller
@@ -32,11 +31,7 @@ public class QQLoginAfterController
 	@Autowired
 	private AccountService accountService;
 	
-/*	@Autowired
-	DefaultWebSecurityManager securityManager;*/
-	
-	
-	private User user = null;
+	private com.yumfee.extremeworld.entity.UserInfo myUser = null;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public void get(HttpServletRequest  request ,HttpServletResponse response) throws IOException
@@ -83,8 +78,8 @@ public class QQLoginAfterController
 
                 
                 //检验是否已经注册
-                user = accountService.findUserByQqOpenId(openID);
-                if(user == null)
+                myUser = accountService.findUserByQqOpenId(openID);
+                if(myUser == null)
                 {
                 	UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
                     UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
@@ -104,15 +99,13 @@ public class QQLoginAfterController
                     }
                     
                     
-                	user = new User();
-                	user.setQqOpenId(openID);
-                	user.setLoginName(openID);
-                	user.setName(userInfoBean.getNickname());
-                	user.setPlainPassword(openID);
+                	myUser = new com.yumfee.extremeworld.entity.UserInfo();
+                	myUser.setQqOpenId(openID);
+                	myUser.setLoginName(openID);
+                	myUser.setName(userInfoBean.getNickname());
+                	myUser.setPlainPassword(openID);
                 	
-                	accountService.registerUser(user);
-                	
-                	
+                	accountService.registerUser(myUser);
                 	
                 }
                 

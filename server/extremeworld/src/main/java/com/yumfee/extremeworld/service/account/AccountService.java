@@ -14,11 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.repository.TaskDao;
-import com.yumfee.extremeworld.repository.UserDao;
+import com.yumfee.extremeworld.repository.UserInfoDao;
 import com.yumfee.extremeworld.service.ServiceException;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
+
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
@@ -39,12 +42,13 @@ public class AccountService {
 
 	private static Logger logger = LoggerFactory.getLogger(AccountService.class);
 
-	private UserDao userDao;
+	private UserInfoDao userDao;
+	
 	private TaskDao taskDao;
 	private Clock clock = Clock.DEFAULT;
 
-	public List<User> getAllUser() {
-		return (List<User>) userDao.findAll();
+	public List<UserInfo> getAllUser() {
+		return (List<UserInfo>) userDao.findAll();
 	}
 
 	public User getUser(Long id) 
@@ -52,17 +56,17 @@ public class AccountService {
 		return userDao.findOne(id);
 	}
 
-	public User findUserByLoginName(String loginName) 
+	public UserInfo findUserByLoginName(String loginName) 
 	{
 		return userDao.findByLoginName(loginName);
 	}
 
-	public User findUserByQqOpenId(String qqOpenId)
+	public UserInfo findUserByQqOpenId(String qqOpenId)
 	{
 		return userDao.findByQqOpenId(qqOpenId);
 	}
 	
-	public void registerUser(User user) 
+	public void registerUser(UserInfo user) 
 	{
 		entryptPassword(user); 
 /*		user.setPassword("ccc");
@@ -74,7 +78,7 @@ public class AccountService {
 		userDao.save(user);
 	}
 
-	public void updateUser(User user) 
+	public void updateUser(UserInfo user) 
 	{
 		if (StringUtils.isNotBlank(user.getPlainPassword())) 
 		{
@@ -124,7 +128,7 @@ public class AccountService {
 	}
 
 	@Autowired
-	public void setUserDao(UserDao userDao) 
+	public void setUserDao(UserInfoDao userDao) 
 	{
 		this.userDao = userDao;
 	}

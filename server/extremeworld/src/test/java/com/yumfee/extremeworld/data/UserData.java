@@ -6,12 +6,14 @@
 package com.yumfee.extremeworld.data;
 
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserInfo;
+
 import org.springside.modules.test.data.RandomData;
 
 public class UserData {
 
-	public static User randomNewUser() {
-		User user = new User();
+	public static UserInfo randomNewUser() {
+		UserInfo user = new UserInfo();
 		user.setLoginName(RandomData.randomName("user"));
 		user.setName(RandomData.randomName("User"));
 		user.setPlainPassword(RandomData.randomName("password"));

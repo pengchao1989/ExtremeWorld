@@ -1,3 +1,3 @@
-ÐèÒªµ¼Èëqq»¥ÁªµÄjar°üµ½maven±¾µØ¿â
-µ¼ÈëÃüÁî£ºC:\Users\³¬>mvn install:install-file -DgroupId=com.qq.connect -DartifactId=qqcon
+ï»¿éœ€è¦å¯¼å…¥qqäº’è”çš„jaråŒ…åˆ°mavenæœ¬åœ°åº“
+å¯¼å…¥å‘½ä»¤ï¼šC:\Users\è¶…>mvn install:install-file -DgroupId=com.qq.connect -DartifactId=qqcon
 nect -Dversion=2.0 -Dpackaging=jar -Dfile=G:\github\ExtremeWorld\soft\Sdk4J.jar

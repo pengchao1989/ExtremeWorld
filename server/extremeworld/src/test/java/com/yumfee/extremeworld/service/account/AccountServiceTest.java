@@ -15,12 +15,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
 import com.yumfee.extremeworld.data.UserData;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.repository.TaskDao;
 import com.yumfee.extremeworld.repository.UserDao;
 import com.yumfee.extremeworld.service.ServiceException;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
+
 import org.springside.modules.test.security.shiro.ShiroTestUtils;
 import org.springside.modules.utils.Clock.MockClock;
 
@@ -48,7 +51,7 @@ public class AccountServiceTest {
 
 	@Test
 	public void registerUser() {
-		User user = UserData.randomNewUser();
+		UserInfo user = UserData.randomNewUser();
 		Date currentTime = new Date();
 		accountService.setClock(new MockClock(currentTime));
 
@@ -64,12 +67,12 @@ public class AccountServiceTest {
 	@Test
 	public void updateUser() {
 		// 如果明文密码不为空，加密密码会被更新.
-		User user = UserData.randomNewUser();
+		UserInfo user = UserData.randomNewUser();
 		accountService.updateUser(user);
 		assertThat(user.getSalt()).isNotNull();
 
 		// 如果明文密码为空，加密密码无变化。
-		User user2 = UserData.randomNewUser();
+		UserInfo user2 = UserData.randomNewUser();
 		user2.setPlainPassword(null);
 		accountService.updateUser(user2);
 		assertThat(user2.getSalt()).isNull();
