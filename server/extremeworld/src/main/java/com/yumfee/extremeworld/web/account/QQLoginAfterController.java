@@ -6,6 +6,10 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +23,6 @@ import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.account.AccountService;
-import com.yumfee.extremeworld.service.account.ShiroDbRealm;
 
 @Controller
 @RequestMapping(value = "/qqloginafter")
@@ -28,6 +31,9 @@ public class QQLoginAfterController
 	
 	@Autowired
 	private AccountService accountService;
+	
+/*	@Autowired
+	DefaultWebSecurityManager securityManager;*/
 	
 	
 	private User user = null;
@@ -102,14 +108,17 @@ public class QQLoginAfterController
                 	user.setQqOpenId(openID);
                 	user.setLoginName(openID);
                 	user.setName(userInfoBean.getNickname());
-                	user.setPassword("123");
-                	user.setPlainPassword("123");
-                	user.setSalt("salt");
+                	user.setPlainPassword(openID);
                 	
                 	accountService.registerUser(user);
                 	
+                	
+                	
                 }
                 
+                Subject subject = SecurityUtils.getSubject();
+                UsernamePasswordToken token = new UsernamePasswordToken(openID,openID);
+                subject.login(token);
                 
                 out.println("欢迎你，代号为 " + openID + " 的用户!");
                 request.getSession().setAttribute("demo_openid", openID);
@@ -120,6 +129,6 @@ public class QQLoginAfterController
         } catch (QQConnectException e) {
         }
     
-        return "redirect:/login";
+        return "redirect:/topic";
 	}
 }

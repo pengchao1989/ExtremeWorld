@@ -64,9 +64,9 @@ public class AccountService {
 	
 	public void registerUser(User user) 
 	{
-		//entryptPassword(user); 
-		user.setPassword("ccc");
-		user.setSalt("salt");
+		entryptPassword(user); 
+/*		user.setPassword("ccc");
+		user.setSalt("salt");*/
 		
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
@@ -117,7 +117,7 @@ public class AccountService {
 	private void entryptPassword(User user) 
 	{
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
-		user.setSalt(/*Encodes.encodeHex(salt)*/"123");
+		user.setSalt(Encodes.encodeHex(salt));
 
 		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
