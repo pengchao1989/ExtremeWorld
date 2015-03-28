@@ -1,7 +1,9 @@
 package com.yumfee.extremeworld.web.video;
 
 import javax.servlet.ServletRequest;
+import javax.validation.Valid;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -10,11 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yumfee.extremeworld.entity.Task;
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.VideoService;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
 @RequestMapping(value = "/video")
@@ -53,4 +59,30 @@ public class VideoController
 				
 				return "/video/videoDetail";
 			}
+	
+	@RequestMapping(value = "create", method = RequestMethod.GET)
+	public String createForm(Model model)
+	{
+		model.addAttribute("video", new Video());
+		model.addAttribute("action", "create");
+		
+		
+		return "/video/videoForm";
+	}
+	
+	@RequestMapping(value = "create", method = RequestMethod.POST)
+	public String create(@Valid Video newVideo, RedirectAttributes redirectAttributes)
+	{
+		User user = new User(getCurrentUserId());
+		newVideo.setUser(user);
+		return "redirect:/task/";
+	}
+	
+	/**
+	 * 取出Shiro中的当前用户Id.
+	 */
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
+	}
 }

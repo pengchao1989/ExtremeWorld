@@ -27,22 +27,22 @@ public class UptokenRestController
 	    PutPolicy putPolicy = new PutPolicy(bucketName);
 	    String uptoken = putPolicy.token(mac);
 	    Token token = new Token();
-	    token.token = uptoken;
+	    token.uptoken = uptoken;
 		return token;
 	}
 	
 	class Token
 	{
-		private String token;
+		private String uptoken;
 
-		public String getToken()
+		public String getUptoken()
 		{
-			return token;
+			return uptoken;
 		}
 
-		public void setToken(String token)
+		public void setUptoken(String uptoken)
 		{
-			this.token = token;
+			this.uptoken = uptoken;
 		}
 		
 	}

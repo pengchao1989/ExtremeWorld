@@ -13,6 +13,8 @@
 <body>
 	<div class="container main_content">
 	
+		<a href="${ctx}/video/create" class="btn btn-primary btn-lg active" role="button">发布视频</a>
+	
 		<ul class="media-list">
 			<c:forEach items="${videos.content}" var="video">
 				<a href="${ctx}/video/${video.id}" target="_blank">${video.title} }</a>
