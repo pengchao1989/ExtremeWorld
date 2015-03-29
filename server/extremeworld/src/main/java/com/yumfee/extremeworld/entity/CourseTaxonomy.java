@@ -17,6 +17,7 @@ public class CourseTaxonomy extends IdEntity
 	
 	private List<Course> courses;
 
+	
 	public String getName()
 	{
 		return name;

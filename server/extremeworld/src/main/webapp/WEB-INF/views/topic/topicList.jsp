@@ -3,6 +3,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,7 +23,7 @@
 					<c:forEach items="${topics.content}" var="topic">
 						<li class="media">
 								<div class="media-left">
-									<a href="#"> <img class="media-object avatar" src="${ctx}/static/ace/assets/avatars/avatar1.png" alt="..."></a>
+									<a href="#"> <img class="media-object avatar" src="${static_url}${topic.user.avatar}" alt="..."></a>
 									
 								</div>
 								<div class="media-body">

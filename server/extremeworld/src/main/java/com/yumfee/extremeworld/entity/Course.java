@@ -1,14 +1,10 @@
 package com.yumfee.extremeworld.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -23,6 +19,8 @@ public class Course extends IdEntity
 	private String content;
 	private Date createTime;
 	private Date modifyTime;
+	
+	private CourseTaxonomy courseTaxonomy;
 	
 	private User user;
 	
@@ -82,4 +80,17 @@ public class Course extends IdEntity
 	{
 		this.user = user;
 	}
+
+	@ManyToOne
+	@JoinColumn(name = "taxonomy_id")
+	public CourseTaxonomy getCourseTaxonomy()
+	{
+		return courseTaxonomy;
+	}
+
+	public void setCourseTaxonomy(CourseTaxonomy courseTaxonomy)
+	{
+		this.courseTaxonomy = courseTaxonomy;
+	}
+	
 }
