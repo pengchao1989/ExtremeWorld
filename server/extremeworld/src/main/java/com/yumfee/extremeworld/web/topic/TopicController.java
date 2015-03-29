@@ -43,6 +43,8 @@ public class TopicController
 	{
 		Page<Topic> topics = topicService.getAllTopic(pageNumber, pageSize, sortType);
 		
+		//Page<Topic> topics = topicService.getAllTopicByCourse(1L,pageNumber, pageSize, sortType);
+		
 		model.addAttribute("topics", topics);
 		return "topic/topicList";
 	}

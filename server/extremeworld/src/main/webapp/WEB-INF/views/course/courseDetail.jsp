@@ -9,13 +9,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-
-
 </head>
 <body>
-
 	<div class="container main_content">
-
+	
+		<div class="jumbotron">
+			<div class = "row">
+				<div class="col-sm-10">
+					<h1>${course.name}</h1>
+				</div>
+				
+				<div class="col-sm-2">
+					<p><a class="btn btn-success " href="#" role="button">编辑</a></p>
+				</div>
+			</div>
+			
+			<label>最后由</label><a href="#">${course.user.name}</a><label>于${course.modifyTime}编辑</label>
+			
+		 	<p>${course.content}</p>
+		</div>
+		
+		<h2>讨论与教学</h2>
+		
 		<div class="row">
 			<tbody>
 				<ul class="media-list">
@@ -27,7 +42,6 @@
 								</div>
 								<div class="media-body">
 									<a href="${ctx}/topic/${topic.id}" target="_blank"> 
-									
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="list-group-item-heading">${topic.title}</h3>
@@ -59,31 +73,7 @@
 					</c:forEach>
 				</ul>
 			</tbody>
-		</div>
-
-
-		<tags:pagination page="${topics}" paginationSize="5"/>
-	
-	<div class="row">
-			<form class="form-horizontal" action="${ctx}/topic"  method="post"  class="form-horizontal">
-				<section id="edit">
-					<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
-					<br/>
-					<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
-					<br/>
-					<input id="submit_btn" class="btn btn-primary" type="submit" value="发布"/>&nbsp;	
-				</section>
-			</form>	
-	</div>
-	
 
 	</div>
-
-	
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/module.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/hotkeys.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/uploader.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/simditor.js"></script>
-	<script type="text/javascript" src="${ctx}/static/scripts/edit.js"></script>
 </body>
 </html>

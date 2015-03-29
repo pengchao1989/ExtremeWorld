@@ -6,9 +6,11 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -35,6 +37,8 @@ public class Topic extends IdEntity
 	private String videoSource;
 	
 	private User user;
+	
+	private Course coursce;
 	
 	@NotBlank
 	public String getTitle()
@@ -134,5 +138,20 @@ public class Topic extends IdEntity
 	{
 		this.user = user;
 	}
+	
+	// optional表示该对象可有可无，它的值为true表示该外键可以为null，它的值为false表示该外键为not null  
+	@ManyToOne(fetch=FetchType.LAZY, optional = false)
+	@JoinTable(name = "tb_course_topic",
+	joinColumns = { @JoinColumn(name="topic_id", referencedColumnName= "id")},
+	inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "id") })
+	public Course getCourse()
+	{
+		return coursce;
+	}
+	public void setCourse(Course coursce)
+	{
+		this.coursce = coursce;
+	}
+	
 	
 }

@@ -27,8 +27,8 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/simditor-2.0.4/styles/simditor.css" />
 
 <!-- ace -->
-<link rel="stylesheet" type="text/css" href="${ctx}/static/ace/assets/css/ace-fonts.css" >
-<link rel="stylesheet" href="${ctx}/static/ace/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+<%-- <link rel="stylesheet" type="text/css" href="${ctx}/static/ace/assets/css/ace-fonts.css" >
+<link rel="stylesheet" href="${ctx}/static/ace/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" /> --%>
 
 
 <link href="${ctx}/static/styles/default.css" type="text/css" rel="stylesheet" />

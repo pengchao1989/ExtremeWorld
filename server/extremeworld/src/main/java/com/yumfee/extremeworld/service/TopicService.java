@@ -44,6 +44,13 @@ public class TopicService
 		return topicDao.findAll(pageRequest);
 	}
 	
+	public Page<Topic> getAllTopicByCourse(Long courseId, int pageNumber, int pageSize,String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		
+		return topicDao.findByCourseId(courseId,pageRequest);
+	}
+	
 	@Autowired
 	public void setTopicDao(TopicDao topicDao)
 	{

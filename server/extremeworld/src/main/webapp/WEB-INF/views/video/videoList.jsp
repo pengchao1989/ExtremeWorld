@@ -17,42 +17,15 @@
 	
 		<ul class="media-list">
 			<c:forEach items="${videos.content}" var="video">
-				<a href="${ctx}/video/${video.id}" target="_blank">${video.title} }</a>
+			<div class="row">
+			
+			</div>
+				<a href="${ctx}/video/${video.id}" target="_blank">${video.title}</a>
 			</c:forEach>
 		</ul>
-	
-		<button id="getData" class="btn btn-primary">GET_TOKEN</button>
-		<p id="result">result</p>
-		
-		<form id="uploadForm" method="post" action="http://upload.qiniu.com/"
-			 enctype="multipart/form-data">
-			  <input name="key" value="<resource_key>">
-			  <input name="x:<custom_name>" type="hidden" value="<custom_value>">
-			  <input id="uptoken" name="token"  value="<upload_token>">
-			  <input name="file" type="file" />
-			  <input name="accept" type="hidden" />
-			  <button type="submit" class="btn btn-default">Submit</button>
-		</form>
-
 
 	</div>
 	
-	<script>
-		$(document).ready(function(){
-			  $("#getData").click(function(){
 
-				  
-				    $.get("${ctx}/api/v1/uptoken",function(data, status){
-
-				     	alert("Data: " + data + "\nStatus: " + status);
-				     	
-						  $("#uptoken").val(data.token);
-						  $("#result").text("1234");
-						  
-			     	
-			    		});
-			  });
-			});
-	</script>
 </body>
 </html>

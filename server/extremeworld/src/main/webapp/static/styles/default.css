@@ -1,5 +1,25 @@
 /* header */
 
+body{
+	background-color: #B6B7BA;
+}
+
+.navbar-default {
+  background-color: #C3E883;
+}
+
+.footer {
+  color: #777;
+  padding: 30px 0;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 70px;
+}
+
+.media-list {
+  padding-left: 20px;
+  list-style: none;
+}
+
 div.reply_body {
 margin-left: 20px;
 border-style: ridge

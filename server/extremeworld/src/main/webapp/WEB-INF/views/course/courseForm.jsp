@@ -8,23 +8,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>新建教程</title>
 </head>
 <body>
-	<div class="container main_content">
-		<c:forEach items="${courseTaxonomyList}" var="courseTaxonomy">
-			<h1>${courseTaxonomy.name}</h1>
-			
-			<div class="list-group">
-			
-			
-				<c:forEach items="${courseTaxonomy.courses}" var="course">
-					<a class="list-group-item" href="${ctx}/course/${course.id}">${course.name}</a>
-				</c:forEach>
-			
-			</div>
-			
-		</c:forEach>
-	</div>
+
 </body>
 </html>
