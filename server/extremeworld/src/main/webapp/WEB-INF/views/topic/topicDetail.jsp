@@ -107,18 +107,18 @@
 							<div class="col-md-10">
 								<a href="#">${reply.userInfo.name}</a>
 								<p>${reply.createTime}</p>
-								<h4>${reply.content}</h4>
+								<h4 >${reply.content}</h4>
 							</div>
 							<div class="col-md-2">
 								<p>1楼</p>
-								<a href="#">回复</a>
+								<a class="sub_reply_form">回复</a>
 							</div>
 
 						</div>
 					</div>
 
 					<!-- 子回复 -->
-					<div style="padding-left: 5%">
+					<div class="reply_panl">
 						<c:forEach items="${reply.subReplys}" var="subreply">
 							<div class="media">
 								<div class="media-left">
@@ -147,26 +147,38 @@
 		
 		<tags:pagination page="${replys}" paginationSize="5"/>
 		
-	<div class="row">
-			<form class="form-horizontal" action="${ctx}/topic/${topic.id}"  method="post"  class="form-horizontal">
-				<section id="edit">
-					<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
-					<br/>
-					<input id="submit_btn" class="btn btn-primary" type="submit" value="回复"/>&nbsp;	
-				</section>
-			</form>	
+		<div class="reply_panl">
+			<form action="">
+				<input id="submit_btn" class="" type="text" value="回复"/>
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+			</form>
+		</div>
+		
+		<div class="row">
+				<form class="form-horizontal" action="${ctx}/topic/${topic.id}"  method="post"  class="form-horizontal">
+					<section id="edit">
+						<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
+						<br/>
+						<input id="submit_btn" class="btn btn-primary" type="submit" value="回复"/>&nbsp;	
+					</section>
+				</form>	
+		</div>
+		
 	</div>
-		
-		
+	
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			$(".sub_reply_form").click(function(){
+				$(this).text("huifu");
+				
+				/* 获取到主回复div */
+				$(this).parents().filter(".reply_list_item").append('<div class="reply_panl"><form><input></input><form></div>');
+			});
+		});
+	
+	</script>
 
-		
-	</div>
-
-	<!-- 	<form method="post" action="http://upload.qiniu.com/" enctype="multipart/form-data">
-		  <input name="token" type="hidden" value="iKeYoaf3toQqqFfpdvNX5VBXX9qTL7FDN6GwcQj:O4jOrUPzqiJCmj462sZsBHDkQ6E=:eyJzY29wZSI6ImV4dHJlbWUiLCJyZXR1cm5VcmwiOiJodHRwOi8vbG9jYWxob3N0OjgwMjMvZXh0cmVtZXdvcmxkL3RvcGljLzUiLCJyZXR1cm5Cb2R5IjoieyAgICAgXCJmb29cIjogXCJiYXJcIiwgICAgIFwibmFtZVwiOiAkKGZuYW1lKSwgICAgIFwic2l6ZVwiOiAkKGZzaXplKSwgICAgIFwidHlwZVwiOiAkKG1pbWVUeXBlKSwgICAgIFwiaGFzaFwiOiAkKGV0YWcpLCAgICAgXCJ3XCI6ICQoaW1hZ2VJbmZvLndpZHRoKSwgICAgIFwiaFwiOiAkKGltYWdlSW5mby5oZWlnaHQpLCAgICAgXCJjb2xvclwiOiAkKGV4aWYuQ29sb3JTcGFjZS52YWwpIH0iLCJkZWFkbGluZSI6MTQyMjQxMzg4OX0=">
-		  <input name="file" type="file" />
-		  <input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;
-	</form> -->
 
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/module.js"></script>
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/hotkeys.js"></script>

@@ -13,14 +13,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">极限学院</a>
+      <a class="navbar-brand" href="${ctx}/">极限学院</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
-        <li><a href="${ctx}/topic">讨论</a></li>
+        <li ><a href="${ctx}/">首页 <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="${ctx}/topic">讨论</a></li>
         <li><a href="${ctx}/video">视频</a></li>
         <li><a href="${ctx}/course">教程</a></li>
         <li><a href="${ctx}/site">场地</a></li>

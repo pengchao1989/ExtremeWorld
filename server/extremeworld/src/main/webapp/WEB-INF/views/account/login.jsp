@@ -37,11 +37,14 @@
 			</div>
 			
 			 <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			 
+			 <a href="${ctx}/qqlogin"><img alt="" src="${ctx}/static/images/qq_login_icon.jpg"></a>
+			 <br/>
 			 <a class="btn" href="${ctx}/register">注册</a>
 			
 	</form>
 	
-	<a href="${ctx}/qqlogin">qq登录</a>
+	
 	
 <!-- 		<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101189354" data-redirecturi="http://www.17skate.com/extremeworld/qqlogin" charset="utf-8" ></script>
 
