@@ -100,6 +100,8 @@ public class CourseController
 		
 		newCourse.setCourseTaxonomy(courseTaxonomy);
 		
+
+		newCourse.setType("course");
 		courseService.saveCourse(newCourse);
 		
 		redirectAttributes.addFlashAttribute("message", "创建教学成功");
@@ -117,8 +119,26 @@ public class CourseController
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("course") Course course, RedirectAttributes redirectAttributes)
+	public String update(@Valid @ModelAttribute("course") Course newCourse, RedirectAttributes redirectAttributes)
 	{
+		//当前暂未更新的数据
+		Course curCourse = courseService.getCourse(newCourse.getId());
+		
+		
+		//将现有内容拷贝为历史版本
+		Course courseRevision = new Course();
+		courseRevision.setName(curCourse.getName()+"-revision");
+		courseRevision.setContent(curCourse.getContent());
+		courseRevision.setType("revision");
+		courseRevision.setUser(curCourse.getUser());
+		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
+		courseService.saveCourse(courseRevision);
+		
+		//将新内容更新至原始数据库行
+		curCourse.setName(newCourse.getName());
+		curCourse.setContent(newCourse.getContent());
+		courseService.saveCourse(curCourse);
+		
 		return "redirect:/course/";
 	}
 	

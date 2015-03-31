@@ -34,9 +34,9 @@ public class QQLoginAfterController
 	private com.yumfee.extremeworld.entity.UserInfo myUser = null;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public void get(HttpServletRequest  request ,HttpServletResponse response) throws IOException
+	public String get(HttpServletRequest  request ,HttpServletResponse response) throws IOException
 	{
-		qqLoginAfter(request, response);
+		return qqLoginAfter(request, response);
 	}
 	
 	
@@ -119,7 +119,9 @@ public class QQLoginAfterController
                 // 利用获取到的accessToken 去获取当前用户的openid --------- end
 
             }
-        } catch (QQConnectException e) {
+        }
+        catch (QQConnectException e) 
+        {
         }
     
         return "redirect:/topic";

@@ -20,7 +20,7 @@
 				</div>
 				
 				<div class="col-sm-2">
-					<p><a class="btn btn-success " href="#" role="button">编辑</a></p>
+					<p><a class="btn btn-success " href="${ctx}/course/update/${course.id}" role="button">编辑</a></p>
 				</div>
 			</div>
 			

@@ -2,7 +2,12 @@ package com.yumfee.extremeworld.entity;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,6 +22,7 @@ public class Course extends IdEntity
 {
 	private String name;
 	private String content;
+	private String type;    //course:正常状态   revision:修订版本
 	private Date createTime;
 	private Date modifyTime;
 	
@@ -44,6 +50,16 @@ public class Course extends IdEntity
 	public void setContent(String content)
 	{
 		this.content = content;
+	}
+
+	public String getType()
+	{
+		return type;
+	}
+
+	public void setType(String type)
+	{
+		this.type = type;
 	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")

@@ -15,6 +15,8 @@
 	<div  class="container main_content">
 		<form action="${ctx}/course/${action}" method="post" class="form-horizontal">
 		
+			<input type="hidden" name="id" value="${course.id}"/>
+		
  			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">分类</label>
 				<div class="col-sm-10">
@@ -31,14 +33,14 @@
 			<div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="name"  name="name" placeholder="名称">
+			      <input type="text" class="form-control" id="name"  name="name" placeholder="名称" value="${course.name}">
 			    </div>
 			  </div>
 			  
 				<div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">内容</label>
 			    <div class="col-sm-10">
-			      <input  class="form-control" rows="20" id="content" name="content"></input>
+			      <input  class="form-control" rows="20" id="content" name="content" value="${course.content}">
 			    </div>
 			  </div>
 
