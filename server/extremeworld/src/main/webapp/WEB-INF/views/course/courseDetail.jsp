@@ -21,6 +21,7 @@
 				
 				<div class="col-sm-2">
 					<p><a class="btn btn-success " href="${ctx}/course/update/${course.id}" role="button">编辑</a></p>
+					<a href="${ctx}/course/revision/${course.id}">历史</a>
 				</div>
 			</div>
 			
@@ -74,6 +75,8 @@
 				</ul>
 			</tbody>
 
+	</div>
+	
 	</div>
 </body>
 </html>

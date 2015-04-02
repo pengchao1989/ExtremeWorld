@@ -28,8 +28,8 @@
 				/static/** = anon
 				/api/** = anon
 				/register/** = anon
-				/qqlogin = anon
-				/qqloginafter = anon
+				/qqlogin/** = anon
+				/qqlogin_redirect = anon
 				/admin/** = roles[admin]
 				/** = user
 			</value>

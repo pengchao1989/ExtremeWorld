@@ -1,10 +1,12 @@
 package com.yumfee.extremeworld.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yumfee.extremeworld.entity.Course;
+import com.yumfee.extremeworld.entity.CourseBase;
 import com.yumfee.extremeworld.repository.CourseDao;
 
 //Spring Bean的标识.
@@ -15,14 +17,19 @@ public class CourseService
 {
 	private CourseDao courseDao;
 	
-	public Course getCourse(Long id)
+	public CourseBase getCourse(Long id)
 	{
 		return courseDao.findOne(id);
 	}
 	
-	public void saveCourse(Course entity)
+	public void saveCourse(CourseBase entity)
 	{
 		courseDao.save(entity);
+	}
+	
+	public List<CourseBase> getRevisions(Long id)
+	{
+		return courseDao.findByPid(id);
 	}
 
 	@Autowired

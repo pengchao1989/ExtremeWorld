@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +23,8 @@ import com.qq.connect.oauth.Oauth;
 import com.yumfee.extremeworld.service.account.AccountService;
 
 @Controller
-@RequestMapping(value = "/qqloginafter")
-public class QQLoginAfterController
+@RequestMapping(value = "/qqlogin_redirect")
+public class QQLoginRedirectController
 {
 	
 	@Autowired
@@ -106,6 +105,10 @@ public class QQLoginAfterController
                 	myUser.setPlainPassword(openID);
                 	
                 	accountService.registerUser(myUser);
+                	
+                	
+                	//第一次qq登录进入欢迎页
+                	
                 	
                 }
                 

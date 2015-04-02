@@ -18,13 +18,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tb_course")
-public class Course extends IdEntity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("course")
+public class CourseBase extends IdEntity
 {
 	private String name;
 	private String content;
-	private String type;    //course:正常状态   revision:修订版本
+	//private String type;    //course:正常状态   revision:修订版本
 	private Date createTime;
 	private Date modifyTime;
+	private Long pid;
 	
 	private CourseTaxonomy courseTaxonomy;
 	
@@ -52,7 +56,7 @@ public class Course extends IdEntity
 		this.content = content;
 	}
 
-	public String getType()
+/*	public String getType()
 	{
 		return type;
 	}
@@ -60,7 +64,7 @@ public class Course extends IdEntity
 	public void setType(String type)
 	{
 		this.type = type;
-	}
+	}*/
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime()
@@ -83,6 +87,18 @@ public class Course extends IdEntity
 	public void setModifyTime(Date modifyTime)
 	{
 		this.modifyTime = modifyTime;
+	}
+	
+	
+
+	public Long getPid()
+	{
+		return pid;
+	}
+
+	public void setPid(Long pid)
+	{
+		this.pid = pid;
 	}
 
 	@ManyToOne

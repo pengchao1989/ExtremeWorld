@@ -15,7 +15,7 @@ public class CourseTaxonomy extends IdEntity
 	private String name;
 	private Date createTime;
 	
-	private List<Course> courses;
+	private List<CourseBase> courses;
 
 	
 	public String getName()
@@ -40,12 +40,12 @@ public class CourseTaxonomy extends IdEntity
 
 	@OneToMany
 	@JoinColumn(name="taxonomy_id")
-	public List<Course> getCourses()
+	public List<CourseBase> getCourses()
 	{
 		return courses;
 	}
 
-	public void setCourses(List<Course> courses)
+	public void setCourses(List<CourseBase> courses)
 	{
 		this.courses = courses;
 	}

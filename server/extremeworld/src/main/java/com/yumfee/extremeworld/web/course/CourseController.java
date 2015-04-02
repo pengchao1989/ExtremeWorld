@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.yumfee.extremeworld.entity.Course;
+
+import com.yumfee.extremeworld.entity.CourseBase;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
+import com.yumfee.extremeworld.entity.CourseVersion;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.CourseService;
@@ -60,7 +62,7 @@ public class CourseController
 	
 	{
 		
-		Course course = courseService.getCourse(id);
+		CourseBase course = courseService.getCourse(id);
 		
 		Page<Topic> topics = topicService.getAllTopicByCourse(id, pageNumber, pageSize, sortType);
 		
@@ -77,7 +79,7 @@ public class CourseController
 		model.addAttribute("courseTaxonomyList", courseTaxonomyList);
 		
 		
-		model.addAttribute("course", new Course());
+		model.addAttribute("course", new CourseBase());
 		model.addAttribute("action", "create");
 		
 		
@@ -85,7 +87,7 @@ public class CourseController
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid Course newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
+	public String create(@Valid CourseBase newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
 	{
 		System.out.println("create");
 		System.out.println("courseTaxonomyId" + request.getParameter("courseTaxonomyId"));
@@ -101,7 +103,7 @@ public class CourseController
 		newCourse.setCourseTaxonomy(courseTaxonomy);
 		
 
-		newCourse.setType("course");
+		//newCourse.setType("course");
 		courseService.saveCourse(newCourse);
 		
 		redirectAttributes.addFlashAttribute("message", "创建教学成功");
@@ -119,19 +121,20 @@ public class CourseController
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("course") Course newCourse, RedirectAttributes redirectAttributes)
+	public String update(@Valid @ModelAttribute("course") CourseBase newCourse, RedirectAttributes redirectAttributes)
 	{
 		//当前暂未更新的数据
-		Course curCourse = courseService.getCourse(newCourse.getId());
+		CourseBase curCourse = courseService.getCourse(newCourse.getId());
 		
 		
 		//将现有内容拷贝为历史版本
-		Course courseRevision = new Course();
+		CourseVersion courseRevision = new CourseVersion();
 		courseRevision.setName(curCourse.getName()+"-revision");
 		courseRevision.setContent(curCourse.getContent());
-		courseRevision.setType("revision");
+		//courseRevision.setType("revision");
 		courseRevision.setUser(curCourse.getUser());
 		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
+		courseRevision.setPid(curCourse.getId());
 		courseService.saveCourse(courseRevision);
 		
 		//将新内容更新至原始数据库行
@@ -139,7 +142,20 @@ public class CourseController
 		curCourse.setContent(newCourse.getContent());
 		courseService.saveCourse(curCourse);
 		
+		//TODO pid
+		
 		return "redirect:/course/";
+	}
+	
+	@RequestMapping(value = "revision/{id}", method = RequestMethod.GET)
+	public String revision(@PathVariable("id") Long id, Model model)
+	{
+		CourseBase version = courseService.getCourse(id);
+		List<CourseBase> revision = courseService.getRevisions(id);
+		
+		model.addAttribute("version", version);
+		model.addAttribute("preversion", revision.get(revision.size()-1));
+		return "/course/courseRevision";
 	}
 	
 	/**

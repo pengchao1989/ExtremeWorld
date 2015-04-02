@@ -38,7 +38,7 @@ public class Topic extends IdEntity
 	
 	private User user;
 	
-	private Course coursce;
+	private CourseBase coursce;
 	
 	@NotBlank
 	public String getTitle()
@@ -144,11 +144,11 @@ public class Topic extends IdEntity
 	@JoinTable(name = "tb_course_topic",
 	joinColumns = { @JoinColumn(name="topic_id", referencedColumnName= "id")},
 	inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "id") })
-	public Course getCourse()
+	public CourseBase getCourse()
 	{
 		return coursce;
 	}
-	public void setCourse(Course coursce)
+	public void setCourse(CourseBase coursce)
 	{
 		this.coursce = coursce;
 	}
