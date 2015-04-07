@@ -7,6 +7,7 @@ import com.yumfee.extremeworld.entity.UserInfo;
 
 public interface UserInfoDao extends PagingAndSortingRepository<UserInfo, Long>
 {
+	UserInfo findById(Long id);
 	UserInfo findByLoginName(String loginName);
 	UserInfo findByQqOpenId(String qqOpenId);
 }

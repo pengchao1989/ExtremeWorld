@@ -6,22 +6,28 @@ import java.io.PrintWriter;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
-import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
+import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.service.account.AccountService;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
 @RequestMapping(value = "/qqlogin")
@@ -31,6 +37,8 @@ public class QQLoginController
 	private AccountService accountService;
 	
 	private com.yumfee.extremeworld.entity.UserInfo myUser = null;
+	
+	private boolean isNewUser = true;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public void qqLogin(ServletRequest request ,HttpServletResponse response) throws IOException {
@@ -49,6 +57,8 @@ public class QQLoginController
 		
 		///return "account/qqLogin";
 	}
+	
+	
 	
 	@RequestMapping(value = "redirect", method = RequestMethod.GET)
 	public String qqLoginRedirect(HttpServletRequest  request ,HttpServletResponse response) throws IOException
@@ -97,7 +107,7 @@ public class QQLoginController
                 myUser = accountService.findUserByQqOpenId(openID);
                 if(myUser == null)
                 {
-                	UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
+                	com.qq.connect.api.qzone.UserInfo qzoneUserInfo = new com.qq.connect.api.qzone.UserInfo(accessToken, openID);
                     UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
                     
                     out.println("<br/>");
@@ -124,8 +134,10 @@ public class QQLoginController
                 	accountService.registerUser(myUser);
                 	
                 	
-                	//第一次qq登录进入欢迎页
                 	
+                	
+                	//第一次qq登录进入欢迎页
+                	isNewUser = true;
                 	
                 }
                 
@@ -144,7 +156,59 @@ public class QQLoginController
         catch (QQConnectException e) 
         {
         }
-    
-        return "redirect:/topic";
+        
+        if(isNewUser)
+        {
+        	return "redirect:/qqlogin/welcome";
+        }
+        else
+        {
+        	return "redirect:/topic";
+        }
+        
+	}
+	
+	@RequestMapping(value = "welcome", method = RequestMethod.GET)
+	public String updateProfileForm(Model model)
+	{
+		Long currentUserId = getCurrentUserId();
+		UserInfo currUserInfo = accountService.getUser(currentUserId);
+		
+		model.addAttribute("user", currUserInfo);
+		model.addAttribute("action", "updateProfile");
+		return "/account/welcome";
+	}
+	
+	@RequestMapping(value = "updateProfile", method = RequestMethod.POST)
+	public String updateProfile(@Valid @ModelAttribute("user") UserInfo user, RedirectAttributes redirectAttributes)
+	{
+		System.out.println("/updateProfile");
+		
+		accountService.updateUser(user);
+		updateCurrentUserName(user.getName());
+		return "redirect:/topic";
+	}
+	
+	@ModelAttribute
+	public void getUser(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model) {
+		if (id != -1) {
+			model.addAttribute("user", accountService.getUser(id));
+		}
+	}
+	
+	/**
+	 * 取出Shiro中的当前用户Id.
+	 */
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
+	}
+	
+	/**
+	 * 更新Shiro中当前用户的用户名.
+	 */
+	private void updateCurrentUserName(String userName) {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		user.name = userName;
 	}
 }

@@ -44,7 +44,7 @@ public class QQLoginRedirectController
 	{
 		System.out.println("/qqLoginAfter");
 		
-		System.out.println("/qqloginafter");
+		
 		
 		response.setContentType("text/html; charset=utf-8");
 

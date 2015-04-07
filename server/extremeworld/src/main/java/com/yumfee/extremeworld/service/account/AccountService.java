@@ -51,11 +51,11 @@ public class AccountService {
 		return (List<UserInfo>) userDao.findAll();
 	}
 
-	public User getUser(Long id) 
+	public UserInfo getUser(Long id) 
 	{
 		return userDao.findOne(id);
 	}
-
+	
 	public UserInfo findUserByLoginName(String loginName) 
 	{
 		return userDao.findByLoginName(loginName);
