@@ -6,34 +6,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.web.MediaTypes;
 
-import com.qiniu.api.auth.AuthException;
-import com.qiniu.api.auth.digest.Mac;
-import com.qiniu.api.config.Config;
-import com.qiniu.api.rs.PutPolicy;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
+
 
 @RestController
 @RequestMapping(value = "/api/v1/uptoken")
 public class UptokenRestController
 {
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public Token getUptoken() throws AuthException, JSONException
+	public Token getUptoken() throws JSONException
 	{
-		Config.ACCESS_KEY = "-iKeYoaf3toQqqFfpdvNX5VBXX9qTL7FDN6GwcQj";
-		Config.SECRET_KEY = "LZkUYSfHyE3al25SQoI1AWF1HoI8NKnshhGtxLtW";
+		String ACCESS_KEY = "-iKeYoaf3toQqqFfpdvNX5VBXX9qTL7FDN6GwcQj";
+		String SECRET_KEY = "LZkUYSfHyE3al25SQoI1AWF1HoI8NKnshhGtxLtW";
 		
-		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 		
 		String bucketName = "extreme";
-	    PutPolicy putPolicy = new PutPolicy(bucketName);
-	    String uptoken = putPolicy.token(mac);
-	    Token token = new Token();
-	    token.uptoken = uptoken;
-		return token;
+	    //String token = auth.uploadToken(bucketName);
+	    String token =  auth.uploadToken(bucketName, null, 3600, 
+	    		new StringMap().
+	    		put("persistentOps", "avthumb/flv/r/24/vcodec/libx264").
+	    		put("persistentNotifyUrl", "http://fake.com/qiniu/notify").
+	    		put("persistentPipeline", "myPipiLine"));
+	    		
+	    
+		return new Token(token);
 	}
 	
 	class Token
 	{
 		private String uptoken;
+		
+		public Token(String token)
+		{
+			this.uptoken = token;
+		}
 
 		public String getUptoken()
 		{

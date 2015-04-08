@@ -12,11 +12,13 @@
 </head>
 <body>
 	<div class="container main_content">
-		<h1>welcome</h1>
 		
-		<form action="${ctx}/qqlogin/${action}" method="post" class="form-horizontal">
+		
+		<form action="${ctx}/qqlogin/${action}" method="post" class="form-welcome">
 			
 			<input type="hidden" name="id" value="${user.id}"/>
+		
+			<h1>welcome</h1>
 		
 			<div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">名字</label>

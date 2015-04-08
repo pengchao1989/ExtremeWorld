@@ -358,8 +358,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.qiniu</groupId>
-			<artifactId>sdk</artifactId>
-			<version>[6.1.7, 6.999]</version>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>7.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.lordofthejars</groupId>

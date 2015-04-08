@@ -55,6 +55,7 @@ $(function() {
             },
             'FileUploaded': function(up, file, info) {
                 /*设置url*/
+            	console.log(info);
                 var res = $.parseJSON(info);
                 if (res.url)
                 {

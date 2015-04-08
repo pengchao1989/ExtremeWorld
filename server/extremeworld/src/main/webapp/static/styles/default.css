@@ -29,6 +29,13 @@ body{
   margin: 0 auto;
 }
 
+.form-welcome
+{
+	max-width: 660px;
+	padding: 15px;
+ 	margin: 0 auto;
+}
+
 .media-list {
   padding-left: 20px;
   list-style: none;
