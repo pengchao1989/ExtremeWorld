@@ -46,8 +46,8 @@
 										</div>
 										
 										<div class="col-md-2">
-											<p>2015-03-15 17:22</p>
-											<p>2015-03-15 17:22</p>
+											<p>${topic.createTime}</p>
+											<p>${topic.updateTime}</p>
 										</div>
 
 									</div>

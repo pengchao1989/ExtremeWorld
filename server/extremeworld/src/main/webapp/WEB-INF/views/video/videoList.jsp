@@ -13,17 +13,46 @@
 <body>
 	<div class="container main_content">
 	
-		<a href="${ctx}/video/create" class="btn btn-primary btn-lg" role="button">上传</a>
+	<div class="row">
+		<div class="col-xs-10 col-md-10">
+			<div class="btn-group btn-group-lg" role="group" aria-label="...">
+			  <button type="button" class="btn btn-default">全部</button>
+			  <button type="button" class="btn btn-default">国内</button>
+			  <button type="button" class="btn btn-default">国外</button>
+			</div>
+		</div>
+		
+		<div class="col-xs-2 col-md-2">
+			<a href="${ctx}/video/create" class="btn btn-primary" role="button">上传</a>
+		</div>
+	</div>
+	
+		<br>
+
 	
 		<ul class="media-list">
+
 			<c:forEach items="${videos.content}" var="video">
-			<div class="row">
 			
-			</div>
-				<a href="${ctx}/video/${video.id}" target="_blank">${video.title}</a>
+			<li class="media">
+				<div class="media-left">
+					<div class="col-xs-6 col-md-3">
+						<a href="${ctx}/video/${video.id}">
+							<img alt="" src="${video.videoDetail.thumbnail}">
+						</a>
+					</div>
+				</div>
+				
+				<div class="media-body">
+					<h3><a href="${ctx}/video/${video.id}" target="_blank">${video.title}</a></h3>
+					<a href="#">${video.user.name}</a> 
+					<p>${video.content}</p>
+				</div>
+			</li>
+
+				
 			</c:forEach>
 		</ul>
-
 	</div>
 	
 
