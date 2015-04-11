@@ -18,6 +18,7 @@ import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.UserInfo;
+import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
@@ -80,8 +81,21 @@ public class TopicController
 		
 		Page<Reply> replys = replyService.getAll(id,pageNumber, pageSize);
 		
+		if(topic instanceof Video)
+		{
+			model.addAttribute("type", "video");
+		}
+		else if(topic instanceof Topic)
+		{
+			model.addAttribute("type", "topic");
+		}
+			
+		
+		
 		model.addAttribute("topic",topic);
 		model.addAttribute("replys", replys);
+		
+		
 		return "topic/topicDetail";
 	}
 	

@@ -10,7 +10,7 @@
         android:gravity="center"
         >
 
-        <TextView android:text="@string/hello_world"
+        <TextView android:text="@string/welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -18,7 +18,8 @@
             android:id="@+id/activity_qq_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="qq登陆"
+            android:layout_marginTop="24dp"
+            android:text="@string/qq_login"
             />
 
     </LinearLayout>

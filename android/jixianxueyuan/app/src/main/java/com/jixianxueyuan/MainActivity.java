@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.inject(this);
+
     }
 
     @OnClick(R.id.activity_qq_login)void qqLogin()

@@ -67,7 +67,11 @@
 					<br />
 					<h4>${topic.content}</h4>
 
-					<c:if test="${topic.videoSource != null}">
+				<c:if test="${type == 'video'}">
+
+
+					
+ 					<c:if test="${topic.videoDetail.videoSource != null}">
 						<div >
 <!-- 							<video src="http://7vilxo.com1.z0.glb.clouddn.com/video_test.mp4"
 								controls="controls"></video> -->
@@ -86,6 +90,8 @@
 								<a id="click-load" class="pbutton" href="#">Load ABPlayerHTML5 Binding</a><br>
 	
 						</div>
+					</c:if> 
+					
 					</c:if>
 				</div>
 			</div>
