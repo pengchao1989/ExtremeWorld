@@ -9,7 +9,7 @@ public class VideoDTO
 	private String content;
 	private int imageCount;
 	private int replyCount;
-	private Date createTime;
+	private String createTime;
 	private int status;
 	
 	private UserInfoMinDTO createUser;
@@ -65,12 +65,12 @@ public class VideoDTO
 		this.replyCount = replyCount;
 	}
 
-	public Date getCreateTime()
+	public String getCreateTime()
 	{
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime)
+	public void setCreateTime(String createTime)
 	{
 		this.createTime = createTime;
 	}

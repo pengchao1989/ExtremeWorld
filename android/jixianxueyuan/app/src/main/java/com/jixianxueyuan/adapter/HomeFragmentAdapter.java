@@ -6,7 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.fragment.TopicFragment;
+import com.jixianxueyuan.fragment.TopicListFragment;
+import com.jixianxueyuan.fragment.VideoListFragment;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -28,12 +29,12 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
-                fragment = new TopicFragment();
+                fragment = new TopicListFragment();
 
                 break;
 
             case 1:
-                fragment = new TopicFragment();
+                fragment = new VideoListFragment();
                 break;
         }
 

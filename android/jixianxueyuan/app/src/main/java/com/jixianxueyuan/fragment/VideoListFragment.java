@@ -2,7 +2,6 @@ package com.jixianxueyuan.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.TopicListAdapter;
+import com.jixianxueyuan.adapter.VideoListAdapter;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.dto.VideoDTO;
 import com.jixianxueyuan.server.ServerMethod;
 
 import java.util.List;
@@ -29,20 +29,19 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 2015/4/12.
  */
-public class TopicFragment extends Fragment {
+public class VideoListFragment extends Fragment{
 
-    @InjectView(R.id.topic_fragment_listview)
+    VideoListAdapter adapter;
+
+    @InjectView(R.id.video_list_fragment_listview)
     ListView listView;
 
-    TopicListAdapter adapter;
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        adapter = new TopicListAdapter(this.getActivity());
-    }
 
+        adapter = new VideoListAdapter(this.getActivity());
+    }
     @Override
     public void onStart()
     {
@@ -52,9 +51,9 @@ public class TopicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.topic_fragment, container, false);
+        View view = inflater.inflate(R.layout.video_list_fragment, container, false);
 
-        ButterKnife.inject(this,view);
+        ButterKnife.inject(this, view);
 
         listView.setAdapter(adapter);
 
@@ -63,10 +62,11 @@ public class TopicFragment extends Fragment {
         return view;
     }
 
+
     private void requestTopicList()
     {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
-        String url = ServerMethod.topic;
+        String url = ServerMethod.video;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
@@ -74,7 +74,7 @@ public class TopicFragment extends Fragment {
                     public void onResponse(String response) {
 
                         Gson gson = new Gson();
-                        List<TopicDTO> topicDTOs = gson.fromJson(response, new TypeToken<List<TopicDTO>>(){}.getType());
+                        List<VideoDTO> topicDTOs = gson.fromJson(response, new TypeToken<List<VideoDTO>>(){}.getType());
                         if(topicDTOs != null)
                         {
                             adapter.addDatas(topicDTOs);
