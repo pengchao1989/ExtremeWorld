@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.fragment.CourseListFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
 import com.jixianxueyuan.fragment.VideoListFragment;
 
@@ -36,6 +37,10 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
             case 1:
                 fragment = new VideoListFragment();
                 break;
+
+            case 2:
+                fragment = new CourseListFragment();
+                break;
         }
 
 
@@ -44,7 +49,7 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -54,6 +59,8 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
                 return mContext.getResources().getString(R.string.topic);
             case 1:
                 return mContext.getResources().getString(R.string.video);
+            case 2:
+                return "教学";
         }
         return null;
     }

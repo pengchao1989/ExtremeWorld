@@ -10,6 +10,8 @@ public class ServerMethod {
 
     public static final String topic = server_url + api_version + "topic";
     public static final String video = server_url + api_version + "video";
+    public static final String courseTaxonomy = server_url + api_version + "course_taxonomy";
+
 
 
 

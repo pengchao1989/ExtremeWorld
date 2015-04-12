@@ -2,12 +2,12 @@ package com.jixianxueyuan.dto;
 
 import java.util.Date;
 
-public class CourseDto
+public class CourseDTO
 {
 	private Long id;
 	private String name;
 	private String content;
-	private Date createTime;
+	private String createTime;
 	
 	private UserInfoMinDTO userInfo;
 
@@ -41,12 +41,12 @@ public class CourseDto
 		this.content = content;
 	}
 
-	public Date getCreateTime()
+	public String getCreateTime()
 	{
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime)
+	public void setCreateTime(String createTime)
 	{
 		this.createTime = createTime;
 	}
