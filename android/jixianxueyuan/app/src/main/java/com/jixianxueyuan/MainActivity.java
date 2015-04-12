@@ -1,11 +1,14 @@
 package com.jixianxueyuan;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import com.jixianxueyuan.activity.HomeActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,6 +32,7 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.activity_qq_login)void qqLogin()
     {
-
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }

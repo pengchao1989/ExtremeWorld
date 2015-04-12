@@ -77,13 +77,11 @@
 								controls="controls"></video> -->
 								
 								<video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
-									<source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.mp4" type="video/mp4">
-									<source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.webm" type="video/webm">
+									<source src="${topic.videoDetail.videoSource}" type="video/mp4">
 									<p>Your browser does not support html5 video!</p>
 								</video>
 								<video id="video-2" style="display:none;" data-setup="{}" width="800" height="450">
-									<source src="//static.cdn.moe/ccltestingvideos/outer_science.webm" type="video/webm">
-									<source src="//static.cdn.moe/ccltestingvideos/outer_science.mp4" type="video/mp4">
+									<source src=${topic.videoDetail.videoSource} type="video/mp4">
 									<p>Your browser does not support html5 video!</p>
 								</video>
 								<div id="load-player"></div>

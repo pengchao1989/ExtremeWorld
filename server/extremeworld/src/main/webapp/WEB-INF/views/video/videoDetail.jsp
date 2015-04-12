@@ -17,9 +17,7 @@
 	<script type="text/javascript">
 			var $_ = function(e){return document.getElementById(e);};
 			window.addEventListener("load",function(){
-				$_("click-load").addEventListener("click", function(e){
-					if(e && e.preventDefault)
-						e.preventDefault();
+				
 					var inst = ABP.create(document.getElementById("load-player"), {
 						"src":{
 							"playlist":[
@@ -36,8 +34,10 @@
 						"width":800,
 						"height":522
 					});
-					$_("click-load").style.display= "none";
-				});
+					
+					CommentLoader('somecommentfile.xml', inst.cmManager);
+					
+				
 			});
 	</script>
 	
@@ -56,11 +56,11 @@
 			
 			<div class="media-body">
 			
-						<a href="#">${video.user.name}</a>
-						<p>${video.createTime}</p>
-						<br />
+				<a href="#">${video.user.name}</a>
+				<p>${video.createTime}</p>
+				<br />
 					
-						<div >
+					<div class="video-container">
 						<video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
 							<!-- <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.mp4" type="video/mp4"> -->
 							<source src=${video.videoDetail.videoSource}>
@@ -73,8 +73,8 @@
 							<p>Your browser does not support html5 video!</p>
 						</video>
 						<div id="load-player"></div>
-						<a id="click-load" class="pbutton" href="#">Load ABPlayerHTML5 Binding</a><br>
-				</div>
+						
+					</div>
 			
 			
 			</div>
@@ -82,5 +82,6 @@
 	
 			
 	</div>
+	
 </body>
 </html>

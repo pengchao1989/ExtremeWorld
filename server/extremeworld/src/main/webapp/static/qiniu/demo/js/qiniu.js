@@ -338,6 +338,7 @@ function QiniuJsSDK() {
         uploader.bind('BeforeUpload', function(up, file) {
 
             ctx = '';
+            //that.file_name=file.name;//记录fileName 以用做调用获取upToken接口时的参数，by pengchao
 
             var directUpload = function(up, file, func) {
 

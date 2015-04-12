@@ -83,3 +83,8 @@ div.reply_list_item{
 p.views{
 	font-size:1.5em;
 }
+
+div.video-container{
+	padding-top:20px;
+	padding-bottom:20px;
+}
