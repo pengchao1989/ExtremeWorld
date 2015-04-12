@@ -6,7 +6,6 @@
 
     <TextView
         android:id="@+id/video_list_item_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        style="@style/ListText" />
 
 </LinearLayout>
