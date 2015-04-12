@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.fragment.CourseListFragment;
@@ -17,14 +19,22 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
 
     Context mContext;
 
+    FragmentManager fm;
+
+
     public HomeFragmentAdapter(FragmentManager fm, Context c) {
         super(fm);
 
         mContext = c;
+        this.fm = fm;
     }
 
+    //getItem 实现中不需要FragmentManager来进行管理，直接new就可以了，每个Item只会get一次
+    //fragment onCreate会执行一次，fragment会一直驻在内存，view会销毁，下次进入视窗会调用onCreateView
     @Override
     public Fragment getItem(int position) {
+
+        Log.d("HomeFragmentAdapter","getItem position=" + position);
 
         Fragment fragment = null;
         switch (position)

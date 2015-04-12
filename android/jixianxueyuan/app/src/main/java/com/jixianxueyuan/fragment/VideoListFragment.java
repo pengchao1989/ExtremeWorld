@@ -2,6 +2,7 @@ package com.jixianxueyuan.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,17 +32,41 @@ import butterknife.InjectView;
  */
 public class VideoListFragment extends Fragment{
 
-    VideoListAdapter adapter;
+    public static final String TAG = VideoListFragment.class.getSimpleName();
+
+
 
     @InjectView(R.id.video_list_fragment_listview)
     ListView listView;
+
+    VideoListAdapter adapter;
+
+    boolean isRefreshData = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
         adapter = new VideoListAdapter(this.getActivity());
+        Log.d("VideoListFragment", "onCreate");
+
     }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    {
+        Log.d("VideoListFragment", "onCreateView");
+
+        View view = inflater.inflate(R.layout.video_list_fragment, container, false);
+
+        ButterKnife.inject(this, view);
+
+        listView.setAdapter(adapter);
+
+        return view;
+    }
+
     @Override
     public void onStart()
     {
@@ -49,21 +74,21 @@ public class VideoListFragment extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    public void onResume()
     {
-        View view = inflater.inflate(R.layout.video_list_fragment, container, false);
-
-        ButterKnife.inject(this, view);
-
-        listView.setAdapter(adapter);
-
-        requestTopicList();
-
-        return view;
+        super.onResume();
+        if(!isRefreshData)
+        {
+            refreshVideoList();
+        }
     }
 
+    private void refreshVideoList()
+    {
+        requestVideoList();
+    }
 
-    private void requestTopicList()
+    private void requestVideoList()
     {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
         String url = ServerMethod.video;
@@ -78,6 +103,7 @@ public class VideoListFragment extends Fragment{
                         if(topicDTOs != null)
                         {
                             adapter.addDatas(topicDTOs);
+                            isRefreshData = true;
                         }
                     }
                 },

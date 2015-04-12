@@ -2,6 +2,7 @@ package com.jixianxueyuan.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +31,38 @@ import butterknife.InjectView;
  */
 public class TopicListFragment extends Fragment {
 
+    public static final String TAG = TopicListFragment.class.getSimpleName();
+
     @InjectView(R.id.topic_list_fragment_listview)
     ListView listView;
 
     TopicListAdapter adapter;
+
+    boolean isRefreshData = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         adapter = new TopicListAdapter(this.getActivity());
+
+        Log.d("TopicListFragment","onCreate");
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    {
+        Log.d("TopicListFragment","onCreateView");
+
+        View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
+
+        ButterKnife.inject(this,view);
+
+        listView.setAdapter(adapter);
+
+
+
+        return view;
     }
 
     @Override
@@ -49,21 +72,23 @@ public class TopicListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    public void onResume()
     {
-        View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
+        super.onResume();
+        if(!isRefreshData)
+        {
+            refreshTopicList();
+        }
+    }
 
-        ButterKnife.inject(this,view);
-
-        listView.setAdapter(adapter);
-
+    private void refreshTopicList()
+    {
         requestTopicList();
-
-        return view;
     }
 
     private void requestTopicList()
     {
+
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
         String url = ServerMethod.topic;
 
@@ -77,6 +102,8 @@ public class TopicListFragment extends Fragment {
                         if(topicDTOs != null)
                         {
                             adapter.addDatas(topicDTOs);
+
+                            isRefreshData = true;
                         }
                     }
                 },
