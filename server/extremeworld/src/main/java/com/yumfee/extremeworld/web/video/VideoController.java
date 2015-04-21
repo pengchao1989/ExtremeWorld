@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yumfee.extremeworld.entity.Task;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.VideoService;
@@ -73,8 +74,9 @@ public class VideoController
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@Valid Video newVideo, RedirectAttributes redirectAttributes)
 	{
-		User user = new User(getCurrentUserId());
-		newVideo.setUser(user);
+		UserInfo user = new UserInfo();
+		user.setId(getCurrentUserId());
+		newVideo.setUserInfo(user);
 		newVideo.setImageCount(0);
 		newVideo.setReplyCount(0);
 		newVideo.setStatus(1);

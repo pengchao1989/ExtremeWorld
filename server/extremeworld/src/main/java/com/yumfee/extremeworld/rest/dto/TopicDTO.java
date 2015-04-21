@@ -18,7 +18,7 @@ public class TopicDTO
 	private int status;
 	private String videoSource;
 	
-	private UserInfoMinDTO createUser;
+	private UserInfoMinDTO userInfo;
 	
 	
 	public Long getId()
@@ -86,13 +86,13 @@ public class TopicDTO
 	{
 		this.videoSource = videoSource;
 	}
-	public UserInfoMinDTO getCreateUser()
+	public UserInfoMinDTO getUserInfo()
 	{
-		return createUser;
+		return userInfo;
 	}
-	public void setCreateUser(UserInfoMinDTO createUser)
+	public void setUserInfo(UserInfoMinDTO user)
 	{
-		this.createUser = createUser;
+		this.userInfo = user;
 	}
 
 	

@@ -53,8 +53,9 @@ public class TopicController
 	@RequestMapping( method = RequestMethod.POST)
 	public String create(@Valid Topic newTopic, RedirectAttributes redirectAttributes)
 	{
-		User user = new User(getCurrentUserId());
-		newTopic.setUser(user);
+		UserInfo user = new UserInfo();
+		user.setId(getCurrentUserId());
+		newTopic.setUserInfo(user);
 		newTopic.setImageCount(0);
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);

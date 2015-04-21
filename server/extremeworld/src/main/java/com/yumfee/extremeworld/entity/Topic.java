@@ -35,7 +35,7 @@ public class Topic extends IdEntity
 	private int status;
 	private String ip;
 	
-	private User user;
+	private UserInfo userInfo;
 	
 	private CourseBase coursce;
 	
@@ -119,13 +119,13 @@ public class Topic extends IdEntity
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	public User getUser()
+	public User getUserInfo()
 	{
-		return user;
+		return userInfo;
 	}
-	public void setUser(User user)
+	public void setUserInfo(UserInfo user)
 	{
-		this.user = user;
+		this.userInfo = user;
 	}
 	
 	// optional表示该对象可有可无，它的值为true表示该外键可以为null，它的值为false表示该外键为not null  

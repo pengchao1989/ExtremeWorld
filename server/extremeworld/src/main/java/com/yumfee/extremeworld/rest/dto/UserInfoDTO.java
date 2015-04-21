@@ -14,7 +14,6 @@ public class UserInfoDTO
 	private String name;
 	private String roles;
 	private Date registerDate;
-	private String nickName;
 	private String gender;
 	private String birth;
 	private String avatar;
@@ -63,14 +62,6 @@ public class UserInfoDTO
 	public void setRegisterDate(Date registerDate)
 	{
 		this.registerDate = registerDate;
-	}
-	public String getNickName()
-	{
-		return nickName;
-	}
-	public void setNickName(String nickName)
-	{
-		this.nickName = nickName;
 	}
 	public String getGender()
 	{

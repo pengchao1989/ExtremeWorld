@@ -3,7 +3,7 @@ package com.jixianxueyuan.dto;
 public class UserInfoMinDTO
 {
 	private Long id;
-	private String nickName;
+	private String name;
 	private String avatar;
 	private String gender;
 	public Long getId()
@@ -14,13 +14,13 @@ public class UserInfoMinDTO
 	{
 		this.id = id;
 	}
-	public String getNickName()
+	public String getName()
 	{
-		return nickName;
+		return name;
 	}
-	public void setNickName(String nickName)
+	public void setName(String name)
 	{
-		this.nickName = nickName;
+		this.name = name;
 	}
 	public String getAvatar()
 	{
