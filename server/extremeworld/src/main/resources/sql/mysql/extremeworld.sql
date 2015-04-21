@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-04-17 13:22:40
+Date: 2015-04-21 19:19:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3968,7 +3968,7 @@ CREATE TABLE `tb_topic` (
   `content` text NOT NULL,
   `image_count` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `reply_count` smallint(255) unsigned NOT NULL DEFAULT '0',
-  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `status` tinyint(255) unsigned NOT NULL DEFAULT '1' COMMENT '1为正常状态',
   `ip` varchar(20) DEFAULT NULL,
