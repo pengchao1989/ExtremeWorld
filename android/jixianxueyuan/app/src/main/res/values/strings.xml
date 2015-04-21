@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">jixianxueyuan</string>
+    <string name="app_name">极限学院</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -7,9 +7,19 @@
     <string name="qq_login">QQ登陆</string>
     <string name="title_activity_home">HomeActivity</string>
 
-    <string name="topic">话题</string>
+    <string name="topic">动态</string>
+    <string name="discovery">发现</string>
+
+    <string name="news">新闻</string>
+    <string name="discuss">讨论</string>
     <string name="video">视频</string>
+    <string name="course">教学</string>
+    <string name="site">场地</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

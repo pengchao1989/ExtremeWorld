@@ -2,7 +2,7 @@ package com.jixianxueyuan.dto;
 
 import java.util.Date;
 
-public class CourseDTO
+public class CourseDto
 {
 	private Long id;
 	private String name;

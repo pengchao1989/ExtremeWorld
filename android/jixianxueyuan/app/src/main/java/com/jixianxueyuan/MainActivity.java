@@ -2,10 +2,7 @@ package com.jixianxueyuan;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 
 import com.jixianxueyuan.activity.HomeActivity;
@@ -35,4 +32,5 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
+
 }

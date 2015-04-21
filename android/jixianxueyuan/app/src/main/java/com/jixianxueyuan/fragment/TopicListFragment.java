@@ -2,6 +2,8 @@ package com.jixianxueyuan.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,10 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.ServerMethod;
+import com.melnykov.fab.FloatingActionButton;
+import com.yalantis.contextmenu.lib.MenuObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -34,7 +39,9 @@ public class TopicListFragment extends Fragment {
     public static final String TAG = TopicListFragment.class.getSimpleName();
 
     @InjectView(R.id.topic_list_fragment_listview)
-    ListView listView;
+    RecyclerView listView;
+    @InjectView(R.id.topic_list_fragment_fab)
+    FloatingActionButton floatingActionButton;
 
     TopicListAdapter adapter;
 
@@ -58,9 +65,20 @@ public class TopicListFragment extends Fragment {
 
         ButterKnife.inject(this,view);
 
+
+        listView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         listView.setAdapter(adapter);
 
 
+        floatingActionButton.attachToRecyclerView(listView);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                floatingActionButton.hide();
+
+            }
+        });
 
         return view;
     }

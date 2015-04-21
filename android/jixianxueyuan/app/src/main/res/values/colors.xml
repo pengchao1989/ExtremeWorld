@@ -1,0 +1,11 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+
+
+    <color name="primary">#ff5cc611</color>
+    <color name="primary_pressed">#ff308cca</color>
+    <color name="ripple">#F06292</color>
+    <color name="accent">#E91E63</color>
+    <color name="accent_pressed">#C2185B</color>
+</resources>

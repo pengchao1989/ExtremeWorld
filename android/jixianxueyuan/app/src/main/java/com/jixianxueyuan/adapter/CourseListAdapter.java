@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.CourseTaxonomyDTO;
 
+
 import java.util.ArrayList;
 import java.util.List;
 

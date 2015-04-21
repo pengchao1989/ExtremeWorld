@@ -22,6 +22,13 @@
             android:text="@string/qq_login"
             />
 
+        <Button
+            android:id="@+id/activity_main_fullscreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fullScreen"
+            />
+
     </LinearLayout>
 
 

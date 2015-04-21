@@ -4,11 +4,12 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.fragment.CourseListFragment;
+import com.jixianxueyuan.fragment.DiscoveryFragment;
+import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
 import com.jixianxueyuan.fragment.VideoListFragment;
 
@@ -45,11 +46,18 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
                 break;
 
             case 1:
-                fragment = new VideoListFragment();
+                fragment = new DiscoveryFragment();
                 break;
 
             case 2:
                 fragment = new CourseListFragment();
+                break;
+            case 3:
+                fragment = new MineFragment();
+                break;
+
+            case 4:
+                fragment = new MineFragment();
                 break;
         }
 
@@ -68,9 +76,11 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
             case 0:
                 return mContext.getResources().getString(R.string.topic);
             case 1:
-                return mContext.getResources().getString(R.string.video);
+                return mContext.getResources().getString(R.string.discovery);
             case 2:
-                return "教学";
+                return "我";
+
+
         }
         return null;
     }

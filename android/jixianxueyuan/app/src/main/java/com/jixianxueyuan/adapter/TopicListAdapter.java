@@ -1,6 +1,7 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,11 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+
 /**
  * Created by pengchao on 2015/4/12.
  */
-public class TopicListAdapter extends BaseAdapter {
+public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.ViewHolder> {
 
     Context context;
 
@@ -42,47 +44,34 @@ public class TopicListAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(context).inflate(R.layout.topic_list_item, null);
+
+
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.titleTextView.setText(topicDTOList.get(position).getTitle());
+
+    }
+
+    @Override
+    public int getItemCount() {
         return topicDTOList.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return topicDTOList.get(position);
-    }
 
-    @Override
-    public long getItemId(int position) {
-        return topicDTOList.get(position).getId();
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        ViewHolder viewHolder = null;
-
-        if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.topic_list_item, null);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        }
-        else{
-            viewHolder = (ViewHolder)convertView.getTag();
-        }
-
-        viewHolder.titleTextView.setText(topicDTOList.get(position).getTitle());
-
-
-        return convertView;
-    }
-
-    static class ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         @InjectView(R.id.topic_list_item_title)
         TextView titleTextView;
 
-        public ViewHolder(View view){
-            ButterKnife.inject(this,view);
+        public ViewHolder(View itemView){
+            super(itemView);
+            ButterKnife.inject(this,itemView);
         }
     }
 }

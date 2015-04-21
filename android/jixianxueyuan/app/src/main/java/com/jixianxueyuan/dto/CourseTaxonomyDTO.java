@@ -3,13 +3,13 @@ package com.jixianxueyuan.dto;
 import java.util.Date;
 import java.util.List;
 
-class CourseTaxonomyDTO
+public class CourseTaxonomyDTO
 {
 	private Long id;
 	private String name;
 	private String createTime;
 	
-	private List<CourseDTO> courses;
+	private List<CourseDto> courses;
 
 	public Long getId()
 	{
@@ -41,12 +41,12 @@ class CourseTaxonomyDTO
 		this.createTime = createTime;
 	}
 
-	public List<CourseDTO> getCourses()
+	public List<CourseDto> getCourses()
 	{
 		return courses;
 	}
 
-	public void setCourses(List<CourseDTO> courses)
+	public void setCourses(List<CourseDto> courses)
 	{
 		this.courses = courses;
 	}
