@@ -58,11 +58,11 @@
 			<div class="media">
 				<div class="media-left">
 					<a href="#"> <img class="media-object"
-						src="http://7u2nc3.com1.z0.glb.clouddn.com/${topic.user.avatar}" alt="..."></a>
+						src="http://7u2nc3.com1.z0.glb.clouddn.com/${topic.userInfo.avatar}" alt="..."></a>
 				</div>
 
 				<div class="media-body">
-					<a href="#">${topic.user.name}</a>
+					<a href="#">${topic.userInfo.name}</a>
 					<p>${topic.createTime}</p>
 					<br />
 					<h4>${topic.content}</h4>

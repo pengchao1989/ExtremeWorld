@@ -33,8 +33,6 @@
 
 <link href="${ctx}/static/styles/default.css" type="text/css" rel="stylesheet" />
 
-<%! String i = "http://7u2nc3.com1.z0.glb.clouddn.com/"; %> 
-
 <sitemesh:head/>
 </head>
 

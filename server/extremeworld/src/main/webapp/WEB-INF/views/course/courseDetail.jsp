@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			
-			<label>最后由</label><a href="#">${course.user.name}</a><label>于${course.modifyTime}编辑</label>
+			<label>最后由</label><a href="#">${course.userInfo.name}</a><label>于${course.modifyTime}编辑</label>
 			
 		 	<p>${course.content}</p>
 		</div>
@@ -46,7 +46,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="list-group-item-heading">${topic.title}</h3>
-											<a>${topic.user.name}</a> 
+											<a>${topic.userInfo.name}</a> 
 										</div>
 										
 										<div class="col-md-2">

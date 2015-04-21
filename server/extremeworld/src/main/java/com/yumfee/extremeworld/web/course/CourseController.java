@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+
 import com.yumfee.extremeworld.entity.CourseBase;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.entity.CourseVersion;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.service.CourseService;
 import com.yumfee.extremeworld.service.CourseTaxonomyService;
 import com.yumfee.extremeworld.service.TopicService;
@@ -94,8 +96,9 @@ public class CourseController
 
 		Long courseTaxonomyId = Long.valueOf(request.getParameter("courseTaxonomyId"));
 		
-		User user = new User(getCurrentUserId());
-		newCourse.setUser(user);
+		UserInfo user = new UserInfo();
+		user.setId(getCurrentUserId());
+		newCourse.setUserInfo(user);
 		
 		CourseTaxonomy courseTaxonomy = new CourseTaxonomy();
 		courseTaxonomy.setId(courseTaxonomyId);
@@ -132,7 +135,7 @@ public class CourseController
 		courseRevision.setName(curCourse.getName()+"-revision");
 		courseRevision.setContent(curCourse.getContent());
 		//courseRevision.setType("revision");
-		courseRevision.setUser(curCourse.getUser());
+		courseRevision.setUserInfo(curCourse.getUserInfo());
 		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
 		courseRevision.setPid(curCourse.getId());
 		courseService.saveCourse(courseRevision);

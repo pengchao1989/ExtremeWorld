@@ -45,7 +45,7 @@
 				
 				<div class="media-body">
 					<h3><a href="${ctx}/video/${video.id}" target="_blank">${video.title}</a></h3>
-					<a href="#">${video.user.name}</a> 
+					<a href="#">${video.userInfo.name}</a> 
 					<p>${video.content}</p>
 				</div>
 			</li>
