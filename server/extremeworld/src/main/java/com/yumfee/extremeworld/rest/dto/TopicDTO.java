@@ -1,6 +1,7 @@
 package com.yumfee.extremeworld.rest.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class TopicDTO
 {
 	private Long id;
+	private String typec;
 	private String title;
 	private String content;
 	private int imageCount;
@@ -20,6 +22,8 @@ public class TopicDTO
 	
 	private UserInfoMinDTO userInfo;
 	
+	private List<MediaDTO> medias;
+	
 	
 	public Long getId()
 	{
@@ -28,6 +32,13 @@ public class TopicDTO
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+	
+	public String getTypec() {
+		return typec;
+	}
+	public void setTypec(String typec) {
+		this.typec = typec;
 	}
 	public String getTitle()
 	{
@@ -94,6 +105,11 @@ public class TopicDTO
 	{
 		this.userInfo = user;
 	}
-
+	public List<MediaDTO> getMedias() {
+		return medias;
+	}
+	public void setMedias(List<MediaDTO> medias) {
+		this.medias = medias;
+	}
 	
 }

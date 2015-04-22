@@ -2,7 +2,7 @@ package com.yumfee.extremeworld.rest.dto;
 
 import java.util.Date;
 
-public class CourseDto
+public class CourseDTO
 {
 	private Long id;
 	private String name;

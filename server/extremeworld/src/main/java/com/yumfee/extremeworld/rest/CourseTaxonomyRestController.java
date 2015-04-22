@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
-import com.yumfee.extremeworld.rest.dto.CourseTaxonomyDto;
+import com.yumfee.extremeworld.rest.dto.CourseTaxonomyDTO;
 import com.yumfee.extremeworld.service.CourseTaxonomyService;
 
 @RestController
@@ -24,9 +24,9 @@ public class CourseTaxonomyRestController
 	CourseTaxonomyService courseTaxonomy;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<CourseTaxonomyDto> list()
+	public List<CourseTaxonomyDTO> list()
 	{
-		List<CourseTaxonomyDto> courseTaxonomyList = BeanMapper.mapList(courseTaxonomy.getAll(), CourseTaxonomyDto.class); 
+		List<CourseTaxonomyDTO> courseTaxonomyList = BeanMapper.mapList(courseTaxonomy.getAll(), CourseTaxonomyDTO.class); 
 		
 		return courseTaxonomyList;
 	}

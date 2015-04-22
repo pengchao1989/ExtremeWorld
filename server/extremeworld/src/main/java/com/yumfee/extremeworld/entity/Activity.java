@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+//type=5  typec="activity"
+
 @Entity
-@DiscriminatorValue("2")
+@DiscriminatorValue("5")
 public class Activity extends Topic
 {
 	private ActivityDetail activityDetail;

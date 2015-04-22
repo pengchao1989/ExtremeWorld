@@ -1,7 +1,9 @@
 package com.yumfee.extremeworld.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -12,6 +14,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -25,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @DiscriminatorValue("1")
 public class Topic extends IdEntity
 {
+	private String typec;
 	private String title;
 	private String excerpt;
 	private String content;
@@ -35,10 +39,20 @@ public class Topic extends IdEntity
 	private int status;
 	private String ip;
 	
+	private List<Media> medias;
+	
 	private UserInfo userInfo;
 	
 	private CourseBase coursce;
 	
+	
+	@NotBlank
+	public String getTypec() {
+		return typec;
+	}
+	public void setTypec(String typec) {
+		this.typec = typec;
+	}
 	@NotBlank
 	public String getTitle()
 	{
@@ -116,6 +130,17 @@ public class Topic extends IdEntity
 	{
 		this.ip = ip;
 	}
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "topic")
+	public List<Media> getMedias() {
+		return medias;
+	}
+	
+	public void setMedias(List<Media> medias) {
+		this.medias = medias;
+	}
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")

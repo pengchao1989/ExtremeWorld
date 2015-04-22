@@ -3,13 +3,13 @@ package com.yumfee.extremeworld.rest.dto;
 import java.util.Date;
 import java.util.List;
 
-public class CourseTaxonomyDto
+public class CourseTaxonomyDTO
 {
 	private Long id;
 	private String name;
 	private Date createTime;
 	
-	private List<CourseDto> courses;
+	private List<CourseDTO> courses;
 
 	public Long getId()
 	{
@@ -41,12 +41,12 @@ public class CourseTaxonomyDto
 		this.createTime = createTime;
 	}
 
-	public List<CourseDto> getCourses()
+	public List<CourseDTO> getCourses()
 	{
 		return courses;
 	}
 
-	public void setCourses(List<CourseDto> courses)
+	public void setCourses(List<CourseDTO> courses)
 	{
 		this.courses = courses;
 	}

@@ -8,6 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -23,9 +28,7 @@ import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.ServerMethod;
 import com.melnykov.fab.FloatingActionButton;
-import com.yalantis.contextmenu.lib.MenuObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -39,13 +42,23 @@ public class TopicListFragment extends Fragment {
     public static final String TAG = TopicListFragment.class.getSimpleName();
 
     @InjectView(R.id.topic_list_fragment_listview)
-    RecyclerView listView;
+    ListView listView;
     @InjectView(R.id.topic_list_fragment_fab)
     FloatingActionButton floatingActionButton;
+    @InjectView(R.id.topic_list_fragment_add_layout)
+    FrameLayout addLayout;
+    @InjectView(R.id.topic_list_fragment_add_button_layout)
+    LinearLayout addButtonLayout;
 
     TopicListAdapter adapter;
 
     boolean isRefreshData = false;
+
+
+    private TranslateAnimation showAddPanl;
+    private TranslateAnimation hideAddPanl;
+    private AlphaAnimation showMainPanl;
+    private AlphaAnimation hideMainPanl;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -65,20 +78,23 @@ public class TopicListFragment extends Fragment {
 
         ButterKnife.inject(this,view);
 
-
-        listView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         listView.setAdapter(adapter);
 
 
-        floatingActionButton.attachToRecyclerView(listView);
+        floatingActionButton.attachToListView(listView);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 floatingActionButton.hide();
+                showAddPanl();
 
             }
         });
+
+
+        initTranslateAnimation();
+
 
         return view;
     }
@@ -133,6 +149,45 @@ public class TopicListFragment extends Fragment {
                 });
 
         queue.add(stringRequest);
+    }
+
+    private void showAddPanl()
+    {
+        addButtonLayout.startAnimation(showAddPanl);
+        addButtonLayout.setVisibility(View.VISIBLE);
+        addLayout.setVisibility(View.VISIBLE);
+
+    }
+
+    private void hideAddrPage()
+    {
+        addButtonLayout.setVisibility(View.GONE);
+        addButtonLayout.startAnimation(hideAddPanl);
+    }
+
+    private void initTranslateAnimation()
+    {
+        hideAddPanl = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_PARENT,  1.0f);
+        hideAddPanl.setDuration(200);
+
+        showAddPanl = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF,  0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 1.0f,
+                Animation.RELATIVE_TO_PARENT, 0.0f);
+        showAddPanl.setDuration(200);
+
+        showMainPanl = new AlphaAnimation(0, 1);
+        showMainPanl.setDuration(400);
+
+
+        hideMainPanl = new AlphaAnimation(1,0);
+        hideMainPanl.setDuration(400);
+
     }
 
 }

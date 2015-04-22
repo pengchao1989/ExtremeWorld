@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+//type=4  typec="video"
+
 @Entity
-@DiscriminatorValue("3")
+@DiscriminatorValue("4")
 public class Video extends Topic
 {
 	private VideoDetail videoDetail;

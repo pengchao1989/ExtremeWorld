@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.jixianxueyuan.activity.HomeActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,6 +26,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.inject(this);
+
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoader.getInstance().init(config);
 
     }
 
