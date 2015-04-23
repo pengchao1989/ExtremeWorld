@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    style="@style/ListContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
     <FrameLayout
@@ -11,8 +12,7 @@
 
         <ListView
             android:id="@+id/topic_list_fragment_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/ListContainer"
             android:scrollbars="none"
             />
 
@@ -38,9 +38,11 @@
             >
 
             <View
+                android:id="@+id/topic_list_fragment_add_blank_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#a0000000"
+                android:background="#a0000000"
+                android:clickable="true"
                 />
 
             <LinearLayout
@@ -49,6 +51,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="bottom"
+                android:paddingTop="16dp"
+                android:paddingBottom="20dp"
+                android:background="@color/white"
                 android:weightSum="3"
                 >
 

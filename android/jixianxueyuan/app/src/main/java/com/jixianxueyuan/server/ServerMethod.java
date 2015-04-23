@@ -4,8 +4,8 @@ package com.jixianxueyuan.server;
  * Created by pengchao on 2015/4/12.
  */
 public class ServerMethod {
-    //static final String server_url = "http://121.42.31.88:80/extremeworld/";
-    static final String server_url = "http://192.168.1.4:8023/extremeworld/";
+    static final String server_url = "http://121.42.31.88:80/extremeworld/";
+    //static final String server_url = "http://192.168.1.4:8023/extremeworld/";
     static final String api_version = "api/v1/";
 
 

@@ -2,6 +2,7 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="white">#FFFAFAFA</color>
 
     <color name="primary">#ff5cc611</color>
     <color name="primary_pressed">#ff308cca</color>

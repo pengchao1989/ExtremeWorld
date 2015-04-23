@@ -14,6 +14,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.StaticResourceConfig;
+import com.jixianxueyuan.util.DateTimeFormatter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
@@ -93,7 +94,8 @@ public class TopicListAdapter extends BaseAdapter {
 
         viewHolder.nameTextView.setText(topicDTO.getUserInfo().getName());
         viewHolder.titleTextView.setText(topicDTO.getTitle());
-        viewHolder.timeTextView.setText(topicDTO.getCreateTime());
+        String timeAgo = DateTimeFormatter.getTimeAgo(context, topicDTO.getCreateTime());
+        viewHolder.timeTextView.setText(timeAgo);
 
         if(topicDTO.getMedias().size() > 0)
         {

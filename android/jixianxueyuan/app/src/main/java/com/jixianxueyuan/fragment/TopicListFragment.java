@@ -2,8 +2,6 @@ package com.jixianxueyuan.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +31,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -49,6 +48,8 @@ public class TopicListFragment extends Fragment {
     FrameLayout addLayout;
     @InjectView(R.id.topic_list_fragment_add_button_layout)
     LinearLayout addButtonLayout;
+    @InjectView(R.id.topic_list_fragment_add_blank_view)
+    View addBlankView;
 
     TopicListAdapter adapter;
 
@@ -57,8 +58,8 @@ public class TopicListFragment extends Fragment {
 
     private TranslateAnimation showAddPanl;
     private TranslateAnimation hideAddPanl;
-    private AlphaAnimation showMainPanl;
-    private AlphaAnimation hideMainPanl;
+    private AlphaAnimation showBlandPanlAnimation;
+    private AlphaAnimation hideBlankPanlAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -87,7 +88,7 @@ public class TopicListFragment extends Fragment {
             public void onClick(View v) {
 
                 floatingActionButton.hide();
-                showAddPanl();
+                showAddLayout();
 
             }
         });
@@ -113,6 +114,11 @@ public class TopicListFragment extends Fragment {
         {
             refreshTopicList();
         }
+    }
+
+    @OnClick(R.id.topic_list_fragment_add_blank_view)void cancelAdd()
+    {
+        hideAddLayout();
     }
 
     private void refreshTopicList()
@@ -151,18 +157,19 @@ public class TopicListFragment extends Fragment {
         queue.add(stringRequest);
     }
 
-    private void showAddPanl()
+    private void showAddLayout()
     {
         addButtonLayout.startAnimation(showAddPanl);
+        addBlankView.startAnimation(showBlandPanlAnimation);
         addButtonLayout.setVisibility(View.VISIBLE);
         addLayout.setVisibility(View.VISIBLE);
 
     }
 
-    private void hideAddrPage()
+    private void hideAddLayout()
     {
-        addButtonLayout.setVisibility(View.GONE);
         addButtonLayout.startAnimation(hideAddPanl);
+        addBlankView.startAnimation(hideBlankPanlAnimation);
     }
 
     private void initTranslateAnimation()
@@ -181,12 +188,29 @@ public class TopicListFragment extends Fragment {
                 Animation.RELATIVE_TO_PARENT, 0.0f);
         showAddPanl.setDuration(200);
 
-        showMainPanl = new AlphaAnimation(0, 1);
-        showMainPanl.setDuration(400);
+        showBlandPanlAnimation = new AlphaAnimation(0, 1);
+        showBlandPanlAnimation.setDuration(200);
 
 
-        hideMainPanl = new AlphaAnimation(1,0);
-        hideMainPanl.setDuration(400);
+        hideBlankPanlAnimation = new AlphaAnimation(1,0);
+        hideBlankPanlAnimation.setDuration(200);
+        hideBlankPanlAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                addButtonLayout.setVisibility(View.GONE);
+                addLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
     }
 
