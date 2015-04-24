@@ -8,38 +8,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="${ctx}/static/abplayer/css/base.css?1" />
-<script src="${ctx}/static/abplayer/js/CommentCoreLibrary.min.js"></script>
-<script src="${ctx}/static/abplayer/js/ABPlayer.min.js"></script>
+
+<link rel="stylesheet" href="${ctx}/static/DanmuPlayer/css/danmuplayer.css">
+<script src="${ctx}/static/DanmuPlayer/js/danmuplayer.js"></script>
+
 
 <title>Insert title here</title>
 
-	<script type="text/javascript">
-			var $_ = function(e){return document.getElementById(e);};
-			window.addEventListener("load",function(){
-				
-					var inst = ABP.create(document.getElementById("load-player"), {
-						"src":{
-							"playlist":[
-								{
-									"video":document.getElementById("video-1"),
-									"comments":"${ctx}/static/abplayer/comment-otsukimi.xml"
-								},
-								{
-									"video":document.getElementById("video-2"),
-									"comments":"${ctx}/static/abplayer/comment-science.xml"
-								}
-							]
-						},
-						"width":800,
-						"height":522
-					});
-					
-					CommentLoader('somecommentfile.xml', inst.cmManager);
-					
-				
-			});
-	</script>
 	
 	
 </head>
@@ -60,21 +35,8 @@
 				<p>${video.createTime}</p>
 				<br />
 					
-					<div class="video-container">
-						<video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
-							<!-- <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.mp4" type="video/mp4"> -->
-							<source src=${video.videoDetail.videoSource}>
-							<!-- <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.webm" type="video/webm"> -->
-							<p>Your browser does not support html5 video!</p>
-						</video>
-						<video id="video-2" style="display:none;" data-setup="{}" width="800" height="450">
-							<!-- <source src="//static.cdn.moe/ccltestingvideos/outer_science.webm" type="video/webm"> -->
-							<source src=${video.videoDetail.videoSource}>
-							<p>Your browser does not support html5 video!</p>
-						</video>
-						<div id="load-player"></div>
-						
-					</div>
+				<div id="danmup">
+				</div>
 			
 			
 			</div>
@@ -83,5 +45,29 @@
 			
 	</div>
 	
+	<script>
+		$(document).ready(function(){
+		$("#danmup").danmuplayer({
+			src:"${video.videoDetail.videoSource}",
+			width:800,
+			height:445,
+		    speed: 15000,
+		    danmuss: {},
+		    sumtime: 65535,
+		    default_font_color: "#FFFFFF",
+		    font_size_small: 16,
+		    font_size_big: 24,
+		    opacity: "1",
+		    top_botton_danmu_time: 5000,
+		    url_to_get_danmu:"${ctx}/api/v1/danmu/2",
+		    url_to_post_danmu:"${ctx}/api/v1/danmu/add?videoId=${video.id}&userId=${userId}"
+			});
+		
+		});
+	</script>
+
+
 </body>
+
+
 </html>

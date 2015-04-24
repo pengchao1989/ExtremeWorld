@@ -56,7 +56,10 @@ public class VideoController
 			{
 				Video video = videoService.getVideo(id);
 		
+				Long userId = getCurrentUserId();
+				
 				model.addAttribute("video", video);
+				model.addAttribute("userId", userId);
 				
 				return "/video/videoDetail";
 			}
