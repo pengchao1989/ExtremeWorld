@@ -12,7 +12,7 @@
 
         <com.romainpiel.shimmer.ShimmerTextView
             android:id="@+id/activity_main_appname"
-            android:text="极限世界"
+            android:text="极限学院"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#444"
@@ -27,10 +27,10 @@
             />
 
         <Button
-            android:id="@+id/activity_main_fullscreen"
+            android:id="@+id/activity_main_danmu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fullScreen"
+            android:text="Danmu"
             />
 
     </LinearLayout>

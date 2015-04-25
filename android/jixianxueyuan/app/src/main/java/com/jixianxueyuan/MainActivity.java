@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.jixianxueyuan.activity.HomeActivity;
+import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.romainpiel.shimmer.Shimmer;
@@ -21,6 +22,9 @@ public class MainActivity extends Activity {
 
     @InjectView(R.id.activity_qq_login)
     Button qqLoginButton;
+
+    @InjectView(R.id.activity_main_danmu)
+    Button danmuButton;
 
     @InjectView(R.id.activity_main_appname)
     ShimmerTextView appNameTextView;
@@ -50,4 +54,10 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+
+    @OnClick(R.id.activity_main_danmu) void danmu()
+    {
+        Intent intent = new Intent(this, VideoDetailActivity.class);
+        startActivity(intent);
+    }
 }
