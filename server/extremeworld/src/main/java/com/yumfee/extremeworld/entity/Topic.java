@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_topic")
@@ -34,10 +35,13 @@ public class Topic extends IdEntity
 	private String content;
 	private int imageCount;
 	private int replyCount;
+	private int viewCount;
+	private int agreeCount;
 	private Date createTime;
 	private Date updateTime;
 	private int status;
 	private String ip;
+
 	
 	private List<Media> medias;
 	
@@ -95,6 +99,18 @@ public class Topic extends IdEntity
 		this.replyCount = replyCount;
 	}
 	
+	public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+	public int getAgreeCount() {
+		return agreeCount;
+	}
+	public void setAgreeCount(int agreeCount) {
+		this.agreeCount = agreeCount;
+	}
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime()
 	{
@@ -158,6 +174,7 @@ public class Topic extends IdEntity
 	@JoinTable(name = "tb_course_topic",
 	joinColumns = { @JoinColumn(name="topic_id", referencedColumnName= "id")},
 	inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "id") })
+	@JsonIgnore
 	public CourseBase getCourse()
 	{
 		return coursce;

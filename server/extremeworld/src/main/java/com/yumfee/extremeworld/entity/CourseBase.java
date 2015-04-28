@@ -20,12 +20,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "tb_course")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("course")
 public class CourseBase extends IdEntity
 {
 	private String name;
 	private String content;
-	//private String type;    //course:正常状态   revision:修订版本
+	/*private String type;    //course:正常状态   revision:修订版本*/	
+	private String t;
 	private Date createTime;
 	private Date modifyTime;
 	private Long pid;
@@ -66,10 +66,19 @@ public class CourseBase extends IdEntity
 		this.type = type;
 	}*/
 
+	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime()
 	{
 		return createTime;
+	}
+
+	public String getT() {
+		return t;
+	}
+
+	public void setT(String t) {
+		this.t = t;
 	}
 
 	public void setCreateTime(Date createTime)

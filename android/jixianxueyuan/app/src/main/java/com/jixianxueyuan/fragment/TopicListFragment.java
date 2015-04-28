@@ -1,5 +1,6 @@
 package com.jixianxueyuan.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,6 +23,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.DiscussionDetailActivity;
+import com.jixianxueyuan.activity.MoodDetailActivity;
+import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.ServerMethod;
@@ -32,6 +36,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -119,6 +124,33 @@ public class TopicListFragment extends Fragment {
     @OnClick(R.id.topic_list_fragment_add_blank_view)void cancelAdd()
     {
         hideAddLayout();
+    }
+
+    @OnItemClick(R.id.topic_list_fragment_listview) void onItemClicked(int position)
+    {
+        TopicDTO topicDTO = (TopicDTO) adapter.getItem(position);
+
+        Intent intent = null;
+        switch (topicDTO.getTypec())
+        {
+            case "mood":
+                intent = new Intent(this.getActivity(), MoodDetailActivity.class);
+                intent.putExtra("topicId", topicDTO.getId());
+                break;
+            case "discuss":
+                intent = new Intent(this.getActivity(), DiscussionDetailActivity.class);
+                intent.putExtra("topicId", topicDTO.getId());
+                break;
+            case "video":
+                intent = new Intent(this.getActivity(), VideoDetailActivity.class);
+                intent.putExtra("videoId",topicDTO.getId());
+                break;
+        }
+
+        if(intent != null)
+        {
+            startActivity(intent);
+        }
     }
 
     private void refreshTopicList()

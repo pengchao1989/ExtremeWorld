@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.CourseBase;
+import com.yumfee.extremeworld.entity.CourseVersion;
 import com.yumfee.extremeworld.repository.CourseDao;
+import com.yumfee.extremeworld.repository.CourseVersionDao;
 
 //Spring Bean的标识.
 @Component
@@ -16,15 +19,21 @@ import com.yumfee.extremeworld.repository.CourseDao;
 public class CourseService
 {
 	private CourseDao courseDao;
+	private CourseVersionDao courseVersionDao;
 	
 	public CourseBase getCourse(Long id)
 	{
 		return courseDao.findOne(id);
 	}
 	
-	public void saveCourse(CourseBase entity)
+	public void saveCourse(Course entity)
 	{
 		courseDao.save(entity);
+	}
+	
+	public void saveCourseVersion(CourseVersion entity)
+	{
+		courseVersionDao.save(entity);
 	}
 	
 	public List<CourseBase> getRevisions(Long id)
@@ -37,6 +46,13 @@ public class CourseService
 	{
 		this.courseDao = courseDao;
 	}
+
+	@Autowired
+	public void setCourseVersionDao(CourseVersionDao courseVersionDao) {
+		this.courseVersionDao = courseVersionDao;
+	}
+	
+	
 	
 	
 }

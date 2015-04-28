@@ -36,6 +36,7 @@ public class RedisTestController
 		
 		Long value = redisTestService.incr(key);
 		
+		
 		model.addAttribute("value",value); 
 		return "test/redis";
 	}

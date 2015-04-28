@@ -49,7 +49,7 @@ public class DanmuBiRestController {
 			//Integer color = Integer.valueOf(danmu.getColor(),16);
 			String colorString = Integer.valueOf(danmu.getColor().replace("#", ""),16).toString();
 			
-			String singleDanmuStr = "<d p=\"" + danmu.getTime() / 10 + ",1,25," + colorString + ",1312863760,0,eff85771,42759017\">" +danmu.getText() + "</d>";
+			String singleDanmuStr = "<d p=\"" + danmu.getTime() / 10.0 + ",1,25," + colorString + ",1312863760,0,eff85771,42759017\">" +danmu.getText() + "</d>";
 			
 			result += singleDanmuStr;
 		}

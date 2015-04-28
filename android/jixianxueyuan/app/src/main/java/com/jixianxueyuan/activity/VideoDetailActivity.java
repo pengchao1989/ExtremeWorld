@@ -1,9 +1,12 @@
 package com.jixianxueyuan.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
@@ -75,10 +78,16 @@ public class VideoDetailActivity extends Activity implements View.OnClickListene
 
     private Button mBtnSendDanmakus;
 
+
+    private Long videoId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_detail_activity);
+
+        Intent intent = getIntent();
+        videoId = intent.getLongExtra("videoId",0L);
+
         findViews();
 
         requesDanmakuData();
@@ -177,7 +186,8 @@ public class VideoDetailActivity extends Activity implements View.OnClickListene
                     mediaPlayer.start();
                 }
             });
-            mVideoView.setVideoPath(Environment.getExternalStorageDirectory() + "/1.mp4");
+            //mVideoView.setVideoPath(Environment.getExternalStorageDirectory() + "/1.mp4");
+            mVideoView.setVideoURI(Uri.parse("http://7u2nc3.com1.z0.glb.clouddn.com/testMP4.mp4"));
         }
     }
 
@@ -185,7 +195,7 @@ public class VideoDetailActivity extends Activity implements View.OnClickListene
     {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.damaku + "/2";
+        String url = ServerMethod.damaku + "/" + videoId;
 
         Log.d("VideoDetailActivity","url=" + url);
 

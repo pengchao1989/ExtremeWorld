@@ -7,7 +7,6 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -24,6 +23,8 @@
             android:label="@string/title_activity_home" >
         </activity>
         <activity android:name=".activity.VideoDetailActivity" />
+        <activity android:name=".activity.MoodDetailActivity"/>
+        <activity android:name=".activity.DiscussionDetailActivity"/>
     </application>
 
 </manifest>

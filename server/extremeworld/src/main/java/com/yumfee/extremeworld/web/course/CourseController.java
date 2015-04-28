@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.CourseBase;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.entity.CourseVersion;
@@ -89,7 +91,7 @@ public class CourseController
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid CourseBase newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
+	public String create(@Valid Course newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
 	{
 		System.out.println("create");
 		System.out.println("courseTaxonomyId" + request.getParameter("courseTaxonomyId"));
@@ -106,7 +108,6 @@ public class CourseController
 		newCourse.setCourseTaxonomy(courseTaxonomy);
 		
 
-		//newCourse.setType("course");
 		courseService.saveCourse(newCourse);
 		
 		redirectAttributes.addFlashAttribute("message", "创建教学成功");
@@ -124,10 +125,10 @@ public class CourseController
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("course") CourseBase newCourse, RedirectAttributes redirectAttributes)
+	public String update(@Valid @ModelAttribute("course") Course newCourse, RedirectAttributes redirectAttributes)
 	{
 		//当前暂未更新的数据
-		CourseBase curCourse = courseService.getCourse(newCourse.getId());
+		Course curCourse = (Course) courseService.getCourse(newCourse.getId());
 		
 		
 		//将现有内容拷贝为历史版本
@@ -138,12 +139,12 @@ public class CourseController
 		courseRevision.setUserInfo(curCourse.getUserInfo());
 		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
 		courseRevision.setPid(curCourse.getId());
-		courseService.saveCourse(courseRevision);
+		courseService.saveCourseVersion(courseRevision);
 		
 		//将新内容更新至原始数据库行
 		curCourse.setName(newCourse.getName());
 		curCourse.setContent(newCourse.getContent());
-		courseService.saveCourse(curCourse);
+		courseService.saveCourse((Course)curCourse);
 		
 		//TODO pid
 		

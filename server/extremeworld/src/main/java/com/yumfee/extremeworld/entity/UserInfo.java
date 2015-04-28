@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_user_info")
 @PrimaryKeyJoinColumn(name = "userId")
@@ -81,6 +83,7 @@ public class UserInfo extends User
 		this.weixin = weixin;
 	}
 	
+	@JsonIgnore
 	//关系维护端,mappedBy属性定义了userinfo为双向关系的维护端
 	//@ManyToMany(mappedBy = "userInfos")
 	//关系被维护端
@@ -98,6 +101,7 @@ public class UserInfo extends User
 		this.hobbys = interests;
 	}
 	
+	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(name = "tb_user_site",
 	joinColumns = { @JoinColumn(name="user_id", referencedColumnName= "userId")},

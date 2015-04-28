@@ -41,7 +41,7 @@
 										</div>
 										
 										<div class="col-md-2">
-											<p class="views">99</p>
+											<p class="views">${topic.viewCount}</p>
 											<p>查看</p>
 										</div>
 										

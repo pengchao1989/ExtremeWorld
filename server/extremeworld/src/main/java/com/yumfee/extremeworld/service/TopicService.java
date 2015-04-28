@@ -9,8 +9,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.mapper.JsonMapper;
 
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.modules.nosql.redis.JedisTemplate;
+import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPool;
+import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPoolBuilder;
 import com.yumfee.extremeworld.repository.TopicDao;
 
 //Spring Bean的标识.
@@ -21,9 +25,35 @@ public class TopicService
 {
 	private TopicDao topicDao;
 	
+	private JedisTemplate jedisTemplate;
+	
+	private JsonMapper jsonMapper = new JsonMapper();
+	
 	public Topic getTopic(Long id)
 	{
-		return topicDao.findOne(id);
+		Topic topic = null;
+		
+		//redis view count inc
+		JedisPool pool = new JedisPoolBuilder().setUrl("direct://localhost:6379?poolSize=" + 20 +"&poolName=abc").buildPool();
+		jedisTemplate = new JedisTemplate(pool);
+		
+		String topicString = jedisTemplate.get("topic:"+id);
+		if(topicString == null)
+		{
+			System.out.println("topicString == null");
+			topic = topicDao.findOne(id);
+			topicString =  jsonMapper.toJson(topic);
+			System.out.println("topicString2 =" + topicString);
+			jedisTemplate.set("topic:"+id, topicString );
+		}
+		else 
+		{
+			System.out.println("topicString =" + topicString);
+			topic = jsonMapper.fromJson(topicString, Topic.class);
+		}
+		
+		
+		return topic;
 	}
 	
 	public void saveTopic(Topic entity)

@@ -5,7 +5,7 @@ package com.jixianxueyuan.server;
  */
 public class ServerMethod {
     //static final String server_url = "http://www.17skate.com:80/extremeworld/";
-    static final String server_url = "http://10.20.3.124:8023/extremeworld/";
+    static final String server_url = "http://192.168.1.4:8023/extremeworld/";
     static final String api_version = "api/v1/";
 
     static final String method_url = server_url + api_version;
