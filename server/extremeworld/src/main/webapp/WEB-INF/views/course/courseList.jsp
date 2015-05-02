@@ -22,10 +22,7 @@
 			
 			
 				<c:forEach items="${courseTaxonomy.courses}" var="course">
-				<c:if test="${course.t=='1'}">
 					<a class="list-group-item" href="${ctx}/course/${course.id}">${course.name}</a>
-				</c:if>
-					
 				</c:forEach>
 			
 			</div>

@@ -3,7 +3,9 @@ package com.yumfee.extremeworld.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -28,6 +30,9 @@ public class UserInfo extends User
 	
 	private List<Hobby> hobbys = new ArrayList<Hobby>();
 	private List<Site> sites = new ArrayList<Site>();
+	
+	private List<UserInfo> followings = new ArrayList<UserInfo>();
+	private List<UserInfo> followers = new ArrayList<UserInfo>();
 	
 /*	public UserInfo(Long id)
 	{
@@ -115,6 +120,29 @@ public class UserInfo extends User
 		this.sites = sites;
 	}
 	
+	@JsonIgnore
+	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_following",
+	joinColumns = { @JoinColumn(name="uid")},
+	inverseJoinColumns = { @JoinColumn(name="fuid") })
+	public List<UserInfo> getFollowings() {
+		return followings;
+	}
+	public void setFollowings(List<UserInfo> followings) {
+		this.followings = followings;
+	}
+	
+	@JsonIgnore
+	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_follower",
+	joinColumns = { @JoinColumn(name="uid")},
+	inverseJoinColumns = { @JoinColumn(name="fuid") })
+	public List<UserInfo> getFollowers() {
+		return followers;
+	}
+	public void setFollowers(List<UserInfo> followers) {
+		this.followers = followers;
+	}
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

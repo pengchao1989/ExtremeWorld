@@ -13,6 +13,7 @@ import org.springside.modules.mapper.JsonMapper;
 
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.modules.nosql.redis.JedisTemplate;
+import com.yumfee.extremeworld.modules.nosql.redis.MyJedisExecutor;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPool;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPoolBuilder;
 import com.yumfee.extremeworld.repository.TopicDao;
@@ -25,33 +26,24 @@ public class TopicService
 {
 	private TopicDao topicDao;
 	
-	private JedisTemplate jedisTemplate;
-	
-	private JsonMapper jsonMapper = new JsonMapper();
 	
 	public Topic getTopic(Long id)
 	{
 		Topic topic = null;
 		
-		//redis view count inc
-		JedisPool pool = new JedisPoolBuilder().setUrl("direct://localhost:6379?poolSize=" + 20 +"&poolName=abc").buildPool();
-		jedisTemplate = new JedisTemplate(pool);
+
 		
-		String topicString = jedisTemplate.get("topic:"+id);
-		if(topicString == null)
+		topic = MyJedisExecutor.get("topic:"+id, Topic.class);
+		
+		if(topic == null)
 		{
-			System.out.println("topicString == null");
+			System.out.println("topic == null");
 			topic = topicDao.findOne(id);
-			topicString =  jsonMapper.toJson(topic);
-			System.out.println("topicString2 =" + topicString);
-			jedisTemplate.set("topic:"+id, topicString );
+			MyJedisExecutor.set("topic:"+id, topic);
+			
 		}
-		else 
-		{
-			System.out.println("topicString =" + topicString);
-			topic = jsonMapper.fromJson(topicString, Topic.class);
-		}
-		
+
+		topic.setViewCount(MyJedisExecutor.incr("topic:view:"+id).intValue());
 		
 		return topic;
 	}
@@ -60,6 +52,7 @@ public class TopicService
 	{
 		entity.setExcerpt(entity.getTitle());
 		topicDao.save(entity);
+		MyJedisExecutor.set("topic:"+entity.getId(), entity);
 	}
 	
 	public List<Topic> getAllTopic()

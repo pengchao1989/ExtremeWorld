@@ -1,23 +1,17 @@
 package com.yumfee.extremeworld.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.ListJoin;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.SetJoin;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yumfee.extremeworld.entity.Course;
-import com.yumfee.extremeworld.entity.CourseBase;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
+import com.yumfee.extremeworld.modules.nosql.redis.MyJedisExecutor;
 import com.yumfee.extremeworld.repository.CourseDao;
 import com.yumfee.extremeworld.repository.CourseTaxonomyDao;
 
@@ -52,8 +46,48 @@ public class CourseTaxonomyService
 			
 		};*/
 		
+		List<CourseTaxonomy> courseTaxonomys = MyJedisExecutor.lrangeList("courseTaxonomys", CourseTaxonomy.class);
+		if(courseTaxonomys == null || courseTaxonomys.size() == 0)
+		{
+			courseTaxonomys = courseTaxonomyDao.findAll();
+			MyJedisExecutor.rpushList("courseTaxonomys",courseTaxonomys);
+		}
 		
-		List<CourseTaxonomy> courseTaxonomys = courseTaxonomyDao.find("1");
+		//Load Course
+		for(CourseTaxonomy courseTaxonomy : courseTaxonomys)
+		{
+			final Long taxonomyId = courseTaxonomy.getId();
+			List<Course> courseList = new ArrayList<Course>();
+			
+			//获取某分类下的courseKey List
+			List<String> courseKeyList = MyJedisExecutor.lrange("courseList:" + taxonomyId);
+			//遍历coursetKey List 依次从redis取出course
+			for(String courseKey : courseKeyList)
+			{
+				Course course = MyJedisExecutor.get(courseKey, Course.class);
+				if(course != null)
+				{
+					courseList.add(course);
+				}
+			}
+			
+			//
+			if(courseList.size() == 0)
+			{
+				System.out.println("taxonomyId=" + taxonomyId);
+				courseList = courseDao.findByCourseTaxonomyIdAndType(taxonomyId, "course");
+
+				for(Course course : courseList)
+				{
+					MyJedisExecutor.set("course:"+course.getId(), course);
+					MyJedisExecutor.lpush("courseList:" + taxonomyId, "course:"+course.getId());
+				}
+			}
+			
+			courseTaxonomy.setCourses(courseList);
+			
+		}
+
 		return courseTaxonomys;
 	}
 	

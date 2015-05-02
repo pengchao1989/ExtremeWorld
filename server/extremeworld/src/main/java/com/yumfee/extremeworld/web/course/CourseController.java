@@ -21,11 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import com.yumfee.extremeworld.entity.Course;
-import com.yumfee.extremeworld.entity.CourseBase;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
-import com.yumfee.extremeworld.entity.CourseVersion;
 import com.yumfee.extremeworld.entity.Topic;
-import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.service.CourseService;
 import com.yumfee.extremeworld.service.CourseTaxonomyService;
@@ -66,7 +63,7 @@ public class CourseController
 	
 	{
 		
-		CourseBase course = courseService.getCourse(id);
+		Course course = courseService.getCourse(id);
 		
 		Page<Topic> topics = topicService.getAllTopicByCourse(id, pageNumber, pageSize, sortType);
 		
@@ -83,7 +80,7 @@ public class CourseController
 		model.addAttribute("courseTaxonomyList", courseTaxonomyList);
 		
 		
-		model.addAttribute("course", new CourseBase());
+		model.addAttribute("course", new Course());
 		model.addAttribute("action", "create");
 		
 		
@@ -132,14 +129,14 @@ public class CourseController
 		
 		
 		//将现有内容拷贝为历史版本
-		CourseVersion courseRevision = new CourseVersion();
+		Course courseRevision = new Course();
 		courseRevision.setName(curCourse.getName()+"-revision");
 		courseRevision.setContent(curCourse.getContent());
-		//courseRevision.setType("revision");
+		courseRevision.setType("revision");
 		courseRevision.setUserInfo(curCourse.getUserInfo());
 		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
 		courseRevision.setPid(curCourse.getId());
-		courseService.saveCourseVersion(courseRevision);
+		courseService.saveCourse(courseRevision);
 		
 		//将新内容更新至原始数据库行
 		curCourse.setName(newCourse.getName());
@@ -154,8 +151,8 @@ public class CourseController
 	@RequestMapping(value = "revision/{id}", method = RequestMethod.GET)
 	public String revision(@PathVariable("id") Long id, Model model)
 	{
-		CourseBase version = courseService.getCourse(id);
-		List<CourseBase> revision = courseService.getRevisions(id);
+		Course version = courseService.getCourse(id);
+		List<Course> revision = courseService.getRevisions(id);
 		
 		model.addAttribute("version", version);
 		model.addAttribute("preversion", revision.get(revision.size()-1));

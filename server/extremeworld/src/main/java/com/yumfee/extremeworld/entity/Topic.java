@@ -47,7 +47,7 @@ public class Topic extends IdEntity
 	
 	private UserInfo userInfo;
 	
-	private CourseBase coursce;
+	private Course coursce;
 	
 	
 	@NotBlank
@@ -175,11 +175,11 @@ public class Topic extends IdEntity
 	joinColumns = { @JoinColumn(name="topic_id", referencedColumnName= "id")},
 	inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "id") })
 	@JsonIgnore
-	public CourseBase getCourse()
+	public Course getCourse()
 	{
 		return coursce;
 	}
-	public void setCourse(CourseBase coursce)
+	public void setCourse(Course coursce)
 	{
 		this.coursce = coursce;
 	}

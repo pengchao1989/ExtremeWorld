@@ -2,12 +2,15 @@ package com.yumfee.extremeworld.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.yumfee.extremeworld.entity.Course;
-import com.yumfee.extremeworld.entity.CourseBase;
 
-public interface CourseDao extends PagingAndSortingRepository<CourseBase,Long>
+public interface CourseDao extends PagingAndSortingRepository<Course,Long>
 {
-	List<CourseBase> findByPid(Long id);
+	List<Course> findByPid(Long pid);
+	
+	@Query("SELECT c FROM  Course c WHERE c.courseTaxonomy.id=? AND type=?")
+	List<Course> findByCourseTaxonomyIdAndType(Long courseTaxonomyId,String type);
 }

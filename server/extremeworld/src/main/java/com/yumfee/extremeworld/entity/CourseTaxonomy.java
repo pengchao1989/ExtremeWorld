@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_course_taxonomy")
 public class CourseTaxonomy extends IdEntity
@@ -38,6 +40,7 @@ public class CourseTaxonomy extends IdEntity
 		this.createTime = createTime;
 	}
 
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="taxonomy_id")
 	public List<Course> getCourses()
