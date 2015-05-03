@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.repository.TaskDao;
-import com.yumfee.extremeworld.repository.UserInfoDao;
+import com.yumfee.extremeworld.repository.UserDao;
 import com.yumfee.extremeworld.service.ServiceException;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -42,7 +42,7 @@ public class AccountService {
 
 	private static Logger logger = LoggerFactory.getLogger(AccountService.class);
 
-	private UserInfoDao userDao;
+	private UserDao userDao;
 	
 	private TaskDao taskDao;
 	private Clock clock = Clock.DEFAULT;
@@ -128,7 +128,7 @@ public class AccountService {
 	}
 
 	@Autowired
-	public void setUserDao(UserInfoDao userDao) 
+	public void setUserDao(UserDao userDao) 
 	{
 		this.userDao = userDao;
 	}

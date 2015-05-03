@@ -88,3 +88,31 @@ div.video-container{
 	padding-top:20px;
 	padding-bottom:20px;
 }
+
+.profile-user-info {
+  display: table;
+  width: calc(100% - 24px);
+  margin: 0 auto;
+}
+
+.profile-user-info-striped {
+  border: 1px solid #DCEBF7;
+}
+
+.profile-info-name {
+  text-align: right;
+  padding: 6px 10px 6px 4px;
+  font-weight: normal;
+  color: #336199;
+  background-color: #EDF3F4;
+  border-top: none;
+  display: table-cell;
+  width: 110px;
+  vertical-align: middle;
+}
+
+.profile-info-value {
+  display: table-cell;
+  padding: 6px 4px 6px 6px;
+  border-top: 1px dotted #D5E4F1;
+}

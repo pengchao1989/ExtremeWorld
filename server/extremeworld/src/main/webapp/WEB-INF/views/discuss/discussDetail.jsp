@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,12 +32,12 @@
 			<h1>${topic.title}</h1>
 			<div class="media">
 				<div class="media-left">
-					<a href="#"> <img class="media-object"
-						src="http://7u2nc3.com1.z0.glb.clouddn.com/${topic.user.avatar}" alt="..."></a>
+					<a href="${ctx}/${topic.user.id}"> <img class="media-object"
+						src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 				</div>
 
 				<div class="media-body">
-					<a href="#">${topic.user.name}</a>
+					<a href="${ctx}/${topic.user.id}">${topic.user.name}</a>
 					<p>${topic.createTime}</p>
 					<br />
 						<c:if test="${type == 'video'}">
@@ -63,14 +64,15 @@
 				<div class="reply_list_item">
 					<div class="media">
 						<div class="media-left">
+						<a href="${ctx}/${reply.user.id}">
 							<img class="media-object avatar" alt="Alexa's Avatar"
-								src="${ctx}/static/ace/assets/avatars/avatar1.png" />
+								src="${static_url}${reply.user.avatar}!webAvatarSmall" /></a>
 						</div>
 
 						<div class="row media-body">
 
 							<div class="col-md-10">
-								<a href="#">${reply.user.name}</a>
+								<a href="${ctx}/${reply.user.id}">${reply.user.name}</a>
 								<p>${reply.createTime}</p>
 								<h4 >${reply.content}</h4>
 							</div>
@@ -88,7 +90,7 @@
 							<div class="media">
 								<div class="media-left">
 									<img class="media-object avatar" alt="Alex Doe's avatar"
-										src="${ctx}/static/ace/assets/avatars/avatar5.png" />
+										src="${static_url}${subreply.user.avatar}!webAvatarSmall" />
 								</div>
 
 								<div class="media-body">
@@ -162,8 +164,8 @@
 		    font_size_big: 24,
 		    opacity: "1",
 		    top_botton_danmu_time: 5000,
-		    url_to_get_danmu:"${ctx}/api/v1/danmu/2",
-		    url_to_post_danmu:"${ctx}/api/v1/danmu/add?videoId=${video.id}&userId=${userId}"
+		    url_to_get_danmu:"${ctx}/api/v1/danmu/${topic.id}",
+		    url_to_post_danmu:"${ctx}/api/v1/danmu/add?videoId=${topic.id}&userId=${userId}"
 			});
 		
 		});

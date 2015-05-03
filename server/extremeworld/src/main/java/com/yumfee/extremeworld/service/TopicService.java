@@ -19,7 +19,7 @@ import com.yumfee.extremeworld.modules.nosql.redis.MyJedisExecutor;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPool;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPoolBuilder;
 import com.yumfee.extremeworld.repository.TopicDao;
-import com.yumfee.extremeworld.repository.UserInfoDao;
+import com.yumfee.extremeworld.repository.UserDao;
 
 //Spring Bean的标识.
 @Component
@@ -30,7 +30,7 @@ public class TopicService
 	@Autowired
 	private TopicDao topicDao;
 	@Autowired
-	private UserInfoDao userInfoDao;
+	private UserDao userInfoDao;
 	
 	
 	public Topic getTopic(Long id)

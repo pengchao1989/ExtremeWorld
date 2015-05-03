@@ -1,4 +1,4 @@
-package com.yumfee.extremeworld.web.topic;
+package com.yumfee.extremeworld.web.discuss;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yumfee.extremeworld.entity.Discussion;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
-import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
+import com.yumfee.extremeworld.service.DiscussionService;
 import com.yumfee.extremeworld.service.ReplyService;
-import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
-@RequestMapping(value = "/topic")
-public class TopicController
-{
+@RequestMapping(value = "/discuss")
+public class DiscussController {
+
 	private static final String PAGE_SIZE = "10";
 	
 	@Autowired
-	private TopicService topicService;
+	private DiscussionService discussionService;
 	
 	@Autowired
 	private ReplyService replyService;
@@ -42,16 +42,15 @@ public class TopicController
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
 			Model model, ServletRequest request)
 	{
-		//Page<Topic> topics = topicService.getAllTopic(pageNumber, pageSize, sortType);
+		Page<Discussion> topics = discussionService.getAll(pageNumber, pageSize, sortType);
 		
-		Page<Topic> topics = topicService.getTopicByfollowings(2L,pageNumber, pageSize, sortType);
 		
 		model.addAttribute("topics", topics);
 		return "discuss/discussList";
 	}
 	
 	@RequestMapping( method = RequestMethod.POST)
-	public String create(@Valid Topic newTopic, RedirectAttributes redirectAttributes)
+	public String create(@Valid Discussion newTopic, RedirectAttributes redirectAttributes)
 	{
 		User user = new User();
 		user.setId(getCurrentUserId());
@@ -60,7 +59,7 @@ public class TopicController
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
 		
-		topicService.saveTopic(newTopic);
+		discussionService.saveDiscussion(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
 		return "redirect:/discuss/";
 	}
@@ -78,7 +77,7 @@ public class TopicController
 		{
 			
 		}
-		Topic topic = topicService.getTopic(id);
+		Topic topic = discussionService.getDiscussion(id);
 		
 		Page<Reply> replys = replyService.getAll(id,pageNumber, pageSize);
 		

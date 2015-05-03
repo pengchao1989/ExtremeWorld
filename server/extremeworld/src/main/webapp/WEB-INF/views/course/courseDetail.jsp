@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			
-			<label>最后由</label><a href="#">${course.user.name}</a><label>于${course.modifyTime}编辑</label>
+			<label>最后由</label><a href="${ctx}/${course.user.id}">${course.user.name}</a><label>于${course.modifyTime}编辑</label>
 			
 		 	<p>${course.content}</p>
 		</div>

@@ -20,7 +20,7 @@ import com.yumfee.extremeworld.data.UserData;
 import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.repository.TaskDao;
-import com.yumfee.extremeworld.repository.UserDao;
+import com.yumfee.extremeworld.repository.UserBaseDao;
 import com.yumfee.extremeworld.service.ServiceException;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -38,7 +38,7 @@ public class AccountServiceTest {
 	private AccountService accountService;
 
 	@Mock
-	private UserDao mockUserDao;
+	private UserBaseDao mockUserDao;
 
 	@Mock
 	private TaskDao mockTaskDao;

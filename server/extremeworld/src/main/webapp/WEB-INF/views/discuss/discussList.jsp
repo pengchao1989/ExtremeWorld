@@ -23,7 +23,7 @@
 					<c:forEach items="${topics.content}" var="topic">
 						<li class="media">
 								<div class="media-left">
-									<a href="#"> <img class="media-object avatar" src="${static_url}${topic.user.avatar}" alt="..."></a>
+									<a href="${ctx}/${topic.user.id}"> <img class="media-object avatar" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 									
 								</div>
 								<div class="media-body">
@@ -32,7 +32,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="list-group-item-heading">${topic.title}</h3>
-											<a>${topic.user.name}</a> 
+											<a href="${ctx}/${topic.user.id}">${topic.user.name}</a> 
 										</div>
 										
 										<div class="col-md-2">

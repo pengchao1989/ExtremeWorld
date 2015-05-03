@@ -42,7 +42,9 @@
 			<sitemesh:body/>
 		</div>
 		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
-	<script src="${ctx}/static/bootstrap/3/js/bootstrap.min.js" type="text/javascript"></script>
+		
+		<script src="${ctx}/static/bootstrap/3/js/bootstrap.min.js" type="text/javascript"></script>
+	
 	
 </body>
 </html>

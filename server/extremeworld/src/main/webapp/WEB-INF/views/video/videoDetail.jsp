@@ -3,6 +3,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,12 +27,12 @@
 		<div class="media">
 			<div class="media-left">
 					<a href="#"> <img class="media-object"
-						src="http://7u2nc3.com1.z0.glb.clouddn.com/${video.user.avatar}" alt="..."></a>
+						src="${static_url}${video.user.avatar}!webAvatarSmall" alt="..."></a>
 			</div>
 			
 			<div class="media-body">
 			
-				<a href="#">${video.user.name}</a>
+				<a href="${ctx}/${video.user.id}">${video.user.name}</a>
 				<p>${video.createTime}</p>
 				<br />
 					
@@ -59,7 +60,7 @@
 		    font_size_big: 24,
 		    opacity: "1",
 		    top_botton_danmu_time: 5000,
-		    url_to_get_danmu:"${ctx}/api/v1/danmu/2",
+		    url_to_get_danmu:"${ctx}/api/v1/danmu/${video.id}",
 		    url_to_post_danmu:"${ctx}/api/v1/danmu/add?videoId=${video.id}&userId=${userId}"
 			});
 		

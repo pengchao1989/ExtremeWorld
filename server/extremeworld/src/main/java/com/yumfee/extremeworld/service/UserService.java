@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.repository.UserInfoDao;
+import com.yumfee.extremeworld.repository.UserDao;
 
 //Spring Bean的标识.
 @Component
@@ -16,15 +16,20 @@ import com.yumfee.extremeworld.repository.UserInfoDao;
 public class UserService {
 
 	@Autowired
-	private UserInfoDao userInfoDao;
+	private UserDao userDao;
+	
+	public User getUser(Long id)
+	{
+		return userDao.findOne(id);
+	}
 	
 	public List<User> getFollowings(Long id)
 	{
-		return userInfoDao.findOne(id).getFollowings();
+		return userDao.findOne(id).getFollowings();
 	}
 	
 	public List<User> getFollowers(Long id)
 	{
-		return userInfoDao.findOne(id).getFollowers();
+		return userDao.findOne(id).getFollowers();
 	}
 }

@@ -18,9 +18,9 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li ><a href="${ctx}/">首页 <span class="sr-only">(current)</span></a></li>
-        <li class="active"><a href="${ctx}/topic">讨论</a></li>
+      <ul id="nav_menu" class="nav navbar-nav">
+        <li><a href="${ctx}/">首页 <span class="sr-only">(current)</span></a></li>
+        <li><a href="${ctx}/discuss">讨论</a></li>
         <li><a href="${ctx}/video">视频</a></li>
         <li><a href="${ctx}/course">教程</a></li>
         <li><a href="${ctx}/site">场地</a></li>
@@ -45,7 +45,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">我</a></li>
+        <li><a href="/me">我</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
