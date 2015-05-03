@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.repository.TaskDao;
 import com.yumfee.extremeworld.repository.UserInfoDao;
 import com.yumfee.extremeworld.service.ServiceException;
@@ -47,26 +47,26 @@ public class AccountService {
 	private TaskDao taskDao;
 	private Clock clock = Clock.DEFAULT;
 
-	public List<UserInfo> getAllUser() {
-		return (List<UserInfo>) userDao.findAll();
+	public List<User> getAllUser() {
+		return (List<User>) userDao.findAll();
 	}
 
-	public UserInfo getUser(Long id) 
+	public User getUser(Long id) 
 	{
 		return userDao.findOne(id);
 	}
 	
-	public UserInfo findUserByLoginName(String loginName) 
+	public User findUserByLoginName(String loginName) 
 	{
 		return userDao.findByLoginName(loginName);
 	}
 
-	public UserInfo findUserByQqOpenId(String qqOpenId)
+	public User findUserByQqOpenId(String qqOpenId)
 	{
 		return userDao.findByQqOpenId(qqOpenId);
 	}
 	
-	public void registerUser(UserInfo user) 
+	public void registerUser(User user) 
 	{
 		entryptPassword(user); 
 /*		user.setPassword("ccc");
@@ -78,7 +78,7 @@ public class AccountService {
 		userDao.save(user);
 	}
 
-	public void updateUser(UserInfo user) 
+	public void updateUser(User user) 
 	{
 		if (StringUtils.isNotBlank(user.getPlainPassword())) 
 		{
@@ -118,7 +118,7 @@ public class AccountService {
 	/**
 	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
 	 */
-	private void entryptPassword(User user) 
+	private void entryptPassword(UserBase user) 
 	{
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
 		user.setSalt(Encodes.encodeHex(salt));

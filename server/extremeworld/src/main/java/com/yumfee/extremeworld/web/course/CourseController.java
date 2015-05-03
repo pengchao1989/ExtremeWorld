@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.entity.Topic;
-import com.yumfee.extremeworld.entity.UserInfo;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.CourseService;
 import com.yumfee.extremeworld.service.CourseTaxonomyService;
 import com.yumfee.extremeworld.service.TopicService;
@@ -95,9 +95,9 @@ public class CourseController
 
 		Long courseTaxonomyId = Long.valueOf(request.getParameter("courseTaxonomyId"));
 		
-		UserInfo user = new UserInfo();
+		User user = new User();
 		user.setId(getCurrentUserId());
-		newCourse.setUserInfo(user);
+		newCourse.setUser(user);
 		
 		CourseTaxonomy courseTaxonomy = new CourseTaxonomy();
 		courseTaxonomy.setId(courseTaxonomyId);
@@ -133,7 +133,7 @@ public class CourseController
 		courseRevision.setName(curCourse.getName()+"-revision");
 		courseRevision.setContent(curCourse.getContent());
 		courseRevision.setType("revision");
-		courseRevision.setUserInfo(curCourse.getUserInfo());
+		courseRevision.setUser(curCourse.getUser());
 		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
 		courseRevision.setPid(curCourse.getId());
 		courseService.saveCourse(courseRevision);

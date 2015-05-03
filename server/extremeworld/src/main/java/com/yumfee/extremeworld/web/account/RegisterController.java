@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.service.account.AccountService;
 
 /**
@@ -37,7 +37,7 @@ public class RegisterController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String register(@Valid UserInfo user, RedirectAttributes redirectAttributes) {
+	public String register(@Valid User user, RedirectAttributes redirectAttributes) {
 		accountService.registerUser(user);
 		redirectAttributes.addFlashAttribute("username", user.getLoginName());
 		return "redirect:/login";

@@ -32,7 +32,7 @@ public class Course extends IdEntity
 	
 	private CourseTaxonomy courseTaxonomy;
 	
-	private UserInfo userInfo;
+	private User user;
 	
 	@NotBlank
 	public String getName()
@@ -111,14 +111,14 @@ public class Course extends IdEntity
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	public UserInfo getUserInfo()
+	public User getUser()
 	{
-		return userInfo;
+		return user;
 	}
 
-	public void setUserInfo(UserInfo user)
+	public void setUser(User user)
 	{
-		this.userInfo = user;
+		this.user = user;
 	}
 
 	@JsonIgnore

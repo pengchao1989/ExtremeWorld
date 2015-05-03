@@ -16,8 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.TopicService;
@@ -42,9 +42,9 @@ public class TopicController
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
 			Model model, ServletRequest request)
 	{
-		Page<Topic> topics = topicService.getAllTopic(pageNumber, pageSize, sortType);
+		//Page<Topic> topics = topicService.getAllTopic(pageNumber, pageSize, sortType);
 		
-		//Page<Topic> topics = topicService.getAllTopicByCourse(1L,pageNumber, pageSize, sortType);
+		Page<Topic> topics = topicService.getTopicByfollowings(2L,pageNumber, pageSize, sortType);
 		
 		model.addAttribute("topics", topics);
 		return "topic/topicList";
@@ -53,9 +53,9 @@ public class TopicController
 	@RequestMapping( method = RequestMethod.POST)
 	public String create(@Valid Topic newTopic, RedirectAttributes redirectAttributes)
 	{
-		UserInfo user = new UserInfo();
+		User user = new User();
 		user.setId(getCurrentUserId());
-		newTopic.setUserInfo(user);
+		newTopic.setUser(user);
 		newTopic.setImageCount(0);
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
@@ -107,12 +107,12 @@ public class TopicController
 		
 		newReply.setId(null);
 		
-		UserInfo userInfo = new UserInfo();
+		User userInfo = new User();
 		userInfo.setId(getCurrentUserId());
 		Topic topic = new Topic();
 		topic.setId(topicId);
 		
-		newReply.setUserInfo(userInfo);
+		newReply.setUser(userInfo);
 		newReply.setTopic(topic);
 		
 		replyService.saveReply(newReply);

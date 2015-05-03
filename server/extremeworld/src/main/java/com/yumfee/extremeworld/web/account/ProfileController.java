@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.service.account.AccountService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -41,7 +41,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("user") UserInfo user) {
+	public String update(@Valid @ModelAttribute("user") User user) {
 		accountService.updateUser(user);
 		updateCurrentUserName(user.getName());
 		return "redirect:/";

@@ -18,7 +18,7 @@ public class Danmu extends IdEntity{
 	private int time;
 	private Date createTime;
 	
-	private UserInfo userInfo;
+	private User user;
 	private Video video;
 	
 	public String getText() {
@@ -61,14 +61,14 @@ public class Danmu extends IdEntity{
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	public User getUserInfo()
+	public UserBase getUser()
 	{
-		return userInfo;
+		return user;
 	}
 
-	public void setUserInfo(UserInfo userInfo)
+	public void setUser(User user)
 	{
-		this.userInfo = userInfo;
+		this.user = user;
 	}
 
 	@ManyToOne

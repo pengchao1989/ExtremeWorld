@@ -17,8 +17,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.yumfee.extremeworld.data.UserData;
+import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.repository.TaskDao;
 import com.yumfee.extremeworld.repository.UserDao;
 import com.yumfee.extremeworld.service.ServiceException;
@@ -51,7 +51,7 @@ public class AccountServiceTest {
 
 	@Test
 	public void registerUser() {
-		UserInfo user = UserData.randomNewUser();
+		User user = UserData.randomNewUser();
 		Date currentTime = new Date();
 		accountService.setClock(new MockClock(currentTime));
 
@@ -67,12 +67,12 @@ public class AccountServiceTest {
 	@Test
 	public void updateUser() {
 		// 如果明文密码不为空，加密密码会被更新.
-		UserInfo user = UserData.randomNewUser();
+		User user = UserData.randomNewUser();
 		accountService.updateUser(user);
 		assertThat(user.getSalt()).isNotNull();
 
 		// 如果明文密码为空，加密密码无变化。
-		UserInfo user2 = UserData.randomNewUser();
+		User user2 = UserData.randomNewUser();
 		user2.setPlainPassword(null);
 		accountService.updateUser(user2);
 		assertThat(user2.getSalt()).isNull();

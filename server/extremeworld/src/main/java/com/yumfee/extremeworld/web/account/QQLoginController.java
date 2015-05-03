@@ -25,7 +25,7 @@ import com.qq.connect.api.OpenID;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
-import com.yumfee.extremeworld.entity.UserInfo;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.account.AccountService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -36,7 +36,7 @@ public class QQLoginController
 	@Autowired
 	private AccountService accountService;
 	
-	private com.yumfee.extremeworld.entity.UserInfo myUser = null;
+	private com.yumfee.extremeworld.entity.User myUser = null;
 	
 	private boolean isNewUser = true;
 	
@@ -125,7 +125,7 @@ public class QQLoginController
                     }
                     
                     
-                	myUser = new com.yumfee.extremeworld.entity.UserInfo();
+                	myUser = new com.yumfee.extremeworld.entity.User();
                 	myUser.setQqOpenId(openID);
                 	myUser.setLoginName(openID);
                 	myUser.setName(userInfoBean.getNickname());
@@ -172,7 +172,7 @@ public class QQLoginController
 	public String updateProfileForm(Model model)
 	{
 		Long currentUserId = getCurrentUserId();
-		UserInfo currUserInfo = accountService.getUser(currentUserId);
+		User currUserInfo = accountService.getUser(currentUserId);
 		
 		model.addAttribute("user", currUserInfo);
 		model.addAttribute("action", "updateProfile");
@@ -180,7 +180,7 @@ public class QQLoginController
 	}
 	
 	@RequestMapping(value = "updateProfile", method = RequestMethod.POST)
-	public String updateProfile(@Valid @ModelAttribute("user") UserInfo user, RedirectAttributes redirectAttributes)
+	public String updateProfile(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes)
 	{
 		System.out.println("/updateProfile");
 		

@@ -21,7 +21,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
-import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserBase;
 
 import org.springside.modules.utils.Encodes;
 
@@ -42,7 +42,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		//UsernamePasswordToken就一shiro定义的user类
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		//根据userName 获取userEntity
-		User user = accountService.findUserByLoginName(token.getUsername());
+		UserBase user = accountService.findUserByLoginName(token.getUsername());
 		
 		if (user != null) 
 		{
@@ -63,7 +63,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) 
 	{
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-		User user = accountService.findUserByLoginName(shiroUser.loginName);
+		UserBase user = accountService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addRoles(user.getRoleList());
 		return info;

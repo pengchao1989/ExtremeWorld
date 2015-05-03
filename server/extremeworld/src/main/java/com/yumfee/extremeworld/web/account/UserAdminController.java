@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.entity.UserInfo;
 import com.yumfee.extremeworld.service.account.AccountService;
 
 /**
@@ -37,7 +37,7 @@ public class UserAdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
-		List<UserInfo> users = accountService.getAllUser();
+		List<User> users = accountService.getAllUser();
 		model.addAttribute("users", users);
 
 		return "account/adminUserList";
@@ -50,7 +50,7 @@ public class UserAdminController {
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("user") UserInfo user, RedirectAttributes redirectAttributes) {
+	public String update(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
 		accountService.updateUser(user);
 		redirectAttributes.addFlashAttribute("message", "更新用户" + user.getLoginName() + "成功");
 		return "redirect:/admin/user";
@@ -58,7 +58,7 @@ public class UserAdminController {
 
 	@RequestMapping(value = "delete/{id}")
 	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-		User user = accountService.getUser(id);
+		UserBase user = accountService.getUser(id);
 		accountService.deleteUser(id);
 		redirectAttributes.addFlashAttribute("message", "删除用户" + user.getLoginName() + "成功");
 		return "redirect:/admin/user";

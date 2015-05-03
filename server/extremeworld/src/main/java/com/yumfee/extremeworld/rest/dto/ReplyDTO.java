@@ -3,7 +3,7 @@ package com.yumfee.extremeworld.rest.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.yumfee.extremeworld.entity.UserInfo;
+import com.yumfee.extremeworld.entity.User;
 
 public class ReplyDTO
 {

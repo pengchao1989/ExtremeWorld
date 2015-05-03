@@ -6,7 +6,7 @@
 package com.yumfee.extremeworld.data;
 
 import com.yumfee.extremeworld.entity.Task;
-import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserBase;
 import org.springside.modules.test.data.RandomData;
 
 /**
@@ -19,7 +19,7 @@ public class TaskData {
 	public static Task randomTask() {
 		Task task = new Task();
 		task.setTitle(randomTitle());
-		User user = new User(1L);
+		UserBase user = new UserBase(1L);
 		task.setUser(user);
 		return task;
 	}

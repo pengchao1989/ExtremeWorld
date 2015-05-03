@@ -24,7 +24,7 @@ public class Site extends IdEntity
 	private Date createTime;
 	
 	private CityGroup cityGroup;
-	private List<UserInfo> userInfos;
+	private List<User> users;
 	
 	public String getName()
 	{
@@ -104,13 +104,13 @@ public class Site extends IdEntity
 	
 	//关系被维护端
 	@ManyToMany(mappedBy = "sites")
-	public List<UserInfo> getUserInfos()
+	public List<User> getUsers()
 	{
-		return userInfos;
+		return users;
 	}
-	public void setUserInfos(List<UserInfo> userInfos)
+	public void setUsers(List<User> users)
 	{
-		this.userInfos = userInfos;
+		this.users = users;
 	}
 	
 	

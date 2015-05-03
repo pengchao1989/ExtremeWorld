@@ -2,12 +2,12 @@ package com.yumfee.extremeworld.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.yumfee.extremeworld.entity.UserInfo;
+import com.yumfee.extremeworld.entity.User;
 
 
-public interface UserInfoDao extends PagingAndSortingRepository<UserInfo, Long>
+public interface UserInfoDao extends PagingAndSortingRepository<User, Long>
 {
-	UserInfo findById(Long id);
-	UserInfo findByLoginName(String loginName);
-	UserInfo findByQqOpenId(String qqOpenId);
+	User findById(Long id);
+	User findByLoginName(String loginName);
+	User findByQqOpenId(String qqOpenId);
 }

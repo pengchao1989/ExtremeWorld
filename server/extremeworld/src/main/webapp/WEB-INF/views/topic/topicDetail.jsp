@@ -8,35 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="${ctx}/static/abplayer/css/base.css?1" />
-<script src="${ctx}/static/abplayer/js/CommentCoreLibrary.min.js"></script>
-<script src="${ctx}/static/abplayer/js/ABPlayer.min.js"></script>
 
-	<script type="text/javascript">
-			var $_ = function(e){return document.getElementById(e);};
-			window.addEventListener("load",function(){
-				$_("click-load").addEventListener("click", function(e){
-					if(e && e.preventDefault)
-						e.preventDefault();
-					var inst = ABP.create(document.getElementById("load-player"), {
-						"src":{
-							"playlist":[
-								{
-									"video":document.getElementById("video-1"),
-									"comments":"${ctx}/static/abplayer/comment-otsukimi.xml"
-								},
-								{
-									"video":document.getElementById("video-2"),
-									"comments":"${ctx}/static/abplayer/comment-science.xml"
-								}
-							]
-						},
-						"width":800,
-						"height":522
-					});
-					$_("click-load").style.display= "none";
-				});
-			});
-	</script>
+<link rel="stylesheet" href="${ctx}/static/DanmuPlayer/css/danmuplayer.css">
+<script src="${ctx}/static/DanmuPlayer/js/danmuplayer.js"></script>
 
 <title>Insert title here</title>
 
@@ -58,39 +32,26 @@
 			<div class="media">
 				<div class="media-left">
 					<a href="#"> <img class="media-object"
-						src="http://7u2nc3.com1.z0.glb.clouddn.com/${topic.userInfo.avatar}" alt="..."></a>
+						src="http://7u2nc3.com1.z0.glb.clouddn.com/${topic.user.avatar}" alt="..."></a>
 				</div>
 
 				<div class="media-body">
-					<a href="#">${topic.userInfo.name}</a>
+					<a href="#">${topic.user.name}</a>
 					<p>${topic.createTime}</p>
 					<br />
-					<h4>${topic.content}</h4>
+						<c:if test="${type == 'video'}">
 
-				<c:if test="${type == 'video'}">
-
-
+		 					<c:if test="${topic.videoDetail.videoSource != null}">
+								<div id="danmup">
+								</div>
+							</c:if> 
 					
- 					<c:if test="${topic.videoDetail.videoSource != null}">
-						<div >
-<!-- 							<video src="http://7vilxo.com1.z0.glb.clouddn.com/video_test.mp4"
-								controls="controls"></video> -->
-								
-								<video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
-									<source src="${topic.videoDetail.videoSource}" type="video/mp4">
-									<p>Your browser does not support html5 video!</p>
-								</video>
-								<video id="video-2" style="display:none;" data-setup="{}" width="800" height="450">
-									<source src=${topic.videoDetail.videoSource} type="video/mp4">
-									<p>Your browser does not support html5 video!</p>
-								</video>
-								<div id="load-player"></div>
-								<a id="click-load" class="pbutton" href="#">Load ABPlayerHTML5 Binding</a><br>
-	
-						</div>
-					</c:if> 
+						</c:if>
+						
+						<br />
 					
-					</c:if>
+						<h4>${topic.content}</h4>
+
 				</div>
 			</div>
 		</div>
@@ -109,7 +70,7 @@
 						<div class="row media-body">
 
 							<div class="col-md-10">
-								<a href="#">${reply.userInfo.name}</a>
+								<a href="#">${reply.user.name}</a>
 								<p>${reply.createTime}</p>
 								<h4 >${reply.content}</h4>
 							</div>
@@ -131,9 +92,9 @@
 								</div>
 
 								<div class="media-body">
-									<a href="#"> ${subreply.userInfo.name} </a>
+									<a href="#"> ${subreply.user.name} </a>
 									<c:if test="${subreply.preSubReply  != null}">
-									回复<a href="#"> ${subreply.preSubReply.userInfo.name}</a>
+									回复<a href="#"> ${subreply.preSubReply.user.name}</a>
 									</c:if>
 									${subreply.content}
 									<div class="row">
@@ -179,9 +140,36 @@
 				/* 获取到主回复div */
 				$(this).parents().filter(".reply_list_item").append('<div class="reply_panl"><form><input></input><form></div>');
 			});
+			
+			
 		});
 	
 	</script>
+	
+	
+	<c:if test="${type == 'video'}">
+		 	<script>
+		$(document).ready(function(){
+		$("#danmup").danmuplayer({
+			src:"${topic.videoDetail.videoSource}",
+			width:800,
+			height:445,
+		    speed: 15000,
+		    danmuss: {},
+		    sumtime: 65535,
+		    default_font_color: "#FFFFFF",
+		    font_size_small: 16,
+		    font_size_big: 24,
+		    opacity: "1",
+		    top_botton_danmu_time: 5000,
+		    url_to_get_danmu:"${ctx}/api/v1/danmu/2",
+		    url_to_post_danmu:"${ctx}/api/v1/danmu/add?videoId=${video.id}&userId=${userId}"
+			});
+		
+		});
+	</script>
+	</c:if>
+
 
 
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/module.js"></script>

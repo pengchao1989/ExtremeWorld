@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yumfee.extremeworld.entity.Task;
-import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 import com.yumfee.extremeworld.service.task.TaskService;
 import org.springside.modules.web.Servlets;
@@ -84,7 +84,7 @@ public class TaskController {
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@Valid Task newTask, RedirectAttributes redirectAttributes) {
-		User user = new User(getCurrentUserId());
+		UserBase user = new UserBase(getCurrentUserId());
 		newTask.setUser(user);
 
 		taskService.saveTask(newTask);

@@ -45,7 +45,7 @@ public class Topic extends IdEntity
 	
 	private List<Media> medias;
 	
-	private UserInfo userInfo;
+	private User user;
 	
 	private Course coursce;
 	
@@ -160,13 +160,13 @@ public class Topic extends IdEntity
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	public User getUserInfo()
+	public User getUser()
 	{
-		return userInfo;
+		return user;
 	}
-	public void setUserInfo(UserInfo user)
+	public void setUser(User user)
 	{
-		this.userInfo = user;
+		this.user = user;
 	}
 	
 	// optional表示该对象可有可无，它的值为true表示该外键可以为null，它的值为false表示该外键为not null  

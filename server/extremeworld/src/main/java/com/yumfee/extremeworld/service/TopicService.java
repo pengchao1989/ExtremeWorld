@@ -1,5 +1,6 @@
 package com.yumfee.extremeworld.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.mapper.JsonMapper;
 
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.modules.nosql.redis.JedisTemplate;
 import com.yumfee.extremeworld.modules.nosql.redis.MyJedisExecutor;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPool;
 import com.yumfee.extremeworld.modules.nosql.redis.pool.JedisPoolBuilder;
 import com.yumfee.extremeworld.repository.TopicDao;
+import com.yumfee.extremeworld.repository.UserInfoDao;
 
 //Spring Bean的标识.
 @Component
@@ -24,16 +27,17 @@ import com.yumfee.extremeworld.repository.TopicDao;
 @Transactional
 public class TopicService
 {
+	@Autowired
 	private TopicDao topicDao;
+	@Autowired
+	private UserInfoDao userInfoDao;
 	
 	
 	public Topic getTopic(Long id)
 	{
 		Topic topic = null;
 		
-
-		
-		topic = MyJedisExecutor.get("topic:"+id, Topic.class);
+/*		topic = MyJedisExecutor.get("topic:"+id, Topic.class);
 		
 		if(topic == null)
 		{
@@ -43,8 +47,10 @@ public class TopicService
 			
 		}
 
-		topic.setViewCount(MyJedisExecutor.incr("topic:view:"+id).intValue());
+		topic.setViewCount(MyJedisExecutor.incr("topic:view:"+id).intValue());*/
 		
+		
+		topic = topicDao.findOne(id);
 		return topic;
 	}
 	
@@ -52,7 +58,7 @@ public class TopicService
 	{
 		entity.setExcerpt(entity.getTitle());
 		topicDao.save(entity);
-		MyJedisExecutor.set("topic:"+entity.getId(), entity);
+		//MyJedisExecutor.set("topic:"+entity.getId(), entity);
 	}
 	
 	public List<Topic> getAllTopic()
@@ -74,11 +80,20 @@ public class TopicService
 		return topicDao.findByCourseId(courseId,pageRequest);
 	}
 	
-	@Autowired
-	public void setTopicDao(TopicDao topicDao)
+	public Page<Topic> getTopicByfollowings(Long id, int pageNumber, int pageSize,String sortType)
 	{
-		this.topicDao = topicDao;
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		
+		List<Long> followingIds = new ArrayList<Long>();
+		List<User> followings = userInfoDao.findOne(id).getFollowings();
+		for(User userInfo : followings)
+		{
+			followingIds.add(userInfo.getId());
+		}
+		return topicDao.findByUserIdIn(followingIds, pageRequest);
 	}
+	
+	
 	
 	/**
 	 * 创建分页请求.

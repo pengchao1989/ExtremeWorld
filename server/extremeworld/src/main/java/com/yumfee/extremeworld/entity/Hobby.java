@@ -16,7 +16,7 @@ public class Hobby extends IdEntity
 	private String description;
 	private Date createTime;
 	
-	private List<UserInfo> userInfos= new ArrayList<UserInfo>();
+	private List<User> users= new ArrayList<User>();
 	
 	public String getName()
 	{
@@ -46,13 +46,13 @@ public class Hobby extends IdEntity
 	//关系被维护端
 	//referencedColumnName指向对象的列名
 	@ManyToMany(mappedBy = "hobbys")
-	public List<UserInfo> getUserInfos()
+	public List<User> getUsers()
 	{
-		return userInfos;
+		return users;
 	}
-	public void setUserInfos(List<UserInfo> userInfos)
+	public void setUsers(List<User> users)
 	{
-		this.userInfos = userInfos;
+		this.users = users;
 	}
 
 	

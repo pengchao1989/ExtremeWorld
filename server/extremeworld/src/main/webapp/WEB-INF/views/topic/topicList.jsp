@@ -23,7 +23,7 @@
 					<c:forEach items="${topics.content}" var="topic">
 						<li class="media">
 								<div class="media-left">
-									<a href="#"> <img class="media-object avatar" src="${static_url}${topic.userInfo.avatar}" alt="..."></a>
+									<a href="#"> <img class="media-object avatar" src="${static_url}${topic.user.avatar}" alt="..."></a>
 									
 								</div>
 								<div class="media-body">
@@ -32,7 +32,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<h3 class="list-group-item-heading">${topic.title}</h3>
-											<a>${topic.userInfo.name}</a> 
+											<a>${topic.user.name}</a> 
 										</div>
 										
 										<div class="col-md-2">

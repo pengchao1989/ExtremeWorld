@@ -30,7 +30,7 @@ public class QQLoginRedirectController
 	@Autowired
 	private AccountService accountService;
 	
-	private com.yumfee.extremeworld.entity.UserInfo myUser = null;
+	private com.yumfee.extremeworld.entity.User myUser = null;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String get(HttpServletRequest  request ,HttpServletResponse response) throws IOException
@@ -98,7 +98,7 @@ public class QQLoginRedirectController
                     }
                     
                     
-                	myUser = new com.yumfee.extremeworld.entity.UserInfo();
+                	myUser = new com.yumfee.extremeworld.entity.User();
                 	myUser.setQqOpenId(openID);
                 	myUser.setLoginName(openID);
                 	myUser.setName(userInfoBean.getNickname());

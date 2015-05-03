@@ -6,9 +6,9 @@
 package com.yumfee.extremeworld.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserBase;
 
-public interface UserDao extends PagingAndSortingRepository<User, Long> {
-	User findByLoginName(String loginName);
-	User findByQqOpenId(String qqOpenId);
+public interface UserDao extends PagingAndSortingRepository<UserBase, Long> {
+	UserBase findByLoginName(String loginName);
+	UserBase findByQqOpenId(String qqOpenId);
 }

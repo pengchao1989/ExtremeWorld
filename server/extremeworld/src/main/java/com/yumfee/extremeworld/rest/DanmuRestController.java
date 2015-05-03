@@ -28,7 +28,7 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Danmu;
-import com.yumfee.extremeworld.entity.UserInfo;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.rest.dto.DanmuDTO;
 import com.yumfee.extremeworld.service.DanmuService;
@@ -87,7 +87,7 @@ public class DanmuRestController {
 		System.out.println("userId=" + userIdString);
 		System.out.println("danmu=" + danmuString);
 		
-		UserInfo userInfo = new UserInfo();
+		User userInfo = new User();
 		userInfo.setId(Long.valueOf(userIdString));
 		
 		Video video = new Video();
@@ -102,7 +102,7 @@ public class DanmuRestController {
 		danmuEntity.setPosition(danmuDTO.getPosition());
 		danmuEntity.setSize(danmuDTO.getSize());
 		danmuEntity.setTime(danmuDTO.getTime());
-		danmuEntity.setUserInfo(userInfo);
+		danmuEntity.setUser(userInfo);
 		danmuEntity.setVideo(video);
 		
 		danmuService.SaveDanmu(danmuEntity);

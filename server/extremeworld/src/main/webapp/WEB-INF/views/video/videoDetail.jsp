@@ -26,12 +26,12 @@
 		<div class="media">
 			<div class="media-left">
 					<a href="#"> <img class="media-object"
-						src="http://7u2nc3.com1.z0.glb.clouddn.com/${video.userInfo.avatar}" alt="..."></a>
+						src="http://7u2nc3.com1.z0.glb.clouddn.com/${video.user.avatar}" alt="..."></a>
 			</div>
 			
 			<div class="media-body">
 			
-				<a href="#">${video.userInfo.name}</a>
+				<a href="#">${video.user.name}</a>
 				<p>${video.createTime}</p>
 				<br />
 					
@@ -45,7 +45,7 @@
 			
 	</div>
 	
-	<script>
+ 	<script>
 		$(document).ready(function(){
 		$("#danmup").danmuplayer({
 			src:"${video.videoDetail.videoSource}",
