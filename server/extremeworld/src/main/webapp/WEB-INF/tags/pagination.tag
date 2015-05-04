@@ -17,7 +17,6 @@ request.setAttribute("end", end);
 %>
 
 <div >
-	<nav>
 		<ul class="pagination">
 			<% if (page.hasPrevious()){%>
 			<li><a href="?page=1&sortType=${sortType}&${searchParams}">&lt;&lt;</a></li>
@@ -31,11 +30,10 @@ request.setAttribute("end", end);
 			<c:forEach var="i" begin="${begin}" end="${end}">
 				<c:choose>
 					<c:when test="${i == current}">
-						<li class="active"><a
-							href="?page=${i}&sortType=${sortType}&${searchParams}">${i}</a></li>
+						<li class="active"><a href="?page=${i}&sortType=${sortType}&${searchParams}">${i}</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="?page=${i}&sortType=${sortType}&${searchParams}">${i}</a></li>
+						<li class=""><a href="?page=${i}&sortType=${sortType}&${searchParams}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -51,6 +49,5 @@ request.setAttribute("end", end);
 			<%} %>
 
 		</ul>
-	</nav>
 </div>
 

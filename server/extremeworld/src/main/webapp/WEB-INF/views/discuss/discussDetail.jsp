@@ -32,12 +32,12 @@
 			<h1>${topic.title}</h1>
 			<div class="media">
 				<div class="media-left">
-					<a href="${ctx}/${topic.user.id}"> <img class="media-object"
+					<a href="${ctx}/u/${topic.user.id}"> <img class="media-object"
 						src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 				</div>
 
 				<div class="media-body">
-					<a href="${ctx}/${topic.user.id}">${topic.user.name}</a>
+					<a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a>
 					<p>${topic.createTime}</p>
 					<br />
 						<c:if test="${type == 'video'}">
@@ -64,7 +64,7 @@
 				<div class="reply_list_item">
 					<div class="media">
 						<div class="media-left">
-						<a href="${ctx}/${reply.user.id}">
+						<a href="${ctx}/u/${reply.user.id}">
 							<img class="media-object avatar" alt="Alexa's Avatar"
 								src="${static_url}${reply.user.avatar}!webAvatarSmall" /></a>
 						</div>
@@ -72,7 +72,7 @@
 						<div class="row media-body">
 
 							<div class="col-md-10">
-								<a href="${ctx}/${reply.user.id}">${reply.user.name}</a>
+								<a href="${ctx}/u/${reply.user.id}">${reply.user.name}</a>
 								<p>${reply.createTime}</p>
 								<h4 >${reply.content}</h4>
 							</div>

@@ -1,18 +1,11 @@
 /* header */
 
 body{
-	background-color: #E4E6E9;
+	background-color: #fcfcfc;
 }
 
 .navbar-default {
   background-color: #C3E883;
-}
-
-.footer {
-  color: #777;
-  padding: 30px 0;
-  border-top: 1px solid #e5e5e5;
-  margin-top: 70px;
 }
 
 .blog-footer {
@@ -52,10 +45,6 @@ border-style: ridge
 
 .light-login {
   background: #dfe0e2;
-}
-
-.avatar{
-	border-radius: 50%;
 }
 
 div.main_content{

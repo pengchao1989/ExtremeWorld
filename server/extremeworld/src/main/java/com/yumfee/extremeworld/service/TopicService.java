@@ -56,7 +56,15 @@ public class TopicService
 	
 	public void saveTopic(Topic entity)
 	{
-		entity.setExcerpt(entity.getTitle());
+		if(entity.getContent().length() > 160)
+		{
+			entity.setExcerpt(entity.getContent().substring(0, 159) + "....");
+		}
+		else
+		{
+			entity.setExcerpt(entity.getContent());
+		}
+		
 		topicDao.save(entity);
 		//MyJedisExecutor.set("topic:"+entity.getId(), entity);
 	}

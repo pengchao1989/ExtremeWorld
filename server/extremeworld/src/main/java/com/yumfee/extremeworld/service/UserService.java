@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.repository.UserDao;
 
@@ -31,5 +32,11 @@ public class UserService {
 	public List<User> getFollowers(Long id)
 	{
 		return userDao.findOne(id).getFollowers();
+	}
+	
+	//user已掌握的course
+	public List<Course> getCourses(Long id)
+	{
+		return userDao.findOne(id).getCourses();
 	}
 }

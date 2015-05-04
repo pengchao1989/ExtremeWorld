@@ -1,6 +1,7 @@
 package com.yumfee.extremeworld.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -32,7 +34,8 @@ public class Course extends IdEntity
 	
 	private CourseTaxonomy courseTaxonomy;
 	
-	private User user;
+	private User user;  //create user
+	private List<User> users;
 	
 	@NotBlank
 	public String getName()
@@ -133,5 +136,17 @@ public class Course extends IdEntity
 	{
 		this.courseTaxonomy = courseTaxonomy;
 	}
+
+	//关系被维护端
+	@ManyToMany(mappedBy = "courses")
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
+	
 	
 }

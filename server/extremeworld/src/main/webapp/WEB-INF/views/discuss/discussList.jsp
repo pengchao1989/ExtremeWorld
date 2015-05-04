@@ -17,50 +17,16 @@
 
 	<div class="container main_content">
 
-		<div class="row">
-			<tbody>
-				<ul class="media-list">
-					<c:forEach items="${topics.content}" var="topic">
-						<li class="media">
-								<div class="media-left">
-									<a href="${ctx}/${topic.user.id}"> <img class="media-object avatar" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
-									
-								</div>
-								<div class="media-body">
-									<a href="${ctx}/topic/${topic.id}" target="_blank"> 
-									
-									<div class="row">
-										<div class="col-md-6">
-											<h3 class="list-group-item-heading">${topic.title}</h3>
-											<a href="${ctx}/${topic.user.id}">${topic.user.name}</a> 
-										</div>
-										
-										<div class="col-md-2">
-												<p class="views">${topic.replyCount}</p>
-												<p>回复</p>
-										</div>
-										
-										<div class="col-md-2">
-											<p class="views">${topic.viewCount}</p>
-											<p>查看</p>
-										</div>
-										
-										<div class="col-md-2">
-											<p>${topic.createTime}</p>
-											<p>${topic.updateTime}</p>
-										</div>
-
-									</div>
-									
-
-										
-									</a>
-								</div>
-						</li>
-					</c:forEach>
-				</ul>
-			</tbody>
-		</div>
+		<ul class="collection">
+			<c:forEach items="${topics.content}" var="topic">
+				<li class="collection-item avatar">
+					<a href="${ctx}/u/${topic.user.id}"> <img class="circle" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+							
+					<a href="${ctx}/topic/${topic.id}" target="_blank"> <span class="title">${topic.title}</span></a>
+					<p><a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a><br></p>
+				</li>
+			</c:forEach>
+		</ul>
 
 
 		<tags:pagination page="${topics}" paginationSize="5"/>
@@ -79,12 +45,15 @@
 	
 
 	</div>
-
 	
+
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/module.js"></script>
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/hotkeys.js"></script>
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/uploader.js"></script>
 	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/simditor.js"></script>
 	<script type="text/javascript" src="${ctx}/static/scripts/edit.js"></script>
+	
+
+	
 </body>
 </html>

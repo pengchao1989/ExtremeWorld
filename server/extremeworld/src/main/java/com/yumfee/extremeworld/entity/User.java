@@ -34,6 +34,8 @@ public class User extends UserBase
 	private List<User> followings = new ArrayList<User>();
 	private List<User> followers = new ArrayList<User>();
 	
+	private List<Course> courses = new ArrayList<Course>();
+	
 /*	public UserInfo(Long id)
 	{
 		super(id);
@@ -142,6 +144,18 @@ public class User extends UserBase
 	}
 	public void setFollowers(List<User> followers) {
 		this.followers = followers;
+	}
+	
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_user_course",
+	joinColumns = { @JoinColumn(name="user_id", referencedColumnName= "userId")},
+	inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "id") })
+	public List<Course> getCourses() {
+		return courses;
+	}
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 	@Override
 	public String toString() {

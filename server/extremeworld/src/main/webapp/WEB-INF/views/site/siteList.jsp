@@ -19,13 +19,18 @@
 			<tbody>
 			<c:forEach items="${sites.content}" var="site" varStatus="status">
 			
-						<div class="col-sm-6 col-md-4">
-							<div class="thumbnail">
-								<img data-src="holder.js/150x150" alt="..."src="${site.frontImg}">
-								<div class="caption">
-									<h3>${site.name}</h3>
-									<p>${site.description}</p>
-								</div>
+						<div class=" col s4">
+							<div class="card ">
+							
+								<div class="card-image">
+					              <img src="${site.frontImg}">
+					              <span class="card-title">${site.name}</span>
+					            </div>
+					            
+					            <div class="card-content">
+					              <p>${site.description}</p>
+					            </div>
+            
 							</div>
 						</div>
 					

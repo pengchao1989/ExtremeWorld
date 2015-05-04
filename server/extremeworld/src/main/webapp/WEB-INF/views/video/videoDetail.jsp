@@ -32,7 +32,7 @@
 			
 			<div class="media-body">
 			
-				<a href="${ctx}/${video.user.id}">${video.user.name}</a>
+				<a href="${ctx}/u/${video.user.id}">${video.user.name}</a>
 				<p>${video.createTime}</p>
 				<br />
 					
