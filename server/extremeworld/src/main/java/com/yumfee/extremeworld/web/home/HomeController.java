@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yumfee.extremeworld.entity.Activity;
+import com.yumfee.extremeworld.entity.Discussion;
+import com.yumfee.extremeworld.entity.Mood;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
@@ -42,6 +46,30 @@ public class HomeController {
 		Page<Topic> topics = topicService.getAllTopic(pageNumber, pageSize, sortType);
 		
 		//Page<Topic> topics = topicService.getTopicByfollowings(2L,pageNumber, pageSize, sortType);
+		
+		for(Topic topic : topics)
+		{
+			if(topic instanceof Discussion)
+			{
+				topic.setTitle("[讨论]" + topic.getTitle());
+				model.addAttribute("type", "discuss");
+			}
+			else if(topic instanceof Mood)
+			{
+				topic.setTitle("[心情]" + topic.getTitle());
+				model.addAttribute("type", "mood");
+			}
+			else if(topic instanceof Video)
+			{
+				topic.setTitle("[视频]" + topic.getTitle());
+				model.addAttribute("type", "video");
+			}
+			else if(topic instanceof Activity)
+			{
+				topic.setTitle("[活动]" + topic.getTitle());
+				model.addAttribute("type", "activity");
+			}
+		}
 		
 		model.addAttribute("topics", topics);
 		

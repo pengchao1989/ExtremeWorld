@@ -13,38 +13,50 @@
 </head>
 <body>
 
-	<div class="container ">
-
-			<tbody>
-				<c:forEach items="${topics.content}" var="topic">
-					
-					<div class="row">
-						<div class="col s12 m6">
-							<div class="card white-grey darken-1">
-								<div class="card-content black-text">
-									<div class="row valign-wrapper">
-										<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
-										<a href="${ctx}/topic/${topic.id}" target="_blank"><span class="card-title black-text">${topic.title}</span></a>
+	<div class="container">
+	
+		<div class="row">
+			<div class="col s12 m9 l10">
+				<h3>新鲜事</h3>
+				<tbody>
+					<c:forEach items="${topics.content}" var="topic">
+						
+						<div class="row">
+							<div class="col s12 m6">
+								<div class="card white-grey darken-1">
+									<div class="card-content black-text">
+										<div class="row valign-wrapper">
+											<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+											<a href="${ctx}/topic/${topic.id}" target="_blank"><span class="card-title black-text">${topic.title}</span></a>
+										</div>
+										
+										<p >${topic.content}</p>
 									</div>
-									
-									<p >${topic.content}</p>
-								</div>
-								<div class="card-action">
-									<a href="#">This is a link</a> <a href='#'>This is a link</a>
+									<div class="card-action">
+										<a href="#">This is a link</a> <a href='#'>This is a link</a>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					
-					
-					</c:forEach>
-			</tbody>
-		
-		<tags:pagination page="${topics}" paginationSize="5"/>
-		
-		<div class="col-md-4">
-		
+						
+						
+						</c:forEach>
+				</tbody>
+			
+				<tags:pagination page="${topics}" paginationSize="5"/>
+			</div>
+	
+				
+			
+			<div class="col hide-on-small-only m3 l2">
+				<div class="toc-wrapper pinned" style="top: 0px;">
+					<p>123</p>
+				</div>	
+			
+			</div>
 		</div>
+
+		
 	
 		
 		
