@@ -34,9 +34,4 @@ public class UserService {
 		return userDao.findOne(id).getFollowers();
 	}
 	
-	//user已掌握的course
-	public List<Course> getCourses(Long id)
-	{
-		return userDao.findOne(id).getCourses();
-	}
 }

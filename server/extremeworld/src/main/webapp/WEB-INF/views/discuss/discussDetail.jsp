@@ -28,8 +28,8 @@
 <body>
 	<div class="container main_content">
 
-		<div class="reply_list_head">
-			<h1>${topic.title}</h1>
+		<div class="reply_list_head ">
+			<h3>${topic.title}</h3>
 			<div class="media">
 				<div class="media-left">
 					<a href="${ctx}/u/${topic.user.id}"> <img class="media-object"
@@ -51,7 +51,7 @@
 						
 						<br />
 					
-						<h4>${topic.content}</h4>
+						<p class="flow-text">${topic.content}</p>
 
 				</div>
 			</div>
@@ -74,7 +74,7 @@
 							<div class="col-md-10">
 								<a href="${ctx}/u/${reply.user.id}">${reply.user.name}</a>
 								<p>${reply.createTime}</p>
-								<h4 >${reply.content}</h4>
+								<p class="flow-text">${reply.content}</p>
 							</div>
 							<div class="col-md-2">
 								<p>1楼</p>

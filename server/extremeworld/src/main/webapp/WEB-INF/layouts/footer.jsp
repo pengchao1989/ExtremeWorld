@@ -14,7 +14,7 @@
 
 </footer> -->
 
-	<footer class="page-footer">
+	<footer class="page-footer cyan">
 		<div class="container">
 			<div class="row">
 				<div class="col l6 s12">
@@ -36,7 +36,7 @@
 		<div class="footer-copyright">
 			<div class="container">
 				Application &copy; 2015  蜀ICP备14031715号 <a class="grey-text text-lighten-4 right"
-					href="#!">More Links</a>
+					href="#!">Developed by 扳手扳死你</a>
 			</div>
 		</div>
 	</footer>

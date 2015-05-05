@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -28,13 +29,16 @@ public class User extends UserBase
 	private String qq;
 	private String weixin;
 	
+	//private List<Topic> topics = new ArrayList<Topic>();
+	
 	private List<Hobby> hobbys = new ArrayList<Hobby>();
 	private List<Site> sites = new ArrayList<Site>();
 	
 	private List<User> followings = new ArrayList<User>();
 	private List<User> followers = new ArrayList<User>();
 	
-	private List<Course> courses = new ArrayList<Course>();
+	/*private List<Credit> credits = new ArrayList<Credit>(); //user自己的技能xue习列表
+*/	/*private List<Score> scores = new ArrayList<Score>();  //user对别人的Credit评分*/	
 	
 /*	public UserInfo(Long id)
 	{
@@ -90,6 +94,13 @@ public class User extends UserBase
 		this.weixin = weixin;
 	}
 	
+/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	public List<Topic> getTopics() {
+		return topics;
+	}
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}*/
 	@JsonIgnore
 	//关系维护端,mappedBy属性定义了userinfo为双向关系的维护端
 	//@ManyToMany(mappedBy = "userInfos")
@@ -146,17 +157,22 @@ public class User extends UserBase
 		this.followers = followers;
 	}
 	
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tb_user_course",
-	joinColumns = { @JoinColumn(name="user_id", referencedColumnName= "userId")},
-	inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "id") })
-	public List<Course> getCourses() {
-		return courses;
+	
+/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	public List<Credit> getCredits() {
+		return credits;
 	}
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
+	public void setCredits(List<Credit> credits) {
+		this.credits = credits;
+	}*/
+	
+/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	public List<Score> getScores() {
+		return scores;
 	}
+	public void setScores(List<Score> scores) {
+		this.scores = scores;
+	}*/
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

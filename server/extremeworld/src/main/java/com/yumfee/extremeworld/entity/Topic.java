@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -42,8 +43,8 @@ public class Topic extends IdEntity
 	private int status;
 	private String ip;
 
+	private MediaWrap mediaWrap;
 	
-	private List<Media> medias;
 	
 	private User user;
 	
@@ -147,14 +148,13 @@ public class Topic extends IdEntity
 		this.ip = ip;
 	}
 	
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "topic")
-	public List<Media> getMedias() {
-		return medias;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "mediawrap_id")
+	public MediaWrap getMediaWrap() {
+		return mediaWrap;
 	}
-	
-	public void setMedias(List<Media> medias) {
-		this.medias = medias;
+	public void setMediaWrap(MediaWrap mediaWrap) {
+		this.mediaWrap = mediaWrap;
 	}
 	
 	

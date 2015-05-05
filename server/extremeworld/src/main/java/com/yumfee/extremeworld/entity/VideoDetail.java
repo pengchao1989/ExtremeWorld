@@ -10,19 +10,19 @@ import javax.persistence.Table;
 @Table(name = "tb_video_detail")
 public class VideoDetail  
 {
-	private Long videoId;
+	private Long id;
 	private String videoSource;
 	private String thumbnail;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getVideoId()
+	public Long getId()
 	{
-		return videoId;
+		return id;
 	}
-	public void setVideoId(Long videoId)
+	public void setId(Long videoId)
 	{
-		this.videoId = videoId;
+		this.id = videoId;
 	}
 	
 	

@@ -26,8 +26,7 @@
 	
 		<div class="media">
 			<div class="media-left">
-					<a href="#"> <img class="media-object"
-						src="${static_url}${video.user.avatar}!webAvatarSmall" alt="..."></a>
+					<a href="#"> <img class="media-object" src="${static_url}${video.user.avatar}!webAvatarSmall" alt="..."></a>
 			</div>
 			
 			<div class="media-body">

@@ -1,6 +1,7 @@
 package com.yumfee.extremeworld.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,4 +15,5 @@ public interface TopicDao extends PagingAndSortingRepository<Topic, Long>
 	public Page<Topic> findByCourseId(Long courseId,Pageable pageable);*/
 	public Page<Topic> findByCourseId(Long courseId,Pageable pageable);
 	public Page<Topic> findByUserIdIn(Collection<Long> ids, Pageable pageable);
+	public List<Topic> findByUserId(Long user);
 }

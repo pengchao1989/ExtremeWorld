@@ -101,6 +101,11 @@ public class TopicService
 		return topicDao.findByUserIdIn(followingIds, pageRequest);
 	}
 	
+	public List<Topic> getTopicByUser(Long userId)
+	{
+		return topicDao.findByUserId(userId);
+	}
+	
 	
 	
 	/**

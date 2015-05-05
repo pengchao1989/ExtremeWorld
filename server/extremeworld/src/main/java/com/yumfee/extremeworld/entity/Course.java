@@ -35,7 +35,6 @@ public class Course extends IdEntity
 	private CourseTaxonomy courseTaxonomy;
 	
 	private User user;  //create user
-	private List<User> users;
 	
 	@NotBlank
 	public String getName()
@@ -136,17 +135,4 @@ public class Course extends IdEntity
 	{
 		this.courseTaxonomy = courseTaxonomy;
 	}
-
-	//关系被维护端
-	@ManyToMany(mappedBy = "courses")
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-	
-	
-	
 }

@@ -28,31 +28,32 @@
 	</div>
 	
 		<br>
+		<div class="row">
 
-	
-		<ul class="media-list">
-
-			<c:forEach items="${videos.content}" var="video">
-			
-			<li class="media">
-				<div class="media-left">
-					<div class="col-xs-6 col-md-3">
-						<a href="${ctx}/video/${video.id}">
-							<img alt="" src="${video.videoDetail.thumbnail}">
-						</a>
+			<c:forEach items="${videos.content}" var="video" varStatus="status">
+				<div class=" col s3">
+					<div class="card ">
+						<div class="card-image">
+							<a href="${ctx}/video/${video.id}">
+								<img alt="" src="${video.videoDetail.thumbnail}">
+							</a>
+						</div>
+						
+						<div class="card-content">
+							<span class="card-title activator grey-text text-darken-3">${video.title}</span>
+							<p><a href="${ctx}/u/${video.user.id}">${video.user.name}</a></p>
+						</div>
 					</div>
-				</div>
 				
-				<div class="media-body">
-					<h3><a href="${ctx}/video/${video.id}" target="_blank">${video.title}</a></h3>
-					<a href="${ctx}/u/${video.user.id}">${video.user.name}</a> 
-					<p>${video.content}</p>
 				</div>
-			</li>
-
+				<c:if test="${status.count%4==0}">
+					</br>
+				</c:if>
+					
 				
 			</c:forEach>
-		</ul>
+			
+		</div>
 	</div>
 	
 

@@ -19,7 +19,7 @@
 			<tbody>
 			<c:forEach items="${sites.content}" var="site" varStatus="status">
 			
-						<div class=" col s4">
+						<div class=" col s3">
 							<div class="card ">
 							
 								<div class="card-image">
@@ -34,7 +34,7 @@
 							</div>
 						</div>
 					
-					<c:if test="${status.count%3==0}">
+					<c:if test="${status.count%4==0}">
 						</br>
 					</c:if>
 			</c:forEach>
