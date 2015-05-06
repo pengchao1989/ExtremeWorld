@@ -9,6 +9,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="${ctx}/static/styles//colorbox.css" />
+
 <title>Extreme world</title>
 </head>
 <body>
@@ -21,19 +24,45 @@
 				<tbody>
 					<c:forEach items="${topics.content}" var="topic">
 						
-						<div class="row">
+						<div class="row ">
 							<div class="col s12 m6">
 								<div class="card white-grey darken-1">
 									<div class="card-content black-text">
+										
 										<div class="row valign-wrapper">
-											<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+											<div class="col s2">
+												<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+											</div>
+											<div class="card-user-head-name s10 ">
+												<a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a>
+												<p>${topic.createTime}</p>
+											</div>
+										</div>
+										
+										
+										
+										<div class="row valign-wrapper">
 											<a href="${ctx}/topic/${topic.id}" target="_blank"><span class="card-title black-text">${topic.title}</span></a>
 										</div>
 										
 										<p >${topic.content}</p>
+										
+										<!-- media -->
+										<div class="row">
+										
+										<ul class="box">
+										<c:forEach items="${topic.mediaWrap.medias}" var="media">
+										<li class="card-thumbnails">
+										<a href="${static_url}${media.path}" data-rel="colorbox">
+											<img alt="" src="${static_url}${media.path}!topicListThum">
+										</a>
+										</li>
+										</c:forEach>
+										</ul>
+										</div>
 									</div>
 									<div class="card-action">
-										<a href="#">This is a link</a> <a href='#'>This is a link</a>
+										<a href="#">评论  ${topic.replyCount}</a> <a href='#'><i class="mdi-action-thumb-up">  ${topic.agreeCount}</i></a>
 									</div>
 								</div>
 							</div>
@@ -63,5 +92,44 @@
 		
 	</div>
 	
+	<script src="${ctx}/static/jquery/jquery.colorbox.js"></script>
+
+	<script type="text/javascript">
+		jQuery(function($) {
+			var $overflow = '';
+			var colorbox_params = {
+				rel : 'colorbox',
+				reposition : true,
+				scalePhotos : true,
+				scrolling : false,
+				previous : '<i class="ace-icon fa fa-arrow-left"></i>',
+				next : '<i class="ace-icon fa fa-arrow-right"></i>',
+				close : '&times;',
+				current : '{current} of {total}',
+				maxWidth : '100%',
+				maxHeight : '100%',
+				onOpen : function() {
+					$overflow = document.body.style.overflow;
+					document.body.style.overflow = 'hidden';
+				},
+				onClosed : function() {
+					document.body.style.overflow = $overflow;
+				},
+				onComplete : function() {
+					$.colorbox.resize();
+				}
+			};
+
+			$('.box [data-rel="colorbox"]')
+					.colorbox(colorbox_params);
+			$("#cboxLoadingGraphic").html(
+					"<i class='mdi-notification-sync'></i>");//let's add a custom loading icon
+
+			$(document).one('ajaxloadstart.page', function(e) {
+				$('#colorbox, #cboxOverlay').remove();
+			});
+		})
+	</script>
+
 </body>
 </html>
