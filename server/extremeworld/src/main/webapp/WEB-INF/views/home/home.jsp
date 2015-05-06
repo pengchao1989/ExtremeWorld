@@ -19,13 +19,14 @@
 	<div class="container">
 	
 		<div class="row">
-			<div class="col s12 m9 l10">
-				<h3>新鲜事</h3>
+			<h3>新鲜事</h3>
+			<div class="col s9 m9">
+				
 				<tbody>
 					<c:forEach items="${topics.content}" var="topic">
 						
 						<div class="row ">
-							<div class="col s12 m6">
+							<div class="col s12 m10">
 								<div class="card white-grey darken-1">
 									<div class="card-content black-text">
 										
@@ -78,10 +79,18 @@
 				
 			
 			<div class="col hide-on-small-only m3 l2">
-				<div class="toc-wrapper pinned" style="top: 0px;">
-					<p>123</p>
-				</div>	
-			
+				<div class="toc-wrapper pin-top" style="top: 0px;">
+			        <div style="height: 1px;">
+			          <ul class="section table-of-contents">
+			            <li><a href="#grid-container" class="active">Container</a></li>
+			            <li><a href="#grid-intro" class="">Introduction</a></li>
+			            <li><a href="#grid-offsets" class="">Offsets</a></li>
+			            <li><a href="#grid-layouts" class="">Creating Layouts</a></li>
+			            <li><a href="#grid-responsive" class="">Responsive Layouts</a></li>
+			          </ul>
+			        </div>
+			      </div>
+           
 			</div>
 		</div>
 

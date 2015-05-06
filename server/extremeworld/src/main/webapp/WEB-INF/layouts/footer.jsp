@@ -23,12 +23,12 @@
 						columns here to organize your footer content.</p>
 				</div>
 				<div class="col l4 offset-l2 s12">
-					<h5 class="white-text">Links</h5>
+					<h5 class="white-text">赞助商链接</h5>
 					<ul>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-						<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.vans.com.cn/">Vans中国</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.nike.com/cn/zh_cn/">Nike中国</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://shop.adidas.cn/">Adidas中国</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.chinaskateboards.cn/">中国滑板网</a></li>
 					</ul>
 				</div>
 			</div>
