@@ -19,9 +19,23 @@
 
 		<div class="row">
 			<ul>
+				<li class="discuss-taxonomy-item">
+						<c:if test="${0==currentTaxonomyId}">
+							<a class="waves-effect waves-light btn blue" href="${ctx}/discuss?taxonomy=0">全部</a>
+						</c:if>
+						<c:if test="${0!=currentTaxonomyId}">
+							<a class="waves-effect waves-light btn" href="${ctx}/discuss?taxonomy=0">全部</a>
+						</c:if>
+				</li>
+				
 				<c:forEach items="${taxonomys}" var="taxonomy">
 					<li class="discuss-taxonomy-item">
-						<a class="waves-effect waves-light btn">${taxonomy.name}</a>
+						<c:if test="${taxonomy.id==currentTaxonomyId}">
+							<a class="waves-effect waves-light btn blue" href="${ctx}/discuss?taxonomy=${taxonomy.id}">${taxonomy.name}</a>
+						</c:if>
+						<c:if test="${taxonomy.id!=currentTaxonomyId}">
+							<a class="waves-effect waves-light btn" href="${ctx}/discuss?taxonomy=${taxonomy.id}">${taxonomy.name}</a>
+						</c:if>
 					</li>
 				</c:forEach>
 			</ul>

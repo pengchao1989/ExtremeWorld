@@ -40,6 +40,13 @@ public class DiscussionService {
 		return discussionDao.findAll(pageRequest);
 	}
 	
+	public Page<Discussion> getByTaxonomy(Long taxonomyId, int pageNumber, int pageSize,String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		
+		return discussionDao.findByTaxonomyId(taxonomyId, pageRequest);
+	}
+	
 	/**
 	 * 创建分页请求.
 	 */

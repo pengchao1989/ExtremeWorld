@@ -47,14 +47,23 @@ public class DiscussController {
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
+			@RequestParam(value = "taxonomy", defaultValue = "0") Long taxonomy,
 			Model model, ServletRequest request)
 	{
 		
-		
-		
-		Page<Discussion> topics = discussionService.getAll(pageNumber, pageSize, sortType);
+		Page<Discussion> topics = null;
+		if(taxonomy != 0)
+		{
+			topics	= discussionService.getByTaxonomy(taxonomy, pageNumber, pageSize, sortType);
+		}
+		else
+		{
+			topics = discussionService.getAll(pageNumber, pageSize, sortType);
+		}
+		 
 		List<Taxonomy> taxonomys = taxonomyService.getTaxonomyByHobby(1L);//滑板
 		
+		model.addAttribute("currentTaxonomyId", taxonomy);
 		model.addAttribute("taxonomys", taxonomys);
 		model.addAttribute("topics", topics);
 		
