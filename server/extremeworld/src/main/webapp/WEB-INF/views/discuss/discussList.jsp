@@ -17,6 +17,17 @@
 
 	<div class="container main_content">
 
+		<div class="row">
+			<ul>
+				<c:forEach items="${taxonomys}" var="taxonomy">
+					<li class="discuss-taxonomy-item">
+						<a class="waves-effect waves-light btn">${taxonomy.name}</a>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+
+
 		<ul class="collection">
 			<c:forEach items="${topics.content}" var="topic">
 				<li class="collection-item avatar">

@@ -89,7 +89,7 @@
 						<c:forEach items="${reply.subReplys}" var="subreply">
 							<div class="media">
 								<div class="media-left">
-									<img class="media-object avatar" alt="Alex Doe's avatar"
+									<img class="media-object avatar" alt=""
 										src="${static_url}${subreply.user.avatar}!webAvatarSmall" />
 								</div>
 
@@ -99,9 +99,8 @@
 									回复<a href="#"> ${subreply.preSubReply.user.name}</a>
 									</c:if>
 									${subreply.content}
-									<div class="row">
-										<p>${subreply.createTime}</p>
-									</div>
+
+									<p>${subreply.createTime}</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -114,12 +113,12 @@
 		
 		<tags:pagination page="${replys}" paginationSize="5"/>
 		
-		<div class="reply_panl">
+<!-- 		<div class="reply_panl">
 			<form action="">
 				<input id="submit_btn" class="" type="text" value="回复"/>
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 			</form>
-		</div>
+		</div> -->
 		
 		<div class="row">
 				<form class="form-horizontal" action="${ctx}/topic/${topic.id}"  method="post"  class="form-horizontal">

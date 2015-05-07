@@ -16,16 +16,16 @@
 		<div class="jumbotron">
 			<div class = "row">
 				<div class="col-sm-10">
-					<h1>${course.name}</h1>
+					<h1>${course.name}</h1><p><a class="btn btn-success " href="${ctx}/course/update/${course.id}" role="button">编辑</a></p>
 				</div>
 				
 				<div class="col-sm-2">
-					<p><a class="btn btn-success " href="${ctx}/course/update/${course.id}" role="button">编辑</a></p>
-					<a href="${ctx}/course/revision/${course.id}">历史</a>
+					<p><a class="btn btn-success " href="${ctx}/course/update/${course.id}" role="button">挑战</a></p>
+					
 				</div>
 			</div>
 			
-			<label>最后由</label><a href="${ctx}/u/${course.user.id}">${course.user.name}</a><label>于${course.modifyTime}编辑</label>
+			<label>最后由</label><a href="${ctx}/u/${course.user.id}">${course.user.name}</a><label>于${course.modifyTime}编辑</label><a href="${ctx}/course/revision/${course.id}">  历史</a>
 			
 		 	<p>${course.content}</p>
 		</div>

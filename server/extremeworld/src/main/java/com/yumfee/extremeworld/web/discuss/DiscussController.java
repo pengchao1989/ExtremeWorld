@@ -1,5 +1,7 @@
 package com.yumfee.extremeworld.web.discuss;
 
+import java.util.List;
+
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
@@ -16,11 +18,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yumfee.extremeworld.entity.Discussion;
 import com.yumfee.extremeworld.entity.Reply;
+import com.yumfee.extremeworld.entity.Taxonomy;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.DiscussionService;
 import com.yumfee.extremeworld.service.ReplyService;
+import com.yumfee.extremeworld.service.TaxonomyService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
@@ -33,6 +37,9 @@ public class DiscussController {
 	private DiscussionService discussionService;
 	
 	@Autowired
+	private TaxonomyService taxonomyService;
+	
+	@Autowired
 	private ReplyService replyService;
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -42,10 +49,15 @@ public class DiscussController {
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
 			Model model, ServletRequest request)
 	{
+		
+		
+		
 		Page<Discussion> topics = discussionService.getAll(pageNumber, pageSize, sortType);
+		List<Taxonomy> taxonomys = taxonomyService.getTaxonomyByHobby(1L);//滑板
 		
-		
+		model.addAttribute("taxonomys", taxonomys);
 		model.addAttribute("topics", topics);
+		
 		return "discuss/discussList";
 	}
 	

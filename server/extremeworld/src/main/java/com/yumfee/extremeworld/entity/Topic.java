@@ -45,6 +45,7 @@ public class Topic extends IdEntity
 
 	private MediaWrap mediaWrap;
 	
+	private Taxonomy taxonomy;
 	
 	private User user;
 	
@@ -157,6 +158,15 @@ public class Topic extends IdEntity
 		this.mediaWrap = mediaWrap;
 	}
 	
+	
+	@ManyToOne
+	@JoinColumn(name = "taxonomy_id")
+	public Taxonomy getTaxonomy() {
+		return taxonomy;
+	}
+	public void setTaxonomy(Taxonomy taxonomy) {
+		this.taxonomy = taxonomy;
+	}
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")

@@ -143,3 +143,11 @@ div.video-container{
   margin: 2px;
   border: 2px solid #333;
 }
+
+.discuss-taxonomy-item {
+  float: left;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin: 4px;
+}
