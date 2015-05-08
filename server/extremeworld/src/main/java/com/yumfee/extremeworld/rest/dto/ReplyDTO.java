@@ -10,7 +10,7 @@ public class ReplyDTO
 	private Long id;
 	private String content;
 	private Date createTime;
-	private UserInfoMinDTO userInfo;
+	private UserMinDTO userInfo;
 	private List<SubReplyDTO> subReplys;
 	
 	public Long getId()
@@ -37,11 +37,11 @@ public class ReplyDTO
 	{
 		this.createTime = createTime;
 	}
-	public UserInfoMinDTO getUserInfo()
+	public UserMinDTO getUserInfo()
 	{
 		return userInfo;
 	}
-	public void setUserInfo(UserInfoMinDTO userInfo)
+	public void setUserInfo(UserMinDTO userInfo)
 	{
 		this.userInfo = userInfo;
 	}

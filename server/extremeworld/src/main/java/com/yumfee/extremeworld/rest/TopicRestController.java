@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.modules.beanvalidator.BeanValidators;
@@ -32,6 +33,8 @@ public class TopicRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(TopicRestController.class);
 			
+	private static final String PAGE_SIZE = "5";
+	
 	@Autowired
 	TopicService topicService;
 	
@@ -39,9 +42,13 @@ public class TopicRestController
 	private Validator validator;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<TopicDTO> list()
+	public List<TopicDTO> list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
 	{
-		List<TopicDTO> topicDTOlist= BeanMapper.mapList(topicService.getAllTopic(), TopicDTO.class);
+		
+		List<Topic> topicList = topicService.getAllTopic(pageNumber,pageSize,  sortType).getContent();
+		List<TopicDTO> topicDTOlist= BeanMapper.mapList(topicList, TopicDTO.class);
 		
 		return topicDTOlist;
 	}

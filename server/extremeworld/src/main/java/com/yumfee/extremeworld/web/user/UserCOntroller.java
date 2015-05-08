@@ -33,7 +33,8 @@ public class UserCOntroller {
 		
 		User user = userService.getUser(id);
 		
-		List<Topic> topics = topicService.getTopicByUser(id);
+		//List<Topic> topics = topicService.getTopicByUser(id);
+		List<Topic> topics = topicService.getTopicByUserAndMediaWrapNotNull(id);
 		
 		model.addAttribute("user", user);
 		model.addAttribute("topics", topics);

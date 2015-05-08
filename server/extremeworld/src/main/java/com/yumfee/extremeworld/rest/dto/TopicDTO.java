@@ -20,10 +20,9 @@ public class TopicDTO
 	private int status;
 	private String videoSource;
 	
-	private UserInfoMinDTO userInfo;
+	private UserMinDTO user;
 	
-	private List<MediaDTO> medias;
-	
+	private MediaWrapDTO  mediaWrap;
 	
 	public Long getId()
 	{
@@ -97,19 +96,20 @@ public class TopicDTO
 	{
 		this.videoSource = videoSource;
 	}
-	public UserInfoMinDTO getUserInfo()
+	public UserMinDTO getUser()
 	{
-		return userInfo;
+		return user;
 	}
-	public void setUserInfo(UserInfoMinDTO user)
+	public void setUser(UserMinDTO user)
 	{
-		this.userInfo = user;
+		this.user = user;
 	}
-	public List<MediaDTO> getMedias() {
-		return medias;
+	public MediaWrapDTO getMediaWrap() {
+		return mediaWrap;
 	}
-	public void setMedias(List<MediaDTO> medias) {
-		this.medias = medias;
+	public void setMediaWrap(MediaWrapDTO mediaWrap) {
+		this.mediaWrap = mediaWrap;
 	}
+	
 	
 }

@@ -13,7 +13,7 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.rest.dto.UserInfoMinDTO;
+import com.yumfee.extremeworld.rest.dto.UserMinDTO;
 import com.yumfee.extremeworld.service.UserService;
 
 @RestController
@@ -26,11 +26,11 @@ public class FollowerRestController {
 	UserService userInfoService;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	List<UserInfoMinDTO> list(@PathVariable("id") Long id)
+	List<UserMinDTO> list(@PathVariable("id") Long id)
 	{
 		List<User> userInfoList = userInfoService.getFollowers(id);
 		
-		List<UserInfoMinDTO> userInfoDTOList = BeanMapper.mapList(userInfoList, UserInfoMinDTO.class);
+		List<UserMinDTO> userInfoDTOList = BeanMapper.mapList(userInfoList, UserMinDTO.class);
 		return userInfoDTOList;
 	}
 }

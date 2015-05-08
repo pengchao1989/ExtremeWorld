@@ -9,7 +9,7 @@ public class CourseDTO
 	private String content;
 	private Date createTime;
 	
-	private UserInfoMinDTO userInfo;
+	private UserMinDTO userInfo;
 
 	public Long getId()
 	{
@@ -51,12 +51,12 @@ public class CourseDTO
 		this.createTime = createTime;
 	}
 
-	public UserInfoMinDTO getUserInfo()
+	public UserMinDTO getUserInfo()
 	{
 		return userInfo;
 	}
 
-	public void setUserInfo(UserInfoMinDTO userInfo)
+	public void setUserInfo(UserMinDTO userInfo)
 	{
 		this.userInfo = userInfo;
 	}

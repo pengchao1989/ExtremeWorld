@@ -69,11 +69,6 @@ public class TopicService
 		//MyJedisExecutor.set("topic:"+entity.getId(), entity);
 	}
 	
-	public List<Topic> getAllTopic()
-	{
-		return (List<Topic>) topicDao.findAll();
-	}
-	
 	public Page<Topic> getAllTopic(int pageNumber, int pageSize,
 			String sortType)
 	{
@@ -101,9 +96,16 @@ public class TopicService
 		return topicDao.findByUserIdIn(followingIds, pageRequest);
 	}
 	
-	public List<Topic> getTopicByUser(Long userId)
+	public List<Topic> getTopicByUser(Long userId, int pageNumber, int pageSize,String sortType)
 	{
-		return topicDao.findByUserId(userId);
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		
+		return topicDao.findByUserId(userId,pageRequest);
+	}
+	
+	public List<Topic> getTopicByUserAndMediaWrapNotNull(Long userId)
+	{
+		return topicDao.findByUserIdAndMediaWrapNotNull(userId);
 	}
 	
 	

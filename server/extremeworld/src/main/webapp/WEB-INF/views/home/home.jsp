@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
+
+	
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
@@ -72,8 +74,14 @@
 						
 						</c:forEach>
 				</tbody>
+				
+				<div id="more-container">
+				
+				</div>
+				
+				<!-- <a id="load-more" class="waves-effect waves-light btn-large">加载更多</a> -->
 			
-				<tags:pagination page="${topics}" paginationSize="5"/>
+			<tags:loadmore page="${topics}" paginationSize="5"/>
 			</div>
 	
 				
@@ -112,9 +120,15 @@
 		
 	</div>
 	
+
+
+	
 	<script src="${ctx}/static/jquery/jquery.colorbox.js"></script>
 
 	<script type="text/javascript">
+	
+		var currentPage = 1;
+	
 		jQuery(function($) {
 			var $overflow = '';
 			var colorbox_params = {
@@ -149,6 +163,14 @@
 				$('#colorbox, #cboxOverlay').remove();
 			});
 		})
+		
+		
+		$("#load-more").click(function(){
+			$.get("${ctx}/loadmore?page=" + (currentPage),function(data){
+				$("#more-container").append(data);
+				
+			}) ;
+		});
 	</script>
 
 </body>

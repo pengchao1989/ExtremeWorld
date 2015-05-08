@@ -1,6 +1,6 @@
 package com.yumfee.extremeworld.rest.dto;
 
-public class UserInfoMinDTO
+public class UserMinDTO
 {
 	private Long id;
 	private String name;
