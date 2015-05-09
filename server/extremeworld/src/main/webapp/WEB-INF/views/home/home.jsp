@@ -33,7 +33,7 @@
 									<div class="card-content black-text">
 										
 										<div class="row valign-wrapper">
-											<div class="col s2">
+											<div>
 												<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 											</div>
 											<div class="card-user-head-name s10 ">
@@ -160,7 +160,7 @@
 			};
 
 
-			/* $('.box [data-rel="colorbox"]').colorbox(colorbox_params); */
+			$('.box [data-rel="colorbox"]').colorbox(colorbox_params);
 			$("#cboxLoadingGraphic").html(
 					"<i class='mdi-notification-sync'></i>");//let's add a custom loading icon
 
@@ -176,7 +176,7 @@
 			});
 					
 			$("#load-more").click(function(){
-				$.get("${ctx}/loadmore?page=" + (currentPage++),function(data){
+				$.get("${ctx}/loadmore?page=" + (++currentPage),function(data){
 					$("#more-container").append(data);
 					
 					

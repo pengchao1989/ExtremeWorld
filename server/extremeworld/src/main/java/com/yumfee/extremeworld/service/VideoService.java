@@ -43,6 +43,12 @@ public class VideoService
 		return videoDao.findAll(pageRequest);
 	}
 	
+	public Page<Video> getByUser(Long userId, int pageNumber, int pageSize, String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		return videoDao.findByUserId(userId, pageRequest);
+	}
+	
 	@Autowired
 	public void setVideoDao(VideoDao videoDao)
 	{

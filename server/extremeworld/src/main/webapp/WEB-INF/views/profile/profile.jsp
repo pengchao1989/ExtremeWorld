@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
@@ -66,7 +67,7 @@
 											<div class="card-content black-text">
 												
 												<div class="row valign-wrapper">
-													<div class="col s2">
+													<div>
 														<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 													</div>
 													<div class="card-user-head-name s10 ">
