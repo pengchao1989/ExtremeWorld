@@ -89,6 +89,6 @@ public class ProfileController {
 		Page<Video> videos = videoService.getByUser(id, pageNumber, pageSize, sortType);
 		
 		model.addAttribute("videos", videos);
-		return "/profile/pictureListFragment";
+		return "/profile/videoListFragment";
 	}
 }

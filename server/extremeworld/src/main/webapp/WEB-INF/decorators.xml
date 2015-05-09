@@ -7,6 +7,7 @@
  		<pattern>/login*</pattern> 
 		<pattern>/u/loadtopic/*</pattern>
 		<pattern>/u/loadpicture/*</pattern>
+		<pattern>/u/loadvideo/*</pattern>
 	</excludes>
 	
 	<decorator name="default" page="default.jsp">

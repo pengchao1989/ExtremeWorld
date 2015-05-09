@@ -52,7 +52,7 @@
 				      <ul class="tabs">
 				        <li class="tab col s3"><a class="active" href="#topic">动态</a></li>
 				        <li class="tab col s3"><a id="picture-li" href="#picture">照片</a></li>
-				        <li class="tab col s3"><a href="#video">视频</a></li>
+				        <li class="tab col s3"><a id="video-li" href="#video">视频</a></li>
 				        <li class="tab col s3"><a href="#score">成就</a></li>
 				      </ul>
 				    </div>
@@ -119,7 +119,12 @@
 						<div id="more-picture-container">
 						</div>
 				    </div>
-				    <div id="video" class="col s12">Test 3</div>
+				    
+				    <!-- video fragment -->
+				    <div id="video" class="col s12">
+						<div id="more-video-container">
+						</div>
+				    </div>
 				    <div id="score" class="col s12">Test 4</div>
 				  </div>
         
@@ -139,6 +144,7 @@
 		    
 		    var currentTopicPage = 1;
 		    var currentPicturePage = 0;
+		    var currentVideoPage = 0;
 		    
 		    
 			$("#load-more-topic").click(function(){
@@ -152,6 +158,14 @@
 			$("#picture-li").click(function(){
 				$.get("${ctx}/u/loadpicture/${user.id}?page=" + (++currentPicturePage),function(data){
 					$("#more-picture-container").append(data);
+					
+					
+				}) ;
+			});
+			
+			$("#video-li").click(function(){
+				$.get("${ctx}/u/loadvideo/${user.id}?page=" + (++currentVideoPage),function(data){
+					$("#more-video-container").append(data);
 					
 					
 				}) ;
