@@ -51,17 +51,17 @@
 										<p >${topic.content}</p>
 										
 										<!-- media -->
-										<div class="row">
+										<div class="row media_container">
 										
-										<ul class="box">
-										<c:forEach items="${topic.mediaWrap.medias}" var="media">
-										<li class="card-thumbnails">
-										<a href="${static_url}${media.path}" data-rel="colorbox">
-											<img alt="" src="${static_url}${media.path}!topicListThum">
-										</a>
-										</li>
-										</c:forEach>
-										</ul>
+											<ul class="box">
+												<c:forEach items="${topic.mediaWrap.medias}" var="media">
+												<li class="card-thumbnails">
+												<a href="${static_url}${media.path}" data-rel="colorbox">
+													<img alt="" src="${static_url}${media.path}!topicListThum">
+												</a>
+												</li>
+												</c:forEach>
+											</ul>
 										</div>
 									</div>
 									<div class="card-action">
@@ -127,6 +127,11 @@
 
 	<script type="text/javascript">
 	
+		$(document).ready(function(){   
+			
+		})
+		
+		
 		var currentPage = 1;
 	
 		jQuery(function($) {
@@ -154,23 +159,33 @@
 				}
 			};
 
-			$('.box [data-rel="colorbox"]')
-					.colorbox(colorbox_params);
+
+			/* $('.box [data-rel="colorbox"]').colorbox(colorbox_params); */
 			$("#cboxLoadingGraphic").html(
 					"<i class='mdi-notification-sync'></i>");//let's add a custom loading icon
 
 			$(document).one('ajaxloadstart.page', function(e) {
+				
+				$('$(this).box [data-rel="colorbox"]').colorbox(colorbox_params);
+				
 				$('#colorbox, #cboxOverlay').remove();
+			});
+					
+			$('.media_container').on('mouseenter',function(){
+				console.log("mouseenter log 1");
+			});
+					
+			$("#load-more").click(function(){
+				$.get("${ctx}/loadmore?page=" + (currentPage++),function(data){
+					$("#more-container").append(data);
+					
+					
+				}) ;
 			});
 		})
 		
 		
-		$("#load-more").click(function(){
-			$.get("${ctx}/loadmore?page=" + (currentPage),function(data){
-				$("#more-container").append(data);
-				
-			}) ;
-		});
+
 	</script>
 
 </body>

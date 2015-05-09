@@ -28,7 +28,7 @@ import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
  */
 @Controller
 @RequestMapping(value = "/profile")
-public class ProfileController {
+public class ProfileControllerOLd {
 
 	@Autowired
 	private AccountService accountService;

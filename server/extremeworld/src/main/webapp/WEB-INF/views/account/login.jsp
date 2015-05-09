@@ -10,10 +10,20 @@
 	<title>登录页</title>
 </head>
 
+<link type="image/x-icon" href="${ctx}/static/images/favicon.ico" rel="shortcut icon">
+<link href="${ctx}/static/jquery-validation/1.11.1/validate.css" type="text/css" rel="stylesheet" />
+
+
+<link rel="stylesheet" type="text/css" href="${ctx}/static/font-awesome-4.2.0/css/font-awesome.css" />
+
+<link type="text/css" rel="stylesheet" href="${ctx}/static/materialize/css/materialize.css"  media="screen,projection"/> 
+
+<link href="${ctx}/static/styles/default.css" type="text/css" rel="stylesheet" />
+
 <body>
 <div class="container">
 
-	<form  action="${ctx}/login" method="post" class="form-signin">
+	<form id="loginForm" action="${ctx}/login" method="post" class="form-signin">
 		<%
 		String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 		if(error != null){
@@ -25,28 +35,34 @@
 		}
 		%>
 		
-		<h2 class="form-signin-heading">Please sign in</h2>
-		<label for="inputEmail" class="sr-only">Email address</label>
+		<h2 class="form-signin-heading">欢迎回来</h2>
 		<input type="text" id="username" name="username"  value="${username}" class="form-control" placeholder="Email address" required autofocus/>
-		<label for="inputPassword" class="sr-only">Password</label>
 		<input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
 
 				
-			<div class="checkbox">
+<!--  			<div class="checkbox">
 				<label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我</label>
-			</div>
+			</div> -->
+
+			<p>
+				<input type="checkbox" class="filled-in" id="filled-in-box" name="rememberMe" /> 
+				<label for="filled-in-box">记住我</label>
+			</p>
 			
-			 <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			
+			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+
+			<br/>
+			 <a class="btn btn-lg btn-primary btn-block" href="${ctx}/register">注册</a>
 			 
 			 <a href="${ctx}/qqlogin"><img alt="" src="${ctx}/static/images/qq_login_icon.jpg"></a>
-			 <br/>
-			 <a class="btn" href="${ctx}/register">注册</a>
+			 <a href="${ctx}/qqlogin"><img alt="" src="${ctx}/static/images/icon48_wx_button.png"></a>
 			
 	</form>
 	
 	
 	
-<!-- 		<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101189354" data-redirecturi="http://www.17skate.com/extremeworld/qqlogin" charset="utf-8" ></script>
+<!--  		<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101189354" data-redirecturi="http://www.17skate.com/extremeworld/qqlogin" charset="utf-8" ></script>
 
 		<span id="qqLoginBtn" ></span>
 
@@ -57,7 +73,7 @@
 		  scope : "get_user_info",//展示授权，全部可用授权可填 all
 		  display : "pc"//应用场景，可选
 		 });
-		</script>
+		</script> -->
 </div>
 
 
@@ -65,6 +81,10 @@
 		$(document).ready(function() {
 			$("#loginForm").validate();
 		});
-	</script> -->
+	</script>
+	
+	<%-- <script src="${ctx}/static/materialize/js/materialize.min.js" type="text/javascript"></script> --%>
+	
+	
 </body>
 </html>

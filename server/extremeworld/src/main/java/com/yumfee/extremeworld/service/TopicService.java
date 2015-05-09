@@ -96,16 +96,18 @@ public class TopicService
 		return topicDao.findByUserIdIn(followingIds, pageRequest);
 	}
 	
-	public List<Topic> getTopicByUser(Long userId, int pageNumber, int pageSize,String sortType)
+	public Page<Topic> getTopicByUser(Long userId, int pageNumber, int pageSize,String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
 		return topicDao.findByUserId(userId,pageRequest);
 	}
 	
-	public List<Topic> getTopicByUserAndMediaWrapNotNull(Long userId)
+	public Page<Topic> getTopicByUserAndMediaWrapNotNull(Long userId , int pageNumber, int pageSize,String sortType)
 	{
-		return topicDao.findByUserIdAndMediaWrapNotNull(userId);
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+	
+		return topicDao.findByUserIdAndMediaWrapNotNull(userId, pageRequest);
 	}
 	
 	

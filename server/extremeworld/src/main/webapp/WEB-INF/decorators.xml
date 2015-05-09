@@ -4,6 +4,9 @@
 		<pattern>/static/*</pattern>
 		<pattern>/api</pattern>
 		<pattern>/loadmore*</pattern>
+ 		<pattern>/login*</pattern> 
+		<pattern>/u/loadtopic/*</pattern>
+		<pattern>/u/loadpicture/*</pattern>
 	</excludes>
 	
 	<decorator name="default" page="default.jsp">

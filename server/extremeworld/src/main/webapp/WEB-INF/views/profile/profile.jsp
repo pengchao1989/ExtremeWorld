@@ -49,33 +49,56 @@
 				  <div class="row">
 				    <div class="col s12">
 				      <ul class="tabs">
-				        <li class="tab col s3"><a href="#topic">动态</a></li>
-				        <li class="tab col s3"><a class="active" href="#test2">照片</a></li>
-				        <li class="tab col s3"><a href="#test3">视频</a></li>
-				        <li class="tab col s3"><a href="#test4">成就</a></li>
+				        <li class="tab col s3"><a class="active" href="#topic">动态</a></li>
+				        <li class="tab col s3"><a id="picture-li" href="#picture">照片</a></li>
+				        <li class="tab col s3"><a href="#video">视频</a></li>
+				        <li class="tab col s3"><a href="#score">成就</a></li>
 				      </ul>
 				    </div>
+				    <!-- topic Fragment -->
 				    <div id="topic" class="col s12">
 						<tbody>
-							<c:forEach items="${topics}" var="topic">
+							<c:forEach items="${topics.content}" var="topic">
 
-								<div class="row">
-									<div class="col s12 m6">
+								<div class="row ">
+									<div class="col s12 m10">
 										<div class="card white-grey darken-1">
 											<div class="card-content black-text">
+												
 												<div class="row valign-wrapper">
-													<a href="${ctx}/u/${topic.user.id}"> <img
-														class="circle responsive-img"
-														src="${static_url}${topic.user.avatar}!webAvatarSmall"
-														alt="..."></a> <a href="${ctx}/topic/${topic.id}"
-														target="_blank"><span class="card-title black-text">${topic.title}</span></a>
+													<div class="col s2">
+														<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+													</div>
+													<div class="card-user-head-name s10 ">
+														<a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a>
+														<p>${topic.createTime}</p>
+													</div>
 												</div>
-
-												<p>${topic.content}</p>
+												
+												
+												
+												<div class="row valign-wrapper">
+													<a href="${ctx}/topic/${topic.id}" target="_blank"><span class="card-title black-text">${topic.title}</span></a>
+												</div>
+												
+												<p >${topic.content}</p>
+												
+												<!-- media -->
+												<div class="row media_container">
+												
+													<ul class="box">
+														<c:forEach items="${topic.mediaWrap.medias}" var="media">
+														<li class="card-thumbnails">
+														<a href="${static_url}${media.path}" data-rel="colorbox">
+															<img alt="" src="${static_url}${media.path}!topicListThum">
+														</a>
+														</li>
+														</c:forEach>
+													</ul>
+												</div>
 											</div>
 											<div class="card-action">
-												<a href="#">This is a link</a> <a href='#'>This is a
-													link</a>
+												<a href="#">评论  ${topic.replyCount}</a> <a href='#'><i class="mdi-action-thumb-up">  ${topic.agreeCount}</i></a>
 											</div>
 										</div>
 									</div>
@@ -83,10 +106,20 @@
 
 							</c:forEach>
 						</tbody>
+						
+						<div id="more-topic-container">
+						</div>
+						
+						<a id="load-more-topic" class="waves-effect waves-light btn-large">加载更多</a>
 					</div>
-				    <div id="test2" class="col s12">Test 2</div>
-				    <div id="test3" class="col s12">Test 3</div>
-				    <div id="test4" class="col s12">Test 4</div>
+					
+					<!-- picture fragment -->
+				    <div id="picture" class="col s12">
+						<div id="more-picture-container">
+						</div>
+				    </div>
+				    <div id="video" class="col s12">Test 3</div>
+				    <div id="score" class="col s12">Test 4</div>
 				  </div>
         
 			</div>
@@ -100,7 +133,29 @@
 	
 	<script type="text/javascript">
 	  $(document).ready(function(){
+		  
 		    $('ul.tabs').tabs();
+		    
+		    var currentTopicPage = 1;
+		    var currentPicturePage = 0;
+		    
+		    
+			$("#load-more-topic").click(function(){
+				$.get("${ctx}/u/loadtopic/${user.id}?page=" + (++currentTopicPage),function(data){
+					$("#more-topic-container").append(data);
+					
+					
+				}) ;
+			});
+			
+			$("#picture-li").click(function(){
+				$.get("${ctx}/u/loadpicture/${user.id}?page=" + (++currentPicturePage),function(data){
+					$("#more-picture-container").append(data);
+					
+					
+				}) ;
+			});
+			
 		  });
 	</script>
 </body>
