@@ -42,11 +42,21 @@
 </head>
 
 <body>
-		<%@ include file="/WEB-INF/layouts/header.jsp"%>
-		<div id="content">
-			<sitemesh:body/>
+
+		<div class="row">
+			<div class="col s2">
+				<p>1111</p>
+			</div>
+			<div class=" col s10">
+				<%@ include file="/WEB-INF/layouts/header.jsp"%>
+				<div id="content">
+					<sitemesh:body/>
+				</div>
+				<%@ include file="/WEB-INF/layouts/footer.jsp"%>
+			</div>
+			
 		</div>
-		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
+		
 		
 		<script src="${ctx}/static/bootstrap/3/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="${ctx}/static/materialize/js/materialize.min.js" type="text/javascript"></script>

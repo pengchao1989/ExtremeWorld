@@ -40,6 +40,5 @@
 			</div>
 		</div>
 	</footer>
-
-
+	
 </div>

@@ -24,7 +24,7 @@
         <li><a href="${ctx}/video">视频</a></li>
         <li><a href="${ctx}/course">教程</a></li>
         <li><a href="${ctx}/site">场地</a></li>
-        <li><a href="#">同城</a></li>
+        <li><a href="${ctx}/news">新闻</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">更多 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
