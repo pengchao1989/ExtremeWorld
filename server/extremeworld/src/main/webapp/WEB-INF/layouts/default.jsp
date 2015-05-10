@@ -43,9 +43,9 @@
 
 <body>
 
-		<div class="row">
+		<div>
 			<div class="col s2">
-				<p>1111</p>
+				<%@ include file="/WEB-INF/layouts/left.jsp"%>
 			</div>
 			<div class=" col s10">
 				<%@ include file="/WEB-INF/layouts/header.jsp"%>
