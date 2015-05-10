@@ -51,6 +51,8 @@ public class Topic extends IdEntity
 	
 	private Course coursce;
 	
+	private Hobby hobby;
+	
 	
 	@NotBlank
 	public String getTypec() {
@@ -193,6 +195,17 @@ public class Topic extends IdEntity
 	{
 		this.coursce = coursce;
 	}
+	
+	@ManyToOne
+	@JoinColumn(name = "hobby_id")
+	public Hobby getHobby() {
+		return hobby;
+	}
+	public void setHobby(Hobby hobby) {
+		this.hobby = hobby;
+	}
+	
+	
 	
 	
 }

@@ -41,9 +41,21 @@ public class HomeController {
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
+			@RequestParam(value = "hobby", defaultValue = "0") Long hobbyId,
 			Model model, ServletRequest request)
 	{
-		Page<Topic> topics = topicService.getAllTopic(pageNumber, pageSize, sortType);
+		Page<Topic> topics = null;
+		
+		if(0 == hobbyId)
+		{
+			topics = topicService.getAllTopic( pageNumber, pageSize, sortType);
+		}
+		else
+		{
+			topics = topicService.getTopicByHobby(hobbyId, pageNumber, pageSize, sortType);
+		}
+		
+		 
 		
 		//Page<Topic> topics = topicService.getTopicByfollowings(2L,pageNumber, pageSize, sortType);
 		
@@ -72,6 +84,8 @@ public class HomeController {
 		}
 		
 		model.addAttribute("topics", topics);
+		
+		model.addAttribute("hobbyId",hobbyId);
 		
 		return "/home/home";
 	}

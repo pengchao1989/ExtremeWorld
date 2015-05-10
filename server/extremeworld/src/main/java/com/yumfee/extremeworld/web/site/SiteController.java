@@ -35,6 +35,7 @@ public class SiteController
 				System.out.println(request.getServerName());
 				model.addAttribute("name", request.getServerName());
 				
+				
 				return "/site/siteList";
 			}
 	

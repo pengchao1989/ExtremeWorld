@@ -47,25 +47,45 @@ public class DiscussController {
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
-			@RequestParam(value = "taxonomy", defaultValue = "0") Long taxonomy,
+			@RequestParam(value = "taxonomy", defaultValue = "0") Long taxonomyId,
+			@RequestParam(value = "hobby", defaultValue = "0") Long hobbyId,
 			Model model, ServletRequest request)
 	{
 		
 		Page<Discussion> topics = null;
-		if(taxonomy != 0)
+		
+		if(0 == hobbyId)
 		{
-			topics	= discussionService.getByTaxonomy(taxonomy, pageNumber, pageSize, sortType);
+			if(taxonomyId != 0)
+			{
+				topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
+			}
+			else
+			{
+				topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
+			}
 		}
 		else
 		{
-			topics = discussionService.getAll(pageNumber, pageSize, sortType);
+			if(taxonomyId != 0)
+			{
+				topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
+			}
+			else
+			{
+				topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
+			}
 		}
-		 
-		List<Taxonomy> taxonomys = taxonomyService.getTaxonomyByHobby(1L);//滑板
 		
-		model.addAttribute("currentTaxonomyId", taxonomy);
+
+		 
+		List<Taxonomy> taxonomys = taxonomyService.getTaxonomyByHobby(hobbyId);
+		
+		model.addAttribute("currentTaxonomyId", taxonomyId);
 		model.addAttribute("taxonomys", taxonomys);
 		model.addAttribute("topics", topics);
+		
+		model.addAttribute("hobbyId",hobbyId);
 		
 		return "discuss/discussList";
 	}

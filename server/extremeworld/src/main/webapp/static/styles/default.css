@@ -4,6 +4,10 @@ body{
 	background-color: #fcfcfc;
 }
 
+.main{
+	  padding-left: 240px;
+}
+
 .navbar-default {
   background-color: #C3E883;
 }

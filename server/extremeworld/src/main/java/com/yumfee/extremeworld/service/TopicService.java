@@ -110,6 +110,13 @@ public class TopicService
 		return topicDao.findByUserIdAndMediaWrapNotNull(userId, pageRequest);
 	}
 	
+	public Page<Topic> getTopicByHobby(Long hobbyId, int pageNumber, int pageSize,String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		
+		return topicDao.findByHobbyId(hobbyId, pageRequest);
+	}
+	
 	
 	
 	/**

@@ -6,6 +6,6 @@ import javax.persistence.Entity;
 //type=6 typec="news"
 @Entity
 @DiscriminatorValue("6")
-public class News {
+public class News extends Topic{
 
 }

@@ -6,7 +6,7 @@
 <nav class="cyan">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
+<%--     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -14,17 +14,17 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="${ctx}/">极限学院</a>
-    </div>
+    </div> --%>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul id="nav_menu" class="nav navbar-nav">
-        <li><a href="${ctx}/">首页 <span class="sr-only">(current)</span></a></li>
-        <li><a href="${ctx}/discuss">讨论</a></li>
-        <li><a href="${ctx}/video">视频</a></li>
-        <li><a href="${ctx}/course">教程</a></li>
-        <li><a href="${ctx}/site">场地</a></li>
-        <li><a href="${ctx}/news">新闻</a></li>
+        <li><a href="${ctx}/?hobby=${hobbyId}">动态 <span class="sr-only">(current)</span></a></li>
+        <li><a href="${ctx}/discuss?hobby=${hobbyId}">讨论</a></li>
+        <li><a href="${ctx}/video?hobby=${hobbyId}">视频</a></li>
+        <li><a href="${ctx}/course?hobby=${hobbyId}">教程</a></li>
+        <li><a href="${ctx}/site?hobby=${hobbyId}">场地</a></li>
+        <li><a href="${ctx}/news?hobby=${hobbyId}">新闻</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">更多 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
