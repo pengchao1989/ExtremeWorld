@@ -37,7 +37,8 @@ public class DiscussionService {
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return discussionDao.findByHobbyId(hobbyId, pageRequest);
+		//return discussionDao.findByHobbyId(hobbyId, pageRequest);
+		return discussionDao.findAll(pageRequest);
 	}
 	
 	public Page<Discussion> getByTaxonomy(Long taxonomyId, int pageNumber, int pageSize,String sortType)
@@ -51,7 +52,8 @@ public class DiscussionService {
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return discussionDao.findByHobbyIdAndTaxonomyId(hobbyId, taxonomyId, pageRequest);
+		//return discussionDao.findByHobbyIdAndTaxonomyId(hobbyId, taxonomyId, pageRequest);
+		return discussionDao.findAll(pageRequest);
 	}
 	
 	/**

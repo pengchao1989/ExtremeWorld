@@ -176,7 +176,7 @@
 			});
 					
 			$("#load-more").click(function(){
-				$.get("${ctx}/loadmore?page=" + (++currentPage),function(data){
+				$.get("${ctx}/${hobby}/loadmore?page=" + (++currentPage),function(data){
 					$("#more-container").append(data);
 					
 					

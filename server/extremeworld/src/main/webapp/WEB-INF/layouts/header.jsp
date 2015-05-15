@@ -19,12 +19,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul id="nav_menu" class="nav navbar-nav">
-        <li><a href="${ctx}/?hobby=${hobbyId}">动态 <span class="sr-only">(current)</span></a></li>
-        <li><a href="${ctx}/discuss?hobby=${hobbyId}">讨论</a></li>
-        <li><a href="${ctx}/video?hobby=${hobbyId}">视频</a></li>
-        <li><a href="${ctx}/course?hobby=${hobbyId}">教程</a></li>
-        <li><a href="${ctx}/site?hobby=${hobbyId}">场地</a></li>
-        <li><a href="${ctx}/news?hobby=${hobbyId}">新闻</a></li>
+        <li><a href="${ctx}/${hobby}">动态 <span class="sr-only">(current)</span></a></li>
+        <li><a href="${ctx}/${hobby}/discuss">讨论</a></li>
+        <li><a href="${ctx}/${hobby}/video">视频</a></li>
+        <li><a href="${ctx}/${hobby}/course">教程</a></li>
+        <li><a href="${ctx}/${hobby}/site">场地</a></li>
+        <li><a href="${ctx}/${hobby}/news">新闻</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">更多 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

@@ -34,7 +34,7 @@
 				<div class=" col s3">
 					<div class="card ">
 						<div class="card-image">
-							<a href="${ctx}/video/${video.id}">
+							<a href="${ctx}/${hobby}/video/${video.id}">
 								<img alt="" src="${video.videoDetail.thumbnail}">
 							</a>
 						</div>

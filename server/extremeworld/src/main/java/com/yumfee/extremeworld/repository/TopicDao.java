@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.yumfee.extremeworld.entity.Topic;
@@ -18,5 +19,8 @@ public interface TopicDao extends PagingAndSortingRepository<Topic, Long>
 	
 	public Page<Topic> findByUserId(Long user, Pageable pageable);
 	public Page<Topic> findByUserIdAndMediaWrapNotNull(Long user,  Pageable pageable);
-	public Page<Topic> findByHobbyId(Long hobbyId, Pageable pageable);
+	
+	
+	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE h.id=?")
+	public Page<Topic> findByHobby(Long hobbyId,  Pageable pageable);
 }

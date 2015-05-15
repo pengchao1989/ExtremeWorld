@@ -20,8 +20,8 @@
         
         
         <li class="bold"><a href="${ctx}/" class="waves-effect waves-teal">极限学院</a></li>
-        <li class="bold"><a href="${ctx}/?hobby=1" class="waves-effect waves-teal">滑板</a></li>
-        <li class="bold"><a href="${ctx}/?hobby=2" class="waves-effect waves-teal">跑酷</a></li>
-        <li class="bold"><a href="${ctx}/?hobby=3" class="waves-effect waves-teal">单车</a></li>
-        <li class="bold"><a href="${ctx}/?hobby=4" class="waves-effect waves-teal">轮滑</a></li>
+        <li class="bold"><a href="${ctx}/skateboard/" class="waves-effect waves-teal">滑板</a></li>
+        <li class="bold"><a href="${ctx}/parkour/" class="waves-effect waves-teal">跑酷</a></li>
+        <li class="bold"><a href="${ctx}/bicycle/" class="waves-effect waves-teal">单车</a></li>
+        <li class="bold"><a href="${ctx}/roller-skating/" class="waves-effect waves-teal">轮滑</a></li>
       </ul>

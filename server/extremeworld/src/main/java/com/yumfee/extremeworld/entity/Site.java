@@ -6,9 +6,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_site")
@@ -25,6 +28,8 @@ public class Site extends IdEntity
 	
 	private CityGroup cityGroup;
 	private List<User> users;
+	private List<Hobby> hobbys;
+	
 	
 	public String getName()
 	{
@@ -113,7 +118,19 @@ public class Site extends IdEntity
 		this.users = users;
 	}
 	
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_site_hobby",
+	joinColumns = { @JoinColumn(name = "site_id", referencedColumnName = "id" ) },
+	inverseJoinColumns = { @JoinColumn(name="hobby_id", referencedColumnName = "id") })
+	public List<Hobby> getHobbys() {
+		return hobbys;
+	}
+	public void setHobbys(List<Hobby> hobbys) {
+		this.hobbys = hobbys;
+	}
 	
+
 	
 	
 	

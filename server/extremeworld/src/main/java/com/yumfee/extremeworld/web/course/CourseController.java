@@ -20,6 +20,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
+
+
+
+
 import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.entity.Topic;
@@ -30,7 +36,7 @@ import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
-@RequestMapping(value = "/course")
+@RequestMapping(value = "{hobby}/course")
 public class CourseController
 {
 	private static final String PAGE_SIZE = "10";
@@ -45,7 +51,10 @@ public class CourseController
 	private TopicService topicService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model, ServletRequest request)
+	public String list(
+			@PathVariable String hobby,
+			Model model, 
+			ServletRequest request)
 	{
 		List<CourseTaxonomy> courseTaxonomyList = courseTaxonomyService.getAll();
 		
@@ -55,7 +64,9 @@ public class CourseController
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public String detail(@PathVariable("id") Long id, 
+	public String detail(
+			@PathVariable String hobby,
+			@PathVariable("id") Long id, 
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
@@ -70,11 +81,14 @@ public class CourseController
 		model.addAttribute("course", course);
 		model.addAttribute("topics", topics);
 		
+		model.addAttribute("hobby", hobby);
 		return "/course/courseDetail";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.GET)
-	public String createForm(Model model)
+	public String createForm(
+			@PathVariable String hobby,
+			Model model)
 	{
 		List<CourseTaxonomy> courseTaxonomyList = courseTaxonomyService.getAll();
 		model.addAttribute("courseTaxonomyList", courseTaxonomyList);
@@ -83,12 +97,15 @@ public class CourseController
 		model.addAttribute("course", new Course());
 		model.addAttribute("action", "create");
 		
+		model.addAttribute("hobby", hobby);
 		
 		return "/course/courseForm";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid Course newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
+	public String create(
+			@PathVariable String hobby,
+			@Valid Course newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
 	{
 		System.out.println("create");
 		System.out.println("courseTaxonomyId" + request.getParameter("courseTaxonomyId"));
@@ -109,20 +126,26 @@ public class CourseController
 		
 		redirectAttributes.addFlashAttribute("message", "创建教学成功");
 		
-		return "redirect:/course/";
+		return "redirect:/ + hobby +“/course/”";
 	}
 	
 	
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable("id") Long id, Model model)
+	public String updateForm(
+			@PathVariable String hobby,
+			@PathVariable("id") Long id, Model model)
 	{
 		model.addAttribute("course", courseService.getCourse(id));
 		model.addAttribute("action", "update");
-		return "/course/courseForm";
+		
+		model.addAttribute("hobby", hobby);
+		return "/" + hobby + "/course/courseForm";
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("course") Course newCourse, RedirectAttributes redirectAttributes)
+	public String update(
+			@PathVariable String hobby,
+			@Valid @ModelAttribute("course") Course newCourse, RedirectAttributes redirectAttributes)
 	{
 		//当前暂未更新的数据
 		Course curCourse = (Course) courseService.getCourse(newCourse.getId());
@@ -144,19 +167,22 @@ public class CourseController
 		courseService.saveCourse((Course)curCourse);
 		
 		//TODO pid
-		
-		return "redirect:/course/";
+		return "redirect:/" + hobby +"/course/";
 	}
 	
 	@RequestMapping(value = "revision/{id}", method = RequestMethod.GET)
-	public String revision(@PathVariable("id") Long id, Model model)
+	public String revision(
+			@PathVariable String hobby,
+			@PathVariable("id") Long id, Model model)
 	{
 		Course version = courseService.getCourse(id);
 		List<Course> revision = courseService.getRevisions(id);
 		
 		model.addAttribute("version", version);
 		model.addAttribute("preversion", revision.get(revision.size()-1));
-		return "/course/courseRevision";
+		
+		model.addAttribute("hobby", hobby);
+		return "/" + hobby +  "/course/courseRevision";
 	}
 	
 	/**

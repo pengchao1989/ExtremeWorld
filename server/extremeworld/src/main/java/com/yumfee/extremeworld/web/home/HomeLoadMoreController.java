@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,7 @@ import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
 
 @Controller
-@RequestMapping(value = "/loadmore")
+@RequestMapping(value = "{hobby}/loadmore")
 public class HomeLoadMoreController {
 
 	@Autowired
@@ -36,6 +37,7 @@ public class HomeLoadMoreController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list_fragment(
+			@PathVariable String hobby,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
@@ -76,6 +78,7 @@ public class HomeLoadMoreController {
 			}
 		}
 		
+		model.addAttribute("hobby", hobby);
 		model.addAttribute("topics", topics);
 		
 		return "/home/moreFragment";

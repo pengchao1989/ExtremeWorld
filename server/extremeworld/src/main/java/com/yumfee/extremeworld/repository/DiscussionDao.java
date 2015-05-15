@@ -14,6 +14,6 @@ public interface DiscussionDao extends PagingAndSortingRepository<Discussion, Lo
 	public Page<Discussion> findByUserIdIn(Collection<Long> ids, Pageable pageable);
 	public Page<Discussion> findByTaxonomyId(Long taxonomyId, Pageable pageable);
 	
-	public Page<Discussion> findByHobbyId(Long hobbyId, Pageable pageable);
-	public Page<Discussion> findByHobbyIdAndTaxonomyId(Long hobbyId, Long taxonomyId, Pageable pageable);
+	//public Page<Discussion> findByHobbyId(Long hobbyId, Pageable pageable);
+	//public Page<Discussion> findByHobbyIdAndTaxonomyId(Long hobbyId, Long taxonomyId, Pageable pageable);
 }

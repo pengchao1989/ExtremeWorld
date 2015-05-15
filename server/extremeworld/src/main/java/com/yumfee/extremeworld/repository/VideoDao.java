@@ -9,4 +9,6 @@ import com.yumfee.extremeworld.entity.Video;
 public interface VideoDao extends PagingAndSortingRepository<Video, Long>
 {
 	public Page<Video> findByUserId(Long user, Pageable pageable);
+	
+	//public Page<Video> findByHobbyId(Long hobbyId, Pageable pageable);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.Activity;
 import com.yumfee.extremeworld.entity.Discussion;
 import com.yumfee.extremeworld.entity.Mood;
@@ -22,7 +23,7 @@ import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/{hobby}")
 public class HomeController {
 
 	@Autowired
@@ -38,24 +39,32 @@ public class HomeController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(
+			@PathVariable String hobby,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
-			@RequestParam(value = "hobby", defaultValue = "0") Long hobbyId,
 			Model model, ServletRequest request)
 	{
 		Page<Topic> topics = null;
 		
-		if(0 == hobbyId)
+		System.out.println(hobby);
+		
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		
+		if(hobbyId == 0L)
 		{
 			topics = topicService.getAllTopic( pageNumber, pageSize, sortType);
+			
+		}
+		else if(hobbyId == -1L)
+		{
+			return "redirect:/";
 		}
 		else
 		{
 			topics = topicService.getTopicByHobby(hobbyId, pageNumber, pageSize, sortType);
 		}
-		
-		 
+
 		
 		//Page<Topic> topics = topicService.getTopicByfollowings(2L,pageNumber, pageSize, sortType);
 		
@@ -85,7 +94,7 @@ public class HomeController {
 		
 		model.addAttribute("topics", topics);
 		
-		model.addAttribute("hobbyId",hobbyId);
+		model.addAttribute("hobby",hobby);
 		
 		return "/home/home";
 	}

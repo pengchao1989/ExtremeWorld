@@ -42,7 +42,7 @@
 	</div>
 
 		
-	<tags:pagination page="${sites}" paginationSize="5" />
+<%-- 	<tags:pagination page="${sites}" paginationSize="5" /> --%>
 		
 	</div>
 	<br/>

@@ -114,7 +114,7 @@ public class TopicService
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return topicDao.findByHobbyId(hobbyId, pageRequest);
+		return topicDao.findByHobby(hobbyId,pageRequest);
 	}
 	
 	

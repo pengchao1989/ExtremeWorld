@@ -13,6 +13,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -51,7 +52,7 @@ public class Topic extends IdEntity
 	
 	private Course coursce;
 	
-	private Hobby hobby;
+	private List<Hobby> hobbys;
 	
 	
 	@NotBlank
@@ -196,16 +197,16 @@ public class Topic extends IdEntity
 		this.coursce = coursce;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "hobby_id")
-	public Hobby getHobby() {
-		return hobby;
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_topic_hobby",
+	joinColumns = { @JoinColumn(name = "topic_id", referencedColumnName = "id" ) },
+	inverseJoinColumns = { @JoinColumn(name="hobby_id", referencedColumnName = "id") })
+	public List<Hobby> getHobbys() {
+		return hobbys;
 	}
-	public void setHobby(Hobby hobby) {
-		this.hobby = hobby;
+	public void setHobbys(List<Hobby> hobbys) {
+		this.hobbys = hobbys;
 	}
-	
-	
-	
 	
 }

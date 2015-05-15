@@ -17,6 +17,8 @@ public class Hobby extends IdEntity
 	private Date createTime;
 	
 	private List<User> users= new ArrayList<User>();
+	private List<Site> sites = new ArrayList<Site>();
+	private List<Topic> topics = new ArrayList<Topic>();
 	
 	public String getName()
 	{
@@ -53,6 +55,26 @@ public class Hobby extends IdEntity
 	public void setUsers(List<User> users)
 	{
 		this.users = users;
+	}
+	
+	//关系被维护端
+	//referencedColumnName指向对象的列名
+	@ManyToMany(mappedBy = "hobbys")
+	public List<Site> getSites() {
+		return sites;
+	}
+	public void setSites(List<Site> sites) {
+		this.sites = sites;
+	}
+	
+	//关系被维护端
+	//referencedColumnName指向对象的列名
+	@ManyToMany(mappedBy = "hobbys")
+	public List<Topic> getTopics() {
+		return topics;
+	}
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
 	}
 
 	

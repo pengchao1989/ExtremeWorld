@@ -94,7 +94,6 @@ public class TopicListFragment extends Fragment {
 
                 floatingActionButton.hide();
                 showAddLayout();
-
             }
         });
 

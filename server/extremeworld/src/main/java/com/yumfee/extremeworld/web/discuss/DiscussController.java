@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.Discussion;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Taxonomy;
@@ -28,7 +29,7 @@ import com.yumfee.extremeworld.service.TaxonomyService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
-@RequestMapping(value = "/discuss")
+@RequestMapping(value = "{hobby}/discuss")
 public class DiscussController {
 
 	private static final String PAGE_SIZE = "10";
@@ -44,39 +45,26 @@ public class DiscussController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(
+			@PathVariable String hobby,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
 			@RequestParam(value = "taxonomy", defaultValue = "0") Long taxonomyId,
-			@RequestParam(value = "hobby", defaultValue = "0") Long hobbyId,
 			Model model, ServletRequest request)
 	{
 		
 		Page<Discussion> topics = null;
 		
-		if(0 == hobbyId)
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+
+		if(taxonomyId != 0)
 		{
-			if(taxonomyId != 0)
-			{
-				topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
-			}
-			else
-			{
-				topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
-			}
+			topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
 		}
 		else
 		{
-			if(taxonomyId != 0)
-			{
-				topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
-			}
-			else
-			{
-				topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
-			}
+			topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
 		}
-		
 
 		 
 		List<Taxonomy> taxonomys = taxonomyService.getTaxonomyByHobby(hobbyId);
@@ -85,13 +73,16 @@ public class DiscussController {
 		model.addAttribute("taxonomys", taxonomys);
 		model.addAttribute("topics", topics);
 		
-		model.addAttribute("hobbyId",hobbyId);
+		model.addAttribute("hobby",hobby);
 		
 		return "discuss/discussList";
 	}
 	
 	@RequestMapping( method = RequestMethod.POST)
-	public String create(@Valid Discussion newTopic, RedirectAttributes redirectAttributes)
+	public String create(
+			@PathVariable String hobby,
+			@Valid Discussion newTopic, 
+			RedirectAttributes redirectAttributes)
 	{
 		User user = new User();
 		user.setId(getCurrentUserId());
@@ -106,7 +97,9 @@ public class DiscussController {
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public String detail(@PathVariable("id") Long id, 
+	public String detail(
+			@PathVariable String hobby,
+			@PathVariable("id") Long id, 
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
@@ -144,7 +137,11 @@ public class DiscussController {
 	
 	//子回复
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public String createReply(@PathVariable("id") Long topicId, @Valid Reply newReply, RedirectAttributes redirectAttributes)
+	public String createReply(
+			@PathVariable String hobby,
+			@PathVariable("id") Long topicId, 
+			@Valid Reply newReply, 
+			RedirectAttributes redirectAttributes)
 	{
 		
 		newReply.setId(null);

@@ -13,7 +13,7 @@
 <body>
 	<div class="container main_content">
 	
-		<a class="btn btn-success " href="${ctx}/course/create" role="button">新增教学</a>
+		<a class="btn btn-success " href="${ctx}/${hobby}/course/create" role="button">新增教学</a>
 		
 		<c:forEach items="${courseTaxonomyList}" var="courseTaxonomy">
 			<h1>${courseTaxonomy.name}</h1>

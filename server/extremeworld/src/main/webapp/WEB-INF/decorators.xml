@@ -3,7 +3,7 @@
 	<excludes>
 		<pattern>/static/*</pattern>
 		<pattern>/api</pattern>
-		<pattern>/loadmore*</pattern>
+		<pattern>/*/loadmore*</pattern>
  		<pattern>/login*</pattern> 
 		<pattern>/u/loadtopic/*</pattern>
 		<pattern>/u/loadpicture/*</pattern>

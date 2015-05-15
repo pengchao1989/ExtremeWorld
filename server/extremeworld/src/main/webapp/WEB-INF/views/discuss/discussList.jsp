@@ -21,20 +21,20 @@
 			<ul>
 				<li class="discuss-taxonomy-item">
 						<c:if test="${0==currentTaxonomyId}">
-							<a class="waves-effect waves-light btn blue" href="${ctx}/discuss?hobby=${hobbyId}&taxonomy=0">全部</a>
+							<a class="waves-effect waves-light btn blue" href="${ctx}/${hobby}/discuss?taxonomy=0">全部</a>
 						</c:if>
 						<c:if test="${0!=currentTaxonomyId}">
-							<a class="waves-effect waves-light btn" href="${ctx}/discuss?hobby=${hobbyId}&taxonomy=0">全部</a>
+							<a class="waves-effect waves-light btn" href="${ctx}/${hobby}/discuss?taxonomy=0">全部</a>
 						</c:if>
 				</li>
 				
 				<c:forEach items="${taxonomys}" var="taxonomy">
 					<li class="discuss-taxonomy-item">
 						<c:if test="${taxonomy.id==currentTaxonomyId}">
-							<a class="waves-effect waves-light btn blue" href="${ctx}/discuss?hobby=${hobbyId}&taxonomy=${taxonomy.id}">${taxonomy.name}</a>
+							<a class="waves-effect waves-light btn blue" href="${ctx}/${hobby}/discuss?taxonomy=${taxonomy.id}">${taxonomy.name}</a>
 						</c:if>
 						<c:if test="${taxonomy.id!=currentTaxonomyId}">
-							<a class="waves-effect waves-light btn" href="${ctx}/discuss?hobby=${hobbyId}&taxonomy=${taxonomy.id}">${taxonomy.name}</a>
+							<a class="waves-effect waves-light btn" href="${ctx}/${hobby}/discuss?taxonomy=${taxonomy.id}">${taxonomy.name}</a>
 						</c:if>
 					</li>
 				</c:forEach>
@@ -57,7 +57,7 @@
 		<tags:pagination page="${topics}" paginationSize="5"/>
 	
 	<div class="row">
-			<form class="form-horizontal" action="${ctx}/topic"  method="post"  class="form-horizontal">
+			<form class="form-horizontal" action="${ctx}/${hobby}/topic"  method="post"  class="form-horizontal">
 				<section id="edit">
 					<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
 					<br/>
