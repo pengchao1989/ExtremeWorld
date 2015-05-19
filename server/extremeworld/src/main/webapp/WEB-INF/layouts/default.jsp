@@ -24,7 +24,7 @@
 <script src="${ctx}/static/materialize/js/materialize.min.js" type="text/javascript"></script>
 
 <link rel="stylesheet" type="text/css" href="${ctx}/static/font-awesome-4.2.0/css/font-awesome.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/static/simditor-2.0.4/styles/simditor.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/static/simditor-2.1.10/styles/simditor.css" />
 
 
 

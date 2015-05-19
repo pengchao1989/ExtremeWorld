@@ -76,10 +76,10 @@
 	</div>
 	
 
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/module.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/hotkeys.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/uploader.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.0.4/scripts/simditor.js"></script>
+	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/module.js"></script>
+	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/hotkeys.js"></script>
+	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/uploader.js"></script>
+	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/simditor.js"></script>
 	<script type="text/javascript" src="${ctx}/static/scripts/edit.js"></script>
 	
 

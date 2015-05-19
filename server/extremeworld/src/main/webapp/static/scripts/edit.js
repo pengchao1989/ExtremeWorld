@@ -4,17 +4,20 @@
 (function() {
   $(function() {
 
-    var editor, mobileToolbar, toolbar;
-    toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', '|', 'link', 'image', 'hr'];
+    var editor, mobileToolbar, toolbar, allowedTags;
+    toolbar = [ 'link', 'image'];
+    allowedTags = ['a', 'img'];
     return editor = new Simditor({
       textarea: $('#txt-content'),
       placeholder: '这里输入文字...',
       toolbar: toolbar,
       pasteImage: true,
       upload: location.search === '?upload' ? {
-          url: 'upload.qiniu.com',
+          url: 'http://7u2nc3.com1.z0.glb.clouddn.com',
           
-        } : true
+        } : true,
+        allowedTags:allowedTags
+       
       
     });
   });
