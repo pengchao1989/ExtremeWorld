@@ -52,8 +52,7 @@ public class VideoService
 	public Page<Video> getByHobby(Long hobbyId, int pageNumber, int pageSize, String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		//return videoDao.findByHobbyId(hobbyId, pageRequest);
-		return videoDao.findAll(pageRequest);
+		return videoDao.findByHobbyId(hobbyId, pageRequest);
 	}
 	
 	@Autowired

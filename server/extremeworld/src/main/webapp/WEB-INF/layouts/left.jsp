@@ -19,7 +19,7 @@
             <object id="front-page-logo" type="image/svg+xml" data="res/materialize.svg">Your browser does not support SVG</object></a></li> -->
         
         
-        <li class="bold"><a href="${ctx}/" class="waves-effect waves-teal">极限学院</a></li>
+        <li class="bold"><a href="${ctx}/all/" class="waves-effect waves-teal">极限学院</a></li>
         <li class="bold"><a href="${ctx}/skateboard/" class="waves-effect waves-teal">滑板</a></li>
         <li class="bold"><a href="${ctx}/parkour/" class="waves-effect waves-teal">跑酷</a></li>
         <li class="bold"><a href="${ctx}/bicycle/" class="waves-effect waves-teal">单车</a></li>

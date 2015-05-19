@@ -23,7 +23,7 @@
 		</div>
 		
 		<div class="col-xs-2 col-md-2">
-			<a href="${ctx}/video/create" class="btn btn-primary" role="button">上传</a>
+			<a href="${ctx}/${hobby}/video/create" class="btn btn-primary" role="button">上传</a>
 		</div>
 	</div>
 	

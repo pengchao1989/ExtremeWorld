@@ -47,7 +47,7 @@
 				<li class="collection-item avatar">
 					<a href="${ctx}/u/${topic.user.id}"> <img class="circle" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 							
-					<a href="${ctx}/topic/${topic.id}" target="_blank"> <span class="title">${topic.title}</span></a>
+					<a href="${ctx}/${hobby}/discuss/${topic.id}" target="_blank"> <span class="title">${topic.title}</span></a>
 					<p><a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a><br></p>
 				</li>
 			</c:forEach>
@@ -56,8 +56,10 @@
 
 		<tags:pagination page="${topics}" paginationSize="5"/>
 	
-	<div class="row">
-			<form class="form-horizontal" action="${ctx}/${hobby}/topic"  method="post"  class="form-horizontal">
+
+	<c:if test="${0!=currentTaxonomyId}">
+		<div class="row">
+			<form class="form-horizontal" action="${ctx}/${hobby}/discuss?taxonomyId=${currentTaxonomyId}"  method="post"  class="form-horizontal">
 				<section id="edit">
 					<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
 					<br/>
@@ -66,7 +68,9 @@
 					<input id="submit_btn" class="btn btn-primary" type="submit" value="发布"/>&nbsp;	
 				</section>
 			</form>	
-	</div>
+		</div>
+	</c:if>
+
 	
 
 	</div>

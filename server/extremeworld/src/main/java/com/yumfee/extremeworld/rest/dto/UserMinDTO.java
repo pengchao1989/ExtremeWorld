@@ -6,6 +6,7 @@ public class UserMinDTO
 	private String name;
 	private String avatar;
 	private String gender;
+	private CountryDTO country;
 	public Long getId()
 	{
 		return id;
@@ -38,6 +39,13 @@ public class UserMinDTO
 	{
 		this.gender = gender;
 	}
+	public CountryDTO getCountry() {
+		return country;
+	}
+	public void setCountry(CountryDTO country) {
+		this.country = country;
+	}
+	
 	
 	
 }

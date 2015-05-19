@@ -1,5 +1,6 @@
 package com.yumfee.extremeworld.web.discuss;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.Discussion;
+import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Taxonomy;
 import com.yumfee.extremeworld.entity.Topic;
@@ -57,14 +59,22 @@ public class DiscussController {
 		
 		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
 
-		if(taxonomyId != 0)
+		if(hobbyId == 0)
 		{
-			topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
+			topics = discussionService.getAll(pageNumber, pageSize, sortType);
 		}
 		else
 		{
-			topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
+			if(taxonomyId != 0)
+			{
+				topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
+			}
+			else
+			{
+				topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
+			}
 		}
+
 
 		 
 		List<Taxonomy> taxonomys = taxonomyService.getTaxonomyByHobby(hobbyId);
@@ -82,18 +92,36 @@ public class DiscussController {
 	public String create(
 			@PathVariable String hobby,
 			@Valid Discussion newTopic, 
+			@RequestParam(value = "taxonomy", defaultValue = "0") Long taxonomyId,
 			RedirectAttributes redirectAttributes)
 	{
+		System.out.println("Discuss create");
+		
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		
+		//TODO 增加对hobbyId的容错
+		Hobby currHobby = new Hobby();
+		currHobby.setId(hobbyId);
+		List<Hobby> hobbys = new ArrayList<Hobby>();
+		hobbys.add(currHobby);
+		newTopic.setHobbys(hobbys);
+		
+		Taxonomy currentTaxonomy = new Taxonomy();
+		currentTaxonomy.setId(taxonomyId);
+		newTopic.setTaxonomy(currentTaxonomy);
+		
 		User user = new User();
 		user.setId(getCurrentUserId());
 		newTopic.setUser(user);
 		newTopic.setImageCount(0);
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
+		newTopic.setT("discuss");
+		
 		
 		discussionService.saveDiscussion(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
-		return "redirect:/discuss/";
+		return "redirect:/“ + hobby + ”/discuss/";
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)

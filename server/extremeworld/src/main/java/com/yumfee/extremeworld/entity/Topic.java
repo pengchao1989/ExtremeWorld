@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @DiscriminatorValue("1")
 public class Topic extends IdEntity
 {
-	private String typec;
+	private String t;
 	private String title;
 	private String excerpt;
 	private String content;
@@ -55,12 +54,11 @@ public class Topic extends IdEntity
 	private List<Hobby> hobbys;
 	
 	
-	@NotBlank
-	public String getTypec() {
-		return typec;
+	public String getT() {
+		return t;
 	}
-	public void setTypec(String typec) {
-		this.typec = typec;
+	public void setT(String t) {
+		this.t = t;
 	}
 	@NotBlank
 	public String getTitle()

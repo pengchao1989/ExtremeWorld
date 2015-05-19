@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -31,6 +32,7 @@ public class User extends UserBase
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
+	private Country country;
 	private List<Hobby> hobbys = new ArrayList<Hobby>();
 	private List<Site> sites = new ArrayList<Site>();
 	
@@ -94,7 +96,16 @@ public class User extends UserBase
 		this.weixin = weixin;
 	}
 	
-/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "country_id")
+	public Country getCountry() {
+		return country;
+	}
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+	/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	public List<Topic> getTopics() {
 		return topics;
 	}

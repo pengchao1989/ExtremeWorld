@@ -10,6 +10,10 @@ public class HobbyPathConfig {
 		{
 			hobbyId = 0L;
 		}
+		else if(hobby.equals("all"))
+		{
+			hobbyId = 0L;
+		}
 		else if(hobby.equals("skateboard"))
 		{
 			hobbyId = 1L;

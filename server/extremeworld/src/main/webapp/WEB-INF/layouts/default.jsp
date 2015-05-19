@@ -44,10 +44,10 @@
 <body>
 
 		<div>
-			<div class="col s2">
+<%-- 			<div class="col s2">
 				<%@ include file="/WEB-INF/layouts/left.jsp"%>
-			</div>
-			<div class=" col s10 main">
+			</div> --%>
+			<div ><!-- class=" col s10 main" -->
 				<%@ include file="/WEB-INF/layouts/header.jsp"%>
 				<div id="content">
 					<sitemesh:body/>

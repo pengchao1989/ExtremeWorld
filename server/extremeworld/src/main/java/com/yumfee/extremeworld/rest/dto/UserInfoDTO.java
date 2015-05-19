@@ -19,6 +19,8 @@ public class UserInfoDTO
 	private String avatar;
 	private String description;
 	
+	private CountryDTO country;
+	
 	private List<UserInterestDTO> interests;
 	private List<SiteDTO> sites;
 	
@@ -94,6 +96,15 @@ public class UserInfoDTO
 	public void setDescription(String description)
 	{
 		this.description = description;
+	}
+	
+	
+	
+	public CountryDTO getCountry() {
+		return country;
+	}
+	public void setCountry(CountryDTO country) {
+		this.country = country;
 	}
 	public List<UserInterestDTO> getInterests()
 	{
