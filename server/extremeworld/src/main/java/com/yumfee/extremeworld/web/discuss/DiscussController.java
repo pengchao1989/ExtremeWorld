@@ -159,8 +159,9 @@ public class DiscussController {
 		model.addAttribute("topic",topic);
 		model.addAttribute("replys", replys);
 		
+		model.addAttribute("hobby",hobby);
 		
-		return "discuss/discussDetail";
+		return "/discuss/discussDetail";
 	}
 	
 	//子回复
@@ -184,9 +185,7 @@ public class DiscussController {
 		
 		replyService.saveReply(newReply);
 		
-		
-		
-		return "redirect:/discuss/"+ topicId;
+		return "redirect:/" + hobby + "/discuss/"+ topicId;
 	}
 	
 	/**
