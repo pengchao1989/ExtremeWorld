@@ -155,3 +155,7 @@ div.video-container{
   overflow: hidden;
   margin: 4px;
 }
+
+.video_image{
+	height: 180px;
+}

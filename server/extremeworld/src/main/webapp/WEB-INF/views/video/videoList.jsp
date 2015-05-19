@@ -15,15 +15,11 @@
 	
 	<div class="row">
 		<div class="col-xs-10 col-md-10">
-			<div class="btn-group btn-group-lg" role="group" aria-label="...">
-			  <button type="button" class="btn btn-default">全部</button>
-			  <button type="button" class="btn btn-default">国内</button>
-			  <button type="button" class="btn btn-default">国外</button>
-			</div>
+			<a href="${ctx}/${hobby}/video/create" class="btn btn-primary" role="button">上传</a>
 		</div>
 		
 		<div class="col-xs-2 col-md-2">
-			<a href="${ctx}/${hobby}/video/create" class="btn btn-primary" role="button">上传</a>
+			
 		</div>
 	</div>
 	
@@ -33,14 +29,14 @@
 			<c:forEach items="${videos.content}" var="video" varStatus="status">
 				<div class=" col s3">
 					<div class="card ">
-						<div class="card-image">
-							<a href="${ctx}/${hobby}/video/${video.id}">
-								<img alt="" src="${video.videoDetail.thumbnail}">
+						<div class="card-image video_image">
+							<a href="${ctx}/${hobby}/video/${video.id}" target="_blank">
+								<img alt="" src="${video.videoDetail.thumbnail}!webVideoListThum">
 							</a>
 						</div>
 						
 						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-3">${video.title}</span>
+							<span class=" activator grey-text text-darken-3">${video.title}</span>
 							<p><a href="${ctx}/u/${video.user.id}">${video.user.name}</a></p>
 						</div>
 					</div>
