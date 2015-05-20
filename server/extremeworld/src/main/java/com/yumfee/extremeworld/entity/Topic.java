@@ -26,11 +26,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_topic")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "t", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("1")
 public class Topic extends IdEntity
 {
-	private String t;
+	private String type;
 	private String title;
 	private String excerpt;
 	private String content;
@@ -54,11 +54,11 @@ public class Topic extends IdEntity
 	private List<Hobby> hobbys;
 	
 	
-	public String getT() {
-		return t;
+	public String getType() {
+		return type;
 	}
-	public void setT(String t) {
-		this.t = t;
+	public void setType(String t) {
+		this.type = t;
 	}
 	@NotBlank
 	public String getTitle()

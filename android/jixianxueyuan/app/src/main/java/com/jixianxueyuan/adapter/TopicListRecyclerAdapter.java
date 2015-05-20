@@ -56,7 +56,7 @@ public class TopicListRecyclerAdapter extends RecyclerView.Adapter<TopicListRecy
         holder.titleTextView.setText(topicDTOList.get(position).getTitle());
 
         holder.timeTextView.setText(topicDTOList.get(position).getCreateTime());
-        holder.nameTextView.setText(topicDTOList.get(position).getUserInfo().getName());
+        holder.nameTextView.setText(topicDTOList.get(position).getUser().getName());
 
     }
 

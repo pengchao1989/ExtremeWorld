@@ -1,7 +1,5 @@
 package com.jixianxueyuan.dto;
 
-import java.util.Date;
-
 public class CourseDto
 {
 	private Long id;
@@ -9,7 +7,7 @@ public class CourseDto
 	private String content;
 	private String createTime;
 	
-	private UserInfoMinDTO userInfo;
+	private UserMinDTO userInfo;
 
 	public Long getId()
 	{
@@ -51,12 +49,12 @@ public class CourseDto
 		this.createTime = createTime;
 	}
 
-	public UserInfoMinDTO getUserInfo()
+	public UserMinDTO getUserInfo()
 	{
 		return userInfo;
 	}
 
-	public void setUserInfo(UserInfoMinDTO userInfo)
+	public void setUserInfo(UserMinDTO userInfo)
 	{
 		this.userInfo = userInfo;
 	}

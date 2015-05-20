@@ -1,8 +1,6 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
-import android.media.Image;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,7 @@ import android.widget.TextView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.MediaDTO;
+import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.DateTimeFormatter;
@@ -92,27 +91,33 @@ public class TopicListAdapter extends BaseAdapter {
         TopicDTO topicDTO = topicDTOList.get(position);
 
 
-        viewHolder.nameTextView.setText(topicDTO.getUserInfo().getName());
+        viewHolder.nameTextView.setText(topicDTO.getUser().getName());
         viewHolder.titleTextView.setText(topicDTO.getTitle());
         String timeAgo = DateTimeFormatter.getTimeAgo(context, topicDTO.getCreateTime());
         viewHolder.timeTextView.setText(timeAgo);
 
-        if(topicDTO.getMedias().size() > 0)
-        {
-            viewHolder.frontImageView.setVisibility(View.VISIBLE);
-            MediaDTO mediaDto = topicDTO.getMedias().get(0);
+        MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 
-            String url = StaticResourceConfig.IMG_DOMAIN + mediaDto.getPath();
-            ImageLoader.getInstance().displayImage(url, viewHolder.frontImageView);
+        if(mediawrap != null)
+        {
+            if(mediawrap.getMedias().size() > 0)
+            {
+                viewHolder.frontImageView.setVisibility(View.VISIBLE);
+                MediaDTO mediaDto = mediawrap.getMedias().get(0);
+
+                String url = StaticResourceConfig.IMG_DOMAIN + mediaDto.getPath();
+                ImageLoader.getInstance().displayImage(url, viewHolder.frontImageView);
+            }
+
         }
         else
         {
             viewHolder.frontImageView.setVisibility(View.GONE);
         }
 
-        if(topicDTO.getTypec() != null || topicDTO.getTypec().length() > 0)
+        if(topicDTO.getType() != null || topicDTO.getType().length() > 0)
         {
-            switch (topicDTO.getTypec())
+            switch (topicDTO.getType())
             {
                 case "mood":
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_face_grey600_18dp);

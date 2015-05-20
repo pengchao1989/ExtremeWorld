@@ -46,7 +46,7 @@ public class CourseTaxonomyService
 			
 		};*/
 		
-		List<CourseTaxonomy> courseTaxonomys = MyJedisExecutor.lrangeList("courseTaxonomys", CourseTaxonomy.class);
+/*		List<CourseTaxonomy> courseTaxonomys = MyJedisExecutor.lrangeList("courseTaxonomys", CourseTaxonomy.class);
 		if(courseTaxonomys == null || courseTaxonomys.size() == 0)
 		{
 			courseTaxonomys = courseTaxonomyDao.findAll();
@@ -86,7 +86,9 @@ public class CourseTaxonomyService
 			
 			courseTaxonomy.setCourses(courseList);
 			
-		}
+		}*/
+		
+		List<CourseTaxonomy> courseTaxonomys = courseTaxonomyDao.findAll();
 
 		return courseTaxonomys;
 	}

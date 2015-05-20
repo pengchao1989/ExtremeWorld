@@ -130,7 +130,7 @@ public class TopicListFragment extends Fragment {
         TopicDTO topicDTO = (TopicDTO) adapter.getItem(position);
 
         Intent intent = null;
-        switch (topicDTO.getTypec())
+        switch (topicDTO.getType())
         {
             case "mood":
                 intent = new Intent(this.getActivity(), MoodDetailActivity.class);

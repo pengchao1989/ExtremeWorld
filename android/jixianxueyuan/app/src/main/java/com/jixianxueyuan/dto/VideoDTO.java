@@ -1,7 +1,5 @@
 package com.jixianxueyuan.dto;
 
-import java.util.Date;
-
 public class VideoDTO
 {
 	private Long id;
@@ -12,7 +10,7 @@ public class VideoDTO
 	private String createTime;
 	private int status;
 	
-	private UserInfoMinDTO createUser;
+	private UserMinDTO createUser;
 
 	
 	public Long getId()
@@ -85,12 +83,12 @@ public class VideoDTO
 		this.status = status;
 	}
 
-	public UserInfoMinDTO getCreateUser()
+	public UserMinDTO getCreateUser()
 	{
 		return createUser;
 	}
 
-	public void setCreateUser(UserInfoMinDTO createUser)
+	public void setCreateUser(UserMinDTO createUser)
 	{
 		this.createUser = createUser;
 	}

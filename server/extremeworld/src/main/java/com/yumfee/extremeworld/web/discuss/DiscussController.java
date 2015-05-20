@@ -116,7 +116,7 @@ public class DiscussController {
 		newTopic.setImageCount(0);
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
-		newTopic.setT("discuss");
+		newTopic.setType("discuss");
 		
 		
 		discussionService.saveDiscussion(newTopic);
