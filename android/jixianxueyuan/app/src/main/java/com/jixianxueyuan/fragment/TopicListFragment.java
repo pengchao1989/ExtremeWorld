@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -57,6 +58,8 @@ public class TopicListFragment extends Fragment {
     @InjectView(R.id.topic_list_fragment_add_blank_view)
     View addBlankView;
 
+    int currentPage = 1;
+
     TopicListAdapter adapter;
 
     boolean isRefreshData = false;
@@ -82,10 +85,24 @@ public class TopicListFragment extends Fragment {
         Log.d("TopicListFragment","onCreateView");
 
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
+        View footerView = inflater.inflate(R.layout.loadmore, null,false);
 
         ButterKnife.inject(this,view);
+        //ButterKnife.inject(this, footerView);
+
+        Button loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
+        loadMoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getNextPage();
+            }
+        });
+        listView.addFooterView(footerView);
 
         listView.setAdapter(adapter);
+
+
+        //
 
 
         floatingActionButton.attachToListView(listView);
@@ -153,7 +170,15 @@ public class TopicListFragment extends Fragment {
         }
     }
 
+
     private void refreshTopicList()
+    {
+        currentPage = 1;
+
+        requestTopicList();
+    }
+
+    private void getNextPage()
     {
         requestTopicList();
     }
@@ -162,7 +187,7 @@ public class TopicListFragment extends Fragment {
     {
 
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
-        String url = ServerMethod.topic;
+        String url = ServerMethod.topic + "?page=" + currentPage ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
@@ -178,6 +203,8 @@ public class TopicListFragment extends Fragment {
                             adapter.addDatas(topicDTOs);
 
                             isRefreshData = true;
+
+                            currentPage++;
                         }
                     }
                 },
