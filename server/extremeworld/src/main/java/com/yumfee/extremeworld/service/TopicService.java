@@ -114,6 +114,11 @@ public class TopicService
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
+		if(hobbyId == 0L)
+		{
+			return topicDao.findAll(pageRequest);
+		}
+		
 		return topicDao.findByHobby(hobbyId,pageRequest);
 	}
 	

@@ -1,13 +1,13 @@
 package com.yumfee.extremeworld.rest;
 
 import java.net.URI;
-import java.util.List;
 
 import javax.validation.Validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +22,15 @@ import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.service.TopicService;
 
 
 @RestController
-@RequestMapping(value = "/api/v1/topic")
+@RequestMapping(value = "/api/v1/{hobby}/topic")
 public class TopicRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(TopicRestController.class);
@@ -42,15 +44,20 @@ public class TopicRestController
 	private Validator validator;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<TopicDTO> list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+	public  MyPage<TopicDTO,Topic> list(
+			@PathVariable String hobby,
+			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
 	{
 		
-		List<Topic> topicList = topicService.getAllTopic(pageNumber,pageSize,  sortType).getContent();
-		List<TopicDTO> topicDTOlist= BeanMapper.mapList(topicList, TopicDTO.class);
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
 		
-		return topicDTOlist;
+		Page<Topic> topicPageSource = topicService.getTopicByHobby(hobbyId, pageNumber, pageSize, sortType);
+		
+		MyPage<TopicDTO, Topic> topicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPageSource);
+		
+		return topicPage;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)

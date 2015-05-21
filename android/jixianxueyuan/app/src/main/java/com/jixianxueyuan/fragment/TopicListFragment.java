@@ -27,6 +27,7 @@ import com.jixianxueyuan.activity.DiscussionDetailActivity;
 import com.jixianxueyuan.activity.MoodDetailActivity;
 import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
+import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.ServerMethod;
 import com.melnykov.fab.FloatingActionButton;
@@ -169,7 +170,9 @@ public class TopicListFragment extends Fragment {
                     public void onResponse(String response) {
 
                         Gson gson = new Gson();
-                        List<TopicDTO> topicDTOs = gson.fromJson(response, new TypeToken<List<TopicDTO>>(){}.getType());
+                        MyPage<TopicDTO> page = gson.fromJson(response,new TypeToken<MyPage<TopicDTO>>(){}.getType());
+                        List<TopicDTO> topicDTOs = page.getContents();
+
                         if(topicDTOs != null)
                         {
                             adapter.addDatas(topicDTOs);
