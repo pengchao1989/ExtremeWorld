@@ -26,9 +26,11 @@ import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.DiscussionDetailActivity;
 import com.jixianxueyuan.activity.MoodDetailActivity;
+import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.dto.MyPage;
+import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.ServerMethod;
 import com.melnykov.fab.FloatingActionButton;
@@ -151,21 +153,25 @@ public class TopicListFragment extends Fragment {
         switch (topicDTO.getType())
         {
             case "mood":
-                intent = new Intent(this.getActivity(), MoodDetailActivity.class);
-                intent.putExtra("topicId", topicDTO.getId());
+                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+
                 break;
             case "discuss":
-                intent = new Intent(this.getActivity(), DiscussionDetailActivity.class);
-                intent.putExtra("topicId", topicDTO.getId());
+                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 break;
             case "video":
-                intent = new Intent(this.getActivity(), VideoDetailActivity.class);
-                intent.putExtra("videoId",topicDTO.getId());
+                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 break;
         }
 
         if(intent != null)
         {
+            intent.putExtra("topicId", topicDTO.getId());
+            intent.putExtra("title", topicDTO.getTitle());
+            intent.putExtra("content", topicDTO.getContent());
+            intent.putExtra("createTime", topicDTO.getCreateTime());
+            intent.putExtra("name", topicDTO.getUser().getName());
+            intent.putExtra("avatar", topicDTO.getUser().getAvatar());
             startActivity(intent);
         }
     }
@@ -195,11 +201,14 @@ public class TopicListFragment extends Fragment {
                     public void onResponse(String response) {
 
                         Gson gson = new Gson();
-                        MyPage<TopicDTO> page = gson.fromJson(response,new TypeToken<MyPage<TopicDTO>>(){}.getType());
-                        List<TopicDTO> topicDTOs = page.getContents();
 
-                        if(topicDTOs != null)
+                        MyResponse<MyPage<TopicDTO>> myResponse = gson.fromJson(response,new TypeToken<MyResponse<MyPage<TopicDTO>>>(){}.getType());
+
+
+                        if(myResponse.getStatus() == ServerMethod.status_ok)
                         {
+                            MyPage page = myResponse.getContent();
+                            List<TopicDTO> topicDTOs = page.getContents();
                             adapter.addDatas(topicDTOs);
 
                             isRefreshData = true;

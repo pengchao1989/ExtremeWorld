@@ -1,5 +1,8 @@
 package com.yumfee.extremeworld.rest.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Country")
 public class CountryDTO {
 
 	private String name;

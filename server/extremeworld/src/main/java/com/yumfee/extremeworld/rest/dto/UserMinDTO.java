@@ -1,5 +1,8 @@
 package com.yumfee.extremeworld.rest.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "User")
 public class UserMinDTO
 {
 	private Long id;

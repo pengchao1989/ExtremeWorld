@@ -50,7 +50,7 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
                 break;
 
             case 2:
-                fragment = new CourseListFragment();
+                fragment = new MineFragment();
                 break;
             case 3:
                 fragment = new MineFragment();

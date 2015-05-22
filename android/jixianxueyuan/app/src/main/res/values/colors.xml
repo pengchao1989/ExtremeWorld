@@ -5,6 +5,9 @@
     <color name="background">#fff3f5ef</color>
 
     <color name="white">#FFFAFAFA</color>
+    <color name="black">#FF000000</color>
+    <color name="deep_purple_darken_4">#ff311b92</color>
+    <color name="blue_darken_4">#ff0d47a1</color>
 
     <color name="primary">#ff5cc611</color>
     <color name="primary_pressed">#ff308cca</color>

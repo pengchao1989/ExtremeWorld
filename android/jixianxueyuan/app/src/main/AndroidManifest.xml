@@ -22,6 +22,7 @@
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity android:name=".activity.TopicDetailActivity"/>
         <activity android:name=".activity.VideoDetailActivity" />
         <activity android:name=".activity.MoodDetailActivity"/>
         <activity android:name=".activity.DiscussionDetailActivity"/>

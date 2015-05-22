@@ -64,7 +64,7 @@ public class CourseTaxonomyActivity extends Activity{
     public void onResume()
     {
         super.onResume();
-        requestCourseList();
+        //requestCourseList();
     }
 
     private void requestCourseList()

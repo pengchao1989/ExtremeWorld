@@ -25,6 +25,7 @@ import org.springside.modules.web.MediaTypes;
 import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.rest.dto.MyPage;
+import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.service.TopicService;
 
@@ -44,7 +45,7 @@ public class TopicRestController
 	private Validator validator;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public  MyPage<TopicDTO,Topic> list(
+	public  MyResponse list(
 			@PathVariable String hobby,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
@@ -57,7 +58,7 @@ public class TopicRestController
 		
 		MyPage<TopicDTO, Topic> topicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPageSource);
 		
-		return topicPage;
+		return MyResponse.ok(topicPage);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)

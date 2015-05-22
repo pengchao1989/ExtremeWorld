@@ -1,0 +1,11 @@
+package com.yumfee.extremeworld.proto;
+
+ option java_package = "com.yumfee.extremeworld.proto";
+ option java_outer_classname = "CountryProto";
+
+message CountryDTO
+{
+	required string id = 1;
+	required string name=2;
+	required string nameZH=3;
+}

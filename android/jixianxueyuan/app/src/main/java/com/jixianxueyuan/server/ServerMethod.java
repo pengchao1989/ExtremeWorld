@@ -4,6 +4,9 @@ package com.jixianxueyuan.server;
  * Created by pengchao on 2015/4/12.
  */
 public class ServerMethod {
+
+    public static final int status_ok = 1;
+
     //static final String server_url = "http://jixianxueyuan.com:8080/extremeworld/";
     static final String server_url = "http://192.168.1.4:8023/extremeworld/";
     static final String api_version = "api/v1/all/";
