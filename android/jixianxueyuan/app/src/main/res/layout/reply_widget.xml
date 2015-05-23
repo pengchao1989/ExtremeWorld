@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reply_widget_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:weightSum="10"
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp"
+    >
+
+    <ImageView
+        android:layout_weight="0.5"
+        android:id="@+id/reply_widget_emoji_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="4dp"
+        android:src="@mipmap/smiley"
+        />
+
+    <com.yumfee.emoji.EmojiconEditText
+        android:layout_weight="9"
+        android:id="@+id/reply_widget_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        emojicon:emojiconSize="28sp"
+        android:hint="@string/we_speek"
+        android:background="@drawable/edittext_background"
+        />
+
+    <ImageView
+        android:layout_weight="0.5"
+        android:id="@+id/reply_widget_submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="4dp"
+        android:src="@mipmap/ic_action_send_now"
+        />
+
+
+
+</LinearLayout>

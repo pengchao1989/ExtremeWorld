@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +38,9 @@ import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.widget.ReplyWidget;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
+import com.yumfee.emoji.EmojiconEditText;
 
 
 import java.util.LinkedList;
@@ -50,22 +52,12 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 5/22/15.
  */
-
-public class TopicDetailActivity extends Activity
-{
-
-}
-/*
-
-
-
-public class TopicDetailActivity extends FragmentActivity implements EmojiconGridFragment.OnEmojiconClickedListener, EmojiconsFragment.OnEmojiconBackspaceClickedListener{
+public class TopicDetailActivity extends Activity{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
 
     @InjectView(R.id.topic_detail_listview)ListView listView;
-    @InjectView(R.id.reply_widget_edittext)EmojiconEditText emojiconEditText;
-    @InjectView(R.id.emojicons)FrameLayout emojiconsLayout;
+    @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
 
     int currentPage = 1;
     int totalPage = 0;
@@ -83,8 +75,8 @@ public class TopicDetailActivity extends FragmentActivity implements EmojiconGri
     View footerView;
     Button loadMoreButton;
 
-    EmojiconsFragment emojiconsFragment;
-    boolean isCurEmoji = false;
+
+    ReplyWidget replyWidget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,57 +90,15 @@ public class TopicDetailActivity extends FragmentActivity implements EmojiconGri
         initFooterView();
 
         adapter = new TopicDetailListAdapter(this);
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);;
 
+        replyWidget = new ReplyWidget(this, contentLayout);
 
-
-
-        initReplyWidget();
 
         requestReplyList();
 
     }
 
-    private void initReplyWidget()
-    {
-        Button emojiButton = (Button) findViewById(R.id.reply_widget_more_button);
-        emojiButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                FragmentManager fm = TopicDetailActivity.this.getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
-                if(!isCurEmoji)
-                {
-                    emojiconsLayout.setVisibility(View.VISIBLE);
-
-                    if(emojiconsFragment == null)
-                    {
-                        emojiconsFragment = new EmojiconsFragment();
-                        ft.replace(R.id.emojicons, emojiconsFragment);
-                    }
-                    else
-                    {
-                        ft.show(emojiconsFragment);
-                    }
-
-                    isCurEmoji = true;
-                }
-                else
-                {
-                    ft.hide(emojiconsFragment);
-                    emojiconsLayout.setVisibility(View.GONE);
-                    isCurEmoji = false;
-                }
-
-                ft.commit();
-
-            }
-        });
-
-
-    }
 
     private void initTopicHeadView()
     {
@@ -196,10 +146,8 @@ public class TopicDetailActivity extends FragmentActivity implements EmojiconGri
                 textView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 headViewHolder.contentLayout.addView(textView);
-*/
 /*								String emoji = "\ue32d \ue32d \ue32d";
-								String content = "ÎÒÊÇÄÚÈÝ hello";*//*
-
+								String content = "ÎÒÊÇÄÚÈÝ hello";*/
                 String temp = contentFragmentList.get(n).mText ;
                 textView.setText(Html.fromHtml(temp));
             }
@@ -289,16 +237,6 @@ public class TopicDetailActivity extends FragmentActivity implements EmojiconGri
         queue.add(stringRequest);
     }
 
-    @Override
-    public void onEmojiconBackspaceClicked(View view) {
-        EmojiconsFragment.backspace(emojiconEditText);
-    }
-
-    @Override
-    public void onEmojiconClicked(Emojicon emojicon) {
-        EmojiconsFragment.input(emojiconEditText, emojicon);
-    }
-
     public class HeadViewHolder
     {
         @InjectView(R.id.topic_detail_title)TextView titleTextView;
@@ -313,4 +251,3 @@ public class TopicDetailActivity extends FragmentActivity implements EmojiconGri
         }
     }
 }
-*/

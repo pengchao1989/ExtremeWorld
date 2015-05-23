@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     >
 
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,67 +19,59 @@
             />
 
         <LinearLayout
+            android:id="@+id/reply_widget_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="bottom"
-            style="@style/ListItem"
+            android:layout_alignParentBottom="true"
+            />
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:weightSum="10"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_weight="0.5"
+                android:id="@+id/reply_widget_more_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white_overlay"
-                android:weightSum="10"
-                >
-
-                <Button
-                    android:id="@+id/reply_widget_more_button"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/white_button_background"
-                    android:text="表情"
-                    />
-
-
-                <com.rockerhieu.emojicon.EmojiconEditText
-                    android:id="@+id/reply_widget_edittext"
-                    android:layout_weight="8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    emojicon:emojiconSize="28sp"
-                    android:hint="@string/we_speek"
-                    android:background="@drawable/edittext_background"
-                    />
-
-                <Button
-                    android:id="@+id/reply_widget_submit_button"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/white_button_background"
-                    android:text="@string/reply"
-                    />
-
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:id="@+id/emojicons"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:visibility="gone"
+                android:layout_gravity="bottom"
+                android:padding="4dp"
+                android:src="@mipmap/smiley"
                 />
 
-        </LinearLayout>
+            <com.yumfee.emoji.EmojiconEditText
+                android:layout_weight="9"
+                android:id="@+id/reply_widget_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                emojicon:emojiconSize="28sp"
+                android:hint="@string/we_speek"
+                android:background="@drawable/edittext_background"
+                />
+
+            <ImageView
+                android:layout_weight="0.5"
+                android:id="@+id/reply_widget_submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:padding="4dp"
+                android:src="@mipmap/ic_action_send_now"
+                />
 
 
 
+        </LinearLayout>-->
 
-    </FrameLayout>
-
-
+    </RelativeLayout>
 
 
 </LinearLayout>
