@@ -2,19 +2,18 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,18 +28,14 @@ import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
-import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.MyLog;
-import com.liuguangqiang.swipeback.SwipeBackLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,13 +49,10 @@ public class TopicDetailActivity extends Activity{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
 
-    @InjectView(R.id.topic_detail_swipeback_layout)
-    SwipeBackLayout swipeBackLayout;
-
-
     @InjectView(R.id.topic_detail_listview)ListView listView;
 
     int currentPage = 1;
+    int totalPage = 0;
     TopicDetailListAdapter adapter;
 
     Long topicId;
@@ -72,6 +64,8 @@ public class TopicDetailActivity extends Activity{
 
     View headView;
     HeadViewHolder headViewHolder;
+    View footerView;
+    Button loadMoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,17 +76,13 @@ public class TopicDetailActivity extends Activity{
         ButterKnife.inject(this);
 
         initTopicHeadView();
-
-
-        listView.addHeaderView(headView);
+        initFooterView();
 
         adapter = new TopicDetailListAdapter(this);
         listView.setAdapter(adapter);
 
         requestReplyList();
 
-
-        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
     }
 
     private void initTopicHeadView()
@@ -148,8 +138,48 @@ public class TopicDetailActivity extends Activity{
             }
 
         }
+
+        listView.addHeaderView(headView);
     }
 
+    private void doHideFootView()
+    {
+        if(totalPage <= 1)
+        {
+            footerView.setVisibility(View.GONE);
+        }
+        else if(currentPage >= totalPage)
+        {
+            loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+        }
+    }
+
+    private void initFooterView()
+    {
+        footerView = LayoutInflater.from(this).inflate(R.layout.loadmore, null, false);
+
+        loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
+        loadMoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getNextPage();
+            }
+        });
+        listView.addFooterView(footerView);
+    }
+
+    private void getNextPage()
+    {
+        if(currentPage < totalPage)
+        {
+            requestReplyList();
+        }
+        else
+        {
+            Toast.makeText(this,"没了", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     private void requestReplyList()
     {
@@ -175,7 +205,10 @@ public class TopicDetailActivity extends Activity{
                             List<ReplyDTO> topicDTOs = page.getContents();
                             adapter.addNextPageData(topicDTOs);
 
+                            totalPage = page.getTotalPages();
                             currentPage++;
+
+                            doHideFootView();
                         }
                     }
                 },

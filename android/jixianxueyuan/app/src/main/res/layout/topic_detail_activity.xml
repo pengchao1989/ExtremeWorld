@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.liuguangqiang.swipeback.SwipeBackLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/topic_detail_swipeback_layout"
     android:orientation="vertical"
@@ -7,19 +7,67 @@
     android:layout_height="match_parent"
     >
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:background="@color/background"
-        style="@style/MainContainer"
-        >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/topic_detail_listview"
+            style="@style/ListContainer"
+            />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            style="@style/ListItem"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_overlay"
+                android:weightSum="10"
+                >
+
+                <Button
+                    android:id="@+id/reply_widget_more_button"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_button_background"
+                    android:text="表情"
+                    />
 
 
-    </LinearLayout>
+                <EditText
+                    android:layout_weight="8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/we_speek"
+                    android:background="@drawable/edittext_background"
+                    />
+
+                <Button
+                    android:id="@+id/reply_widget_submit_button"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_button_background"
+                    android:text="@string/reply"
+                    />
 
 
-</com.liuguangqiang.swipeback.SwipeBackLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </FrameLayout>
+
+
+
+
+</LinearLayout>

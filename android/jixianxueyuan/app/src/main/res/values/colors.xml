@@ -1,11 +1,17 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
+    <color name="white_overlay">#66FAFAFA</color>
 
     <color name="background">#fff3f5ef</color>
 
     <color name="white">#FFFAFAFA</color>
     <color name="black">#FF000000</color>
+    <color name="blue">#ff2196f3</color>
+    <color name="blue_deep">#ff1976d2</color>
+    <color name="grey">#ffeeeeee</color>
+    <color name="grey_deep">#ffbdbdbd</color>
+
     <color name="deep_purple_darken_4">#ff311b92</color>
     <color name="blue_darken_4">#ff0d47a1</color>
 
