@@ -154,7 +154,7 @@ public class TopicListFragment extends Fragment {
         switch (topicDTO.getType())
         {
             case "mood":
-                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+                intent = new Intent(this.getActivity(), MoodDetailActivity.class);
 
                 break;
             case "discuss":

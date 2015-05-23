@@ -38,10 +38,7 @@ import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.MyLog;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.rockerhieu.emojicon.EmojiconEditText;
-import com.rockerhieu.emojicon.EmojiconGridFragment;
-import com.rockerhieu.emojicon.EmojiconsFragment;
-import com.rockerhieu.emojicon.emoji.Emojicon;
+
 
 
 import java.util.LinkedList;
@@ -53,6 +50,15 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 5/22/15.
  */
+
+public class TopicDetailActivity extends Activity
+{
+
+}
+/*
+
+
+
 public class TopicDetailActivity extends FragmentActivity implements EmojiconGridFragment.OnEmojiconClickedListener, EmojiconsFragment.OnEmojiconBackspaceClickedListener{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
@@ -190,8 +196,10 @@ public class TopicDetailActivity extends FragmentActivity implements EmojiconGri
                 textView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 headViewHolder.contentLayout.addView(textView);
+*/
 /*								String emoji = "\ue32d \ue32d \ue32d";
-								String content = "ÎÒÊÇÄÚÈÝ hello";*/
+								String content = "ÎÒÊÇÄÚÈÝ hello";*//*
+
                 String temp = contentFragmentList.get(n).mText ;
                 textView.setText(Html.fromHtml(temp));
             }
@@ -305,3 +313,4 @@ public class TopicDetailActivity extends FragmentActivity implements EmojiconGri
         }
     }
 }
+*/
