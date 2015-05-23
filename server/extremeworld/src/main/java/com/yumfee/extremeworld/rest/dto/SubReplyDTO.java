@@ -2,13 +2,15 @@ package com.yumfee.extremeworld.rest.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SubReplyDTO
 {
 	private Long id;
 	private String content;
 	private Date createTime;
 	
-	private UserMinDTO userInfo;
+	private UserMinDTO user;
 
 	
 	public Long getId()
@@ -31,6 +33,7 @@ public class SubReplyDTO
 		this.content = content;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime()
 	{
 		return createTime;
@@ -41,14 +44,14 @@ public class SubReplyDTO
 		this.createTime = createTime;
 	}
 
-	public UserMinDTO getUserInfo()
+	public UserMinDTO getUser()
 	{
-		return userInfo;
+		return user;
 	}
 
-	public void setUserInfo(UserMinDTO userInfo)
+	public void setUser(UserMinDTO user)
 	{
-		this.userInfo = userInfo;
+		this.user = user;
 	}
 	
 	

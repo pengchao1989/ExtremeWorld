@@ -33,6 +33,7 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.MyLog;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
@@ -166,6 +167,7 @@ public class TopicListFragment extends Fragment {
 
         if(intent != null)
         {
+            MyLog.d(TAG, "topicId=" + topicDTO.getId());
             intent.putExtra("topicId", topicDTO.getId());
             intent.putExtra("title", topicDTO.getTitle());
             intent.putExtra("content", topicDTO.getContent());

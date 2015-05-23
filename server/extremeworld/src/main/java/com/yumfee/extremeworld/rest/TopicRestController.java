@@ -36,7 +36,7 @@ public class TopicRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(TopicRestController.class);
 			
-	private static final String PAGE_SIZE = "5";
+	private static final String PAGE_SIZE = "15";
 	
 	@Autowired
 	TopicService topicService;

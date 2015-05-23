@@ -13,8 +13,10 @@
         style="@style/MainContainer"
         >
 
-
-        <include layout="@layout/topic_detail_head_view"/>
+        <ListView
+            android:id="@+id/topic_detail_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 
     </LinearLayout>

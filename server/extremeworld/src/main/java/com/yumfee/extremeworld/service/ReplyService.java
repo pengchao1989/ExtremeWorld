@@ -38,10 +38,10 @@ public class ReplyService
 		return replyDao.findAll(pageRequest);
 	}
 	
-	public Page<Reply> getAll(Long id, int pageNumber, int pageSize)
+	public Page<Reply> getAll(Long topicId, int pageNumber, int pageSize)
 	{
 		PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize);
-		return replyDao.findByTopicId(id,pageRequest);
+		return replyDao.findByTopicId(topicId,pageRequest);
 	}
 	
 	public void saveReply(Reply entity)

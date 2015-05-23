@@ -3,6 +3,7 @@ package com.yumfee.extremeworld.rest.dto;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yumfee.extremeworld.entity.User;
 
 public class ReplyDTO
@@ -10,7 +11,7 @@ public class ReplyDTO
 	private Long id;
 	private String content;
 	private Date createTime;
-	private UserMinDTO userInfo;
+	private UserMinDTO user;
 	private List<SubReplyDTO> subReplys;
 	
 	public Long getId()
@@ -29,6 +30,8 @@ public class ReplyDTO
 	{
 		this.content = content;
 	}
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime()
 	{
 		return createTime;
@@ -37,13 +40,13 @@ public class ReplyDTO
 	{
 		this.createTime = createTime;
 	}
-	public UserMinDTO getUserInfo()
+	public UserMinDTO getUser()
 	{
-		return userInfo;
+		return user;
 	}
-	public void setUserInfo(UserMinDTO userInfo)
+	public void setUser(UserMinDTO user)
 	{
-		this.userInfo = userInfo;
+		this.user = user;
 	}
 	public List<SubReplyDTO> getSubReplys()
 	{

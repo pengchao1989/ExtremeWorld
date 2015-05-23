@@ -1,14 +1,13 @@
 package com.jixianxueyuan.dto;
 
-import java.util.Date;
 import java.util.List;
 
 public class ReplyDTO
 {
 	private Long id;
 	private String content;
-	private Date createTime;
-	private UserMinDTO userInfo;
+	private String createTime;
+	private UserMinDTO user;
 	private List<SubReplyDTO> subReplys;
 	
 	public Long getId()
@@ -27,21 +26,21 @@ public class ReplyDTO
 	{
 		this.content = content;
 	}
-	public Date getCreateTime()
+	public String getCreateTime()
 	{
 		return createTime;
 	}
-	public void setCreateTime(Date createTime)
+	public void setCreateTime(String createTime)
 	{
 		this.createTime = createTime;
 	}
-	public UserMinDTO getUserInfo()
+	public UserMinDTO getUser()
 	{
-		return userInfo;
+		return user;
 	}
-	public void setUserInfo(UserMinDTO userInfo)
+	public void setUser(UserMinDTO user)
 	{
-		this.userInfo = userInfo;
+		this.user = user;
 	}
 	public List<SubReplyDTO> getSubReplys()
 	{

@@ -95,6 +95,8 @@ public class TopicListAdapter extends BaseAdapter {
         viewHolder.titleTextView.setText(topicDTO.getTitle());
         String timeAgo = DateTimeFormatter.getTimeAgo(context, topicDTO.getCreateTime());
         viewHolder.timeTextView.setText(timeAgo);
+        viewHolder.viewCountTextView.setText( String.valueOf(topicDTO.getViewCount()));
+        viewHolder.agreeCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 
@@ -157,6 +159,12 @@ public class TopicListAdapter extends BaseAdapter {
 
         @InjectView(R.id.topic_list_item_front_image)
         ImageView frontImageView;
+
+        @InjectView(R.id.topic_list_item_view_count)
+        TextView viewCountTextView;
+
+        @InjectView(R.id.topic_list_item_agree_count)
+        TextView agreeCountTextView;
 
         public ViewHolder(View itemView){
 

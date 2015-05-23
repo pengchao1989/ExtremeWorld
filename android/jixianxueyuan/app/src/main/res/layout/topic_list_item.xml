@@ -122,9 +122,9 @@
                     android:src="@mipmap/ic_visibility_grey600_24dp"
                     />
                 <TextView
+                    android:id="@+id/topic_list_item_view_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12次"
                     />
 
                 <ImageView
@@ -135,9 +135,9 @@
                     />
 
                 <TextView
+                    android:id="@+id/topic_list_item_agree_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8次"
                     />
 
             </LinearLayout>
