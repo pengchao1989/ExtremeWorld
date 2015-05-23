@@ -3,12 +3,16 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,6 +38,10 @@ import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.MyLog;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.rockerhieu.emojicon.EmojiconEditText;
+import com.rockerhieu.emojicon.EmojiconGridFragment;
+import com.rockerhieu.emojicon.EmojiconsFragment;
+import com.rockerhieu.emojicon.emoji.Emojicon;
 
 
 import java.util.LinkedList;
@@ -45,11 +53,13 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends Activity{
+public class TopicDetailActivity extends FragmentActivity implements EmojiconGridFragment.OnEmojiconClickedListener, EmojiconsFragment.OnEmojiconBackspaceClickedListener{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
 
     @InjectView(R.id.topic_detail_listview)ListView listView;
+    @InjectView(R.id.reply_widget_edittext)EmojiconEditText emojiconEditText;
+    @InjectView(R.id.emojicons)FrameLayout emojiconsLayout;
 
     int currentPage = 1;
     int totalPage = 0;
@@ -67,6 +77,9 @@ public class TopicDetailActivity extends Activity{
     View footerView;
     Button loadMoreButton;
 
+    EmojiconsFragment emojiconsFragment;
+    boolean isCurEmoji = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +94,53 @@ public class TopicDetailActivity extends Activity{
         adapter = new TopicDetailListAdapter(this);
         listView.setAdapter(adapter);
 
+
+
+
+        initReplyWidget();
+
         requestReplyList();
+
+    }
+
+    private void initReplyWidget()
+    {
+        Button emojiButton = (Button) findViewById(R.id.reply_widget_more_button);
+        emojiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fm = TopicDetailActivity.this.getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+
+                if(!isCurEmoji)
+                {
+                    emojiconsLayout.setVisibility(View.VISIBLE);
+
+                    if(emojiconsFragment == null)
+                    {
+                        emojiconsFragment = new EmojiconsFragment();
+                        ft.replace(R.id.emojicons, emojiconsFragment);
+                    }
+                    else
+                    {
+                        ft.show(emojiconsFragment);
+                    }
+
+                    isCurEmoji = true;
+                }
+                else
+                {
+                    ft.hide(emojiconsFragment);
+                    emojiconsLayout.setVisibility(View.GONE);
+                    isCurEmoji = false;
+                }
+
+                ft.commit();
+
+            }
+        });
+
 
     }
 
@@ -220,6 +279,16 @@ public class TopicDetailActivity extends Activity{
                 });
 
         queue.add(stringRequest);
+    }
+
+    @Override
+    public void onEmojiconBackspaceClicked(View view) {
+        EmojiconsFragment.backspace(emojiconEditText);
+    }
+
+    @Override
+    public void onEmojiconClicked(Emojicon emojicon) {
+        EmojiconsFragment.input(emojiconEditText, emojicon);
     }
 
     public class HeadViewHolder

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     android:id="@+id/topic_detail_swipeback_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -19,6 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="bottom"
             style="@style/ListItem"
             >
@@ -40,10 +42,12 @@
                     />
 
 
-                <EditText
+                <com.rockerhieu.emojicon.EmojiconEditText
+                    android:id="@+id/reply_widget_edittext"
                     android:layout_weight="8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    emojicon:emojiconSize="28sp"
                     android:hint="@string/we_speek"
                     android:background="@drawable/edittext_background"
                     />
@@ -59,6 +63,13 @@
 
 
             </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/emojicons"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:visibility="gone"
+                />
 
         </LinearLayout>
 

@@ -7,5 +7,7 @@
     <dimen name="list_item_horizontal_padding">@dimen/activity_horizontal_margin</dimen>
     <dimen name="list_item_vertical_padding">6dp</dimen>
 
+    <dimen name="bottom_input_widget_heigh">60dp</dimen>
+
 
 </resources>
