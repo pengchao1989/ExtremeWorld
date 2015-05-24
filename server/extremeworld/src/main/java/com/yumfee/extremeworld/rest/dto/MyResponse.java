@@ -13,6 +13,13 @@ public class MyResponse {
 		response.setContent(content);
 		return response;
 	}
+	
+	public static MyResponse create()
+	{
+		MyResponse response = new MyResponse();
+		response.setStatus(201);
+		return response;
+	}
 
 	public int getStatus() {
 		return status;
