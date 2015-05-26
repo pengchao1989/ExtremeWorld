@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,8 +26,10 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CreateMoodActivity;
 import com.jixianxueyuan.activity.DiscussionDetailActivity;
 import com.jixianxueyuan.activity.MoodDetailActivity;
+import com.jixianxueyuan.activity.ShortVIdeoDetail;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
@@ -61,7 +65,10 @@ public class TopicListFragment extends Fragment {
     @InjectView(R.id.topic_list_fragment_add_blank_view)
     View addBlankView;
 
-    int currentPage = 1;
+    View footerView;
+    Button loadMoreButton;
+    int currentPage = 0;
+    int totalPage = 0;
 
     TopicListAdapter adapter;
 
@@ -88,12 +95,12 @@ public class TopicListFragment extends Fragment {
         Log.d("TopicListFragment","onCreateView");
 
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
-        View footerView = inflater.inflate(R.layout.loadmore, null,false);
+        footerView = inflater.inflate(R.layout.loadmore, null,false);
 
         ButterKnife.inject(this,view);
         //ButterKnife.inject(this, footerView);
 
-        Button loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
+        loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
         loadMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,7 +167,7 @@ public class TopicListFragment extends Fragment {
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 break;
             case "video":
-                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+                intent = new Intent(this.getActivity(), ShortVIdeoDetail.class);
                 break;
         }
 
@@ -177,24 +184,58 @@ public class TopicListFragment extends Fragment {
         }
     }
 
+    @OnClick(R.id.topic_list_fragment_add_discuss)void onCreateDiscuss()
+    {
+        Intent intent = new Intent(this.getActivity(), CreateMoodActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.topic_list_fragment_add_mood)void onCreateMood()
+    {
+
+    }
+    @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
+    {
+
+    }
 
     private void refreshTopicList()
     {
-        currentPage = 1;
+        currentPage = 0;
 
         requestTopicList();
     }
 
     private void getNextPage()
     {
-        requestTopicList();
+
+        if(currentPage < totalPage )
+        {
+            requestTopicList();
+        }
+        else
+        {
+            Toast.makeText(this.getActivity(), "没了", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void doHideFootView()
+    {
+        if(totalPage <= 1)
+        {
+            footerView.setVisibility(View.GONE);
+        }
+        else if(currentPage >= totalPage)
+        {
+            loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+        }
     }
 
     private void requestTopicList()
     {
 
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
-        String url = ServerMethod.topic + "?page=" + currentPage ;
+        String url = ServerMethod.topic + "?page=" + (currentPage + 1);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
@@ -214,7 +255,10 @@ public class TopicListFragment extends Fragment {
 
                             isRefreshData = true;
 
-                            currentPage++;
+                            totalPage = page.getTotalPages();
+                            currentPage = page.getCurPage() + 1;
+                            doHideFootView();
+
                         }
                     }
                 },

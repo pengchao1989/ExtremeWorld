@@ -3,6 +3,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     >
 
     <FrameLayout
@@ -59,9 +60,11 @@
 
 
                 <LinearLayout
+                    android:id="@+id/topic_list_fragment_add_discuss"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:gravity="center"
                     android:clickable="true">
 
@@ -70,6 +73,11 @@
                         android:layout_height="wrap_content"
                         android:src="@mipmap/ic_message_black_48dp"
                         />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/discuss"
+                        />
 
 
 
@@ -77,9 +85,11 @@
 
 
                 <LinearLayout
+                    android:id="@+id/topic_list_fragment_add_mood"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:gravity="center"
                     android:clickable="true">
 
@@ -89,13 +99,21 @@
                         android:src="@mipmap/ic_picture_in_picture_black_48dp"
                         />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mood"
+                        />
+
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/topic_list_fragment_add_short_video"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:gravity="center"
                     android:clickable="true"
                     >
@@ -103,6 +121,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/ic_videocam_black_48dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/short_video"
                         />
 
                 </LinearLayout>

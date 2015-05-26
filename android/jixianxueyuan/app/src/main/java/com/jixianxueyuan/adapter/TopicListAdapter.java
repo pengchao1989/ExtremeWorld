@@ -98,6 +98,8 @@ public class TopicListAdapter extends BaseAdapter {
         viewHolder.viewCountTextView.setText( String.valueOf(topicDTO.getViewCount()));
         viewHolder.agreeCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
+        ImageLoader.getInstance().displayImage(StaticResourceConfig.IMG_DOMAIN + topicDTO.getUser().getAvatar() + "!androidListAvatar", viewHolder.avatarImageView);
+
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 
         if(mediawrap != null)
@@ -150,6 +152,8 @@ public class TopicListAdapter extends BaseAdapter {
         ImageView typeImageView;
         @InjectView(R.id.topic_list_item_title)
         TextView titleTextView;
+        @InjectView(R.id.topic_list_item_avatar)
+        ImageView avatarImageView;
 
         @InjectView(R.id.topic_list_item_name)
         TextView nameTextView;

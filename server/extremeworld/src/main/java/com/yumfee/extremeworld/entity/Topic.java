@@ -195,7 +195,6 @@ public class Topic extends IdEntity
 		this.coursce = coursce;
 	}
 	
-	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tb_topic_hobby",
 	joinColumns = { @JoinColumn(name = "topic_id", referencedColumnName = "id" ) },

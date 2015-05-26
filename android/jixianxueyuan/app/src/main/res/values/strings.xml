@@ -12,6 +12,8 @@
     <string name="topic">动态</string>
     <string name="discovery">发现</string>
 
+    <string name="mood">心情</string>
+    <string name="short_video">短视频</string>
     <string name="news">新闻</string>
     <string name="discuss">讨论</string>
     <string name="video">视频</string>
@@ -20,6 +22,8 @@
 
     <string name="reply">回复</string>
     <string name="we_speek">我也说一句</string>
+    <string name="want_speek">想说点儿什么呢</string>
+    <string name="submit">发布</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

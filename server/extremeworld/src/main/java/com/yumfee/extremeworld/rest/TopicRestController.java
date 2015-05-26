@@ -82,6 +82,8 @@ public class TopicRestController
 		//JSR303
 		BeanValidators.validateWithException(validator,topic);
 		
+		
+		
 		topicService.saveTopic(topic);
 		
 		Long id = topic.getId();

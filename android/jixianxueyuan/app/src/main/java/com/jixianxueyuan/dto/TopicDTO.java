@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
 
+import java.util.List;
+
 public class TopicDTO
 {
     private Long id;
@@ -18,6 +20,10 @@ public class TopicDTO
     private UserMinDTO user;
 
     private MediaWrapDTO mediaWrap;
+
+    private TaxonomyDTO taxonomy;
+
+    private List<HobbyDTO> hobbys;
 
 
     public Long getId()
@@ -124,5 +130,17 @@ public class TopicDTO
     public void setMediaWrap(MediaWrapDTO mediaWrap) {
         this.mediaWrap = mediaWrap;
     }
-	
+    public TaxonomyDTO getTaxonomy() {
+        return taxonomy;
+    }
+    public void setTaxonomy(TaxonomyDTO taxonomy) {
+        this.taxonomy = taxonomy;
+    }
+    public List<HobbyDTO> getHobbys() {
+        return hobbys;
+    }
+    public void setHobbys(List<HobbyDTO> hobbys) {
+        this.hobbys = hobbys;
+    }
+
 }

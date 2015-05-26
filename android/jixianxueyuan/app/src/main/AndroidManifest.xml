@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <user-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +28,11 @@
         <activity android:name=".activity.MoodDetailActivity"/>
         <activity android:name=".activity.DiscussionDetailActivity"/>
         <activity android:name=".activity.CourseTaxonomyActivity"/>
+        <activity android:name=".activity.CreateMoodActivity"/>
+        <activity android:name=".activity.ShortVIdeoDetail"/>
+
+
+        <service android:name="com.jixianxueyuan.util.filedownload.DownloadService" />
     </application>
 
 </manifest>
