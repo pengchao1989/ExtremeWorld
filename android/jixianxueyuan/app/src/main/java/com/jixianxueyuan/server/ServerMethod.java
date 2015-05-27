@@ -8,7 +8,7 @@ public class ServerMethod {
     public static final int status_ok = 1;
 
     //static final String server_url = "http://jixianxueyuan.com:8080/extremeworld/";
-    static final String server_url = "http://10.20.3.126:8023/extremeworld/";
+    static final String server_url = "http://192.168.1.6:8023/extremeworld/";
     static final String api_version = "api/v1/";
     static final String hobby = "all";
 

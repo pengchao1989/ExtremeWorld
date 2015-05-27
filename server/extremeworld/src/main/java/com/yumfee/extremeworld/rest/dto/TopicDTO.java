@@ -20,7 +20,6 @@ public class TopicDTO
 	private int agreeCount;
 	private Date createTime;
 	private int status;
-	private String videoSource;
 	
 	private UserMinDTO user;
 	
@@ -107,14 +106,7 @@ public class TopicDTO
 	{
 		this.status = status;
 	}
-	public String getVideoSource()
-	{
-		return videoSource;
-	}
-	public void setVideoSource(String videoSource)
-	{
-		this.videoSource = videoSource;
-	}
+
 	public UserMinDTO getUser()
 	{
 		return user;

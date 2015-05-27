@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class UserMinDTO
+import java.io.Serializable;
+
+public class UserMinDTO implements Serializable
 {
 	private Long id;
 	private String name;

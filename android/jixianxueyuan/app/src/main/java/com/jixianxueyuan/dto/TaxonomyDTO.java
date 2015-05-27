@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class TaxonomyDTO {
+import java.io.Serializable;
+
+public class TaxonomyDTO implements Serializable {
 
 	private Long id;
 	private String name;

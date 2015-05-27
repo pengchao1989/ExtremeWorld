@@ -1,9 +1,10 @@
 package com.jixianxueyuan.dto;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TopicDTO
+public class TopicDTO implements Serializable
 {
     private Long id;
     private String type;
@@ -15,7 +16,6 @@ public class TopicDTO
     private int agreeCount;
     private String createTime;
     private int status;
-    private String videoSource;
 
     private UserMinDTO user;
 
@@ -107,14 +107,6 @@ public class TopicDTO
     public void setStatus(int status)
     {
         this.status = status;
-    }
-    public String getVideoSource()
-    {
-        return videoSource;
-    }
-    public void setVideoSource(String videoSource)
-    {
-        this.videoSource = videoSource;
     }
     public UserMinDTO getUser()
     {

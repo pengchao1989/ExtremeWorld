@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class MediaDTO {
+import java.io.Serializable;
+
+public class MediaDTO implements Serializable {
 
 	private Long id;
 	private String path;

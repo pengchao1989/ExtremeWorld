@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class HobbyDTO {
+import java.io.Serializable;
+
+public class HobbyDTO implements Serializable {
 
 	private Long id;
 	private String name;

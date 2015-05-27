@@ -173,6 +173,17 @@ public class TopicListFragment extends Fragment {
 
         if(intent != null)
         {
+            if(topicDTO.getMediaWrap() != null)
+            {
+                if(topicDTO.getMediaWrap().getMedias() != null)
+                {
+                    if(topicDTO.getMediaWrap().getMedias().size() != 0)
+                    {
+                        intent.putExtra("mediaPath", topicDTO.getMediaWrap().getMedias().get(0).getPath());
+                    }
+                }
+            }
+
             MyLog.d(TAG, "topicId=" + topicDTO.getId());
             intent.putExtra("topicId", topicDTO.getId());
             intent.putExtra("title", topicDTO.getTitle());

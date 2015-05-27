@@ -1,10 +1,11 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
-public class MediaWrapDTO {
+public class MediaWrapDTO implements Serializable {
 
 	private String createTime;
 	private List<MediaDTO> medias;
