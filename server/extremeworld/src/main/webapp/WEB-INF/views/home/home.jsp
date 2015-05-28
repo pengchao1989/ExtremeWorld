@@ -22,13 +22,13 @@
 	
 		<div class="row">
 			<h3>新鲜事</h3>
-			<div class="col s9 m9">
+			<div class="col s12 m9 l10 ">
 				
 				<tbody>
 					<c:forEach items="${topics.content}" var="topic">
 						
 						<div class="row ">
-							<div class="col s12 m10">
+							<div class="col s12 l10">
 								<div class="card white-grey darken-1">
 									<div class="card-content black-text">
 										
@@ -86,7 +86,7 @@
 	
 				
 			
-			<div class="col hide-on-small-only m3 l2">
+			<div class="col hide-on-small-only l2 m3">
 				<div class="toc-wrapper pin-top" style="top: 0px;">
 			        <div style="height: 1px;">
 			          <ul class="section table-of-contents">

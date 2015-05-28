@@ -29,13 +29,13 @@
 					<a href="#"> <img class="media-object" src="${static_url}${video.user.avatar}!webAvatarSmall" alt="..."></a>
 			</div>
 			
-			<div class="media-body">
+			<div class="media-body s12">
 			
 				<a href="${ctx}/u/${video.user.id}">${video.user.name}</a>
 				<p>${video.createTime}</p>
 				<br />
 					
-				<div id="danmup">
+				<div id="danmup" >
 				</div>
 			
 			

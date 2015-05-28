@@ -27,7 +27,7 @@
 		<div class="row">
 
 			<c:forEach items="${videos.content}" var="video" varStatus="status">
-				<div class=" col s3">
+				<div class=" col l3 s12">
 					<div class="card ">
 						<div class="card-image video_image">
 							<a href="${ctx}/${hobby}/video/${video.id}" target="_blank">

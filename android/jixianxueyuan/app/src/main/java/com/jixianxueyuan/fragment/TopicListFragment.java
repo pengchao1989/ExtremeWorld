@@ -27,11 +27,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateMoodActivity;
-import com.jixianxueyuan.activity.DiscussionDetailActivity;
-import com.jixianxueyuan.activity.MoodDetailActivity;
-import com.jixianxueyuan.activity.ShortVIdeoDetail;
+import com.jixianxueyuan.activity.ShortVideoDetailActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
-import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
@@ -52,7 +49,7 @@ import butterknife.OnItemClick;
  */
 public class TopicListFragment extends Fragment {
 
-    public static final String TAG = TopicListFragment.class.getSimpleName();
+    public static final String tag = TopicListFragment.class.getSimpleName();
 
     @InjectView(R.id.topic_list_fragment_listview)
     ListView listView;
@@ -86,13 +83,13 @@ public class TopicListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         adapter = new TopicListAdapter(this.getActivity());
 
-        Log.d("TopicListFragment","onCreate");
+        Log.d(tag,"onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
-        Log.d("TopicListFragment","onCreateView");
+        Log.d(tag,"onCreateView");
 
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
         footerView = inflater.inflate(R.layout.loadmore, null,false);
@@ -167,7 +164,7 @@ public class TopicListFragment extends Fragment {
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 break;
             case "video":
-                intent = new Intent(this.getActivity(), ShortVIdeoDetail.class);
+                intent = new Intent(this.getActivity(), ShortVideoDetailActivity.class);
                 break;
         }
 
@@ -184,7 +181,7 @@ public class TopicListFragment extends Fragment {
                 }
             }
 
-            MyLog.d(TAG, "topicId=" + topicDTO.getId());
+            MyLog.d(tag, "topicId=" + topicDTO.getId());
             intent.putExtra("topicId", topicDTO.getId());
             intent.putExtra("title", topicDTO.getTitle());
             intent.putExtra("content", topicDTO.getContent());
@@ -232,14 +229,20 @@ public class TopicListFragment extends Fragment {
 
     private void doHideFootView()
     {
-        if(totalPage <= 1)
+        if(totalPage > 1)
         {
-            footerView.setVisibility(View.GONE);
+            if(footerView.getVisibility() != View.VISIBLE)
+            {
+                footerView.setVisibility(View.VISIBLE);
+            }
+
+            if(currentPage >= totalPage)
+            {
+                loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+            }
+
         }
-        else if(currentPage >= totalPage)
-        {
-            loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
-        }
+
     }
 
     private void requestTopicList()

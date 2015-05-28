@@ -6,6 +6,21 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <user-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-feature android:name="android.hardware.camera" />
+
+    <permission
+        android:name="android.permission.FLASHLIGHT"
+        android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
+        android:protectionLevel="normal" />
+
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+
 
     <application
         android:allowBackup="true"
@@ -30,7 +45,8 @@
         <activity android:name=".activity.DiscussionDetailActivity"/>
         <activity android:name=".activity.CourseTaxonomyActivity"/>
         <activity android:name=".activity.CreateMoodActivity"/>
-        <activity android:name=".activity.ShortVIdeoDetail"/>
+        <activity android:name=".activity.ShortVideoDetailActivity"/>
+        <activity android:name=".activity.VideoRecordActivity"/>
 
 
         <service android:name="com.jixianxueyuan.util.filedownload.DownloadService" />

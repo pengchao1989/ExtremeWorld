@@ -90,7 +90,7 @@ public class TopicDetailActivity extends Activity{
         initFooterView();
 
         adapter = new TopicDetailListAdapter(this);
-        listView.setAdapter(adapter);;
+        listView.setAdapter(adapter);
 
         replyWidget = new ReplyWidget(this, contentLayout);
 
@@ -159,13 +159,17 @@ public class TopicDetailActivity extends Activity{
 
     private void doHideFootView()
     {
-        if(totalPage <= 1)
+        if(totalPage > 1)
         {
-            footerView.setVisibility(View.GONE);
-        }
-        else if(currentPage >= totalPage)
-        {
-            loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+            if(footerView.getVisibility() != View.VISIBLE)
+            {
+                footerView.setVisibility(View.VISIBLE);
+            }
+
+            if(currentPage >= totalPage)
+            {
+                loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+            }
         }
     }
 
