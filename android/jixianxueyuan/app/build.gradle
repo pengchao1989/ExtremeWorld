@@ -38,15 +38,4 @@ dependencies {
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile project(':emoji')
 
-
-/*    compile files('libs/javacpp.jar')
-    compile files('libs/opencv.jar')
-    compile files('libs/artoolkitplus.jar')
-    compile files('libs/ffmpeg.jar')
-    compile files('libs/flandmark.jar')
-    compile files('libs/flycapture.jar')
-    compile files('libs/javacv.jar')
-    compile files('libs/libdc1394.jar')
-    compile files('libs/libfreenect.jar')
-    compile files('libs/videoinput.jar')*/
 }
