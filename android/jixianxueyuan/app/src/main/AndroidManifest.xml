@@ -46,7 +46,8 @@
         <activity android:name=".activity.CourseTaxonomyActivity"/>
         <activity android:name=".activity.CreateMoodActivity"/>
         <activity android:name=".activity.ShortVideoDetailActivity"/>
-        <activity android:name=".activity.VideoRecordActivity"/>
+        <activity android:name=".record.FFmpegRecorderActivity"/>
+        <activity android:name=".record.FFmpegPreviewActivity"/>
 
 
         <service android:name="com.jixianxueyuan.util.filedownload.DownloadService" />

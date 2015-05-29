@@ -37,5 +37,6 @@ dependencies {
     compile 'com.github.liuguangqiang.swipeback:library:0.3.0@aar'
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile project(':emoji')
-
+    compile files('libs/javacpp.jar')
+    compile files('libs/javacv.jar')
 }

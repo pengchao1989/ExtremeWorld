@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.jixianxueyuan.activity.HomeActivity;
 import com.jixianxueyuan.activity.VideoDetailActivity;
-import com.jixianxueyuan.activity.VideoRecordActivity;
+import com.jixianxueyuan.record.FFmpegRecorderActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.romainpiel.shimmer.Shimmer;
@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.activity_main_record) void record()
     {
-        Intent intent = new Intent(this, VideoRecordActivity.class);
+        Intent intent = new Intent(this, FFmpegRecorderActivity.class);
         startActivity(intent);
     }
 }
