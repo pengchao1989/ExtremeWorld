@@ -77,7 +77,7 @@ public class TopicRestController
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)
-	public ResponseEntity<?> create(@RequestBody Topic topic, UriComponentsBuilder uriBuilder)
+	public MyResponse create(@RequestBody Topic topic, UriComponentsBuilder uriBuilder)
 	{
 		//JSR303
 		BeanValidators.validateWithException(validator,topic);
@@ -86,12 +86,11 @@ public class TopicRestController
 		
 		topicService.saveTopic(topic);
 		
-		Long id = topic.getId();
-		URI uri = uriBuilder.path("/api/v1/topic/" + id).build().toUri();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uri);
 
-		return new ResponseEntity(headers, HttpStatus.CREATED);
+		Topic result = topicService.getTopic(topic.getId());
+		TopicDTO dto = BeanMapper.map(result, TopicDTO.class);
+
+		return MyResponse.ok(dto);
 	}
 	
 }

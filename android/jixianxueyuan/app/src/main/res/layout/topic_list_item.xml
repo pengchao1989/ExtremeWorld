@@ -85,7 +85,7 @@
                 </LinearLayout>
 
 
-                <TextView
+                <com.yumfee.emoji.EmojiconTextView
                     android:id="@+id/topic_list_item_title"
                     android:layout_marginLeft="2dp"
                     style="@style/ListText"

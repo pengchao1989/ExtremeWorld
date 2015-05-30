@@ -1,11 +1,15 @@
 package com.jixianxueyuan.server;
 
+import com.squareup.okhttp.MediaType;
+
 /**
  * Created by pengchao on 2015/4/12.
  */
 public class ServerMethod {
 
     public static final int status_ok = 1;
+
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     //static final String server_url = "http://jixianxueyuan.com:8080/extremeworld/";
     static final String server_url = "http://192.168.1.6:8023/extremeworld/";

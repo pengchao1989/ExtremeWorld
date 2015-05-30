@@ -145,6 +145,11 @@ public class NewEditWidget {
 
     }
 
+    public String getText()
+    {
+        return emojiconEditText.getText().toString();
+    }
+
     public void setReplyWidgetListener(ReplyWidgetListener replyWidgetListener) {
         this.replyWidgetListener = replyWidgetListener;
     }

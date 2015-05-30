@@ -91,6 +91,7 @@
     <orderEntry type="library" exported="" name="library-1.0.15" level="project" />
     <orderEntry type="library" exported="" name="javacpp" level="project" />
     <orderEntry type="library" exported="" name="dfm-0.3.1" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.3" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
@@ -105,6 +106,7 @@
     <orderEntry type="library" exported="" name="contextmenu-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="javacv" level="project" />
     <orderEntry type="library" exported="" name="library-1.4.0" level="project" />
+    <orderEntry type="library" exported="" name="okio-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="MaterialTabs-0.11" level="project" />
     <orderEntry type="module" module-name="emoji" exported="" />

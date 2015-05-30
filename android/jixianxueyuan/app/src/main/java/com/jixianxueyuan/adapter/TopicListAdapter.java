@@ -17,6 +17,7 @@ import com.jixianxueyuan.util.DateTimeFormatter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.yumfee.emoji.EmojiconTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,7 +152,7 @@ public class TopicListAdapter extends BaseAdapter {
         @InjectView(R.id.topic_list_item_type)
         ImageView typeImageView;
         @InjectView(R.id.topic_list_item_title)
-        TextView titleTextView;
+        EmojiconTextView titleTextView;
         @InjectView(R.id.topic_list_item_avatar)
         ImageView avatarImageView;
 

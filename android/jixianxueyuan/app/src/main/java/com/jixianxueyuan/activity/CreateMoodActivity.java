@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.android.volley.Request;
@@ -23,6 +24,7 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.NewEditWidget;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -76,22 +78,35 @@ public class CreateMoodActivity extends Activity {
         buildTopicParam();
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("topic",topicDTO);
+        map.put("title", "this is title");
+        map.put("content", "this is content");
+        map.put("type", "mood");
 
-        JSONObject jsonObject = new JSONObject(map);
+        Gson gson = new Gson();
+        String param = gson.toJson(topicDTO);
+        MyLog.d(tag, "param json=" + param);
+
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(param);
+            MyLog.d(tag, "jsonObject=" + jsonObject.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,url,jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        MyLog.d(tag, "onResponse");
+                        MyLog.d(tag, "onResponse=" + response.toString());
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        MyLog.d(tag, "onErrorResponse");
+                        MyLog.d(tag, "onErrorResponse" + error.toString());
                     }
                 });
 
@@ -101,8 +116,8 @@ public class CreateMoodActivity extends Activity {
     private void buildTopicParam()
     {
         topicDTO = new TopicDTO();
-        topicDTO.setTitle("this content is from android client");
-        topicDTO.setContent("this content is from android client");
+        topicDTO.setTitle(newEditWidget.getText());
+        topicDTO.setContent(newEditWidget.getText());
         topicDTO.setType("mood");
         UserMinDTO userMinDTO = new UserMinDTO();
         userMinDTO.setId(1L);
