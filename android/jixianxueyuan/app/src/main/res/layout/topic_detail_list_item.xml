@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     style="@style/ListItem"
     >
 
     <include layout="@layout/user_head_view"/>
 
-    <TextView
+    <com.yumfee.emoji.EmojiconTextView
         android:id="@+id/topic_detail_list_item_reply_content"
+        emojicon:emojiconSize="28sp"
         style="@style/contentText"
         />
 

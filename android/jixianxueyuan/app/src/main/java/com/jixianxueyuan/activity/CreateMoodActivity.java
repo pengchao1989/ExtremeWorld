@@ -77,11 +77,6 @@ public class CreateMoodActivity extends Activity {
 
         buildTopicParam();
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("title", "this is title");
-        map.put("content", "this is content");
-        map.put("type", "mood");
-
         Gson gson = new Gson();
         String param = gson.toJson(topicDTO);
         MyLog.d(tag, "param json=" + param);

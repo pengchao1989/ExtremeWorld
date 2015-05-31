@@ -24,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -33,15 +34,25 @@ import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
+import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.dto.request.ReplyRequest;
+import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ReplyWidget;
+import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yumfee.emoji.EmojiconEditText;
+import com.yumfee.emoji.EmojiconTextView;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -52,14 +63,14 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends Activity{
+public class TopicDetailActivity extends Activity implements ReplyWidgetListener {
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
 
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
 
-    int currentPage = 1;
+    int currentPage = 0;
     int totalPage = 0;
     TopicDetailListAdapter adapter;
 
@@ -74,7 +85,6 @@ public class TopicDetailActivity extends Activity{
     HeadViewHolder headViewHolder;
     View footerView;
     Button loadMoreButton;
-
 
     ReplyWidget replyWidget;
 
@@ -93,6 +103,7 @@ public class TopicDetailActivity extends Activity{
         listView.setAdapter(adapter);
 
         replyWidget = new ReplyWidget(this, contentLayout);
+        replyWidget.setReplyWidgetListener(this);
 
 
         requestReplyList();
@@ -141,13 +152,12 @@ public class TopicDetailActivity extends Activity{
             }
             else if(contentFragmentList.get(n).mType == AnalyzeContent.ContentFragment.TEXT_TYPE)
             {
-                TextView textView = new TextView(this);
+                EmojiconTextView textView = new EmojiconTextView(this);
                 textView.setTextSize(20);
+                textView.setEmojiconSize(48);
                 textView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 headViewHolder.contentLayout.addView(textView);
-/*								String emoji = "\ue32d \ue32d \ue32d";
-								String content = "ÎÒÊÇÄÚÈÝ hello";*/
                 String temp = contentFragmentList.get(n).mText ;
                 textView.setText(Html.fromHtml(temp));
             }
@@ -203,24 +213,21 @@ public class TopicDetailActivity extends Activity{
     private void requestReplyList()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.reply + "?topicId="+ topicId + "&page=" + currentPage ;
+        String url = ServerMethod.reply + "?topicId="+ topicId + "&page=" + (currentPage + 1) ;
         MyLog.d(tag, "request=" + url);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
-                new Response.Listener<String>() {
+        MyPageRequest<ReplyDTO> stringRequest = new MyPageRequest<ReplyDTO>(Request.Method.GET,url,ReplyDTO.class,
+                new Response.Listener<MyResponse<MyPage<ReplyDTO>>>()
+                {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(MyResponse<MyPage<ReplyDTO>> response) {
 
                         MyLog.d(tag,"response=" + response);
 
-                        Gson gson = new Gson();
 
-                        MyResponse<MyPage<ReplyDTO>> myResponse = gson.fromJson(response,new TypeToken<MyResponse<MyPage<ReplyDTO>>>(){}.getType());
-
-
-                        if(myResponse.getStatus() == ServerMethod.status_ok)
+                        if(response.getStatus() == MyResponse.status_ok)
                         {
-                            MyPage page = myResponse.getContent();
+                            MyPage<ReplyDTO> page = response.getContent();
                             List<ReplyDTO> topicDTOs = page.getContents();
                             adapter.addNextPageData(topicDTOs);
 
@@ -241,9 +248,61 @@ public class TopicDetailActivity extends Activity{
         queue.add(stringRequest);
     }
 
+    private void submitReply(String replyContent)
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ServerMethod.reply;
+
+        ReplyRequest replyRequest = buildReplyDTO(replyContent);
+
+
+        MyRequest<ReplyDTO> stringRequest = new MyRequest<ReplyDTO>(Request.Method.POST,url,ReplyDTO.class, replyRequest,
+                new Response.Listener<MyResponse<ReplyDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<ReplyDTO> response) {
+                        MyLog.d(tag, "onResponse=" + response.toString());
+
+                        if(response.getStatus() == MyResponse.status_ok)
+                        {
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        MyLog.d(tag, "onErrorResponse" + error.toString());
+                    }
+                });
+
+        queue.add(stringRequest);
+    }
+
+    private ReplyRequest buildReplyDTO(String replyString)
+    {
+        ReplyRequest replyDTO = new ReplyRequest();
+        replyDTO.setContent(replyString);
+
+        UserMinDTO userMinDTO = new UserMinDTO();
+        userMinDTO.setId(1L);
+        replyDTO.setUser(userMinDTO);
+
+        TopicDTO topicDTO = new TopicDTO();
+        topicDTO.setId(topicId);
+        replyDTO.setTopic(topicDTO);
+
+        return replyDTO;
+    }
+
+
+    @Override
+    public void onCommit(String text) {
+        submitReply(text);
+    }
+
     public class HeadViewHolder
     {
-        @InjectView(R.id.topic_detail_title)TextView titleTextView;
+        @InjectView(R.id.topic_detail_title)EmojiconTextView titleTextView;
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;

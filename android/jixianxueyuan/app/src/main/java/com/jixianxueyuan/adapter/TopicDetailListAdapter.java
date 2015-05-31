@@ -12,6 +12,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.yumfee.emoji.EmojiconTextView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -96,7 +97,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
-        @InjectView(R.id.topic_detail_list_item_reply_content)TextView replyContentTextView;
+        @InjectView(R.id.topic_detail_list_item_reply_content)EmojiconTextView replyContentTextView;
 
         public ViewHolder(View itemView)
         {

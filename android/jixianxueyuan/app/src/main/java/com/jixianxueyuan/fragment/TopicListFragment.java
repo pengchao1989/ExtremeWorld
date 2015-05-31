@@ -261,7 +261,7 @@ public class TopicListFragment extends Fragment {
                         MyResponse<MyPage<TopicDTO>> myResponse = gson.fromJson(response,new TypeToken<MyResponse<MyPage<TopicDTO>>>(){}.getType());
 
 
-                        if(myResponse.getStatus() == ServerMethod.status_ok)
+                        if(myResponse.getStatus() == MyResponse.status_ok)
                         {
                             MyPage page = myResponse.getContent();
                             List<TopicDTO> topicDTOs = page.getContents();

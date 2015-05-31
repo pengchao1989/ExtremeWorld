@@ -2,6 +2,8 @@ package com.jixianxueyuan.dto;
 
 public class MyResponse<T> {
 
+    public static final int status_ok = 1;
+
 	public int status;
 	
 	public T content;

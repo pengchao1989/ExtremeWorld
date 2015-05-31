@@ -1,5 +1,7 @@
 package com.jixianxueyuan.dto;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class MyPage<T> {
@@ -40,6 +42,22 @@ public class MyPage<T> {
 	public void setTotalElements(Long totalElements) {
 		this.totalElements = totalElements;
 	}
+
+    static ParameterizedType type(final Class raw, final Type... args) {
+        return new ParameterizedType() {
+            public Type getRawType() {
+                return raw;
+            }
+
+            public Type[] getActualTypeArguments() {
+                return args;
+            }
+
+            public Type getOwnerType() {
+                return null;
+            }
+        };
+    }
 	
 	
 	

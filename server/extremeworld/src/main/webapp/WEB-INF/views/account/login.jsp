@@ -10,6 +10,8 @@
 	<title>登录页</title>
 </head>
 
+<meta property="qc:admins" content="23561375476173314563757504255577244" />
+
 <link type="image/x-icon" href="${ctx}/static/images/favicon.ico" rel="shortcut icon">
 <link href="${ctx}/static/jquery-validation/1.11.1/validate.css" type="text/css" rel="stylesheet" />
 

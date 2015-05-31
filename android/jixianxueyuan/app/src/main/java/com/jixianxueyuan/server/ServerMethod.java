@@ -7,7 +7,6 @@ import com.squareup.okhttp.MediaType;
  */
 public class ServerMethod {
 
-    public static final int status_ok = 1;
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
