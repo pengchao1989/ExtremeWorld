@@ -40,6 +40,12 @@ public class TopicDetailListAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public void addNew(ReplyDTO replyDTO)
+    {
+        this.replyDTOs.add(replyDTO);
+        this.notifyDataSetChanged();
+    }
+
     public void adFrontPageData()
     {
 

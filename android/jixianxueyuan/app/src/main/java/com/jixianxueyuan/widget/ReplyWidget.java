@@ -171,4 +171,12 @@ public class ReplyWidget {
         iconToBeChanged.setImageResource(drawableResourceId);
     }
 
+    public void clean()
+    {
+        if(emojiconEditText != null)
+        {
+            emojiconEditText.setText("");
+        }
+    }
+
 }

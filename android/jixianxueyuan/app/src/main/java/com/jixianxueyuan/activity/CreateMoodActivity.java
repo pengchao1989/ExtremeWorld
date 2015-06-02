@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,7 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.NewEditWidget;
@@ -77,25 +79,17 @@ public class CreateMoodActivity extends Activity {
 
         buildTopicParam();
 
-        Gson gson = new Gson();
-        String param = gson.toJson(topicDTO);
-        MyLog.d(tag, "param json=" + param);
-
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(param);
-            MyLog.d(tag, "jsonObject=" + jsonObject.toString());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,url,jsonObject,
-                new Response.Listener<JSONObject>() {
+        MyRequest<TopicDTO> stringRequest = new MyRequest(Request.Method.POST,url,TopicDTO.class, topicDTO,
+                new Response.Listener<MyResponse<TopicDTO>>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(MyResponse<TopicDTO> response) {
 
-                        MyLog.d(tag, "onResponse=" + response.toString());
+                        if(response.getStatus() == MyResponse.status_ok)
+                        {
+                            Toast.makeText(CreateMoodActivity.this, R.string.add_topic_success, Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+
                     }
                 },
                 new Response.ErrorListener() {
