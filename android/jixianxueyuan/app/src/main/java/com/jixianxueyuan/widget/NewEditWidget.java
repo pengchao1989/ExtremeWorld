@@ -22,10 +22,12 @@ public class NewEditWidget {
 
     Context context;
     ReplyWidgetListener replyWidgetListener;
+    NewEditWidgetListener newEditWidgetListener;
 
     LinearLayout contentContainer;
 
     ImageView emojiButton;
+    ImageView imgButton;
     EmojiconEditText emojiconEditText;
 
     public NewEditWidget(Context context, LinearLayout contentContainer)
@@ -40,7 +42,8 @@ public class NewEditWidget {
     {
         View view = LayoutInflater.from(context).inflate(R.layout.new_edit_widget, null);
 
-        emojiButton = (ImageView) view.findViewById(R.id.reply_widget_emoji_button);
+        emojiButton = (ImageView) view.findViewById(R.id.new_edit_widget_emoji_button);
+        imgButton = (ImageView) view.findViewById(R.id.new_edit_widget_img_button);
         emojiconEditText = (EmojiconEditText) view.findViewById(R.id.reply_widget_edittext);
         final View rootView = view.findViewById(R.id.reply_widget_root_view);
 
@@ -140,6 +143,17 @@ public class NewEditWidget {
             }
         });
 
+        imgButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if(newEditWidgetListener != null)
+                {
+                    newEditWidgetListener.onImage();
+                }
+            }
+        });
+
 
         contentContainer.addView(view);
 
@@ -152,6 +166,11 @@ public class NewEditWidget {
 
     public void setReplyWidgetListener(ReplyWidgetListener replyWidgetListener) {
         this.replyWidgetListener = replyWidgetListener;
+    }
+
+    public void setNewEditWidgetListener(NewEditWidgetListener listener)
+    {
+        this.newEditWidgetListener = listener;
     }
 
 

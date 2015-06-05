@@ -20,9 +20,14 @@
             android:orientation="vertical"
             />
 
+        <com.jixianxueyuan.widget.NoScorllBarGridView
+            android:id="@+id/create_mood_image_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
 
     </LinearLayout>
-
 
     <Button
         android:id="@+id/create_mood_submit"

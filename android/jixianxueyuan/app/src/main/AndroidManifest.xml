@@ -49,6 +49,10 @@
         <activity android:name=".record.FFmpegRecorderActivity"/>
         <activity android:name=".record.FFmpegPreviewActivity"/>
 
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+
 
         <service android:name="com.jixianxueyuan.util.filedownload.DownloadService" />
     </application>

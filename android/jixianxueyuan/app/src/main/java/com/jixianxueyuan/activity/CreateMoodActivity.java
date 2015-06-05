@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -25,6 +26,8 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.NewEditWidget;
+import com.jixianxueyuan.widget.NewEditWidgetListener;
+import com.jixianxueyuan.widget.NoScorllBarGridView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,19 +41,24 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
  * Created by pengchao on 5/24/15.
  */
-public class CreateMoodActivity extends Activity {
+public class CreateMoodActivity extends Activity implements NewEditWidgetListener {
 
     public static final String tag = CreateMoodActivity.class.getSimpleName();
 
 
     @InjectView(R.id.create_edit_widget_layout)
     LinearLayout editWidgetLayout;
+    @InjectView(R.id.create_mood_image_gridview)
+    NoScorllBarGridView imageGridView;
 
     NewEditWidget newEditWidget;
+
+
 
     TopicDTO topicDTO;
 
@@ -64,6 +72,8 @@ public class CreateMoodActivity extends Activity {
 
 
         newEditWidget = new NewEditWidget(this, editWidgetLayout);
+
+        newEditWidget.setNewEditWidgetListener(this);
 
     }
 
@@ -118,4 +128,37 @@ public class CreateMoodActivity extends Activity {
         topicDTO.setHobbys(hobbys);
     }
 
+    @Override
+    public void onImage()
+    {
+        Intent intent = new Intent(this, MultiImageSelectorActivity.class);
+
+// whether show camera
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
+
+// max select image amount
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 9);
+
+// select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
+
+        startActivityForResult(intent, 1);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                // Get the result list of select image paths
+                List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                // do your logic ....
+                for(String p : path)
+                {
+                    MyLog.d(tag, "path=" + p);
+                }
+            }
+        }
+    }
 }
