@@ -13,28 +13,66 @@
 <body>
 	<div class="container main_content">
 		
-		
-		<form action="${ctx}/qqlogin/${action}" method="post" class="form-welcome">
-			
-			<input type="hidden" name="id" value="${user.id}"/>
-		
-			<h1>welcome</h1>
-		
-			<div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">名字</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="name"  name="name" placeholder="名字" value="${user.name}">
-			    </div>
-			  </div>
+		<div class="row">
+			<div class="col s12 m5 l5">
+				<h3>公约</h3>
+				<ul>
+					<p>用户以各种方式使用极限学院服务和数据（包括但不限于发表、宣传介绍、转载、浏览及利用极限学院或极限学院用户发布内容）的过程中，不得以任何方式利用极限学院直接或间接从事违反中国法律、以及社会公德的行为，且用户应当恪守下述承诺：</p>
+					<li>1. 发布、转载或提供的内容符合中国法律、社会公德；</li>
+					<li>2. 不得干扰、损害和侵犯极限学院的各种合法权利与利益；</li>
+					<li>3. 遵守极限学院以及与之相关的网络服务的协议、指导原则、管理细则等；</li>
 
-			<div class="form-group">
-				<div class="col-md-2"></div>
-				<div class="col-sm-10">
-					<button type="submit" class="btn btn-primary btn-lg">发布</button>
-				</div>
-
+					<p>极限学院有权对违反上述承诺的内容予以删除。</p>
+				
+				</ul>
 			</div>
-		</form>
+		
+			<div class="col s12 m6 l6">
+				<h3>个人信息</h3>
+			
+				<form action="${ctx}/qqlogin/${action}" method="post" class="form-welcome">
+			
+					<input type="hidden" name="id" value="${user.id}"/>
+				
+					
+					<div class="input-field col s12">
+					     <input type="text" class="validate" id="name"  name="name"  value="${user.name}">
+					     <label for="name">昵称</label>
+					</div>
+					
+					<div class="input-field col s12">
+						<select name="gender">
+					      <option value="保密" >您的性别</option>
+					      <option value="男">男</option>
+					      <option value="女">女</option>
+					      <option value="保密">保密</option>
+					    </select>
+					</div>
+		
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-primary btn-lg">提交</button>
+						</div>
+		
+					</div>
+				</form>
+			</div>
+			
+			
+
+		</div>
+		
+		<div style="padding-bottom:360px"/>
+		
+		
 	</div>
+	
+	<script type="text/javascript">
+	  $(document).ready(function() {
+		    $('select').material_select();
+		  });
+	</script>
 </body>
+	
 </html>
