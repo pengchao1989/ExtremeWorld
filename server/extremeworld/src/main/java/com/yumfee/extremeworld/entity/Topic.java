@@ -214,7 +214,7 @@ public class Topic extends IdEntity
 	@ManyToMany(cascade = { CascadeType.PERSIST },fetch = FetchType.LAZY)
 	@JoinTable(name = "tb_topic_agree",
 	joinColumns = { @JoinColumn(name = "topic_id", referencedColumnName = "id" ) },
-	inverseJoinColumns = { @JoinColumn(name="u_id", referencedColumnName = "userId") })
+	inverseJoinColumns = { @JoinColumn(name="user_id", referencedColumnName = "userId") })
 	public List<User> getAgrees()
 	{
 		return agrees;
