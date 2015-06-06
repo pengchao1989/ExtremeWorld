@@ -60,6 +60,7 @@ public class CourseController
 		
 		model.addAttribute("courseTaxonomyList", courseTaxonomyList);
 		
+		model.addAttribute("hobby",hobby);
 		return "/course/courseList";
 	}
 	
@@ -139,7 +140,7 @@ public class CourseController
 		model.addAttribute("action", "update");
 		
 		model.addAttribute("hobby", hobby);
-		return "/" + hobby + "/course/courseForm";
+		return  "/course/courseForm";
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)

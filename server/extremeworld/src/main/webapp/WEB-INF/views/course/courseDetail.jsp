@@ -16,7 +16,7 @@
 		<div class="jumbotron">
 			<div class = "row">
 				<div class="col-sm-10">
-					<h1>${course.name}</h1><p><a class="btn btn-success " href="${ctx}/course/update/${course.id}" role="button">编辑</a></p>
+					<h1>${course.name}</h1><p><a class="btn btn-success " href="${ctx}/${hobby}/course/update/${course.id}" role="button">编辑</a></p>
 				</div>
 				
 				<div class="col-sm-2">

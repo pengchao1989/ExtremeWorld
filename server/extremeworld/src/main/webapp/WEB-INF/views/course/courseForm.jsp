@@ -17,18 +17,22 @@
 		
 			<input type="hidden" name="id" value="${course.id}"/>
 		
- 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-2 control-label">分类</label>
-				<div class="col-sm-10">
-					<select class="form-control"  id="taxonomySelect" name="courseTaxonomyId" >
+			<c:if test="${action == 'create'}">
+				 <div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">分类</label>
+					<div class="col-sm-10">
+						<select class="form-control"  id="taxonomySelect" name="courseTaxonomyId" >
+	
+						<c:forEach items="${courseTaxonomyList}" var="courseTaxonomy">
+							<option value=${courseTaxonomy.id}>${courseTaxonomy.name}</option>
+						</c:forEach>
+							
+						</select>
+					</div>
+				</div> 
+			</c:if>
+		
 
-					<c:forEach items="${courseTaxonomyList}" var="courseTaxonomy">
-						<option value=${courseTaxonomy.id}>${courseTaxonomy.name}</option>
-					</c:forEach>
-						
-					</select>
-				</div>
-			</div> 
 		
 			<div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">名称</label>

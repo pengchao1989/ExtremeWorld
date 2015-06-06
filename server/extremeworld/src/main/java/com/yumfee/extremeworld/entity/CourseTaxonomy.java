@@ -41,8 +41,7 @@ public class CourseTaxonomy extends IdEntity
 	}
 
 	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="taxonomy_id")
+	@OneToMany(mappedBy = "courseTaxonomy")
 	public List<Course> getCourses()
 	{
 		return courses;

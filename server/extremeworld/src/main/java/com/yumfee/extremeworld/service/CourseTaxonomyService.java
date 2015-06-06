@@ -24,6 +24,7 @@ public class CourseTaxonomyService
 	private CourseTaxonomyDao courseTaxonomyDao;
 	private CourseDao courseDao;
 	
+	
 	public CourseTaxonomy getCourseTaxonomy(Long id)
 	{
 		return courseTaxonomyDao.findOne(id);
@@ -89,6 +90,14 @@ public class CourseTaxonomyService
 		}*/
 		
 		List<CourseTaxonomy> courseTaxonomys = courseTaxonomyDao.findAll();
+		
+		//再循环取出每个目录下的course
+		for(CourseTaxonomy courseTaxonomy : courseTaxonomys)
+		{
+			List<Course> courses = courseDao.findByCourseTaxonomyIdAndType(courseTaxonomy.getId(), "course");
+			courseTaxonomy.setCourses(courses);
+		}
+		
 
 		return courseTaxonomys;
 	}

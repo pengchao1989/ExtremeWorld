@@ -22,7 +22,7 @@
 			
 			
 				<c:forEach items="${courseTaxonomy.courses}" var="course">
-					<a class="list-group-item" href="${ctx}/course/${course.id}">${course.name}</a>
+					<a class="list-group-item" href="${ctx}/${hobby}/course/${course.id}">${course.name}</a>
 				</c:forEach>
 			
 			</div>
