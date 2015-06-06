@@ -24,10 +24,12 @@ import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.service.TopicService;
+import com.yumfee.extremeworld.service.UserService;
 
 
 @RestController
@@ -43,6 +45,9 @@ public class TopicRestController
 	
 	@Autowired
 	private Validator validator;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public  MyResponse list(
@@ -92,5 +97,7 @@ public class TopicRestController
 
 		return MyResponse.ok(dto);
 	}
+	
+
 	
 }

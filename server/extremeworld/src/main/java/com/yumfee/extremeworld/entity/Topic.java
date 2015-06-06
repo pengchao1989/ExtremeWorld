@@ -53,6 +53,8 @@ public class Topic extends IdEntity
 	
 	private List<Hobby> hobbys;
 	
+	private List<User> agrees;
+	
 	
 	public String getType() {
 		return type;
@@ -205,5 +207,25 @@ public class Topic extends IdEntity
 	public void setHobbys(List<Hobby> hobbys) {
 		this.hobbys = hobbys;
 	}
+
+
+
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST },fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_topic_agree",
+	joinColumns = { @JoinColumn(name = "topic_id", referencedColumnName = "id" ) },
+	inverseJoinColumns = { @JoinColumn(name="u_id", referencedColumnName = "userId") })
+	public List<User> getAgrees()
+	{
+		return agrees;
+	}
+	public void setAgrees(List<User> agrees)
+	{
+		this.agrees = agrees;
+	}
+
+	
+	
+	
 	
 }

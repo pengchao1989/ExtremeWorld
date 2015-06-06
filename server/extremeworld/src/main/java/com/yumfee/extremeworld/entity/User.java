@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -35,9 +34,11 @@ public class User extends UserBase
 	private Country country;
 	private List<Hobby> hobbys = new ArrayList<Hobby>();
 	private List<Site> sites = new ArrayList<Site>();
+	private List<Topic> agreeTopics = new ArrayList<Topic>();
 	
 	private List<User> followings = new ArrayList<User>();
 	private List<User> followers = new ArrayList<User>();
+	 
 	
 	/*private List<Credit> credits = new ArrayList<Credit>(); //user自己的技能xue习列表
 */	/*private List<Score> scores = new ArrayList<Score>();  //user对别人的Credit评分*/	
@@ -144,6 +145,19 @@ public class User extends UserBase
 		this.sites = sites;
 	}
 	
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "agrees")
+	public List<Topic> getAgreeTopics()
+	{
+		return agreeTopics;
+	}
+	public void setAgreeTopics(List<Topic> agreeTopics)
+	{
+		this.agreeTopics = agreeTopics;
+	}
+	
+	
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
 	@JoinTable(name = "tb_following",
@@ -187,5 +201,14 @@ public class User extends UserBase
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {   
+        if (obj instanceof User) {   
+            User u = (User) obj;   
+            return this.id.equals(u.id);   
+        }   
+        return super.equals(obj); 
 	}
 }
