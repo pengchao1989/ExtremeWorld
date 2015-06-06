@@ -154,13 +154,18 @@ public class CourseController
 		
 		//将现有内容拷贝为历史版本
 		Course courseRevision = new Course();
-		courseRevision.setName(curCourse.getName()+"-revision");
+		courseRevision.setName(curCourse.getName()+"-revision-");
 		courseRevision.setContent(curCourse.getContent());
 		courseRevision.setType("revision");
 		courseRevision.setUser(curCourse.getUser());
 		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
 		courseRevision.setPid(curCourse.getId());
 		courseService.saveCourse(courseRevision);
+		
+		//再将历史版本取出来，更新名字，fuck
+		courseRevision.setName(courseRevision.getName() + courseRevision.getId());
+		courseService.saveCourse(courseRevision);
+		
 		
 		//将新内容更新至原始数据库行
 		curCourse.setName(newCourse.getName());
@@ -183,7 +188,7 @@ public class CourseController
 		model.addAttribute("preversion", revision.get(revision.size()-1));
 		
 		model.addAttribute("hobby", hobby);
-		return "/" + hobby +  "/course/courseRevision";
+		return "/course/courseRevision";
 	}
 	
 	/**

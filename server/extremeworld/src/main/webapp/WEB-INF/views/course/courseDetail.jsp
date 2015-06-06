@@ -25,9 +25,9 @@
 				</div>
 			</div>
 			
-			<label>最后由</label><a href="${ctx}/u/${course.user.id}">${course.user.name}</a><label>于${course.modifyTime}编辑</label><a href="${ctx}/course/revision/${course.id}">  历史</a>
+			<label>最后由</label><a href="${ctx}/u/${course.user.id}">${course.user.name}</a><label>于${course.modifyTime}编辑</label><a href="${ctx}/${hobby}/course/revision/${course.id}">  历史</a>
 			
-		 	<p>${course.content}</p>
+		 	<p id="course_content">${course.content}</p>
 		</div>
 		
 		<h2>讨论与教学</h2>
@@ -78,5 +78,25 @@
 	</div>
 	
 	</div>
+	
+	<script type="text/javascript">
+	
+		function TransferString(content)  
+		{  
+		    var string = content;  
+		    try{  
+		        string=string.replace(/\r\n/g,"<br/>")  
+		        string=string.replace(/\n/g,"<br/>");  
+		    }catch(e) {  
+		        alert(e.message);  
+		    }  
+		    return string;  
+		}  
+	
+	
+		$(document).ready(function(){
+			$("#course_content").html(TransferString($("#course_content").text()));
+		});
+	</script>
 </body>
 </html>

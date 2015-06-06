@@ -27,10 +27,33 @@
 		
 	</div>
 	
+		<p id="vesion" style="visibility:hidden;">${version.content}</p>
+		<p id="revesion" style="visibility:hidden;">${preversion.content}</p>
+	
 	
 		<script type="text/javascript">
+		
+		function TransferString(content)  
+		{  
+		    var string = content;  
+		    try{  
+		        string=string.replace(/\r\n/g,"\n");
+		        string=string.replace(/\n/g,"\n");  
+		    }catch(e) {  
+		        alert(e.message);  
+		    }  
+		    return string;  
+		}  
 
         $(document).ready(function () {
+        	
+        	var reversion = TransferString($("#revesion").text());
+        	var version  = TransferString($("#vesion").text());
+        	
+        	
+        	console.log(reversion);
+        	console.log(version);
+        	
         	
 			$('#compare').mergely({
 				width: 'auto',
@@ -39,10 +62,10 @@
 					readOnly: true, 
 					lineWrapping: true,
 				},lhs: function(setValue) {
-					setValue("${preversion.content}");
+					setValue(reversion);
 				},
 				rhs: function(setValue) {
-					setValue("${version.content}");
+					setValue(version);
 				}
 			});
 			

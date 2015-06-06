@@ -13,7 +13,7 @@
 <body>
 
 	<div  class="container main_content">
-		<form action="${ctx}/course/${action}" method="post" class="form-horizontal">
+		<form action="${ctx}/${hobby}/course/${action}" method="post" class="form-horizontal">
 		
 			<input type="hidden" name="id" value="${course.id}"/>
 		

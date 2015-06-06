@@ -6,3 +6,4 @@ $('#nav_menu li').click(function(e) {
   }
   e.preventDefault();
 });
+
