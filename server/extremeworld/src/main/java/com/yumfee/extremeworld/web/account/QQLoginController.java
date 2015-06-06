@@ -25,6 +25,7 @@ import com.qq.connect.api.OpenID;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
+import com.yumfee.extremeworld.entity.Country;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.account.AccountService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
@@ -63,6 +64,7 @@ public class QQLoginController
 	@RequestMapping(value = "redirect", method = RequestMethod.GET)
 	public String qqLoginRedirect(HttpServletRequest  request ,HttpServletResponse response) throws IOException
 	{
+		System.out.println("/redirect");
 		return qqLoginAfter(request,response);
 	}
 	
@@ -131,6 +133,10 @@ public class QQLoginController
                 	myUser.setName(userInfoBean.getNickname());
                 	myUser.setPlainPassword(openID);
                 	
+                	Country country = new Country();
+                	country.setId("CN");
+                	myUser.setCountry(country);
+                	
                 	accountService.registerUser(myUser);
                 	
                 	
@@ -141,6 +147,7 @@ public class QQLoginController
                 	
                 }
                 
+                //下面几行语句执行后进入ShiroDbRealm doGetAuthenticationInfo函数，校验合法性
                 Subject subject = SecurityUtils.getSubject();
                 UsernamePasswordToken token = new UsernamePasswordToken(openID,openID);
                 subject.login(token);
@@ -186,7 +193,7 @@ public class QQLoginController
 		
 		accountService.updateUser(user);
 		updateCurrentUserName(user.getName());
-		return "redirect:/topic";
+		return "redirect:/";
 	}
 	
 	@ModelAttribute

@@ -97,7 +97,7 @@ public class User extends UserBase
 	}
 	
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "country_id")
 	public Country getCountry() {
 		return country;

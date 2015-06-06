@@ -68,9 +68,7 @@ public class AccountService {
 	
 	public void registerUser(User user) 
 	{
-		entryptPassword(user); 
-/*		user.setPassword("ccc");
-		user.setSalt("salt");*/
+		entryptPassword(user);
 		
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());

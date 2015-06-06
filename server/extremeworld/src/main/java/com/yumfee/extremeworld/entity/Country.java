@@ -10,12 +10,11 @@ import javax.persistence.Table;
 @Table(name = "s_country")
 public class Country {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	String id;
 	String name;
 	String nameZH;
 	
+	@Id
 	public String getId() {
 		return id;
 	}
