@@ -26,9 +26,7 @@
 			</ul>
 
 
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-				</li>
+			<ul class="right hide-on-med-and-down">
 				<shiro:authenticated>  
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

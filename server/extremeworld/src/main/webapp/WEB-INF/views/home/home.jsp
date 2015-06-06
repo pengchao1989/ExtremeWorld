@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="${ctx}/static/styles//colorbox.css" />
 
-<title>Extreme world</title>
+<title>新鲜事</title>
 </head>
 <body>
 

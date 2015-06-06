@@ -48,19 +48,21 @@
 					      <option value="保密">保密</option>
 					    </select>
 					</div>
+					
+					<div class="input-field col s12">
+					     <input type="text" class="validate" id="birth"  name="birth"  value="1989">
+					     <label for="birth">出生年份</label>
+					</div>
 		
 					<div class="form-group">
-						<div class="col-md-2"></div>
-						<div class="col-sm-10">
-							<button type="submit" class="btn btn-primary btn-lg">提交</button>
+						<div class="col s12">
+							<button type="submit" class="btn waves-effect waves-light">走你 <i class="mdi-content-send right"></i></button>
 						</div>
 		
 					</div>
 				</form>
 			</div>
 			
-			
-
 		</div>
 		
 		<div style="padding-bottom:360px"/>

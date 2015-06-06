@@ -132,6 +132,8 @@ public class QQLoginController
                 	myUser.setLoginName(openID);
                 	myUser.setName(userInfoBean.getNickname());
                 	myUser.setPlainPassword(openID);
+                	myUser.setAvatar(userInfoBean.getAvatar().getAvatarURL100());
+
                 	
                 	Country country = new Country();
                 	country.setId("CN");
@@ -190,6 +192,13 @@ public class QQLoginController
 	public String updateProfile(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes)
 	{
 		System.out.println("/updateProfile");
+		
+		String birth = user.getBirth();
+		if(birth.length() == 4 )
+		{
+			birth += "-01-01";
+		}
+		user.setBirth(birth);
 		
 		accountService.updateUser(user);
 		updateCurrentUserName(user.getName());
