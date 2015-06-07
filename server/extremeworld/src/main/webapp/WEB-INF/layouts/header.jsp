@@ -18,11 +18,11 @@
 			<ul id="nav_menu" class="nav navbar-nav">
 			
 				<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院</a></li>
-				<li><a href="${ctx}/${hobby}">动态 <span class="sr-only">(current)</span></a></li>
 				<li><a href="${ctx}/${hobby}/discuss">讨论</a></li>
 				<li><a href="${ctx}/${hobby}/video">视频</a></li>
 				<li><a href="${ctx}/${hobby}/course">教程</a></li>
 				<li><a href="${ctx}/${hobby}/news">新闻</a></li>
+				<li><a href="${ctx}/${hobby}">叽喳 <span class="sr-only">(current)</span></a></li>
 			</ul>
 
 

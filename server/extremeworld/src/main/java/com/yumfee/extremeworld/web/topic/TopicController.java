@@ -23,7 +23,7 @@ import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
-@RequestMapping(value = "/topic")
+@RequestMapping(value = "{hobby}/topic")
 public class TopicController
 {
 	private static final String PAGE_SIZE = "10";
@@ -36,6 +36,7 @@ public class TopicController
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(
+			@PathVariable String hobby,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
@@ -46,11 +47,16 @@ public class TopicController
 		Page<Topic> topics = topicService.getTopicByfollowings(2L,pageNumber, pageSize, sortType);
 		
 		model.addAttribute("topics", topics);
+		
+		model.addAttribute("hobby",hobby);
+		
 		return "discuss/discussList";
 	}
 	
 	@RequestMapping( method = RequestMethod.POST)
-	public String create(@Valid Topic newTopic, RedirectAttributes redirectAttributes)
+	public String create(
+			@PathVariable String hobby,
+			@Valid Topic newTopic, RedirectAttributes redirectAttributes)
 	{
 		User user = new User();
 		user.setId(getCurrentUserId());
@@ -61,11 +67,13 @@ public class TopicController
 		
 		topicService.saveTopic(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
-		return "redirect:/discuss/";
+		return "redirect:/" + hobby + "/discuss/";
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public String detail(@PathVariable("id") Long id, 
+	public String detail(
+			@PathVariable String hobby,
+			@PathVariable("id") Long id, 
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
@@ -97,6 +105,7 @@ public class TopicController
 		model.addAttribute("topic",topic);
 		model.addAttribute("replys", replys);
 		
+		model.addAttribute("hobby",hobby);
 		
 		return "discuss/discussDetail";
 	}
@@ -130,6 +139,11 @@ public class TopicController
 	 */
 	private Long getCurrentUserId() {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		return user.id;
+		if(user != null)
+		{
+			return user.id;
+		}
+		return null;
+		
 	}
 }

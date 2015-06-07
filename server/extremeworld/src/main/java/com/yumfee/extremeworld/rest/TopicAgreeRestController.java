@@ -53,6 +53,7 @@ public class TopicAgreeRestController
 			if( !agreeUsers.contains(user) )
 			{
 				agreeUsers.add(user);
+				topic.setAgreeCount(topic.getAgreeCount() + 1);
 			}
 			
 		}

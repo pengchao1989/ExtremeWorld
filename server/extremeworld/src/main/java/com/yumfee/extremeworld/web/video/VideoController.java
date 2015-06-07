@@ -117,6 +117,11 @@ public class VideoController
 	 */
 	private Long getCurrentUserId() {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		return user.id;
+		if(user != null)
+		{
+			return user.id;
+		}
+		return null;
+		
 	}
 }

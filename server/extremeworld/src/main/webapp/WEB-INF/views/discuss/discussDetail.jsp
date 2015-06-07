@@ -37,7 +37,7 @@
 				</div>
 
 				<div class="media-body">
-					<a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a>
+					<a href="${ctx}/u/${topic.user.id}" target="_blank">${topic.user.name}</a>
 					<p>${topic.createTime}</p>
 					<br />
 						<c:if test="${type == 'video'}">

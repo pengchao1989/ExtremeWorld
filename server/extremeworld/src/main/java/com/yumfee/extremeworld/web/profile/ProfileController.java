@@ -1,6 +1,5 @@
 package com.yumfee.extremeworld.web.profile;
 
-import java.util.List;
 
 import javax.servlet.ServletRequest;
 
@@ -47,6 +46,7 @@ public class ProfileController {
 		
 		model.addAttribute("user", user);
 		model.addAttribute("topics", topics);
+		model.addAttribute("hobby", "all");
 		return "/profile/profile";
 	}
 	

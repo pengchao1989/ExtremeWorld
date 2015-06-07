@@ -37,7 +37,7 @@
 												<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 											</div>
 											<div class="card-user-head-name s10 ">
-												<a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a>
+												<a href="${ctx}/u/${topic.user.id}" target="_blank">${topic.user.name}</a>
 												<p>${topic.createTime}</p>
 											</div>
 										</div>
@@ -45,7 +45,7 @@
 										
 										
 										<div class="row valign-wrapper">
-											<a href="${ctx}/topic/${topic.id}" target="_blank"><span class="card-title black-text">${topic.title}</span></a>
+											<a href="${ctx}/${hobby}/topic/${topic.id}" target="_blank"><span class="card-title black-text">${topic.title}</span></a>
 										</div>
 										
 										<p >${topic.content}</p>

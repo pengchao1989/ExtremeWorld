@@ -3,6 +3,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,7 +26,7 @@
 				</div>
 			</div>
 			
-			<label>最后由</label><a href="${ctx}/u/${course.user.id}">${course.user.name}</a><label>于${course.modifyTime}编辑</label><a href="${ctx}/${hobby}/course/revision/${course.id}">  历史</a>
+			<label>最后由</label><a href="${ctx}/u/${course.user.id}" target="_blank">${course.user.name}</a><label>于${course.modifyTime}编辑</label><a href="${ctx}/${hobby}/course/revision/${course.id}">  历史</a>
 			
 		 	<p id="course_content">${course.content}</p>
 		</div>
@@ -33,49 +34,18 @@
 		<h2>讨论与教学</h2>
 		
 		<div class="row">
-			<tbody>
-				<ul class="media-list">
-					<c:forEach items="${topics.content}" var="topic">
-						<li class="media">
-								<div class="media-left">
-									<a href="#"> <img class="media-object avatar" src="${ctx}/static/ace/assets/avatars/avatar1.png" alt="..."></a>
-									
-								</div>
-								<div class="media-body">
-									<a href="${ctx}/topic/${topic.id}" target="_blank"> 
-									<div class="row">
-										<div class="col-md-6">
-											<h3 class="list-group-item-heading">${topic.title}</h3>
-											<a>${topic.user.name}</a> 
-										</div>
-										
-										<div class="col-md-2">
-												<p class="views">${topic.replyCount}</p>
-												<p>回复</p>
-										</div>
-										
-										<div class="col-md-2">
-											<p class="views">99</p>
-											<p>查看</p>
-										</div>
-										
-										<div class="col-md-2">
-											<p>2015-03-15 17:22</p>
-											<p>2015-03-15 17:22</p>
-										</div>
+			<ul class="collection">
+				<c:forEach items="${topics.content}" var="topic">
+					<li class="collection-item avatar">
+						<a href="${ctx}/u/${topic.user.id}"> <img class="circle" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+								
+						<a href="${ctx}/${hobby}/topic/${topic.id}" target="_blank"> <span class="title">${topic.title}</span></a>
+						<p><a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a><br></p>
+					</li>
+				</c:forEach>
+			</ul>
 
-									</div>
-									
-
-										
-									</a>
-								</div>
-						</li>
-					</c:forEach>
-				</ul>
-			</tbody>
-
-	</div>
+		</div>
 	
 	</div>
 	
