@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Topic extends IdEntity
 {
 	private String type;
+	private String magicType;
 	private String title;
 	private String excerpt;
 	private String content;
@@ -61,6 +62,12 @@ public class Topic extends IdEntity
 	}
 	public void setType(String t) {
 		this.type = t;
+	}
+	public String getMagicType() {
+		return magicType;
+	}
+	public void setMagicType(String magicType) {
+		this.magicType = magicType;
 	}
 	@NotBlank
 	public String getTitle()

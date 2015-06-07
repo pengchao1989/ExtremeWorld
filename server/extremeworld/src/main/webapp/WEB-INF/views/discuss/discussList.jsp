@@ -3,7 +3,6 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -45,7 +44,7 @@
 		<ul class="collection">
 			<c:forEach items="${topics.content}" var="topic">
 				<li class="collection-item avatar">
-					<a href="${ctx}/u/${topic.user.id}"> <img class="circle" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+					<a href="${ctx}/u/${topic.user.id}"> <img class="circle" src="${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 							
 					<a href="${ctx}/${hobby}/discuss/${topic.id}" target="_blank"> <span class="title">${topic.title}</span></a>
 					<p><a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a><br></p>

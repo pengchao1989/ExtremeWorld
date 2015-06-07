@@ -8,6 +8,8 @@
 		<pattern>/u/loadtopic/*</pattern>
 		<pattern>/u/loadpicture/*</pattern>
 		<pattern>/u/loadvideo/*</pattern>
+		<pattern>/*/course/loadQuestion/*</pattern>
+		<pattern>/*/course/loadExplain/*</pattern>
 	</excludes>
 	
 	<decorator name="default" page="default.jsp">

@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,7 +32,7 @@
 			<div class="media">
 				<div class="media-left">
 					<a href="${ctx}/u/${topic.user.id}"> <img class="media-object"
-						src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+						src="${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 				</div>
 
 				<div class="media-body">
@@ -66,7 +65,7 @@
 						<div class="media-left">
 						<a href="${ctx}/u/${reply.user.id}">
 							<img class="media-object avatar" alt="Alexa's Avatar"
-								src="${static_url}${reply.user.avatar}!webAvatarSmall" /></a>
+								src="${reply.user.avatar}!webAvatarSmall" /></a>
 						</div>
 
 						<div class="row media-body">
@@ -90,7 +89,7 @@
 							<div class="media">
 								<div class="media-left">
 									<img class="media-object avatar" alt=""
-										src="${static_url}${subreply.user.avatar}!webAvatarSmall" />
+										src="${subreply.user.avatar}!webAvatarSmall" />
 								</div>
 
 								<div class="media-body">

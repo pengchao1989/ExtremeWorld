@@ -76,11 +76,11 @@ public class TopicService
 		return topicDao.findAll(pageRequest);
 	}
 	
-	public Page<Topic> getAllTopicByCourse(Long courseId, int pageNumber, int pageSize,String sortType)
+	public Page<Topic> getAllTopicByCourseAndMagicType(Long courseId, String magicType, int pageNumber, int pageSize,String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return topicDao.findByCourseId(courseId,pageRequest);
+		return topicDao.findByCourseIdAndMagicType(courseId, magicType,pageRequest);
 	}
 	
 	public Page<Topic> getTopicByfollowings(Long id, int pageNumber, int pageSize,String sortType)

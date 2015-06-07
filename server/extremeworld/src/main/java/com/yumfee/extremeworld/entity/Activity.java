@@ -15,7 +15,7 @@ public class Activity extends Topic
 	private ActivityDetail activityDetail;
 
 	@OneToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="activity_id")
+	@JoinColumn(name="id")
 	public ActivityDetail getActivityDetail()
 	{
 		return activityDetail;

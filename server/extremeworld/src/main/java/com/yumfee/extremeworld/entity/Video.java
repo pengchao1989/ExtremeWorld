@@ -15,7 +15,7 @@ public class Video extends Topic
 	private VideoDetail videoDetail;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "video_id")
+	@JoinColumn(name = "id")
 	public VideoDetail getVideoDetail()
 	{
 		return videoDetail;

@@ -5,7 +5,6 @@
 
 	
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,7 +33,7 @@
 										
 										<div class="row valign-wrapper">
 											<div>
-												<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+												<a href="${ctx}/u/${topic.user.id}"> <img class="circle responsive-img" src="${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 											</div>
 											<div class="card-user-head-name s10 ">
 												<a href="${ctx}/u/${topic.user.id}" target="_blank">${topic.user.name}</a>
@@ -56,8 +55,8 @@
 											<ul class="box">
 												<c:forEach items="${topic.mediaWrap.medias}" var="media">
 												<li class="card-thumbnails">
-												<a href="${static_url}${media.path}" data-rel="colorbox">
-													<img alt="" src="${static_url}${media.path}!topicListThum">
+												<a href="${media.path}" data-rel="colorbox">
+													<img alt="" src="${media.path}!topicListThum">
 												</a>
 												</li>
 												</c:forEach>

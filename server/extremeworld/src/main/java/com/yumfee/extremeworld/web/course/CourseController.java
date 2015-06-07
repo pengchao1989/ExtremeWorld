@@ -26,6 +26,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
+import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.entity.Topic;
@@ -77,13 +80,43 @@ public class CourseController
 		
 		Course course = courseService.getCourse(id);
 		
-		Page<Topic> topics = topicService.getAllTopicByCourse(id, pageNumber, pageSize, sortType);
+		Page<Topic> questions = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicQuestion, pageNumber, pageSize, sortType);
+		Page<Topic> explains = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicExplain, pageNumber, pageSize, sortType);
 		
 		model.addAttribute("course", course);
-		model.addAttribute("topics", topics);
+		model.addAttribute("questions", questions);
+		model.addAttribute("explains", explains);
 		
 		model.addAttribute("hobby", hobby);
 		return "/course/courseDetail";
+	}
+	
+	@RequestMapping(value = "loadQuestion/{id}", method = RequestMethod.GET)
+	public String loadMoreOfQuestion(@PathVariable("id") Long id,
+			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
+			Model model, ServletRequest request)
+	{
+		Page<Topic> questions = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicQuestion, pageNumber, pageSize, sortType);
+		
+		model.addAttribute("topics", questions);
+		
+		return "/course/topicFragment";
+	}
+	
+	@RequestMapping(value = "loadExplain/{id}", method = RequestMethod.GET)
+	public String loadMoreOfCourse(@PathVariable("id") Long id,
+			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
+			Model model, ServletRequest request)
+	{
+		Page<Topic> explains = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicExplain, pageNumber, pageSize, sortType);
+		
+		model.addAttribute("topics", explains);
+		
+		return "/course/topicFragment";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.GET)

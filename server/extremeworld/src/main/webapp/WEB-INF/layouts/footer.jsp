@@ -25,10 +25,10 @@
 				<div class="col l4 offset-l2 s12">
 					<h5 class="white-text">赞助商链接</h5>
 					<ul>
-						<li><a class="grey-text text-lighten-3" href="http://www.vans.com.cn/">Vans中国</a></li>
-						<li><a class="grey-text text-lighten-3" href="http://www.nike.com/cn/zh_cn/">Nike中国</a></li>
-						<li><a class="grey-text text-lighten-3" href="http://shop.adidas.cn/">Adidas中国</a></li>
-						<li><a class="grey-text text-lighten-3" href="http://www.chinaskateboards.cn/">中国滑板网</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.vans.com.cn/" target="_blank">Vans中国</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.nike.com/cn/zh_cn/" target="_blank">Nike中国</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://shop.adidas.cn/" target="_blank">Adidas中国</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.chinaskateboards.cn/" target="_blank">中国滑板网</a></li>
 					</ul>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 		<div class="footer-copyright">
 			<div class="container">
 				Application &copy; 2015  蜀ICP备14031715号 <a class="grey-text text-lighten-4 right"
-					href="#!">Developed by 扳手扳死你</a>
+					href="http://weibo.com/u/1743975303" target="_blank">Developed by 扳手扳死你</a>
 			</div>
 		</div>
 	</footer>

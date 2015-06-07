@@ -13,7 +13,7 @@ public interface TopicDao extends PagingAndSortingRepository<Topic, Long>
 {
 /*	@Query("SELECT tb_topic FROM tb_course_topic  LEFT JOIN tb_topic ON tb_course_topic.topic_id = tb_topic.id WHERE tb_course_topic.course_id = ?")
 	public Page<Topic> findByCourseId(Long courseId,Pageable pageable);*/
-	public Page<Topic> findByCourseId(Long courseId,Pageable pageable);
+	public Page<Topic> findByCourseIdAndMagicType(Long courseId,String magicType, Pageable pageable);
 	public Page<Topic> findByUserIdIn(Collection<Long> ids, Pageable pageable);
 	
 	public Page<Topic> findByUserId(Long user, Pageable pageable);

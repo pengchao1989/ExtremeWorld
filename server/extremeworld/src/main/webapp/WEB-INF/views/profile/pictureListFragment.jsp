@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <div>
 <c:forEach items="${topics.content}" var="topic">
@@ -28,8 +27,8 @@
 							
 							<c:forEach items="${topic.mediaWrap.medias}" var="media">
 								<li class="card-thumbnails"><a
-									href="${static_url}${media.path}" data-rel="colorbox"> <img
-										alt="" src="${static_url}${media.path}!topicListThum">
+									href="${media.path}" data-rel="colorbox"> <img
+										alt="" src="${media.path}!topicListThum">
 								</a></li>
 							</c:forEach>
 						</ul>

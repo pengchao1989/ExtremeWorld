@@ -3,7 +3,6 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="static_url" value="http://7u2nc3.com1.z0.glb.clouddn.com/"/>
 
 <div>
 <c:forEach items="${topics.content}" var="topic">
@@ -17,7 +16,7 @@
 						<div>
 							<a href="${ctx}/u/${topic.user.id}"> <img
 								class="circle responsive-img"
-								src="${static_url}${topic.user.avatar}!webAvatarSmall" alt="..."></a>
+								src="${topic.user.avatar}!webAvatarSmall" alt="..."></a>
 						</div>
 						<div class="card-user-head-name s10 ">
 							<a href="${ctx}/u/${topic.user.id}">${topic.user.name}</a>
@@ -40,8 +39,8 @@
 						<ul class="box">
 							<c:forEach items="${topic.mediaWrap.medias}" var="media">
 								<li class="card-thumbnails"><a
-									href="${static_url}${media.path}" data-rel="colorbox"> <img
-										alt="" src="${static_url}${media.path}!topicListThum">
+									href="${media.path}" data-rel="colorbox"> <img
+										alt="" src="${media.path}!topicListThum">
 								</a></li>
 							</c:forEach>
 						</ul>

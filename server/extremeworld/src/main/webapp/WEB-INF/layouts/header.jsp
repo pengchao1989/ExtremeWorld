@@ -17,12 +17,23 @@
 		<div class="" id="bs-example-navbar-collapse-1">
 			<ul id="nav_menu" class="nav navbar-nav">
 			
-				<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院</a></li>
+				<c:choose>
+					<c:when test="${hobby == 'skateboard'}">
+						<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院-滑板</a></li>
+					</c:when>
+					<c:when test="${hobby == 'parkour'}">
+						<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院-跑酷</a></li>
+					</c:when>
+					<c:when test="${hobby == 'all'}">
+						<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院</a></li>
+					</c:when>
+				</c:choose>
+			
 				<li><a href="${ctx}/${hobby}/discuss">讨论</a></li>
 				<li><a href="${ctx}/${hobby}/video">视频</a></li>
 				<li><a href="${ctx}/${hobby}/course">教程</a></li>
 				<li><a href="${ctx}/${hobby}/news">新闻</a></li>
-				<li><a href="${ctx}/${hobby}">叽喳 <span class="sr-only">(current)</span></a></li>
+				<li><a href="${ctx}/${hobby}">新鲜事<span class="sr-only">(current)</span></a></li>
 			</ul>
 
 
