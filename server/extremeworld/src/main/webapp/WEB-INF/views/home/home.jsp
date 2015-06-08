@@ -64,7 +64,8 @@
 										</div>
 									</div>
 									<div class="card-action">
-										<a href="#">评论  ${topic.replyCount}</a> <a href='#'><i class="mdi-action-thumb-up">  ${topic.agreeCount}</i></a>
+										<a href="#">评论  ${topic.replyCount}</a> 
+										<a class="zan" href='javascript:void(0);'><i class="mdi-action-thumb-up"></i> <span>${topic.agreeCount}</span><lable style="visibility:hidden">${topic.id}</lable></a>
 									</div>
 								</div>
 							</div>
@@ -181,10 +182,37 @@
 					
 				}) ;
 			});
+			
+			
+			/* zan */
+/* 			$('a.zan').click(function(){
+		        var left = parseInt($(this).offset().left)+10, top =  parseInt($(this).offset().top)-10, obj=$(this);
+
+		        $(this).append('<div id="zan"><b>+1<\/b></\div>');
+		        $('#zan').css({'position':'absolute','z-index':'1','color':'#C30','left':left+'px','top':top+'px'});
+		        $('#zan').animate({top:top-20,opacity: 0},1500,
+		        function(){
+		            $(this).fadeOut(1500).remove();
+		            var Num = parseInt(obj.find('span').text());
+		               Num++;
+		            obj.find('span').text(Num);
+		        });
+		    return false;
+		    }); */
+		    
+			$('a.zan').click(function(){
+				var topicId = $(this).children("lable").text();
+				var obj=$(this)
+				console.log(topicId);
+				$.get("/api/v1/all/topic_agree/" + topicId + "?" + <shiro:principal property="id"/> ,function(data, status){
+					var Num = parseInt(obj.find('span').text());
+					Num++;
+					obj.find('span').text(Num);
+				})
+			});
+			
 		})
 		
-		
-
 	</script>
 
 </body>
