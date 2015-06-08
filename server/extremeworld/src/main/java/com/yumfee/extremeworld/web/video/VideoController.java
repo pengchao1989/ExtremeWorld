@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
+import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.VideoService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -29,6 +31,9 @@ public class VideoController
 
 	@Autowired
 	private VideoService videoService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(
@@ -68,15 +73,19 @@ public class VideoController
 			Model model, ServletRequest request)
 			{
 				Video video = videoService.getVideo(id);
+				Page<Reply> replys = replyService.getAll(id,pageNumber, pageSize);
 		
 				Long userId = getCurrentUserId();
 				
-				model.addAttribute("video", video);
+				model.addAttribute("topic", video);
+				model.addAttribute("replys", replys);
+				
 				model.addAttribute("userId", userId);
+				model.addAttribute("type", "video");
 				
 				model.addAttribute("hobby", hobby);
 				
-				return "/video/videoDetail";
+				return "discuss/discussDetail";
 			}
 	
 	@RequestMapping(value = "create", method = RequestMethod.GET)

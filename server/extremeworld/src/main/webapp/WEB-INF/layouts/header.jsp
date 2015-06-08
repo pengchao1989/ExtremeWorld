@@ -59,7 +59,7 @@
 				
 				<shiro:notAuthenticated>  
 					<li>
-						<a href="${ctx}/login">请登录</a>
+						<a href="${ctx}/qqlogin"><img alt="" src="${ctx}/static/images/qq_bt_blue_76X24.png"></a>
 					</li>
 							
 				</shiro:notAuthenticated>

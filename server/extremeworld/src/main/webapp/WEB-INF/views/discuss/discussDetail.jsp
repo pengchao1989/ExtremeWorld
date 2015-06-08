@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -119,7 +120,8 @@
 			</form>
 		</div> -->
 		
-		<div class="row">
+		<shiro:authenticated> 
+			<div class="row">
 				<form class="form-horizontal" action="${ctx}/topic/${topic.id}"  method="post"  class="form-horizontal">
 					<section id="edit">
 						<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
@@ -127,7 +129,13 @@
 						<input id="submit_btn" class="btn btn-primary" type="submit" value="回复"/>&nbsp;	
 					</section>
 				</form>	
-		</div>
+			</div>
+		</shiro:authenticated>
+		
+		<shiro:notAuthenticated>  
+		</shiro:notAuthenticated>
+		
+
 		
 	</div>
 	

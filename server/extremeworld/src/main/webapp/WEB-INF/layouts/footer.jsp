@@ -18,9 +18,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col l6 s12">
-					<h5 class="white-text">Footer Content</h5>
-					<p class="grey-text text-lighten-4">You can use rows and
-						columns here to organize your footer content.</p>
+					<h5 class="white-text">本网站纯属娱乐</h5>
+					<p class="grey-text text-lighten-4">开发技术低劣，随时可能崩溃，若出现故障概不负责。<a href="${ctx}/${hobby}/todoList">待开发功能</a></p>
 				</div>
 				<div class="col l4 offset-l2 s12">
 					<h5 class="white-text">赞助商链接</h5>
