@@ -92,7 +92,7 @@ public class DiscussController {
 	public String create(
 			@PathVariable String hobby,
 			@Valid Discussion newTopic, 
-			@RequestParam(value = "taxonomy", defaultValue = "0") Long taxonomyId,
+			@RequestParam(value = "taxonomyId", defaultValue = "0") Long taxonomyId,
 			RedirectAttributes redirectAttributes)
 	{
 		System.out.println("Discuss create");

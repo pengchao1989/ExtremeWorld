@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
@@ -13,15 +14,14 @@
 <body>
 	<div class="container main_content">
 	
-	<div class="row">
-		<div class="col-xs-10 col-md-10">
-			<a href="${ctx}/${hobby}/video/create" class="btn btn-primary" role="button">上传</a>
+	<shiro:authenticated> 
+		<div class="row">
+			<div class="col s12">
+				<a href="${ctx}/${hobby}/video/create" class="btn btn-primary" role="button">上传</a>
+			</div>
 		</div>
-		
-		<div class="col-xs-2 col-md-2">
-			
-		</div>
-	</div>
+	</shiro:authenticated>
+
 	
 		<br>
 		<div class="row">

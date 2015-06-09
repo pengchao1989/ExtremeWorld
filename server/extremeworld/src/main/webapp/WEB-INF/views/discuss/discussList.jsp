@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
@@ -55,20 +56,22 @@
 
 		<tags:pagination page="${topics}" paginationSize="5"/>
 	
-
-	<c:if test="${0!=currentTaxonomyId}">
-		<div class="row">
-			<form class="form-horizontal" action="${ctx}/${hobby}/discuss?taxonomyId=${currentTaxonomyId}"  method="post"  class="form-horizontal">
-				<section id="edit">
-					<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
-					<br/>
-					<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
-					<br/>
-					<input id="submit_btn" class="btn btn-primary" type="submit" value="发布"/>&nbsp;	
-				</section>
-			</form>	
-		</div>
-	</c:if>
+	
+	<shiro:authenticated> 
+		<c:if test="${0!=currentTaxonomyId}">
+			<div class="row">
+				<form class="form-horizontal" action="${ctx}/${hobby}/discuss?taxonomyId=${currentTaxonomyId}"  method="post"  class="form-horizontal">
+					<section id="edit">
+						<input type="text" id="topic_title" name="title"   value="${task.title}" class="form-control"  placeholder="标题" minlength="3"/>
+						<br/>
+						<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
+						<br/>
+						<input id="submit_btn" class="btn btn-primary" type="submit" value="发布"/>&nbsp;	
+					</section>
+				</form>	
+			</div>
+		</c:if>
+	</shiro:authenticated>
 
 	
 

@@ -61,8 +61,10 @@
 			</ul>
 			
 			<div id="more-question-container"></div>
-						
-			<a id="load-more-question" class="waves-effect waves-light btn-large">加载更多</a>
+			
+				<a id="load-more-question" class="waves-effect waves-light btn-large">加载更多</a>
+
+			
 		</div>
 
 		<!-- explain fragment -->
@@ -79,7 +81,7 @@
 			</ul>
 			
 			<div id="more-explain-container"></div>
-						
+			
 			<a id="load-more-explain" class="waves-effect waves-light btn-large">加载更多</a>
 		</div>
 
