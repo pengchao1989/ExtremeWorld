@@ -121,7 +121,7 @@ public class DiscussController {
 		
 		discussionService.saveDiscussion(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
-		return "redirect:/" + hobby + "/discuss/";
+		return "redirect:/" + hobby + "/discuss?taxonomy=" + taxonomyId;
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
