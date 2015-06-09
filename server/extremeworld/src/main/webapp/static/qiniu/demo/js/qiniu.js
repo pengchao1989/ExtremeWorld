@@ -338,7 +338,6 @@ function QiniuJsSDK() {
         uploader.bind('BeforeUpload', function(up, file) {
 
             ctx = '';
-            //that.file_name=file.name;//记录fileName 以用做调用获取upToken接口时的参数，by pengchao
 
             var directUpload = function(up, file, func) {
 
@@ -369,7 +368,7 @@ function QiniuJsSDK() {
 
 
                 up.setOption({
-                    'url': 'http://up.qiniu.com/',
+                    'url': 'http://upload.qiniu.com/',
                     'multipart': true,
                     'chunk_size': undefined,
                     'multipart_params': multipart_params_obj
@@ -412,7 +411,7 @@ function QiniuJsSDK() {
                         }
                     }
                     up.setOption({
-                        'url': 'http://up.qiniu.com/mkblk/' + blockSize,
+                        'url': 'http://upload.qiniu.com/mkblk/' + blockSize,
                         'multipart': false,
                         'chunk_size': chunk_size,
                         'required_features': "chunks",
@@ -436,7 +435,7 @@ function QiniuJsSDK() {
             chunk_size = chunk_size || (up.settings && up.settings.chunk_size);
             if (leftSize < chunk_size) {
                 up.setOption({
-                    'url': 'http://up.qiniu.com/mkblk/' + leftSize
+                    'url': 'http://upload.qiniu.com/mkblk/' + leftSize
                 });
             }
             localStorage.setItem(file.name, JSON.stringify({
@@ -593,7 +592,7 @@ function QiniuJsSDK() {
                         }
                     }
 
-                    var url = 'http://up.qiniu.com/mkfile/' + file.size + key + x_vars_url;
+                    var url = 'http://upload.qiniu.com/mkfile/' + file.size + key + x_vars_url;
                     var ajax = that.createAjax();
                     ajax.open('POST', url, true);
                     ajax.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');

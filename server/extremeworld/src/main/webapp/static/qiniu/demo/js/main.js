@@ -54,24 +54,6 @@ $(function() {
                 $('#success').show();
             },
             'FileUploaded': function(up, file, info) {
-                /*设置url*/
-            	console.log(info);
-                var res = $.parseJSON(info);
-                if (res.url)
-                {
-                	console.log('hello man,a file is uploaded' + res.url);
-                	$('#video_videosource').val(res.url);
-                }
-                else 
-                {
-                    var domain = up.getOption('domain');
-                    url = domain + encodeURI(res.key);
-                    var link = domain + res.key;
-                
-                    console.log('hello man,a file is uploaded  link=' + res.url);
-                    $('#video_videosource').val(link);
-                }
-                
                 var progress = new FileProgress(file, 'fsUploadProgress');
                 progress.setComplete(up, info);
             },
@@ -92,7 +74,6 @@ $(function() {
 
     uploader.bind('FileUploaded', function() {
         console.log('hello man,a file is uploaded');
-        
     });
     $('#container').on(
         'dragenter',

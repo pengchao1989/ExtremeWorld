@@ -20,8 +20,31 @@ public class UptokenRestController
 	String ACCESS_KEY = "-iKeYoaf3toQqqFfpdvNX5VBXX9qTL7FDN6GwcQj";
 	String SECRET_KEY = "LZkUYSfHyE3al25SQoI1AWF1HoI8NKnshhGtxLtW";
 	
-	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public Token getUptoken() throws JSONException
+	@RequestMapping(value = "picture", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public Token getPictureUptoken() throws JSONException
+	{
+
+		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+		
+		String bucketName = "extreme";
+
+
+		String encodedEntryURI = UrlSafeBase64.encodeToString(bucketName + ":" + "123456789.jpg");
+		
+		System.out.println("getUptoken  encodedEntryURI = " + encodedEntryURI);
+
+		
+	    //String token = auth.uploadToken(bucketName);
+		//视频切片vframe/jpg/offset/7/w/480/h/360
+		//MP4->FLV avthumb/flv/r/24/vcodec/libx264
+	    String token =  auth.uploadToken(bucketName, null);	
+	    
+	    
+		return new Token(token);
+	}
+	
+	@RequestMapping(value = "upvideo", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public Token getVideoUptoken() throws JSONException
 	{
 
 		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);

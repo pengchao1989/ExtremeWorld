@@ -14,8 +14,8 @@
 <body>
 	<div class="container main_content">
 	
-		<input type="hidden" id="domain" value="http://7u2nc3.com1.z0.glb.clouddn.com">
-        <input type="hidden" id="uptoken_url" value="${ctx}/api/v1/uptoken/">
+		<input type="hidden" id="domain" value="http://img.jixianxueyuan.com/">
+        <input type="hidden" id="uptoken_url" value="${ctx}/api/v1/uptoken/upvideo">
         
         
 		<form id="inputForm" action="${ctx}/video/${action}" method="post" class="form-horizontal">
