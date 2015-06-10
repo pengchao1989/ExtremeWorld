@@ -133,7 +133,7 @@ public class TopicController
 		
 		
 		
-		return "redirect:/" + hobby + "/discuss/"+ topicId;
+		return "redirect:/" + hobby + "/topic/"+ topicId;
 	}
 	
 	/**

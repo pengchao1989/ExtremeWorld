@@ -161,7 +161,7 @@ public class DiscussController {
 		
 		model.addAttribute("hobby",hobby);
 		
-		return "/discuss/discussDetail";
+		return "discuss/discussDetail";
 	}
 	
 	//子回复

@@ -8,13 +8,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
+<link rel="stylesheet" href="${ctx}/static/abplayer/css/base.css?1" />
 <link rel="stylesheet" href="${ctx}/static/DanmuPlayer/css/danmuplayer.css">
 <link rel="stylesheet" href="${ctx}/static/umeditor/themes/default/css/umeditor.css">
 
+
 <script src="${ctx}/static/DanmuPlayer/js/danmuplayer.js"></script>
 
-<title>Insert title here</title>
+<title>${topic.title}</title>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -185,7 +186,6 @@
 
 
 	<!-- 载入UMeditor，以下文件可存放在CDN -->
-	<script src="${ctx}/static/umeditor/third-party/jquery.min.js"></script>
 	<script src="${ctx}/static/umeditor/umeditor.config.js"></script>
 	<script src="${ctx}/static/umeditor/umeditor.min.js"></script>
 	<script src="${ctx}/static/umeditor/plupload/plupload.full.min.js"></script>

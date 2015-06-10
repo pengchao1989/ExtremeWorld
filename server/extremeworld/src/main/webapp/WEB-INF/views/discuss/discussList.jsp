@@ -80,7 +80,6 @@
 	</div>
 	
 	<!-- 载入UMeditor，以下文件可存放在CDN -->
-	<script src="${ctx}/static/umeditor/third-party/jquery.min.js"></script>
 	<script src="${ctx}/static/umeditor/umeditor.config.js"></script>
 	<script src="${ctx}/static/umeditor/umeditor.min.js"></script>
 	<script src="${ctx}/static/umeditor/plupload/plupload.full.min.js"></script>
