@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="${ctx}/static/abplayer/css/base.css?1" />
 
 <link rel="stylesheet" href="${ctx}/static/DanmuPlayer/css/danmuplayer.css">
+<link rel="stylesheet" href="${ctx}/static/umeditor/themes/default/css/umeditor.css">
+
 <script src="${ctx}/static/DanmuPlayer/js/danmuplayer.js"></script>
 
 <title>Insert title here</title>
@@ -122,9 +123,12 @@
 		
 		<shiro:authenticated> 
 			<div class="row">
-				<form class="form-horizontal" action="${ctx}/topic/${topic.id}"  method="post"  class="form-horizontal">
+				<form class="form-horizontal" action="${ctx}/${hobby}/topic/${topic.id}"  method="post"  class="form-horizontal">
 					<section id="edit">
-						<textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea>
+						<!-- <textarea id="txt-content"  name="content"  data-autosave="editor-content"  placeholder="这里输入内容" autofocus></textarea> -->
+						
+						<script id="edit-container" name="content" type="text/plain" style="width:100%;height:360px;"></script>	
+						
 						<br/>
 						<input id="submit_btn" class="btn btn-primary" type="submit" value="回复"/>&nbsp;	
 					</section>
@@ -180,11 +184,23 @@
 
 
 
-	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/module.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/hotkeys.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/uploader.js"></script>
-	<script type="text/javascript" src="${ctx}/static/simditor-2.1.10/scripts/simditor.js"></script>
-	<script type="text/javascript" src="${ctx}/static/scripts/edit.js"></script>
+	<!-- 载入UMeditor，以下文件可存放在CDN -->
+	<script src="${ctx}/static/umeditor/third-party/jquery.min.js"></script>
+	<script src="${ctx}/static/umeditor/umeditor.config.js"></script>
+	<script src="${ctx}/static/umeditor/umeditor.min.js"></script>
+	<script src="${ctx}/static/umeditor/plupload/plupload.full.min.js"></script>
+	<script src="${ctx}/static/umeditor/qiniu.min.js"></script>
+	
+	
+	<!-- 初始化七牛插件，必须由服务器动态生成 -->
+	<script src="${ctx}/static/umeditor/qiniu.init.js"></script>
+	
+	<!-- 创建编辑器 -->
+	<script>
+	    var QINIU_UPTOKEN_URL = '${ctx}/api/v1/uptoken/picture';
+ 		var QINIU_BUCKET_DOMAIN = 'img.jixianxueyuan.com/';
+		var um = UM.getEditor('edit-container');
+	</script>
 
 </body>
 </html>

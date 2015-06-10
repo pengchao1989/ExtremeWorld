@@ -57,7 +57,7 @@
 
 		<tags:pagination page="${topics}" paginationSize="5"/>
 	
-	
+	<shiro:authenticated>  
 		<c:if test="${0!=currentTaxonomyId}">
 			<div class="row">
 				<form class="form-horizontal" action="${ctx}/${hobby}/discuss?taxonomyId=${currentTaxonomyId}"  method="post"  class="form-horizontal">
@@ -74,6 +74,7 @@
 				</form>	
 			</div>
 		</c:if>
+	</shiro:authenticated>
 
 
 	</div>

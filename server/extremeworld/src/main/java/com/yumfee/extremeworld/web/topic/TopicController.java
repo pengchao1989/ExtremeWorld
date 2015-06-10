@@ -110,9 +110,11 @@ public class TopicController
 		return "discuss/discussDetail";
 	}
 	
-	//子回复
+	//回复
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public String createReply(@PathVariable("id") Long topicId, 
+	public String createReply(
+			@PathVariable String hobby,
+			@PathVariable("id") Long topicId, 
 			@Valid Reply newReply, 
 			RedirectAttributes redirectAttributes)
 	{
@@ -131,7 +133,7 @@ public class TopicController
 		
 		
 		
-		return "redirect:/discuss/"+ topicId;
+		return "redirect:/" + hobby + "/discuss/"+ topicId;
 	}
 	
 	/**
