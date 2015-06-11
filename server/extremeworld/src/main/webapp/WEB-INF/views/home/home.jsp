@@ -54,11 +54,19 @@
 										
 											<ul class="box">
 												<c:forEach items="${topic.mediaWrap.medias}" var="media">
-												<li class="card-thumbnails">
-												<a href="${media.path}" data-rel="colorbox">
-													<img alt="" src="${media.path}!topicListThum">
-												</a>
-												</li>
+												<c:choose>
+													<c:when test="${media.type == 'img'}">
+														<li class="card-thumbnails">
+															<a href="${media.path}" data-rel="colorbox">
+																<img alt="" src="${media.path}!topicListThum">
+															</a>
+														</li>
+													</c:when>
+													<c:when test="media.type == 'video' || media.type == 's_video'">
+													</c:when>
+												</c:choose>
+												
+
 												</c:forEach>
 											</ul>
 										</div>

@@ -18,7 +18,7 @@ $(function() {
         domain: $('#domain').val(),
         // downtoken_url: '/downtoken',
         // unique_names: true,
-        // save_key: true,
+        save_key: true,
         // x_vars: {
         //     'id': '1234',
         //     'time': function(up, file) {
@@ -43,6 +43,8 @@ $(function() {
                 if (up.runtime === 'html5' && chunk_size) {
                     progress.setChunkProgess(chunk_size);
                 }
+                
+                console.log('BeforeUpload');
             },
             'UploadProgress': function(up, file) {
                 var progress = new FileProgress(file, 'fsUploadProgress');
@@ -56,6 +58,13 @@ $(function() {
             'FileUploaded': function(up, file, info) {
                 var progress = new FileProgress(file, 'fsUploadProgress');
                 progress.setComplete(up, info);
+                
+                var domain = up.getOption('domain');
+                var res = $.parseJSON(info);
+                var sourceLink = domain + res.key; 
+                console.log(sourceLink);
+                
+                $('#video_videosource').val(sourceLink);
             },
             'Error': function(up, err, errTip) {
                 $('table').show();

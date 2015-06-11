@@ -18,7 +18,7 @@
         <input type="hidden" id="uptoken_url" value="${ctx}/api/v1/uptoken/upvideo">
         
         
-		<form id="inputForm" action="${ctx}/video/${action}" method="post" class="form-horizontal">
+		<form id="inputForm" action="${ctx}/${hobby}/video/${action}" method="post" class="form-horizontal">
 			
 			 <input  type="hidden" class="form-control" id="video_videosource"  name="videoSource" >
 			 

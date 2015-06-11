@@ -62,9 +62,9 @@ public class UptokenRestController
 		//MP4->FLV avthumb/flv/r/24/vcodec/libx264
 	    String token =  auth.uploadToken(bucketName, null, 3600, 
 	    		new StringMap().
-	    		put("persistentOps", "vframe/jpg/offset/20/w/480/h/360|saveas/"+encodedEntryURI).
+	    		put("persistentOps", "vframe/jpg/offset/20/w/480/h/360"). //|saveas/"+encodedEntryURI
 	    		put("persistentNotifyUrl", "http://fake.com/qiniu/notify").
-	    		put("persistentPipeline", "myPipiLine"));	
+	    		put("persistentPipeline", "myPipiLine"));
 	    
 	    
 		return new Token(token);

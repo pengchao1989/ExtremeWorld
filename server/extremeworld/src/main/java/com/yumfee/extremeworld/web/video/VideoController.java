@@ -4,6 +4,8 @@ import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
+import com.yumfee.extremeworld.entity.VideoDetail;
 import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.VideoService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
@@ -26,6 +29,7 @@ import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 @RequestMapping(value = "{hobby}/video")
 public class VideoController
 {
+	private static Logger logger = LoggerFactory.getLogger(VideoController.class);
 	
 	private static final String PAGE_SIZE = "24";
 
@@ -105,6 +109,7 @@ public class VideoController
 	public String create(
 			@PathVariable String hobby,
 			@Valid Video newVideo, 
+			ServletRequest request,
 			RedirectAttributes redirectAttributes)
 	{
 		User user = new User();
@@ -114,7 +119,19 @@ public class VideoController
 		newVideo.setReplyCount(0);
 		newVideo.setStatus(1);
 		newVideo.setExcerpt(newVideo.getContent());
+
+		//videoSource在属性的属性中，单独从form参数中提取
+		String videoSource = request.getParameter("videoSource");
+		logger.debug(videoSource);
+		//System.out.println(videoSource);
 		
+		
+		videoService.saveVideo(newVideo);
+		
+		VideoDetail videoDetail = new VideoDetail();
+		videoDetail.setId(newVideo.getId());
+		videoDetail.setVideoSource(videoSource);
+		newVideo.setVideoDetail(videoDetail);
 		videoService.saveVideo(newVideo);
 		
 		redirectAttributes.addFlashAttribute("message", "发布视频成功");
