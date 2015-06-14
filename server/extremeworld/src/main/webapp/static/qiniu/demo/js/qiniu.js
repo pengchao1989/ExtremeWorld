@@ -246,6 +246,7 @@ function QiniuJsSDK() {
         that.key_handler = typeof op.init.Key === 'function' ? op.init.Key : '';
         this.domain = op.domain;
         var ctx = '';
+        that.myParam = '';
 
         var reset_chunk_size = function() {
             var ie = that.detectIEVersion();
@@ -284,6 +285,8 @@ function QiniuJsSDK() {
                     if (ajax.readyState === 4 && ajax.status === 200) {
                         var res = that.parseJSON(ajax.responseText);
                         that.token = res.uptoken;
+                        that.myParam = res.myParam;
+                        console.log(that.myParam);
                     }
                 };
                 ajax.send();
@@ -320,6 +323,7 @@ function QiniuJsSDK() {
         var uploader = new plupload.Uploader(option);
 
         uploader.bind('Init', function(up, params) {
+        	console.log('Init qiniu');
             getUpToken();
         });
         uploader.init();
@@ -563,7 +567,13 @@ function QiniuJsSDK() {
                         };
                         ajax_downtoken.send('key=' + that.parseJSON(info).key + '&domain=' + op.domain);
                     } else if (_FileUploaded_Handler) {
-                        _FileUploaded_Handler(up, file, info);
+                    	
+                    	var res = that.parseJSON(info);
+                    	res.front = that.myParam;
+                    	var newInfo = window.JSON.stringify(res);
+                    	
+                        _FileUploaded_Handler(up, file, newInfo);
+                        console.log('123')
                     }
                 };
 

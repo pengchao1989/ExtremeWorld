@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -43,6 +44,8 @@ public class Topic extends IdEntity
 	private Date updateTime;
 	private int status;
 	private String ip;
+	
+	private VideoDetail videoDetail;
 
 	private MediaWrap mediaWrap;
 	
@@ -157,6 +160,18 @@ public class Topic extends IdEntity
 	public void setIp(String ip)
 	{
 		this.ip = ip;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "video_detail_id")
+	public VideoDetail getVideoDetail()
+	{
+		return videoDetail;
+	}
+
+	public void setVideoDetail(VideoDetail videoDetail)
+	{
+		this.videoDetail = videoDetail;
 	}
 	
 	@OneToOne(cascade = CascadeType.ALL)

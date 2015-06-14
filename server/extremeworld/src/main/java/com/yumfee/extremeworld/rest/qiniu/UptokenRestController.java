@@ -1,16 +1,26 @@
 package com.yumfee.extremeworld.rest.qiniu;
 
+import java.net.URI;
+import java.util.UUID;
+
 import org.json.JSONException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.MediaTypes;
 
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.qiniu.util.UrlSafeBase64;
+import com.yumfee.extremeworld.entity.Task;
 
 
 @RestController
@@ -50,9 +60,10 @@ public class UptokenRestController
 		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 		
 		String bucketName = "extreme";
+		String frontImage =  UUID.randomUUID().toString();
 
 
-		String encodedEntryURI = UrlSafeBase64.encodeToString(bucketName + ":" + "123456789.jpg");
+		String encodedEntryURI = UrlSafeBase64.encodeToString(bucketName + ":" + frontImage);
 		
 		System.out.println("getUptoken  encodedEntryURI = " + encodedEntryURI);
 
@@ -60,14 +71,22 @@ public class UptokenRestController
 	    //String token = auth.uploadToken(bucketName);
 		//视频切片vframe/jpg/offset/7/w/480/h/360
 		//MP4->FLV avthumb/flv/r/24/vcodec/libx264
-	    String token =  auth.uploadToken(bucketName, null, 3600, 
+	    String tokenString =  auth.uploadToken(bucketName, null, 3600, 
 	    		new StringMap().
-	    		put("persistentOps", "vframe/jpg/offset/20/w/480/h/360"). //|saveas/"+encodedEntryURI
-	    		put("persistentNotifyUrl", "http://fake.com/qiniu/notify").
-	    		put("persistentPipeline", "myPipiLine"));
+	    		put("persistentOps", "vframe/jpg/offset/4/w/480/h/360|saveas/"+encodedEntryURI). //|saveas/"+encodedEntryURI
+	    		put("persistentNotifyUrl", "http://www.jixianxueyuan.com/api/v1/uptoken/upvideo").
+	    		put("persistentPipeline", "myvideo"));
 	    
+	    Token token = new Token(tokenString);
+	    token.setMyParam(frontImage);
 	    
-		return new Token(token);
+		return token;
+	}
+	
+	@RequestMapping(value = "upvideo", method = RequestMethod.POST, consumes = MediaTypes.JSON)
+	public ResponseEntity<?> front(UriComponentsBuilder uriBuilder) {
+
+		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "video/{fileName}",method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
@@ -99,6 +118,7 @@ public class UptokenRestController
 	class Token
 	{
 		private String uptoken;
+		private String myParam;
 		
 		public Token(String token)
 		{
@@ -114,6 +134,16 @@ public class UptokenRestController
 		{
 			this.uptoken = uptoken;
 		}
+
+		public String getMyParam() {
+			return myParam;
+		}
+
+		public void setMyParam(String myParam) {
+			this.myParam = myParam;
+		}
+		
+		
 		
 	}
 }

@@ -27,9 +27,9 @@ public class VideoService
 		return videoDao.findOne(id);
 	}
 	
-	public void saveVideo(Video entity)
+	public Video saveVideo(Video entity)
 	{
-		videoDao.save(entity);
+		return videoDao.save(entity);
 	}
 	
 	public List<Video> getAll()

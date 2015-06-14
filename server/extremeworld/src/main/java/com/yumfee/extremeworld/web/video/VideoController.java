@@ -122,15 +122,16 @@ public class VideoController
 
 		//videoSource在属性的属性中，单独从form参数中提取
 		String videoSource = request.getParameter("videoSource");
+		String frontSource = request.getParameter("frontSource");
 		logger.debug(videoSource);
-		//System.out.println(videoSource);
+		logger.debug(frontSource);
+		System.out.println(videoSource);
+		System.out.println(frontSource);
 		
-		
-		videoService.saveVideo(newVideo);
 		
 		VideoDetail videoDetail = new VideoDetail();
-		videoDetail.setId(newVideo.getId());
 		videoDetail.setVideoSource(videoSource);
+		videoDetail.setThumbnail(frontSource);
 		newVideo.setVideoDetail(videoDetail);
 		videoService.saveVideo(newVideo);
 		

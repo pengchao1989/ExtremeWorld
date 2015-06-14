@@ -29,6 +29,11 @@ $(function() {
         // },
         auto_start: true,
         init: {
+        	
+        	'Init' : function(up,params){
+        		
+        	},
+        	
             'FilesAdded': function(up, files) {
                 $('table').show();
                 $('#success').hide();
@@ -62,9 +67,12 @@ $(function() {
                 var domain = up.getOption('domain');
                 var res = $.parseJSON(info);
                 var sourceLink = domain + res.key; 
+                var frontSource = domain + res.front;
                 console.log(sourceLink);
+                console.log(frontSource);
                 
                 $('#video_videosource').val(sourceLink);
+                $('#front_source').val(frontSource);
             },
             'Error': function(up, err, errTip) {
                 $('table').show();
