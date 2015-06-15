@@ -56,7 +56,7 @@
 			<div class = "col-md-2">
 			</div>
 				<div class="col-sm-10">
-					<button type="submit" class="btn btn-primary btn-lg">发布</button>
+					<button id="video_submit" type="submit" class="btn btn-primary btn-lg disabled">发布</button>
 				</div>
 				
 			</div>

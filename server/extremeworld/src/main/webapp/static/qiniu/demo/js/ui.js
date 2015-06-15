@@ -191,6 +191,7 @@ FileProgress.prototype.setComplete = function(up, info) {
 
     var res = $.parseJSON(info);
     var url;
+    var front;
     if (res.url) {
         url = res.url;
         str = "<div><strong>Link:</strong><a href=" + res.url + " target='_blank' > " + res.url + "</a></div>" +
@@ -198,6 +199,7 @@ FileProgress.prototype.setComplete = function(up, info) {
     } else {
         var domain = up.getOption('domain');
         url = domain + encodeURI(res.key);
+        front = domain + encodeURI(res.front);
         var link = domain + res.key;
         str = "<div><strong>Link:</strong><a href=" + url + " target='_blank' > " + link + "</a></div>" +
             "<div class=hash><strong>Hash:</strong>" + res.hash + "</div>";
@@ -236,11 +238,8 @@ FileProgress.prototype.setComplete = function(up, info) {
     progressNameTd.append(Wrapper);
 
     if (!isImg) {
-        showImg.attr('src', 'default.png');
-        Wrapper.addClass('default');
-
-        imgWrapper.append(showImg);
-        Wrapper.append(imgWrapper);
+ 
+    	
     } else {
         linkWrapper.append(showImg);
         imgWrapper.append(linkWrapper);

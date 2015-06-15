@@ -73,6 +73,7 @@ $(function() {
                 
                 $('#video_videosource').val(sourceLink);
                 $('#front_source').val(frontSource);
+                $('#video_submit').removeClass("disabled");
             },
             'Error': function(up, err, errTip) {
                 $('table').show();
