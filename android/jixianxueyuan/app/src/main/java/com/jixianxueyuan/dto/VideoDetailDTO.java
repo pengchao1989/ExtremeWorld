@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class VideoDetailDTO {
+import java.io.Serializable;
+
+public class VideoDetailDTO implements Serializable {
 
 	private Long id;
 	private String videoSource;

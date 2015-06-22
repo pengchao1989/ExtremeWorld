@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +23,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,8 +34,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
+import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
@@ -45,9 +50,12 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
+import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
+import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yumfee.emoji.EmojiconEditText;
 import com.yumfee.emoji.EmojiconTextView;
@@ -56,6 +64,12 @@ import com.yumfee.emoji.EmojiconTextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -72,16 +86,14 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
 
+    TopicDTO topicDTO;
+
+
     int currentPage = 0;
     int totalPage = 0;
     TopicDetailListAdapter adapter;
 
-    Long topicId;
-    String title;
-    String content;
-    String name;
-    String avatar;
-    String createTime;
+
 
     View headView;
     HeadViewHolder headViewHolder;
@@ -90,6 +102,37 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
     ReplyWidget replyWidget;
 
+    DiskLruCache mDiskLruCache;
+
+    boolean interceptFlag = false;
+    int mProgressNum = 0;
+
+
+    final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
+    final int HADLER_DOWNLOAD_VIDEO_FAILED = 0x2;
+    final int HANDLER_DOWNLOAD_UPDATE = 0x3;
+    Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case HADLER_DOWNLOAD_VIDEO_SUCCESS:
+
+                    headViewHolder.roundProgressBarWidthNumber.setVisibility(View.GONE);
+
+                    String url = topicDTO.getVideoDetail().getVideoSource()/*"http://7u2nc3.com1.z0.glb.clouddn.com/short_videofm11QHWk09-1CaKh6JpN-A__.mp4"*/;
+
+                    String key = Util.stringToMD5(url);
+
+                    playVideo(DiskCachePath.getDiskCacheDir(TopicDetailActivity.this, "short_video").getPath() + "/"+ key + ".0" );
+                    break;
+                case HANDLER_DOWNLOAD_UPDATE:
+                    headViewHolder.roundProgressBarWidthNumber.setProgress(mProgressNum);
+                    break;
+            }
+        }
+
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +140,9 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         setContentView(R.layout.topic_detail_activity);
 
         ButterKnife.inject(this);
+
+        Intent intent = this.getIntent();
+        topicDTO = (TopicDTO) intent.getSerializableExtra("topic");
 
         initTopicHeadView();
         initFooterView();
@@ -121,24 +167,17 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
         Intent intent = this.getIntent();
 
-        topicId = intent.getLongExtra("topicId", 0);
-        title = intent.getStringExtra("title");
-        content = intent.getStringExtra("content");
-        name = intent.getStringExtra("name");
-        createTime = intent.getStringExtra("createTime");
-        avatar = intent.getStringExtra("avatar");
 
-
-        headViewHolder.titleTextView.setText(title);
-        headViewHolder.nameTextView.setText(name);
-        String timeAgo = DateTimeFormatter.getTimeAgo(this, createTime);
+        headViewHolder.titleTextView.setText(topicDTO.getTitle());
+        headViewHolder.nameTextView.setText(topicDTO.getUser().getName());
+        String timeAgo = DateTimeFormatter.getTimeAgo(this, topicDTO.getCreateTime());
         headViewHolder.timeTextView.setText(timeAgo);
 
-        String url =  avatar + "!androidListAvatar";
+        String url =  topicDTO.getUser().getAvatar() + "!androidListAvatar";
         ImageLoader.getInstance().displayImage(url, headViewHolder.avatarImageView);
 
         List<AnalyzeContent.ContentFragment> contentFragmentList = new LinkedList<AnalyzeContent.ContentFragment>();
-        contentFragmentList = AnalyzeContent.analyzeContent(content);
+        contentFragmentList = AnalyzeContent.analyzeContent(topicDTO.getContent());
 
         for(int n=0; n != contentFragmentList.size() ; n++ )
         {
@@ -166,7 +205,43 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
         }
 
+        if (topicDTO.getType() == TopicType.VIDEO || topicDTO.getVideoDetail() != null)
+        {
+            if(topicDTO.getVideoDetail().getVideoSource() != null)
+            {
+                initVideo();
+            }
+        }
+
+
         listView.addHeaderView(headView);
+    }
+
+    private void initVideo()
+    {
+        headViewHolder.videoLayout.setVisibility(View.VISIBLE);
+
+        openDiskLruCache();
+
+        String key = Util.stringToMD5(topicDTO.getVideoDetail().getVideoSource());
+
+
+        try {
+            DiskLruCache.Snapshot snapShot = mDiskLruCache.get(key);
+
+            if(snapShot != null)
+            {
+                playVideo(DiskCachePath.getDiskCacheDir(this, "short_video").getPath() +"/" + key + ".0" );
+            }
+            else
+            {
+                headViewHolder.roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
+                downloadVideoFile();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void doHideFootView()
@@ -225,7 +300,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     private void requestReplyList()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.reply + "?topicId="+ topicId + "&page=" + (currentPage + 1) ;
+        String url = ServerMethod.reply + "?topicId="+ topicDTO.getId() + "&page=" + (currentPage + 1) ;
         MyLog.d(tag, "request=" + url);
 
         MyPageRequest<ReplyDTO> stringRequest = new MyPageRequest<ReplyDTO>(Request.Method.GET,url,ReplyDTO.class,
@@ -314,7 +389,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         replyDTO.setUser(userMinDTO);
 
         TopicDTO topicDTO = new TopicDTO();
-        topicDTO.setId(topicId);
+        topicDTO.setId(topicDTO.getId());
         replyDTO.setTopic(topicDTO);
 
         return replyDTO;
@@ -333,10 +408,141 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
         @InjectView(R.id.topic_detail_content_container)LinearLayout contentLayout;
+        @InjectView(R.id.videoview)VideoView videoView;
+        @InjectView(R.id.short_video_detail_progress)
+        RoundProgressBarWidthNumber roundProgressBarWidthNumber;
+        @InjectView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
 
         public HeadViewHolder(View headView)
         {
             ButterKnife.inject(this, headView);
         }
+    }
+
+
+    //video
+    private void playVideo(String path)
+    {
+        MyLog.d(tag, "videoPath=" + path);
+
+        headViewHolder.videoView.setVideoPath(path);
+        headViewHolder.videoView.requestFocus();
+        headViewHolder.videoView.start();
+    }
+
+
+    private void downloadVideoFile() {
+
+        Thread thread = new Thread(new DownloadRunnable(topicDTO.getVideoDetail().getVideoSource()));
+        thread.start();
+
+    }
+
+    private void openDiskLruCache()
+    {
+        try {
+            File cacheDir = DiskCachePath.getDiskCacheDir(this, "short_video");
+            if (!cacheDir.exists()) {
+                cacheDir.mkdirs();
+            }
+            mDiskLruCache = DiskLruCache.open(cacheDir, Util.getAppVersion(this), 1, 20 * 1024 * 1024);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private class DownloadRunnable implements Runnable
+    {
+        private String url;
+
+        public DownloadRunnable(String url)
+        {
+            this.url = url;
+        }
+
+        @Override
+        public void run() {
+            try {
+                String key = Util.stringToMD5(this.url);
+                DiskLruCache.Editor editor = mDiskLruCache.edit(key);
+                if (editor != null)
+                {
+                    OutputStream outputStream = editor.newOutputStream(0);
+                    if (downloadUrlToStream(this.url, outputStream))
+                    {
+                        editor.commit();
+
+
+                    } else
+                    {
+                        editor.abort();
+                    }
+                }
+                mDiskLruCache.flush();
+
+                handler.sendEmptyMessage(HADLER_DOWNLOAD_VIDEO_SUCCESS);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private boolean downloadUrlToStream(String urlString, OutputStream outputStream) {
+        HttpURLConnection urlConnection = null;
+
+        InputStream is = null;
+
+        try
+        {
+            final URL url = new URL(urlString);
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            is = urlConnection.getInputStream();
+
+            int length = urlConnection.getContentLength();
+            int count = 0, oldProgressNum = 0;
+            byte buf[] = new byte[1024];
+            do
+            {
+                int numread = is.read(buf);
+                count += numread;
+                mProgressNum = (int) (((float) count / length) * 100);
+                if(mProgressNum  > oldProgressNum)
+                {
+                    oldProgressNum = mProgressNum;
+                    MyLog.d(ShortVideoDetailActivity.tag, "progress=" + mProgressNum);
+                    handler.sendEmptyMessage(HANDLER_DOWNLOAD_UPDATE);
+                }
+
+                if (numread <= 0) {
+                    break;
+                }
+                outputStream.write(buf,0, numread);
+
+            }while (!interceptFlag);
+
+            return true;
+        }
+        catch (final IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            try {
+
+                if (is != null) {
+                    is.close();
+                }
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }

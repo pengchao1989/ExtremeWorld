@@ -164,19 +164,19 @@ public class TopicListFragment extends Fragment {
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 break;
             case "video":
-                intent = new Intent(this.getActivity(), ShortVideoDetailActivity.class);
+                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 break;
         }
 
         if(intent != null)
         {
+            intent.putExtra("topic", topicDTO);
+
             if(topicDTO.getVideoDetail() != null)
             {
                 if(topicDTO.getVideoDetail().getVideoSource()!= null)
                 {
-
                     intent.putExtra("videoPath", topicDTO.getVideoDetail().getVideoSource());
-
                 }
             }
 

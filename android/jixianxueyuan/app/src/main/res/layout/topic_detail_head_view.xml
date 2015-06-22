@@ -17,6 +17,29 @@
         style="@style/titleText"
         />
 
+    <FrameLayout
+        android:id="@+id/topic_detail_head_view_video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+
+        <VideoView
+            android:id="@+id/videoview"
+            android:layout_width="match_parent"
+            android:layout_height="360dp" />
+
+        <com.jixianxueyuan.widget.RoundProgressBarWidthNumber
+            android:id="@+id/short_video_detail_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+
     <LinearLayout
         android:id="@+id/topic_detail_content_container"
         android:layout_width="match_parent"
