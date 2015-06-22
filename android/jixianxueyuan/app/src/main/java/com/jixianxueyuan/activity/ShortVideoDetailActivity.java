@@ -10,7 +10,6 @@ import android.widget.VideoView;
 
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
@@ -44,7 +43,7 @@ public class ShortVideoDetailActivity extends Activity {
 
     DiskLruCache mDiskLruCache;
 
-    String mediaPath;
+    String videoPath;
 
     boolean interceptFlag = false;
     int mProgressNum = 0;
@@ -61,7 +60,7 @@ public class ShortVideoDetailActivity extends Activity {
 
                     roundProgressBarWidthNumber.setVisibility(View.GONE);
 
-                    String url = mediaPath/*"http://7u2nc3.com1.z0.glb.clouddn.com/short_videofm11QHWk09-1CaKh6JpN-A__.mp4"*/;
+                    String url = videoPath/*"http://7u2nc3.com1.z0.glb.clouddn.com/short_videofm11QHWk09-1CaKh6JpN-A__.mp4"*/;
 
                     String key = Util.stringToMD5(url);
 
@@ -83,15 +82,15 @@ public class ShortVideoDetailActivity extends Activity {
         ButterKnife.inject(this);
 
         Intent intent = this.getIntent();
-        if(intent.hasExtra("mediaPath"))
+        if(intent.hasExtra("videoPath"))
         {
-            mediaPath = StaticResourceConfig.IMG_DOMAIN + intent.getStringExtra("mediaPath");
+            videoPath =  intent.getStringExtra("videoPath");
         }
 
         openDiskLruCache();
 
 
-        String url = mediaPath;
+        String url = videoPath;
 
         String key = Util.stringToMD5(url);
 
@@ -127,7 +126,7 @@ public class ShortVideoDetailActivity extends Activity {
 
 
     private void downloadVideoFile() {
-        String url = mediaPath;
+        String url = videoPath;
 
         Thread thread = new Thread(new DownloadRunnable(url));
         thread.start();

@@ -30,6 +30,8 @@
 			<div class="col s12 m6 l6">
 				<h3>个人信息</h3>
 			
+			
+			
 				<form action="${ctx}/qqlogin/${action}" method="post" class="form-welcome">
 			
 					<input type="hidden" name="id" value="${user.id}"/>

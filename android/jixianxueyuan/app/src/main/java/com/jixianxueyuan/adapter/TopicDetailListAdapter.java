@@ -91,7 +91,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
         viewHolder.replyContentTextView.setText(replyDTO.getContent());
 
 
-        String url = StaticResourceConfig.IMG_DOMAIN + replyDTO.getUser().getAvatar() + "!androidListAvatar";
+        String url = replyDTO.getUser().getAvatar() + "!androidListAvatar";
         ImageLoader.getInstance().displayImage(url, viewHolder.avatarImageView);
 
         return convertView;

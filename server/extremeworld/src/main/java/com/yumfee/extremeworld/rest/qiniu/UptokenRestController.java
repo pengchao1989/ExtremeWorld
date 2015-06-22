@@ -59,7 +59,7 @@ public class UptokenRestController
 
 		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 		
-		String bucketName = "extreme";
+		String bucketName = "extreme-video";
 		String frontImage =  UUID.randomUUID().toString();
 
 

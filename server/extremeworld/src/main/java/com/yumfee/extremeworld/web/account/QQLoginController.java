@@ -132,7 +132,7 @@ public class QQLoginController
                 	myUser.setLoginName(openID);
                 	myUser.setName(userInfoBean.getNickname());
                 	myUser.setPlainPassword(openID);
-                	myUser.setAvatar(userInfoBean.getAvatar().getAvatarURL100());
+                	myUser.setAvatar(userInfoBean.getAvatar().getAvatarURL50());
 
                 	
                 	Country country = new Country();

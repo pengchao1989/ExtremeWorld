@@ -134,7 +134,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         String timeAgo = DateTimeFormatter.getTimeAgo(this, createTime);
         headViewHolder.timeTextView.setText(timeAgo);
 
-        String url = StaticResourceConfig.IMG_DOMAIN + avatar + "!androidListAvatar";
+        String url =  avatar + "!androidListAvatar";
         ImageLoader.getInstance().displayImage(url, headViewHolder.avatarImageView);
 
         List<AnalyzeContent.ContentFragment> contentFragmentList = new LinkedList<AnalyzeContent.ContentFragment>();

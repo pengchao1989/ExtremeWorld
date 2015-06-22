@@ -170,14 +170,13 @@ public class TopicListFragment extends Fragment {
 
         if(intent != null)
         {
-            if(topicDTO.getMediaWrap() != null)
+            if(topicDTO.getVideoDetail() != null)
             {
-                if(topicDTO.getMediaWrap().getMedias() != null)
+                if(topicDTO.getVideoDetail().getVideoSource()!= null)
                 {
-                    if(topicDTO.getMediaWrap().getMedias().size() != 0)
-                    {
-                        intent.putExtra("mediaPath", topicDTO.getMediaWrap().getMedias().get(0).getPath());
-                    }
+
+                    intent.putExtra("videoPath", topicDTO.getVideoDetail().getVideoSource());
+
                 }
             }
 
@@ -255,6 +254,8 @@ public class TopicListFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        //MyLog.d(tag, "response=" + response);
 
                         Gson gson = new Gson();
 

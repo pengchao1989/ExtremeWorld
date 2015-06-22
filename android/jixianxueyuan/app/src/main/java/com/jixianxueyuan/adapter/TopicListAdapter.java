@@ -99,7 +99,7 @@ public class TopicListAdapter extends BaseAdapter {
         viewHolder.viewCountTextView.setText( String.valueOf(topicDTO.getViewCount()));
         viewHolder.agreeCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
-        ImageLoader.getInstance().displayImage(StaticResourceConfig.IMG_DOMAIN + topicDTO.getUser().getAvatar() + "!androidListAvatar", viewHolder.avatarImageView);
+        ImageLoader.getInstance().displayImage(topicDTO.getUser().getAvatar() + "!androidListAvatar", viewHolder.avatarImageView);
 
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 
@@ -110,7 +110,7 @@ public class TopicListAdapter extends BaseAdapter {
                 viewHolder.frontImageView.setVisibility(View.VISIBLE);
                 MediaDTO mediaDto = mediawrap.getMedias().get(0);
 
-                String url = StaticResourceConfig.IMG_DOMAIN + mediaDto.getPath();
+                String url =  mediaDto.getPath();
                 ImageLoader.getInstance().displayImage(url, viewHolder.frontImageView);
             }
 
@@ -120,7 +120,7 @@ public class TopicListAdapter extends BaseAdapter {
             viewHolder.frontImageView.setVisibility(View.GONE);
         }
 
-        if(topicDTO.getType() != null || topicDTO.getType().length() > 0)
+        if(topicDTO.getType() != null && topicDTO.getType().length() > 0)
         {
             switch (topicDTO.getType())
             {

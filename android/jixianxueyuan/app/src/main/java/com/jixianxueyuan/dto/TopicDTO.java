@@ -19,6 +19,8 @@ public class TopicDTO implements Serializable
 
     private UserMinDTO user;
 
+    private VideoDetailDTO videoDetail;
+
     private MediaWrapDTO mediaWrap;
 
     private TaxonomyDTO taxonomy;
@@ -107,6 +109,12 @@ public class TopicDTO implements Serializable
     public void setStatus(int status)
     {
         this.status = status;
+    }
+    public VideoDetailDTO getVideoDetail() {
+        return videoDetail;
+    }
+    public void setVideoDetail(VideoDetailDTO videoDetail) {
+        this.videoDetail = videoDetail;
     }
     public UserMinDTO getUser()
     {

@@ -5,5 +5,5 @@ package com.jixianxueyuan.server;
  */
 public class StaticResourceConfig {
 
-    public static final String IMG_DOMAIN = "http://7u2nc3.com1.z0.glb.clouddn.com/";
+    //public static final String IMG_DOMAIN = "http://7u2nc3.com1.z0.glb.clouddn.com/";
 }
