@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CreateShortVideoActivity;
 
 
 public class FFmpegPreviewActivity extends Activity implements TextureView.SurfaceTextureListener
@@ -109,9 +110,20 @@ public class FFmpegPreviewActivity extends Activity implements TextureView.Surfa
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+
 		case R.id.play_cancel:
 			stop();
 			break;
+        case R.id.play_next:
+
+            mediaPlayer.stop();
+            Intent intent = new Intent(this, CreateShortVideoActivity.class);
+            intent.putExtra("path", path);
+
+            startActivity(intent);
+            finish();
+
+            break;
 		case R.id.previre_play:
 			if(!mediaPlayer.isPlaying()){
 				mediaPlayer.start();
@@ -124,6 +136,8 @@ public class FFmpegPreviewActivity extends Activity implements TextureView.Surfa
 				imagePlay.setVisibility(View.VISIBLE);
 			}
 			break;
+
+
 		default:
 			break;
 		}
@@ -131,7 +145,8 @@ public class FFmpegPreviewActivity extends Activity implements TextureView.Surfa
 	
 	private void stop(){
 		mediaPlayer.stop();
-		Intent intent = new Intent(this,FFmpegRecorderActivity.class);
+		Intent intent = new Intent(this,CreateShortVideoActivity.class);
+        intent.putExtra("path", path);
 		startActivity(intent);
 		finish();
 	}

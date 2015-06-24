@@ -48,6 +48,7 @@
         <activity android:name=".activity.ShortVideoDetailActivity"/>
         <activity android:name=".record.FFmpegRecorderActivity"/>
         <activity android:name=".record.FFmpegPreviewActivity"/>
+        <activity android:name=".activity.CreateShortVideoActivity"/>
 
         <activity
             android:configChanges="orientation|screenSize"

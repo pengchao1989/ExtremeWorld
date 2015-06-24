@@ -14,6 +14,7 @@ public class ServerMethod {
 
     static final String method_url = server_url + api_version;
 
+    public static final String uploadToken = server_url + api_version + "/uptoken/upvideo";
 
     public static final String topic = method_url + "all/" + "topic";
     public static final String video = method_url + "all/" + "video";

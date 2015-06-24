@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.jixianxueyuan.activity.CreateShortVideoActivity;
 import com.jixianxueyuan.activity.HomeActivity;
 import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.record.FFmpegRecorderActivity;
+import com.jixianxueyuan.record.NewFFmpegFrameRecorder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.romainpiel.shimmer.Shimmer;
@@ -58,13 +60,14 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.activity_main_danmu) void danmu()
     {
-        Intent intent = new Intent(this, VideoDetailActivity.class);
+        /*Intent intent = new Intent(this, VideoDetailActivity.class);*/
+        Intent intent = new Intent(this, CreateShortVideoActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.activity_main_record) void record()
     {
-        Intent intent = new Intent(this, FFmpegRecorderActivity.class);
+        Intent intent = new Intent(this, NewFFmpegFrameRecorder.class);
         startActivity(intent);
     }
 }

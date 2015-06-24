@@ -31,7 +31,24 @@
 	<div class="container main_content">
 
 		<div class="reply_list_head ">
+		
 			<h3>${topic.title}</h3>
+			
+			
+			<c:if test="${type == 'video'}">
+			
+				<c:if test="${topic.videoDetail.videoSource != null}">
+					<div class="row">
+						<div class="col s12 m12 l12" id="danmup">
+					
+						</div>
+					</div>
+
+				</c:if> 
+		
+			</c:if>
+
+
 			<div class="media">
 				<div class="media-left">
 					<a href="${ctx}/u/${topic.user.id}"> <img class="media-object"
@@ -42,14 +59,7 @@
 					<a href="${ctx}/u/${topic.user.id}" target="_blank">${topic.user.name}</a>
 					<p>${topic.createTime}</p>
 					<br />
-						<c:if test="${type == 'video'}">
-
-		 					<c:if test="${topic.videoDetail.videoSource != null}">
-								<div id="danmup">
-								</div>
-							</c:if> 
-					
-						</c:if>
+						
 						
 						<br />
 					

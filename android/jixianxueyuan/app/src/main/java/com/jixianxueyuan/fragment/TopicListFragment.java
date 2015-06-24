@@ -29,10 +29,12 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateMoodActivity;
 import com.jixianxueyuan.activity.ShortVideoDetailActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
+import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.record.FFmpegRecorderActivity;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.melnykov.fab.FloatingActionButton;
@@ -202,7 +204,8 @@ public class TopicListFragment extends Fragment {
     }
     @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
     {
-
+        Intent intent = new Intent(this.getActivity(), FFmpegRecorderActivity.class);
+        startActivity(intent);
     }
 
     private void refreshTopicList()
