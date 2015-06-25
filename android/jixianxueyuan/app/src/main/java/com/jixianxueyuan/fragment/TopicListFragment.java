@@ -31,6 +31,7 @@ import com.jixianxueyuan.activity.ShortVideoDetailActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
+import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -161,12 +162,15 @@ public class TopicListFragment extends Fragment {
         {
             case "mood":
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+                intent.setAction(TopicType.MOOD);
                 break;
             case "discuss":
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+                intent.setAction(TopicType.MOOD);
                 break;
             case "video":
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+                intent.setAction(TopicType.VIDEO);
                 break;
         }
 

@@ -2,6 +2,8 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -17,17 +19,28 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.dto.UploadToken;
 import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.NewEditWidget;
 import com.jixianxueyuan.widget.NewEditWidgetListener;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
+import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,12 +68,17 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
     LinearLayout editWidgetLayout;
     @InjectView(R.id.create_mood_image_gridview)
     NoScorllBarGridView imageGridView;
+    @InjectView(R.id.create_short_video_progress)
+    RoundProgressBarWidthNumber roundProgressBarWidthNumber;
 
     NewEditWidget newEditWidget;
 
-
+    String action = null;
+    String videoPath = null;
+    UploadToken uploadToken = null;
 
     TopicDTO topicDTO;
+    VideoDetailDTO videoDetailDTO;
 
     @Override
     public void onCreate(Bundle savedInstanceStated)
@@ -69,6 +87,26 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
         setContentView(R.layout.create_mood_activity);
 
         ButterKnife.inject(this);
+
+        Intent intent = getIntent();
+        action = intent.getAction();
+        if(action == null)
+        {
+
+            finish();
+            return;
+        }
+        else
+        {
+            if (action.equals(TopicType.MOOD))
+            {
+
+            }
+            else if(action.equals(TopicType.VIDEO))
+            {
+                videoPath = intent.getStringExtra("path");
+            }
+        }
 
 
         newEditWidget = new NewEditWidget(this, editWidgetLayout);
@@ -79,7 +117,15 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
 
     @OnClick(R.id.create_mood_submit)void onSubmit()
     {
-        submit();
+        if(action.equals(TopicType.MOOD))
+        {
+            submit();
+        }
+        else if(action.equals(TopicType.VIDEO))
+        {
+            requestToken();
+        }
+
     }
 
     private void submit()
@@ -112,6 +158,60 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
         queue.add(stringRequest);
     }
 
+    private void requestToken()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(ServerMethod.uploadToken, new Response.Listener<String>(){
+
+            @Override
+            public void onResponse(String response) {
+
+                Gson gson = new Gson();
+                uploadToken = gson.fromJson(response, UploadToken.class);
+
+                MyLog.d("CreateShortVideoActivity", "path=" + videoPath);
+
+                UploadManager uploadManager = new UploadManager();
+
+                uploadManager.put(videoPath, Util.getUUID(), uploadToken.getUptoken(),
+                        new UpCompletionHandler() {
+                            @Override
+                            public void complete(String key, ResponseInfo info, JSONObject response) {
+                                MyLog.i("qiniu", info.path);
+                                MyLog.i("qiniu", key);
+
+                                videoDetailDTO = new VideoDetailDTO();
+                                videoDetailDTO.setVideoSource(StaticResourceConfig.VIDEO_DOMAIN + key);
+                                videoDetailDTO.setThumbnail(StaticResourceConfig.VIDEO_DOMAIN + uploadToken.getMyParam());
+
+
+                                Toast.makeText(CreateMoodActivity.this,"视频上传成功", Toast.LENGTH_LONG).show();
+
+                                submit();
+                            }
+                        }, new UploadOptions(null, null, false,
+                                new UpProgressHandler(){
+                                    public void progress(String key, double percent)
+                                    {
+
+                                        Log.i("qiniu", key + ": " + percent);
+                                        roundProgressBarWidthNumber.setProgress( (int)(percent * 100) );
+                                    }
+                                }, null));
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", error.getMessage(), error);
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
     private void buildTopicParam()
     {
         topicDTO = new TopicDTO();
@@ -126,6 +226,11 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
         hobbyDTO.setId(1L);
         hobbys.add(hobbyDTO);
         topicDTO.setHobbys(hobbys);
+
+        if(action.equals(TopicType.VIDEO))
+        {
+            topicDTO.setVideoDetail(videoDetailDTO);
+        }
     }
 
     @Override
@@ -133,13 +238,13 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
     {
         Intent intent = new Intent(this, MultiImageSelectorActivity.class);
 
-// whether show camera
+        // whether show camera
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
 
-// max select image amount
+        // max select image amount
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 9);
 
-// select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
+        // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
 
         startActivityForResult(intent, 1);
@@ -156,9 +261,35 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
                 // do your logic ....
                 for(String p : path)
                 {
-                    MyLog.d(tag, "path=" + p);
+                    MyLog.d(tag, "videoPath=" + p);
                 }
             }
         }
+    }
+
+
+
+
+    /**
+     * 获取视频的缩略图
+     * 先通过ThumbnailUtils来创建一个视频的缩略图，然后再利用ThumbnailUtils来生成指定大小的缩略图。
+     * 如果想要的缩略图的宽和高都小于MICRO_KIND，则类型要使用MICRO_KIND作为kind的值，这样会节省内存。
+     * @param videoPath 视频的路径
+     * @param width 指定输出视频缩略图的宽度
+     * @param height 指定输出视频缩略图的高度度
+     * @param kind 参照MediaStore.Images.Thumbnails类中的常量MINI_KIND和MICRO_KIND。
+     *            其中，MINI_KIND: 512 x 384，MICRO_KIND: 96 x 96
+     * @return 指定大小的视频缩略图
+     */
+    private Bitmap getVideoThumbnail(String videoPath, int width, int height,
+                                     int kind) {
+        Bitmap bitmap = null;
+        // 获取视频的缩略图
+        bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
+        System.out.println("w"+bitmap.getWidth());
+        System.out.println("h"+bitmap.getHeight());
+        bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
+                ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+        return bitmap;
     }
 }

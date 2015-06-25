@@ -18,7 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CreateMoodActivity;
 import com.jixianxueyuan.activity.CreateShortVideoActivity;
+import com.jixianxueyuan.config.TopicType;
 
 
 public class FFmpegPreviewActivity extends Activity implements TextureView.SurfaceTextureListener
@@ -145,7 +147,8 @@ public class FFmpegPreviewActivity extends Activity implements TextureView.Surfa
 	
 	private void stop(){
 		mediaPlayer.stop();
-		Intent intent = new Intent(this,CreateShortVideoActivity.class);
+		Intent intent = new Intent(this,CreateMoodActivity.class);
+        intent.setAction(TopicType.VIDEO);
         intent.putExtra("path", path);
 		startActivity(intent);
 		finish();

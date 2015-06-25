@@ -126,7 +126,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_visibility_grey600_24dp"
+                    android:src="@mipmap/icon_comment_s_1"
                     />
                 <TextView
                     android:id="@+id/topic_list_item_view_count"
@@ -137,7 +137,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_thumb_up_grey600_24dp"
+                    android:src="@mipmap/icon_hand_normal_1"
                     android:layout_marginLeft="20dp"
                     />
 
