@@ -6,5 +6,5 @@ package com.jixianxueyuan.server;
 public class StaticResourceConfig {
 
     public static final String IMG_DOMAIN = "http://img.jixianxueyuan.com/";
-    public static final String VIDEO_DOMAIN = "http://video.jixianxueyuan.com/";
+    public static final String VIDEO_DOMAIN = "http://static.jixianxueyuan.com/";
 }

@@ -35,6 +35,7 @@ import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.melnykov.fab.FloatingActionButton;
@@ -207,7 +208,8 @@ public class TopicListFragment extends Fragment {
     }
     @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
     {
-
+        Intent intent = new Intent(this.getActivity(), MediaRecorderActivity.class);
+        startActivity(intent);
     }
 
     private void refreshTopicList()
