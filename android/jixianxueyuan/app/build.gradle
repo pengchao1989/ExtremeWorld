@@ -41,4 +41,5 @@ dependencies {
     compile files('libs/javacpp.jar')
     compile files('libs/javacv.jar')
     compile project(':multi-image-selector')
+    compile project(':VitamioRecorderLibrary')
 }

@@ -112,6 +112,7 @@
     <orderEntry type="library" exported="" name="cardview-v7-22.0.0" level="project" />
     <orderEntry type="module" module-name="emoji" exported="" />
     <orderEntry type="module" module-name="multi-image-selector" exported="" />
+    <orderEntry type="module" module-name="VitamioRecorderLibrary" exported="" />
   </component>
 </module>
 
