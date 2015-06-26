@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Light">
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
 <!--        <item name="android:windowIsTranslucent">true</item>
@@ -129,6 +129,14 @@
 
     <style name="contentEditText">
         <item name="android:background">@drawable/edittext_background</item>
+    </style>
+
+    <style name="BlueButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/blue_button_background</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:height">30dp</item>
     </style>
 
 

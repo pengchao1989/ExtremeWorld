@@ -200,6 +200,7 @@ public class TopicListFragment extends Fragment {
     @OnClick(R.id.topic_list_fragment_add_discuss)void onCreateDiscuss()
     {
         Intent intent = new Intent(this.getActivity(), CreateMoodActivity.class);
+        intent.setAction(TopicType.MOOD);
         startActivity(intent);
     }
     @OnClick(R.id.topic_list_fragment_add_mood)void onCreateMood()

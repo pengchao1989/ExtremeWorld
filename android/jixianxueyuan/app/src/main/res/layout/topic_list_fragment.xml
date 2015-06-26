@@ -120,7 +120,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_videocam_black_48dp"
+                        android:src="@mipmap/btn_pb_add_camera"
                         />
 
                     <TextView

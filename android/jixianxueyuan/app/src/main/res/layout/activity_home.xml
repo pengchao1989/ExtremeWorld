@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_below="@+id/toolbar"
-            app:primaryColor="#009688"
+            app:primaryColor="@color/primary_color"
             app:accentColor="#ffc400" />
 
 

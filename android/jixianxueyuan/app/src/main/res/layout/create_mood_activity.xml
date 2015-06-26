@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="@string/submit"
         android:layout_alignParentBottom="true"
-        android:background="@color/blue"
+        style="@style/BlueButton"
         />
 
     <com.jixianxueyuan.widget.RoundProgressBarWidthNumber

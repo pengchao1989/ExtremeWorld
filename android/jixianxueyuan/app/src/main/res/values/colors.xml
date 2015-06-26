@@ -1,9 +1,11 @@
 <resources>
 
+    <color name="primary_color">#00bcd4</color>
+
     <color name="black_overlay">#66000000</color>
     <color name="white_overlay">#66FAFAFA</color>
 
-    <color name="background">#ffe6e8e2</color>
+    <color name="background">#6cd9dbd5</color>
 
     <color name="white">#FFFAFAFA</color>
     <color name="black">#FF000000</color>
