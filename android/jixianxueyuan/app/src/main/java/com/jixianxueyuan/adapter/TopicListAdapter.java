@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -103,22 +105,9 @@ public class TopicListAdapter extends BaseAdapter {
 
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 
-        if(mediawrap != null)
-        {
-            if(mediawrap.getMedias().size() > 0)
-            {
-                viewHolder.frontImageView.setVisibility(View.VISIBLE);
-                MediaDTO mediaDto = mediawrap.getMedias().get(0);
+        VideoDetailDTO videoDetailDTO = topicDTO.getVideoDetail();
 
-                String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url, viewHolder.frontImageView);
-            }
 
-        }
-        else
-        {
-            viewHolder.frontImageView.setVisibility(View.GONE);
-        }
 
         if(topicDTO.getType() != null && topicDTO.getType().length() > 0)
         {
@@ -142,6 +131,73 @@ public class TopicListAdapter extends BaseAdapter {
             }
         }
 
+        //多媒体信息
+        if(videoDetailDTO != null)
+        {
+            viewHolder.videoFrontLayout.setVisibility(View.VISIBLE);
+
+            ImageLoader.getInstance().displayImage(videoDetailDTO.getThumbnail() + "!AndroidListItem", viewHolder.videoFrontImageView);
+
+        }
+        else
+        {
+            viewHolder.videoFrontLayout.setVisibility(View.GONE);
+        }
+
+
+        if(mediawrap != null)
+        {
+            if(mediawrap.getMedias().size() > 0)
+            {
+                viewHolder.topicImageView_1.setVisibility(View.VISIBLE);
+                MediaDTO mediaDto = mediawrap.getMedias().get(0);
+
+                String url =  mediaDto.getPath();
+                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_1);
+            }
+            if(mediawrap.getMedias().size() > 1)
+            {
+                viewHolder.topicImageView_2.setVisibility(View.VISIBLE);
+                MediaDTO mediaDto = mediawrap.getMedias().get(1);
+
+                String url =  mediaDto.getPath();
+                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_2);
+            }
+            if(mediawrap.getMedias().size() > 2)
+            {
+                viewHolder.topicImageView_3.setVisibility(View.VISIBLE);
+                MediaDTO mediaDto = mediawrap.getMedias().get(2);
+
+                String url =  mediaDto.getPath();
+                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_3);
+            }
+            if(mediawrap.getMedias().size() > 3)
+            {
+                viewHolder.topicImageView_4.setVisibility(View.VISIBLE);
+                MediaDTO mediaDto = mediawrap.getMedias().get(3);
+
+                String url =  mediaDto.getPath();
+                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_4);
+            }
+            if(mediawrap.getMedias().size() > 4)
+            {
+                viewHolder.topicImageView_5.setVisibility(View.VISIBLE);
+                MediaDTO mediaDto = mediawrap.getMedias().get(4);
+
+                String url =  mediaDto.getPath();
+                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_5);
+            }
+        }
+        else
+        {
+            viewHolder.topicImageView_1.setVisibility(View.GONE);
+            viewHolder.topicImageView_2.setVisibility(View.GONE);
+            viewHolder.topicImageView_3.setVisibility(View.GONE);
+            viewHolder.topicImageView_4.setVisibility(View.GONE);
+            viewHolder.topicImageView_5.setVisibility(View.GONE);
+        }
+
+
 
         return convertView;
     }
@@ -162,14 +218,33 @@ public class TopicListAdapter extends BaseAdapter {
         @InjectView(R.id.topic_list_item_time)
         TextView timeTextView;
 
-        @InjectView(R.id.topic_list_item_front_image)
-        ImageView frontImageView;
-
         @InjectView(R.id.topic_list_item_view_count)
         TextView viewCountTextView;
 
         @InjectView(R.id.topic_list_item_agree_count)
         TextView agreeCountTextView;
+
+        @InjectView(R.id.topic_list_item_image_1)
+        ImageView topicImageView_1;
+
+        @InjectView(R.id.topic_list_item_image_2)
+        ImageView topicImageView_2;
+
+        @InjectView(R.id.topic_list_item_image_3)
+        ImageView topicImageView_3;
+
+        @InjectView(R.id.topic_list_item_image_4)
+        ImageView topicImageView_4;
+
+        @InjectView(R.id.topic_list_item_image_5)
+        ImageView topicImageView_5;
+
+        @InjectView(R.id.topic_list_item_video_front_layout)
+        RelativeLayout videoFrontLayout;
+
+        @InjectView(R.id.topic_list_item_video_front_image)
+        ImageView videoFrontImageView;
+
 
         public ViewHolder(View itemView){
 

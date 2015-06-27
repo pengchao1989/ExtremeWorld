@@ -62,9 +62,7 @@ public class TopicListFragment extends Fragment {
     @InjectView(R.id.topic_list_fragment_add_blank_view)
     View addBlankView;
 
-    //View footerView;
     LoadMoreView loadMoreView;
-    //Button loadMoreButton;
     int currentPage = 0;
     int totalPage = 0;
 
@@ -93,34 +91,19 @@ public class TopicListFragment extends Fragment {
         Log.d(tag,"onCreateView");
 
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
-        //footerView = inflater.inflate(R.layout.loadmore, null,false);
 
         ButterKnife.inject(this,view);
-        //ButterKnife.inject(this, footerView);
-
-/*        loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
-        loadMoreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getNextPage();
-            }
-        });*/
 
         loadMoreView = new LoadMoreView(this.getActivity());
         loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
             @Override
             public void runLoad() {
-                MyLog.d(tag, "loadmore is clicked");
                 getNextPage();
             }
         });
         listView.addFooterView(loadMoreView);
 
         listView.setAdapter(adapter);
-
-
-        //
-
 
         floatingActionButton.attachToListView(listView);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -245,15 +228,12 @@ public class TopicListFragment extends Fragment {
         {
             if(loadMoreView.isLoading() == true)
             {
-                //footerView.setVisibility(View.VISIBLE);
                 loadMoreView.onFinish();
             }
 
             if(currentPage >= totalPage)
             {
-                //loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
                 loadMoreView.setOver();
-
             }
 
         }
