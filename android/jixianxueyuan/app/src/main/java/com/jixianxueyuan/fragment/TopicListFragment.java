@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,9 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateMoodActivity;
-import com.jixianxueyuan.activity.ShortVideoDetailActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
-import com.jixianxueyuan.activity.VideoDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
@@ -38,6 +34,7 @@ import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.widget.LoadMoreView;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
@@ -65,8 +62,9 @@ public class TopicListFragment extends Fragment {
     @InjectView(R.id.topic_list_fragment_add_blank_view)
     View addBlankView;
 
-    View footerView;
-    Button loadMoreButton;
+    //View footerView;
+    LoadMoreView loadMoreView;
+    //Button loadMoreButton;
     int currentPage = 0;
     int totalPage = 0;
 
@@ -95,19 +93,28 @@ public class TopicListFragment extends Fragment {
         Log.d(tag,"onCreateView");
 
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
-        footerView = inflater.inflate(R.layout.loadmore, null,false);
+        //footerView = inflater.inflate(R.layout.loadmore, null,false);
 
         ButterKnife.inject(this,view);
         //ButterKnife.inject(this, footerView);
 
-        loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
+/*        loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
         loadMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getNextPage();
             }
+        });*/
+
+        loadMoreView = new LoadMoreView(this.getActivity());
+        loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+            @Override
+            public void runLoad() {
+                MyLog.d(tag, "loadmore is clicked");
+                getNextPage();
+            }
         });
-        listView.addFooterView(footerView);
+        listView.addFooterView(loadMoreView);
 
         listView.setAdapter(adapter);
 
@@ -125,9 +132,7 @@ public class TopicListFragment extends Fragment {
             }
         });
 
-
         initTranslateAnimation();
-
 
         return view;
     }
@@ -238,14 +243,17 @@ public class TopicListFragment extends Fragment {
     {
         if(totalPage > 1)
         {
-            if(footerView.getVisibility() != View.VISIBLE)
+            if(loadMoreView.isLoading() == true)
             {
-                footerView.setVisibility(View.VISIBLE);
+                //footerView.setVisibility(View.VISIBLE);
+                loadMoreView.onFinish();
             }
 
             if(currentPage >= totalPage)
             {
-                loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+                //loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+                loadMoreView.setOver();
+
             }
 
         }
