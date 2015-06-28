@@ -3,6 +3,7 @@ package com.jixianxueyuan.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,8 @@ public class TopicListFragment extends Fragment {
     LinearLayout addButtonLayout;
     @InjectView(R.id.topic_list_fragment_add_blank_view)
     View addBlankView;
+    @InjectView(R.id.top_list_swiperefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     LoadMoreView loadMoreView;
     int currentPage = 0;
@@ -112,6 +115,15 @@ public class TopicListFragment extends Fragment {
 
                 floatingActionButton.hide();
                 showAddLayout();
+            }
+        });
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.blue);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                refreshTopicList();
             }
         });
 
@@ -269,6 +281,7 @@ public class TopicListFragment extends Fragment {
                             totalPage = page.getTotalPages();
                             currentPage = page.getCurPage() + 1;
                             doHideFootView();
+                            swipeRefreshLayout.setRefreshing(false);
 
                         }
                     }
