@@ -212,11 +212,20 @@
 				var topicId = $(this).children("lable").text();
 				var obj=$(this)
 				console.log(topicId);
-				$.get("/api/v1/all/topic_agree/" + topicId + "?" + <shiro:principal property="id"/> ,function(data, status){
-					var Num = parseInt(obj.find('span').text());
-					Num++;
-					obj.find('span').text(Num);
-				})
+				$.ajax({
+						type: 'POST',
+						contentType:"application/json",
+						url:"/api/v1/topic_agree",
+						data:
+						{
+							"topicId":topicId,
+							"userId":<shiro:principal property="id"/>
+						},
+						success:function(data, status){
+							var Num = parseInt(obj.find('span').text());
+							Num++;
+							obj.find('span').text(Num);
+						}})
 			});
 			
 		})

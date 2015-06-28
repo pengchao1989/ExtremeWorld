@@ -21,6 +21,7 @@ public class ServerMethod {
     public static final String courseTaxonomy = method_url + "course_taxonomy";
     public static final String damaku = method_url + "danmubi";
     public static final String reply = method_url + "reply";
+    public static final String zan = method_url  + "topic_agree";
 
 
 }

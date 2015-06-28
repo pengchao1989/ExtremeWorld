@@ -1,7 +1,5 @@
 package com.yumfee.extremeworld.rest;
 
-import java.util.List;
-
 import javax.validation.Validator;
 
 import org.slf4j.Logger;
@@ -23,7 +21,6 @@ import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.ReplyDTO;
-import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.service.ReplyService;
 
 @RestController
@@ -72,7 +69,7 @@ public class ReplyRestController
 	}
 	
 	//consumes = MediaTypes.JSON 若设置了MediaTYpes 则在http的header中设置Content-Type为application/json才能成功映射，否则返回415
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON_UTF_8)
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)
 	public MyResponse create(@RequestBody Reply reply)//@RequestBody Reply reply
 	{
 		BeanValidators.validateWithException(validator,reply);

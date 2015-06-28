@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -38,12 +39,14 @@ import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.dto.AgreeResultDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
+import com.jixianxueyuan.dto.request.ZanRequest;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
@@ -88,11 +91,9 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
     TopicDTO topicDTO;
 
-
     int currentPage = 0;
     int totalPage = 0;
     TopicDetailListAdapter adapter;
-
 
 
     View headView;
@@ -172,6 +173,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         headViewHolder.nameTextView.setText(topicDTO.getUser().getName());
         String timeAgo = DateTimeFormatter.getTimeAgo(this, topicDTO.getCreateTime());
         headViewHolder.timeTextView.setText(timeAgo);
+        headViewHolder.zanCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
         String url =  topicDTO.getUser().getAvatar() + "!androidListAvatar";
         ImageLoader.getInstance().displayImage(url, headViewHolder.avatarImageView);
@@ -213,6 +215,13 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             }
         }
 
+        headViewHolder.zanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //点赞
+                submitZan();
+            }
+        });
 
         listView.addHeaderView(headView);
     }
@@ -367,6 +376,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                                 inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
                             }
 
+
                             //更新reply到UI
 
 
@@ -399,6 +409,35 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         return replyDTO;
     }
 
+    private boolean submitZan()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String url = ServerMethod.zan;
+
+        ZanRequest zanRequest = new ZanRequest();
+        zanRequest.setTopicId(12L);
+        zanRequest.setUserId(1L);
+
+
+        MyRequest<AgreeResultDTO> myRequest = new MyRequest(Request.Method.POST, url, AgreeResultDTO.class,zanRequest, new Response.Listener<MyResponse<AgreeResultDTO>>() {
+            @Override
+            public void onResponse(MyResponse<AgreeResultDTO> response) {
+
+                headViewHolder.zanButton.setImageResource(R.mipmap.icon_hand_click_1);
+                headViewHolder.zanCountTextView.setText(String.valueOf(response.getContent().getCount()));
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                MyLog.d(tag, "onErrorResponse" + error.toString());
+            }
+        });
+
+        queue.add(myRequest);
+        return false;
+    }
+
 
     @Override
     public void onCommit(String text) {
@@ -416,6 +455,9 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         @InjectView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;
         @InjectView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
+        @InjectView(R.id.topic_detail_head_zan)ImageButton zanButton;
+        @InjectView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
+
 
         public HeadViewHolder(View headView)
         {
