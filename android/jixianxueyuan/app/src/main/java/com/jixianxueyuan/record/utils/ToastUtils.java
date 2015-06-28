@@ -9,17 +9,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.record.VCameraDemoApplication;
+import com.jixianxueyuan.MyApplication;
 
 
 public class ToastUtils {
 
 	public static void showToast(int resID) {
-		showToast(VCameraDemoApplication.getContext(), Toast.LENGTH_SHORT, resID);
+		showToast(MyApplication.getContext(), Toast.LENGTH_SHORT, resID);
 	}
 
 	public static void showToast(String text) {
-		showToast(VCameraDemoApplication.getContext(), Toast.LENGTH_SHORT, text);
+		showToast(MyApplication.getContext(), Toast.LENGTH_SHORT, text);
 	}
 
 	public static void showToast(Context ctx, int resID) {
@@ -35,7 +35,7 @@ public class ToastUtils {
 	}
 
 	public static void showLongToast(int resID) {
-		showToast(VCameraDemoApplication.getContext(), Toast.LENGTH_LONG, resID);
+		showToast(MyApplication.getContext(), Toast.LENGTH_LONG, resID);
 	}
 
 	public static void showLongToast(Context ctx, String text) {
@@ -43,7 +43,7 @@ public class ToastUtils {
 	}
 
 	public static void showLongToast(String text) {
-		showToast(VCameraDemoApplication.getContext(), Toast.LENGTH_LONG, text);
+		showToast(MyApplication.getContext(), Toast.LENGTH_LONG, text);
 	}
 
 	public static void showToast(Context ctx, int duration, int resID) {

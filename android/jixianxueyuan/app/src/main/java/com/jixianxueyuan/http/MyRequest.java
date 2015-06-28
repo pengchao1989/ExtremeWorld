@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.util.MyLog;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -67,6 +68,8 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
         try
         {
             String jsonStr = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+
+            MyLog.d("MyRequest", "json=" + jsonStr);
 
             MyResponse<T> myResponse = gson.fromJson(jsonStr, new TypeToken<MyResponse<T>>(){}.getType());
 

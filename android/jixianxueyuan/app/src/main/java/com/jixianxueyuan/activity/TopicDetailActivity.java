@@ -360,11 +360,15 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                             replyWidget.clean();
                             Toast.makeText(TopicDetailActivity.this, R.string.reply_success,Toast.LENGTH_LONG).show();
 
+                            //隐藏键盘
                             View view = getWindow().peekDecorView();
                             if (view != null) {
                                 InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                                 inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
                             }
+
+                            //更新reply到UI
+
 
                         }
                     }
@@ -388,9 +392,9 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         userMinDTO.setId(1L);
         replyDTO.setUser(userMinDTO);
 
-        TopicDTO topicDTO = new TopicDTO();
-        topicDTO.setId(topicDTO.getId());
-        replyDTO.setTopic(topicDTO);
+        TopicDTO topic = new TopicDTO();
+        topic.setId(topicDTO.getId());
+        replyDTO.setTopic(topic);
 
         return replyDTO;
     }

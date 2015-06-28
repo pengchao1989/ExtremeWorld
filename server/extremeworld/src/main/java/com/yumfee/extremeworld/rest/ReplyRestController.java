@@ -81,9 +81,9 @@ public class ReplyRestController
 		
 		System.out.println("reply restful create + ");
 		
-		Reply result = replyService.getReply(reply.getId());
+		//Reply result = replyService.getReply(reply.getId());
 		
-		ReplyDTO dto = BeanMapper.map(result, ReplyDTO.class);
+		ReplyDTO dto = BeanMapper.map(reply, ReplyDTO.class);
 
 		return MyResponse.ok(dto);
 	}
