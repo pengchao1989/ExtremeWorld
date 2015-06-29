@@ -125,6 +125,10 @@ public class TopicListAdapter extends BaseAdapter {
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
                     break;
 
+                case "s_video":
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
+                    break;
+
                 case "activity":
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_assistant_photo_grey600_18dp);
                     break;

@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 //type=5  typec="activity"
 
 @Entity
-@DiscriminatorValue("5")
+@DiscriminatorValue("6")
 public class Activity extends Topic
 {
 	private ActivityDetail activityDetail;
