@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Environment;
 
 
+import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.record.service.AssertService;
 import com.yixia.camera.VCamera;
 import com.yixia.camera.util.DeviceUtils;
@@ -15,6 +16,8 @@ import java.io.File;
 public class MyApplication extends Application {
 
 	private static MyApplication application;
+
+    BaseInfoDTO baseInfoDTO;
 
 	@Override
 	public void onCreate() {
@@ -41,7 +44,16 @@ public class MyApplication extends Application {
 		startService(new Intent(this, AssertService.class));
 	}
 
+
 	public static Context getContext() {
 		return application;
 	}
+
+    public BaseInfoDTO getBaseInfoDTO() {
+        return baseInfoDTO;
+    }
+
+    public void setBaseInfoDTO(BaseInfoDTO baseInfoDTO) {
+        this.baseInfoDTO = baseInfoDTO;
+    }
 }

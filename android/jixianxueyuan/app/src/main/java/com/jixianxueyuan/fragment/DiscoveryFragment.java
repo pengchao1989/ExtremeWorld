@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
+import com.jixianxueyuan.activity.DiscussHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryLIstAdapter;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class DiscoveryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.discovery_fragment, container, false);
 
@@ -77,6 +78,7 @@ public class DiscoveryFragment extends Fragment {
                     case 0:
                         break;
                     case 1:
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), DiscussHomeActivity.class);
                         break;
                     case 2:
                         break;

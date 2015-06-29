@@ -1,11 +1,13 @@
 package com.jixianxueyuan.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class HobbyDTO implements Serializable {
 
 	private Long id;
 	private String name;
+    private List<TaxonomyDTO> taxonomys;
 	public Long getId() {
 		return id;
 	}
@@ -18,6 +20,12 @@ public class HobbyDTO implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+    public List<TaxonomyDTO> getTaxonomys() {
+        return taxonomys;
+    }
+    public void setTaxonomys(List<TaxonomyDTO> taxonomys) {
+        this.taxonomys = taxonomys;
+    }
 	
 	
 }

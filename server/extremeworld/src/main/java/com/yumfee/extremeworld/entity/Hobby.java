@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +17,7 @@ public class Hobby extends IdEntity
 	private String description;
 	private Date createTime;
 	
+	private List<Taxonomy> taxonomys = new ArrayList<Taxonomy>();
 	private List<User> users= new ArrayList<User>();
 	private List<Site> sites = new ArrayList<Site>();
 	private List<Topic> topics = new ArrayList<Topic>();
@@ -76,7 +78,18 @@ public class Hobby extends IdEntity
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
+	
+	//关系被维护端
+	//referencedColumnName指向对象的列名
+	@OneToMany(mappedBy = "hobby")
+	public List<Taxonomy> getTaxonomys() {
+		return taxonomys;
+	}
+	public void setTaxonomys(List<Taxonomy> taxonomys) {
+		this.taxonomys = taxonomys;
+	}
 
+	
 	
 	
 	

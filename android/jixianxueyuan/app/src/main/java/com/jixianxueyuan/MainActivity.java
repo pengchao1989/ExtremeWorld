@@ -6,9 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.activity.CreateShortVideoActivity;
 import com.jixianxueyuan.activity.HomeActivity;
+import com.jixianxueyuan.dto.BaseInfoDTO;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
+import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -52,6 +61,8 @@ public class MainActivity extends Activity {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
+        requestBaseInfo();
+
     }
 
     @OnClick(R.id.activity_qq_login)void qqLogin()
@@ -82,6 +93,33 @@ public class MainActivity extends Activity {
         }*/
     }
 
+    private void requestBaseInfo()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ServerMethod.baseInfo;
+
+        MyRequest<BaseInfoDTO> myRequest = new MyRequest<BaseInfoDTO>(Request.Method.GET,url,BaseInfoDTO.class,
+                new Response.Listener<MyResponse<BaseInfoDTO>>(){
+
+                    @Override
+                    public void onResponse(MyResponse<BaseInfoDTO> response) {
+
+                        //基础信息，持久化到client中，保证每天只更新一次
+
+                        MyApplication myApplication = (MyApplication) MyApplication.getContext();
+                        myApplication.setBaseInfoDTO(response.getContent());
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+        });
+
+        queue.add(myRequest);
+     }
 
     @OnClick(R.id.activity_main_danmu) void danmu()
     {
@@ -100,6 +138,7 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         mTencent.onActivityResult(requestCode, resultCode, data);
     }
+
 
 
 }
