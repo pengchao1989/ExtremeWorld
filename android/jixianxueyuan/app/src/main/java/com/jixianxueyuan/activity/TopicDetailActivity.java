@@ -215,7 +215,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             }
         }
 
-        headViewHolder.zanButton.setOnClickListener(new View.OnClickListener() {
+        headViewHolder.zanLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //点赞
@@ -416,7 +416,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         String url = ServerMethod.zan;
 
         ZanRequest zanRequest = new ZanRequest();
-        zanRequest.setTopicId(12L);
+        zanRequest.setTopicId(topicDTO.getId());
         zanRequest.setUserId(1L);
 
 
@@ -457,6 +457,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         @InjectView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
         @InjectView(R.id.topic_detail_head_zan)ImageButton zanButton;
         @InjectView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
+        @InjectView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
 
 
         public HeadViewHolder(View headView)

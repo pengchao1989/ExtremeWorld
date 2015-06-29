@@ -47,6 +47,10 @@
 											<a href="${ctx}/${hobby}/topic/${topic.id}" target="_blank"><span class="card-title black-text">${topic.title}</span></a>
 										</div>
 										
+<%-- 										<c:if test="${topic.videoDetail != null}">
+											<video id="myvideo" src="${topic.videoDetail.videoSource}" controls="controls"></video>
+										</c:if> --%>
+										
 										<p >${topic.content}</p>
 										
 										<!-- media -->
@@ -227,6 +231,10 @@
 							obj.find('span').text(Num);
 						}})
 			});
+		    
+		    $('#myvideo').click(function(){
+		    	$(this).play();
+		    })
 			
 		})
 		

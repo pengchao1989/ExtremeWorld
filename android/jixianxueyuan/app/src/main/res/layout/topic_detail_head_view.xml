@@ -27,7 +27,8 @@
         <VideoView
             android:id="@+id/videoview"
             android:layout_width="match_parent"
-            android:layout_height="360dp" />
+            android:layout_height="360dp"
+            />
 
         <com.jixianxueyuan.widget.RoundProgressBarWidthNumber
             android:id="@+id/short_video_detail_progress"
@@ -48,10 +49,13 @@
         />
 
     <LinearLayout
+        android:id="@+id/topic_detail_head_zhan_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:padding="4dp"
         android:gravity="bottom"
+        android:clickable="true"
         >
 
         <TextView
