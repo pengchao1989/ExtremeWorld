@@ -2,6 +2,7 @@ package com.yumfee.extremeworld.config;
 
 public class TopicType {
 	
+	public static final String all = "all";
 	public static final String mood = "mood";
 	public static final String discuss = "discuss";
 	public static final String video = "video";

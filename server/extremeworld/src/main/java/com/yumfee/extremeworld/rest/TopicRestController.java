@@ -20,6 +20,7 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
@@ -45,9 +46,11 @@ public class TopicRestController
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	@RequestMapping( method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public  MyResponse list(
 			@PathVariable String hobby,
+			@RequestParam (value = "type", defaultValue = "all") String type,
+			@RequestParam(value = "taxonomyId", defaultValue = "0") Long taxonomyId,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
@@ -55,7 +58,19 @@ public class TopicRestController
 		
 		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
 		
-		Page<Topic> topicPageSource = topicService.getTopicByHobby(hobbyId, pageNumber, pageSize, sortType);
+		Page<Topic> topicPageSource = null;
+		
+		switch(type)
+		{
+		case TopicType.all:
+			topicPageSource = topicService.getTopicByHobby(hobbyId, pageNumber, pageSize, sortType);
+			break;
+		case TopicType.discuss:
+			topicPageSource = topicService.getTopicByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId, pageNumber, pageSize, sortType);
+			break;
+		}
+		
+		
 		
 		MyPage<TopicDTO, Topic> topicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPageSource);
 		

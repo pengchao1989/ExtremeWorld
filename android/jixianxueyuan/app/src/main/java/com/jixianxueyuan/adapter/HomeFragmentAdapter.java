@@ -1,6 +1,7 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -41,8 +42,10 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
+                Bundle bundle = new Bundle();
+                bundle.putString("topicType", "all");
                 fragment = new TopicListFragment();
-
+                fragment.setArguments(bundle);
                 break;
 
             case 1:

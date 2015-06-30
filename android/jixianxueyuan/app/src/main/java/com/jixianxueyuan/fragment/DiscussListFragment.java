@@ -18,6 +18,8 @@ import butterknife.InjectView;
  */
 public class DiscussListFragment extends Fragment {
 
+    String taxonomyName;
+    int taxonomyId;
 
     @InjectView(R.id.discuss_list_fragment_listview)ListView listView;
 

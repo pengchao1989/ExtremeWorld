@@ -122,6 +122,18 @@ public class TopicService
 		return topicDao.findByHobby(hobbyId,pageRequest);
 	}
 	
+	public Page<Topic> getTopicByHobbyAndType(Long hobbyId, String type, int pageNumber, int pageSize, String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		return topicDao.findByHobbyAndType(hobbyId, type, pageRequest);
+	}
+	
+	public Page<Topic> getTopicByHobbyAndTypeAndTaxonomy(Long hobbyId, String type, Long taxonomyId, int pageNumber, int pageSize, String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		return topicDao.findByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId,pageRequest);
+	}
+	
 	
 	
 	/**

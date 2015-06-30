@@ -65,6 +65,10 @@ public class TopicListFragment extends Fragment {
     @InjectView(R.id.top_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    /*以下两个参数用于定义topic范围，从arg传递过来*/
+    String topicType;
+    String topicTaxonomyId;
+
     LoadMoreView loadMoreView;
     int currentPage = 0;
     int totalPage = 0;
@@ -96,6 +100,17 @@ public class TopicListFragment extends Fragment {
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
 
         ButterKnife.inject(this,view);
+
+        Bundle bundle = getArguments();
+        if(bundle.containsKey("topicType"))
+        {
+            topicType = bundle.getString("topicType");
+        }
+        if(bundle.containsKey("topicTaxonomyId"))
+        {
+            topicTaxonomyId = bundle.getString("topicTaxonomyId");
+        }
+
 
         loadMoreView = new LoadMoreView(this.getActivity());
         loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
@@ -169,6 +184,7 @@ public class TopicListFragment extends Fragment {
                 intent.setAction(TopicType.MOOD);
                 break;
             case "video":
+            case "s_video":
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 intent.setAction(TopicType.VIDEO);
                 break;
