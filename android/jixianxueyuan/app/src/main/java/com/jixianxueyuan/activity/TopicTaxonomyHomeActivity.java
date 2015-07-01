@@ -6,7 +6,7 @@ import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.DiscussListFragmentPageAdapter;
+import com.jixianxueyuan.adapter.TopicTaxonomyListFragmentPageAdapter;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -14,12 +14,12 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 6/29/15.
  */
-public class DiscussHomeActivity extends FragmentActivity {
+public class TopicTaxonomyHomeActivity extends FragmentActivity {
 
     @InjectView(R.id.discuss_home_activity_pager)ViewPager viewPager;
     @InjectView(R.id.discuss_home_activity_pager_title_strip)PagerTitleStrip pagerTitleStrip;
 
-    DiscussListFragmentPageAdapter pageAdapter;
+    TopicTaxonomyListFragmentPageAdapter pageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class DiscussHomeActivity extends FragmentActivity {
         ButterKnife.inject(this);
 
 
-        pageAdapter = new DiscussListFragmentPageAdapter(this.getSupportFragmentManager(), this);
+        pageAdapter = new TopicTaxonomyListFragmentPageAdapter(this.getSupportFragmentManager(), this);
 
         viewPager.setAdapter(pageAdapter);
 

@@ -59,7 +59,7 @@
         <activity android:name=".activity.CreateMoodActivity"/>
         <activity android:name=".activity.ShortVideoDetailActivity"/>
         <activity android:name=".activity.CreateShortVideoActivity"/>
-        <activity android:name=".activity.DiscussHomeActivity"/>
+        <activity android:name=".activity.TopicTaxonomyHomeActivity"/>
 
 
         <activity

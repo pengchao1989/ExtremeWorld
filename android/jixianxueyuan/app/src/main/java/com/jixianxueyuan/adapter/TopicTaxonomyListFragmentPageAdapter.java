@@ -13,7 +13,7 @@ import com.jixianxueyuan.fragment.TopicListFragment;
 /**
  * Created by pengchao on 6/29/15.
  */
-public class DiscussListFragmentPageAdapter extends FragmentPagerAdapter {
+public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter {
 
     Context mContext;
     MyApplication myApplication;
@@ -22,7 +22,7 @@ public class DiscussListFragmentPageAdapter extends FragmentPagerAdapter {
 
     HobbyDTO hobbyDTO;
 
-    public DiscussListFragmentPageAdapter(FragmentManager fm, Context c) {
+    public TopicTaxonomyListFragmentPageAdapter(FragmentManager fm, Context c) {
         super(fm);
         mContext = c;
         this.fm = fm;

@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
-import com.jixianxueyuan.activity.DiscussHomeActivity;
+import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryLIstAdapter;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class DiscoveryFragment extends Fragment {
                     case 0:
                         break;
                     case 1:
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), DiscussHomeActivity.class);
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         break;
                     case 2:
                         break;
