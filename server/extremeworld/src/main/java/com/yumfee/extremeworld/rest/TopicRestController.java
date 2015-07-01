@@ -66,8 +66,12 @@ public class TopicRestController
 			topicPageSource = topicService.getTopicByHobby(hobbyId, pageNumber, pageSize, sortType);
 			break;
 		case TopicType.DISCUSS:
+		case TopicType.NEWS:
+		case TopicType.VIDEO:
+		case TopicType.S_VIDEO:
 			topicPageSource = topicService.getTopicByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId, pageNumber, pageSize, sortType);
 			break;
+		
 		}
 		
 		

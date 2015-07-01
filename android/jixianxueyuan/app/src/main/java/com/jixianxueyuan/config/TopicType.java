@@ -5,6 +5,8 @@ package com.jixianxueyuan.config;
  */
 public class TopicType {
 
+    public static final String STRING = "topicType";
+
     public static final String ALL = "all";
     public static final String MOOD = "mood";
     public static final String DISCUSS = "discuss";

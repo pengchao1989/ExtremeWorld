@@ -1,5 +1,6 @@
 package com.jixianxueyuan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTitleStrip;
@@ -7,6 +8,8 @@ import android.support.v4.view.ViewPager;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicTaxonomyListFragmentPageAdapter;
+import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.util.MyLog;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -21,6 +24,8 @@ public class TopicTaxonomyHomeActivity extends FragmentActivity {
 
     TopicTaxonomyListFragmentPageAdapter pageAdapter;
 
+    String topicType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +34,21 @@ public class TopicTaxonomyHomeActivity extends FragmentActivity {
 
         ButterKnife.inject(this);
 
+        Intent intent = this.getIntent();
+        if(intent.hasExtra(TopicType.STRING))
+        {
+            topicType = intent.getStringExtra(TopicType.STRING);
+            MyLog.d("TopicTaxonomyHomeActivity", "topicType=" + topicType);
+        }
+        else
+        {
+            finish();
+        }
 
-        pageAdapter = new TopicTaxonomyListFragmentPageAdapter(this.getSupportFragmentManager(), this);
+
+        pageAdapter = new TopicTaxonomyListFragmentPageAdapter(this.getSupportFragmentManager(), this, topicType);
 
         viewPager.setAdapter(pageAdapter);
-
 
     }
 }

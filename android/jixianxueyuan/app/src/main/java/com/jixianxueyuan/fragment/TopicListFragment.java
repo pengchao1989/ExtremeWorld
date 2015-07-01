@@ -281,7 +281,8 @@ public class TopicListFragment extends Fragment {
                 url = ServerMethod.topic + "?page=" + (currentPage + 1);
                 break;
             case TopicType.DISCUSS:
-                url = ServerMethod.topic + "?type=" + TopicType.DISCUSS +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+            case TopicType.NEWS:
+                url = ServerMethod.topic + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
                 break;
         }
 

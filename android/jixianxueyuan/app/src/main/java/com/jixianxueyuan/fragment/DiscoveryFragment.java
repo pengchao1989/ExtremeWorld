@@ -15,6 +15,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryLIstAdapter;
+import com.jixianxueyuan.config.TopicType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,11 +77,16 @@ public class DiscoveryFragment extends Fragment {
                 switch (position)
                 {
                     case 0:
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
+                        intent.putExtra(TopicType.STRING, TopicType.NEWS);
                         break;
                     case 1:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
+                        intent.putExtra(TopicType.STRING, TopicType.DISCUSS);
                         break;
                     case 2:
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
+                        intent.putExtra(TopicType.STRING, TopicType.VIDEO);
                         break;
                     case 3:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), CourseTaxonomyActivity.class);

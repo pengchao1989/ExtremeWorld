@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Taxonomy extends IdEntity {
 
 	private String name;
+	private String type;
 	private Date createTime;
 	
 	private Hobby hobby;
@@ -26,6 +27,12 @@ public class Taxonomy extends IdEntity {
 		this.name = name;
 	}
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime() {
 		return createTime;

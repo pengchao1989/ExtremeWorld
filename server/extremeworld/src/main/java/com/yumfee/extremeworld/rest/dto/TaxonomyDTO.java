@@ -7,6 +7,7 @@ public class TaxonomyDTO {
 
 	private Long id;
 	private String name;
+	private String type;
 	
 	public Long getId() {
 		return id;
@@ -20,6 +21,13 @@ public class TaxonomyDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 	
 }
