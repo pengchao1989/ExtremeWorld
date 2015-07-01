@@ -228,10 +228,22 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
         hobbys.add(hobbyDTO);
         topicDTO.setHobbys(hobbys);
 
-        if(action.equals(TopicType.VIDEO))
+
+        if(action.equals(TopicType.DISCUSS))
+        {
+            topicDTO.setType(TopicType.DISCUSS);
+        }
+        else if(action.equals(TopicType.VIDEO))
         {
             topicDTO.setVideoDetail(videoDetailDTO);
+            topicDTO.setType(TopicType.S_VIDEO);
         }
+        else if(action.equals(TopicType.NEWS))
+        {
+
+        }
+
+
     }
 
     @Override

@@ -62,10 +62,10 @@ public class TopicRestController
 		
 		switch(type)
 		{
-		case TopicType.all:
+		case TopicType.ALL:
 			topicPageSource = topicService.getTopicByHobby(hobbyId, pageNumber, pageSize, sortType);
 			break;
-		case TopicType.discuss:
+		case TopicType.DISCUSS:
 			topicPageSource = topicService.getTopicByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId, pageNumber, pageSize, sortType);
 			break;
 		}

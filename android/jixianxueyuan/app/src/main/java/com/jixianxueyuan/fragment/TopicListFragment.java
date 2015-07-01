@@ -272,7 +272,25 @@ public class TopicListFragment extends Fragment {
     {
 
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
-        String url = ServerMethod.topic + "?page=" + (currentPage + 1);
+
+        String url = null;
+
+        switch (topicType)
+        {
+            case TopicType.ALL:
+                url = ServerMethod.topic + "?page=" + (currentPage + 1);
+                break;
+            case TopicType.DISCUSS:
+                url = ServerMethod.topic + "?type=" + TopicType.DISCUSS +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                break;
+        }
+
+        MyLog.d(tag, "request url=" + url);
+        if(url == null)
+        {
+            return;
+        }
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {

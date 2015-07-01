@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.jixianxueyuan.MyApplication;
 import com.jixianxueyuan.dto.HobbyDTO;
-import com.jixianxueyuan.fragment.DiscussListFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
 
 /**
@@ -38,7 +37,7 @@ public class DiscussListFragmentPageAdapter extends FragmentPagerAdapter {
 
         Bundle bundle = new Bundle();
         bundle.putString("topicType", "discuss");
-        bundle.putString("topicTaxonomy", String.valueOf(hobbyDTO.getTaxonomys().get(position).getId()));
+        bundle.putString("topicTaxonomyId", String.valueOf(hobbyDTO.getTaxonomys().get(position).getId()));
         TopicListFragment fragment = new TopicListFragment();
         fragment.setArguments(bundle);
         return fragment;

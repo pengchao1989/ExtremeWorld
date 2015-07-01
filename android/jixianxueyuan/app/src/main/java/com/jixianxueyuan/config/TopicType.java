@@ -5,9 +5,12 @@ package com.jixianxueyuan.config;
  */
 public class TopicType {
 
-    public static String MOOD = "mood";
-    public static String DISCUSS = "discuss";
-    public static String VIDEO = "video";
-    public static String S_VIDEO = "s_video";
+    public static final String ALL = "all";
+    public static final String MOOD = "mood";
+    public static final String DISCUSS = "discuss";
+    public static final String VIDEO = "video";
+    public static final String S_VIDEO = "s_video";
+    public static final String ACTIVITY = "activity";
+    public static final String NEWS = "news";
 
 }
