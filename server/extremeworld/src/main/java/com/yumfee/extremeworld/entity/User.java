@@ -28,6 +28,7 @@ public class User extends UserBase
 	private String description;
 	private String qq;
 	private String weixin;
+	private String geoHash;
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
@@ -95,6 +96,13 @@ public class User extends UserBase
 	public void setWeixin(String weixin)
 	{
 		this.weixin = weixin;
+	}
+	
+	public String getGeoHash() {
+		return geoHash;
+	}
+	public void setGeoHash(String geoHash) {
+		this.geoHash = geoHash;
 	}
 	
 	

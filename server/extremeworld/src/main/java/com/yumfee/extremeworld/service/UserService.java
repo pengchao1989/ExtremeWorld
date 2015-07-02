@@ -23,6 +23,11 @@ public class UserService {
 		return userDao.findOne(id);
 	}
 	
+	public User saveUser(User user)
+	{
+		return userDao.save(user);
+	}
+	
 	public List<User> getFollowings(Long id)
 	{
 		return userDao.findOne(id).getFollowings();
