@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.liuguangqiang.swipeback.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/course_taxonomy_activity_swipeback_layout"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    >
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="course_activity"
+        />
+
+    <ExpandableListView
+        android:id="@+id/course_taxonomy_activity_expandablelistview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/background"
-        >
+        android:layout_height="match_parent"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="course_activity"
-            />
-
-        <ExpandableListView
-            android:id="@+id/course_taxonomy_activity_expandablelistview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-</com.liuguangqiang.swipeback.SwipeBackLayout>
+</LinearLayout>

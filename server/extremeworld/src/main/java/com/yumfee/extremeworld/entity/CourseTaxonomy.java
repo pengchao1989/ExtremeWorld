@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,6 +19,7 @@ public class CourseTaxonomy extends IdEntity
 	private String name;
 	private Date createTime;
 	
+	private Hobby hobby;
 	private List<Course> courses;
 
 	
@@ -38,6 +41,16 @@ public class CourseTaxonomy extends IdEntity
 	public void setCreateTime(Date createTime)
 	{
 		this.createTime = createTime;
+	}
+
+	@ManyToOne()
+	@JoinColumn(name="hobby_id")
+	public Hobby getHobby() {
+		return hobby;
+	}
+
+	public void setHobby(Hobby hobby) {
+		this.hobby = hobby;
 	}
 
 	@JsonIgnore

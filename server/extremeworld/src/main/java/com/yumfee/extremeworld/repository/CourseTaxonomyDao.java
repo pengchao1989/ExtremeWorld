@@ -24,4 +24,7 @@ public interface CourseTaxonomyDao extends PagingAndSortingRepository<CourseTaxo
 	
 	@Query("select ct from CourseTaxonomy ct JOIN ct.courses c WHERE c.type=?")
 	List<CourseTaxonomy> find(String t);
+	
+	@Query("SELECT ct FROM CourseTaxonomy ct  WHERE ct.hobby.id=?")
+	List<CourseTaxonomy> findByHobby(Long hobbyId);
 }

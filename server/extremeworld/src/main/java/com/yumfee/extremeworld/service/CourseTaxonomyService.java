@@ -30,7 +30,7 @@ public class CourseTaxonomyService
 		return courseTaxonomyDao.findOne(id);
 	}
 	
-	public List<CourseTaxonomy> getAll()
+	public List<CourseTaxonomy> findByHobby(Long hobbyId)
 	{
 /*		Specification<CourseTaxonomy> spec = new Specification<CourseTaxonomy>(){
 
@@ -89,7 +89,7 @@ public class CourseTaxonomyService
 			
 		}*/
 		
-		List<CourseTaxonomy> courseTaxonomys = courseTaxonomyDao.findAll();
+		List<CourseTaxonomy> courseTaxonomys = courseTaxonomyDao.findByHobby(hobbyId);
 		
 		//再循环取出每个目录下的course
 		for(CourseTaxonomy courseTaxonomy : courseTaxonomys)

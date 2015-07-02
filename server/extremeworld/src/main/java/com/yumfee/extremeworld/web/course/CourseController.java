@@ -28,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
@@ -59,7 +61,9 @@ public class CourseController
 			Model model, 
 			ServletRequest request)
 	{
-		List<CourseTaxonomy> courseTaxonomyList = courseTaxonomyService.getAll();
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		
+		List<CourseTaxonomy> courseTaxonomyList = courseTaxonomyService.findByHobby(hobbyId);
 		
 		model.addAttribute("courseTaxonomyList", courseTaxonomyList);
 		
@@ -124,7 +128,9 @@ public class CourseController
 			@PathVariable String hobby,
 			Model model)
 	{
-		List<CourseTaxonomy> courseTaxonomyList = courseTaxonomyService.getAll();
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		
+		List<CourseTaxonomy> courseTaxonomyList = courseTaxonomyService.findByHobby(hobbyId);
 		model.addAttribute("courseTaxonomyList", courseTaxonomyList);
 		
 		

@@ -16,6 +16,9 @@ import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CourseListAdapter;
 import com.jixianxueyuan.dto.CourseTaxonomyDTO;
+import com.jixianxueyuan.dto.CourseTaxonomysResponseDTO;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.liuguangqiang.swipeback.SwipeBackLayout;
 
@@ -31,8 +34,6 @@ public class CourseTaxonomyActivity extends Activity{
 
     @InjectView(R.id.course_taxonomy_activity_expandablelistview)
     ExpandableListView expandableListView;
-    @InjectView(R.id.course_taxonomy_activity_swipeback_layout)
-    SwipeBackLayout swipeBackLayout;
 
     CourseListAdapter adapter;
 
@@ -46,12 +47,11 @@ public class CourseTaxonomyActivity extends Activity{
 
         ButterKnife.inject(this);
 
-        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
-
         adapter = new CourseListAdapter(this);
         expandableListView.setAdapter(adapter);
 
 
+        requestCourseList();
 
     }
     @Override
@@ -72,19 +72,17 @@ public class CourseTaxonomyActivity extends Activity{
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.courseTaxonomy;
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
-                new Response.Listener<String>() {
+        MyRequest<CourseTaxonomysResponseDTO> stringRequest = new MyRequest<CourseTaxonomysResponseDTO>(Request.Method.GET,url,CourseTaxonomysResponseDTO.class,
+                new Response.Listener<MyResponse<CourseTaxonomysResponseDTO>>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(MyResponse<CourseTaxonomysResponseDTO> response) {
 
-                        Log.d("CourseTaxonomyActivity", "response=" + response);
 
                         Gson gson = new Gson();
-                        List<CourseTaxonomyDTO> courseTaxonomyDTOs = gson.fromJson(response, new TypeToken<List<CourseTaxonomyDTO>>(){}.getType());
-                        if(courseTaxonomyDTOs != null)
+
+                        if(response.getContent() != null)
                         {
-                            adapter.addDatas(courseTaxonomyDTOs);
-                            adapter.notifyDataSetChanged();
+                            adapter.addDatas(response.getContent().getCourseTaxonomyList());
                         }
                     }
                 },
