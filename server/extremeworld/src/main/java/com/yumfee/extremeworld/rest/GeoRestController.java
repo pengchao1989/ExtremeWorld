@@ -1,6 +1,8 @@
 package com.yumfee.extremeworld.rest;
 
 
+import java.util.List;
+
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.web.MediaTypes;
 
 import ch.hsr.geohash.GeoHash;
 import ch.hsr.geohash.WGS84Point;
 import ch.hsr.geohash.queries.GeoHashCircleQuery;
+import ch.hsr.geohash.util.VincentyGeodesy;
 
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
@@ -31,9 +35,12 @@ public class GeoRestController {
 	private UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse list(@PathVariable String hobby) {
+	public MyResponse list(@PathVariable String hobby,
+			@RequestParam (value = "latitude", defaultValue = "0") double latitude,
+			@RequestParam (value = "longitude", defaultValue = "0") double longitude
+			) {
 		
-		WGS84Point center = new WGS84Point(39.86391280373075, 116.37356590048701);
+		WGS84Point center = new WGS84Point(latitude, longitude);
 		GeoHashCircleQuery query = new GeoHashCircleQuery(center, 589);
 		
 		// the distance between center and test1 is about 430 meters
@@ -44,6 +51,24 @@ public class GeoRestController {
 		WGS84Point point = new WGS84Point(39.86391280373075, 116.37356590048701);
 		
 		String geoHashString = GeoHash.geoHashStringWithCharacterPrecision(point.getLatitude(), point.getLongitude(), 12);
+		
+		List<User> userList = userService.getAll();
+		
+		for(User user : userList)
+		{
+			GeoHash nearGeoHash  = GeoHash.fromGeohashString(user.getGeoHash());
+			GeoHash centerGeoHash = GeoHash.withCharacterPrecision(center.getLatitude(), center.getLongitude(), 12);
+			
+			WGS84Point nearPoint = nearGeoHash.getPoint();
+			WGS84Point centerPoint = new WGS84Point(latitude, longitude);
+			
+			
+			double distence = VincentyGeodesy.distanceInMeters(centerPoint, nearPoint);
+			
+			System.out.println("userId=" + user.getId() +  "distence=" + distence);
+		}
+		
+		
 		
 		return MyResponse.ok(geoHashString);
 	}
