@@ -5,6 +5,7 @@ import android.content.res.Resources;
 
 import com.jixianxueyuan.R;
 
+import java.security.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -69,4 +70,12 @@ public class DateTimeFormatter {
 
         return timeAgo;
     }
+
+/*    public static String getTime(String dateString)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
+
+    }*/
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        my:my_title="教学详情"
+        />
+
+    <ListView
+        android:id="@+id/course_detail_listview"
+        style="@style/ListContainer"
+        />
+
+</LinearLayout>

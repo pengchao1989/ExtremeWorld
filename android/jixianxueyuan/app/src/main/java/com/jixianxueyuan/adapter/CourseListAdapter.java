@@ -10,6 +10,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.dto.CourseDto;
 import com.jixianxueyuan.dto.CourseTaxonomyDTO;
 
 
@@ -58,7 +59,7 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
+    public CourseDto getChild(int groupPosition, int childPosition) {
         return courseTaxonomyDTOList.get(groupPosition).getCourses().get(childPosition);
     }
 
@@ -103,7 +104,7 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 
     @Override

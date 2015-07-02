@@ -49,6 +49,8 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
         super(method, url,null , listener, errorListener);
         mListener = listener;
         this.clazz = clazz;
+
+        MyLog.d("MyRequest", "url=" + url);
     }
 
     public MyRequest(int method, String url, Class<T> clazz, Object requestBodyObject, Response.Listener<MyResponse<T>> listener,  Response.ErrorListener errorListener) {

@@ -29,7 +29,6 @@ public class TopicDTO
 	
 	private TaxonomyDTO taxonomy;
 	
-	private List<HobbyDTO> hobbys;
 	
 	public Long getId()
 	{
@@ -138,11 +137,6 @@ public class TopicDTO
 	public void setTaxonomy(TaxonomyDTO taxonomy) {
 		this.taxonomy = taxonomy;
 	}
-	public List<HobbyDTO> getHobbys() {
-		return hobbys;
-	}
-	public void setHobbys(List<HobbyDTO> hobbys) {
-		this.hobbys = hobbys;
-	}
+
 	
 }

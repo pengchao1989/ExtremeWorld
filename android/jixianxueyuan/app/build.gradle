@@ -45,4 +45,5 @@ dependencies {
     compile project(':multi-image-selector')
     compile project(':VitamioRecorderLibrary')
     compile files('libs/open_sdk_r5043_lite.jar')
+
 }

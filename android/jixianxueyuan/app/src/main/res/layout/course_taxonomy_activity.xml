@@ -14,15 +14,11 @@
         my:my_title="教学"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="course_activity"
-        />
-
     <ExpandableListView
         android:id="@+id/course_taxonomy_activity_expandablelistview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        />
 
 </LinearLayout>

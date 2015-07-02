@@ -1,8 +1,10 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.android.volley.Request;
@@ -50,6 +52,18 @@ public class CourseTaxonomyActivity extends Activity{
         adapter = new CourseListAdapter(this);
         expandableListView.setAdapter(adapter);
 
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                Intent intent = new Intent(CourseTaxonomyActivity.this, CourseDetailActivity.class);
+                intent.putExtra("courseId", adapter.getChildId(groupPosition, childPosition));
+                intent.putExtra("courseName", adapter.getChild(groupPosition, childPosition).getName() );
+                startActivity(intent);
+                return false;
+            }
+        });
 
         requestCourseList();
 

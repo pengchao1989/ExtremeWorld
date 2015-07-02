@@ -6,8 +6,9 @@ public class CourseDto
 	private String name;
 	private String content;
 	private String createTime;
+    private String modifyTime;
 	
-	private UserMinDTO userInfo;
+	private UserMinDTO user;
 
 	public Long getId()
 	{
@@ -49,15 +50,20 @@ public class CourseDto
 		this.createTime = createTime;
 	}
 
-	public UserMinDTO getUserInfo()
-	{
-		return userInfo;
-	}
 
-	public void setUserInfo(UserMinDTO userInfo)
-	{
-		this.userInfo = userInfo;
-	}
-	
-	
+    public String getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    public UserMinDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserMinDTO user) {
+        this.user = user;
+    }
 }
