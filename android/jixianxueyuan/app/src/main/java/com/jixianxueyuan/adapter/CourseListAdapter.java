@@ -106,5 +106,10 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    @Override
+    public boolean areAllItemsEnabled() {
+        return false;
+    }
+
 
 }

@@ -83,7 +83,14 @@ public class CourseTaxonomyActivity extends Activity{
                         if(response.getContent() != null)
                         {
                             adapter.addDatas(response.getContent().getCourseTaxonomyList());
+
+                            for(int i = 0; i != adapter.getGroupCount(); i++)
+                            {
+                                expandableListView.expandGroup(i);
+                            }
                         }
+
+
                     }
                 },
                 new Response.ErrorListener() {

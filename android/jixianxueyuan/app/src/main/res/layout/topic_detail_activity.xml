@@ -2,11 +2,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:id="@+id/topic_detail_swipeback_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        my:my_title="话题详情"
+        />
+
 
     <RelativeLayout
         android:id="@+id/content_container"
