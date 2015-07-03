@@ -8,6 +8,7 @@ public class UserMinDTO implements Serializable
 	private String name;
 	private String avatar;
 	private String gender;
+    private double distance;
 	public Long getId()
 	{
 		return id;
@@ -40,6 +41,12 @@ public class UserMinDTO implements Serializable
 	{
 		this.gender = gender;
 	}
-	
-	
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 }

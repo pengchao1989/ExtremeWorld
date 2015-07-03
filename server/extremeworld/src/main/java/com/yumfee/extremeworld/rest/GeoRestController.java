@@ -1,6 +1,8 @@
 package com.yumfee.extremeworld.rest;
 
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.validation.Validator;
@@ -51,7 +53,10 @@ public class GeoRestController {
 			) {
 		
 		WGS84Point center = new WGS84Point(latitude, longitude);
+		
 		String geoHashString = GeoHash.geoHashStringWithCharacterPrecision(center.getLatitude(), center.getLongitude(), 12);
+		
+		System.out.println("latitude=" + center.getLatitude() + "longitude" + center.getLongitude() + "  geoHash=" + geoHashString);
 		
 		//更新用户最后的geohash
 		if(pageNumber == 1)
@@ -82,6 +87,16 @@ public class GeoRestController {
 			System.out.println("userId=" + userItem.getId() +  "distence=" + distence);
 		}
 		
+		//排序
+		Collections.sort(userMinePage.getContents(), new Comparator<UserMinDTO>(){
+
+			@Override
+			public int compare(UserMinDTO o1, UserMinDTO o2) {
+				
+				return (int) (o1.getDistance() - o2.getDistance());
+			}
+			
+		});
 		
 		
 		return MyResponse.ok(userMinePage);

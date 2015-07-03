@@ -7,13 +7,25 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.adapter.NearFriendListAdapter;
+import com.jixianxueyuan.dto.MyPage;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +41,12 @@ public class NearFriendActivity extends Activity  {
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
 
-    @InjectView(R.id.near_friend_location_text)TextView myLocationText;
+    double latitude;
+    double longitude;
+
+    @InjectView(R.id.near_friend_listview)ListView listView;
+
+    NearFriendListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +56,57 @@ public class NearFriendActivity extends Activity  {
 
         ButterKnife.inject(this);
 
+        adapter = new NearFriendListAdapter(this);
+        listView.setAdapter(adapter);
+
+        refresh();
+    }
+
+    private void refresh()
+    {
+        if(mLocationClient == null)
+        {
+            initLocation();
+        }
+
+        if(mLocationClient.isStarted() == false)
+        {
+            mLocationClient.start();
+        }
+    }
+
+
+    private void requestData()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String url = ServerMethod.near_friend + "?userId=1" + "&latitude=" + latitude + "&longitude=" + longitude + "&page=1";
+        MyLog.d("NearFriendActivity", "request=" + url);
+
+        MyPageRequest<UserMinDTO> myPageRequest = new MyPageRequest<UserMinDTO>(Request.Method.GET,url, UserMinDTO.class,
+                new Response.Listener<MyResponse<MyPage<UserMinDTO>>>(){
+
+                    @Override
+                    public void onResponse(MyResponse<MyPage<UserMinDTO>> response) {
+
+                        adapter.refreshData(response.getContent().getContents());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+
+                );
+
+        queue.add(myPageRequest);
+
+    }
+
+    private void initLocation()
+    {
         mLocationClient = new LocationClient(getApplicationContext());// 声明 LocationClient 类
         mLocationClient.registerLocationListener( myListener);// 注册监听函数
         mLocationClient.start();
@@ -48,11 +116,11 @@ public class NearFriendActivity extends Activity  {
         option.setOpenGps(true);
         option.setAddrType("all");// 返回的定位结果包含地址信息
         option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度 , 默认值 gcj02
-        option.setScanSpan(5000);// 设置发起定位请求的间隔时间为 5000ms
+        //option.setScanSpan(5000);// 设置发起定位请求的间隔时间为 5000ms
         option.disableCache(true);// 禁止启用缓存定位
         option.setPoiNumber(5); // 最多返回 POI 个数
         option.setPoiDistance(1000); //poi 查询距离
-        option.setPoiExtraInfo(true); // 是否需要 POI 的电话和地址等详细信息
+        option.setPoiExtraInfo(false); // 是否需要 POI 的电话和地址等详细信息
         mLocationClient.setLocOption(option);
 
         if (mLocationClient != null && mLocationClient.isStarted())
@@ -61,6 +129,7 @@ public class NearFriendActivity extends Activity  {
             MyLog.d("LocSDK3", "locClient is null or not started");
 
     }
+
 
 
 
@@ -87,10 +156,22 @@ public class NearFriendActivity extends Activity  {
             sb.append(location.getSpeed());
             sb.append("\nsatellite : ");
             sb.append(location.getSatelliteNumber());
+
+
+
+
         } else if (location.getLocType() == BDLocation.TypeNetWorkLocation){
             sb.append("\naddr : ");
             sb.append(location.getAddrStr());
         }
+
+            mLocationClient.stop();
+
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+            //请求数据
+            requestData();
             MyLog.d("Location",sb.toString());
         }
         public void onReceivePoi(BDLocation poiLocation) {
@@ -119,7 +200,15 @@ public class NearFriendActivity extends Activity  {
             }else{
                 sb.append("noPoi information");
             }
-            MyLog.d("Location", sb.toString());
+
+            mLocationClient.stop();
+
+            latitude = poiLocation.getLatitude();
+            longitude = poiLocation.getLongitude();
+
+            //请求数据
+            requestData();
+            MyLog.d("POI Location", sb.toString());
         }
     }
 

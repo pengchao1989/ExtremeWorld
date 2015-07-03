@@ -60,7 +60,7 @@ public class UserService {
 	private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
 		Sort sort = null;
 		if ("auto".equals(sortType)) {
-			sort = new Sort(Direction.DESC, "id");
+			sort = new Sort(Direction.ASC, "geoHash");
 		} 
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}

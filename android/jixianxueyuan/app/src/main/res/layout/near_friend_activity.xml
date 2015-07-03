@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/near_friend_location_text"
+
+    <com.jixianxueyuan.widget.MyActionBar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        my:my_title="附近的人"
+        />
+
+    <ListView
+        android:id="@+id/near_friend_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        </ListView>
 
 </LinearLayout>

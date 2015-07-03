@@ -25,6 +25,7 @@ public class ServerMethod {
     public static final String damaku = method_url + "danmubi";
     public static final String reply = method_url + "reply";
     public static final String zan = method_url  + "topic_agree";
+    public static final String near_friend = method_url + hobby + "geo/near_friend";
 
 
 }

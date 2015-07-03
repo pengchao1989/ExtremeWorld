@@ -51,4 +51,18 @@ public class Util {
     {
         return  UUID.randomUUID().toString();
     }
+
+    static public String meterToString(double meter)
+    {
+        if(meter < 1000.0)
+        {
+            return String.format("%.2f", meter) + "m";
+        }
+        else if(meter >= 1000.0)
+        {
+            return String.format("%.2f", meter / 1000.0) + "km";
+        }
+
+        return "-";
+    }
 }
