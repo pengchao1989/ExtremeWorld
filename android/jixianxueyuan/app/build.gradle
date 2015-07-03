@@ -36,6 +36,7 @@ dependencies {
     compile 'com.github.ctiao:dfm:0.3.1'
     compile 'com.github.liuguangqiang.swipeback:library:0.3.0@aar'
     /*compile 'me.xiaopan:pager-sliding-tag-strip:1.6.0'*/
+
     /*compile 'com.github.ppamorim:dragger:1.1'*/
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile 'com.qiniu:qiniu-android-sdk:7.0.+'
@@ -45,5 +46,5 @@ dependencies {
     compile project(':multi-image-selector')
     compile project(':VitamioRecorderLibrary')
     compile files('libs/open_sdk_r5043_lite.jar')
-
+    compile files('libs/locSDK_3.3.jar')
 }

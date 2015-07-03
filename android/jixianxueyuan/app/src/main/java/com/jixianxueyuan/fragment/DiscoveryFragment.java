@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
+import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryLIstAdapter;
 import com.jixianxueyuan.config.TopicType;
@@ -92,6 +93,9 @@ public class DiscoveryFragment extends Fragment {
                         intent = new Intent(DiscoveryFragment.this.getActivity(), CourseTaxonomyActivity.class);
                         break;
                     case 4:
+                        break;
+                    case 5:
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
                 }
 
