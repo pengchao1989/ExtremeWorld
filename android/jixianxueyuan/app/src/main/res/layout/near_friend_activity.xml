@@ -12,12 +12,23 @@
         my:my_title="附近的人"
         />
 
-    <ListView
-        android:id="@+id/near_friend_listview"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/near_friend_swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        >
+
+        <ListView
+            android:id="@+id/near_friend_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
-        </ListView>
+
+
 
 </LinearLayout>

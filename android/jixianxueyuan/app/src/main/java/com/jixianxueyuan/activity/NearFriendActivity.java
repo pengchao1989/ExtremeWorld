@@ -7,8 +7,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,6 +32,7 @@ import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.widget.LoadMoreView;
 
 import java.text.SimpleDateFormat;
 
@@ -45,8 +51,13 @@ public class NearFriendActivity extends Activity  {
     double longitude;
 
     @InjectView(R.id.near_friend_listview)ListView listView;
+    @InjectView(R.id.near_friend_swiperefresh)SwipeRefreshLayout swipeRefreshLayout;
 
     NearFriendListAdapter adapter;
+
+    LoadMoreView loadMoreView;
+    int currentPage = 0;
+    int totalPage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +67,47 @@ public class NearFriendActivity extends Activity  {
 
         ButterKnife.inject(this);
 
-        adapter = new NearFriendListAdapter(this);
-        listView.setAdapter(adapter);
+        initView();
+
 
         refresh();
     }
 
+    private void initView()
+    {
+        adapter = new NearFriendListAdapter(this);
+
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.blue);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                refresh();
+            }
+        });
+
+        loadMoreView = new LoadMoreView(this);
+        loadMoreView.setVisibility(View.GONE);
+        loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+            @Override
+            public void runLoad() {
+
+            }
+        });
+
+        listView.addFooterView(loadMoreView);
+
+        listView.setAdapter(adapter);
+
+    }
+
     private void refresh()
     {
+        swipeRefreshLayout.setRefreshing(true);
+
+        currentPage = 0;
+
         if(mLocationClient == null)
         {
             initLocation();
@@ -75,12 +119,42 @@ public class NearFriendActivity extends Activity  {
         }
     }
 
+    private void nextPage()
+    {
+        if(currentPage < totalPage )
+        {
+            requestData();
+        }
+        else
+        {
+            Toast.makeText(this, "没了", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void doHideFootView()
+    {
+        if(totalPage > 1)
+        {
+            if(loadMoreView.isLoading() == true)
+            {
+                loadMoreView.onFinish();
+            }
+
+            if(currentPage >= totalPage)
+            {
+                loadMoreView.setOver();
+            }
+
+        }
+
+    }
+
 
     private void requestData()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = ServerMethod.near_friend + "?userId=1" + "&latitude=" + latitude + "&longitude=" + longitude + "&page=1";
+        String url = ServerMethod.near_friend + "?userId=1" + "&latitude=" + latitude + "&longitude=" + longitude + "&page=" + (currentPage + 1);
         MyLog.d("NearFriendActivity", "request=" + url);
 
         MyPageRequest<UserMinDTO> myPageRequest = new MyPageRequest<UserMinDTO>(Request.Method.GET,url, UserMinDTO.class,
@@ -90,11 +164,13 @@ public class NearFriendActivity extends Activity  {
                     public void onResponse(MyResponse<MyPage<UserMinDTO>> response) {
 
                         adapter.refreshData(response.getContent().getContents());
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        swipeRefreshLayout.setRefreshing(false);
 
                     }
                 }

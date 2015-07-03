@@ -1,51 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/MainContainer"
-    android:background="@color/white"
     >
 
-    <LinearLayout
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/create_mood_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/MainContainer"
+        android:background="@color/white"
         >
 
         <LinearLayout
-            android:id="@+id/create_edit_widget_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            />
+            >
 
-        <com.jixianxueyuan.widget.NoScorllBarGridView
-            android:id="@+id/create_mood_image_gridview"
+            <LinearLayout
+                android:id="@+id/create_edit_widget_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
+
+            <com.jixianxueyuan.widget.NoScorllBarGridView
+                android:id="@+id/create_mood_image_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/create_mood_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:layout_alignParentBottom="true"
+            style="@style/BlueButton"
             />
 
+        <com.jixianxueyuan.widget.RoundProgressBarWidthNumber
+            android:id="@+id/create_short_video_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/create_mood_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/submit"
-        android:layout_alignParentBottom="true"
-        style="@style/BlueButton"
-        />
-
-    <com.jixianxueyuan.widget.RoundProgressBarWidthNumber
-        android:id="@+id/create_short_video_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        />
+    </RelativeLayout>
 
 
 
-</RelativeLayout>
+
+
+</LinearLayout>

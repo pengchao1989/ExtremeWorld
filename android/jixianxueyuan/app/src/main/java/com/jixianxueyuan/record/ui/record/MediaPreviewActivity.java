@@ -460,6 +460,7 @@ public class MediaPreviewActivity extends BaseActivity implements OnClickListene
         intent.setAction(TopicType.VIDEO);
         intent.putExtra("path", mVideoPath);
 		startActivity(intent);
+        finish();
 	}
 
 	/** 显示加载中 */

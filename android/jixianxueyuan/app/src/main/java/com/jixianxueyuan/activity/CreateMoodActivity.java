@@ -33,6 +33,7 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.NewEditWidget;
 import com.jixianxueyuan.widget.NewEditWidgetListener;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
@@ -65,6 +66,7 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
     public static final String tag = CreateMoodActivity.class.getSimpleName();
 
 
+    @InjectView(R.id.create_mood_actionbar)MyActionBar myActionBar;
     @InjectView(R.id.create_edit_widget_layout)
     LinearLayout editWidgetLayout;
     @InjectView(R.id.create_mood_image_gridview)
@@ -101,11 +103,12 @@ public class CreateMoodActivity extends Activity implements NewEditWidgetListene
         {
             if (action.equals(TopicType.MOOD))
             {
-
+                myActionBar.setTitle("发布动态");
             }
             else if(action.equals(TopicType.VIDEO))
             {
                 videoPath = intent.getStringExtra("path");
+                myActionBar.setTitle("发布短视频");
             }
         }
 

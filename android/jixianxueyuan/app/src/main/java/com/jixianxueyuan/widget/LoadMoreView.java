@@ -22,7 +22,7 @@ public class LoadMoreView extends RelativeLayout {
     ProgressBar progressBar = null;
 
 
-    boolean isLoading = false;
+    boolean isLoading = true;
     boolean isOver = false;
 
 
@@ -79,6 +79,11 @@ public class LoadMoreView extends RelativeLayout {
 
     public void onFinish()
     {
+        if(LoadMoreView.this.getVisibility() != VISIBLE)
+        {
+            LoadMoreView.this.setVisibility(VISIBLE);
+        }
+
         isLoading = false;
         LoadMoreView.this.loadButton.setVisibility(View.VISIBLE);
         LoadMoreView.this.progressBar.setVisibility(View.GONE);

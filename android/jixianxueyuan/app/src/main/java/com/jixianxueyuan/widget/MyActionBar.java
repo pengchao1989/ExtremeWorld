@@ -19,9 +19,12 @@ public class MyActionBar extends LinearLayout {
 
     Context context;
 
+    TextView titleTextView;
+
     public MyActionBar(Context context) {
         super(context);
         View view = LayoutInflater.from(context).inflate(R.layout.my_actionbar, this);
+        titleTextView = (TextView) view.findViewById(R.id.page_head_title);
     }
 
     public MyActionBar(final Context context, AttributeSet attrs)
@@ -30,7 +33,7 @@ public class MyActionBar extends LinearLayout {
 
         View view = LayoutInflater.from(context).inflate(R.layout.my_actionbar, this);
 
-        TextView titleTextView = (TextView) view.findViewById(R.id.page_head_title);
+        titleTextView = (TextView) view.findViewById(R.id.page_head_title);
         LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.page_head_back);
 
 
@@ -61,4 +64,11 @@ public class MyActionBar extends LinearLayout {
 
     }
 
+    public void setTitle(String title)
+    {
+        if(titleTextView != null)
+        {
+            titleTextView.setText(title);
+        }
+    }
 }

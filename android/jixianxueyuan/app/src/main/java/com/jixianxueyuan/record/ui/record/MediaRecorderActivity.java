@@ -596,6 +596,7 @@ public class MediaRecorderActivity extends BaseActivity implements MediaRecorder
 		intent.putExtras(bundle);
 		startActivity(intent);
 		mRebuild = false;
+        finish();
 	}
 
 	/**

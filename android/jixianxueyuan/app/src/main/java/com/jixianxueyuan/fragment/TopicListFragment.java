@@ -113,6 +113,7 @@ public class TopicListFragment extends Fragment {
 
 
         loadMoreView = new LoadMoreView(this.getActivity());
+        loadMoreView.setVisibility(View.GONE);
         loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
             @Override
             public void runLoad() {
@@ -215,6 +216,7 @@ public class TopicListFragment extends Fragment {
 
     @OnClick(R.id.topic_list_fragment_add_discuss)void onCreateDiscuss()
     {
+        hideAddLayout();
         Intent intent = new Intent(this.getActivity(), CreateMoodActivity.class);
         intent.setAction(TopicType.MOOD);
         startActivity(intent);
@@ -225,6 +227,7 @@ public class TopicListFragment extends Fragment {
     }
     @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
     {
+        hideAddLayout();
         Intent intent = new Intent(this.getActivity(), MediaRecorderActivity.class);
         startActivity(intent);
     }
@@ -309,7 +312,15 @@ public class TopicListFragment extends Fragment {
                         {
                             MyPage page = myResponse.getContent();
                             List<TopicDTO> topicDTOs = page.getContents();
-                            adapter.addDatas(topicDTOs);
+                            if(currentPage == 0)
+                            {
+                                adapter.refresh(topicDTOs);
+                            }
+                            else
+                            {
+                                adapter.addDatas(topicDTOs);
+                            }
+
 
                             isRefreshData = true;
 

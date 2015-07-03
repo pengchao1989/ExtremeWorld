@@ -51,6 +51,14 @@ public class TopicListAdapter extends BaseAdapter {
                 .displayer(new RoundedBitmapDisplayer(20)).build();
     }
 
+    public void refresh(List<TopicDTO> list)
+    {
+        topicDTOList.clear();
+        topicDTOList.addAll(list);
+
+        this.notifyDataSetChanged();
+    }
+
     public void addDatas(List<TopicDTO> topicDTOs)
     {
         for(TopicDTO dtoItem : topicDTOs)
