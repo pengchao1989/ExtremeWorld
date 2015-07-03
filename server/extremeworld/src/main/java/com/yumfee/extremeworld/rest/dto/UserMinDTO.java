@@ -2,6 +2,8 @@ package com.yumfee.extremeworld.rest.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement(name = "User")
 public class UserMinDTO
 {
@@ -9,6 +11,10 @@ public class UserMinDTO
 	private String name;
 	private String avatar;
 	private String gender;
+	
+	private String geoHash;
+	private double distance;
+	
 	public Long getId()
 	{
 		return id;
@@ -41,5 +47,21 @@ public class UserMinDTO
 	{
 		this.gender = gender;
 	}
+	
+	//排除该属性，避免泄露隐私
+	@JsonIgnore
+	public String getGeoHash() {
+		return geoHash;
+	}
+	public void setGeoHash(String geoHash) {
+		this.geoHash = geoHash;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	
 	
 }

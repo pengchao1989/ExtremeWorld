@@ -3,6 +3,10 @@ package com.yumfee.extremeworld.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +32,13 @@ public class UserService {
 		return (List<User>) userDao.findAll();
 	}
 	
+	public Page<User> findByGeoHash(String geoHash,  int pageNumber, int pageSize,String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		
+		return userDao.findByGeoHashLike(geoHash, pageRequest);
+	}
+	
 	public User saveUser(User user)
 	{
 		return userDao.save(user);
@@ -41,6 +52,17 @@ public class UserService {
 	public List<User> getFollowers(Long id)
 	{
 		return userDao.findOne(id).getFollowers();
+	}
+	
+	/**
+	 * 创建分页请求.
+	 */
+	private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
+		Sort sort = null;
+		if ("auto".equals(sortType)) {
+			sort = new Sort(Direction.DESC, "id");
+		} 
+		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}
 	
 }
