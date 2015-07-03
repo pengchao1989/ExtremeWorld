@@ -25,7 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.CreateMoodActivity;
+import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.config.TopicType;
@@ -93,7 +93,7 @@ public class TopicListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         Log.d(tag,"onCreateView");
 
@@ -102,9 +102,9 @@ public class TopicListFragment extends Fragment {
         ButterKnife.inject(this,view);
 
         Bundle bundle = getArguments();
-        if(bundle.containsKey("topicType"))
+        if(bundle.containsKey(TopicType.STRING))
         {
-            topicType = bundle.getString("topicType");
+            topicType = bundle.getString(TopicType.STRING);
         }
         if(bundle.containsKey("topicTaxonomyId"))
         {
@@ -129,8 +129,34 @@ public class TopicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                //判定当前是哪个模块，确定add动作
+                switch (topicType)
+                {
+                    case TopicType.ALL:
+                        showAddLayout();
+                        break;
+                    case TopicType.NEWS:
+                        Intent intent = new Intent(TopicListFragment.this.getActivity(), CreateTopicActivity.class);
+                        intent.putExtra(TopicType.STRING, TopicType.NEWS);
+                        startActivity(intent);
+                        break;
+                    case TopicType.DISCUSS:
+                        Intent intent2 = new Intent(TopicListFragment.this.getActivity(), CreateTopicActivity.class);
+                        intent2.putExtra(TopicType.STRING, TopicType.DISCUSS);
+                        intent2.putExtra("topicTaxonomyId", topicTaxonomyId);
+                        startActivity(intent2);
+                        break;
+                    case TopicType.S_VIDEO:
+                        Intent intent3 = new Intent(TopicListFragment.this.getActivity(), MediaRecorderActivity.class);
+                        startActivity(intent3);
+                        break;
+
+                    case TopicType.VIDEO:
+                        floatingActionButton.setVisibility(View.GONE);
+                        break;
+                }
                 floatingActionButton.hide();
-                showAddLayout();
+
             }
         });
 
@@ -176,19 +202,21 @@ public class TopicListFragment extends Fragment {
         Intent intent = null;
         switch (topicDTO.getType())
         {
-            case "mood":
+            case TopicType.MOOD:
+            case TopicType.NEWS:
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
-                intent.setAction(TopicType.MOOD);
+                intent.putExtra(TopicType.STRING, TopicType.MOOD);
                 break;
-            case "discuss":
+            case TopicType.DISCUSS:
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
-                intent.setAction(TopicType.MOOD);
+                intent.putExtra(TopicType.STRING, TopicType.DISCUSS);
                 break;
-            case "video":
-            case "s_video":
+            case TopicType.VIDEO:
+            case TopicType.S_VIDEO:
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
-                intent.setAction(TopicType.VIDEO);
+                intent.putExtra(TopicType.STRING, TopicType.S_VIDEO);
                 break;
+
         }
 
         if(intent != null)
@@ -217,8 +245,8 @@ public class TopicListFragment extends Fragment {
     @OnClick(R.id.topic_list_fragment_add_discuss)void onCreateDiscuss()
     {
         hideAddLayout();
-        Intent intent = new Intent(this.getActivity(), CreateMoodActivity.class);
-        intent.setAction(TopicType.MOOD);
+        Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
+        intent.putExtra(TopicType.STRING, TopicType.MOOD);
         startActivity(intent);
     }
     @OnClick(R.id.topic_list_fragment_add_mood)void onCreateMood()
@@ -285,6 +313,9 @@ public class TopicListFragment extends Fragment {
                 break;
             case TopicType.DISCUSS:
             case TopicType.NEWS:
+                url = ServerMethod.topic + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                break;
+            case TopicType.S_VIDEO:
                 url = ServerMethod.topic + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
                 break;
         }

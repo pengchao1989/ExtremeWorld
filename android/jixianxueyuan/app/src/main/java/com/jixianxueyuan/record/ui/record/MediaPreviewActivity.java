@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.CreateMoodActivity;
+import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.record.common.CommonIntentExtra;
 import com.jixianxueyuan.record.po.POThemeSingle;
@@ -456,9 +456,9 @@ public class MediaPreviewActivity extends BaseActivity implements OnClickListene
 	private void onEncodingEnd() {
 		hideProgress();
 		mStartEncoding = false;
-        Intent intent = new Intent(this, CreateMoodActivity.class);
-        intent.setAction(TopicType.VIDEO);
-        intent.putExtra("path", mVideoPath);
+        Intent intent = new Intent(this, CreateTopicActivity.class);
+        intent.setAction(TopicType.S_VIDEO);
+        intent.putExtra("videoPath", mVideoPath);
 		startActivity(intent);
         finish();
 	}

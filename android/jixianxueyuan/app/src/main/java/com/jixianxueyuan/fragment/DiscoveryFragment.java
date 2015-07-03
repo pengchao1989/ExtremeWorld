@@ -85,16 +85,23 @@ public class DiscoveryFragment extends Fragment {
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.STRING, TopicType.DISCUSS);
                         break;
+
                     case 2:
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), CourseTaxonomyActivity.class);
+                        break;
+                    case 3:
+                        break;
+
+                    case 4:
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
+                        intent.putExtra(TopicType.STRING, TopicType.S_VIDEO);
+                        break;
+
+                    case 5:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.STRING, TopicType.VIDEO);
                         break;
-                    case 3:
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), CourseTaxonomyActivity.class);
-                        break;
-                    case 4:
-                        break;
-                    case 5:
+                    case 6:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
                 }

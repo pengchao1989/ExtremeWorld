@@ -41,8 +41,12 @@ public class NearFriendListAdapter extends BaseAdapter {
         userMinDTOList.addAll(list);
 
         this.notifyDataSetChanged();
+    }
 
-
+    public void addDatas(List<UserMinDTO> list)
+    {
+        userMinDTOList.addAll(list);
+        this.notifyDataSetChanged();
     }
 
     @Override

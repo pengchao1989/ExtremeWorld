@@ -16,7 +16,8 @@
     <string name="short_video">短视频</string>
     <string name="news">新闻</string>
     <string name="discuss">讨论</string>
-    <string name="video">视频</string>
+    <string name="s_video">短视频</string>
+    <string name="video">长视频</string>
     <string name="course">教学</string>
     <string name="site">场地</string>
     <string name="people">附近的人</string>

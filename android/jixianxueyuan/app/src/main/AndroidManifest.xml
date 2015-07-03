@@ -62,7 +62,7 @@
         <activity android:name=".activity.MoodDetailActivity"/>
         <activity android:name=".activity.DiscussionDetailActivity"/>
         <activity android:name=".activity.CourseTaxonomyActivity"/>
-        <activity android:name=".activity.CreateMoodActivity"/>
+        <activity android:name=".activity.CreateTopicActivity"/>
         <activity android:name=".activity.ShortVideoDetailActivity"/>
         <activity android:name=".activity.CreateShortVideoActivity"/>
         <activity android:name=".activity.TopicTaxonomyHomeActivity"/>

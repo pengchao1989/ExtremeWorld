@@ -92,7 +92,7 @@ public class NearFriendActivity extends Activity  {
         loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
             @Override
             public void runLoad() {
-
+                nextPage();
             }
         });
 
@@ -163,8 +163,24 @@ public class NearFriendActivity extends Activity  {
                     @Override
                     public void onResponse(MyResponse<MyPage<UserMinDTO>> response) {
 
-                        adapter.refreshData(response.getContent().getContents());
+                        if(currentPage == 0)
+                        {
+                            adapter.refreshData(response.getContent().getContents());
+                        }
+                        else
+                        {
+                            adapter.addDatas(response.getContent().getContents());
+                        }
+
                         swipeRefreshLayout.setRefreshing(false);
+
+                        totalPage = response.getContent().getTotalPages();
+                        currentPage = response.getContent().getCurPage() + 1;
+                        doHideFootView();
+
+
+
+
                     }
                 },
                 new Response.ErrorListener() {

@@ -34,7 +34,7 @@ import com.yumfee.extremeworld.service.UserService;
 @RequestMapping(value = "/api/v1/{hobby}/geo")
 public class GeoRestController {
 	
-	private static final String PAGE_SIZE = "30";
+	private static final String PAGE_SIZE = "50";
 	
 	@Autowired
 	private Validator validator;
@@ -68,7 +68,7 @@ public class GeoRestController {
 
 		
 		
-		Page<User> userPage = userService.findByGeoHash(geoHashString.substring(0, 4) + "%",pageNumber, pageSize, sortType);//geoHash前几个字符
+		Page<User> userPage = userService.findByGeoHash(geoHashString.substring(0, 2) + "%",pageNumber, pageSize, sortType);//geoHash前几个字符
 		
 		
 		MyPage<UserMinDTO, User> userMinePage = new MyPage<UserMinDTO, User>(UserMinDTO.class,userPage );
