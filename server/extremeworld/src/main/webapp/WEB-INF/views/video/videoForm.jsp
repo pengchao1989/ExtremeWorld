@@ -15,7 +15,7 @@
 	<div class="container main_content">
 	
 		<input type="hidden" id="domain" value="http://img.jixianxueyuan.com/">
-        <input type="hidden" id="uptoken_url" value="${ctx}/api/v1/uptoken/upvideo">
+        <input type="hidden" id="uptoken_url" value="${ctx}/api/v1/uptoken/video">
         
         
         

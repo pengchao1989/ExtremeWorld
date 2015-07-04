@@ -53,7 +53,7 @@ public class UptokenRestController
 		return new Token(token);
 	}
 	
-	@RequestMapping(value = "upvideo", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	@RequestMapping(value = "video", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public Token getVideoUptoken() throws JSONException
 	{
 
