@@ -21,6 +21,8 @@ public class MyActionBar extends LinearLayout {
 
     TextView titleTextView;
 
+    private OnClickListener actionOnClickListener;
+
     public MyActionBar(Context context) {
         super(context);
         View view = LayoutInflater.from(context).inflate(R.layout.my_actionbar, this);
@@ -35,6 +37,7 @@ public class MyActionBar extends LinearLayout {
 
         titleTextView = (TextView) view.findViewById(R.id.page_head_title);
         LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.page_head_back);
+        LinearLayout actionLayout = (LinearLayout) view.findViewById(R.id.page_head_action);
 
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyActionBar);
@@ -43,6 +46,22 @@ public class MyActionBar extends LinearLayout {
         if(title != null)
         {
             titleTextView.setText(title);
+        }
+
+        int type = a.getInt(R.styleable.MyActionBar_type, 0);
+        if(type == 1)
+        {
+            actionLayout.setVisibility(View.VISIBLE);
+            actionLayout.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(actionOnClickListener != null)
+                    {
+                        actionOnClickListener.onClick(v);
+                    }
+
+                }
+            });
         }
 
         backLayout.setOnClickListener(new OnClickListener() {
@@ -70,5 +89,10 @@ public class MyActionBar extends LinearLayout {
         {
             titleTextView.setText(title);
         }
+    }
+
+    public void setActionOnClickListener(OnClickListener listener)
+    {
+        actionOnClickListener = listener;
     }
 }

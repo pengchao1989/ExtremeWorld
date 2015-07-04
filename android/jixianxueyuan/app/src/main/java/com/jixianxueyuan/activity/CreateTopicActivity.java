@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -47,7 +48,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
@@ -86,6 +86,22 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         ButterKnife.inject(this);
 
         initExtra();
+
+        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(topicType.equals(TopicType.MOOD))
+                {
+                    submit();
+                }
+                else if(topicType.equals(TopicType.VIDEO))
+                {
+                    requestVideoToken();
+                }
+            }
+        });
 
         newEditWidget = new NewEditWidget(this, editWidgetLayout);
 
@@ -128,18 +144,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     }
 
-    @OnClick(R.id.create_topic_submit)void onSubmit()
-    {
-        if(topicType.equals(TopicType.MOOD))
-        {
-            submit();
-        }
-        else if(topicType.equals(TopicType.VIDEO))
-        {
-            requestToken();
-        }
-
-    }
 
     private void submit()
     {
@@ -171,7 +175,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         queue.add(stringRequest);
     }
 
-    private void requestToken()
+    private void requestVideoToken()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
 

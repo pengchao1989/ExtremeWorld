@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="5dp"
+            android:padding="6dp"
             >
 
             <TextView
@@ -38,8 +38,29 @@
             android:layout_centerInParent="true"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:text="title"
             />
+
+
+        <LinearLayout
+            android:id="@+id/page_head_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:padding="6dp"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发表"
+                android:textColor="@color/blue"
+                android:textSize="18sp"
+                />
+
+
+        </LinearLayout>
 
 
     </RelativeLayout>
