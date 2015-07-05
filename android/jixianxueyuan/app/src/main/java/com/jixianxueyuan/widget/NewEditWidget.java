@@ -1,5 +1,6 @@
 package com.jixianxueyuan.widget;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -164,6 +165,15 @@ public class NewEditWidget {
         return emojiconEditText.getText().toString();
     }
 
+    public boolean insertImg(String imgPath)
+    {
+        //根据图片绝对地址，查询或生成缩略图，插入EditText中
+
+        //ContentResolver contentResolver = context.getContentResolver();
+
+        return true;
+    }
+
     public void setReplyWidgetListener(ReplyWidgetListener replyWidgetListener) {
         this.replyWidgetListener = replyWidgetListener;
     }
@@ -177,5 +187,6 @@ public class NewEditWidget {
     private void changeEmojiKeyboardIcon(ImageView iconToBeChanged, int drawableResourceId){
         iconToBeChanged.setImageResource(drawableResourceId);
     }
+
 
 }

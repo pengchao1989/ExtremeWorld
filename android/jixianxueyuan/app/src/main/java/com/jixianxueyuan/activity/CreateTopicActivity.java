@@ -7,6 +7,7 @@ import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
 
     @InjectView(R.id.create_topic_actionbar)MyActionBar myActionBar;
+    @InjectView(R.id.create_topic_title)EditText titleEditText;
     @InjectView(R.id.create_edit_widget_layout)
     LinearLayout editWidgetLayout;
     @InjectView(R.id.create_topic_image_gridview)
@@ -66,13 +68,14 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     @InjectView(R.id.create_short_video_progress)
     RoundProgressBarWidthNumber roundProgressBarWidthNumber;
 
-    NewEditWidget newEditWidget;
+    NewEditWidget contentEditWidget;
 
     String topicType = null;
     String topicTaxonomyId = null;
     String topicTaxonomyName = null;
     String videoPath = null;
     UploadToken uploadToken = null;
+    String pictureUploadToken = null;
 
     TopicDTO topicDTO;
     VideoDetailDTO videoDetailDTO;
@@ -103,9 +106,9 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
             }
         });
 
-        newEditWidget = new NewEditWidget(this, editWidgetLayout);
+        contentEditWidget = new NewEditWidget(this, editWidgetLayout);
 
-        newEditWidget.setNewEditWidgetListener(this);
+        contentEditWidget.setNewEditWidgetListener(this);
 
     }
 
@@ -179,7 +182,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        StringRequest stringRequest = new StringRequest(ServerMethod.uploadToken, new Response.Listener<String>(){
+        StringRequest stringRequest = new StringRequest(ServerMethod.videoUploadToken, new Response.Listener<String>(){
 
             @Override
             public void onResponse(String response) {
@@ -190,6 +193,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                 MyLog.d("CreateShortVideoActivity", "path=" + videoPath);
 
                 UploadManager uploadManager = new UploadManager();
+
+                roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
 
                 uploadManager.put(videoPath, Util.getUUID(), uploadToken.getUptoken(),
                         new UpCompletionHandler() {
@@ -205,6 +210,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
                                 Toast.makeText(CreateTopicActivity.this,"视频上传成功", Toast.LENGTH_LONG).show();
 
+                                roundProgressBarWidthNumber.setVisibility(View.GONE);
                                 submit();
                             }
                         }, new UploadOptions(null, null, false,
@@ -229,12 +235,28 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         queue.add(stringRequest);
     }
 
+    private void requestPictureToken()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(ServerMethod.imgUploadToken, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                pictureUploadToken = response;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+    }
+
     private void buildTopicParam()
     {
         topicDTO = new TopicDTO();
-        topicDTO.setTitle(newEditWidget.getText());
-        topicDTO.setContent(newEditWidget.getText());
-        topicDTO.setType("mood");
+        topicDTO.setTitle(titleEditText.getText().toString());
+        topicDTO.setContent(contentEditWidget.getText());
+
         UserMinDTO userMinDTO = new UserMinDTO();
         userMinDTO.setId(1L);
         topicDTO.setUser(userMinDTO);
@@ -244,21 +266,26 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         hobbys.add(hobbyDTO);
         topicDTO.setHobbys(hobbys);
 
-
-        if(topicType.equals(TopicType.DISCUSS))
+        switch(topicType)
         {
-            topicDTO.setType(TopicType.DISCUSS);
+            case TopicType.MOOD:
+                topicDTO.setType(TopicType.MOOD);
+                break;
+            case TopicType.DISCUSS:
+                topicDTO.setType(TopicType.DISCUSS);
+                break;
+            case TopicType.VIDEO:
+                topicDTO.setVideoDetail(videoDetailDTO);
+                topicDTO.setType(TopicType.S_VIDEO);
+                break;
+            case TopicType.S_VIDEO:
+                topicDTO.setVideoDetail(videoDetailDTO);
+                topicDTO.setType(TopicType.S_VIDEO);
+                break;
+            case TopicType.NEWS:
+                topicDTO.setType(TopicType.NEWS);
+                break;
         }
-        else if(topicType.equals(TopicType.VIDEO))
-        {
-            topicDTO.setVideoDetail(videoDetailDTO);
-            topicDTO.setType(TopicType.S_VIDEO);
-        }
-        else if(topicType.equals(TopicType.NEWS))
-        {
-            topicDTO.setType(TopicType.NEWS);
-        }
-
 
     }
 

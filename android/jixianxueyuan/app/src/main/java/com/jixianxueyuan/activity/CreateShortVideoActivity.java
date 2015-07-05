@@ -1,7 +1,6 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.UploadToken;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.util.MyHttpClient;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.qiniu.android.http.ResponseInfo;
@@ -68,7 +66,7 @@ public class CreateShortVideoActivity extends Activity {
     {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        StringRequest stringRequest = new StringRequest(ServerMethod.uploadToken, new Response.Listener<String>(){
+        StringRequest stringRequest = new StringRequest(ServerMethod.videoUploadToken, new Response.Listener<String>(){
 
             @Override
             public void onResponse(String response) {

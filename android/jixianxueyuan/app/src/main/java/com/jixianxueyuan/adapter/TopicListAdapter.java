@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -121,24 +122,27 @@ public class TopicListAdapter extends BaseAdapter {
         {
             switch (topicDTO.getType())
             {
-                case "mood":
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_face_grey600_18dp);
+                case TopicType.MOOD:
+                    //viewHolder.typeImageView.setImageResource(R.mipmap.ic_face_grey600_18dp);
                     break;
 
-                case "discuss":
+                case TopicType.DISCUSS:
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_message_grey600_24dp);
                     break;
 
-                case "video":
+                case TopicType.VIDEO:
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
                     break;
 
-                case "s_video":
+                case TopicType.S_VIDEO:
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
                     break;
 
-                case "activity":
+                case TopicType.ACTIVITY:
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_assistant_photo_grey600_18dp);
+                    break;
+                case TopicType.NEWS:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_picture_in_picture_grey600_24dp);
                     break;
             }
         }

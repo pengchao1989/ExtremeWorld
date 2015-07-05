@@ -84,7 +84,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_message_black_48dp"
+                        android:src="@mipmap/btn_pb_add_pic"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_picture_in_picture_black_48dp"
+                        android:src="@mipmap/btn_pb_add_expression"
                         />
 
                     <TextView

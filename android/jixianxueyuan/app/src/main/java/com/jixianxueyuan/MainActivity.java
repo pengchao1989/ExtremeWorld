@@ -16,6 +16,7 @@ import com.jixianxueyuan.activity.HomeActivity;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.http.MyRequest;
+import com.jixianxueyuan.record.ui.record.ImportVideoActivity;
 import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
@@ -124,7 +125,7 @@ public class MainActivity extends Activity {
     @OnClick(R.id.activity_main_danmu) void danmu()
     {
         /*Intent intent = new Intent(this, VideoDetailActivity.class);*/
-        Intent intent = new Intent(this, CreateShortVideoActivity.class);
+        Intent intent = new Intent(this, ImportVideoActivity.class);
         startActivity(intent);
     }
 
