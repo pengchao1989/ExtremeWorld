@@ -248,6 +248,8 @@ public class MultiImageSelectorFragment extends Fragment {
                         // 正常操作
                         Image image = (Image) adapterView.getAdapter().getItem(i);
                         selectImageFromGrid(image, mode);
+
+                        Log.d("path=", image.path);
                     }
                 }else{
                     // 正常操作
@@ -452,7 +454,9 @@ public class MultiImageSelectorFragment extends Fragment {
                 MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.DISPLAY_NAME,
                 MediaStore.Images.Media.DATE_ADDED,
-                MediaStore.Images.Media._ID };
+                MediaStore.Images.Media._ID,
+
+        };
 
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
