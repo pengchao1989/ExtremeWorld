@@ -92,7 +92,7 @@
 	<!-- 创建编辑器 -->
 	<script>
 	    var QINIU_UPTOKEN_URL = '${ctx}/api/v1/uptoken/picture';
- 		var QINIU_BUCKET_DOMAIN = 'img.jixianxueyuan.com/';
+ 		var QINIU_BUCKET_DOMAIN = 'img.jixianxueyuan.com';
 		var um = UM.getEditor('edit-container');
 	</script>
 	

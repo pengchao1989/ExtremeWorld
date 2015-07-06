@@ -60,10 +60,9 @@
 					<p>${topic.createTime}</p>
 					<br />
 						
-						
-						<br />
+					<br />
 					
-						<p class="flow-text">${topic.content}</p>
+					<p id="content" class="flow-text">${topic.content}</p>
 
 				</div>
 			</div>
@@ -173,21 +172,24 @@
 	<c:if test="${type == 'video'}">
 		 	<script>
 		$(document).ready(function(){
-		$("#danmup").danmuplayer({
-			src:"${topic.videoDetail.videoSource}",
-			width:800,
-			height:445,
-		    speed: 15000,
-		    danmuss: {},
-		    sumtime: 65535,
-		    default_font_color: "#FFFFFF",
-		    font_size_small: 16,
-		    font_size_big: 24,
-		    opacity: "1",
-		    top_botton_danmu_time: 5000,
-		    url_to_get_danmu:"${ctx}/api/v1/danmu/${topic.id}",
-		    url_to_post_danmu:"${ctx}/api/v1/danmu/add?videoId=${topic.id}&userId=${userId}"
-			});
+			
+			$("#danmup").danmuplayer({
+				src:"${topic.videoDetail.videoSource}",
+				width:800,
+				height:445,
+			    speed: 15000,
+			    danmuss: {},
+			    sumtime: 65535,
+			    default_font_color: "#FFFFFF",
+			    font_size_small: 16,
+			    font_size_big: 24,
+			    opacity: "1",
+			    top_botton_danmu_time: 5000,
+			    url_to_get_danmu:"${ctx}/api/v1/danmu/${topic.id}",
+			    url_to_post_danmu:"${ctx}/api/v1/danmu/add?videoId=${topic.id}&userId=${userId}"
+				});
+			
+			
 		
 		});
 	</script>

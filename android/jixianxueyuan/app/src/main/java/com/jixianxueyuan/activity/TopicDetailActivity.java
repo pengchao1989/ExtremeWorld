@@ -3,14 +3,19 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +59,8 @@ import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
+import com.jixianxueyuan.util.MImageGetter;
+import com.jixianxueyuan.util.MTagHandler;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.ReplyWidget;
@@ -66,6 +73,7 @@ import com.yumfee.emoji.EmojiconTextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xml.sax.XMLReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -88,6 +96,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
+
 
     TopicDTO topicDTO;
 
@@ -112,6 +121,8 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
     final int HADLER_DOWNLOAD_VIDEO_FAILED = 0x2;
     final int HANDLER_DOWNLOAD_UPDATE = 0x3;
+    final int HANDLER_INIT_CONTENT_SPANNED_SUCCESS = 0x4;
+    final int HANDLER_INIT_CONTENT_SPANNED_FAILED = 0x5;
     Handler handler = new Handler()
     {
         @Override
@@ -129,6 +140,15 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                     break;
                 case HANDLER_DOWNLOAD_UPDATE:
                     headViewHolder.roundProgressBarWidthNumber.setProgress(mProgressNum);
+                    break;
+
+                case HANDLER_INIT_CONTENT_SPANNED_SUCCESS:
+
+                    Spanned spanned = (Spanned) msg.obj;
+                    headViewHolder.contentTextView.setText(spanned);
+                    break;
+
+                case HANDLER_INIT_CONTENT_SPANNED_FAILED:
                     break;
             }
         }
@@ -178,20 +198,41 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         String url =  topicDTO.getUser().getAvatar() + "!androidListAvatar";
         ImageLoader.getInstance().displayImage(url, headViewHolder.avatarImageView);
 
-        List<AnalyzeContent.ContentFragment> contentFragmentList = new LinkedList<AnalyzeContent.ContentFragment>();
-        contentFragmentList = AnalyzeContent.analyzeContent(topicDTO.getContent());
+
+
+        //参考链接
+        // http://www.ibm.com/developerworks/cn/web/1407_zhangqian_androidhtml/#_清单 4._fromHtml()方法定义
+        //http://www.jb51.net/article/46799.htm
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Spanned spanned = Html.fromHtml(topicDTO.getContent(), new MImageGetter(TopicDetailActivity.this.headViewHolder.contentTextView, TopicDetailActivity.this), new MTagHandler());
+
+                Message msg = new Message();
+                msg.what = HANDLER_INIT_CONTENT_SPANNED_SUCCESS;
+                msg.obj = spanned;
+                handler.sendMessage(msg);
+            }
+        });
+        t.start();
+
+
+
+        /*List<AnalyzeContent.ContentFragment> contentFragmentList = new LinkedList<AnalyzeContent.ContentFragment>();
+        contentFragmentList = AnalyzeContent.analyzeContent2(topicDTO.getContent());
 
         for(int n=0; n != contentFragmentList.size() ; n++ )
         {
             if(contentFragmentList.get(n).mType == AnalyzeContent.ContentFragment.IMG_URL_TYPE)
             {
                 ImageView imageviwe = new ImageView(this);
-                imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
                 headViewHolder.contentLayout.addView(imageviwe);
 
-                ImageLoader.getInstance().displayImage(contentFragmentList.get(n).mText, imageviwe);
+                ImageLoader.getInstance().displayImage(contentFragmentList.get(n).mText + "!AndroidDetail", imageviwe);
             }
             else if(contentFragmentList.get(n).mType == AnalyzeContent.ContentFragment.TEXT_TYPE)
             {
@@ -206,7 +247,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             }
 
         }
-
+*/
         if (topicDTO.getType() == TopicType.VIDEO || topicDTO.getVideoDetail() != null)
         {
             if(topicDTO.getVideoDetail().getVideoSource() != null)
@@ -458,6 +499,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         @InjectView(R.id.topic_detail_head_zan)ImageButton zanButton;
         @InjectView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
         @InjectView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
+        @InjectView(R.id.topic_detail_content_textview)TextView contentTextView;
 
 
         public HeadViewHolder(View headView)

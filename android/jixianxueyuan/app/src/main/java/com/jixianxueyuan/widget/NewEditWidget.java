@@ -306,7 +306,7 @@ public class NewEditWidget {
                 }
             };
 
-            CharSequence cs = Html.fromHtml("<img src='" + imgPath + "'/>",imageGetter, null);
+            CharSequence cs = Html.fromHtml("<img src='" + imgPath + "'/><br/>",imageGetter, null);
 
             Message msg = new Message();
             msg.what = GET_IMAGE_SUCCESS;

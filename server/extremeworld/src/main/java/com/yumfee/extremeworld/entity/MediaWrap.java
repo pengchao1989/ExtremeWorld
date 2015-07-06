@@ -1,11 +1,13 @@
 package com.yumfee.extremeworld.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,7 +30,8 @@ public class MediaWrap extends IdEntity{
 		this.createTime = createTime;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mediaWrap")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity=Media.class)
+	@JoinColumn(name="mediawrap_id", unique=true, nullable=false, updatable=false)
 	public List<Media> getMedias() {
 		return medias;
 	}

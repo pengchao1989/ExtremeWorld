@@ -160,6 +160,12 @@ public class TopicListAdapter extends BaseAdapter {
             viewHolder.videoFrontLayout.setVisibility(View.GONE);
         }
 
+        viewHolder.topicImageView_1.setVisibility(View.GONE);
+        viewHolder.topicImageView_2.setVisibility(View.GONE);
+        viewHolder.topicImageView_3.setVisibility(View.GONE);
+        viewHolder.topicImageView_4.setVisibility(View.GONE);
+        viewHolder.topicImageView_5.setVisibility(View.GONE);
+
 
         if(mediawrap != null)
         {
@@ -204,15 +210,6 @@ public class TopicListAdapter extends BaseAdapter {
                 ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_5);
             }
         }
-        else
-        {
-            viewHolder.topicImageView_1.setVisibility(View.GONE);
-            viewHolder.topicImageView_2.setVisibility(View.GONE);
-            viewHolder.topicImageView_3.setVisibility(View.GONE);
-            viewHolder.topicImageView_4.setVisibility(View.GONE);
-            viewHolder.topicImageView_5.setVisibility(View.GONE);
-        }
-
 
 
         return convertView;

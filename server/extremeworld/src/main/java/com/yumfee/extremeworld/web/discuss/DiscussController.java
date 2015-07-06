@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Discussion;
 import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Reply;
@@ -28,6 +29,7 @@ import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.service.DiscussionService;
 import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.TaxonomyService;
+import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
@@ -37,7 +39,7 @@ public class DiscussController {
 	private static final String PAGE_SIZE = "10";
 	
 	@Autowired
-	private DiscussionService discussionService;
+	private TopicService topicService;
 	
 	@Autowired
 	private TaxonomyService taxonomyService;
@@ -55,23 +57,23 @@ public class DiscussController {
 			Model model, ServletRequest request)
 	{
 		
-		Page<Discussion> topics = null;
+		Page<Topic> topics = null;
 		
 		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
 
 		if(hobbyId == 0)
 		{
-			topics = discussionService.getAll(pageNumber, pageSize, sortType);
+			topics = topicService.getAllTopic(pageNumber, pageSize, sortType);
 		}
 		else
 		{
 			if(taxonomyId != 0)
 			{
-				topics	= discussionService.getByHobbyAndTaxonomy(hobbyId, taxonomyId, pageNumber, pageSize, sortType);
+				topics	= topicService.getTopicByHobbyAndTypeAndTaxonomy(hobbyId, TopicType.DISCUSS, taxonomyId, pageNumber, pageSize, sortType);
 			}
 			else
 			{
-				topics = discussionService.getByHobby(hobbyId, pageNumber, pageSize, sortType);
+				topics = topicService.getTopicByHobbyAndType(hobbyId, TopicType.DISCUSS, pageNumber, pageSize, sortType);
 			}
 		}
 
@@ -116,10 +118,10 @@ public class DiscussController {
 		newTopic.setImageCount(0);
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
-		newTopic.setType("discuss");
+		newTopic.setType(TopicType.DISCUSS);
 		
 		
-		discussionService.saveDiscussion(newTopic);
+		topicService.saveTopic(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
 		return "redirect:/" + hobby + "/discuss?taxonomy=" + taxonomyId;
 	}
@@ -139,7 +141,7 @@ public class DiscussController {
 		{
 			
 		}
-		Topic topic = discussionService.getDiscussion(id);
+		Topic topic = topicService.getTopic(id);
 		
 		Page<Reply> replys = replyService.getAll(id,pageNumber, pageSize);
 		

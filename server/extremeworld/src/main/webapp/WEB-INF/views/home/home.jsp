@@ -51,7 +51,7 @@
 											<video id="myvideo" src="${topic.videoDetail.videoSource}" controls="controls"></video>
 										</c:if> --%>
 										
-										<p >${topic.content}</p>
+										<p >${topic.excerpt}</p>
 										
 										<!-- media -->
 										<div class="row media_container">

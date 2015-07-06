@@ -14,7 +14,7 @@ public class Media extends IdEntity{
 	private String des;
 	private String type;//img video music
 	
-	private MediaWrap mediaWrap;
+	//private MediaWrap mediaWrap;
 	
 	public String getPath() {
 		return path;
@@ -36,14 +36,14 @@ public class Media extends IdEntity{
 	}
 	
 	
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, optional = true)
+/*	@ManyToOne(cascade = { CascadeType.ALL}, optional = true)
 	@JoinColumn(name = "mediawrap_id")
 	public MediaWrap getMediaWrap() {
 		return mediaWrap;
 	}
 	public void setMediaWrap(MediaWrap mediaWrap) {
 		this.mediaWrap = mediaWrap;
-	}
+	}*/
 	
 	
 	

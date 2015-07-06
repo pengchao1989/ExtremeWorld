@@ -47,4 +47,5 @@ dependencies {
     compile project(':VitamioRecorderLibrary')
     compile files('libs/open_sdk_r5043_lite.jar')
     compile files('libs/locSDK_3.3.jar')
+    compile files('libs/jsoup-1.8.2.jar')
 }

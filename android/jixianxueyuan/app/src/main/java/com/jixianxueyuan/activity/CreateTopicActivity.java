@@ -399,12 +399,12 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         MyLog.d("CreateTopicActivity", "analyze before contetn=" + str);
 
         //除了img外的标签全部删掉
-        String regex = "<(?!img)[^>]+>";
+/*        String regex = "<(?!img)[^>]+>";
         str=str.replaceAll(regex,"").trim();
         MyLog.d("CreateTopicActivity","analyzeContent replace=" + str);
 
         String gbkString = str.trim();
-        MyLog.d("CreateTopicActivity","analyzeContent gbkstring=" + gbkString);
+        MyLog.d("CreateTopicActivity","analyzeContent gbkstring=" + gbkString);*/
 
         Iterator iter = serverImagePathMap.entrySet().iterator();
         while (iter.hasNext())
@@ -414,11 +414,11 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
             String key = (String) entry.getKey();
             String val = StaticResourceConfig.IMG_DOMAIN + (String) entry.getValue();
 
-            gbkString = gbkString.replace( "\"" + key + "\"", val+"/");
+            str = str.replace(  key , val);
         }
 
-        MyLog.d("CreateTopicActivity", "resultString=" + gbkString);
-        return gbkString;
+        MyLog.d("CreateTopicActivity", "resultString=" + str);
+        return str;
 
 
     }

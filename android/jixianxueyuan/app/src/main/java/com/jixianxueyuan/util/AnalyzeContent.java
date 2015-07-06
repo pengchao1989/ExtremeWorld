@@ -2,7 +2,14 @@ package com.jixianxueyuan.util;
 
 import com.jixianxueyuan.server.StaticResourceConfig;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import java.util.LinkedList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
 
 /**
  * Created by pengchao on 5/23/15.
@@ -43,6 +50,37 @@ public class AnalyzeContent {
                 MyLog.d("TopicDetailActivity", "is text");
             }
             result.add(temp);
+        }
+
+        return result;
+    }
+
+    public static LinkedList<ContentFragment> analyzeContent2(String content)
+    {
+        LinkedList<ContentFragment> result = new LinkedList<ContentFragment>();
+
+
+        Document doc = Jsoup.parse(content);
+
+        List<Element> elementList = doc.getAllElements();
+        for(Element element : elementList)
+        {
+
+            if(element.tagName().equals("p"))
+            {
+                ContentFragment fragment = new ContentFragment();
+                fragment.mType = ContentFragment.TEXT_TYPE;
+                fragment.mText = element.text();
+                result.add(fragment);
+            }
+            else if(element.tagName().equals("img"))
+            {
+                ContentFragment fragment = new ContentFragment();
+                fragment.mType = ContentFragment.IMG_URL_TYPE;
+                fragment.mText = element.attr("src");
+                result.add(fragment);
+            }
+
         }
 
         return result;
