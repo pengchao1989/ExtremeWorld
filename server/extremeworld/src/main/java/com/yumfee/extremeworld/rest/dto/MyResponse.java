@@ -20,6 +20,13 @@ public class MyResponse {
 		response.setStatus(201);
 		return response;
 	}
+	
+	public static MyResponse noContent()
+	{
+		MyResponse response = new MyResponse();
+		response.setStatus(204);//错误码204
+		return response;
+	}
 
 	public int getStatus() {
 		return status;

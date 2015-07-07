@@ -7,8 +7,8 @@ package com.jixianxueyuan.server;
 public class ServerMethod {
 
 
-    //static final String server_url = "http://jixianxueyuan.com/";
-    static final String server_url = "http://192.168.1.2:8023/";
+    static final String server_url = "http://jixianxueyuan.com/";
+    //static final String server_url = "http://192.168.1.2:8023/";
     static final String api_version = "api/v1/";
     static final String hobby = "skateboard/";
 
@@ -18,6 +18,7 @@ public class ServerMethod {
     public static final String imgUploadToken = server_url + api_version + "/uptoken/picture";
 
     public static final String baseInfo = method_url + "base_info";
+    public static final String account_login = method_url + hobby + "account/login";
     public static final String topic = method_url + "skateboard/" + "topic";
     public static final String video = method_url + "all/" + "video";
     public static final String courseTaxonomy = method_url + "skateboard/"  + "course_taxonomy";

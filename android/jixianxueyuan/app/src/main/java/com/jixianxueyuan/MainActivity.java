@@ -15,6 +15,8 @@ import com.jixianxueyuan.activity.CreateShortVideoActivity;
 import com.jixianxueyuan.activity.HomeActivity;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.UserInfoDTO;
+import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.record.ui.record.ImportVideoActivity;
 import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
@@ -68,8 +70,14 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.activity_qq_login)void qqLogin()
     {
-        Intent intent = new Intent(this, HomeActivity.class);
+
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
+
+        //requestLogin();
+
+
+
 
 /*        mTencent = Tencent.createInstance("101220015", this.getApplicationContext());
         mTencent.setOpenId("");
@@ -121,6 +129,30 @@ public class MainActivity extends Activity {
 
         queue.add(myRequest);
      }
+
+    private void requestLogin()
+    {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ServerMethod.account_login + "?qqOpenId=DC5F63930F15A7B7DC3AFE50843763BB";
+
+        MyRequest<UserInfoDTO> myRequest = new MyRequest<UserInfoDTO>(Request.Method.GET, url, UserInfoDTO.class,
+                new Response.Listener<MyResponse<UserInfoDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<UserInfoDTO> response) {
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+                );
+
+        queue.add(myRequest);
+    }
 
     @OnClick(R.id.activity_main_danmu) void danmu()
     {

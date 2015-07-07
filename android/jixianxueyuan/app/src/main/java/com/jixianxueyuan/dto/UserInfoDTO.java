@@ -9,7 +9,7 @@ public class UserInfoDTO
 	private String loginName;
 	private String name;
 	private String roles;
-	private Date registerDate;
+	private String registerDate;
 	private String gender;
 	private String birth;
 	private String avatar;
@@ -50,11 +50,11 @@ public class UserInfoDTO
 	{
 		this.roles = roles;
 	}
-	public Date getRegisterDate()
+	public String getRegisterDate()
 	{
 		return registerDate;
 	}
-	public void setRegisterDate(Date registerDate)
+	public void setRegisterDate(String registerDate)
 	{
 		this.registerDate = registerDate;
 	}

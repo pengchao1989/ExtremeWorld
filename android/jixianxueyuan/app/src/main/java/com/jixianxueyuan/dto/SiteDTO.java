@@ -11,7 +11,7 @@ public class SiteDTO
 	private String address;
 	private String longitude;
 	private String latitude;
-	private Date createTime;
+	private String createTime;
 	public String getName()
 	{
 		return name;
@@ -68,11 +68,11 @@ public class SiteDTO
 	{
 		this.latitude = latitude;
 	}
-	public Date getCreateTime()
+	public String getCreateTime()
 	{
 		return createTime;
 	}
-	public void setCreateTime(Date createTime)
+	public void setCreateTime(String createTime)
 	{
 		this.createTime = createTime;
 	}
