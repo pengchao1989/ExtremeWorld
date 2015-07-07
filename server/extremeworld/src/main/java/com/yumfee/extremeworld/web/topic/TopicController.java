@@ -137,8 +137,7 @@ public class TopicController
 		
 		User userInfo = new User();
 		userInfo.setId(getCurrentUserId());
-		Topic topic = new Topic();
-		topic.setId(topicId);
+		Topic topic = topicService.getTopic(topicId);
 		
 		newReply.setUser(userInfo);
 		newReply.setTopic(topic);

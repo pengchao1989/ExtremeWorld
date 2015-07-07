@@ -10,8 +10,12 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
+import com.yumfee.extremeworld.repository.RemindDao;
 import com.yumfee.extremeworld.repository.ReplyDao;
+import com.yumfee.extremeworld.repository.TopicDao;
+import com.yumfee.extremeworld.repository.UserDao;
 
 //Spring Bean的标识.
 @Component
@@ -21,6 +25,12 @@ public class ReplyService
 {
 	@Autowired
 	private ReplyDao replyDao;
+	
+	@Autowired
+	private RemindDao remindDao;
+	
+	@Autowired 
+	private TopicDao topicDao;
 
 	public Reply getReply(long id)
 	{
@@ -44,9 +54,21 @@ public class ReplyService
 		return replyDao.findByTopicId(topicId,pageRequest);
 	}
 	
-	public void saveReply(Reply entity)
+	public void saveReply(Reply reply)
 	{
-		replyDao.save(entity);
+		replyDao.save(reply);
+		
+		//在此处理提醒数据
+		Remind remind = new Remind();
+		remind.setTargetType("topic");
+		remind.setContent(reply.getContent());
+		remind.setTargetId(reply.getTopic().getId());
+		remind.setTargetContent(reply.getTopic().getTitle());
+		remind.setSpeaker(reply.getUser());
+		remind.setListener(reply.getTopic().getUser());
+		
+		remindDao.save(remind);
+		
 	}
 	
 
