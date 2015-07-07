@@ -4,6 +4,10 @@ import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -87,6 +91,16 @@ public class TopicController
 		}
 		Topic topic = topicService.getTopic(id);
 		
+		
+		//在此处理content中图片地址，以更适合在web端显示
+		String newContent = replaceImageUrl(topic.getContent());
+		
+		System.out.print(newContent);
+		
+		topic.setContent(newContent);
+
+		
+		
 		Page<Reply> replys = replyService.getAll(id,pageNumber, pageSize);
 		
 		if(topic instanceof Video)
@@ -147,5 +161,29 @@ public class TopicController
 		}
 		return null;
 		
+	}
+	
+	
+	private String replaceImageUrl(String content)
+	{
+		
+		String regexPIC_URL="http://img\\.jixianxueyuan\\.com.*";
+		
+		Document contnetDocument = Jsoup.parseBodyFragment(content);
+		
+		Elements images = contnetDocument.getElementsByTag("img");
+		for(Element img : images)
+		{
+			String src = img.attr("src");
+			
+			if(src.matches(regexPIC_URL) && (!src.contains("!webContentImg")))
+			{
+				img.attr("src", src + "!webContentImg");
+			}
+			
+		}
+		
+
+		return contnetDocument.body().html();
 	}
 }
