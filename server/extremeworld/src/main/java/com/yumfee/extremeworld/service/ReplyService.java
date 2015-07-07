@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
+import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.repository.RemindDao;
 import com.yumfee.extremeworld.repository.ReplyDao;
 import com.yumfee.extremeworld.repository.TopicDao;
@@ -63,9 +64,12 @@ public class ReplyService
 		remind.setTargetType("topic");
 		remind.setContent(reply.getContent());
 		remind.setTargetId(reply.getTopic().getId());
-		remind.setTargetContent(reply.getTopic().getTitle());
 		remind.setSpeaker(reply.getUser());
-		remind.setListener(reply.getTopic().getUser());
+		
+		
+		Topic topic = topicDao.findOne(reply.getTopic().getId());
+		remind.setTargetContent(topic.getTitle());
+		remind.setListener(topic.getUser());
 		
 		remindDao.save(remind);
 		

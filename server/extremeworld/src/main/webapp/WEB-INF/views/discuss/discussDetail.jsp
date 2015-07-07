@@ -62,7 +62,7 @@
 						
 					<br />
 					
-					<p id="content" class="flow-text">${topic.content}</p>
+					<p id="content" class="flow-text">${topicContent}</p>
 
 				</div>
 			</div>

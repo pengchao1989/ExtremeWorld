@@ -179,8 +179,8 @@ public class DiscussController {
 		
 		User userInfo = new User();
 		userInfo.setId(getCurrentUserId());
-		Topic topic = topicService.getTopic(topicId);
-		//topic.setId(topicId);
+		Topic topic = new Topic();
+		topic.setId(topicId);
 		
 		newReply.setUser(userInfo);
 		newReply.setTopic(topic);

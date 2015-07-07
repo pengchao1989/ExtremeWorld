@@ -97,7 +97,7 @@ public class TopicController
 		
 		System.out.print(newContent);
 		
-		topic.setContent(newContent);
+		//topic.setContent(newContent);
 
 		
 		
@@ -117,6 +117,7 @@ public class TopicController
 		
 		
 		model.addAttribute("topic",topic);
+		model.addAttribute("topicContent", newContent);
 		model.addAttribute("replys", replys);
 		
 		model.addAttribute("hobby",hobby);
@@ -137,7 +138,8 @@ public class TopicController
 		
 		User userInfo = new User();
 		userInfo.setId(getCurrentUserId());
-		Topic topic = topicService.getTopic(topicId);
+		Topic topic = new Topic();
+		topic.setId(topicId);
 		
 		newReply.setUser(userInfo);
 		newReply.setTopic(topic);
