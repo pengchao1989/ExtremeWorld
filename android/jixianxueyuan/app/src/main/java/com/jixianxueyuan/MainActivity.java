@@ -50,6 +50,8 @@ public class MainActivity extends Activity {
 
     Tencent mTencent;
 
+    String openId = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,15 +73,15 @@ public class MainActivity extends Activity {
     @OnClick(R.id.activity_qq_login)void qqLogin()
     {
 
-        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-        startActivity(intent);
+/*        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent);*/
 
         //requestLogin();
 
 
 
 
-/*        mTencent = Tencent.createInstance("101220015", this.getApplicationContext());
+        mTencent = Tencent.createInstance("101228787", this.getApplicationContext());
         mTencent.setOpenId("");
         if (!mTencent.isSessionValid())
         {
@@ -99,7 +101,7 @@ public class MainActivity extends Activity {
 
                 }
             });
-        }*/
+        }
     }
 
     private void requestBaseInfo()

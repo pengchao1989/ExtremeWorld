@@ -61,7 +61,7 @@
 												<c:choose>
 													<c:when test="${media.type == 'img'}">
 														<li class="card-thumbnails">
-															<a href="${media.path}" data-rel="colorbox">
+															<a href="${media.path}!webContent" data-rel="colorbox">
 																<img alt="" src="${media.path}!topicListThum">
 															</a>
 														</li>
