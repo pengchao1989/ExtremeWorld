@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/MainContainer"
+    android:background="@color/primary_color"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -15,30 +16,18 @@
             android:text="极限学院"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#444"
+            android:textColor="@color/white"
             android:textSize="50sp"/>
 
         <Button
             android:id="@+id/activity_qq_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             android:layout_marginTop="24dp"
             android:text="@string/qq_login"
             />
 
-        <Button
-            android:id="@+id/activity_main_danmu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Danmu"
-            />
-
-        <Button
-            android:id="@+id/activity_main_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="video record"
-            />
 
     </LinearLayout>
 

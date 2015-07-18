@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Table(name = "tb_hobby")
 public class Hobby extends IdEntity
 {
+	private String eName;
 	private String name;
 	private String description;
 	private Date createTime;
@@ -22,6 +23,13 @@ public class Hobby extends IdEntity
 	private List<Site> sites = new ArrayList<Site>();
 	private List<Topic> topics = new ArrayList<Topic>();
 	
+	
+	public String geteName() {
+		return eName;
+	}
+	public void seteName(String eName) {
+		this.eName = eName;
+	}
 	public String getName()
 	{
 		return name;

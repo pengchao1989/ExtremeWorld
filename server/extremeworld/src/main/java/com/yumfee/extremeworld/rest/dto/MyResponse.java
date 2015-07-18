@@ -25,6 +25,7 @@ public class MyResponse {
 	{
 		MyResponse response = new MyResponse();
 		response.setStatus(204);//错误码204
+		response.setContent(null);
 		return response;
 	}
 

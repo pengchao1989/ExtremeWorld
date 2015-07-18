@@ -6,6 +6,13 @@
     <string name="welcome">welcome</string>
     <string name="qq_login">QQ登陆</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="register">注册</string>
+    <string name="nickname">昵称</string>
+    <string name="birth">生日</string>
+    <string name="boy">男</string>
+    <string name="girl">女</string>
+    <string name="secret">秘密</string>
+    <string name="save_profile">保存信息</string>
 
     <string name="not_more">没有更多了</string>
 

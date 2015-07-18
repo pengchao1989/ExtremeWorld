@@ -97,4 +97,15 @@ public class Util {
 
         return "-";
     }
+
+    static public String getApplicationMetaString(Context context , String key){
+
+        try {
+            return context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA).metaData.getString(key);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

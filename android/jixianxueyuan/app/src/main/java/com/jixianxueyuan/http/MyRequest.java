@@ -77,12 +77,21 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
 
             JsonParser parser = new JsonParser();
             JsonObject jsonObject =  parser.parse(jsonStr).getAsJsonObject();
-            JsonElement contentObject = jsonObject.getAsJsonObject("content");
 
-            T content = gson.fromJson(contentObject, clazz);
+            if(jsonObject.has("content"))
+            {
+                JsonElement contentObject = jsonObject.get("content");
+                if(contentObject == null)
+                {
+                    myResponse.setContent(null);
+                }
+                else
+                {
+                    T content = gson.fromJson(contentObject, clazz);
+                    myResponse.setContent(content);
+                }
 
-            myResponse.setContent(content);
-
+            }
 
             return Response.success(myResponse, HttpHeaderParser.parseCacheHeaders(response));
         }
