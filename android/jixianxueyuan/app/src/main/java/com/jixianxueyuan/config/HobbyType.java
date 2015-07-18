@@ -13,5 +13,4 @@ public class HobbyType {
     public static final String BMX = "bmx";
     public static final String ROLLER_SKATING = "roller_skating";
     public static final String SKEE = "skee";
-    public static final String CLIMBING = "climbing";
 }

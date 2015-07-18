@@ -59,6 +59,8 @@ public class MainActivity extends Activity {
 
         ButterKnife.inject(this);
 
+        initView();
+
         final Shimmer shimmer = new Shimmer();
         shimmer.setRepeatCount(0);
         shimmer.start(appNameTextView);
@@ -75,6 +77,7 @@ public class MainActivity extends Activity {
         String hobby = Util.getApplicationMetaString(this, "hobby");
         switch (hobby){
             case HobbyType.SKATEBOARD:
+                appNameTextView.setText(this.getResources().getText(R.string.app_name_skateboard));
                 break;
         }
     }
