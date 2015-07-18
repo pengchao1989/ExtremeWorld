@@ -37,7 +37,7 @@ public class RegisterActivity extends Activity {
 
     private void initView(){
 
-        hobby = Util.getApplicationMetaString(this, "hobby");
+        hobby = Util.getApplicationMetaString(this, "HOBBY");
         MyLog.d(this.getClass().getSimpleName(), "hobby=" + hobby);
 
         Intent intent = this.getIntent();

@@ -74,10 +74,16 @@ public class MainActivity extends Activity {
 
     private void initView()
     {
-        String hobby = Util.getApplicationMetaString(this, "hobby");
+        String hobby = Util.getApplicationMetaString(this, "HOBBY");
         switch (hobby){
             case HobbyType.SKATEBOARD:
                 appNameTextView.setText(this.getResources().getText(R.string.app_name_skateboard));
+                break;
+            case HobbyType.PARKOUR:
+                appNameTextView.setText(this.getResources().getText(R.string.app_name_packour));
+                break;
+            case HobbyType.BMX:
+                appNameTextView.setText(this.getResources().getText(R.string.app_name_bmx));
                 break;
         }
     }

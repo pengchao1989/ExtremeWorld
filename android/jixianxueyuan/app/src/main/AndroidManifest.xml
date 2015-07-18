@@ -124,7 +124,8 @@
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
 
 
-        <meta-data  android:name="hobby" android:value="skateboard"/>
+        <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>
+
     </application>
 
 

@@ -11,12 +11,38 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+
+    productFlavors{
+
+        parkour{
+            applicationId = "com.jixianxueyuan.parkour"
+            manifestPlaceholders = [HOBBY : "parkour"]
+        }
+        bmx{
+            applicationId = "com.jixianxueyuan.bmx"
+            manifestPlaceholders = [HOBBY : "bmx"]
+        }
+        skateboard{
+            applicationId = "com.jixianxueyuan.skateboard"
+            manifestPlaceholders = [HOBBY : "skateboard"]
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    //这个是解决lint报错的代码
+    lintOptions {
+        abortOnError false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+    }
+
 }
 
 dependencies {

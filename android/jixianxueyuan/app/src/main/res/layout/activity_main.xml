@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+        android:paddingTop="80dp"
         >
 
         <com.romainpiel.shimmer.ShimmerTextView
@@ -23,7 +24,8 @@
             android:id="@+id/activity_qq_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:layout_marginTop="24dp"
             android:text="@string/qq_login"
             />
