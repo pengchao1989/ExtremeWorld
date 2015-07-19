@@ -82,7 +82,12 @@ public class NearFriendListAdapter extends BaseAdapter {
 
         UserMinDTO userMinDTO = userMinDTOList.get(position);
 
-        ImageLoader.getInstance().displayImage(userMinDTO.getAvatar() + "!androidListAvatar", viewHolder.avatarImageView);
+        String avatarUrl = userMinDTO.getAvatar();
+        if(Util.isOurServerImage(avatarUrl)){
+            avatarUrl += "!androidListAvatar";
+        }
+
+        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
         viewHolder.nameTextView.setText(userMinDTO.getName());
         viewHolder.distanceTextView.setText(Util.meterToString(userMinDTO.getDistance()));
 

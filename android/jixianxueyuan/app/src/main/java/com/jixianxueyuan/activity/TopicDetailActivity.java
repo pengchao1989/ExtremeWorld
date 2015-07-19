@@ -43,6 +43,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
+import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.AgreeResultDTO;
 import com.jixianxueyuan.dto.MyPage;
@@ -440,7 +441,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         replyDTO.setContent(replyString);
 
         UserMinDTO userMinDTO = new UserMinDTO();
-        userMinDTO.setId(1L);
+        userMinDTO.setId(MyApplication.getContext().getMine().getUserInfo().getId());
         replyDTO.setUser(userMinDTO);
 
         TopicDTO topic = new TopicDTO();
@@ -458,7 +459,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
         ZanRequest zanRequest = new ZanRequest();
         zanRequest.setTopicId(topicDTO.getId());
-        zanRequest.setUserId(1L);
+        zanRequest.setUserId(MyApplication.getContext().getMine().getUserInfo().getId());
 
 
         MyRequest<AgreeResultDTO> myRequest = new MyRequest(Request.Method.POST, url, AgreeResultDTO.class,zanRequest, new Response.Listener<MyResponse<AgreeResultDTO>>() {

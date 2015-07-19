@@ -26,6 +26,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.NearFriendListAdapter;
+import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserMinDTO;
@@ -154,7 +155,8 @@ public class NearFriendActivity extends Activity  {
     {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = ServerMethod.near_friend + "?userId=1" + "&latitude=" + latitude + "&longitude=" + longitude + "&page=" + (currentPage + 1);
+        Long userId = MyApplication.getContext().getMine().getUserInfo().getId();
+        String url = ServerMethod.near_friend + "?userId=" + userId + "&latitude=" + latitude + "&longitude=" + longitude + "&page=" + (currentPage + 1);
         MyLog.d("NearFriendActivity", "request=" + url);
 
         MyPageRequest<UserMinDTO> myPageRequest = new MyPageRequest<UserMinDTO>(Request.Method.GET,url, UserMinDTO.class,
