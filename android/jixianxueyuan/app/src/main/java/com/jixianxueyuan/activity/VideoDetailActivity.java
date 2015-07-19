@@ -195,7 +195,7 @@ public class VideoDetailActivity extends Activity implements View.OnClickListene
     {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.damaku + "/" + videoId;
+        String url = ServerMethod.damaku() + "/" + videoId;
 
         Log.d("VideoDetailActivity","url=" + url);
 

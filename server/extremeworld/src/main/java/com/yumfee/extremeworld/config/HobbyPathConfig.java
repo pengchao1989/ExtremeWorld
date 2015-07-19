@@ -22,7 +22,7 @@ public class HobbyPathConfig {
 		{
 			hobbyId = 2L;
 		}
-		else if(hobby.equals("bicycle"))
+		else if(hobby.equals("bmx"))
 		{
 			hobbyId = 3L;
 		}

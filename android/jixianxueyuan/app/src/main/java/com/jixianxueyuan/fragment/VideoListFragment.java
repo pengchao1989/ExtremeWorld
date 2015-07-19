@@ -97,7 +97,7 @@ public class VideoListFragment extends Fragment{
     private void requestVideoList()
     {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
-        String url = ServerMethod.video;
+        String url = ServerMethod.video();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {

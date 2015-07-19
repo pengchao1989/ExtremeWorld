@@ -119,7 +119,7 @@ public class MainActivity extends InstrumentedActivity {
 
     private void requestBaseInfo() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.baseInfo;
+        String url = ServerMethod.baseInfo();
 
         MyRequest<BaseInfoDTO> myRequest = new MyRequest<BaseInfoDTO>(Request.Method.GET, url, BaseInfoDTO.class,
                 new Response.Listener<MyResponse<BaseInfoDTO>>() {
@@ -145,7 +145,7 @@ public class MainActivity extends InstrumentedActivity {
 
     private void requestLogin() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_login + "?qqOpenId=" + qqOpenInfo.getOpenid();
+        String url = ServerMethod.account_login() + "?qqOpenId=" + qqOpenInfo.getOpenid();
 
         MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
                 new Response.Listener<MyResponse<UserDTO>>() {

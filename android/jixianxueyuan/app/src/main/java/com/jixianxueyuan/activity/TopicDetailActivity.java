@@ -351,7 +351,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     private void requestReplyList()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.reply + "?topicId="+ topicDTO.getId() + "&page=" + (currentPage + 1) ;
+        String url = ServerMethod.reply() + "?topicId="+ topicDTO.getId() + "&page=" + (currentPage + 1) ;
         MyLog.d(tag, "request=" + url);
 
         MyPageRequest<ReplyDTO> stringRequest = new MyPageRequest<ReplyDTO>(Request.Method.GET,url,ReplyDTO.class,
@@ -388,7 +388,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     private void submitReply(String replyContent)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.reply;
+        String url = ServerMethod.reply();
 
         ReplyRequest replyRequest = buildReplyDTO(replyContent);
 
@@ -455,7 +455,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = ServerMethod.zan;
+        String url = ServerMethod.zan();
 
         ZanRequest zanRequest = new ZanRequest();
         zanRequest.setTopicId(topicDTO.getId());

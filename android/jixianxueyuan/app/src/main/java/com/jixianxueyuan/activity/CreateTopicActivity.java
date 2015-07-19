@@ -189,7 +189,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.topic;
+        String url = ServerMethod.topic();
 
         buildTopicParam();
 

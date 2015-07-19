@@ -84,7 +84,7 @@ public class CourseTaxonomyActivity extends Activity{
     private void requestCourseList()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.courseTaxonomy;
+        String url = ServerMethod.courseTaxonomy();
 
         MyRequest<CourseTaxonomysResponseDTO> stringRequest = new MyRequest<CourseTaxonomysResponseDTO>(Request.Method.GET,url,CourseTaxonomysResponseDTO.class,
                 new Response.Listener<MyResponse<CourseTaxonomysResponseDTO>>() {

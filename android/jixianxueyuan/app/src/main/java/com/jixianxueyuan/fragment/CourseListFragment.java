@@ -88,7 +88,7 @@ public class CourseListFragment extends Fragment{
     private void requestCourseList()
     {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
-        String url = ServerMethod.courseTaxonomy;
+        String url = ServerMethod.courseTaxonomy();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {

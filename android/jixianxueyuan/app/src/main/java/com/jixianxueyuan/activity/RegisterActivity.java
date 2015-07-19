@@ -96,7 +96,7 @@ public class RegisterActivity extends Activity {
 
     private void requestRegister(){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_register;
+        String url = ServerMethod.account_register();
 
         buildUserIofoParam();
 

@@ -32,6 +32,7 @@ import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
@@ -309,14 +310,14 @@ public class TopicListFragment extends Fragment {
         switch (topicType)
         {
             case TopicType.ALL:
-                url = ServerMethod.topic + "?page=" + (currentPage + 1);
+                url = ServerMethod.topic() + "?page=" + (currentPage + 1);
                 break;
             case TopicType.DISCUSS:
             case TopicType.NEWS:
-                url = ServerMethod.topic + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
                 break;
             case TopicType.S_VIDEO:
-                url = ServerMethod.topic + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
                 break;
         }
 
@@ -326,22 +327,15 @@ public class TopicListFragment extends Fragment {
             return;
         }
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
-                new Response.Listener<String>() {
+        MyPageRequest<TopicDTO> stringRequest = new MyPageRequest(Request.Method.GET,url,TopicDTO.class,
+                new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {
                     @Override
-                    public void onResponse(String response) {
-
-                        //MyLog.d(tag, "response=" + response);
-
-                        Gson gson = new Gson();
-
-                        MyResponse<MyPage<TopicDTO>> myResponse = gson.fromJson(response,new TypeToken<MyResponse<MyPage<TopicDTO>>>(){}.getType());
+                    public void onResponse(MyResponse<MyPage<TopicDTO>> response) {
 
 
-                        if(myResponse.getStatus() == MyResponse.status_ok)
+                        if(response.getStatus() == MyResponse.status_ok)
                         {
-                            MyPage page = myResponse.getContent();
+                            MyPage page = response.getContent();
                             List<TopicDTO> topicDTOs = page.getContents();
                             if(currentPage == 0)
                             {

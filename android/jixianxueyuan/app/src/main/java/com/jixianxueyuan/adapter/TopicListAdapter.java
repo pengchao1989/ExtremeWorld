@@ -17,6 +17,7 @@ import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.DateTimeFormatter;
+import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
@@ -110,7 +111,11 @@ public class TopicListAdapter extends BaseAdapter {
         viewHolder.viewCountTextView.setText( String.valueOf(topicDTO.getViewCount()));
         viewHolder.agreeCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
-        ImageLoader.getInstance().displayImage(topicDTO.getUser().getAvatar() + "!androidListAvatar", viewHolder.avatarImageView);
+        String avatarUrl = topicDTO.getUser().getAvatar();
+        if(Util.isOurServerImage(avatarUrl)){
+            avatarUrl += "!androidListAvatar";
+        }
+        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
 
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 

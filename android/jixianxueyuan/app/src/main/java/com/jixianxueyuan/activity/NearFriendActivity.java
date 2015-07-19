@@ -156,7 +156,7 @@ public class NearFriendActivity extends Activity  {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         Long userId = MyApplication.getContext().getMine().getUserInfo().getId();
-        String url = ServerMethod.near_friend + "?userId=" + userId + "&latitude=" + latitude + "&longitude=" + longitude + "&page=" + (currentPage + 1);
+        String url = ServerMethod.near_friend() + "?userId=" + userId + "&latitude=" + latitude + "&longitude=" + longitude + "&page=" + (currentPage + 1);
         MyLog.d("NearFriendActivity", "request=" + url);
 
         MyPageRequest<UserMinDTO> myPageRequest = new MyPageRequest<UserMinDTO>(Request.Method.GET,url, UserMinDTO.class,

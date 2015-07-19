@@ -105,7 +105,7 @@ public class CourseDetailActivity extends Activity {
     private void requestCourseDetail()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.course + courseId;
+        String url = ServerMethod.course() + courseId;
 
         MyRequest<CourseDto> myRequest = new MyRequest<CourseDto>(Request.Method.GET,url, CourseDto.class,
                 new Response.Listener<MyResponse<CourseDto>>(){
@@ -139,7 +139,7 @@ public class CourseDetailActivity extends Activity {
     {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = ServerMethod.course_explain + courseId;
+        String url = ServerMethod.course_explain() + courseId;
 
         MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest<TopicDTO>(Request.Method.GET,url, TopicDTO.class,
                 new Response.Listener<MyResponse<MyPage<TopicDTO>>>(){
