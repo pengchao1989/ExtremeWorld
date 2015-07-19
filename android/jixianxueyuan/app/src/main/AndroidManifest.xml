@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jixianxueyuan" >
 
-    <permission android:name="com.jixianxueyuan.bmx.permission.JPUSH_MESSAGE" android:protectionLevel="signature"/>
-    <uses-permission android:name="com.jixianxueyuan.bmx.permission.JPUSH_MESSAGE"/>
+    <permission android:name="${APPLICATIONID}.permission.JPUSH_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="${APPLICATIONID}.permission.JPUSH_MESSAGE"/>
 
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
     <uses-permission android:name="android.permission.INTERNET" />
@@ -131,7 +131,7 @@
 
 
         <!-- Required SDK核心功能-->
-        <activity android:name="cn.jpush.android.ui.PushActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:configChanges="orientation|keyboardHidden"><intent-filter><action android:name="cn.jpush.android.ui.PushActivity"/><category android:name="android.intent.category.DEFAULT"/><category android:name="com.jixianxueyuan.bmx"/></intent-filter></activity>
+        <activity android:name="cn.jpush.android.ui.PushActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:configChanges="orientation|keyboardHidden"><intent-filter><action android:name="cn.jpush.android.ui.PushActivity"/><category android:name="android.intent.category.DEFAULT"/><category android:name="${APPLICATIONID}"/></intent-filter></activity>
         <!-- Required  SDK核心功能-->
         <service
             android:name="cn.jpush.android.service.DownloadService"
@@ -156,7 +156,7 @@
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!--Required  显示通知栏 -->
-                <category android:name="com.jixianxueyuan.bmx" />
+                <category android:name="${APPLICATIONID}" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -189,7 +189,7 @@
                 <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="com.jixianxueyuan.bmx" />
+                <category android:name="${APPLICATIONID}" />
             </intent-filter>
         </receiver>
         <!-- Required  . Enable it you can get statistics data with channel
@@ -199,7 +199,7 @@
             android:value="developer-default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="4798383b7d7bdee3a2db3356" />
+            android:value="${JPUSH_APPKEY}" />
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>
