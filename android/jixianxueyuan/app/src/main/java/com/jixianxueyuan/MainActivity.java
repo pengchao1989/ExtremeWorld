@@ -38,9 +38,11 @@ import com.tencent.tauth.UiError;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import cn.jpush.android.api.InstrumentedActivity;
+import cn.jpush.android.api.JPushInterface;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends InstrumentedActivity {
 
     @InjectView(R.id.activity_qq_login)
     Button qqLoginButton;
@@ -68,7 +70,13 @@ public class MainActivity extends Activity {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(getApplicationContext());
+
+
         requestBaseInfo();
+
+
 
     }
 
