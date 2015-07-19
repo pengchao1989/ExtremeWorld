@@ -72,6 +72,7 @@ public class MainActivity extends InstrumentedActivity {
 
         JPushInterface.setDebugMode(true);
         JPushInterface.init(getApplicationContext());
+        //JPushInterface.setAlias(this, );
 
 
         requestBaseInfo();

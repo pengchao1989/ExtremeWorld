@@ -16,6 +16,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.mapper.JsonMapper;
 
+import cn.jpush.api.JPushClient;
+import cn.jpush.api.common.resp.APIConnectionException;
+import cn.jpush.api.common.resp.APIRequestException;
+import cn.jpush.api.push.PushResult;
+import cn.jpush.api.push.model.PushPayload;
+
 import com.yumfee.extremeworld.entity.Media;
 import com.yumfee.extremeworld.entity.MediaWrap;
 import com.yumfee.extremeworld.entity.Topic;
@@ -117,6 +123,7 @@ public class TopicService
 		
 		topicDao.save(entity);
 		//MyJedisExecutor.set("topic:"+entity.getId(), entity);
+		
 	}
 	
 	public Page<Topic> getAllTopic(int pageNumber, int pageSize,
@@ -199,4 +206,8 @@ public class TopicService
 
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}
+	
+	public static PushPayload buildPushObject_all_all_alert() {
+        return PushPayload.alertAll("this msg is from server");
+    }
 }

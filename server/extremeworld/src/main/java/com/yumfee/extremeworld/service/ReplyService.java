@@ -10,6 +10,15 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.jpush.api.JPushClient;
+import cn.jpush.api.common.resp.APIConnectionException;
+import cn.jpush.api.common.resp.APIRequestException;
+import cn.jpush.api.push.PushResult;
+import cn.jpush.api.push.model.Message;
+import cn.jpush.api.push.model.Platform;
+import cn.jpush.api.push.model.PushPayload;
+import cn.jpush.api.push.model.audience.Audience;
+
 import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
@@ -59,6 +68,8 @@ public class ReplyService
 	{
 		replyDao.save(reply);
 		
+		//TODO下面代码应异步处理
+		
 		//在此处理提醒数据
 		Remind remind = new Remind();
 		remind.setTargetType("topic");
@@ -72,6 +83,28 @@ public class ReplyService
 		remind.setListener(topic.getUser());
 		
 		remindDao.save(remind);
+		
+		//在此处理推送
+		JPushClient jpushClient = new JPushClient("80a458ad8be7998a79b9af85", "4798383b7d7bdee3a2db3356", 3);
+		PushPayload payload = PushPayload.newBuilder()
+				.setPlatform(Platform.android_ios())
+				.setAudience(Audience.alias(remind.getListener().getId().toString()))
+				.setMessage(
+						Message.newBuilder()
+							.setMsgContent(remind.getTargetContent() + " 有新回复" )
+							.addExtra("targetId", remind.getTargetId())
+							.build() )
+				.build();
+
+        try {
+            PushResult result = jpushClient.sendPush(payload);
+
+        } catch (APIConnectionException e) {
+            // Connection error, should retry later
+
+        } catch (APIRequestException e) {
+            // Should review the error, and fix the request
+        }
 		
 	}
 	
