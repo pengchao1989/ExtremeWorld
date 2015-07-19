@@ -22,6 +22,7 @@ public class MyApplication extends Application {
 
     BaseInfoDTO baseInfoDTO;
     Mine mine;
+    String currentHobby;
 
 	@Override
 	public void onCreate() {
@@ -50,7 +51,8 @@ public class MyApplication extends Application {
 
 
         //设置app rest api的hobby值
-        ServerMethod.setHobby(Util.getApplicationMetaString(this, "HOBBY"));
+        currentHobby = Util.getApplicationMetaString(this, "HOBBY");
+        ServerMethod.setHobby(currentHobby);
 
         //初始化本地用户信息
         mine = new Mine();
@@ -78,5 +80,9 @@ public class MyApplication extends Application {
 
     public void setMine(Mine mine) {
         this.mine = mine;
+    }
+
+    public String getCurrentHobby() {
+        return currentHobby;
     }
 }

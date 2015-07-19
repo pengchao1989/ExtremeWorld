@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MyResponse;
@@ -367,7 +368,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         topicDTO.setUser(userMinDTO);
         List<HobbyDTO> hobbys = new ArrayList<HobbyDTO>();
         HobbyDTO hobbyDTO = new HobbyDTO();
-        hobbyDTO.setId(1L);
+        Long hobbyId = HobbyType.getHobbyId(MyApplication.getContext().getCurrentHobby());
+        hobbyDTO.setId(hobbyId);
         hobbys.add(hobbyDTO);
         topicDTO.setHobbys(hobbys);
 
