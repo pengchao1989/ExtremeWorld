@@ -192,7 +192,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
         buildTopicParam();
 
-        MyRequest<TopicDTO> stringRequest = new MyRequest(Request.Method.POST,url,TopicDTO.class, topicDTO,
+        MyRequest<TopicDTO> myRequest = new MyRequest(Request.Method.POST,url,TopicDTO.class, topicDTO,
                 new Response.Listener<MyResponse<TopicDTO>>() {
                     @Override
                     public void onResponse(MyResponse<TopicDTO> response) {
@@ -212,7 +212,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     }
                 });
 
-        queue.add(stringRequest);
+        queue.add(myRequest);
     }
 
 

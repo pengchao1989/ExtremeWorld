@@ -1,14 +1,14 @@
 package com.jixianxueyuan.dto.qq;
 
+import java.io.Serializable;
+
 /**
  * Created by pengchao on 7/18/15.
  */
-public class QQUserInfo {
+public class QQUserInfo implements Serializable {
     String nickname;
     String gender;
     String figureurl_qq_1;
-
-
     String figureurl_qq_2;
     String province;
     String city;

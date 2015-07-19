@@ -59,6 +59,7 @@
         </LinearLayout>
 
         <RadioGroup
+            android:id="@+id/register_gender_radiogroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -68,14 +69,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/boy"
-                android:id="@+id/radioButton"
+                android:id="@+id/register_gender_male"
+                android:checked="true"
                 android:layout_gravity="center_horizontal" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/girl"
-                android:id="@+id/radioButton2"
+                android:id="@+id/register_gender_female"
                 android:layout_gravity="center_horizontal" />
 
 

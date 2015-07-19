@@ -1,9 +1,11 @@
 package com.jixianxueyuan.dto.qq;
 
+import java.io.Serializable;
+
 /**
  * Created by pengchao on 7/18/15.
  */
-public class QQBaseInfo {
+public class QQOpenInfo implements Serializable {
     String openid;
     String access_token;
 

@@ -1,6 +1,5 @@
 package com.jixianxueyuan;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -17,11 +16,9 @@ import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserInfoDTO;
-import com.jixianxueyuan.dto.qq.QQBaseInfo;
+import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.http.MyRequest;
-import com.jixianxueyuan.record.ui.record.ImportVideoActivity;
-import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
@@ -30,7 +27,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 import com.tencent.connect.UserInfo;
-import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -52,7 +48,8 @@ public class MainActivity extends InstrumentedActivity {
 
     Tencent tencent;
 
-    String openId = null;
+    //String openId = null;
+    QQOpenInfo qqOpenInfo = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +118,6 @@ public class MainActivity extends InstrumentedActivity {
                     public void onResponse(MyResponse<BaseInfoDTO> response) {
 
                         //基础信息，持久化到client中，保证每天只更新一次
-
                         MyApplication myApplication = (MyApplication) MyApplication.getContext();
                         myApplication.setBaseInfoDTO(response.getContent());
 
@@ -139,7 +135,7 @@ public class MainActivity extends InstrumentedActivity {
 
     private void requestLogin() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_login + "?" + openId;
+        String url = ServerMethod.account_login + "?" + qqOpenInfo.getOpenid();
 
         MyRequest<UserInfoDTO> myRequest = new MyRequest<UserInfoDTO>(Request.Method.GET, url, UserInfoDTO.class,
                 new Response.Listener<MyResponse<UserInfoDTO>>() {
@@ -183,10 +179,9 @@ public class MainActivity extends InstrumentedActivity {
 
                     Gson gson = new Gson();
 
-                    QQBaseInfo qqOpenInfo = gson.fromJson(response.toString(), QQBaseInfo.class);
+                    qqOpenInfo = gson.fromJson(response.toString(), QQOpenInfo.class);
                     if (qqOpenInfo != null) {
                         //qq登录成功后进行自家用户登录或注册
-                        openId = qqOpenInfo.getOpenid();
                         requestLogin();
                     }
 
@@ -218,8 +213,10 @@ public class MainActivity extends InstrumentedActivity {
                 QQUserInfo qqUserInfo = gson.fromJson(response.toString(), QQUserInfo.class);
                 if(qqUserInfo != null){
                     Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                    intent.putExtra("nickName", qqUserInfo.getNickname());
-                    intent.putExtra("gender", qqUserInfo.getGender());
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("qqOpenInfo", qqOpenInfo);
+                    bundle.putSerializable("qqUserInfo", qqUserInfo);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }

@@ -21,6 +21,7 @@ public class ServerMethod {
 
     public static final String baseInfo = method_url + "base_info";
     public static final String account_login = method_url + hobby + "account/login";
+    public static final String account_register = method_url + hobby + "account/register";
     public static final String topic = method_url + "skateboard/" + "topic";
     public static final String video = method_url + "all/" + "video";
     public static final String courseTaxonomy = method_url + "skateboard/"  + "course_taxonomy";
