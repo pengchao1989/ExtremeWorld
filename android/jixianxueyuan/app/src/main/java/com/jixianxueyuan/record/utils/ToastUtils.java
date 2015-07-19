@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.MyApplication;
+import com.jixianxueyuan.app.MyApplication;
 
 
 public class ToastUtils {

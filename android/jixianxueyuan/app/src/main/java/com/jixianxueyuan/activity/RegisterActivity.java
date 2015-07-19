@@ -1,7 +1,6 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -15,7 +14,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.MyResponse;
-import com.jixianxueyuan.dto.UserInfoDTO;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.dto.request.UserInfoRequest;
@@ -23,11 +21,9 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
-import com.tencent.tauth.Tencent;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 /**

@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
-import com.jixianxueyuan.MyApplication;
+import com.jixianxueyuan.app.MyApplication;
 
 
 public final class PreferenceUtils {

@@ -12,10 +12,12 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.jixianxueyuan.activity.HomeActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
+import com.jixianxueyuan.app.Mine;
+import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.dto.MyResponse;
-import com.jixianxueyuan.dto.UserInfoDTO;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.http.MyRequest;
@@ -75,6 +77,21 @@ public class MainActivity extends InstrumentedActivity {
         requestBaseInfo();
 
 
+        //若本地有登录信息，则直接进行登录
+        Mine mine = MyApplication.getContext().getMine();
+        if(mine.getUserInfo() != null && mine.getUserInfo().getId() != null){
+            //直接进入Hone页
+            if(mine.getUserInfo().getId() > 0){
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+        else{
+            //等待用户点击登录按钮进行登录
+        }
+
+
 
     }
 
@@ -97,14 +114,7 @@ public class MainActivity extends InstrumentedActivity {
     @OnClick(R.id.activity_qq_login)
     void qqLogin() {
 
-        //Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-        //startActivity(intent);
-
-        //requestLogin();
-
         requestQQOpenId();
-
-
     }
 
     private void requestBaseInfo() {
@@ -135,16 +145,24 @@ public class MainActivity extends InstrumentedActivity {
 
     private void requestLogin() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_login + "?" + qqOpenInfo.getOpenid();
+        String url = ServerMethod.account_login + "?qqOpenId=" + qqOpenInfo.getOpenid();
 
-        MyRequest<UserInfoDTO> myRequest = new MyRequest<UserInfoDTO>(Request.Method.GET, url, UserInfoDTO.class,
-                new Response.Listener<MyResponse<UserInfoDTO>>() {
+        MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
+                new Response.Listener<MyResponse<UserDTO>>() {
                     @Override
-                    public void onResponse(MyResponse<UserInfoDTO> response) {
+                    public void onResponse(MyResponse<UserDTO> response) {
 
                         if (response.getStatus() == ServerMethod.STATUS_OK) {
+
+                            //持久化用户信息
+                            Mine mine = MyApplication.getContext().getMine();
+                            mine.setUserInfo(response.getContent());
+                            mine.WriteSerializationToLocal(MainActivity.this);
+
+                            //登录完成，进入HOME页
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(intent);
+                            finish();
                         } else if (response.getStatus() == ServerMethod.STATUS_NO_CONTENT) {
 
 

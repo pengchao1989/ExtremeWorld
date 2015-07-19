@@ -1,11 +1,11 @@
 package com.jixianxueyuan.dto.request;
 
-import com.jixianxueyuan.dto.UserInfoDTO;
+import com.jixianxueyuan.dto.UserDTO;
 
 /**
  * Created by pengchao on 7/19/15.
  */
-public class UserInfoRequest extends UserInfoDTO {
+public class UserInfoRequest extends UserDTO {
     private String qqOpenId;
 
     public String getQqOpenId() {

@@ -1,4 +1,4 @@
-package com.jixianxueyuan;
+package com.jixianxueyuan.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.os.Environment;
 
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.record.service.AssertService;
+import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.Util;
 import com.yixia.camera.VCamera;
 import com.yixia.camera.util.DeviceUtils;
 
@@ -17,7 +19,9 @@ public class MyApplication extends Application {
 
 	private static MyApplication application;
 
+
     BaseInfoDTO baseInfoDTO;
+    Mine mine;
 
 	@Override
 	public void onCreate() {
@@ -42,10 +46,21 @@ public class MyApplication extends Application {
 
 		//解压assert里面的文件
 		startService(new Intent(this, AssertService.class));
+
+
+
+        //设置app rest api的hobby值
+        ServerMethod.setHobby(Util.getApplicationMetaString(this, "HOBBY"));
+
+        //初始化本地用户信息
+        mine = new Mine();
+        mine.SerializationFromLocal(this);
+
+
 	}
 
 
-	public static Context getContext() {
+	public static MyApplication getContext() {
 		return application;
 	}
 
@@ -55,5 +70,13 @@ public class MyApplication extends Application {
 
     public void setBaseInfoDTO(BaseInfoDTO baseInfoDTO) {
         this.baseInfoDTO = baseInfoDTO;
+    }
+
+    public Mine getMine() {
+        return mine;
+    }
+
+    public void setMine(Mine mine) {
+        this.mine = mine;
     }
 }

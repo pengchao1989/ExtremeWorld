@@ -15,7 +15,7 @@ import com.yumfee.extremeworld.entity.Country;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
-import com.yumfee.extremeworld.rest.dto.UserInfoDTO;
+import com.yumfee.extremeworld.rest.dto.UserDTO;
 import com.yumfee.extremeworld.service.account.AccountService;
 
 @RestController
@@ -26,7 +26,7 @@ public class AccountRestController {
 	AccountService accountService;
 	
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	@RequestMapping(value = "/qqlogin", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public MyResponse login(
 			@PathVariable String hobby,
 			@RequestParam(value = "qqOpenId", defaultValue = "0") String qqOpenId
@@ -36,7 +36,7 @@ public class AccountRestController {
 		User user = accountService.findUserByQqOpenId(qqOpenId);
 		if(user != null)
 		{
-			UserInfoDTO userDTO = BeanMapper.map(user, UserInfoDTO.class);
+			UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
 			return MyResponse.ok(userDTO);
 		}
 		

@@ -1,25 +1,19 @@
-package com.yumfee.extremeworld.rest.dto;
+package com.jixianxueyuan.dto;
 
 import java.util.Date;
 import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-@XmlRootElement(name = "UserInfo")
-public class UserInfoDTO
+public class UserDTO
 {
 	private Long id;
 	private String loginName;
 	private String name;
 	private String roles;
-	private Date registerDate;
+	private String registerDate;
 	private String gender;
 	private String birth;
 	private String avatar;
 	private String description;
-	
-	private CountryDTO country;
 	
 	private List<UserInterestDTO> interests;
 	private List<SiteDTO> sites;
@@ -56,12 +50,11 @@ public class UserInfoDTO
 	{
 		this.roles = roles;
 	}
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
-	public Date getRegisterDate()
+	public String getRegisterDate()
 	{
 		return registerDate;
 	}
-	public void setRegisterDate(Date registerDate)
+	public void setRegisterDate(String registerDate)
 	{
 		this.registerDate = registerDate;
 	}
@@ -96,15 +89,6 @@ public class UserInfoDTO
 	public void setDescription(String description)
 	{
 		this.description = description;
-	}
-	
-	
-	
-	public CountryDTO getCountry() {
-		return country;
-	}
-	public void setCountry(CountryDTO country) {
-		this.country = country;
 	}
 	public List<UserInterestDTO> getInterests()
 	{

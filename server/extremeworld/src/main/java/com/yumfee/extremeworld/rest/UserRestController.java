@@ -10,7 +10,7 @@ import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
-import com.yumfee.extremeworld.rest.dto.UserInfoDTO;
+import com.yumfee.extremeworld.rest.dto.UserDTO;
 import com.yumfee.extremeworld.service.UserService;
 
 @RestController
@@ -24,7 +24,7 @@ public class UserRestController {
 	public MyResponse get(@PathVariable("id") Long id)
 	{
 		User user = userService.getUser(id);
-		UserInfoDTO userDTO = BeanMapper.map(user, UserInfoDTO.class);
+		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
 		return MyResponse.ok(userDTO);
 	}
 }
