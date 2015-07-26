@@ -71,11 +71,37 @@ public class DateTimeFormatter {
         return timeAgo;
     }
 
-/*    public static String getTime(String dateString)
+    //2015 or 8月15
+    public static String getLargeTime(String dateString)
     {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+        String largeTime = "";
+        try {
+
+            Date date = sdf.parse(dateString);
+
+            int beforeSeconds = (int) (date.getTime() / 1000);
+            int nowSeconds = (int) (Calendar.getInstance().getTimeInMillis() / 1000);
+            int timeDifference = nowSeconds - beforeSeconds;
 
 
-    }*/
+
+            if (timeDifference < YEARS) {
+                SimpleDateFormat resultFormat = new SimpleDateFormat("MM月dd");
+                largeTime = resultFormat.format(date);
+            } else {
+                SimpleDateFormat resultFormat = new SimpleDateFormat("yyyy年");
+                largeTime = resultFormat.format(date);
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return largeTime;
+
+
+    }
 }

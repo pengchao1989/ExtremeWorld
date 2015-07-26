@@ -223,22 +223,6 @@ public class TopicListFragment extends Fragment {
         if(intent != null)
         {
             intent.putExtra("topic", topicDTO);
-
-            if(topicDTO.getVideoDetail() != null)
-            {
-                if(topicDTO.getVideoDetail().getVideoSource()!= null)
-                {
-                    intent.putExtra("videoPath", topicDTO.getVideoDetail().getVideoSource());
-                }
-            }
-
-            MyLog.d(tag, "topicId=" + topicDTO.getId());
-            intent.putExtra("topicId", topicDTO.getId());
-            intent.putExtra("title", topicDTO.getTitle());
-            intent.putExtra("content", topicDTO.getContent());
-            intent.putExtra("createTime", topicDTO.getCreateTime());
-            intent.putExtra("name", topicDTO.getUser().getName());
-            intent.putExtra("avatar", topicDTO.getUser().getAvatar());
             startActivity(intent);
         }
     }

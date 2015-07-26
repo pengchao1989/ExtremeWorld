@@ -82,7 +82,7 @@ public class TopicRestController
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public TopicDTO get(@PathVariable("id") Long id)
+	public MyResponse get(@PathVariable("id") Long id)
 	{
 		Topic topic = topicService.getTopic(id);
 		if(topic == null)
@@ -93,7 +93,23 @@ public class TopicRestController
 		}
 		
 		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);
-		return topicDto;
+		return MyResponse.ok(topicDto);
+	}
+	
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public MyResponse getTopicByUser(@PathVariable("id") Long userId,
+			@RequestParam (value = "type", defaultValue = "all") String type,
+			@RequestParam(value = "taxonomyId", defaultValue = "0") Long taxonomyId,
+			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
+	{
+		Page<Topic> topicPage = topicService.getTopicByUser(userId, pageNumber, pageSize, sortType);
+		
+		MyPage<TopicDTO, Topic> myTopicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPage);
+		
+	
+		return MyResponse.ok(myTopicPage);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)

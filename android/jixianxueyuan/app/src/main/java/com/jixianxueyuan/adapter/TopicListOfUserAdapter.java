@@ -1,7 +1,7 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,31 +11,28 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
-import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.DateTimeFormatter;
-import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.yumfee.emoji.EmojiconTextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-
 /**
- * Created by pengchao on 2015/4/12.
+ * Created by pengchao on 7/21/15.
  */
-public class TopicListAdapter extends BaseAdapter {
+public class TopicListOfUserAdapter extends BaseAdapter {
 
     Context context;
 
@@ -43,8 +40,8 @@ public class TopicListAdapter extends BaseAdapter {
 
     private DisplayImageOptions options;
 
-    public TopicListAdapter(Context context)
-    {
+
+    public TopicListOfUserAdapter(Context context){
         this.context = context;
         topicDTOList = new ArrayList<TopicDTO>();
 
@@ -89,40 +86,26 @@ public class TopicListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder = null;
-        if (convertView == null)
-        {
-            convertView = LayoutInflater.from(context).inflate(R.layout.topic_list_item, parent, false);
+        if (convertView == null) {
+
+            convertView = LayoutInflater.from(context).inflate(R.layout.topic_list_of_user_item,null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }
-        else
-        {
+        } else {
+
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+
         TopicDTO topicDTO = topicDTOList.get(position);
-
-
-        viewHolder.nameTextView.setText(topicDTO.getUser().getName());
         viewHolder.titleTextView.setText(topicDTO.getTitle());
-        String timeAgo = DateTimeFormatter.getTimeAgo(context, topicDTO.getCreateTime());
-        viewHolder.timeTextView.setText(timeAgo);
-        viewHolder.viewCountTextView.setText( String.valueOf(topicDTO.getViewCount()));
-        viewHolder.agreeCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
-        String avatarUrl = topicDTO.getUser().getAvatar();
-        if(Util.isOurServerImage(avatarUrl)){
-            avatarUrl += "!androidListAvatar";
-        }
-        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
-
-        MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
-
-        VideoDetailDTO videoDetailDTO = topicDTO.getVideoDetail();
-
+        //time
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
+        viewHolder.dateTextView.setText(DateTimeFormatter.getLargeTime(topicDTO.getCreateTime()));
 
 
         if(topicDTO.getType() != null && topicDTO.getType().length() > 0)
@@ -153,6 +136,9 @@ public class TopicListAdapter extends BaseAdapter {
                     break;
             }
         }
+
+        MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
+        VideoDetailDTO videoDetailDTO = topicDTO.getVideoDetail();
 
         //多媒体信息
         if(videoDetailDTO != null)
@@ -218,65 +204,40 @@ public class TopicListAdapter extends BaseAdapter {
             }
         }
 
-        viewHolder.avatarImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, UserHomeActivity.class);
-                intent.putExtra("userMinDTO", topicDTOList.get(position).getUser());
-                context.startActivity(intent);
-            }
-        });
 
         return convertView;
     }
 
-
     public static class ViewHolder{
-
-        @InjectView(R.id.topic_list_item_type)
+        @InjectView(R.id.topic_list_of_user_item_date)
+        TextView dateTextView;
+        @InjectView(R.id.topic_list_of_user_item_type)
         ImageView typeImageView;
-        @InjectView(R.id.topic_list_item_title)
+        @InjectView(R.id.topic_list_of_user_item_title)
         EmojiconTextView titleTextView;
-        @InjectView(R.id.topic_list_item_avatar)
-        ImageView avatarImageView;
-
-        @InjectView(R.id.topic_list_item_name)
-        TextView nameTextView;
-
-        @InjectView(R.id.topic_list_item_time)
-        TextView timeTextView;
-
-        @InjectView(R.id.topic_list_item_view_count)
-        TextView viewCountTextView;
-
-        @InjectView(R.id.topic_list_item_agree_count)
-        TextView agreeCountTextView;
-
-        @InjectView(R.id.topic_list_item_image_1)
+        @InjectView(R.id.topic_list_of_user_item_image_1)
         ImageView topicImageView_1;
 
-        @InjectView(R.id.topic_list_item_image_2)
+        @InjectView(R.id.topic_list_of_user_item_image_2)
         ImageView topicImageView_2;
 
-        @InjectView(R.id.topic_list_item_image_3)
+        @InjectView(R.id.topic_list_of_user_item_image_3)
         ImageView topicImageView_3;
 
-        @InjectView(R.id.topic_list_item_image_4)
+        @InjectView(R.id.topic_list_of_user_item_image_4)
         ImageView topicImageView_4;
 
-        @InjectView(R.id.topic_list_item_image_5)
+        @InjectView(R.id.topic_list_of_user_item_image_5)
         ImageView topicImageView_5;
 
-        @InjectView(R.id.topic_list_item_video_front_layout)
+        @InjectView(R.id.topic_list_of_user_item_video_front_layout)
         RelativeLayout videoFrontLayout;
 
-        @InjectView(R.id.topic_list_item_video_front_image)
+        @InjectView(R.id.topic_list_of_user_item_video_front_image)
         ImageView videoFrontImageView;
 
-
-        public ViewHolder(View itemView){
-
-            ButterKnife.inject(this,itemView);
+        public ViewHolder(View view){
+            ButterKnife.inject(this,view);
         }
     }
 }

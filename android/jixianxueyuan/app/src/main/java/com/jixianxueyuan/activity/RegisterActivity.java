@@ -105,7 +105,7 @@ public class RegisterActivity extends Activity {
                     @Override
                     public void onResponse(MyResponse response) {
                         if(response.getStatus() == MyResponse.status_ok){
-                            Toast.makeText(RegisterActivity.this, R.string.register, Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_LONG).show();
                         }
                     }
                 },

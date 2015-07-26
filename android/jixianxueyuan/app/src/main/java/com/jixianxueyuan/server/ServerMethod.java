@@ -28,7 +28,9 @@ public class ServerMethod {
     public static final String baseInfo(){return method_url + "base_info";};
     public static final String account_login() { return method_url + hobby + "account/qqlogin";};
     public static final String account_register () {return method_url + hobby + "account/register";};
+    public static final String user(){return method_url + "user";};
     public static final String topic(){return method_url + hobby + "topic";};
+    public static final String topic_user(){return method_url + hobby + "topic/user/";};
     public static final String video(){return method_url + hobby + "video";};
     public static final String courseTaxonomy() {return method_url + hobby  + "course_taxonomy";};
     public static final String course(){return method_url + hobby + "course/";};

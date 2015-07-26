@@ -55,7 +55,7 @@ public class NearFriendListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public UserMinDTO getItem(int position) {
         return userMinDTOList.get(position);
     }
 

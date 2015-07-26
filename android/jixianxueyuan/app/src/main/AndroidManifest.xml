@@ -76,6 +76,7 @@
         <activity android:name=".activity.CourseDetailActivity"/>
         <activity android:name=".activity.NearFriendActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
+        <activity android:name=".activity.UserHomeActivity"/>
 
 
         <activity
@@ -102,6 +103,7 @@
             android:name=".record.ui.record.VideoPlayerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CameraTheme"></activity>
+
 
         <activity
             android:configChanges="orientation|screenSize"
