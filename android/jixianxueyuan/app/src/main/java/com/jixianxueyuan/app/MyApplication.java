@@ -4,14 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
+import android.widget.Toast;
 
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.callback.InitResultCallback;
+import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.dto.BaseInfoDTO;
-import com.jixianxueyuan.record.service.AssertService;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.Util;
-import com.yixia.camera.VCamera;
-import com.yixia.camera.util.DeviceUtils;
 
 import java.io.File;
 
@@ -29,26 +30,21 @@ public class MyApplication extends Application {
 		super.onCreate();
 		application = this;
 
-		// 设置拍摄视频缓存路径
-		File dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-		if (DeviceUtils.isZte()) {
-			if (dcim.exists()) {
-				VCamera.setVideoCachePath(dcim + "/Camera/VCameraDemo/");
-			} else {
-				VCamera.setVideoCachePath(dcim.getPath().replace("/sdcard/", "/sdcard-ext/") + "/Camera/VCameraDemo/");
-			}
-		} else {
-			VCamera.setVideoCachePath(dcim + "/Camera/VCameraDemo/");
-		}
-		// 开启log输出,ffmpeg输出到logcat
-		VCamera.setDebugMode(true);
-		// 初始化拍摄SDK，必须
-		VCamera.initialize(this);
+        AlibabaSDK.asyncInit(this, new InitResultCallback() {
 
-		//解压assert里面的文件
-		startService(new Intent(this, AssertService.class));
+            @Override
+            public void onSuccess() {
+                Toast.makeText(MyApplication.this, "初始化成功", Toast.LENGTH_SHORT)
+                        .show();
+            }
 
+            @Override
+            public void onFailure(int code, String message) {
+                Toast.makeText(MyApplication.this, "初始化异常", Toast.LENGTH_SHORT)
+                        .show();
+            }
 
+        });
 
         //设置app rest api的hobby值
         currentHobby = Util.getApplicationMetaString(this, "HOBBY");

@@ -33,7 +33,6 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.http.MyPageRequest;
-import com.jixianxueyuan.record.ui.record.MediaRecorderActivity;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.LoadMoreView;
@@ -148,8 +147,8 @@ public class TopicListFragment extends Fragment {
                         startActivity(intent2);
                         break;
                     case TopicType.S_VIDEO:
-                        Intent intent3 = new Intent(TopicListFragment.this.getActivity(), MediaRecorderActivity.class);
-                        startActivity(intent3);
+                        //Intent intent3 = new Intent(TopicListFragment.this.getActivity(), MediaRecorderActivity.class);
+                        //startActivity(intent3);
                         break;
 
                     case TopicType.VIDEO:
@@ -241,8 +240,8 @@ public class TopicListFragment extends Fragment {
     @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
     {
         hideAddLayout();
-        Intent intent = new Intent(this.getActivity(), MediaRecorderActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this.getActivity(), MediaRecorderActivity.class);
+        //startActivity(intent);
     }
 
     private void refreshTopicList()

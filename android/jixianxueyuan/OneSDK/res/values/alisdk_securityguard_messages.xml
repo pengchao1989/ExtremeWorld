@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="alisdk_message_701_message">获取图片文件时的 APK 签名和当前程序的 APK 签名不一致</string>
+    <string name="alisdk_message_701_action">使用同一 Keystore 签名的 Apk 在 SDK 下载页面重新下载 SDK</string>
+    <string name="alisdk_message_701_type">E</string>
+    <string name="alisdk_message_702_message">没有找到图片文件，请确保图片文件 yw_1222{0}.jpg 在 res\\drawable 目录下</string>
+    <string name="alisdk_message_702_action">如果使用项目依赖方式使用 SDK，请检查所依赖的 SDK 项目中 res\\drawable 是否存在图片文件，如果是将 SDK 拷贝至当前开发应用中，请检查是否漏拷贝</string>
+    <string name="alisdk_message_702_type">E</string>
+    <string name="alisdk_message_703_message">SDK 中图片文件 (res\\drawable\\yw_1222.jpg) 的内容不正确</string>
+    <string name="alisdk_message_703_action">使用同一 Keystore 签名的 Apk 在 SDK 下载页面重新下载 SDK</string>
+    <string name="alisdk_message_703_type">E</string>
+    <string name="alisdk_message_704_message">在 APK 中找不到对应的 libsecurityguard***.so 文件或者 so 文件载入出错</string>
+    <string name="alisdk_message_704_action">如果使用项目依赖方式使用 SDK，请检查所依赖的 SDK 项目中 libs 目录下 securityguard***.jar 和 armeabi/armeabi-v7a/x86 下 securityguard***.so 是否存在，大小正常并版本是否一致，如果是将 SDK 拷贝至当前开发应用中，请在当前应用中检查。如文件存在，请检查 IDE 设置，例如 Android Studio 项目的 build.gradle 中 jniLibs.srcDirs</string>
+    <string name="alisdk_message_704_type">E</string>
+    <string name="alisdk_message_10016_message">安全模块初始化失败，错误消息为 {0}</string>
+    <string name="alisdk_message_10016_action">请在开发环境中运行应用，检查 logcat 输出的异常信息</string>
+    <string name="alisdk_message_10016_type">E</string>
+
+</resources>

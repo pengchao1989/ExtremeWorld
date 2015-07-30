@@ -22,7 +22,6 @@ import com.jixianxueyuan.dto.CourseTaxonomysResponseDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
-import com.liuguangqiang.swipeback.SwipeBackLayout;
 
 import java.util.List;
 

@@ -77,34 +77,6 @@
         <activity android:name=".activity.NearFriendActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.UserHomeActivity"/>
-
-
-        <activity
-            android:name=".record.ui.record.MediaRecorderActivity"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/CameraTheme">
-        </activity>
-
-        <activity
-            android:name=".record.ui.record.MediaPreviewActivity"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/CameraTheme"></activity>
-        <activity
-            android:name=".record.ui.record.ImportVideoActivity"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/CameraTheme"></activity>
-        <activity
-            android:name=".record.ui.record.VideoPlayerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CameraTheme"></activity>
-
-
         <activity
             android:configChanges="orientation|screenSize"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
-import com.liuguangqiang.swipeback.SwipeBackLayout;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -16,8 +15,6 @@ import butterknife.InjectView;
  */
 public class DiscussionDetailActivity extends Activity{
 
-    @InjectView(R.id.discussion_detail_swipeback_layout)
-    SwipeBackLayout swipeBackLayout;
     @InjectView(R.id.discussion_detail_title)TextView titleTextView;
     @InjectView(R.id.discussion_detail_content)TextView contentTextView;
 
@@ -39,7 +36,5 @@ public class DiscussionDetailActivity extends Activity{
 
         titleTextView.setText(title);
         contentTextView.setText(content);
-
-        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
     }
 }
