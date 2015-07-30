@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <me.amiee.nicetab.NiceTabLayout
+        android:id="@+id/discuss_home_activity_pager_title_strip"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="?colorPrimary"
+        app:ntlDividerPaddingLeft="8dp"
+        app:ntlDividerPaddingRight="8dp"
+        app:ntlIndicatorHeight="2dp"
+        app:ntlOverlayColor="#aa1a237e"
+        app:ntlTabMode="both"
+        app:ntlTextSize="20sp"
+        app:ntlTextStyle="normal"
+        app:ntlUnderlineHeight="1dp"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/discuss_home_activity_pager"
         android:layout_width="match_parent"
@@ -20,17 +35,6 @@
         This title strip will display the currently visible page title, as well as the page
         titles for adjacent pages.
         -->
-
-        <android.support.v4.view.PagerTitleStrip
-            android:id="@+id/discuss_home_activity_pager_title_strip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="#33b5e5"
-            android:paddingBottom="4dp"
-            android:paddingTop="4dp"
-            android:textColor="#fff" />
-
     </android.support.v4.view.ViewPager>
 
 </LinearLayout>

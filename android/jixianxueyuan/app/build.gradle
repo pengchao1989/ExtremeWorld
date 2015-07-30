@@ -73,7 +73,8 @@ dependencies {
     compile 'com.romainpiel.shimmer:library:1.4.0'
     compile 'com.github.ctiao:dfm:0.3.1'
     compile 'com.github.liuguangqiang.swipeback:library:0.3.0@aar'
-    compile (name:'pagerslidingtabstrip-1.6.0', ext:'aar')
+    compile(name: 'pagerslidingtabstrip-1.6.0', ext: 'aar')
+    compile 'me.amiee:nicetab:1.0.0'
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile 'com.qiniu:qiniu-android-sdk:7.0.+'
     compile 'com.github.ksoichiro:android-observablescrollview:1.5.2'
@@ -87,4 +88,5 @@ dependencies {
     compile files('libs/locSDK_3.3.jar')
     compile files('libs/jsoup-1.8.2.jar')
     compile files('libs/jpush-sdk-release1.7.5.jar')
+    compile files('libs/renderscript-v8.jar')
 }
