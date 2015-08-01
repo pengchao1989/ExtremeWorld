@@ -1,1 +1,1 @@
-include ':app', ':emoji', ':multi-image-selector', ':qupaisdk', ':OneSDK'
+include ':app', ':emoji', ':multi-image-selector', ':qupaisdk'

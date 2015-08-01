@@ -7,8 +7,8 @@ import android.os.Environment;
 import android.widget.Toast;
 
 
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.callback.InitResultCallback;
+/*import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.callback.InitResultCallback;*/
 import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.server.ServerMethod;
@@ -30,7 +30,7 @@ public class MyApplication extends Application {
 		super.onCreate();
 		application = this;
 
-        AlibabaSDK.turnOnDebug();
+/*        AlibabaSDK.turnOnDebug();
         AlibabaSDK.asyncInit(this, new InitResultCallback() {
 
             @Override
@@ -45,7 +45,7 @@ public class MyApplication extends Application {
                         .show();
             }
 
-        });
+        });*/
 
         //设置app rest api的hobby值
         currentHobby = Util.getApplicationMetaString(this, "HOBBY");
