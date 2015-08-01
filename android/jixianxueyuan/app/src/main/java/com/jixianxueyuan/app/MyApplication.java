@@ -30,6 +30,7 @@ public class MyApplication extends Application {
 		super.onCreate();
 		application = this;
 
+        AlibabaSDK.turnOnDebug();
         AlibabaSDK.asyncInit(this, new InitResultCallback() {
 
             @Override

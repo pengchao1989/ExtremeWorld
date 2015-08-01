@@ -16,12 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.system.RequestCode;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.duanqu.qupai.sdk.android.QupaiService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
@@ -37,6 +40,7 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.LoadMoreView;
 import com.melnykov.fab.FloatingActionButton;
+import com.alibaba.sdk.android.callback.FailureCallback;
 
 import java.util.List;
 
@@ -242,6 +246,17 @@ public class TopicListFragment extends Fragment {
         hideAddLayout();
         //Intent intent = new Intent(this.getActivity(), MediaRecorderActivity.class);
         //startActivity(intent);
+        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
+
+        qupaiService.initRecord( 8.0, 2000 * 1000, null, true,null,2);
+
+        qupaiService.showRecordPage(TopicListFragment.this.getActivity(), 123, true,
+                new FailureCallback() {
+                    @Override
+                    public void onFailure(int i, String s) {
+                        Toast.makeText(TopicListFragment.this.getActivity(), "onFailure:"+ s + "CODE"+ i, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void refreshTopicList()
