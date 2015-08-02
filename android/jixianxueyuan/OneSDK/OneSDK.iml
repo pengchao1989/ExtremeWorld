@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":qupaisdk" />
+        <option name="GRADLE_PROJECT_PATH" value=":OneSDK" />
       </configuration>
     </facet>
     <facet type="android" name="Android">
@@ -16,9 +16,7 @@
         <option name="SOURCE_GEN_TASK_NAME" value="generateDebugSources" />
         <option name="TEST_SOURCE_GEN_TASK_NAME" value="generateDebugAndroidTestSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
-        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
-        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
         <option name="LIBRARY_PROJECT" value="true" />
       </configuration>
@@ -48,11 +46,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
@@ -86,30 +84,19 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="jackson-core-2.4.4" level="project" />
-    <orderEntry type="library" exported="" name="guava-18.0" level="project" />
-    <orderEntry type="library" exported="" name="jcip-annotations-1.0" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="Qupai-Common" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="qupai-Engine.UI" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="dagger-2.0.1" level="project" />
-    <orderEntry type="library" exported="" name="javax.inject-1" level="project" />
-    <orderEntry type="library" exported="" name="jsr305-3.0.0" level="project" />
-    <orderEntry type="library" exported="" name="jackson-databind-2.4.4" level="project" />
-    <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="qupai-Recorder" level="project" />
-    <orderEntry type="library" exported="" name="qupai-Engine" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v13-22.0.0" level="project" />
-    <orderEntry type="library" exported="" name="jsr250-api-1.0" level="project" />
-    <orderEntry type="library" exported="" name="jackson-annotations-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="qupai-Sdk" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="mockito-core-1.10.19" level="project" />
-    <orderEntry type="library" exported="" name="QupaiResource" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="objenesis-2.1" level="project" />
+    <orderEntry type="library" exported="" name="mediaservice-4.0.4" level="project" />
+    <orderEntry type="library" exported="" name="alisdk-kernel-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="alisdk-ut-3" level="project" />
+    <orderEntry type="library" exported="" name="rpc-core-1.0_06101606" level="project" />
+    <orderEntry type="library" exported="" name="utdid4all-1.0.4" level="project" />
+    <orderEntry type="library" exported="" name="alisdk-security-2" level="project" />
+    <orderEntry type="library" exported="" name="securityguard-1.5.32" level="project" />
+    <orderEntry type="library" exported="" name="alisdk-hotpatch-1" level="project" />
+    <orderEntry type="library" exported="" name="UTMini-4.3.8" level="project" />
+    <orderEntry type="library" exported="" name="session-sdk-0.9.3_06011037" level="project" />
+    <orderEntry type="library" exported="" name="sdk-legacy-support-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="alisdk-system-8" level="project" />
+    <orderEntry type="library" exported="" name="rpc-sdk-0.9.3_07221616" level="project" />
   </component>
 </module>
 

@@ -26,23 +26,24 @@ import java.util.List;
 /**
  * Created by pengchao on 8/1/15.
  */
-public class QiNiuPictureUpload {
+public class QiNiuImageUpload {
 
     Context context;
     UploadToken pictureUploadToken = null;
-    QiniuUploadListener listener = null;
-    List<String> imagePath;
-    LinkedHashMap<String,String> serverImagePathMap = null;
+    QiNiuImageUploadListener listener = null;
+    List<String> imagePathList;
+    LinkedHashMap<String,String> serverImagePathMap;
 
     int imagePathUploadIndex = 0;
 
-    public QiNiuPictureUpload(Context context){
+    public QiNiuImageUpload(Context context){
         this.context = context;
     }
 
-    public void upload(List<String> imagePath, QiniuUploadListener listener){
+    public void upload(List<String> imagePath, QiNiuImageUploadListener listener){
         this.listener = listener;
-        this.imagePath = imagePath;
+        this.imagePathList = imagePath;
+        serverImagePathMap = new LinkedHashMap<String,String>();
         requestPictureToken();
     }
 
@@ -81,7 +82,7 @@ public class QiNiuPictureUpload {
 
         MyLog.d("CreateTopicActivity","upLoadImage path index=" + imagePathUploadIndex);
 
-        uploadManager.put(imagePath.get(imagePathUploadIndex), Util.getDateKey(), pictureUploadToken.getUptoken(),
+        uploadManager.put(imagePathList.get(imagePathUploadIndex), Util.getDateKey(), pictureUploadToken.getUptoken(),
                 new UpCompletionHandler() {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject response) {
@@ -89,9 +90,9 @@ public class QiNiuPictureUpload {
                         MyLog.d("", "key=" + key);
 
 
-                        serverImagePathMap.put(imagePath.get(imagePathUploadIndex), key);
+                        serverImagePathMap.put(imagePathList.get(imagePathUploadIndex), key);
 
-                        if(imagePathUploadIndex < imagePath.size() - 1)
+                        if(imagePathUploadIndex < imagePathList.size() - 1)
                         {
                             imagePathUploadIndex++;
                             upLoadImage();
@@ -99,6 +100,9 @@ public class QiNiuPictureUpload {
                         else
                         {
                             //全部上传完成
+                            if(listener != null){
+                                listener.onUploadComplete(serverImagePathMap);
+                            }
                         }
 
                     }

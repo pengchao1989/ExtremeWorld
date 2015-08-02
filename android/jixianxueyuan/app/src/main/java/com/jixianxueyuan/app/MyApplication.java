@@ -4,11 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
+import android.support.multidex.MultiDex;
 import android.widget.Toast;
 
 
-/*import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.callback.InitResultCallback;*/
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.server.ServerMethod;
@@ -25,12 +26,18 @@ public class MyApplication extends Application {
     Mine mine;
     String currentHobby;
 
-	@Override
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    @Override
 	public void onCreate() {
 		super.onCreate();
 		application = this;
 
-/*        AlibabaSDK.turnOnDebug();
+        AlibabaSDK.turnOnDebug();
         AlibabaSDK.asyncInit(this, new InitResultCallback() {
 
             @Override
@@ -45,7 +52,7 @@ public class MyApplication extends Application {
                         .show();
             }
 
-        });*/
+        });
 
         //设置app rest api的hobby值
         currentHobby = Util.getApplicationMetaString(this, "HOBBY");

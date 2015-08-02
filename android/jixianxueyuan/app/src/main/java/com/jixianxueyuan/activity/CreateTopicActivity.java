@@ -33,6 +33,11 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.util.qiniu.QiNiuImageUpload;
+import com.jixianxueyuan.util.qiniu.QiNiuImageUploadListener;
+import com.jixianxueyuan.util.qiniu.QiNiuVideoUpload;
+import com.jixianxueyuan.util.qiniu.QiNiuVideoUploadListener;
+import com.jixianxueyuan.util.qiniu.VideoUploadResult;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.NewEditWidget;
 import com.jixianxueyuan.widget.NewEditWidgetListener;
@@ -82,10 +87,10 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     List<String> localImagePathList = null;
     LinkedHashMap<String,String> serverImagePathMap = null;
-    static int imagePathUploadIndex = 0;
 
-    UploadToken videoUploadToken = null;
-    UploadToken pictureUploadToken = null;
+    List<String> localVideoPathList = null;
+    LinkedHashMap<String,VideoUploadResult> serverVideoPathMap = null;
+
 
     TopicDTO topicDTO;
     VideoDetailDTO videoDetailDTO;
@@ -176,14 +181,59 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     private void submitVideo()
     {
-        requestVideoToken();
+        QiNiuVideoUpload qiNiuVideoUpload = new QiNiuVideoUpload(this);
+        qiNiuVideoUpload.upload(localVideoPathList, new QiNiuVideoUploadListener() {
+            @Override
+            public void onUploading() {
+
+            }
+
+            @Override
+            public void onUploadFailed() {
+
+            }
+
+            @Override
+            public void onUploadComplete(LinkedHashMap<String, VideoUploadResult> result) {
+
+            }
+
+            @Override
+            public void onUploadCancelled() {
+
+            }
+        });
     }
 
     private void submitImage()
     {
+        QiNiuImageUpload qiNiuPictureUpload = new QiNiuImageUpload(this);
+        qiNiuPictureUpload.upload(localImagePathList, new QiNiuImageUploadListener() {
+            @Override
+            public void onUploading() {
 
-        serverImagePathMap = new LinkedHashMap<String,String>();
-        requestPictureToken();
+            }
+
+            @Override
+            public void onUploadFailed() {
+
+            }
+
+            @Override
+            public void onUploadComplete(LinkedHashMap<String, String> result) {
+                serverImagePathMap = result;
+                if(serverImagePathMap != null){
+                    submitContent();
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onUploadCancelled() {
+
+            }
+        });
     }
 
     private void submitContent()
@@ -218,133 +268,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     }
 
 
-    private void requestVideoToken()
-    {
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        StringRequest stringRequest = new StringRequest(ServerMethod.videoUploadToken, new Response.Listener<String>(){
-
-            @Override
-            public void onResponse(String response) {
-
-                Gson gson = new Gson();
-                videoUploadToken = gson.fromJson(response, UploadToken.class);
-
-                MyLog.d("CreateShortVideoActivity", "path=" + videoPath);
-
-                upLoadVideo();
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", error.getMessage(), error);
-            }
-        });
-
-        queue.add(stringRequest);
-    }
-
-    private void requestPictureToken()
-    {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(ServerMethod.imgUploadToken, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                Gson gson = new Gson();
-
-                pictureUploadToken = gson.fromJson(response, UploadToken.class);
-
-                MyLog.d("CreateTopicActivity","pictureUploadToken=" + pictureUploadToken);
-
-               upLoadImage();
-            }
-        },
-                new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        queue.add(stringRequest);
-    }
-
-    private void upLoadVideo()
-    {
-        UploadManager uploadManager = new UploadManager();
-
-        roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
-
-        uploadManager.put(videoPath, Util.getUUID(), videoUploadToken.getUptoken(),
-                new UpCompletionHandler() {
-                    @Override
-                    public void complete(String key, ResponseInfo info, JSONObject response) {
-                        MyLog.i("qiniu", info.path);
-                        MyLog.i("qiniu", key);
-
-                        videoDetailDTO = new VideoDetailDTO();
-                        videoDetailDTO.setVideoSource(StaticResourceConfig.VIDEO_DOMAIN + key);
-                        videoDetailDTO.setThumbnail(StaticResourceConfig.VIDEO_DOMAIN + videoUploadToken.getMyParam());
-
-
-                        Toast.makeText(CreateTopicActivity.this,"视频上传成功", Toast.LENGTH_LONG).show();
-
-                        roundProgressBarWidthNumber.setVisibility(View.GONE);
-
-                        //
-                        submitContent();
-                    }
-                }, new UploadOptions(null, null, false,
-                        new UpProgressHandler(){
-                            public void progress(String key, double percent)
-                            {
-
-                                Log.i("qiniu", key + ": " + percent);
-                                roundProgressBarWidthNumber.setProgress( (int)(percent * 100) );
-                            }
-                        }, null));
-    }
-
-    private void upLoadImage()
-    {
-        UploadManager uploadManager = new UploadManager();
-
-
-        MyLog.d("CreateTopicActivity","upLoadImage path index=" + imagePathUploadIndex);
-
-        uploadManager.put(localImagePathList.get(imagePathUploadIndex), Util.getDateKey(), pictureUploadToken.getUptoken(),
-                new UpCompletionHandler() {
-                    @Override
-                    public void complete(String key, ResponseInfo info, JSONObject response) {
-
-                        MyLog.d("", "key=" + key);
-
-
-                        serverImagePathMap.put(localImagePathList.get(imagePathUploadIndex), key);
-
-                        if(imagePathUploadIndex < localImagePathList.size() - 1)
-                        {
-                            imagePathUploadIndex++;
-                            upLoadImage();
-                        }
-                        else
-                        {
-                            submitContent();
-                        }
-
-                    }
-                },
-                new UploadOptions(null,null,false,new UpProgressHandler() {
-                    @Override
-                    public void progress(String key, double percent) {
-
-                    }
-                },null)
-                );
-    }
 
     private void buildTopicParam()
     {
