@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.AlibabaSDK;
@@ -65,6 +66,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +88,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     @InjectView(R.id.create_topic_title)EditText titleEditText;
     @InjectView(R.id.create_edit_widget_layout)
     LinearLayout editWidgetLayout;
+    @InjectView(R.id.create_topic_video_thumble_layout)
+    RelativeLayout videoThumbleLayout;
     @InjectView(R.id.create_topic_video_thumble_imageview)
     ImageView videoThumbleImage;
     @InjectView(R.id.create_short_video_progress)
@@ -108,6 +112,10 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     TopicDTO topicDTO;
     VideoDetailDTO videoDetailDTO;
+
+
+    boolean isUploadedImage = false;
+    boolean isUploadedVideo = false;
 
     @Override
     public void onCreate(Bundle savedInstanceStated)
@@ -170,15 +178,16 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
         localImagePathList = contentEditWidget.getLocalImagePathList();
 
-        //若存在视频则走视频上传链
-        if(videoPath != null)
-        {
-            submitVideo();
-        }
+
         //若不存在视频但存在图片，则走图片上传链
-        else if(localImagePathList != null && localImagePathList.size() > 0)
+        if(localImagePathList != null && localImagePathList.size() > 0)
         {
             submitImage();
+        }
+        //若存在视频则走视频上传链
+        else if(localVideoPathList != null && localVideoPathList.size() > 0)
+        {
+            submitVideo();
         }
         //若既不存在视频也不存在图片，则直接上传内容
         else
@@ -205,7 +214,17 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
             @Override
             public void onUploadComplete(LinkedHashMap<String, VideoUploadResult> result) {
+                VideoUploadResult videoUploadResult = result.get(videoPath);
+                videoDetailDTO = new VideoDetailDTO();
+                videoDetailDTO.setVideoSource(videoUploadResult.getUrl());
+                videoDetailDTO.setThumbnail(videoUploadResult.getThumbnailUrl());
 
+                isUploadedVideo = true;
+                if(localImagePathList != null && localImagePathList.size() > 0 && isUploadedImage == false){
+                    submitImage();
+                }else {
+                    submitContent();
+                }
             }
 
             @Override
@@ -233,7 +252,13 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
             public void onUploadComplete(LinkedHashMap<String, String> result) {
                 serverImagePathMap = result;
                 if(serverImagePathMap != null){
-                    submitContent();
+                    isUploadedImage = true;
+                    if(videoPath != null && isUploadedVideo == false){
+                        submitVideo();
+                    }else {
+                        submitContent();
+                    }
+
                 }else {
 
                 }
@@ -418,11 +443,9 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                         @Override
                         public void onSuccess() {
                             Toast.makeText(CreateTopicActivity.this, "视频录制成功", Toast.LENGTH_LONG).show();
-
-                            ImageLoader imageLoader = ImageLoader.getInstance();
-                            //Uri uri = Uri.fromFile(new File(thumblePath));
-                            imageLoader.displayImage("file://" + thumblePath, videoThumbleImage);
-
+                            showVideoThumble();
+                            localVideoPathList = new LinkedList<String>();
+                            localVideoPathList.add(videoPath);
                         }
 
                         @Override
@@ -436,5 +459,19 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                 }
                 break;
         }
+    }
+
+    private void showVideoThumble(){
+
+        videoThumbleLayout.setVisibility(View.VISIBLE);
+
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        //Uri uri = Uri.fromFile(new File(thumblePath));
+        imageLoader.displayImage("file://" + thumblePath, videoThumbleImage);
+    }
+
+    private void hideVideoThumble(){
+        videoThumbleLayout.setVisibility(View.VISIBLE);
     }
 }

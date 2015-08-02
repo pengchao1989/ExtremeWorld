@@ -40,10 +40,29 @@
                 android:orientation="vertical"
                 />
 
-            <ImageView
-                android:id="@+id/create_topic_video_thumble_imageview"
+            <RelativeLayout
+                android:id="@+id/create_topic_video_thumble_layout"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:id="@+id/create_topic_video_thumble_imageview"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/zeus_player_play"
+                    android:layout_centerInParent="true"
+                    />
+
+             </RelativeLayout>
+
+
 
 
         </LinearLayout>
