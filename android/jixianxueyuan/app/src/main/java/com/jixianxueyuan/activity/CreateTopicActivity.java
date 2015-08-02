@@ -4,24 +4,31 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.callback.FailureCallback;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.duanqu.qupai.sdk.android.QupaiService;
+import com.duanqu.qupai.sdk.callback.SaveFileCallback;
 import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.VideoRecordConfig;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -43,14 +50,18 @@ import com.jixianxueyuan.widget.NewEditWidget;
 import com.jixianxueyuan.widget.NewEditWidgetListener;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -68,13 +79,15 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     public static final String tag = CreateTopicActivity.class.getSimpleName();
 
+    public static final int REQUEST_IMAGE_CODE = 1;
+    public static final int REQUEST_VIDEO_CODE = 2;
 
     @InjectView(R.id.create_topic_actionbar)MyActionBar myActionBar;
     @InjectView(R.id.create_topic_title)EditText titleEditText;
     @InjectView(R.id.create_edit_widget_layout)
     LinearLayout editWidgetLayout;
-    @InjectView(R.id.create_topic_image_gridview)
-    NoScorllBarGridView imageGridView;
+    @InjectView(R.id.create_topic_video_thumble_imageview)
+    ImageView videoThumbleImage;
     @InjectView(R.id.create_short_video_progress)
     RoundProgressBarWidthNumber roundProgressBarWidthNumber;
 
@@ -84,6 +97,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     String topicTaxonomyId = null;
     String topicTaxonomyName = null;
     String videoPath = null;
+    String thumblePath = null;
 
     List<String> localImagePathList = null;
     LinkedHashMap<String,String> serverImagePathMap = null;
@@ -103,8 +117,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
         ButterKnife.inject(this);
 
-        initExtra();
-
         myActionBar.setActionOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +128,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         contentEditWidget = new NewEditWidget(this, editWidgetLayout);
 
         contentEditWidget.setNewEditWidgetListener(this);
+
+        initExtra();
 
     }
 
@@ -129,11 +143,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
             topicTaxonomyId = bundle.getString("topicTaxonomyId");
             topicTaxonomyName = bundle.getString("topicTaxonomyName");
 
-            if(topicType.equals(TopicType.S_VIDEO))
-            {
-                videoPath = bundle.getString("videoPath");
-            }
-
             switch (topicType)
             {
                 case TopicType.MOOD:
@@ -144,6 +153,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     break;
                 case TopicType.S_VIDEO:
                     myActionBar.setTitle("发布短视频");
+                    startVideoRecord();
                     break;
                 case TopicType.NEWS:
                     myActionBar.setTitle("发布新闻");
@@ -345,8 +355,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
         MyLog.d("CreateTopicActivity", "resultString=" + str);
         return str;
-
-
     }
 
     @Override
@@ -363,50 +371,70 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
 
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, REQUEST_IMAGE_CODE);
 
+    }
+
+    @Override
+    public void onVideo() {
+        startVideoRecord();
+    }
+
+    private void startVideoRecord(){
+        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
+
+        qupaiService.initRecord(VideoRecordConfig.DEFAULT_DURATION_LIMIT, VideoRecordConfig.DEFAULT_BITRATE, null, true,null,2);
+
+        qupaiService.showRecordPage(this, REQUEST_VIDEO_CODE, true,
+                new FailureCallback() {
+                    @Override
+                    public void onFailure(int i, String s) {
+                        Toast.makeText(CreateTopicActivity.this, "onFailure:"+ s + "CODE"+ i, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
-            if(resultCode == RESULT_OK){
-                // Get the result list of select image paths
-                List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-                // do your logic ....
-                for(String p : path)
-                {
-                    MyLog.d(tag, "videoPath=" + p);
-                    contentEditWidget.insertImg(p);
+        switch (requestCode) {
+            case REQUEST_IMAGE_CODE:
+                if (resultCode == RESULT_OK) {
+                    // Get the result list of select image paths
+                    List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                    // do your logic ....
+                    for (String p : path) {
+                        MyLog.d(tag, "imgPath=" + p);
+                        contentEditWidget.insertImg(p);
+                    }
                 }
-            }
+                break;
+            case REQUEST_VIDEO_CODE:
+                if (resultCode == RESULT_OK) {
+                    QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
+                    videoPath = VideoRecordConfig.VIDEOPATH(this);
+                    thumblePath = VideoRecordConfig.THUMBPATH(this);
+                    qupaiService.copyVideoFile(data, videoPath, thumblePath, new SaveFileCallback() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(CreateTopicActivity.this, "视频录制成功", Toast.LENGTH_LONG).show();
+
+                            ImageLoader imageLoader = ImageLoader.getInstance();
+                            //Uri uri = Uri.fromFile(new File(thumblePath));
+                            imageLoader.displayImage("file://" + thumblePath, videoThumbleImage);
+
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            Toast.makeText(CreateTopicActivity.this, "视频录制失败", Toast.LENGTH_LONG).show();
+                            videoPath = null;
+                            thumblePath = null;
+                        }
+
+                    });
+                }
+                break;
         }
-    }
-
-
-
-
-    /**
-     * 获取视频的缩略图
-     * 先通过ThumbnailUtils来创建一个视频的缩略图，然后再利用ThumbnailUtils来生成指定大小的缩略图。
-     * 如果想要的缩略图的宽和高都小于MICRO_KIND，则类型要使用MICRO_KIND作为kind的值，这样会节省内存。
-     * @param videoPath 视频的路径
-     * @param width 指定输出视频缩略图的宽度
-     * @param height 指定输出视频缩略图的高度度
-     * @param kind 参照MediaStore.Images.Thumbnails类中的常量MINI_KIND和MICRO_KIND。
-     *            其中，MINI_KIND: 512 x 384，MICRO_KIND: 96 x 96
-     * @return 指定大小的视频缩略图
-     */
-    private Bitmap getVideoThumbnail(String videoPath, int width, int height,
-                                     int kind) {
-        Bitmap bitmap = null;
-        // 获取视频的缩略图
-        bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
-        System.out.println("w"+bitmap.getWidth());
-        System.out.println("h"+bitmap.getHeight());
-        bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
-                ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
-        return bitmap;
     }
 }

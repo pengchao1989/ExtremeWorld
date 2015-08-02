@@ -563,7 +563,6 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                     {
                         editor.commit();
 
-
                     } else
                     {
                         editor.abort();

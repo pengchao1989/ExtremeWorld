@@ -244,19 +244,9 @@ public class TopicListFragment extends Fragment {
     @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
     {
         hideAddLayout();
-        //Intent intent = new Intent(this.getActivity(), MediaRecorderActivity.class);
-        //startActivity(intent);
-        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
-
-        qupaiService.initRecord( 8.0, 2000 * 1000, null, true,null,2);
-
-        qupaiService.showRecordPage(TopicListFragment.this.getActivity(), 123, true,
-                new FailureCallback() {
-                    @Override
-                    public void onFailure(int i, String s) {
-                        Toast.makeText(TopicListFragment.this.getActivity(), "onFailure:"+ s + "CODE"+ i, Toast.LENGTH_LONG).show();
-                    }
-                });
+        Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
+        intent.putExtra(TopicType.STRING, TopicType.S_VIDEO);
+        startActivity(intent);
     }
 
     private void refreshTopicList()

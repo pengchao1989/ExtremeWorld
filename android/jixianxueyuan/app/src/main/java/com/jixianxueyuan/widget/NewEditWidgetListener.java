@@ -6,4 +6,5 @@ package com.jixianxueyuan.widget;
 public interface NewEditWidgetListener {
 
     void onImage();
+    void onVideo();
 }

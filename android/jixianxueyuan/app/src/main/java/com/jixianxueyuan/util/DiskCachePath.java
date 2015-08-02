@@ -7,6 +7,7 @@ import java.io.File;
 
 /**
  * Created by pengchao on 5/26/15.
+ * 目录为SDCard/Android/data/包名/cache/uniqueName
  */
 public class DiskCachePath {
 
@@ -19,6 +20,10 @@ public class DiskCachePath {
         } else {
             cachePath = context.getCacheDir().getPath();
         }
-        return new File(cachePath + File.separator + uniqueName);
+        File dir = new File(cachePath + File.separator + uniqueName);
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        return dir;
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +20,7 @@ import android.widget.PopupWindow;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.util.MyLog;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.picasso.Picasso;
 import com.yumfee.emoji.EmojiconEditText;
 import com.yumfee.emoji.EmojiconGridView;
@@ -48,6 +50,7 @@ public class NewEditWidget {
 
     ImageView emojiButton;
     ImageView imgButton;
+    ImageView videoButton;
     EmojiconEditText emojiconEditText;
 
 
@@ -86,6 +89,7 @@ public class NewEditWidget {
 
         emojiButton = (ImageView) view.findViewById(R.id.new_edit_widget_emoji_button);
         imgButton = (ImageView) view.findViewById(R.id.new_edit_widget_img_button);
+        videoButton = (ImageView) view.findViewById(R.id.new_edit_widget_video_button);
         emojiconEditText = (EmojiconEditText) view.findViewById(R.id.reply_widget_edittext);
         final View rootView = view.findViewById(R.id.reply_widget_root_view);
 
@@ -196,6 +200,15 @@ public class NewEditWidget {
             }
         });
 
+        videoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(newEditWidgetListener != null){
+                    newEditWidgetListener.onVideo();
+                }
+            }
+        });
+
 
         contentContainer.addView(view);
 
@@ -298,8 +311,6 @@ public class NewEditWidget {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
 
                     return drawable;
 

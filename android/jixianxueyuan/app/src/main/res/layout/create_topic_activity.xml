@@ -40,11 +40,10 @@
                 android:orientation="vertical"
                 />
 
-            <com.jixianxueyuan.widget.NoScorllBarGridView
-                android:id="@+id/create_topic_image_gridview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+            <ImageView
+                android:id="@+id/create_topic_video_thumble_imageview"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
 
         </LinearLayout>
