@@ -110,7 +110,9 @@ public class QiNiuImageUpload {
                 new UploadOptions(null,null,false,new UpProgressHandler() {
                     @Override
                     public void progress(String key, double percent) {
-
+                        if(listener != null){
+                            listener.onUploading(imagePathUploadIndex, key, percent);
+                        }
                     }
                 },null)
         );

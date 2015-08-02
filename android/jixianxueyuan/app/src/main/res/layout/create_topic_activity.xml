@@ -6,76 +6,123 @@
     android:layout_height="match_parent"
     >
 
-    <com.jixianxueyuan.widget.MyActionBar
-        android:id="@+id/create_topic_actionbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        my:type="submit"
-        />
 
-    <RelativeLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/MainContainer"
-        android:background="@color/white"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
 
-            <EditText
-                android:id="@+id/create_topic_title"
+            <com.jixianxueyuan.widget.MyActionBar
+                android:id="@+id/create_topic_actionbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/title"
+                my:type="submit"
                 />
 
-            <LinearLayout
-                android:id="@+id/create_edit_widget_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                />
 
             <RelativeLayout
-                android:id="@+id/create_topic_video_thumble_layout"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/MainContainer"
+                android:background="@color/white"
                 >
 
-                <ImageView
-                    android:id="@+id/create_topic_video_thumble_imageview"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/zeus_player_play"
-                    android:layout_centerInParent="true"
-                    />
+                    android:orientation="vertical"
+                    >
 
-             </RelativeLayout>
+                    <EditText
+                        android:id="@+id/create_topic_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/title"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/create_edit_widget_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/create_topic_video_thumble_layout"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:visibility="gone"
+                        >
+
+                        <ImageView
+                            android:id="@+id/create_topic_video_thumble_imageview"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/zeus_player_play"
+                            android:layout_centerInParent="true"
+                            />
+
+                    </RelativeLayout>
 
 
 
+
+                </LinearLayout>
+
+
+
+
+
+            </RelativeLayout>
 
         </LinearLayout>
 
-        <com.jixianxueyuan.widget.RoundProgressBarWidthNumber
-            android:id="@+id/create_short_video_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            />
 
-    </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/create_topic_upload_progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/semi_transparent"
+            >
+
+            <ProgressBar
+                android:id="@+id/create_topic_upload_progress_view"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                />
+
+            <TextView
+                android:id="@+id/create_topic_upload_progress_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/create_topic_upload_progress_view"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:text="正在上传"
+                />
+
+
+
+
+        </RelativeLayout>
+    </FrameLayout>
+
+
 
 
 

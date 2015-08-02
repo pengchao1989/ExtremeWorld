@@ -107,8 +107,9 @@ public class QiNiuVideoUpload {
                         new UpProgressHandler(){
                             public void progress(String key, double percent)
                             {
-
-                                Log.i("qiniu", key + ": " + percent);
+                                if(listener != null){
+                                    listener.onUploading(videoPathUploadIndex, key, percent);
+                                }
                             }
                         }, null));
     }

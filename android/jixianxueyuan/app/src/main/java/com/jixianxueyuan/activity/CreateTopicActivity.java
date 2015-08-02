@@ -2,16 +2,16 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.ThumbnailUtils;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.AlibabaSDK;
@@ -20,11 +20,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.duanqu.qupai.sdk.android.QupaiService;
 import com.duanqu.qupai.sdk.callback.SaveFileCallback;
-import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
@@ -52,17 +50,7 @@ import com.jixianxueyuan.widget.NewEditWidgetListener;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.qiniu.android.http.ResponseInfo;
-import com.qiniu.android.storage.UpCompletionHandler;
-import com.qiniu.android.storage.UpProgressHandler;
-import com.qiniu.android.storage.UploadManager;
-import com.qiniu.android.storage.UploadOptions;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -92,8 +80,13 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     RelativeLayout videoThumbleLayout;
     @InjectView(R.id.create_topic_video_thumble_imageview)
     ImageView videoThumbleImage;
-    @InjectView(R.id.create_short_video_progress)
-    RoundProgressBarWidthNumber roundProgressBarWidthNumber;
+
+    @InjectView(R.id.create_topic_upload_progress_layout)
+    RelativeLayout progressLayout;
+    @InjectView(R.id.create_topic_upload_progress_view)
+    ProgressBar uploadProgress;
+    @InjectView(R.id.create_topic_upload_progress_textview)
+    TextView progressTextView;
 
     NewEditWidget contentEditWidget;
 
@@ -117,6 +110,23 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     boolean isUploadedImage = false;
     boolean isUploadedVideo = false;
 
+    public static final int HANDLER_UPDATE_PROGRESS = 0x1;
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle progressData = msg.getData();
+            switch (progressData.getInt("type")){
+                case 1:
+                    progressTextView.setText("正在上传第" + progressData.getInt("index") + "张图片  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
+                    break;
+                case 2:
+                    progressTextView.setText("正在上传视频  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
+                    break;
+                case 3:
+                    break;
+            }
+        }
+    };
     @Override
     public void onCreate(Bundle savedInstanceStated)
     {
@@ -176,6 +186,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     private void submitControling()
     {
 
+        showUploadProgressView();
+
         localImagePathList = contentEditWidget.getLocalImagePathList();
 
 
@@ -203,8 +215,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         QiNiuVideoUpload qiNiuVideoUpload = new QiNiuVideoUpload(this);
         qiNiuVideoUpload.upload(localVideoPathList, new QiNiuVideoUploadListener() {
             @Override
-            public void onUploading() {
-
+            public void onUploading(int index, String key, double percent) {
+                updateProgressView(2, index, percent);
             }
 
             @Override
@@ -238,9 +250,10 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     {
         QiNiuImageUpload qiNiuPictureUpload = new QiNiuImageUpload(this);
         qiNiuPictureUpload.upload(localImagePathList, new QiNiuImageUploadListener() {
-            @Override
-            public void onUploading() {
 
+            @Override
+            public void onUploading(int index, String key, double percent) {
+                updateProgressView(1, index, percent);
             }
 
             @Override
@@ -340,7 +353,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                 topicDTO.setType(TopicType.DISCUSS);
                 break;
             case TopicType.VIDEO:
-                topicDTO.setVideoDetail(videoDetailDTO);
                 topicDTO.setType(TopicType.S_VIDEO);
                 break;
             case TopicType.S_VIDEO:
@@ -351,6 +363,11 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                 topicDTO.setType(TopicType.NEWS);
                 break;
         }
+
+        if(videoDetailDTO != null){
+            topicDTO.setVideoDetail(videoDetailDTO);
+        }
+
 
     }
 
@@ -473,5 +490,27 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     private void hideVideoThumble(){
         videoThumbleLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void showUploadProgressView(){
+        progressLayout.setVisibility(View.VISIBLE);
+
+    }
+
+    private void hideUploadProgressView(){
+        progressLayout.setVisibility(View.GONE);
+    }
+
+    private void updateProgressView(int type, int index, double percent){
+
+        Message msg = new Message();
+        msg.what = HANDLER_UPDATE_PROGRESS;
+        Bundle progressData = new Bundle();
+        progressData.putInt("type", type);
+        progressData.putInt("index", index+1);
+        progressData.putDouble("percent", percent);
+        msg.setData(progressData);
+        handler.sendMessage(msg);
+
     }
 }
