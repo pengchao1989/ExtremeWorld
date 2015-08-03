@@ -76,6 +76,7 @@ dependencies {
     compile 'com.qiniu:qiniu-android-sdk:7.0.+'
     compile 'com.github.ksoichiro:android-observablescrollview:1.5.2'
     compile 'com.github.ppamorim:dragger:1.1'
+    compile 'de.greenrobot:greendao:2.0.0'
     compile project(':emoji')
     compile project(':multi-image-selector')
     compile files('libs/open_sdk_r5043_lite.jar')

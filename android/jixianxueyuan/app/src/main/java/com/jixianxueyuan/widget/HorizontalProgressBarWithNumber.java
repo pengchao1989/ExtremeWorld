@@ -17,7 +17,7 @@ public class HorizontalProgressBarWithNumber extends ProgressBar
 {
 
     private static final int DEFAULT_TEXT_SIZE = 10;
-    private static final int DEFAULT_TEXT_COLOR = 0XFFFC00D1;
+    private static final int DEFAULT_TEXT_COLOR = 0XFF5cc611;
     private static final int DEFAULT_COLOR_UNREACHED_COLOR = 0xFFd3d6da;
     private static final int DEFAULT_HEIGHT_REACHED_PROGRESS_BAR = 2;
     private static final int DEFAULT_HEIGHT_UNREACHED_PROGRESS_BAR = 2;
