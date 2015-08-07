@@ -23,6 +23,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <!-- 允许程序接收到广播在系统完成启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
 
     <uses-feature
@@ -102,6 +105,32 @@
 
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
 
+
+        <!--baichuan push-->
+        <service android:name="com.alibaba.cchannel.core.ServiceContainer"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.alibaba.cchannel.action.SERVICE_CONTAINER" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="com.jixianxueyuan.receiver.CustomReceiver">
+            <intent-filter>
+                <!-- 消息处理事件（用来弹出消息提醒以及收取应用的自定义消息，必选。） -->
+                <action android:name="com.alibaba.cchannel.action.NOTIFICATION" />
+
+                <!-- 通道被打开的事件，应用可以用来缓存当前收到的通知（可选） -->
+                <action android:name="com.alibaba.cchannel.action.NOTIFICATION_OPENED" />
+                <!-- 通道状态切换事件（应用端可以根据此状态来显示当前的通道健康状态，需要继承CPushMessageReceiver并重载onChannelStatusChanged方法，可选。）-->
+                <action android:name="com.alibaba.cchannel.action.CHANNEL_STATUS" />
+
+                <!-- 开屏事件（用来尝试唤起已经不可用的服务，可选。建议打开） -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <!-- 开机事件（用来在手机重启后，自动启动云通道后台服务，可选。建议打开） -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <!-- Required  . Enable it you can get statistics data with channel
         -->
         <meta-data
@@ -110,6 +139,9 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="${JPUSH_APPKEY}" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="f997213fb1b98d9a842c199155326d27"/>
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>

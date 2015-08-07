@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/aliwx_message_item_height"
+    android:background="@drawable/aliwx_friend_item_bg" >
+
+    <LinearLayout
+        android:id="@+id/head_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/aliwx_column_up_unit_margin"
+        android:paddingRight="@dimen/aliwx_column_up_unit_margin" >
+
+        <ImageView
+            android:id="@+id/head"
+            android:layout_width="@dimen/aliwx_common_head_size"
+            android:layout_height="@dimen/aliwx_common_head_size"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/unread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/aliwx_unread_hint"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/aliwx_unread_text_size" />
+
+    <TextView
+        android:id="@+id/time"
+        style="@style/aliwx_column_msg_time_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/head_layout"
+        android:layout_marginRight="@dimen/aliwx_common_safe_margin"
+        android:textColor="?attr/aliwx_cvstime_textcolor"
+        android:textSize="?attr/aliwx_cvstime_textsize" />
+
+    <LinearLayout
+        android:id="@+id/conversation_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/aliwx_common_unit_margin"
+        android:layout_toLeftOf="@id/time"
+        android:layout_toRightOf="@id/head_layout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/aliwx_column_msg_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:ellipsize="middle"
+            android:includeFontPadding="false"
+            android:textColor="?attr/aliwx_cvsname_textcolor"
+            android:textSize="?attr/aliwx_cvsnname_textsize" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/content"
+        style="@style/aliwx_column_msg_style_1_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/aliwx_common_unit_margin"
+        android:layout_marginRight="@dimen/aliwx_message_content_margin_right"
+        android:layout_toRightOf="@id/head_layout"
+        android:textColor="?attr/aliwx_cvscontent_textcolor"
+        android:textSize="?attr/aliwx_cvscontent_textsize" />
+
+    <ImageView
+        android:id="@+id/sweep_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/aliwx_common_safe_margin"
+        android:duplicateParentState="true"
+        android:src="@drawable/aliwx_arrow" />
+
+</RelativeLayout>

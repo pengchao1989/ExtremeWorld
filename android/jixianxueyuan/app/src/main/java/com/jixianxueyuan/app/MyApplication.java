@@ -5,11 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 import android.widget.Toast;
 
 
+import com.alibaba.cchannel.CloudChannelConstants;
+import com.alibaba.cchannel.plugin.CloudPushService;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.callback.InitResultCallback;
+import com.alibaba.cchannel.core.task.RunnableCallbackAdapter;
 import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.server.ServerMethod;
@@ -44,6 +48,8 @@ public class MyApplication extends Application {
             public void onSuccess() {
                 Toast.makeText(MyApplication.this, "初始化成功", Toast.LENGTH_SHORT)
                         .show();
+
+                initCloudChannel(MyApplication.this);
             }
 
             @Override
@@ -65,8 +71,34 @@ public class MyApplication extends Application {
 
 	}
 
+    /**
+     * 初始化云推送通道
+     * @param applicationContext
+     */
+    private void initCloudChannel(Context applicationContext) {
+        CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
+        if(cloudPushService != null) {
+            cloudPushService.register(applicationContext,  new RunnableCallbackAdapter<Void>() {
+                @Override
+                public void onSuccess(Void result) {
+                    Log.d(CloudChannelConstants.TAG, "init cloudchannel success");
+                }
 
-	public static MyApplication getContext() {
+
+                @Override
+                public void onFailed(Exception exception){
+                    Log.d(CloudChannelConstants.TAG, "init cloudchannel failed");
+                }
+            });
+        }else{
+            Log.i(CloudChannelConstants.TAG, "CloudPushService is null");
+        }
+
+    }
+
+
+
+    public static MyApplication getContext() {
 		return application;
 	}
 

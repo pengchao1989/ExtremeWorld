@@ -89,16 +89,23 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="mediaservice-4.0.4" level="project" />
     <orderEntry type="library" exported="" name="alisdk-kernel-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="IMKit-1.6.0.0" level="project" />
     <orderEntry type="library" exported="" name="alisdk-ut-3" level="project" />
     <orderEntry type="library" exported="" name="rpc-core-1.0_06101606" level="project" />
+    <orderEntry type="library" exported="" name="IMLib-1.6.0.0" level="project" />
     <orderEntry type="library" exported="" name="utdid4all-1.0.4" level="project" />
     <orderEntry type="library" exported="" name="alisdk-security-2" level="project" />
+    <orderEntry type="library" exported="" name="alisdk-login-3" level="project" />
     <orderEntry type="library" exported="" name="securityguard-1.5.32" level="project" />
     <orderEntry type="library" exported="" name="alisdk-hotpatch-1" level="project" />
+    <orderEntry type="library" exported="" name="alisdk-amap-location-3" level="project" />
+    <orderEntry type="library" exported="" name="umeng-analytics-v5.4.1" level="project" />
+    <orderEntry type="library" exported="" name="push-sdk-0.9.3_06111425" level="project" />
     <orderEntry type="library" exported="" name="UTMini-4.3.8" level="project" />
     <orderEntry type="library" exported="" name="session-sdk-0.9.3_06011037" level="project" />
     <orderEntry type="library" exported="" name="sdk-legacy-support-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="alisdk-system-8" level="project" />
     <orderEntry type="library" exported="" name="rpc-sdk-0.9.3_07221616" level="project" />
+    <orderEntry type="library" exported="" name="Android_Location_V1.3.2" level="project" />
   </component>
 </module>
