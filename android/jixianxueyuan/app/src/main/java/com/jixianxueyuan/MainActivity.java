@@ -68,10 +68,6 @@ public class MainActivity extends Activity {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
-/*        JPushInterface.setDebugMode(true);
-        JPushInterface.init(getApplicationContext());*/
-        //JPushInterface.setAlias(this, );
-
 
         requestBaseInfo();
 

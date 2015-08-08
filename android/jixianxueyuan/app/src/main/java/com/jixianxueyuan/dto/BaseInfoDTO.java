@@ -1,11 +1,12 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by pengchao on 6/30/15.
  */
-public class BaseInfoDTO {
+public class BaseInfoDTO implements Serializable {
     List<HobbyDTO> hobbys;
 
     public List<HobbyDTO> getHobbyDTOList() {

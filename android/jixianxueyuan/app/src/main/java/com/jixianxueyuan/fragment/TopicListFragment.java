@@ -320,7 +320,6 @@ public class TopicListFragment extends Fragment {
                     @Override
                     public void onResponse(MyResponse<MyPage<TopicDTO>> response) {
 
-
                         if(response.getStatus() == MyResponse.status_ok)
                         {
                             MyPage page = response.getContent();
@@ -333,7 +332,6 @@ public class TopicListFragment extends Fragment {
                             {
                                 adapter.addDatas(topicDTOs);
                             }
-
 
                             isRefreshData = true;
 

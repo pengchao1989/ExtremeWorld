@@ -2,24 +2,18 @@ package com.jixianxueyuan.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.widget.Toast;
-
 
 import com.alibaba.cchannel.CloudChannelConstants;
 import com.alibaba.cchannel.plugin.CloudPushService;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.alibaba.cchannel.core.task.RunnableCallbackAdapter;
-import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.dto.BaseInfoDTO;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.Util;
-
-import java.io.File;
 
 public class MyApplication extends Application {
 
