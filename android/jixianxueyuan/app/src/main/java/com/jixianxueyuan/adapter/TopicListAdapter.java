@@ -134,26 +134,26 @@ public class TopicListAdapter extends BaseAdapter {
                     break;
 
                 case TopicType.DISCUSS:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_message_grey600_24dp);
+                    //viewHolder.typeImageView.setImageResource(R.mipmap.ic_message_grey600_24dp);
                     viewHolder.titleTextView.setText("[讨论]" + topicDTO.getTitle());
                     break;
 
                 case TopicType.VIDEO:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
+                    //viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
                     viewHolder.titleTextView.setText("[视频]" + topicDTO.getTitle());
                     break;
 
                 case TopicType.S_VIDEO:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
+                    //viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
                     viewHolder.titleTextView.setText("[视频]" + topicDTO.getTitle());
                     break;
 
                 case TopicType.ACTIVITY:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_assistant_photo_grey600_18dp);
+                    //viewHolder.typeImageView.setImageResource(R.mipmap.ic_assistant_photo_grey600_18dp);
                     viewHolder.titleTextView.setText("[活动]" + topicDTO.getTitle());
                     break;
                 case TopicType.NEWS:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_picture_in_picture_grey600_24dp);
+                    //viewHolder.typeImageView.setImageResource(R.mipmap.ic_picture_in_picture_grey600_24dp);
                     viewHolder.titleTextView.setText("[新闻]" + topicDTO.getTitle());
                     break;
             }
@@ -239,8 +239,8 @@ public class TopicListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-        @InjectView(R.id.topic_list_item_type)
-        ImageView typeImageView;
+/*        @InjectView(R.id.topic_list_item_type)
+        ImageView typeImageView;*/
         @InjectView(R.id.topic_list_item_title)
         EmojiconTextView titleTextView;
         @InjectView(R.id.topic_list_item_avatar)

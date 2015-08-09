@@ -23,6 +23,13 @@
     </string-array>
 
     <string-array name="mine_names">
+        <item>@string/reply_of_me</item>
+        <item>@string/agree_of_me</item>
+    </string-array>
+
+    <string-array name="mine_images">
+        <item>@mipmap/ic_msg_comment</item>
+        <item>@mipmap/ic_msg_like</item>
     </string-array>
 
 </resources>

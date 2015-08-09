@@ -34,13 +34,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
-<!--                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/bg_home_avatar"
-                    />-->
-
-
             </FrameLayout>
 
 
@@ -87,13 +80,6 @@
                     android:layout_marginLeft="2dp"
                     emojicon:emojiconSize="28sp"
                     style="@style/ListText"
-                    />
-
-                <ImageView
-                    android:id="@+id/topic_list_item_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignRight="@id/topic_list_item_title"
                     />
 
             </RelativeLayout>

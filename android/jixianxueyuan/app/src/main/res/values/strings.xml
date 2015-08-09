@@ -28,6 +28,9 @@
     <string name="course">教学</string>
     <string name="site">场地</string>
     <string name="people">附近的人</string>
+    
+    <string name="reply_of_me">回复我的</string>
+    <string name="agree_of_me">赞</string>
 
     <string name="reply">回复</string>
     <string name="we_speek">我也说一句</string>
