@@ -44,7 +44,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout style="@style/ImageItemLayout">
+        <RelativeLayout
+            android:id="@+id/mine_fragment_remind_reply"
+            style="@style/ImageItemLayout">
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.jixianxueyuan.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.RemindOfReplyActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by pengchao on 4/20/15.
@@ -69,5 +72,10 @@ public class MineFragment extends Fragment {
     public void onStop()
     {
         super.onStop();
+    }
+
+    @OnClick(R.id.mine_fragment_remind_reply) void remindReplyOnClick(){
+        Intent intent = new Intent(this.getActivity(), RemindOfReplyActivity.class);
+        startActivity(intent);
     }
 }
