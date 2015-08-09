@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="168dp">
+        android:layout_height="178dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,9 +34,102 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="128dp" />
+            android:layout_marginTop="118dp" />
 
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/ImageItemLayout">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_msg_comment" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/reply_of_me" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerView" />
+
+        <RelativeLayout style="@style/ImageItemLayout">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_msg_like" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/agree_of_me" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerView" />
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            style="@style/ImageItemLayout"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_menu_setting" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/setting" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerView" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

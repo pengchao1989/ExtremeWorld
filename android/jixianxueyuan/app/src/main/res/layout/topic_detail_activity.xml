@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         my:my_title="话题详情"
         />
-    
+
     <RelativeLayout
         android:id="@+id/content_container"
         android:layout_width="match_parent"
