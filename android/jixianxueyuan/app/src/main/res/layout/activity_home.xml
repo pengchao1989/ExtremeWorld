@@ -10,21 +10,16 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#009688"
+        android:layout_height="0dp"
         />
 
-
-
-        <it.neokree.materialtabs.MaterialTabHost
-            android:id="@+id/tabHost"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/toolbar"
-            app:primaryColor="@color/primary_color"
-            app:accentColor="#ffc400" />
-
-
+    <it.neokree.materialtabs.MaterialTabHost
+        android:id="@+id/tabHost"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/toolbar"
+        app:primaryColor="@color/primary_color"
+        app:accentColor="@color/primary" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/activity_home_fragment_viewpager"
@@ -32,6 +27,5 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/tabHost"/>
         >
-
 
 </LinearLayout>

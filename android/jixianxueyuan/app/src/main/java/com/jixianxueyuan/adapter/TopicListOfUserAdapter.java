@@ -108,35 +108,6 @@ public class TopicListOfUserAdapter extends BaseAdapter {
         viewHolder.dateTextView.setText(DateTimeFormatter.getLargeTime(topicDTO.getCreateTime()));
 
 
-        if(topicDTO.getType() != null && topicDTO.getType().length() > 0)
-        {
-            switch (topicDTO.getType())
-            {
-                case TopicType.MOOD:
-                    //viewHolder.typeImageView.setImageResource(R.mipmap.ic_face_grey600_18dp);
-                    break;
-
-                case TopicType.DISCUSS:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_message_grey600_24dp);
-                    break;
-
-                case TopicType.VIDEO:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
-                    break;
-
-                case TopicType.S_VIDEO:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_videocam_grey600_18dp);
-                    break;
-
-                case TopicType.ACTIVITY:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_assistant_photo_grey600_18dp);
-                    break;
-                case TopicType.NEWS:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_picture_in_picture_grey600_24dp);
-                    break;
-            }
-        }
-
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
         VideoDetailDTO videoDetailDTO = topicDTO.getVideoDetail();
 
@@ -211,8 +182,6 @@ public class TopicListOfUserAdapter extends BaseAdapter {
     public static class ViewHolder{
         @InjectView(R.id.topic_list_of_user_item_date)
         TextView dateTextView;
-        @InjectView(R.id.topic_list_of_user_item_type)
-        ImageView typeImageView;
         @InjectView(R.id.topic_list_of_user_item_title)
         EmojiconTextView titleTextView;
         @InjectView(R.id.topic_list_of_user_item_image_1)

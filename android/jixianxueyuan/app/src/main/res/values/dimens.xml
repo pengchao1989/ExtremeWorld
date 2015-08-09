@@ -11,5 +11,8 @@
 
     <dimen name="bottom_input_widget_heigh">60dp</dimen>
 
+    <dimen name="avatar_width">42dp</dimen>
+    <dimen name="avatar_height">42dp</dimen>
+
 
 </resources>

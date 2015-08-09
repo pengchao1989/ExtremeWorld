@@ -19,12 +19,12 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 4/20/15.
  */
-public class DiscoveryLIstAdapter extends BaseAdapter {
+public class DiscoveryListAdapter extends BaseAdapter {
 
     Context context;
     List<DiscoveryItem> discoryItems;
 
-    public DiscoveryLIstAdapter(Context context){
+    public DiscoveryListAdapter(Context context){
         this.context = context;
         discoryItems = new ArrayList<DiscoveryItem>();
 

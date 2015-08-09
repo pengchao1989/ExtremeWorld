@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="4dp"
-    android:background="@color/white"
+    android:background="@color/background"
     style="@style/ListItem"
     >
 
@@ -54,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        style="@style/ListSecondaryText"
         />
 
     <LinearLayout
@@ -70,12 +71,14 @@
             android:id="@+id/topic_detail_head_zan_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/timeAgoText"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="赞"
+            style="@style/timeAgoText"
             />
 
         <ImageButton

@@ -23,7 +23,7 @@
 
         <ListView
             android:id="@+id/topic_detail_listview"
-            style="@style/ListContainer"
+            style="@style/ListView"
             />
 
         <LinearLayout

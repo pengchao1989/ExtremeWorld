@@ -1,12 +1,15 @@
 <resources>
 
-    <color name="primary_color">#00bcd4</color>
+    <color name="primary_color">#1b1926</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="white_overlay">#66FAFAFA</color>
 
-    <color name="background">#6cd9dbd5</color>
+    <color name="background">#2b2938</color>
+    <color name="item_background">#24222f</color>
+    <color name="item_background_pressed">#423c56</color>
     <color name="semi_transparent">#a0000000</color>
+    <color name="divider">#35333f</color>
 
     <color name="white">#FFFAFAFA</color>
     <color name="black">#FF000000</color>
@@ -25,7 +28,8 @@
     <color name="accent_pressed">#C2185B</color>
 
 
-    <color name="primary_text">#3D3D3D</color>
+    <color name="primary_text">#fdfdfd</color>
+    <color name="secondary_text">#a4a3a8</color>
 
 
 

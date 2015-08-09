@@ -15,7 +15,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
-import com.jixianxueyuan.adapter.DiscoveryLIstAdapter;
+import com.jixianxueyuan.adapter.DiscoveryListAdapter;
 import com.jixianxueyuan.config.TopicType;
 
 import java.util.ArrayList;
@@ -33,13 +33,13 @@ public class DiscoveryFragment extends Fragment {
 
     @InjectView(R.id.discovery_fragment_listview)ListView listView;
 
-    DiscoveryLIstAdapter adapter;
+    DiscoveryListAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        adapter = new DiscoveryLIstAdapter(this.getActivity());
+        adapter = new DiscoveryListAdapter(this.getActivity());
     }
 
     @Override
@@ -58,10 +58,10 @@ public class DiscoveryFragment extends Fragment {
         int len = ar.length();
         int[] discoveryImages = new int[len];
 
-        List<DiscoveryLIstAdapter.DiscoveryItem> discoveryItemList = new ArrayList<DiscoveryLIstAdapter.DiscoveryItem>();
+        List<DiscoveryListAdapter.DiscoveryItem> discoveryItemList = new ArrayList<DiscoveryListAdapter.DiscoveryItem>();
         for(int i = 0; i < len; i++)
         {
-            DiscoveryLIstAdapter.DiscoveryItem item = new DiscoveryLIstAdapter.DiscoveryItem();
+            DiscoveryListAdapter.DiscoveryItem item = new DiscoveryListAdapter.DiscoveryItem();
             item.setName(discoveryNames[i]);
             item.setImageResourceId(ar.getResourceId(i,0));
             discoveryItemList.add(item);

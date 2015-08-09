@@ -24,13 +24,15 @@
             android:id="@+id/user_head_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ListNameText"
+            style="@style/ListPrimaryText"
             />
 
         <TextView
             android:id="@+id/user_head_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            style="@style/timeAgoText"
+            />
 
     </LinearLayout>
 

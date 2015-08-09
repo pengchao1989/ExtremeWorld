@@ -6,6 +6,6 @@
 
     <TextView
         android:id="@+id/video_list_item_title"
-        style="@style/ListText" />
+        style="@style/ListPrimaryText" />
 
 </LinearLayout>

@@ -3,7 +3,9 @@
     xmlns:my="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    >
 
     <com.jixianxueyuan.widget.MyActionBar
         android:id="@+id/user_home_actionbar"
@@ -15,7 +17,7 @@
         android:id="@+id/user_home_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"
+        style="@style/ListView"
         />
 
 

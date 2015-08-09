@@ -13,7 +13,7 @@
 
     <ListView
         android:id="@+id/course_detail_listview"
-        style="@style/ListContainer"
+        style="@style/ListView"
         />
 
 </LinearLayout>

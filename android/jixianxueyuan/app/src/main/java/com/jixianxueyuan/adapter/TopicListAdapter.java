@@ -164,9 +164,7 @@ public class TopicListAdapter extends BaseAdapter {
         if(videoDetailDTO != null)
         {
             viewHolder.videoFrontLayout.setVisibility(View.VISIBLE);
-
             ImageLoader.getInstance().displayImage(videoDetailDTO.getThumbnail() + "!AndroidListItem", viewHolder.videoFrontImageView);
-
         }
         else
         {

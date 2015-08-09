@@ -29,10 +29,10 @@
                 android:layout_height="wrap_content"
                 >
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/topic_list_item_avatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/avatar_width"
+                    android:layout_height="@dimen/avatar_height"
                     />
             </FrameLayout>
 
@@ -48,13 +48,15 @@
                     android:id="@+id/topic_list_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/ListNameText"
+                    style="@style/ListPrimaryText"
                     />
 
                 <TextView
                     android:id="@+id/topic_list_item_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    style="@style/timeAgoText"
+                    />
 
             </LinearLayout>
 
@@ -79,7 +81,7 @@
                     android:id="@+id/topic_list_item_title"
                     android:layout_marginLeft="2dp"
                     emojicon:emojiconSize="28sp"
-                    style="@style/ListText"
+                    style="@style/ListPrimaryText"
                     />
 
             </RelativeLayout>
@@ -173,6 +175,8 @@
                     android:id="@+id/topic_list_item_view_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    style="@style/ListSecondaryText"
                     />
 
                 <ImageView
@@ -186,6 +190,8 @@
                     android:id="@+id/topic_list_item_agree_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    style="@style/ListSecondaryText"
                     />
 
             </LinearLayout>

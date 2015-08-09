@@ -29,12 +29,12 @@
         </RelativeLayout>
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mine_avatar_imageview"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="128dp"
-            android:src="@mipmap/avatar_girl" />
+            android:layout_marginTop="128dp" />
 
 
     </RelativeLayout>

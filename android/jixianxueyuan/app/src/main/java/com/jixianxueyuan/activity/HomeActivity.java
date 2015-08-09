@@ -23,9 +23,7 @@ public class HomeActivity extends ActionBarActivity implements MaterialTabListen
     @InjectView(R.id.activity_home_fragment_viewpager)ViewPager viewPager;
 
     HomeFragmentAdapter fragmentAdapter;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
