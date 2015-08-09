@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,11 +20,15 @@ import com.jixianxueyuan.adapter.TopicListOfUserAdapter;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.LoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -41,8 +47,12 @@ public class UserHomeActivity extends Activity {
     TopicListOfUserAdapter adapter;
 
     UserMinDTO userMinDTO;
+    UserDTO userDTO;
 
     LoadMoreView loadMoreView;
+    TextView signatureTextView;
+
+
     int currentPage = 0;
     int totalPage = 0;
 
@@ -61,21 +71,52 @@ public class UserHomeActivity extends Activity {
             finish();
         }
 
-
-
         actionBar.setTitle(userMinDTO.getName());
 
-        View headView = LayoutInflater.from(this).inflate(R.layout.user_home_head_view, null);
-        listView.addHeaderView(headView);
+
+        initHeadView();
 
         adapter = new TopicListOfUserAdapter(this);
-
         listView.setAdapter(adapter);
-
-
+        requestUserInfo();
         requestTopicList();
     }
 
+    private void initHeadView(){
+        View headView = LayoutInflater.from(this).inflate(R.layout.user_home_head_view, null);
+        signatureTextView = (TextView) headView.findViewById(R.id.user_home_head_signature);
+        ImageView avatarImageView = (ImageView) headView.findViewById(R.id.user_home_head_avatar);
+        String avatarUrl = userMinDTO.getAvatar() + "!AndroidProfileAvatar";
+        MyLog.d("UserHomeActivity", "avatar=" +avatarUrl);
+        ImageLoader.getInstance().displayImage(avatarUrl, avatarImageView);
+        listView.addHeaderView(headView);
+    }
+
+    private void requestUserInfo(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ServerMethod.user()+userMinDTO.getId();
+
+        MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
+                new Response.Listener<MyResponse<UserDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<UserDTO> response) {
+
+                        if(response.getStatus() == MyResponse.status_ok){
+                            userDTO = response.getContent();
+                            signatureTextView.setText(userDTO.getSignature());
+                        }
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(myRequest);
+    }
 
     private void requestTopicList(){
 
@@ -119,10 +160,15 @@ public class UserHomeActivity extends Activity {
     }
 
     @OnItemClick(R.id.user_home_listview)void onItemCLick(int position){
-        TopicDTO topicDTO = (TopicDTO) adapter.getItem(position-1);
-        Intent intent = new Intent(this, TopicDetailActivity.class);
-        intent.putExtra("topic", topicDTO);
-        startActivity(intent);
+        if(position == 0){
+
+        }else {
+            TopicDTO topicDTO = (TopicDTO) adapter.getItem(position-1);
+            Intent intent = new Intent(this, TopicDetailActivity.class);
+            intent.putExtra("topic", topicDTO);
+            startActivity(intent);
+        }
+
     }
 
 }

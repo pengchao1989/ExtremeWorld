@@ -63,6 +63,10 @@ public class Mine {
         if(shared.contains("description")){
             userInfo.setDescription(shared.getString("description", ""));
         }
+        if(shared.contains("signature")){
+            userInfo.setSignature(shared.getString("signature", ""));
+        }
+
 
         return true;
     }
@@ -80,6 +84,7 @@ public class Mine {
         editor.putString("avatar", userInfo.getAvatar());
         editor.putString("birth", userInfo.getBirth());
         editor.putString("description", userInfo.getDescription());
+        editor.putString("signature", userInfo.getSignature());
 
         editor.commit();
     }

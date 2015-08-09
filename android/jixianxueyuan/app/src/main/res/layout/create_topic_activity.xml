@@ -69,7 +69,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/zeus_player_play"
+                            android:src="@mipmap/ic_play_share_to_wechat_circle"
                             android:layout_centerInParent="true"
                             />
 

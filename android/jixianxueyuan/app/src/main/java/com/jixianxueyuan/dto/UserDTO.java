@@ -14,6 +14,7 @@ public class UserDTO
 	private String birth;
 	private String avatar;
 	private String description;
+	private String signature;
 	
 	private List<UserInterestDTO> interests;
 	
@@ -88,6 +89,12 @@ public class UserDTO
 	public void setDescription(String description)
 	{
 		this.description = description;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 	public List<UserInterestDTO> getInterests()
 	{
