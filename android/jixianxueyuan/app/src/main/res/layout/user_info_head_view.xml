@@ -7,10 +7,10 @@
     android:gravity="center_vertical"
     android:paddingTop="8dp"
     >
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_head_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/avatar_width"
+        android:layout_height="@dimen/avatar_height"
         />
 
     <LinearLayout

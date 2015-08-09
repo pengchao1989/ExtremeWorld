@@ -265,7 +265,7 @@ public class TopicListFragment extends Fragment {
         }
         else
         {
-            Toast.makeText(this.getActivity(), "没了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), R.string.not_more, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -315,7 +315,7 @@ public class TopicListFragment extends Fragment {
             return;
         }
 
-        MyPageRequest<TopicDTO> stringRequest = new MyPageRequest(Request.Method.GET,url,TopicDTO.class,
+        MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest(Request.Method.GET,url,TopicDTO.class,
                 new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {
                     @Override
                     public void onResponse(MyResponse<MyPage<TopicDTO>> response) {
@@ -350,7 +350,7 @@ public class TopicListFragment extends Fragment {
                     }
                 });
 
-        queue.add(stringRequest);
+        queue.add(myPageRequest);
     }
 
     private void showAddLayout()

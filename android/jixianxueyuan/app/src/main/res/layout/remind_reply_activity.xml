@@ -14,7 +14,6 @@
         my:my_title="@string/reply_of_me"
         />
 
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/remind_reply_list_swiperefresh"
         android:layout_width="match_parent"

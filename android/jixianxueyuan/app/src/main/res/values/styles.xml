@@ -48,7 +48,7 @@
         <item name="android:paddingRight">@dimen/list_horizontal_padding</item>
         <item name="android:paddingTop">@dimen/list_item_vertical_padding</item>
         <item name="android:paddingBottom">@dimen/list_item_vertical_padding</item>
-        <item name="android:background">@color/item_background</item>
+        <item name="android:background">@drawable/list_item_background</item>
     </style>
 
     <style name="ListPrimaryText">
@@ -56,6 +56,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primary_text</item>
+    </style>
+    
+    <style name="ListPrimaryTextSmall" parent="@style/ListPrimaryText">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="ListSecondaryText">

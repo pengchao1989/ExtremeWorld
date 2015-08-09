@@ -9,7 +9,7 @@
     style="@style/ListItem"
     >
 
-    <include layout="@layout/topic_detail_head_user_view"/>
+    <include layout="@layout/user_info_head_view"/>
 
     <com.yumfee.emoji.EmojiconTextView
         android:id="@+id/topic_detail_title"

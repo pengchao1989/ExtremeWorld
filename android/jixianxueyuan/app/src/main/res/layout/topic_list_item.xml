@@ -21,19 +21,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            >
+            android:gravity="center_vertical">
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/topic_list_item_avatar"
                     android:layout_width="@dimen/avatar_width"
-                    android:layout_height="@dimen/avatar_height"
-                    />
+                    android:layout_height="@dimen/avatar_height" />
             </FrameLayout>
 
 
@@ -41,22 +38,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="6dp"
-                >
+                android:layout_marginLeft="6dp">
 
                 <TextView
                     android:id="@+id/topic_list_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/ListPrimaryText"
-                    />
+                    style="@style/ListPrimaryText" />
 
                 <TextView
                     android:id="@+id/topic_list_item_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/timeAgoText"
-                    />
+                    style="@style/timeAgoText" />
 
             </LinearLayout>
 

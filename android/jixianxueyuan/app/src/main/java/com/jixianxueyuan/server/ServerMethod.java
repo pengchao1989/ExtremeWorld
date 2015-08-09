@@ -39,6 +39,7 @@ public class ServerMethod {
     public static final String reply(){return  method_url + "reply";};
     public static final String zan() {return method_url  + "topic_agree";}
     public static final String near_friend (){return method_url + hobby + "geo/near_friend";};
+    public static final String remind() {return method_url + "remind/";};
 
 
 
