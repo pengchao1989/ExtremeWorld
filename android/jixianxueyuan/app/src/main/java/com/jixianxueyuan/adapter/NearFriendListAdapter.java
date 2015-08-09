@@ -1,7 +1,6 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -26,42 +26,42 @@ import butterknife.InjectView;
 public class NearFriendListAdapter extends BaseAdapter {
 
     Context context;
-    List<UserMinDTO> userMinDTOList;
+    List<UserDTO> userDTOList;
 
     public NearFriendListAdapter(Context context)
     {
         this.context = context;
-        userMinDTOList = new ArrayList<UserMinDTO>();
+        userDTOList = new ArrayList<UserDTO>();
     }
 
-    public void refreshData(List<UserMinDTO> list )
+    public void refreshData(List<UserDTO> list )
     {
-        userMinDTOList.clear();
+        userDTOList.clear();
 
-        userMinDTOList.addAll(list);
+        userDTOList.addAll(list);
 
         this.notifyDataSetChanged();
     }
 
-    public void addDatas(List<UserMinDTO> list)
+    public void addDatas(List<UserDTO> list)
     {
-        userMinDTOList.addAll(list);
+        userDTOList.addAll(list);
         this.notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return userMinDTOList.size();
+        return userDTOList.size();
     }
 
     @Override
-    public UserMinDTO getItem(int position) {
-        return userMinDTOList.get(position);
+    public UserDTO getItem(int position) {
+        return userDTOList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return userMinDTOList.get(position).getId();
+        return userDTOList.get(position).getId();
     }
 
     @Override
@@ -80,17 +80,29 @@ public class NearFriendListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        UserMinDTO userMinDTO = userMinDTOList.get(position);
+        UserDTO userDTO = userDTOList.get(position);
 
-        String avatarUrl = userMinDTO.getAvatar();
+        String avatarUrl = userDTO.getAvatar();
         if(Util.isOurServerImage(avatarUrl)){
             avatarUrl += "!androidListAvatar";
         }
 
         ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
-        viewHolder.nameTextView.setText(userMinDTO.getName());
-        viewHolder.distanceTextView.setText(Util.meterToString(userMinDTO.getDistance()));
+        viewHolder.nameTextView.setText(userDTO.getName());
+        viewHolder.distanceTextView.setText(Util.meterToString(userDTO.getDistance()));
+        String timeAgo = DateTimeFormatter.getTimeAgo(context, userDTO.getGeoModifyTime());
+        if(timeAgo != null){
+            viewHolder.timeAgoTextView.setText(timeAgo);
+        }
 
+
+        if(userDTO.getGender().equals("male")){
+            viewHolder.genderImageView.setImageResource(R.mipmap.ic_sex_male);
+        }else if(userDTO.getGender().equals("female")){
+            viewHolder.genderImageView.setImageResource(R.mipmap.ic_sex_female);
+        }
+
+        viewHolder.signatureTextView.setText(userDTO.getSignature());
 
         return convertView;
     }
@@ -100,6 +112,9 @@ public class NearFriendListAdapter extends BaseAdapter {
         @InjectView(R.id.near_friend_list_item_avatar)ImageView avatarImageView;
         @InjectView(R.id.near_friend_list_item_name)TextView nameTextView;
         @InjectView(R.id.near_friend_list_item_distance)TextView distanceTextView;
+        @InjectView(R.id.near_friend_list_item_gender)ImageView genderImageView;
+        @InjectView(R.id.near_friend_list_item_time)TextView timeAgoTextView;
+        @InjectView(R.id.near_friend_list_item_signature)TextView signatureTextView;
 
         public ViewHolder(View itemView)
         {

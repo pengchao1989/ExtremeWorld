@@ -1,20 +1,22 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class UserDTO
+public class UserDTO implements Serializable
 {
 	private Long id;
 	private String loginName;
 	private String name;
-	private String roles;
 	private String registerDate;
 	private String gender;
 	private String birth;
 	private String avatar;
 	private String description;
 	private String signature;
+    private double distance;
+    private String geoModifyTime;
 	
 	private List<UserInterestDTO> interests;
 	
@@ -41,14 +43,6 @@ public class UserDTO
 	public void setName(String name)
 	{
 		this.name = name;
-	}
-	public String getRoles()
-	{
-		return roles;
-	}
-	public void setRoles(String roles)
-	{
-		this.roles = roles;
 	}
 	public String getRegisterDate()
 	{
@@ -104,5 +98,19 @@ public class UserDTO
 	{
 		this.interests = interests;
 	}
-	
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public String getGeoModifyTime() {
+        return geoModifyTime;
+    }
+
+    public void setGeoModifyTime(String geoModifyTime) {
+        this.geoModifyTime = geoModifyTime;
+    }
 }

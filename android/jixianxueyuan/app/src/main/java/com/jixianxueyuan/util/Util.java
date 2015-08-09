@@ -92,7 +92,7 @@ public class Util {
         }
         else if(meter >= 1000.0)
         {
-            return String.format("%.2f", meter / 1000.0) + "km";
+            return String.format("%.1f", meter / 1000.0) + "km";
         }
 
         return "-";

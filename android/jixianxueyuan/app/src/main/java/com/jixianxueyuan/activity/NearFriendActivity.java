@@ -31,6 +31,7 @@ import com.jixianxueyuan.adapter.NearFriendListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
@@ -106,7 +107,13 @@ public class NearFriendActivity extends Activity  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserMinDTO userMinDTO = adapter.getItem(position);
+                UserDTO userDTO = adapter.getItem(position);
+
+                UserMinDTO userMinDTO = new UserMinDTO();
+                userMinDTO.setId(userDTO.getId());
+                userMinDTO.setAvatar(userDTO.getAvatar());
+                userMinDTO.setGender(userDTO.getGender());
+                userMinDTO.setName(userDTO.getName());
                 Intent intent = new Intent(NearFriendActivity.this, UserHomeActivity.class);
                 intent.putExtra("userMinDTO", userMinDTO);
                 startActivity(intent);
@@ -172,11 +179,11 @@ public class NearFriendActivity extends Activity  {
         String url = ServerMethod.near_friend() + "?userId=" + userId + "&latitude=" + latitude + "&longitude=" + longitude + "&page=" + (currentPage + 1);
         MyLog.d("NearFriendActivity", "request=" + url);
 
-        MyPageRequest<UserMinDTO> myPageRequest = new MyPageRequest<UserMinDTO>(Request.Method.GET,url, UserMinDTO.class,
-                new Response.Listener<MyResponse<MyPage<UserMinDTO>>>(){
+        MyPageRequest<UserDTO> myPageRequest = new MyPageRequest<UserDTO>(Request.Method.GET,url, UserDTO.class,
+                new Response.Listener<MyResponse<MyPage<UserDTO>>>(){
 
                     @Override
-                    public void onResponse(MyResponse<MyPage<UserMinDTO>> response) {
+                    public void onResponse(MyResponse<MyPage<UserDTO>> response) {
 
                         if(currentPage == 0)
                         {
