@@ -64,6 +64,7 @@ import com.jixianxueyuan.util.MImageGetter;
 import com.jixianxueyuan.util.MTagHandler;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.widget.LoadMoreView;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
@@ -108,8 +109,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
     View headView;
     HeadViewHolder headViewHolder;
-    View footerView;
-    Button loadMoreButton;
+    LoadMoreView loadMoreButton;
 
     ReplyWidget replyWidget;
 
@@ -299,30 +299,30 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     {
         if(totalPage > 1)
         {
-            if(footerView.getVisibility() != View.VISIBLE)
+            if(loadMoreButton.isLoading() == true)
             {
-                footerView.setVisibility(View.VISIBLE);
+                loadMoreButton.onFinish();
             }
 
             if(currentPage >= totalPage)
             {
-                loadMoreButton.setText(R.string.not_more, TextView.BufferType.NORMAL);
+                loadMoreButton.setOver();
             }
         }
     }
 
     private void initFooterView()
     {
-        footerView = LayoutInflater.from(this).inflate(R.layout.loadmore, null, false);
 
-        loadMoreButton = (Button) footerView.findViewById(R.id.loadmore_button);
-        loadMoreButton.setOnClickListener(new View.OnClickListener() {
+        loadMoreButton = new LoadMoreView(this);
+        loadMoreButton.setVisibility(View.GONE);
+        loadMoreButton.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
             @Override
-            public void onClick(View v) {
+            public void runLoad() {
                 getNextPage();
             }
         });
-        listView.addFooterView(footerView);
+        listView.addFooterView(loadMoreButton);
     }
 
     private void getNextPage()
@@ -333,7 +333,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         }
         else
         {
-            Toast.makeText(this,"没了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.not_more, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -492,7 +492,6 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
-        @InjectView(R.id.topic_detail_content_container)LinearLayout contentLayout;
         @InjectView(R.id.videoview)VideoView videoView;
         @InjectView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;

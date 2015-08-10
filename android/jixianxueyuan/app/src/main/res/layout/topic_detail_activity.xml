@@ -23,6 +23,7 @@
 
         <ListView
             android:id="@+id/topic_detail_listview"
+            android:paddingBottom="@dimen/bottom_input_widget_heigh"
             style="@style/ListView"
             />
 
@@ -33,51 +34,7 @@
             android:orientation="vertical"
             android:layout_alignParentBottom="true"
             />
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:weightSum="10"
-            android:layout_alignParentBottom="true"
-            android:paddingBottom="6dp"
-            android:paddingTop="6dp"
-            >
 
-            <ImageView
-                android:layout_weight="0.5"
-                android:id="@+id/reply_widget_more_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="4dp"
-                android:src="@mipmap/smiley"
-                />
-
-            <com.yumfee.emoji.EmojiconEditText
-                android:layout_weight="9"
-                android:id="@+id/reply_widget_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                emojicon:emojiconSize="28sp"
-                android:hint="@string/we_speek"
-                android:background="@drawable/edittext_background"
-                />
-
-            <ImageView
-                android:layout_weight="0.5"
-                android:id="@+id/reply_widget_submit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="4dp"
-                android:src="@mipmap/ic_action_send_now"
-                />
-
-
-
-        </LinearLayout>-->
 
     </RelativeLayout>
 

@@ -3,8 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:layout_margin="8dp"
+    android:padding="16dp"
     android:background="@color/item_background"
     >
 
@@ -13,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="查看更多"
-        style="@style/BlueButton"
+        style="@style/TransparentButton"
         />
 
     <ProgressBar

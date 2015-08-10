@@ -3,6 +3,7 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.jixianxueyuan.dto.RemindDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.widget.LoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 
 import java.util.List;
@@ -43,6 +45,9 @@ public class RemindOfReplyActivity extends Activity {
     @InjectView(R.id.remind_reply_listview)
     ListView listView;
 
+    LoadMoreView loadMoreView;
+
+
     RemindOfReolyListAdapter adapter;
 
     int currentPage = 0;
@@ -59,10 +64,53 @@ public class RemindOfReplyActivity extends Activity {
         myApplication = (MyApplication) this.getApplication();
         mine = myApplication.getMine();
 
+        initFootView();
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                refreshTopicList();
+            }
+        });
+
         adapter = new RemindOfReolyListAdapter(this);
         listView.setAdapter(adapter);
 
+
+
         refreshTopicList();
+
+    }
+
+    private void initFootView(){
+        loadMoreView = new LoadMoreView(this);
+        loadMoreView.setVisibility(View.GONE);
+        loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+            @Override
+            public void runLoad() {
+                getNextPage();
+            }
+        });
+        listView.addFooterView(loadMoreView);
+    }
+
+    private void doHideFootView()
+    {
+        if(totalPage > 1)
+        {
+            if(loadMoreView.isLoading() == true)
+            {
+                loadMoreView.onFinish();
+            }
+
+            if(currentPage >= totalPage)
+            {
+                loadMoreView.setOver();
+            }
+
+        }
+
     }
 
     private void refreshTopicList()
@@ -97,10 +145,18 @@ public class RemindOfReplyActivity extends Activity {
                             MyLog.d("RemindOfReplyActivity","onResponse");
                             MyPage myPage = response.getContent();
                             List<RemindDTO> remindDTOList = myPage.getContents();
-                            adapter.addData(remindDTOList);
+                            if(currentPage == 0){
+                                adapter.refreshData(remindDTOList);
+                            }else {
+                                adapter.addData(remindDTOList);
+                            }
+
 
                             totalPage = myPage.getTotalPages();
                             currentPage = myPage.getCurPage() + 1;
+
+                            doHideFootView();
+                            swipeRefreshLayout.setRefreshing(false);
                         }
                     }
                 }, new Response.ErrorListener() {

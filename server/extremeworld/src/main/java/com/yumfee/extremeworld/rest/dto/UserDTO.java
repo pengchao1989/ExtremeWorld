@@ -2,7 +2,9 @@ package com.yumfee.extremeworld.rest.dto;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
@@ -12,12 +14,15 @@ public class UserDTO
 	private Long id;
 	private String loginName;
 	private String name;
-	private String roles;
 	private Date registerDate;
 	private String gender;
 	private String birth;
 	private String avatar;
 	private String description;
+	private String signature;
+	private String geoHash;
+	private Date geoModifyTime;
+	private double distance;
 	
 	private CountryDTO country;
 	
@@ -47,14 +52,7 @@ public class UserDTO
 	{
 		this.name = name;
 	}
-	public String getRoles()
-	{
-		return roles;
-	}
-	public void setRoles(String roles)
-	{
-		this.roles = roles;
-	}
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getRegisterDate()
 	{
@@ -96,7 +94,31 @@ public class UserDTO
 	{
 		this.description = description;
 	}
-	
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	public String getGeoHash() {
+		return geoHash;
+	}
+	public void setGeoHash(String geoHash) {
+		this.geoHash = geoHash;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
+	public Date getGeoModifyTime() {
+		return geoModifyTime;
+	}
+	public void setGeoModifyTime(Date geoModifyTime) {
+		this.geoModifyTime = geoModifyTime;
+	}
 	public CountryDTO getCountry() {
 		return country;
 	}

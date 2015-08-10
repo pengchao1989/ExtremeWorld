@@ -26,6 +26,7 @@ import ch.hsr.geohash.util.VincentyGeodesy;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
+import com.yumfee.extremeworld.rest.dto.UserDTO;
 import com.yumfee.extremeworld.rest.dto.UserMinDTO;
 import com.yumfee.extremeworld.rest.dto.request.PointDTO;
 import com.yumfee.extremeworld.service.UserService;
@@ -67,13 +68,12 @@ public class GeoRestController {
 		}
 
 		
-		
 		Page<User> userPage = userService.findByGeoHash(geoHashString.substring(0, 2) + "%",pageNumber, pageSize, sortType);//geoHash前几个字符
 		
 		
-		MyPage<UserMinDTO, User> userMinePage = new MyPage<UserMinDTO, User>(UserMinDTO.class,userPage );
+		MyPage<UserDTO, User> userMinePage = new MyPage<UserDTO, User>(UserDTO.class,userPage );
 		
-		for(UserMinDTO userItem : userMinePage.getContents())
+		for(UserDTO userItem : userMinePage.getContents())
 		{
 			GeoHash nearGeoHash  = GeoHash.fromGeohashString(userItem.getGeoHash());
 			
@@ -88,10 +88,10 @@ public class GeoRestController {
 		}
 		
 		//排序
-		Collections.sort(userMinePage.getContents(), new Comparator<UserMinDTO>(){
+		Collections.sort(userMinePage.getContents(), new Comparator<UserDTO>(){
 
 			@Override
-			public int compare(UserMinDTO o1, UserMinDTO o2) {
+			public int compare(UserDTO o1, UserDTO o2) {
 				
 				return (int) (o1.getDistance() - o2.getDistance());
 			}

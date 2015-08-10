@@ -164,7 +164,7 @@ public class TopicListFragment extends Fragment {
             }
         });
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.blue);
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

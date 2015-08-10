@@ -1,6 +1,7 @@
 package com.yumfee.extremeworld.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,9 +27,11 @@ public class User extends UserBase
 	private String birth;
 	private String avatar;
 	private String description;
+	private String signature;
 	private String qq;
 	private String weixin;
 	private String geoHash;
+	private Date   geoModifyTime;
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
@@ -81,6 +84,12 @@ public class User extends UserBase
 	{
 		this.description = description;
 	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
 	public String getQq()
 	{
 		return qq;
@@ -105,6 +114,12 @@ public class User extends UserBase
 		this.geoHash = geoHash;
 	}
 	
+	public Date getGeoModifyTime() {
+		return geoModifyTime;
+	}
+	public void setGeoModifyTime(Date geoModifyTime) {
+		this.geoModifyTime = geoModifyTime;
+	}
 	
 	@OneToOne
 	@JoinColumn(name = "country_id")

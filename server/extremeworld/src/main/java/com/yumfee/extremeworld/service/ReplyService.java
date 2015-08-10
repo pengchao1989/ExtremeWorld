@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +23,6 @@ import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.repository.RemindDao;
 import com.yumfee.extremeworld.repository.ReplyDao;
 import com.yumfee.extremeworld.repository.TopicDao;
-import com.yumfee.extremeworld.repository.UserDao;
 
 //Spring Bean的标识.
 @Component
@@ -64,49 +61,51 @@ public class ReplyService
 		return replyDao.findByTopicId(topicId,pageRequest);
 	}
 	
-	public void saveReply(Reply reply)
-	{
+	public void saveReply(Reply reply) {
 		replyDao.save(reply);
-		
-		//TODO下面代码应异步处理
-		
-		//在此处理提醒数据
+
+		// TODO下面代码应异步处理
+
+		// 在此处理提醒数据
 		Remind remind = new Remind();
 		remind.setTargetType("topic");
 		remind.setContent(reply.getContent());
 		remind.setTargetId(reply.getTopic().getId());
 		remind.setSpeaker(reply.getUser());
-		
-		
+
 		Topic topic = topicDao.findOne(reply.getTopic().getId());
 		remind.setTargetContent(topic.getTitle());
 		remind.setListener(topic.getUser());
-		
-		remindDao.save(remind);
-		
-		//在此处理推送
-		JPushClient jpushClient = new JPushClient("80a458ad8be7998a79b9af85", "4798383b7d7bdee3a2db3356", 3);
-		PushPayload payload = PushPayload.newBuilder()
-				.setPlatform(Platform.android_ios())
-				.setAudience(Audience.alias(remind.getListener().getId().toString()))
-				.setMessage(
-						Message.newBuilder()
-							.setMsgContent(remind.getTargetContent() + " 有新回复" )
-							.addExtra("targetId", remind.getTargetId())
-							.build() )
-				.build();
 
-        try {
-            PushResult result = jpushClient.sendPush(payload);
+		if (reply.getUser().getId() != topic.getUser().getId()) {
+			remindDao.save(remind);
 
-        } catch (APIConnectionException e) {
-            // Connection error, should retry later
+			// 在此处理推送
+			JPushClient jpushClient = new JPushClient(
+					"80a458ad8be7998a79b9af85", "4798383b7d7bdee3a2db3356", 3);
+			PushPayload payload = PushPayload
+					.newBuilder()
+					.setPlatform(Platform.android_ios())
+					.setAudience(
+							Audience.alias(remind.getListener().getId()
+									.toString()))
+					.setMessage(
+							Message.newBuilder()
+									.setMsgContent(
+											remind.getTargetContent() + " 有新回复")
+									.addExtra("targetId", remind.getTargetId())
+									.build()).build();
+			try {
+				PushResult result = jpushClient.sendPush(payload);
 
-        } catch (APIRequestException e) {
-            // Should review the error, and fix the request
-        }
-		
+			} catch (APIConnectionException e) {
+				// Connection error, should retry later
+
+			} catch (APIRequestException e) {
+				// Should review the error, and fix the request
+			}
+		}
+
 	}
-	
 
 }

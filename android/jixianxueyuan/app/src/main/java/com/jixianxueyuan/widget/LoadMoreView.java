@@ -51,7 +51,10 @@ public class LoadMoreView extends RelativeLayout {
             public void onClick(View v) {
                 if(!isLoading && isOver==false)
                 {
-                    loadMoreViewListener.runLoad();
+                    if(loadMoreViewListener != null){
+                        loadMoreViewListener.runLoad();
+                    }
+
                     LoadMoreView.this.loadButton.setVisibility(View.GONE);
                     LoadMoreView.this.progressBar.setVisibility(View.VISIBLE);
                     isLoading = true;

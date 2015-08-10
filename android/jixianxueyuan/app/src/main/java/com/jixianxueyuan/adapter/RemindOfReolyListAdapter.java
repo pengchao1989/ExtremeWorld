@@ -34,7 +34,7 @@ public class RemindOfReolyListAdapter extends BaseAdapter {
         remindDTOList = new LinkedList<RemindDTO>();
     }
 
-    public void setData(List<RemindDTO> remindDTOs){
+    public void refreshData(List<RemindDTO> remindDTOs){
         if(remindDTOList == null){
             remindDTOList = new LinkedList<RemindDTO>();
         }
@@ -72,7 +72,7 @@ public class RemindOfReolyListAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.remind_of_reply_list_item,null);
             viewHolder = new ViewHolder(convertView);
-            convertView.setTag(convertView);
+            convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
@@ -87,6 +87,7 @@ public class RemindOfReolyListAdapter extends BaseAdapter {
 
         viewHolder.timeTextView.setText(remindDTO.getCreateTime());
         viewHolder.contentTextView.setText(remindDTO.getContent());
+        viewHolder.targetTextView.setText(remindDTO.getTargetContent());
 
         return convertView;
     }
@@ -98,6 +99,8 @@ public class RemindOfReolyListAdapter extends BaseAdapter {
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.remind_reply_list_item_content)
         EmojiconTextView contentTextView;
+        @InjectView(R.id.remind_reply_list_item_target_content)
+        EmojiconTextView targetTextView;
 
         public ViewHolder(View itemView){
             ButterKnife.inject(this, itemView);
