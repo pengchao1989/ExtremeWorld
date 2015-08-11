@@ -39,6 +39,7 @@
     <string name="submit">发布</string>
     <string name="reply_success">回复成功</string>
     <string name="add_topic_success">发布主题成功</string>
+    <string name="load_sub_reply" formatted="false">查看更多%1$d条回复</string>
 
     <string name="nickname">昵称</string>
     <string name="birth">生日</string>

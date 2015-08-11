@@ -9,8 +9,49 @@
 
     <com.yumfee.emoji.EmojiconTextView
         android:id="@+id/topic_detail_list_item_reply_content"
+        android:layout_marginTop="@dimen/list_content_margin_head"
         emojicon:emojiconSize="28sp"
-        style="@style/contentText"
+        style="@style/ListSecondaryText"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/list_content_margin_head"
+        android:layout_marginLeft="16dp">
+
+        <com.yumfee.emoji.EmojiconTextView
+            android:id="@+id/topic_detail_list_item_sub_reply_content_1"
+            android:layout_marginTop="@dimen/list_content_margin_head"
+            style="@style/ListSecondaryTextSmall"
+            emojicon:emojiconSize="28sp" />
+
+
+        <com.yumfee.emoji.EmojiconTextView
+            android:id="@+id/topic_detail_list_item_sub_reply_content_2"
+            android:layout_marginTop="@dimen/list_content_margin_head"
+            style="@style/ListSecondaryTextSmall"
+            emojicon:emojiconSize="28sp" />
+
+
+        <com.yumfee.emoji.EmojiconTextView
+            android:id="@+id/topic_detail_list_item_sub_reply_content_3"
+            android:layout_marginTop="@dimen/list_content_margin_head"
+            style="@style/ListSecondaryTextSmall"
+            emojicon:emojiconSize="28sp" />
+
+        <TextView
+            android:id="@+id/topic_detail_list_item_sub_reply_loadmore"
+            android:layout_marginTop="@dimen/list_content_margin_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textColor="@color/blue"
+            android:text="@string/load_sub_reply"
+
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
