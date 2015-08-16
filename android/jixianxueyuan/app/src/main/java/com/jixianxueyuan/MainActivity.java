@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.alibaba.cchannel.plugin.CloudPushService;
+import com.alibaba.sdk.android.AlibabaSDK;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -153,6 +155,9 @@ public class MainActivity extends Activity {
                             Mine mine = MyApplication.getContext().getMine();
                             mine.setUserInfo(response.getContent());
                             mine.WriteSerializationToLocal(MainActivity.this);
+
+                            CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
+                            cloudPushService.bindAccount(String.valueOf(mine.getUserInfo().getId()));
 
                             //登录完成，进入HOME页
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);

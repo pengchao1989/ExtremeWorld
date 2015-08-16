@@ -35,6 +35,15 @@ public class MyApplication extends Application {
 		super.onCreate();
 		application = this;
 
+
+        //设置app rest api的hobby值
+        currentHobby = Util.getApplicationMetaString(this, "HOBBY");
+        ServerMethod.setHobby(currentHobby);
+
+        //初始化本地用户信息
+        mine = new Mine();
+        mine.SerializationFromLocal(this);
+
         AlibabaSDK.turnOnDebug();
         AlibabaSDK.asyncInit(this, new InitResultCallback() {
 
@@ -53,16 +62,6 @@ public class MyApplication extends Application {
             }
 
         });
-
-        //设置app rest api的hobby值
-        currentHobby = Util.getApplicationMetaString(this, "HOBBY");
-        ServerMethod.setHobby(currentHobby);
-
-        //初始化本地用户信息
-        mine = new Mine();
-        mine.SerializationFromLocal(this);
-
-
 	}
 
     /**
@@ -72,6 +71,11 @@ public class MyApplication extends Application {
     private void initCloudChannel(Context applicationContext) {
         CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
         if(cloudPushService != null) {
+            if(getMine().getUserInfo() != null){
+                long userId = getMine().getUserInfo().getId();
+                cloudPushService.bindAccount(String.valueOf(userId));
+            }
+
             cloudPushService.register(applicationContext,  new RunnableCallbackAdapter<Void>() {
                 @Override
                 public void onSuccess(Void result) {

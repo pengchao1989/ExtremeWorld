@@ -8,21 +8,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.jpush.api.JPushClient;
-import cn.jpush.api.common.resp.APIConnectionException;
-import cn.jpush.api.common.resp.APIRequestException;
-import cn.jpush.api.push.PushResult;
-import cn.jpush.api.push.model.Message;
-import cn.jpush.api.push.model.Platform;
-import cn.jpush.api.push.model.PushPayload;
-import cn.jpush.api.push.model.audience.Audience;
-
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.CloudpushMessageAndroidRequest;
+import com.taobao.api.request.CloudpushNoticeAndroidRequest;
+import com.taobao.api.response.CloudpushMessageAndroidResponse;
+import com.taobao.api.response.CloudpushNoticeAndroidResponse;
 import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.repository.RemindDao;
 import com.yumfee.extremeworld.repository.ReplyDao;
 import com.yumfee.extremeworld.repository.TopicDao;
+import com.yumfee.extremeworld.repository.UserDao;
 
 //Spring Bean的标识.
 @Component
@@ -38,6 +37,9 @@ public class ReplyService
 	
 	@Autowired 
 	private TopicDao topicDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	public Reply getReply(long id)
 	{
@@ -79,31 +81,29 @@ public class ReplyService
 
 		if (reply.getUser().getId() != topic.getUser().getId()) {
 			remindDao.save(remind);
+			
+			User Speaker = userDao.findById(reply.getUser().getId());
 
 			// 在此处理推送
-			JPushClient jpushClient = new JPushClient(
-					"80a458ad8be7998a79b9af85", "4798383b7d7bdee3a2db3356", 3);
-			PushPayload payload = PushPayload
-					.newBuilder()
-					.setPlatform(Platform.android_ios())
-					.setAudience(
-							Audience.alias(remind.getListener().getId()
-									.toString()))
-					.setMessage(
-							Message.newBuilder()
-									.setMsgContent(
-											remind.getTargetContent() + " 有新回复")
-									.addExtra("targetId", remind.getTargetId())
-									.build()).build();
-			try {
-				PushResult result = jpushClient.sendPush(payload);
+			String appkey = "23213197";
+			String secret = "9b14e759a5cd8b4182202a9d29b4e12e";
+			String url = "http://gw.api.taobao.com/router/rest";
 
-			} catch (APIConnectionException e) {
-				// Connection error, should retry later
-
-			} catch (APIRequestException e) {
-				// Should review the error, and fix the request
-			}
+			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+	        CloudpushNoticeAndroidRequest req=new CloudpushNoticeAndroidRequest();
+	        req.setTitle(Speaker.getName() + "对你进行了回复!");
+	        req.setSummary(remind.getContent());
+	        req.setTarget("account");
+	        req.setTargetValue(String.valueOf(topic.getUser().getId()));
+	        try {
+	            CloudpushNoticeAndroidResponse response = client.execute(req);
+	            if(response.isSuccess()){
+	                System.out.println("push  notice is success!");
+	            }
+	        }
+	        catch (Exception e){
+	            System.out.println("push notice is error!");
+	        }
 		}
 
 	}
