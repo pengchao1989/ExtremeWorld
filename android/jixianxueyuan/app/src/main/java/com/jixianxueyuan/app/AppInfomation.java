@@ -1,8 +1,6 @@
 package com.jixianxueyuan.app;
 
-import android.content.Context;
-
-import com.jixianxueyuan.dto.BaseInfoDTO;
+import com.jixianxueyuan.dto.HandshakeDTO;
 
 import java.io.Serializable;
 
@@ -15,7 +13,7 @@ public class AppInfomation implements Serializable {
 
 
     String currentHobby;
-    BaseInfoDTO baseInfoDTO;
+    HandshakeDTO handshakeDTO;
 
     public static synchronized AppInfomation getInstance(){
         if(appInfomation == null){
@@ -35,11 +33,11 @@ public class AppInfomation implements Serializable {
         this.currentHobby = currentHobby;
     }
 
-    public BaseInfoDTO getBaseInfoDTO() {
-        return baseInfoDTO;
+    public HandshakeDTO getHandshakeDTO() {
+        return handshakeDTO;
     }
 
-    public void setBaseInfoDTO(BaseInfoDTO baseInfoDTO) {
-        this.baseInfoDTO = baseInfoDTO;
+    public void setHandshakeDTO(HandshakeDTO handshakeDTO) {
+        this.handshakeDTO = handshakeDTO;
     }
 }

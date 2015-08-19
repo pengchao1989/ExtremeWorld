@@ -2,7 +2,7 @@ package com.yumfee.extremeworld.rest.dto;
 
 import java.util.List;
 
-public class BaseInfoDTO {
+public class HandshakeDTO {
 
     List<HobbyDTO> hobbys;
 

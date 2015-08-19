@@ -11,16 +11,18 @@ import com.alibaba.cchannel.plugin.CloudPushService;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.alibaba.cchannel.core.task.RunnableCallbackAdapter;
-import com.jixianxueyuan.dto.BaseInfoDTO;
+import com.jixianxueyuan.dto.HandshakeDTO;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.Util;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class MyApplication extends Application {
 
 	private static MyApplication application;
 
 
-    BaseInfoDTO baseInfoDTO;
+    HandshakeDTO handshakeDTO;
     Mine mine;
     String currentHobby;
 
@@ -35,7 +37,6 @@ public class MyApplication extends Application {
 		super.onCreate();
 		application = this;
 
-
         //设置app rest api的hobby值
         currentHobby = Util.getApplicationMetaString(this, "HOBBY");
         ServerMethod.setHobby(currentHobby);
@@ -43,6 +44,9 @@ public class MyApplication extends Application {
         //初始化本地用户信息
         mine = new Mine();
         mine.SerializationFromLocal(this);
+
+        //初始化imageLoader
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(MyApplication.this));
 
         AlibabaSDK.turnOnDebug();
         AlibabaSDK.asyncInit(this, new InitResultCallback() {
@@ -100,12 +104,12 @@ public class MyApplication extends Application {
 		return application;
 	}
 
-    public BaseInfoDTO getBaseInfoDTO() {
-        return baseInfoDTO;
+    public HandshakeDTO getHandshakeDTO() {
+        return handshakeDTO;
     }
 
-    public void setBaseInfoDTO(BaseInfoDTO baseInfoDTO) {
-        this.baseInfoDTO = baseInfoDTO;
+    public void setHandshakeDTO(HandshakeDTO handshakeDTO) {
+        this.handshakeDTO = handshakeDTO;
     }
 
     public Mine getMine() {

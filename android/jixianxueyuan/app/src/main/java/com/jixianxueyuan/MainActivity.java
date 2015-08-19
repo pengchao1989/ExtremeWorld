@@ -18,7 +18,7 @@ import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
-import com.jixianxueyuan.dto.BaseInfoDTO;
+import com.jixianxueyuan.dto.HandshakeDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
         ImageLoader.getInstance().init(config);
 
 
-        requestBaseInfo();
+        requestHandshake();
 
 
         //若本地有登录信息，则直接进行登录
@@ -114,19 +114,20 @@ public class MainActivity extends Activity {
         requestQQOpenId();
     }
 
-    private void requestBaseInfo() {
+    private void requestHandshake() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.baseInfo();
+        //带上client-hobby信息给服务器，以告知最后是登录的那个应用程序
+        String url = ServerMethod.handshake();
 
-        MyRequest<BaseInfoDTO> myRequest = new MyRequest<BaseInfoDTO>(Request.Method.GET, url, BaseInfoDTO.class,
-                new Response.Listener<MyResponse<BaseInfoDTO>>() {
+        MyRequest<HandshakeDTO> myRequest = new MyRequest<HandshakeDTO>(Request.Method.GET, url, HandshakeDTO.class,
+                new Response.Listener<MyResponse<HandshakeDTO>>() {
 
                     @Override
-                    public void onResponse(MyResponse<BaseInfoDTO> response) {
+                    public void onResponse(MyResponse<HandshakeDTO> response) {
 
                         //基础信息，持久化到client中，保证每天只更新一次
                         MyApplication myApplication = (MyApplication) MyApplication.getContext();
-                        myApplication.setBaseInfoDTO(response.getContent());
+                        myApplication.setHandshakeDTO(response.getContent());
 
                     }
                 },

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by pengchao on 6/30/15.
  */
-public class BaseInfoDTO implements Serializable {
+public class HandshakeDTO implements Serializable {
     List<HobbyDTO> hobbys;
 
     public List<HobbyDTO> getHobbyDTOList() {

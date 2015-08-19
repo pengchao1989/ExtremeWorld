@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.CloudpushMessageAndroidRequest;
 import com.taobao.api.request.CloudpushNoticeAndroidRequest;
-import com.taobao.api.response.CloudpushMessageAndroidResponse;
 import com.taobao.api.response.CloudpushNoticeAndroidResponse;
+import com.yumfee.extremeworld.config.ClientConfigManage;
+import com.yumfee.extremeworld.entity.ClientConfig;
 import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
@@ -40,6 +40,9 @@ public class ReplyService
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ClientConfigManage clientConfigManage;
 
 	public Reply getReply(long id)
 	{
@@ -85,13 +88,14 @@ public class ReplyService
 			User Speaker = userDao.findById(reply.getUser().getId());
 
 			// 在此处理推送
-			String appkey = "23213197";
-			String secret = "9b14e759a5cd8b4182202a9d29b4e12e";
+			ClientConfig clientConfig = clientConfigManage.getCilentConfig(3);
+			String appkey = clientConfig.getBaichuanAppKey();
+			String secret = clientConfig.getBaichuanAppSecret();
 			String url = "http://gw.api.taobao.com/router/rest";
 
 			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
 	        CloudpushNoticeAndroidRequest req=new CloudpushNoticeAndroidRequest();
-	        req.setTitle(Speaker.getName() + "对你进行了回复!");
+	        req.setTitle(Speaker.getName() + "回复了你!");
 	        req.setSummary(remind.getContent());
 	        req.setTarget("account");
 	        req.setTargetValue(String.valueOf(topic.getUser().getId()));

@@ -25,7 +25,7 @@ public class ServerMethod {
     public static final String videoUploadToken = server_url + api_version + "/uptoken/video";
     public static final String imgUploadToken = server_url + api_version + "/uptoken/picture";
 
-    public static final String baseInfo(){return method_url + "base_info";};
+    public static final String handshake(){return method_url + "handshake";};
     public static final String account_login() { return method_url + hobby + "account/qqlogin";};
     public static final String account_register () {return method_url + hobby + "account/register";};
     public static final String user(){return method_url + "user/";};

@@ -10,15 +10,14 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.entity.Hobby;
-import com.yumfee.extremeworld.rest.dto.BaseInfoDTO;
+import com.yumfee.extremeworld.rest.dto.HandshakeDTO;
 import com.yumfee.extremeworld.rest.dto.HobbyDTO;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.service.BaseInfoService;
 
 @RestController
-@RequestMapping(value = "/api/v1/base_info")
-public class BaseInfoRestController {
-
+@RequestMapping(value = "/api/v1/handshake")
+public class HandshakeRestController {
 
 	@Autowired
 	BaseInfoService baseInfoService;
@@ -30,8 +29,8 @@ public class BaseInfoRestController {
 		
 		List<HobbyDTO> hobbyDTOs = BeanMapper.mapList(hobbys, HobbyDTO.class);
 		
-		BaseInfoDTO baseInfoDTO = new BaseInfoDTO();
-		baseInfoDTO.setHobbys(hobbyDTOs);
-		return MyResponse.ok(baseInfoDTO);
+		HandshakeDTO handshakeDTO = new HandshakeDTO();
+		handshakeDTO.setHobbys(hobbyDTOs);
+		return MyResponse.ok(handshakeDTO);
 	}
 }

@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.HobbyDTO;
@@ -45,7 +44,7 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
 
         myApplication = (MyApplication) MyApplication.getContext();
 
-        hobbyDTO = myApplication.getBaseInfoDTO().getHobbyDTOList().get(0);
+        hobbyDTO = myApplication.getHandshakeDTO().getHobbyDTOList().get(0);
 
         analysisTaxonomy();
 
@@ -76,7 +75,7 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
 
     private void analysisTaxonomy()
     {
-        HobbyDTO hobbyDTO = myApplication.getBaseInfoDTO().getHobbyDTOList().get(0);
+        HobbyDTO hobbyDTO = myApplication.getHandshakeDTO().getHobbyDTOList().get(0);
 
         taxonomyDTOList = new ArrayList<TaxonomyDTO>();
 
