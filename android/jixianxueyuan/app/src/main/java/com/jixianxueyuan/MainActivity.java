@@ -23,6 +23,7 @@ import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
+import com.jixianxueyuan.dto.request.HandshakeRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
@@ -118,8 +119,18 @@ public class MainActivity extends Activity {
         RequestQueue queue = Volley.newRequestQueue(this);
         //带上client-hobby信息给服务器，以告知最后是登录的那个应用程序
         String url = ServerMethod.handshake();
+        HandshakeRequestDTO handshakeRequestDTO = new HandshakeRequestDTO();
+        String hobbyStamp = Util.getApplicationMetaString(this, "HOBBY");
+        long userId = -1;
+        UserDTO userDTO = MyApplication.getContext().getMine().getUserInfo();
+        if(userDTO != null){
+            userId = userDTO.getId();
+        }
+        handshakeRequestDTO.setHobbyStamp(hobbyStamp);
+        handshakeRequestDTO.setUserId(userId);
 
-        MyRequest<HandshakeDTO> myRequest = new MyRequest<HandshakeDTO>(Request.Method.GET, url, HandshakeDTO.class,
+
+        MyRequest<HandshakeDTO> myRequest = new MyRequest<HandshakeDTO>(Request.Method.POST, url, HandshakeDTO.class,handshakeRequestDTO,
                 new Response.Listener<MyResponse<HandshakeDTO>>() {
 
                     @Override

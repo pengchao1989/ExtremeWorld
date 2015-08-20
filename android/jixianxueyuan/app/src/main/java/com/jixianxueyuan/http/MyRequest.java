@@ -61,7 +61,7 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
         mListener = listener;
         this.clazz = clazz;
 
-
+        MyLog.d("MyRequest", "url=" + url);
     }
 
     @Override

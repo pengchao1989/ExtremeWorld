@@ -42,7 +42,7 @@ public class MyApplication extends Application {
         ServerMethod.setHobby(currentHobby);
 
         //初始化本地用户信息
-        mine = new Mine();
+        mine = Mine.getInstance();
         mine.SerializationFromLocal(this);
 
         //初始化imageLoader

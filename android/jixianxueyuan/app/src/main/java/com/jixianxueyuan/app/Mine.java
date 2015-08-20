@@ -10,11 +10,19 @@ import com.jixianxueyuan.dto.UserDTO;
  */
 public class Mine {
 
+    private static Mine instance = new Mine();
+    public static Mine getInstance(){
+        return instance;
+    }
+
     private final String SAVE_NAME = "mine";
 
     String qqOpenId = "";
     UserDTO userInfo = new UserDTO();
 
+    private Mine(){
+
+    }
 
     public String getQqOpenId() {
         return qqOpenId;
