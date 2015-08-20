@@ -18,6 +18,7 @@ import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.push.PushManage;
 import com.yumfee.extremeworld.repository.RemindDao;
 import com.yumfee.extremeworld.repository.ReplyDao;
 import com.yumfee.extremeworld.repository.TopicDao;
@@ -42,7 +43,7 @@ public class ReplyService
 	private UserDao userDao;
 	
 	@Autowired
-	private ClientConfigManage clientConfigManage;
+	private PushManage pushManage;
 
 	public Reply getReply(long id)
 	{
@@ -79,35 +80,20 @@ public class ReplyService
 		remind.setSpeaker(reply.getUser());
 
 		Topic topic = topicDao.findOne(reply.getTopic().getId());
+		topic.setReplyCount(topic.getReplyCount() + 1);
+		topicDao.save(topic);
+		
 		remind.setTargetContent(topic.getTitle());
 		remind.setListener(topic.getUser());
 
 		if (reply.getUser().getId() != topic.getUser().getId()) {
 			remindDao.save(remind);
 			
-			User Speaker = userDao.findById(reply.getUser().getId());
+			User speaker = userDao.findById(reply.getUser().getId());
 
 			// 在此处理推送
-			ClientConfig clientConfig = clientConfigManage.getCilentConfig(3);
-			String appkey = clientConfig.getBaichuanAppKey();
-			String secret = clientConfig.getBaichuanAppSecret();
-			String url = "http://gw.api.taobao.com/router/rest";
-
-			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-	        CloudpushNoticeAndroidRequest req=new CloudpushNoticeAndroidRequest();
-	        req.setTitle(Speaker.getName() + "回复了你!");
-	        req.setSummary(remind.getContent());
-	        req.setTarget("account");
-	        req.setTargetValue(String.valueOf(topic.getUser().getId()));
-	        try {
-	            CloudpushNoticeAndroidResponse response = client.execute(req);
-	            if(response.isSuccess()){
-	                System.out.println("push  notice is success!");
-	            }
-	        }
-	        catch (Exception e){
-	            System.out.println("push notice is error!");
-	        }
+			pushManage.pushNotice(topic.getUser(), speaker.getName() + "回复了你!", remind.getContent());
+			
 		}
 
 	}

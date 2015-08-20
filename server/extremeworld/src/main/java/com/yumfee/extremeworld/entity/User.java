@@ -31,11 +31,13 @@ public class User extends UserBase
 	private String qq;
 	private String weixin;
 	private String geoHash;
+	private String hobbyStamp;
 	private Date   geoModifyTime;
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
 	private Country country;
+	
 	private List<Hobby> hobbys = new ArrayList<Hobby>();
 	private List<Site> sites = new ArrayList<Site>();
 	private List<Topic> agreeTopics = new ArrayList<Topic>();
@@ -113,7 +115,12 @@ public class User extends UserBase
 	public void setGeoHash(String geoHash) {
 		this.geoHash = geoHash;
 	}
-	
+	public String getHobbyStamp() {
+		return hobbyStamp;
+	}
+	public void setHobbyStamp(String hobbyStamp) {
+		this.hobbyStamp = hobbyStamp;
+	}
 	public Date getGeoModifyTime() {
 		return geoModifyTime;
 	}
@@ -129,6 +136,7 @@ public class User extends UserBase
 	public void setCountry(Country country) {
 		this.country = country;
 	}
+	
 	/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	public List<Topic> getTopics() {
 		return topics;
@@ -167,7 +175,6 @@ public class User extends UserBase
 	{
 		this.sites = sites;
 	}
-	
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "agrees")

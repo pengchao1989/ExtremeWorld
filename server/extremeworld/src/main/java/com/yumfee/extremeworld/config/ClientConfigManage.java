@@ -21,12 +21,12 @@ public class ClientConfigManage {
 	List<ClientConfig> clientConfigList = null;
 	
 	
-	public ClientConfig getCilentConfig(int hobbyId){
+	public ClientConfig getCilentConfig(String hobbyName){
 		
 		clientConfigList = (List<ClientConfig>) clientConfigDao.findAll();
 		
 		for(ClientConfig clientConfig: clientConfigList){
-			if(clientConfig.getHobby().getId() == hobbyId){
+			if(clientConfig.getHobby().geteName().equals(hobbyName)){
 				return clientConfig;
 			}
 		}

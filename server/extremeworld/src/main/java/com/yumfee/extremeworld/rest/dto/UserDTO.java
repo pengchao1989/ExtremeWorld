@@ -20,6 +20,7 @@ public class UserDTO
 	private String avatar;
 	private String description;
 	private String signature;
+	private String hobbyStamp;
 	private String geoHash;
 	private Date geoModifyTime;
 	private double distance;
@@ -99,6 +100,12 @@ public class UserDTO
 	}
 	public void setSignature(String signature) {
 		this.signature = signature;
+	}
+	public String getHobbyStamp() {
+		return hobbyStamp;
+	}
+	public void setHobbyStamp(String hobbyStamp) {
+		this.hobbyStamp = hobbyStamp;
 	}
 	public String getGeoHash() {
 		return geoHash;
