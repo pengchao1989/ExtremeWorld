@@ -1,8 +1,9 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CourseTaxonomysResponseDTO {
+public class CourseTaxonomysResponseDTO implements Serializable {
 
 	List<CourseTaxonomyDTO> courseTaxonomyList;
 

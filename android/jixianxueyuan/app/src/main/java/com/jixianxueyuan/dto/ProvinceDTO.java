@@ -1,9 +1,10 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class ProvinceDTO
+public class ProvinceDTO implements Serializable
 {
 	private String provinceName;
 	private List<CityDTO> citys;

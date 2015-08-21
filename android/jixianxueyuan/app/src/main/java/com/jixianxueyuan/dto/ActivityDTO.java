@@ -1,8 +1,9 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityDTO
+public class ActivityDTO implements Serializable
 {
 	private Long id;
 	private String title;

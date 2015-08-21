@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class SubReplyDTO
+import java.io.Serializable;
+
+public class SubReplyDTO implements Serializable
 {
 	private Long id;
 	private String content;

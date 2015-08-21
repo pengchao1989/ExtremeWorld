@@ -1,9 +1,11 @@
 package com.jixianxueyuan.dto.request;
 
+import java.io.Serializable;
+
 /**
  * Created by pengchao on 6/28/15.
  */
-public class ZanRequest {
+public class ZanRequest implements Serializable {
     private Long topicId;
     private Long userId;
 

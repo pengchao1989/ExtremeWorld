@@ -1,8 +1,9 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ReplyDTO
+public class ReplyDTO implements Serializable
 {
 	private Long id;
 	private String content;

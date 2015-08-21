@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class CityDTO
+import java.io.Serializable;
+
+public class CityDTO implements Serializable
 {
 	private String cityName;
 

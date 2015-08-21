@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class CityGroupDTO
+import java.io.Serializable;
+
+public class CityGroupDTO implements Serializable
 {
 	private String name;
 	private String description;

@@ -1,9 +1,10 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class CourseTaxonomyDTO
+public class CourseTaxonomyDTO implements Serializable
 {
 	private Long id;
 	private String name;

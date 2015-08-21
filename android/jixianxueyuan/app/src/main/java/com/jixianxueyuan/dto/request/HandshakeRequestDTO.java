@@ -1,9 +1,11 @@
 package com.jixianxueyuan.dto.request;
 
+import java.io.Serializable;
+
 /**
  * Created by pengchao on 8/21/15.
  */
-public class HandshakeRequestDTO {
+public class HandshakeRequestDTO implements Serializable {
 
     private Long userId;
     private String hobbyStamp;

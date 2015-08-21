@@ -1,9 +1,11 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by pengchao on 6/24/15.
  */
-public class UploadToken {
+public class UploadToken implements Serializable {
     private String uptoken;
     private String myParam;
 

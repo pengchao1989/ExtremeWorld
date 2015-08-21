@@ -3,10 +3,12 @@ package com.jixianxueyuan.dto.request;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 
+import java.io.Serializable;
+
 /**
  * Created by pengchao on 5/30/15.
  */
-public class ReplyRequest {
+public class ReplyRequest implements Serializable {
 
     private String content;
     private UserMinDTO user;

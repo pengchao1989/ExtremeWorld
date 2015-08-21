@@ -1,8 +1,9 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityDetailDTO
+public class ActivityDetailDTO implements Serializable
 {
 	private String content;
 	private String frontImg;

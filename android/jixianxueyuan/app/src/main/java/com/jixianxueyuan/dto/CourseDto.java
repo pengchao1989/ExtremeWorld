@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class CourseDto
+import java.io.Serializable;
+
+public class CourseDto implements Serializable
 {
 	private Long id;
 	private String name;
