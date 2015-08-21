@@ -71,8 +71,10 @@ public class MainActivity extends Activity {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
+        if(MyApplication.getContext().getAppInfomation().isNeedUpdate()){
+            requestHandshake();
+        }
 
-        requestHandshake();
 
 
         //若本地有登录信息，则直接进行登录
@@ -138,7 +140,7 @@ public class MainActivity extends Activity {
 
                         //基础信息，持久化到client中，保证每天只更新一次
                         MyApplication myApplication = (MyApplication) MyApplication.getContext();
-                        myApplication.setHandshakeDTO(response.getContent());
+                        myApplication.getAppInfomation().setHandshakeDTO(response.getContent());
 
                     }
                 },

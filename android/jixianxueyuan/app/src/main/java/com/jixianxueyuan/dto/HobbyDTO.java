@@ -5,27 +5,40 @@ import java.util.List;
 
 public class HobbyDTO implements Serializable {
 
-	private Long id;
-	private String name;
+    private Long id;
+    private String eName;
+    private String name;
     private List<TaxonomyDTO> taxonomys;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String geteName() {
+        return eName;
+    }
+
+    public void seteName(String eName) {
+        this.eName = eName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<TaxonomyDTO> getTaxonomys() {
         return taxonomys;
     }
+
     public void setTaxonomys(List<TaxonomyDTO> taxonomys) {
         this.taxonomys = taxonomys;
     }
-	
-	
 }

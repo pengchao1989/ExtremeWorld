@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class HobbyDTO {
 
 	private Long id;
+	private String eName;
 	private String name;
 	private List<TaxonomyDTO> taxonomys;
 	public Long getId() {
@@ -15,6 +16,12 @@ public class HobbyDTO {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String geteName() {
+		return eName;
+	}
+	public void seteName(String eName) {
+		this.eName = eName;
 	}
 	public String getName() {
 		return name;

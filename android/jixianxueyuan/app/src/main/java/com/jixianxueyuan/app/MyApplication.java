@@ -22,9 +22,8 @@ public class MyApplication extends Application {
 	private static MyApplication application;
 
 
-    HandshakeDTO handshakeDTO;
     Mine mine;
-    String currentHobby;
+    AppInfomation appInfomation;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -37,9 +36,12 @@ public class MyApplication extends Application {
 		super.onCreate();
 		application = this;
 
+        appInfomation = AppInfomation.getInstance();
+
         //设置app rest api的hobby值
-        currentHobby = Util.getApplicationMetaString(this, "HOBBY");
-        ServerMethod.setHobby(currentHobby);
+        String currentHobbyStamp = Util.getApplicationMetaString(this, "HOBBY");
+        appInfomation.setCurrentHobbyStamp(currentHobbyStamp);
+        ServerMethod.setHobby(currentHobbyStamp);
 
         //初始化本地用户信息
         mine = Mine.getInstance();
@@ -104,13 +106,6 @@ public class MyApplication extends Application {
 		return application;
 	}
 
-    public HandshakeDTO getHandshakeDTO() {
-        return handshakeDTO;
-    }
-
-    public void setHandshakeDTO(HandshakeDTO handshakeDTO) {
-        this.handshakeDTO = handshakeDTO;
-    }
 
     public Mine getMine() {
         return mine;
@@ -120,7 +115,11 @@ public class MyApplication extends Application {
         this.mine = mine;
     }
 
-    public String getCurrentHobby() {
-        return currentHobby;
+    public AppInfomation getAppInfomation() {
+        return appInfomation;
+    }
+
+    public void setAppInfomation(AppInfomation appInfomation) {
+        this.appInfomation = appInfomation;
     }
 }

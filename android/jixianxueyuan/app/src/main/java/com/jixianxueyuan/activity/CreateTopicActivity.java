@@ -339,7 +339,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         topicDTO.setUser(userMinDTO);
         List<HobbyDTO> hobbys = new ArrayList<HobbyDTO>();
         HobbyDTO hobbyDTO = new HobbyDTO();
-        Long hobbyId = HobbyType.getHobbyId(MyApplication.getContext().getCurrentHobby());
+        Long hobbyId = HobbyType.getHobbyId(MyApplication.getContext().getAppInfomation().getCurrentHobbyStamp());
         hobbyDTO.setId(hobbyId);
         hobbys.add(hobbyDTO);
         topicDTO.setHobbys(hobbys);
