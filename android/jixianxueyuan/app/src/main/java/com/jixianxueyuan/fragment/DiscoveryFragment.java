@@ -12,13 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.login.LoginService;
+import com.alibaba.sdk.android.trade.ItemService;
+import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
+import com.alibaba.sdk.android.trade.model.TradeResult;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryListAdapter;
 import com.jixianxueyuan.config.TopicType;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,6 +110,18 @@ public class DiscoveryFragment extends Fragment {
                         break;
                     case 7:
                         ItemService service = AlibabaSDK.getService(ItemService.class);
+                        service.showItemDetailByItemId(DiscoveryFragment.this.getActivity(), new TradeProcessCallback(){
+
+                            @Override
+                            public void onFailure(int i, String s) {
+
+                            }
+
+                            @Override
+                            public void onPaySuccess(TradeResult tradeResult) {
+
+                            }
+                        }, null, 35745641972L, 1, null);
                         break;
                 }
 

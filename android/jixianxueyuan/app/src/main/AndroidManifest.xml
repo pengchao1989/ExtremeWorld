@@ -102,6 +102,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+        <activity android:name="com.alibaba.sdk.android.trade.ui.TradeWebViewActivity"/>
 
         <service android:name="com.jixianxueyuan.util.filedownload.DownloadService" />
 
