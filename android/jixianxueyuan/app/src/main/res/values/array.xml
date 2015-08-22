@@ -12,13 +12,13 @@
     </string-array>
 
     <string-array name="discovery_images">
-        <item>@mipmap/ic_picture_in_picture_black_48dp</item>
-        <item>@mipmap/ic_message_black_48dp</item>
-        <item>@mipmap/ic_school_black_48dp</item>
-        <item>@mipmap/ic_location_on_black_48dp</item>
-        <item>@mipmap/ic_videocam_black_48dp</item>
-        <item>@mipmap/ic_theaters_black_36dp</item>
-        <item>@mipmap/ic_supervisor_account_black_36dp</item>
+        <item>@mipmap/ic_picture_in_picture_white_48dp</item>
+        <item>@mipmap/ic_message_white_48dp</item>
+        <item>@mipmap/ic_school_white_48dp</item>
+        <item>@mipmap/ic_location_on_white_48dp</item>
+        <item>@mipmap/ic_videocam_white_48dp</item>
+        <item>@mipmap/ic_theaters_white_48dp</item>
+        <item>@mipmap/ic_supervisor_account_white_48dp</item>
 
     </string-array>
 
