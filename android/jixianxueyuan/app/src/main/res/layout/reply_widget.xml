@@ -2,47 +2,184 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:emojicon="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/reply_widget_root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/primary_color"
-    android:weightSum="10"
-    android:paddingBottom="6dp"
-    android:paddingTop="6dp"
+    android:orientation="vertical"
     >
 
-    <ImageView
-        android:layout_weight="0.5"
-        android:id="@+id/reply_widget_emoji_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:padding="4dp"
-        android:src="@mipmap/smiley"
-        />
+    <LinearLayout
 
-    <com.yumfee.emoji.EmojiconEditText
-        android:layout_weight="9"
-        android:id="@+id/reply_widget_edittext"
+        android:id="@+id/reply_widget_root_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        emojicon:emojiconSize="28sp"
-        android:hint="@string/we_speek"
-        android:background="@drawable/edittext_background"
-        />
+        android:orientation="horizontal"
+        android:background="@color/primary_color"
+        android:weightSum="10"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+        >
+        <FrameLayout
+            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/reply_widget_add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:padding="4dp"
+                android:src="@drawable/btn_pb_add"
+                />
+            <ImageView
+                android:id="@+id/reply_widget_has_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="2dp"
+                android:layout_gravity="right"
+                android:src="@mipmap/icon_chat_dot"
+                android:visibility="gone"
+                />
+        </FrameLayout>
 
-    <ImageView
-        android:layout_weight="0.5"
-        android:id="@+id/reply_widget_submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:padding="4dp"
-        android:src="@mipmap/ic_send_white_24dp"
-        />
+
+        <com.yumfee.emoji.EmojiconEditText
+            android:layout_weight="9"
+            android:id="@+id/reply_widget_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            emojicon:emojiconSize="28sp"
+            android:hint="@string/we_speek"
+            android:background="@drawable/edittext_background"
+            />
+
+        <ImageView
+            android:layout_weight="0.5"
+            android:id="@+id/reply_widget_submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:padding="4dp"
+            android:src="@mipmap/ic_send_white_24dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/reply_widget_bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@color/grey"
+        >
+
+        <LinearLayout
+            android:id="@+id/reply_widget_action_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="4"
+            >
+
+            <FrameLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:background="@drawable/btn_load_next_bg"
+                    android:clickable="true"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reply_widget_emoji_button"
+                        android:src="@mipmap/btn_pb_add_expression"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/expression"
+                        />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+                <LinearLayout
+                    android:id="@+id/reply_add_image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:background="@drawable/btn_load_next_bg"
+                    android:clickable="true"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_pb_add_pic"
+                        android:src="@mipmap/btn_pb_add_pic"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/image"
+                        />
+
+                </LinearLayout>
+
+            </FrameLayout>
 
 
+        </LinearLayout>
+
+        <View
+            style="@style/DividerView"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/reply_widget_image_listview"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:scrollbars="none"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

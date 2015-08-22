@@ -180,6 +180,11 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        replyWidget.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void initTopicHeadView()
     {

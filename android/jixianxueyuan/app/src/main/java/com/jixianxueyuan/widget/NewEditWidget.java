@@ -100,7 +100,7 @@ public class NewEditWidget {
         //Will automatically set size according to the soft keyboard size
         popup.setSizeForSoftKeyboard();
 
-        //If the emoji popup is dismissed, change emojiButton to smiley icon
+        //If the emoji popup is dismissed, change addEmojiButton to smiley icon
         popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override

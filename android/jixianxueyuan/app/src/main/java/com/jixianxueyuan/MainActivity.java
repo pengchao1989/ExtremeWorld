@@ -72,8 +72,8 @@ public class MainActivity extends Activity {
         shimmer.setRepeatCount(0);
         shimmer.start(appNameTextView);
 
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
-        ImageLoader.getInstance().init(config);
+/*        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoader.getInstance().init(config);*/
 
         if(MyApplication.getContext().getAppInfomation().isNeedUpdate()){
             requestHandshake();
