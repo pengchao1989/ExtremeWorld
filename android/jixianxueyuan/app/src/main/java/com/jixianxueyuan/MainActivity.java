@@ -1,8 +1,10 @@
 package com.jixianxueyuan;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 
 import com.alibaba.cchannel.plugin.CloudPushService;
@@ -14,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.jixianxueyuan.activity.HomeActivity;
+import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
@@ -100,6 +103,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+        MyLog.d("MainActivity", "getDeviceInfo=" + getDeviceInfo(this));
     }
 
     @Override
@@ -256,7 +260,7 @@ public class MainActivity extends Activity {
 
                 Gson gson = new Gson();
                 QQUserInfo qqUserInfo = gson.fromJson(response.toString(), QQUserInfo.class);
-                if(qqUserInfo != null){
+                if (qqUserInfo != null) {
                     Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("qqOpenInfo", qqOpenInfo);
@@ -283,5 +287,37 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         tencent.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    public static String getDeviceInfo(Context context) {
+        try{
+            org.json.JSONObject json = new org.json.JSONObject();
+            android.telephony.TelephonyManager tm = (android.telephony.TelephonyManager) context
+                    .getSystemService(Context.TELEPHONY_SERVICE);
+
+            String device_id = tm.getDeviceId();
+
+            android.net.wifi.WifiManager wifi = (android.net.wifi.WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+            String mac = wifi.getConnectionInfo().getMacAddress();
+            json.put("mac", mac);
+
+            if( TextUtils.isEmpty(device_id) ){
+                device_id = mac;
+            }
+
+            if( TextUtils.isEmpty(device_id) ){
+                device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),android.provider.Settings.Secure.ANDROID_ID);
+            }
+
+            json.put("device_id", device_id);
+
+            return json.toString();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

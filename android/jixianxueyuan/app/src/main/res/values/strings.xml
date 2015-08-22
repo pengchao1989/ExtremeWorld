@@ -35,6 +35,7 @@
     <string name="reply">回复</string>
     <string name="we_speek">我也说一句</string>
     <string name="want_speek">想说点儿什么呢</string>
+    <string name="send">发送</string>
     <string name="title">标题</string>
     <string name="submit">发布</string>
     <string name="reply_success">回复成功</string>
