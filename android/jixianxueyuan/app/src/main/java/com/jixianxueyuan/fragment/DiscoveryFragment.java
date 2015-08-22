@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.alibaba.sdk.android.AlibabaSDK;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
@@ -103,6 +104,9 @@ public class DiscoveryFragment extends Fragment {
                         break;
                     case 6:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
+                        break;
+                    case 7:
+                        ItemService service = AlibabaSDK.getService(ItemService.class);
                         break;
                 }
 
