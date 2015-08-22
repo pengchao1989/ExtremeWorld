@@ -32,17 +32,26 @@ android {
 
         parkour{
             applicationId = "com.jixianxueyuan.parkour"
-            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.parkour",  HOBBY : "parkour", JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}"]
+            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.parkour",
+                                    HOBBY : "parkour",
+                                    JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}"]
 
         }
         bmx{
             applicationId = "com.jixianxueyuan.bmx"
-            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.bmx", HOBBY : "bmx", JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}"]
+            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.bmx",
+                                    HOBBY : "bmx",
+                                    JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}"]
 
         }
         skateboard{
             applicationId = "com.jixianxueyuan.skateboard"
-            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.skateboard", HOBBY : "skateboard", JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}"]
+            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.skateboard",
+                                    HOBBY : "skateboard",
+                                    JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}"]
 
         }
     }
