@@ -97,10 +97,12 @@ public class TopicService
 			
 			mediaWrap.getMedias().add(imgMedia);
 		}
+		if(medias.size() > 0){
+			mediaWrapDao.save(mediaWrap);
+			entity.setMediaWrap(mediaWrap);
+		}
 		
-		mediaWrapDao.save(mediaWrap);
-		
-		entity.setMediaWrap(mediaWrap);
+
 		
 		
 		//去掉img标签后，再提取前160个字符，作为excerpt
