@@ -33,18 +33,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <Spinner
-                        android:id="@+id/create_topic_taxonomy_spinner"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        />
+                        android:orientation="horizontal">
+                        <Spinner
+                            android:id="@+id/create_topic_taxonomy_spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:spinnerMode="dialog"
+                            android:visibility="gone"
+                            />
 
-                    <EditText
-                        android:id="@+id/create_topic_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/title" />
+                        <EditText
+                            android:id="@+id/create_topic_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/title" />
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/create_edit_widget_layout"

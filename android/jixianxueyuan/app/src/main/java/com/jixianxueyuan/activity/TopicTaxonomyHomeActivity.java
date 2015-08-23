@@ -48,18 +48,18 @@ public class TopicTaxonomyHomeActivity extends FragmentActivity {
             switch (topicType)
             {
                 case TopicType.NEWS:
-                    myActionBar.setTitle("新闻");
+                    myActionBar.setTitle(this.getString(R.string.news));
                     niceTabLayout.setVisibility(View.GONE);
                     break;
                 case TopicType.DISCUSS:
-                    myActionBar.setTitle("讨论");
+                    myActionBar.setTitle(this.getString(R.string.discuss));
                     break;
                 case TopicType.S_VIDEO:
-                    myActionBar.setTitle("短视频");
+                    myActionBar.setTitle(this.getString(R.string.s_video));
                     break;
 
                 case TopicType.VIDEO:
-                    myActionBar.setTitle("长视频");
+                    myActionBar.setTitle(this.getString(R.string.video));
                     break;
             }
         }
@@ -67,7 +67,6 @@ public class TopicTaxonomyHomeActivity extends FragmentActivity {
         {
             finish();
         }
-
 
 
         pageAdapter = new TopicTaxonomyListFragmentPageAdapter(this.getSupportFragmentManager(), this, topicType);

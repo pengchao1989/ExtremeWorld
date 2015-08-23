@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.duanqu.qupai.sdk.android.QupaiService;
 import com.duanqu.qupai.sdk.callback.SaveFileCallback;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.adapter.TaxonomySpinnerAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.TopicType;
@@ -101,7 +103,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     List<String> localVideoPathList = null;
     LinkedHashMap<String,VideoUploadResult> serverVideoPathMap = null;
 
-    List<String> taxonomyNameList;
+    List<TaxonomyDTO> taxonomyDTOList;
+    TaxonomySpinnerAdapter taxonomySpinnerAdapter;
 
 
     TopicDTO topicDTO;
@@ -149,7 +152,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         contentEditWidget.setNewEditWidgetListener(this);
 
         initExtra();
-
     }
 
     private void initExtra()
@@ -169,6 +171,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     break;
                 case TopicType.DISCUSS:
                     myActionBar.setTitle("发布讨论");
+                    initTaxonomySpinner();
                     break;
                 case TopicType.S_VIDEO:
                     myActionBar.setTitle("发布短视频");
@@ -178,9 +181,29 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     myActionBar.setTitle("发布新闻");
                     break;
             }
-
         }
+    }
 
+    private void initTaxonomySpinner(){
+        taxonomySpinner.setVisibility(View.VISIBLE);
+        taxonomyDTOList = MyApplication.getContext().getAppInfomation().getCurrentHobbyTaxonomyListOfType(topicType);
+
+        taxonomySpinnerAdapter = new TaxonomySpinnerAdapter(this);
+        taxonomySpinnerAdapter.setTaxonomyDTOList(taxonomyDTOList);
+        taxonomySpinner.setAdapter(taxonomySpinnerAdapter);
+
+        taxonomySpinner.setSelection(taxonomySpinnerAdapter.getTaxonomyIndex(topicTaxonomyId));
+        taxonomySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                topicTaxonomyId = taxonomySpinnerAdapter.getItemId(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     //提交数据流程控制函数
@@ -366,7 +389,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         }
 
         //taxonomy
-        if(topicTaxonomyId != null || topicTaxonomyId != 0L){
+        if(topicTaxonomyId != null && topicTaxonomyId != 0L){
             TaxonomyDTO taxonomyDTO = new TaxonomyDTO();
             taxonomyDTO.setId(topicTaxonomyId);
             topicDTO.setTaxonomy(taxonomyDTO);

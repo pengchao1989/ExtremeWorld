@@ -228,12 +228,15 @@ public class TopicListFragment extends Fragment {
     {
         hideAddLayout();
         Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
-        intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+        intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
         startActivity(intent);
     }
     @OnClick(R.id.topic_list_fragment_add_mood)void onCreateMood()
     {
-
+        hideAddLayout();
+        Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
+        intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+        startActivity(intent);
     }
     @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
     {
