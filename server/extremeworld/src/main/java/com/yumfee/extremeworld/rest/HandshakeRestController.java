@@ -33,6 +33,18 @@ public class HandshakeRestController {
 	@Autowired
 	BaseInfoService baseInfoService;
 	
+	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	MyResponse get(){
+		List<Hobby> hobbys = baseInfoService.getBaseInfo();
+		
+		List<HobbyDTO> hobbyDTOs = BeanMapper.mapList(hobbys, HobbyDTO.class);
+		
+		HandshakeDTO handshakeDTO = new HandshakeDTO();
+		handshakeDTO.setHobbys(hobbyDTOs);
+		return MyResponse.ok(handshakeDTO);
+	}
+	
+	
 	@RequestMapping(method = RequestMethod.POST,consumes = MediaTypes.JSON_UTF_8)
 	MyResponse post(@RequestBody HandshakeRequestDTO handshakeRequest)
 	{

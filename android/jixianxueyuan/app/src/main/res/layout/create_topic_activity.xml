@@ -33,6 +33,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <Spinner
+                        android:id="@+id/create_topic_taxonomy_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        />
+
                     <EditText
                         android:id="@+id/create_topic_title"
                         android:layout_width="match_parent"

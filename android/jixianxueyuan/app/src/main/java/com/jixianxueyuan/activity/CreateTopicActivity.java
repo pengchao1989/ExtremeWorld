@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +71,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     public static final int REQUEST_VIDEO_CODE = 2;
 
     @InjectView(R.id.create_topic_actionbar)MyActionBar myActionBar;
+    @InjectView(R.id.create_topic_taxonomy_spinner)Spinner taxonomySpinner;
     @InjectView(R.id.create_topic_title)EditText titleEditText;
     @InjectView(R.id.create_edit_widget_layout)
     LinearLayout editWidgetLayout;
@@ -98,6 +100,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     List<String> localVideoPathList = null;
     LinkedHashMap<String,VideoUploadResult> serverVideoPathMap = null;
+
+    List<String> taxonomyNameList;
 
 
     TopicDTO topicDTO;
