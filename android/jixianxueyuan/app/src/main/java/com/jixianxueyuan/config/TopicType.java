@@ -5,7 +5,7 @@ package com.jixianxueyuan.config;
  */
 public class TopicType {
 
-    public static final String STRING = "topicType";
+    public static final String TYPE = "topicType";
 
     public static final String ALL = "all";
     public static final String MOOD = "mood";
@@ -14,5 +14,8 @@ public class TopicType {
     public static final String S_VIDEO = "s_video";
     public static final String ACTIVITY = "activity";
     public static final String NEWS = "news";
+
+    public static final String TOPIC_TAXONOMY_ID = "topicTaxonomyId";
+    public static final String TOPIC_TAXONOMY_NAME = "topicTaxonomyName";
 
 }

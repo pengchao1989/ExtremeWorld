@@ -3,7 +3,6 @@ package com.jixianxueyuan.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -13,9 +12,6 @@ import com.jixianxueyuan.adapter.TopicTaxonomyListFragmentPageAdapter;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.MyActionBar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -44,9 +40,9 @@ public class TopicTaxonomyHomeActivity extends FragmentActivity {
         ButterKnife.inject(this);
 
         Intent intent = this.getIntent();
-        if(intent.hasExtra(TopicType.STRING))
+        if(intent.hasExtra(TopicType.TYPE))
         {
-            topicType = intent.getStringExtra(TopicType.STRING);
+            topicType = intent.getStringExtra(TopicType.TYPE);
             MyLog.d("TopicTaxonomyHomeActivity", "topicType=" + topicType);
 
             switch (topicType)

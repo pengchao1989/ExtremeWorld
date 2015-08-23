@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.login.LoginService;
 import com.alibaba.sdk.android.trade.ItemService;
 import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
 import com.alibaba.sdk.android.trade.model.TradeResult;
@@ -83,11 +82,11 @@ public class DiscoveryFragment extends Fragment {
                 {
                     case 0:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
-                        intent.putExtra(TopicType.STRING, TopicType.NEWS);
+                        intent.putExtra(TopicType.TYPE, TopicType.NEWS);
                         break;
                     case 1:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
-                        intent.putExtra(TopicType.STRING, TopicType.DISCUSS);
+                        intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
                         break;
 
                     case 2:
@@ -98,12 +97,12 @@ public class DiscoveryFragment extends Fragment {
 
                     case 4:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
-                        intent.putExtra(TopicType.STRING, TopicType.S_VIDEO);
+                        intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
                         break;
 
                     case 5:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
-                        intent.putExtra(TopicType.STRING, TopicType.VIDEO);
+                        intent.putExtra(TopicType.TYPE, TopicType.VIDEO);
                         break;
                     case 6:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);

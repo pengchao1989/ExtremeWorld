@@ -78,8 +78,10 @@ public class MyApplication extends Application {
         CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
         if(cloudPushService != null) {
             if(getMine().getUserInfo() != null){
-                long userId = getMine().getUserInfo().getId();
-                cloudPushService.bindAccount(String.valueOf(userId));
+                if(getMine().getUserInfo().getId() != null){
+                    long userId = getMine().getUserInfo().getId();
+                    cloudPushService.bindAccount(String.valueOf(userId));
+                }
             }
 
             cloudPushService.register(applicationContext,  new RunnableCallbackAdapter<Void>() {
@@ -87,7 +89,6 @@ public class MyApplication extends Application {
                 public void onSuccess(Void result) {
                     Log.d(CloudChannelConstants.TAG, "init cloudchannel success");
                 }
-
 
                 @Override
                 public void onFailed(Exception exception){

@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
         String hobbyStamp = Util.getApplicationMetaString(this, "HOBBY");
         long userId = -1;
         UserDTO userDTO = MyApplication.getContext().getMine().getUserInfo();
-        if(userDTO != null){
+        if(userDTO != null && userDTO.getId() != null){
             userId = userDTO.getId();
         }
         handshakeRequestDTO.setHobbyStamp(hobbyStamp);
@@ -155,7 +155,6 @@ public class MainActivity extends Activity {
                     @Override
                     public void onResponse(MyResponse<HandshakeDTO> response) {
 
-                        //基础信息，持久化到client中，保证每天只更新一次
                         MyApplication myApplication = (MyApplication) MyApplication.getContext();
                         myApplication.getAppInfomation().setHandshakeDTO(response.getContent());
 

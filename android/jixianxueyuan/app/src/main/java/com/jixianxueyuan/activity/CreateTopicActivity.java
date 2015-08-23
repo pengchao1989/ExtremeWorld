@@ -30,15 +30,14 @@ import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.VideoRecordConfig;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.TaxonomyDTO;
 import com.jixianxueyuan.dto.TopicDTO;
-import com.jixianxueyuan.dto.UploadToken;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiNiuImageUpload;
 import com.jixianxueyuan.util.qiniu.QiNiuImageUploadListener;
 import com.jixianxueyuan.util.qiniu.QiNiuVideoUpload;
@@ -47,8 +46,6 @@ import com.jixianxueyuan.util.qiniu.VideoUploadResult;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.NewEditWidget;
 import com.jixianxueyuan.widget.NewEditWidgetListener;
-import com.jixianxueyuan.widget.NoScorllBarGridView;
-import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -91,7 +88,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     NewEditWidget contentEditWidget;
 
     String topicType = null;
-    String topicTaxonomyId = null;
+    Long topicTaxonomyId = null;
     String topicTaxonomyName = null;
     String videoPath = null;
     String thumblePath = null;
@@ -157,14 +154,14 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         Bundle bundle = intent.getExtras();
         if(bundle != null)
         {
-            topicType = bundle.getString(TopicType.STRING);
-            topicTaxonomyId = bundle.getString("topicTaxonomyId");
-            topicTaxonomyName = bundle.getString("topicTaxonomyName");
+            topicType = bundle.getString(TopicType.TYPE);
+            topicTaxonomyId = bundle.getLong(TopicType.TOPIC_TAXONOMY_ID);
+            topicTaxonomyName = bundle.getString(TopicType.TOPIC_TAXONOMY_NAME);
 
             switch (topicType)
             {
                 case TopicType.MOOD:
-                    myActionBar.setTitle("发布动态");
+                    myActionBar.setTitle("发布心情");
                     break;
                 case TopicType.DISCUSS:
                     myActionBar.setTitle("发布讨论");
@@ -194,7 +191,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         //若不存在视频但存在图片，则走图片上传链
         if(localImagePathList != null && localImagePathList.size() > 0)
         {
-            submitImage();
+            uploadImage();
         }
         //若存在视频则走视频上传链
         else if(localVideoPathList != null && localVideoPathList.size() > 0)
@@ -233,7 +230,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
                 isUploadedVideo = true;
                 if(localImagePathList != null && localImagePathList.size() > 0 && isUploadedImage == false){
-                    submitImage();
+                    uploadImage();
                 }else {
                     submitContent();
                 }
@@ -246,7 +243,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         });
     }
 
-    private void submitImage()
+    private void uploadImage()
     {
         QiNiuImageUpload qiNiuPictureUpload = new QiNiuImageUpload(this);
         qiNiuPictureUpload.upload(localImagePathList, new QiNiuImageUploadListener() {
@@ -363,6 +360,14 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                 topicDTO.setType(TopicType.NEWS);
                 break;
         }
+
+        //taxonomy
+        if(topicTaxonomyId != null || topicTaxonomyId != 0L){
+            TaxonomyDTO taxonomyDTO = new TaxonomyDTO();
+            taxonomyDTO.setId(topicTaxonomyId);
+            topicDTO.setTaxonomy(taxonomyDTO);
+        }
+
 
         if(videoDetailDTO != null){
             topicDTO.setVideoDetail(videoDetailDTO);

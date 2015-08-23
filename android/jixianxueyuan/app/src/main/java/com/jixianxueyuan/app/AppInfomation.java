@@ -72,6 +72,6 @@ public class AppInfomation{
 
     private void writeSerializationToLocal(){
         ACache mCache = ACache.get(MyApplication.getContext());
-        mCache.put(HANDSHAKEDTO, handshakeDTO,1 * ACache.TIME_HOUR);
+        mCache.put(HANDSHAKEDTO, handshakeDTO,1 * 60/*ACache.TIME_HOUR*/);
     }
 }

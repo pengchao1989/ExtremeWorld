@@ -55,8 +55,8 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
     public Fragment getItem(int position) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(TopicType.STRING, topicType);
-        bundle.putString("topicTaxonomyId", String.valueOf(taxonomyDTOList.get(position).getId()));
+        bundle.putString(TopicType.TYPE, topicType);
+        bundle.putLong("topicTaxonomyId", taxonomyDTOList.get(position).getId());
         TopicListFragment fragment = new TopicListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -93,8 +93,8 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
                     taxonomyDTO.getName(), // Title
                     R.drawable.ic_home, // Icon
                     R.drawable.ic_home_a, // Icon
-                    mContext.getResources().getColor(R.color.blue), // Indicator color
-                    mContext.getResources().getColor(R.color.blue) // Divider color
+                    mContext.getResources().getColor(R.color.white), // Indicator color
+                    mContext.getResources().getColor(R.color.white) // Divider color
             ));
         }
     }

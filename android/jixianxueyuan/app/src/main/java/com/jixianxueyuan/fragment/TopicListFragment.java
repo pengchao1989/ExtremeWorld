@@ -16,17 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.system.RequestCode;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.duanqu.qupai.sdk.android.QupaiService;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
@@ -40,7 +34,6 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.LoadMoreView;
 import com.melnykov.fab.FloatingActionButton;
-import com.alibaba.sdk.android.callback.FailureCallback;
 
 import java.util.List;
 
@@ -71,7 +64,7 @@ public class TopicListFragment extends Fragment {
 
     /*以下两个参数用于定义topic范围，从arg传递过来*/
     String topicType;
-    String topicTaxonomyId;
+    Long topicTaxonomyId;
 
     LoadMoreView loadMoreView;
     int currentPage = 0;
@@ -106,13 +99,13 @@ public class TopicListFragment extends Fragment {
         ButterKnife.inject(this,view);
 
         Bundle bundle = getArguments();
-        if(bundle.containsKey(TopicType.STRING))
+        if(bundle.containsKey(TopicType.TYPE))
         {
-            topicType = bundle.getString(TopicType.STRING);
+            topicType = bundle.getString(TopicType.TYPE);
         }
         if(bundle.containsKey("topicTaxonomyId"))
         {
-            topicTaxonomyId = bundle.getString("topicTaxonomyId");
+            topicTaxonomyId = bundle.getLong("topicTaxonomyId");
         }
 
 
@@ -141,13 +134,14 @@ public class TopicListFragment extends Fragment {
                         break;
                     case TopicType.NEWS:
                         Intent intent = new Intent(TopicListFragment.this.getActivity(), CreateTopicActivity.class);
-                        intent.putExtra(TopicType.STRING, TopicType.NEWS);
+                        intent.putExtra(TopicType.TYPE, TopicType.NEWS);
+                        intent.putExtra(TopicType.TOPIC_TAXONOMY_ID, topicTaxonomyId);
                         startActivity(intent);
                         break;
                     case TopicType.DISCUSS:
                         Intent intent2 = new Intent(TopicListFragment.this.getActivity(), CreateTopicActivity.class);
-                        intent2.putExtra(TopicType.STRING, TopicType.DISCUSS);
-                        intent2.putExtra("topicTaxonomyId", topicTaxonomyId);
+                        intent2.putExtra(TopicType.TYPE, TopicType.DISCUSS);
+                        intent2.putExtra(TopicType.TOPIC_TAXONOMY_ID, topicTaxonomyId);
                         startActivity(intent2);
                         break;
                     case TopicType.S_VIDEO:
@@ -209,16 +203,16 @@ public class TopicListFragment extends Fragment {
             case TopicType.MOOD:
             case TopicType.NEWS:
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
-                intent.putExtra(TopicType.STRING, TopicType.MOOD);
+                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
                 break;
             case TopicType.DISCUSS:
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
-                intent.putExtra(TopicType.STRING, TopicType.DISCUSS);
+                intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
                 break;
             case TopicType.VIDEO:
             case TopicType.S_VIDEO:
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
-                intent.putExtra(TopicType.STRING, TopicType.S_VIDEO);
+                intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
                 break;
 
         }
@@ -234,7 +228,7 @@ public class TopicListFragment extends Fragment {
     {
         hideAddLayout();
         Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
-        intent.putExtra(TopicType.STRING, TopicType.MOOD);
+        intent.putExtra(TopicType.TYPE, TopicType.MOOD);
         startActivity(intent);
     }
     @OnClick(R.id.topic_list_fragment_add_mood)void onCreateMood()
@@ -245,7 +239,7 @@ public class TopicListFragment extends Fragment {
     {
         hideAddLayout();
         Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
-        intent.putExtra(TopicType.STRING, TopicType.S_VIDEO);
+        intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
         startActivity(intent);
     }
 
