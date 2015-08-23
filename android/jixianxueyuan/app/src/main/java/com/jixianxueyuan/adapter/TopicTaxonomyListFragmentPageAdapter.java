@@ -28,8 +28,6 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
 
     FragmentManager fm;
 
-    HobbyDTO hobbyDTO;
-
     String topicType;
 
     List<TaxonomyDTO> taxonomyDTOList;
@@ -44,7 +42,6 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
 
         myApplication = (MyApplication) MyApplication.getContext();
 
-        hobbyDTO = myApplication.getAppInfomation().getCurrentHobbyInfo();
 
         analysisTaxonomy();
 
@@ -75,7 +72,7 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
 
     private void analysisTaxonomy()
     {
-        taxonomyDTOList = myApplication.getAppInfomation().getCurrentHobbyInfo().getTaxonomys();
+        taxonomyDTOList = myApplication.getAppInfomation().getCurrentHobbyTaxonomyListOfType(topicType);
     }
 
     @Override
