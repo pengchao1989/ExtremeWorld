@@ -41,7 +41,7 @@
         <item name="android:listSelector">#00000000</item>
     </style>
 
-    <style name="ListItem">
+    <style name="ListItemLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">@dimen/list_horizontal_padding</item>
@@ -49,6 +49,11 @@
         <item name="android:paddingTop">@dimen/list_item_vertical_padding</item>
         <item name="android:paddingBottom">@dimen/list_item_vertical_padding</item>
         <item name="android:background">@drawable/list_item_background</item>
+    </style>
+
+    <style name="SmallListItemLayout" parent="@style/ListItemLayout">
+        <item name="android:paddingTop">@dimen/small_list_item_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/small_list_item_vertical_padding</item>
     </style>
 
     <style name="ListPrimaryText">

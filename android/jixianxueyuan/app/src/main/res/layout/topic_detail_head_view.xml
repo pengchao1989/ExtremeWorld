@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="4dp"
     android:background="@color/background"
-    style="@style/ListItem"
+    style="@style/ListItemLayout"
     >
 
     <include layout="@layout/user_info_head_view"/>
