@@ -3,30 +3,20 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -35,11 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
@@ -56,8 +42,6 @@ import com.jixianxueyuan.dto.request.ZanRequest;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.server.StaticResourceConfig;
-import com.jixianxueyuan.util.AnalyzeContent;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MImageGetter;
@@ -69,13 +53,7 @@ import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yumfee.emoji.EmojiconEditText;
 import com.yumfee.emoji.EmojiconTextView;
-
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xml.sax.XMLReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,11 +61,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 /**
  * Created by pengchao on 5/22/15.
@@ -359,7 +337,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         String url = ServerMethod.reply() + "?topicId="+ topicDTO.getId() + "&page=" + (currentPage + 1) ;
         MyLog.d(tag, "request=" + url);
 
-        MyPageRequest<ReplyDTO> stringRequest = new MyPageRequest<ReplyDTO>(Request.Method.GET,url,ReplyDTO.class,
+        MyPageRequest<ReplyDTO> myPageRequest = new MyPageRequest<ReplyDTO>(Request.Method.GET,url,ReplyDTO.class,
                 new Response.Listener<MyResponse<MyPage<ReplyDTO>>>()
                 {
                     @Override
@@ -387,7 +365,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                     }
                 });
 
-        queue.add(stringRequest);
+        queue.add(myPageRequest);
     }
 
     private void submitReply(String replyContent)
@@ -637,5 +615,12 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             }
         }
         return false;
+    }
+
+    @OnItemClick(R.id.topic_detail_listview)void onReplyItemClicked(int position){
+        Intent intent = new Intent(TopicDetailActivity.this, ReplyDetailActivity.class);
+        ReplyDTO replyDTO = (ReplyDTO) adapter.getItem(position -1);
+        intent.putExtra("reply", replyDTO);
+        startActivity(intent);
     }
 }

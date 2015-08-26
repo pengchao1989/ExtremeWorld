@@ -37,13 +37,9 @@ public class ServerMethod {
     public static final String course_explain () {return method_url + hobby + "course/explain/";};
     public static final String damaku(){return method_url + "danmubi";};
     public static final String reply(){return  method_url + "reply";};
+    public static final String sub_reply(){return method_url + "sub_reply";};
     public static final String zan() {return method_url  + "topic_agree";}
     public static final String near_friend (){return method_url + hobby + "geo/near_friend";};
     public static final String remind() {return method_url + "remind/";};
-
-
-
-
-
 
 }

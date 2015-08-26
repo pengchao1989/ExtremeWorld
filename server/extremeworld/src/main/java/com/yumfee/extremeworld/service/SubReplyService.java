@@ -42,9 +42,9 @@ public class SubReplyService {
 		return subReplyDao.findOne(id);
 	}
 	
-	public Page<SubReply> getALl(int pageNumber, int pageSize){
+	public Page<SubReply> getAll(long replyId, int pageNumber, int pageSize){
 		PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize);
-		return subReplyDao.findAll(pageRequest);
+		return subReplyDao.findByReplyId(replyId, pageRequest);
 	}
 	
 	public void saveSubReply(SubReply subReply){

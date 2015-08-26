@@ -14,6 +14,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.util.MyLog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +50,7 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
         super(Request.Method.GET, url,null , listener, errorListener);
         mListener = listener;
         this.classz = classz;
+        MyLog.d("MyRequest", "url=" + url);
     }
 
     public MyPageRequest(int method ,String url, Class<T> classz, Response.Listener<MyResponse<MyPage<T>>> listener,  Response.ErrorListener errorListener) {
@@ -56,6 +58,7 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
         super(method, url,null , listener, errorListener);
         mListener = listener;
         this.classz = classz;
+        MyLog.d("MyRequest", "url=" + url);
     }
 
     public MyPageRequest(int method, String url, Class<T> classz, Object requestBodyObject, Response.Listener<MyResponse<MyPage<T>>> listener,  Response.ErrorListener errorListener) {
@@ -65,6 +68,7 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
         this.mRequestBodyObject = requestBodyObject;
         mListener = listener;
         this.classz = classz;
+        MyLog.d("MyRequest", "url=" + url);
     }
 
     @Override

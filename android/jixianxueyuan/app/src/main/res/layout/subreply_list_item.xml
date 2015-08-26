@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
+    >
+
+    <com.yumfee.emoji.EmojiconTextView
+        android:id="@+id/subreply_list_item_content"
+        android:layout_marginTop="@dimen/list_content_margin_head"
+        style="@style/ListSecondaryTextSmall"
+        emojicon:emojiconSize="28sp" />
+
+</LinearLayout>

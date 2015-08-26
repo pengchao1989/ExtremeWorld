@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/topic_detail_swipeback_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    >
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        my:my_title="话题详情"
+        />
+
+    <RelativeLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/reply_detail_listview"
+            android:paddingBottom="@dimen/bottom_input_widget_heigh"
+            style="@style/ListView"
+            />
+
+        <LinearLayout
+            android:id="@+id/reply_widget_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            />
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>

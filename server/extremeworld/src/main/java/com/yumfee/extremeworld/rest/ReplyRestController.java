@@ -47,9 +47,9 @@ public class ReplyRestController
 		
 		Page<Reply> replyPage = replyService.getAll(topicId, pageNumber, pageSize);
 		
-		MyPage<ReplyDTO, Reply> replyPageNew = new MyPage<ReplyDTO, Reply>(ReplyDTO.class, replyPage);
+		MyPage<ReplyDTO, Reply> myReplyPage = new MyPage<ReplyDTO, Reply>(ReplyDTO.class, replyPage);
 		
-		return MyResponse.ok(replyPageNew);
+		return MyResponse.ok(myReplyPage);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
