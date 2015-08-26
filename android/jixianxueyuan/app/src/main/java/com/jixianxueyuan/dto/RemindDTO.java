@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class RemindDTO implements Serializable {
     private String content;
     private String targetContent;
-    private String targetType;
+    private int targetType;
     private Long targetId;
     private String createTime;
 
@@ -31,11 +31,11 @@ public class RemindDTO implements Serializable {
         this.targetContent = targetContent;
     }
 
-    public String getTargetType() {
+    public int getTargetType() {
         return targetType;
     }
 
-    public void setTargetType(String targetType) {
+    public void setTargetType(int targetType) {
         this.targetType = targetType;
     }
 

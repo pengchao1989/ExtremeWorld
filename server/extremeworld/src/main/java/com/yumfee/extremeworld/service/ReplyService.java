@@ -8,12 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.CloudpushNoticeAndroidRequest;
-import com.taobao.api.response.CloudpushNoticeAndroidResponse;
-import com.yumfee.extremeworld.config.ClientConfigManage;
-import com.yumfee.extremeworld.entity.ClientConfig;
+import com.yumfee.extremeworld.config.RemindType;
 import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
@@ -74,15 +69,16 @@ public class ReplyService
 
 		// 在此处理提醒数据
 		Remind remind = new Remind();
-		remind.setTargetType("topic");
+		remind.setType(RemindType.TYPE_REPLY);
 		remind.setContent(reply.getContent());
-		remind.setTargetId(reply.getTopic().getId());
 		remind.setSpeaker(reply.getUser());
 
 		Topic topic = topicDao.findOne(reply.getTopic().getId());
 		topic.setReplyCount(topic.getReplyCount() + 1);
 		topicDao.save(topic);
 		
+		remind.setTargetId(topic.getId());
+		remind.setTargetType(RemindType.TARGET_TYPE_TOPIC);
 		remind.setTargetContent(topic.getTitle());
 		remind.setListener(topic.getUser());
 

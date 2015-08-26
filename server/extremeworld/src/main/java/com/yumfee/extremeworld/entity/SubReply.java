@@ -18,6 +18,7 @@ public class SubReply extends IdEntity
 	
 	private User user;
 	
+	private Reply reply;
 	private SubReply preSubReply;
 
 	public String getContent()
@@ -51,6 +52,16 @@ public class SubReply extends IdEntity
 	public void setUser(User user)
 	{
 		this.user = user;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "reply_id")
+	public Reply getReply() {
+		return reply;
+	}
+
+	public void setReply(Reply reply) {
+		this.reply = reply;
 	}
 
 	@ManyToOne

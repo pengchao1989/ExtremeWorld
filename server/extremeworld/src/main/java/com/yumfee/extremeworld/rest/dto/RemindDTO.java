@@ -8,7 +8,7 @@ public class RemindDTO {
 
 	private String content;
 	private String targetContent;
-	private String targetType;
+	private int targetType;
 	private Long targetId;
 	private Date createTime;
 	
@@ -26,10 +26,10 @@ public class RemindDTO {
 	public void setTargetContent(String targetContent) {
 		this.targetContent = targetContent;
 	}
-	public String getTargetType() {
+	public int getTargetType() {
 		return targetType;
 	}
-	public void setTargetType(String targetType) {
+	public void setTargetType(int targetType) {
 		this.targetType = targetType;
 	}
 	public Long getTargetId() {

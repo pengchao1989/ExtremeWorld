@@ -11,14 +11,21 @@ import javax.persistence.Table;
 @Table(name = "tb_remind")
 public class Remind extends IdEntity{
 	
+	private int type;
 	private String content;
 	private String targetContent;
-	private String targetType;
+	private int targetType;
 	private Long targetId;
 	private Date createTime;
 	private User speaker;
 	private User listener;
 	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public String getContent() {
 		return content;
 	}
@@ -31,10 +38,10 @@ public class Remind extends IdEntity{
 	public void setTargetContent(String targetContent) {
 		this.targetContent = targetContent;
 	}
-	public String getTargetType() {
+	public int getTargetType() {
 		return targetType;
 	}
-	public void setTargetType(String targetType) {
+	public void setTargetType(int targetType) {
 		this.targetType = targetType;
 	}
 	public Long getTargetId() {
