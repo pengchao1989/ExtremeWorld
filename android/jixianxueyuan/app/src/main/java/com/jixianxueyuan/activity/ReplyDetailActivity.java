@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ import com.jixianxueyuan.dto.request.SubReplyRequest;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.widget.ReplyWidget;
+import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -35,10 +38,12 @@ import me.nereo.multi_image_selector.bean.Image;
 /**
  * Created by pengchao on 8/22/15.
  */
-public class ReplyDetailActivity extends Activity {
+public class ReplyDetailActivity extends Activity implements ReplyWidgetListener {
 
 
     @InjectView(R.id.reply_detail_listview)ListView listView;
+    @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
+    ReplyWidget replyWidget;
 
     ReplyDTO replyDTO;
 
@@ -57,7 +62,16 @@ public class ReplyDetailActivity extends Activity {
         adapter = new SubReplylListAdapter(this);
         listView.setAdapter(adapter);
 
+        replyWidget = new ReplyWidget(this, contentLayout);
+        replyWidget.setReplyWidgetListener(this);
+
         requestSubReplyList();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        replyWidget.onActivityResult(requestCode, resultCode, data);
     }
 
     private void getIntentData(){
@@ -139,6 +153,11 @@ public class ReplyDetailActivity extends Activity {
 
         subReplyRequest.setReply(replyDTO);
         return subReplyRequest;
+
+    }
+
+    @Override
+    public void onCommit(String text) {
 
     }
 }

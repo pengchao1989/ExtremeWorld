@@ -36,6 +36,7 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
 import com.jixianxueyuan.dto.request.ZanRequest;
@@ -76,7 +77,6 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
-
 
     TopicDTO topicDTO;
 
@@ -388,6 +388,11 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                             if(isLastPage())
                             {
                                 ReplyDTO replyDTO = response.getContent();
+                                UserDTO mine = MyApplication.getContext().getMine().getUserInfo();
+                                replyDTO.getUser().setName(mine.getName());
+                                replyDTO.getUser().setAvatar(mine.getAvatar());
+                                replyDTO.getUser().setGender(mine.getGender());
+                                replyDTO.getUser().setId(mine.getId());
                                 adapter.addNew(replyDTO);
                             }
 
