@@ -100,6 +100,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
         viewHolder.nameTextView.setText(replyDTO.getUser().getName());
         viewHolder.timeTextView.setText(replyDTO.getCreateTime());
         viewHolder.replyContentTextView.setText(replyDTO.getContent());
+        viewHolder.floorTextView.setText(replyDTO.getFloor() + context.getString(R.string.floor));
 
 
         String url = replyDTO.getUser().getAvatar() + "!androidListAvatar";
@@ -206,6 +207,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
+        @InjectView(R.id.user_head_right_tip)TextView floorTextView;
         @InjectView(R.id.topic_detail_list_item_reply_content)EmojiconTextView replyContentTextView;
 
         @InjectView(R.id.topic_detail_list_item_sub_reply_content_1)

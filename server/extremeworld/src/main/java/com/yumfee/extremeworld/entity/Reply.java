@@ -18,6 +18,7 @@ public class Reply extends IdEntity
 {
 	private String content;
 	private Date createTime;
+	private int floor;
 	
 	private List<SubReply> subReplys = new ArrayList<SubReply>();
 	
@@ -43,6 +44,14 @@ public class Reply extends IdEntity
 	public void setCreateTime(Date createTime)
 	{
 		this.createTime = createTime;
+	}
+
+	public int getFloor() {
+		return floor;
+	}
+
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
 
 	@OneToMany

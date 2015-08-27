@@ -63,7 +63,12 @@ public class ReplyService
 	}
 	
 	public void saveReply(Reply reply) {
+		
+		Topic topic = topicDao.findOne(reply.getTopic().getId());
+		reply.setFloor(topic.getReplyCount() + 1);
 		replyDao.save(reply);
+		topic.setReplyCount(topic.getReplyCount() + 1);
+		topicDao.save(topic);
 
 		// TODO下面代码应异步处理
 
@@ -73,10 +78,6 @@ public class ReplyService
 		remind.setContent(reply.getContent());
 		remind.setSpeaker(reply.getUser());
 
-		Topic topic = topicDao.findOne(reply.getTopic().getId());
-		topic.setReplyCount(topic.getReplyCount() + 1);
-		topicDao.save(topic);
-		
 		remind.setTargetId(topic.getId());
 		remind.setTargetType(RemindType.TARGET_TYPE_TOPIC);
 		remind.setTargetContent(topic.getTitle());

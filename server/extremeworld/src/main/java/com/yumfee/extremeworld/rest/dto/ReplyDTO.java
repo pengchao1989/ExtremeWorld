@@ -11,6 +11,7 @@ public class ReplyDTO
 	private Long id;
 	private String content;
 	private Date createTime;
+	private int floor;
 	private UserMinDTO user;
 	private List<SubReplyDTO> subReplys;
 	
@@ -39,6 +40,12 @@ public class ReplyDTO
 	public void setCreateTime(Date createTime)
 	{
 		this.createTime = createTime;
+	}
+	public int getFloor() {
+		return floor;
+	}
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
 	public UserMinDTO getUser()
 	{
