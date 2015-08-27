@@ -237,6 +237,33 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
         contentContainer.addView(view);
     }
 
+    public String getText(){
+        return emojiconEditText.getText().toString();
+    }
+
+    public void setText(String text){
+        emojiconEditText.setText(text);
+        emojiconEditText.setSelection(text.length());
+    }
+
+    public void setHint(String hint){
+        emojiconEditText.setText("");
+        emojiconEditText.setHint(hint);
+    }
+
+    public void resetHint(){
+        emojiconEditText.setText("");
+        emojiconEditText.setHint(R.string.we_speek);
+    }
+
+    public void showKeyboard(){
+        showSoftKeyboard(emojiconEditText);
+    }
+
+    public void hideKeyboard(){
+        hideSoftKeyboard(emojiconEditText);
+    }
+
     public void setReplyWidgetListener(ReplyWidgetListener replyWidgetListener) {
         this.replyWidgetListener = replyWidgetListener;
     }

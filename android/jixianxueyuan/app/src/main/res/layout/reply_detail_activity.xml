@@ -11,9 +11,9 @@
     >
 
     <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/reply_detail_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        my:my_title="话题详情"
         />
 
     <RelativeLayout
@@ -24,6 +24,7 @@
         <ListView
             android:id="@+id/reply_detail_listview"
             android:paddingBottom="@dimen/bottom_input_widget_heigh"
+            android:transcriptMode="normal"
             style="@style/ListView"
             />
 

@@ -36,6 +36,11 @@ public class SubReplylListAdapter extends BaseAdapter {
         subReplyDTOList = new LinkedList<SubReplyDTO>();
     }
 
+    public void addData(SubReplyDTO subReplyDTO){
+        subReplyDTOList.add(subReplyDTO);
+        this.notifyDataSetChanged();
+    }
+
     public void setData(List<SubReplyDTO> subReplyDTOs){
         if(subReplyDTOList != null){
             subReplyDTOList.clear();
