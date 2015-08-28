@@ -35,7 +35,7 @@ public class RemindRestController {
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
 		
-		Page<Remind> remindList = remindService.getAll(id,pageNumber, pageSize);
+		Page<Remind> remindList = remindService.getAll(id,pageNumber, pageSize, sortType);
 		
 		MyPage<RemindDTO, Remind> myRemindPage = new MyPage<RemindDTO, Remind>(RemindDTO.class, remindList);
 		

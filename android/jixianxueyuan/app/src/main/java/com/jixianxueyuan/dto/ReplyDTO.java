@@ -9,6 +9,7 @@ public class ReplyDTO implements Serializable
 	private String content;
 	private String createTime;
 	private int floor;
+    private int subReplyCount;
 	private UserMinDTO user;
 	private List<SubReplyDTO> subReplys;
 	
@@ -39,7 +40,13 @@ public class ReplyDTO implements Serializable
 	public int getFloor() {
 		return floor;
 	}
-	public void setFloor(int floor) {
+    public int getSubReplyCount() {
+        return subReplyCount;
+    }
+    public void setSubReplyCount(int subReplyCount) {
+        this.subReplyCount = subReplyCount;
+    }
+    public void setFloor(int floor) {
 		this.floor = floor;
 	}
 	public UserMinDTO getUser()

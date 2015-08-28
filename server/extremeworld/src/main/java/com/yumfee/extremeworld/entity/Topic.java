@@ -38,6 +38,7 @@ public class Topic extends IdEntity
 	private String content;
 	private int imageCount;
 	private int replyCount;
+	private int allReplyCount;
 	private int viewCount;
 	private int agreeCount;
 	private Date createTime;
@@ -113,7 +114,12 @@ public class Topic extends IdEntity
 	{
 		this.replyCount = replyCount;
 	}
-	
+	public int getAllReplyCount() {
+		return allReplyCount;
+	}
+	public void setAllReplyCount(int allReplyCount) {
+		this.allReplyCount = allReplyCount;
+	}
 	public int getViewCount() {
 		return viewCount;
 	}

@@ -109,7 +109,7 @@ public class TopicListAdapter extends BaseAdapter {
         viewHolder.nameTextView.setText(topicDTO.getUser().getName());
         String timeAgo = DateTimeFormatter.getTimeAgo(context, topicDTO.getCreateTime());
         viewHolder.timeTextView.setText(timeAgo);
-        viewHolder.viewCountTextView.setText( String.valueOf(topicDTO.getReplyCount()));
+        viewHolder.viewCountTextView.setText( String.valueOf(topicDTO.getAllReplyCount()));
         viewHolder.agreeCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
         String avatarUrl = topicDTO.getUser().getAvatar();

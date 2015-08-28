@@ -68,6 +68,7 @@ public class ReplyService
 		reply.setFloor(topic.getReplyCount() + 1);
 		replyDao.save(reply);
 		topic.setReplyCount(topic.getReplyCount() + 1);
+		topic.setAllReplyCount(topic.getAllReplyCount() + 1);
 		topicDao.save(topic);
 
 		// TODO下面代码应异步处理

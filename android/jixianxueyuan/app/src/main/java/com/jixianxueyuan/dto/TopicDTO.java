@@ -12,6 +12,7 @@ public class TopicDTO implements Serializable
     private String content;
     private int imageCount;
     private int replyCount;
+    private int allReplyCount;
     private int viewCount;
     private int agreeCount;
     private String createTime;
@@ -76,6 +77,13 @@ public class TopicDTO implements Serializable
     public void setReplyCount(int replyCount)
     {
         this.replyCount = replyCount;
+    }
+    public int getAllReplyCount() {
+        return allReplyCount;
+    }
+
+    public void setAllReplyCount(int allReplyCount) {
+        this.allReplyCount = allReplyCount;
     }
 
     public int getViewCount() {
