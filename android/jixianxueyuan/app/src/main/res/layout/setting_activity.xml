@@ -110,6 +110,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="@string/clean_cache" />
+                    <TextView
+                        android:id="@+id/setting_activity_cache_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/ListSecondaryText"
+                        />
                 </LinearLayout>
 
                 <ImageView style="@style/ImageItemRightIcon" />

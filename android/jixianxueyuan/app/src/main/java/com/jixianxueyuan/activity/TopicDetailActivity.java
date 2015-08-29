@@ -557,7 +557,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             if (!cacheDir.exists()) {
                 cacheDir.mkdirs();
             }
-            mDiskLruCache = DiskLruCache.open(cacheDir, Util.getAppVersion(this), 1, 20 * 1024 * 1024);
+            mDiskLruCache = DiskLruCache.open(cacheDir, Util.getAppVersion(this), 1, 30 * 1024 * 1024);
         } catch (IOException e) {
             e.printStackTrace();
         }
