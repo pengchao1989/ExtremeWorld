@@ -53,6 +53,9 @@ public class ReplyDetailActivity extends Activity implements ReplyWidgetListener
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
     ReplyWidget replyWidget;
 
+    HeadViewHolder headViewHolder;
+
+    long replyId = -1;
     ReplyDTO replyDTO;
 
     SubReplylListAdapter adapter;
@@ -71,7 +74,6 @@ public class ReplyDetailActivity extends Activity implements ReplyWidgetListener
 
         initHeadView();
 
-        myActionBar.setTitle(replyDTO.getFloor() + getString(R.string.floor));
         adapter = new SubReplylListAdapter(this);
         listView.setAdapter(adapter);
 
@@ -80,7 +82,16 @@ public class ReplyDetailActivity extends Activity implements ReplyWidgetListener
 
         replyEditCache = new HashMap<Long,String>();
 
-        requestSubReplyList();
+        if(replyDTO != null){
+            refreshHeadView();
+            requestSubReplyList();
+        }else if(replyId != -1){
+            requestReplyDetail();
+        }else {
+            Toast.makeText(this,getString(R.string.err),Toast.LENGTH_SHORT);
+            finish();
+        }
+
     }
 
     @Override
@@ -91,24 +102,52 @@ public class ReplyDetailActivity extends Activity implements ReplyWidgetListener
 
     private void getIntentData(){
         Intent intent = this.getIntent();
-        replyDTO = (ReplyDTO) intent.getSerializableExtra("reply");
+        Bundle bubdle = intent.getExtras();
+        if(bubdle.containsKey("reply")){
+            replyDTO = (ReplyDTO) bubdle.getSerializable("reply");
+        }else if(bubdle.containsKey("replyId")){
+            replyId = bubdle.getLong("replyId");
+        }
     }
 
     private void initHeadView(){
         View headView = LayoutInflater.from(this).inflate(R.layout.reply_detail_head_view, null);
-        ImageView avatarImageView = (ImageView) headView.findViewById(R.id.user_head_avatar);
-        TextView nameTextView = (TextView) headView.findViewById(R.id.user_head_name);
-        TextView timeTextView = (TextView) headView.findViewById(R.id.user_head_time);
-        TextView contentTextView = (TextView) headView.findViewById(R.id.reply_detail_content);
+        headViewHolder = new HeadViewHolder(headView);
+        listView.addHeaderView(headView);
+    }
+
+    private void refreshHeadView(){
+        myActionBar.setTitle(replyDTO.getFloor() + getString(R.string.floor));
 
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(replyDTO.getUser().getAvatar() + "!androidListAvatar", avatarImageView);
-        nameTextView.setText(replyDTO.getUser().getName());
-        timeTextView.setText(replyDTO.getCreateTime());
-        contentTextView.setText(replyDTO.getContent());
+        imageLoader.displayImage(replyDTO.getUser().getAvatar() + "!androidListAvatar", headViewHolder.avatarImageView);
+        headViewHolder.nameTextView.setText(replyDTO.getUser().getName());
+        headViewHolder.timeTextView.setText(replyDTO.getCreateTime());
+        headViewHolder.contentTextView.setText(replyDTO.getContent());
+    }
 
-        listView.addHeaderView(headView);
+    private void requestReplyDetail(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ServerMethod.reply() + "/" + replyId;
 
+        MyRequest<ReplyDTO> myRequest = new MyRequest<ReplyDTO>(Request.Method.GET, url, ReplyDTO.class,
+                new Response.Listener<MyResponse<ReplyDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<ReplyDTO> response) {
+                        if(response.getStatus() == MyResponse.status_ok){
+                            replyDTO = response.getContent();
+                            refreshHeadView();
+                            requestSubReplyList();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(myRequest);
     }
 
     private void requestSubReplyList(){
@@ -129,7 +168,7 @@ public class ReplyDetailActivity extends Activity implements ReplyWidgetListener
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(ReplyDetailActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -236,5 +275,16 @@ public class ReplyDetailActivity extends Activity implements ReplyWidgetListener
         replyWidget.showKeyboard();
     }
 
+    public static class HeadViewHolder{
+
+        @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
+        @InjectView(R.id.user_head_name)TextView nameTextView;
+        @InjectView(R.id.user_head_time)TextView timeTextView;
+        @InjectView(R.id.reply_detail_content)TextView contentTextView;
+
+        public HeadViewHolder(View itemView){
+            ButterKnife.inject(this,itemView);
+        }
+    }
 
 }

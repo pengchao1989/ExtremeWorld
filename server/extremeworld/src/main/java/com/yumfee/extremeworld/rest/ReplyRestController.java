@@ -58,7 +58,7 @@ public class ReplyRestController
 		Reply reply = replyService.getReply(id);
 		if(reply == null)
 		{
-			String message = "huifu不存在(id:" + id + ")";
+			String message = "回复不存在(id:" + id + ")";
 			logger.warn(message);
 			throw new RestException(HttpStatus.NOT_FOUND, message);
 		}

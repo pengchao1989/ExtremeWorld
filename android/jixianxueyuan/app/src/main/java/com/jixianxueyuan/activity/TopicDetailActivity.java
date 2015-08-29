@@ -509,7 +509,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         submitReply(text);
     }
 
-    public class HeadViewHolder
+    public static class HeadViewHolder
     {
         @InjectView(R.id.topic_detail_title)EmojiconTextView titleTextView;
         @InjectView(R.id.user_head_name)TextView nameTextView;
