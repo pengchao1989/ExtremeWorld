@@ -7,7 +7,7 @@
     <include layout="@layout/user_info_head_view"/>
 
     <com.yumfee.emoji.EmojiconTextView
-        android:id="@+id/remind_reply_list_item_content"
+        android:id="@+id/remind_list_item_content"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         emojicon:emojiconSize="22sp"
@@ -24,7 +24,7 @@
         >
 
         <com.yumfee.emoji.EmojiconTextView
-            android:id="@+id/remind_reply_list_item_target_content"
+            android:id="@+id/remind_list_item_target_content"
             android:maxLines="2"
             android:ellipsize="end"
             emojicon:emojiconSize="22sp"

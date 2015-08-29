@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
@@ -13,9 +14,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.RemindOfReolyListAdapter;
+import com.jixianxueyuan.adapter.RemindListAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.RemindType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.RemindDTO;
@@ -29,26 +31,27 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 /**
  * Created by pengchao on 8/9/15.
  */
-public class RemindOfReplyActivity extends Activity {
+public class RemindListActivity extends Activity {
 
     MyApplication myApplication;
     Mine mine;
 
-    @InjectView(R.id.remind_reply_actionbar)
+    @InjectView(R.id.remind_list_actionbar)
     MyActionBar actionBar;
-    @InjectView(R.id.remind_reply_list_swiperefresh)
+    @InjectView(R.id.remind_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
-    @InjectView(R.id.remind_reply_listview)
+    @InjectView(R.id.remind_list_listview)
     ListView listView;
 
     LoadMoreView loadMoreView;
 
 
-    RemindOfReolyListAdapter adapter;
+    RemindListAdapter adapter;
 
     int currentPage = 0;
     int totalPage = 0;
@@ -57,7 +60,7 @@ public class RemindOfReplyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.remind_reply_activity);
+        setContentView(R.layout.remind_list_activity);
 
         ButterKnife.inject(this);
 
@@ -74,7 +77,7 @@ public class RemindOfReplyActivity extends Activity {
             }
         });
 
-        adapter = new RemindOfReolyListAdapter(this);
+        adapter = new RemindListAdapter(this);
         listView.setAdapter(adapter);
 
 
@@ -133,7 +136,7 @@ public class RemindOfReplyActivity extends Activity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.remind() + mine.getUserInfo().getId() + "?page=" + (currentPage + 1);
-        MyLog.d("RemindOfReplyActivity", "request url=" + url);
+        MyLog.d("RemindListActivity", "request url=" + url);
 
         MyPageRequest<RemindDTO> myPageRequest = new MyPageRequest<RemindDTO>(Request.Method.GET, url, RemindDTO.class,
                 new Response.Listener<MyResponse<MyPage<RemindDTO>>>() {
@@ -142,7 +145,7 @@ public class RemindOfReplyActivity extends Activity {
 
                         if(response.getStatus() == MyResponse.status_ok){
 
-                            MyLog.d("RemindOfReplyActivity","onResponse");
+                            MyLog.d("RemindListActivity","onResponse");
                             MyPage myPage = response.getContent();
                             List<RemindDTO> remindDTOList = myPage.getContents();
                             if(currentPage == 0){
@@ -169,5 +172,29 @@ public class RemindOfReplyActivity extends Activity {
         queue.add(myPageRequest);
     }
 
+    @OnItemClick(R.id.remind_list_listview) void onItemClick(int position){
+
+        RemindDTO remindDTO = adapter.getItem(position);
+        int targetType = remindDTO.getTargetType();
+
+        Intent intent = null;
+        switch (targetType){
+
+            case RemindType.TARGET_TYPE_TOPIC:
+                intent = new Intent(RemindListActivity.this, TopicDetailActivity.class);
+                intent.putExtra("topicId", remindDTO.getTargetId());
+                break;
+            case RemindType.TARGET_TYPE_REPLY:
+                intent = new Intent(RemindListActivity.this, ReplyDetailActivity.class);
+                intent.putExtra("replyId", remindDTO.getTargetId());
+                break;
+            default:
+                break;
+        }
+
+        if(intent != null){
+            startActivity(intent);
+        }
+    }
 
 }

@@ -11,7 +11,6 @@ import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -78,6 +77,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
 
+    long topicId = -1;
     TopicDTO topicDTO;
 
     int currentPage = 0;
@@ -142,7 +142,13 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         ButterKnife.inject(this);
 
         Intent intent = this.getIntent();
-        topicDTO = (TopicDTO) intent.getSerializableExtra("topic");
+
+        Bundle bubdle = intent.getExtras();
+        if(bubdle.containsKey("topic")){
+            topicDTO = (TopicDTO) bubdle.getSerializable("topic");
+        }else if(bubdle.containsKey("topicId")){
+            topicId = bubdle.getLong("topicId");
+        }
 
         initTopicHeadView();
         initFooterView();
@@ -153,8 +159,15 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         replyWidget = new ReplyWidget(this, contentLayout);
         replyWidget.setReplyWidgetListener(this);
 
-
-        requestReplyList();
+        if(topicDTO != null){
+            refreshHeadView();
+            requestReplyList();
+        }else if(topicId != -1){
+            requestTopicDetail();
+        }else {
+            Toast.makeText(this,getString(R.string.err), Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
     }
 
@@ -167,12 +180,25 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     private void initTopicHeadView()
     {
         headView = LayoutInflater.from(this).inflate(R.layout.topic_detail_head_view, null);
-
         headViewHolder = new HeadViewHolder(headView);
+        listView.addHeaderView(headView);
+    }
 
-        Intent intent = this.getIntent();
+    private void initFooterView()
+    {
 
+        loadMoreButton = new LoadMoreView(this);
+        loadMoreButton.setVisibility(View.GONE);
+        loadMoreButton.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+            @Override
+            public void runLoad() {
+                getNextPage();
+            }
+        });
+        listView.addFooterView(loadMoreButton);
+    }
 
+    private void refreshHeadView(){
         headViewHolder.titleTextView.setText(topicDTO.getTitle());
         headViewHolder.nameTextView.setText(topicDTO.getUser().getName());
         String timeAgo = DateTimeFormatter.getTimeAgo(this, topicDTO.getCreateTime());
@@ -181,7 +207,6 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
 
         String url =  topicDTO.getUser().getAvatar() + "!androidListAvatar";
         ImageLoader.getInstance().displayImage(url, headViewHolder.avatarImageView);
-
 
 
         //参考链接
@@ -248,7 +273,6 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             }
         });
 
-        listView.addHeaderView(headView);
     }
 
     private void initVideo()
@@ -294,19 +318,6 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         }
     }
 
-    private void initFooterView()
-    {
-
-        loadMoreButton = new LoadMoreView(this);
-        loadMoreButton.setVisibility(View.GONE);
-        loadMoreButton.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
-            @Override
-            public void runLoad() {
-                getNextPage();
-            }
-        });
-        listView.addFooterView(loadMoreButton);
-    }
 
     private void getNextPage()
     {
@@ -331,11 +342,35 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         return false;
     }
 
+    private void requestTopicDetail(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String url = ServerMethod.topic() + "/" + topicId;
+        MyRequest<TopicDTO> myRequest = new MyRequest<TopicDTO>(Request.Method.GET, url, TopicDTO.class,
+                new Response.Listener<MyResponse<TopicDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<TopicDTO> response) {
+                        if(response.getStatus() == MyResponse.status_ok){
+                            topicDTO = response.getContent();
+                            refreshHeadView();
+                            requestReplyList();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(myRequest);
+
+    }
+
     private void requestReplyList()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.reply() + "?topicId="+ topicDTO.getId() + "&page=" + (currentPage + 1) ;
-        MyLog.d(tag, "request=" + url);
 
         MyPageRequest<ReplyDTO> myPageRequest = new MyPageRequest<ReplyDTO>(Request.Method.GET,url,ReplyDTO.class,
                 new Response.Listener<MyResponse<MyPage<ReplyDTO>>>()

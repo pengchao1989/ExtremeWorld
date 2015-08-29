@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.RemindOfReplyActivity;
+import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -75,7 +75,7 @@ public class MineFragment extends Fragment {
     }
 
     @OnClick(R.id.mine_fragment_remind_reply) void remindReplyOnClick(){
-        Intent intent = new Intent(this.getActivity(), RemindOfReplyActivity.class);
+        Intent intent = new Intent(this.getActivity(), RemindListActivity.class);
         startActivity(intent);
     }
 }

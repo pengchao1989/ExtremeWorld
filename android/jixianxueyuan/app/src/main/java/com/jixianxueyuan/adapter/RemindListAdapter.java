@@ -23,12 +23,12 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 8/9/15.
  */
-public class RemindOfReolyListAdapter extends BaseAdapter {
+public class RemindListAdapter extends BaseAdapter {
 
     private Context context;
     private List<RemindDTO> remindDTOList;
 
-    public RemindOfReolyListAdapter(Context context){
+    public RemindListAdapter(Context context){
 
         this.context = context;
         remindDTOList = new LinkedList<RemindDTO>();
@@ -56,7 +56,7 @@ public class RemindOfReolyListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public RemindDTO getItem(int position) {
         return remindDTOList.get(position);
     }
 
@@ -70,7 +70,7 @@ public class RemindOfReolyListAdapter extends BaseAdapter {
 
         ViewHolder viewHolder;
         if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.remind_of_reply_list_item,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.remind_list_item,null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }else {
@@ -97,9 +97,9 @@ public class RemindOfReolyListAdapter extends BaseAdapter {
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
-        @InjectView(R.id.remind_reply_list_item_content)
+        @InjectView(R.id.remind_list_item_content)
         EmojiconTextView contentTextView;
-        @InjectView(R.id.remind_reply_list_item_target_content)
+        @InjectView(R.id.remind_list_item_target_content)
         EmojiconTextView targetTextView;
 
         public ViewHolder(View itemView){

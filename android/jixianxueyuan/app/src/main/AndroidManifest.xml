@@ -80,7 +80,7 @@
         <activity android:name=".activity.NearFriendActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.UserHomeActivity"/>
-        <activity android:name=".activity.RemindOfReplyActivity"/>
+        <activity android:name=".activity.RemindListActivity"/>
         <activity android:name=".activity.ReplyDetailActivity"/>
         <activity
             android:configChanges="orientation|screenSize"

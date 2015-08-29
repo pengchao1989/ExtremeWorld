@@ -8,21 +8,21 @@
     >
 
     <com.jixianxueyuan.widget.MyActionBar
-        android:id="@+id/remind_reply_actionbar"
+        android:id="@+id/remind_list_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         my:my_title="@string/reply_of_me"
         />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/remind_reply_list_swiperefresh"
+        android:id="@+id/remind_list_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
         <ListView
-            android:id="@+id/remind_reply_listview"
+            android:id="@+id/remind_list_listview"
             style="@style/ListView"
             />
 
