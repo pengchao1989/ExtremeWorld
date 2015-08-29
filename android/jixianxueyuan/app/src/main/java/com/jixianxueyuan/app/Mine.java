@@ -40,8 +40,12 @@ public class Mine {
         this.userInfo = userInfo;
     }
 
-    public void LoginOut(Context context){
-
+    public void loginOut(Context context){
+        qqOpenId = "";
+        userInfo = null;
+        SharedPreferences.Editor editor = context.getSharedPreferences(SAVE_NAME, Context.MODE_PRIVATE).edit();
+        editor.clear();
+        editor.commit();
     }
 
 

@@ -189,6 +189,8 @@ public class MainActivity extends Activity {
                             CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
                             cloudPushService.bindAccount(String.valueOf(mine.getUserInfo().getId()));
 
+                            requestHandshake();
+
                             //登录完成，进入HOME页
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(intent);
