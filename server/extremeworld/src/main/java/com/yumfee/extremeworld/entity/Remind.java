@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class Remind extends IdEntity{
 	
 	private int type;
+	private long sourceId;
 	private String content;
 	private String targetContent;
 	private int targetType;
@@ -25,6 +26,12 @@ public class Remind extends IdEntity{
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+	public long getSourceId() {
+		return sourceId;
+	}
+	public void setSourceId(long sourceId) {
+		this.sourceId = sourceId;
 	}
 	public String getContent() {
 		return content;

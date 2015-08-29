@@ -185,6 +185,7 @@ public class RemindListActivity extends Activity {
                 intent.putExtra("topicId", remindDTO.getTargetId());
                 break;
             case RemindType.TARGET_TYPE_REPLY:
+            case RemindType.TARGET_TYPE_SUB_REPLY:
                 intent = new Intent(RemindListActivity.this, ReplyDetailActivity.class);
                 intent.putExtra("replyId", remindDTO.getTargetId());
                 break;

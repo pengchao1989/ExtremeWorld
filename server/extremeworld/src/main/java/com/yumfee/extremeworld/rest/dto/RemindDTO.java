@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class RemindDTO {
 
+	private int type;
+	private long sourceId;
 	private String content;
 	private String targetContent;
 	private int targetType;
@@ -17,6 +19,21 @@ public class RemindDTO {
 	public String getContent() {
 		return content;
 	}
+	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}

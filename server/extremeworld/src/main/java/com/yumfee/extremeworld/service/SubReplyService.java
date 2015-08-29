@@ -102,7 +102,7 @@ public class SubReplyService {
 				preRemind.setSpeaker(subReply.getUser());
 				
 				
-				preRemind.setTargetId(preSubReply.getId());
+				preRemind.setTargetId(reply.getId());
 				preRemind.setTargetType(RemindType.TARGET_TYPE_SUB_REPLY);
 				preRemind.setTargetContent(preSubReply.getContent());
 				preRemind.setListener(preSubReply.getUser());
