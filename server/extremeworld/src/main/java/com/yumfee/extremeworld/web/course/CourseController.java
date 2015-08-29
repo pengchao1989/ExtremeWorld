@@ -1,5 +1,6 @@
 package com.yumfee.extremeworld.web.course;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 
 
@@ -211,6 +213,7 @@ public class CourseController
 		//将新内容更新至原始数据库行
 		curCourse.setName(newCourse.getName());
 		curCourse.setContent(newCourse.getContent());
+		curCourse.setModifyTime(new Date());
 		courseService.saveCourse((Course)curCourse);
 		
 		//TODO pid
