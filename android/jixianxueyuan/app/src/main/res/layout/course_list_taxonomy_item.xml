@@ -3,8 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:background="@color/title_background_color"
+    android:background="@drawable/list_item_background"
     >
 
     <TextView

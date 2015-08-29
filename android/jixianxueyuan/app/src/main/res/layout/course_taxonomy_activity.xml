@@ -11,7 +11,7 @@
     <com.jixianxueyuan.widget.MyActionBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        my:my_title="教学"
+        my:my_title="@string/course"
         />
 
     <ExpandableListView

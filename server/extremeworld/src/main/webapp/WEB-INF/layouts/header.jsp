@@ -8,6 +8,7 @@
 	<li class="divider"></li>
 	<li><a href="${ctx}/skateboard/">滑板</a></li>
 	<li><a href="${ctx}/parkour/">跑酷</a></li>
+	<li><a href="${ctx}/bmx/">BMX</a></li>
 </ul>
 			
 <div class="navbar-fixed">
@@ -24,6 +25,9 @@
 					<c:when test="${hobby == 'parkour'}">
 						<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院-跑酷</a></li>
 					</c:when>
+					<c:when test="${hobby == 'bmx'}">
+						<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院-BMX</a></li>
+					</c:when>
 					<c:otherwise>
 						<li><a class='brand-logo dropdown-button' href='#'data-activates='dropdown1'>极限学院</a></li>
 					</c:otherwise>
@@ -35,7 +39,7 @@
 						<li><a href="${ctx}/${hobby}">新鲜事<span class="sr-only">(current)</span></a></li>
 					</c:when>
 					
-					<c:when test="${hobby == 'skateboard' || hobby=='parkour'}">
+					<c:when test="${hobby == 'skateboard' || hobby=='parkour' || hobby == 'bmx'}">
 						<li><a href="${ctx}/${hobby}/discuss">讨论</a></li>
 						<li><a href="${ctx}/${hobby}/video">视频</a></li>
 						<li><a href="${ctx}/${hobby}/course">教程</a></li>

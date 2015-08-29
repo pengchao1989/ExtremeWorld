@@ -155,6 +155,8 @@ public class CourseController
 		User user = new User();
 		user.setId(getCurrentUserId());
 		newCourse.setUser(user);
+		newCourse.setPid(0L);
+		newCourse.setType("course");
 		
 		CourseTaxonomy courseTaxonomy = new CourseTaxonomy();
 		courseTaxonomy.setId(courseTaxonomyId);
@@ -166,7 +168,7 @@ public class CourseController
 		
 		redirectAttributes.addFlashAttribute("message", "创建教学成功");
 		
-		return "redirect:/ + hobby +“/course/”";
+		return "redirect:/" + hobby +"/course";
 	}
 	
 	
