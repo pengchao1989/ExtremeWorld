@@ -9,6 +9,7 @@ public class TopicType {
 	public static final String S_VIDEO = "s_video";
 	public static final String ACTIVITY = "activity";
 	public static final String NEWS = "news";
+	public static final String COURSE = "course";
 	
 	
 	public static final String magicExplain = "explain";
@@ -36,6 +37,8 @@ public class TopicType {
 			
 		case 7:
 			return NEWS;
+		case 8:
+			return COURSE;
 		
 		default:
 				

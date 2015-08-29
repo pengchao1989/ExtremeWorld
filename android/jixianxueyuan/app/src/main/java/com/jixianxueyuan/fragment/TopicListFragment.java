@@ -195,7 +195,7 @@ public class TopicListFragment extends Fragment {
 
     @OnItemClick(R.id.topic_list_fragment_listview) void onItemClicked(int position)
     {
-        TopicDTO topicDTO = (TopicDTO) adapter.getItem(position);
+        TopicDTO topicDTO = adapter.getItem(position);
 
         Intent intent = null;
         switch (topicDTO.getType())

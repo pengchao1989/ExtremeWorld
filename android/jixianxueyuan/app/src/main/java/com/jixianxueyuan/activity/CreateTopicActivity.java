@@ -179,6 +179,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     break;
                 case TopicType.NEWS:
                     myActionBar.setTitle("发布新闻");
+                case TopicType.COURSE:
+                    myActionBar.setTitle("发布教学");
                     break;
             }
         }
@@ -385,6 +387,9 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                 break;
             case TopicType.NEWS:
                 topicDTO.setType(TopicType.NEWS);
+                break;
+            case TopicType.COURSE:
+                topicDTO.setType(TopicType.COURSE);
                 break;
         }
 

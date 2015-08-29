@@ -110,6 +110,9 @@ public class Util {
     }
 
     static public boolean isOurServerImage(String url){
+        if(url == null){
+            return false;
+        }
         if(url.contains("jixianxueyuan")){
             return true;
         }

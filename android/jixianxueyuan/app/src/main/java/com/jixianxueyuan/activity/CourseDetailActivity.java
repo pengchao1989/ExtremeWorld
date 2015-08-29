@@ -31,6 +31,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 /**
  * Created by pengchao on 7/2/15.
@@ -98,7 +100,7 @@ public class CourseDetailActivity extends Activity {
     {
         footerView = LayoutInflater.from(this).inflate(R.layout.list_footer_textview, null);
         TextView textView = (TextView) footerView.findViewById(R.id.list_footer_textview);
-        textView.setText("进入官网www.jixianxueyuan.com上传你的教学\n滑板宣传你我他、教程编辑靠大家");
+        textView.setText("进入官网www.jixianxueyuan.com上传你的教学");
         listView.addFooterView(footerView);
     }
 
@@ -151,7 +153,6 @@ public class CourseDetailActivity extends Activity {
                         {
                             MyPage<TopicDTO> myPage = response.getContent();
                             adapter.addDatas(myPage.getContents());
-
                         }
                         else
                         {
@@ -183,6 +184,21 @@ public class CourseDetailActivity extends Activity {
         {
             ButterKnife.inject(this, headView);
         }
+    }
+
+    @OnItemClick(R.id.course_detail_listview)void onItemClick(int position){
+        if(position == 0){
+            return;
+        }
+        Intent intent = new Intent(CourseDetailActivity.this, TopicDetailActivity.class);
+        intent.putExtra("topic", adapter.getItem(position - 1));
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.course_detail_head_user_name)void onUserClick(){
+        Intent intent = new Intent(CourseDetailActivity.this, UserHomeActivity.class);
+        intent.putExtra("userMinDTO", courseDto.getUser());
+        startActivity(intent);
     }
 
 }
