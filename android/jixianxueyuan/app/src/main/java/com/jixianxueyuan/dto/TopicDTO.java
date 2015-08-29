@@ -8,6 +8,7 @@ public class TopicDTO implements Serializable
 {
     private Long id;
     private String type;
+    private String magicType;
     private String title;
     private String content;
     private int imageCount;
@@ -25,6 +26,8 @@ public class TopicDTO implements Serializable
     private MediaWrapDTO mediaWrap;
 
     private TaxonomyDTO taxonomy;
+
+    private CourseMinDTO course;
 
     private List<HobbyDTO> hobbys;
 
@@ -44,6 +47,14 @@ public class TopicDTO implements Serializable
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getMagicType() {
+        return magicType;
+    }
+
+    public void setMagicType(String magicType) {
+        this.magicType = magicType;
     }
 
     public String getTitle()
@@ -144,6 +155,15 @@ public class TopicDTO implements Serializable
     public void setTaxonomy(TaxonomyDTO taxonomy) {
         this.taxonomy = taxonomy;
     }
+
+    public CourseMinDTO getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseMinDTO course) {
+        this.course = course;
+    }
+
     public List<HobbyDTO> getHobbys() {
         return hobbys;
     }

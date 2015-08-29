@@ -16,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -54,7 +53,7 @@ public class Topic extends IdEntity
 	
 	private User user;
 	
-	private Course coursce;
+	private Course course;
 	
 	private List<Hobby> hobbys;
 	
@@ -210,19 +209,15 @@ public class Topic extends IdEntity
 		this.user = user;
 	}
 	
-	// optional表示该对象可有可无，它的值为true表示该外键可以为null，它的值为false表示该外键为not null  
-	@ManyToOne(fetch=FetchType.LAZY, optional = false)
-	@JoinTable(name = "tb_course_topic",
-	joinColumns = { @JoinColumn(name="topic_id", referencedColumnName= "id")},
-	inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "id") })
-	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "course_id")
 	public Course getCourse()
 	{
-		return coursce;
+		return course;
 	}
-	public void setCourse(Course coursce)
+	public void setCourse(Course course)
 	{
-		this.coursce = coursce;
+		this.course = course;
 	}
 	
 	@ManyToMany(fetch = FetchType.LAZY)

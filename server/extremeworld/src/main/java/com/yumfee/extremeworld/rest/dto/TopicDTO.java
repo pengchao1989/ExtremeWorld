@@ -12,6 +12,7 @@ public class TopicDTO
 {
 	private Long id;
 	private String type;
+	private String magicType;
 	private String title;
 	private String content;
 	private int imageCount;
@@ -30,6 +31,8 @@ public class TopicDTO
 	
 	private TaxonomyDTO taxonomy;
 	
+	private CourseMinDTO course;
+	
 	
 	public Long getId()
 	{
@@ -45,6 +48,12 @@ public class TopicDTO
 	}
 	public void setType(String typec) {
 		this.type = typec;
+	}
+	public String getMagicType() {
+		return magicType;
+	}
+	public void setMagicType(String magicType) {
+		this.magicType = magicType;
 	}
 	public String getTitle()
 	{
@@ -142,6 +151,12 @@ public class TopicDTO
 	}
 	public void setTaxonomy(TaxonomyDTO taxonomy) {
 		this.taxonomy = taxonomy;
+	}
+	public CourseMinDTO getCourse() {
+		return course;
+	}
+	public void setCourse(CourseMinDTO course) {
+		this.course = course;
 	}
 
 	

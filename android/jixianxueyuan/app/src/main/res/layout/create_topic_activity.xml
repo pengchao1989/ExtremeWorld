@@ -19,7 +19,9 @@
                 android:id="@+id/create_topic_actionbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                my:type="submit" />
+                my:type="submit"
+                my:action_text="@string/submit"
+                />
 
 
             <RelativeLayout

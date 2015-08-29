@@ -18,6 +18,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CourseDetailListAdapter;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.adapter.TopicListAdapter;
+import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.CourseDto;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
@@ -26,6 +27,7 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
+import com.jixianxueyuan.widget.MyActionBar;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ import butterknife.OnItemClick;
  */
 public class CourseDetailActivity extends Activity {
 
+    @InjectView(R.id.course_detail_actionbar)MyActionBar myActionBar;
     @InjectView(R.id.course_detail_listview)ListView listView;
 
     TopicListAdapter adapter;
@@ -56,7 +59,6 @@ public class CourseDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.course_detail_activity);
-
         ButterKnife.inject(this);
 
         getBundle();
@@ -86,11 +88,27 @@ public class CourseDetailActivity extends Activity {
 
     private void initHeadView()
     {
+        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
         headView = LayoutInflater.from(this).inflate(R.layout.course_detail_head_view, null);
 
         headViewHolder = new HeadViewHolder(headView);
 
         headViewHolder.titleTextView.setText(courseName);
+        headViewHolder.userNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CourseDetailActivity.this, UserHomeActivity.class);
+                intent.putExtra("userMinDTO", courseDto.getUser());
+                startActivity(intent);
+            }
+        });
 
         listView.addHeaderView(headView);
 
@@ -98,9 +116,19 @@ public class CourseDetailActivity extends Activity {
 
     private void initFooterView()
     {
-        footerView = LayoutInflater.from(this).inflate(R.layout.list_footer_textview, null);
-        TextView textView = (TextView) footerView.findViewById(R.id.list_footer_textview);
-        textView.setText("进入官网www.jixianxueyuan.com上传你的教学");
+        footerView = LayoutInflater.from(this).inflate(R.layout.list_footer_button, null);
+        Button button = (Button) footerView.findViewById(R.id.list_footer_button);
+        button.setText("上传教学");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CourseDetailActivity.this, CreateTopicActivity.class);
+                intent.putExtra(TopicType.TYPE, TopicType.COURSE);
+                intent.putExtra("courseId", courseDto.getId());
+                intent.putExtra("courseType","explain");
+                startActivity(intent);
+            }
+        });
         listView.addFooterView(footerView);
     }
 
@@ -195,10 +223,5 @@ public class CourseDetailActivity extends Activity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.course_detail_head_user_name)void onUserClick(){
-        Intent intent = new Intent(CourseDetailActivity.this, UserHomeActivity.class);
-        intent.putExtra("userMinDTO", courseDto.getUser());
-        startActivity(intent);
-    }
 
 }

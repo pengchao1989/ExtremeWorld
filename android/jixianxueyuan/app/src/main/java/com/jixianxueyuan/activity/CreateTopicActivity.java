@@ -31,6 +31,7 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.VideoRecordConfig;
+import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TaxonomyDTO;
@@ -94,8 +95,11 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     String topicType = null;
     Long topicTaxonomyId = null;
     String topicTaxonomyName = null;
+    Long courseId = null;
+    String courseType = null;
     String videoPath = null;
     String thumblePath = null;
+
 
     List<String> localImagePathList = null;
     LinkedHashMap<String,String> serverImagePathMap = null;
@@ -109,7 +113,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     TopicDTO topicDTO;
     VideoDetailDTO videoDetailDTO;
-
 
     boolean isUploadedImage = false;
     boolean isUploadedVideo = false;
@@ -181,6 +184,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     myActionBar.setTitle("发布新闻");
                 case TopicType.COURSE:
                     myActionBar.setTitle("发布教学");
+                    courseId = intent.getLongExtra("courseId",0);
+                    courseType = intent.getStringExtra("courseType");
                     break;
             }
         }
@@ -390,6 +395,11 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                 break;
             case TopicType.COURSE:
                 topicDTO.setType(TopicType.COURSE);
+                topicDTO.setMagicType(courseType);
+
+                CourseMinDTO courseMinDTO = new CourseMinDTO();
+                courseMinDTO.setId(courseId);
+                topicDTO.setCourse(courseMinDTO);
                 break;
         }
 

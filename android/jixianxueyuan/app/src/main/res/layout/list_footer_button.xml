@@ -8,20 +8,11 @@
     >
 
     <Button
-        android:id="@+id/loadmore_button"
+        android:id="@+id/list_footer_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loadmore"
+        android:text="查看更多"
         style="@style/TransparentButton"
         />
-
-    <ProgressBar
-        android:id="@+id/loadmore_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        />
-
 
 </LinearLayout>

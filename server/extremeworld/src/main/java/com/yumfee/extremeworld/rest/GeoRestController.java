@@ -3,6 +3,7 @@ package com.yumfee.extremeworld.rest;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Validator;
@@ -64,6 +65,7 @@ public class GeoRestController {
 		{
 			User user = userService.getUser(userId);
 			user.setGeoHash(geoHashString);
+			user.setGeoModifyTime(new Date());
 			userService.saveUser(user);
 		}
 
@@ -112,6 +114,7 @@ public class GeoRestController {
 		String geoHash = GeoHash.geoHashStringWithCharacterPrecision(center.getLatitude(), center.getLongitude(), 12);
 		
 		user.setGeoHash(geoHash);
+		user.setGeoModifyTime(new Date());
 		
 		userService.saveUser(user);
 		
