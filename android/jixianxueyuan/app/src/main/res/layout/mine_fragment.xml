@@ -77,6 +77,7 @@
         <View style="@style/DividerView" />
 
         <RelativeLayout
+            android:id="@+id/mine_fragment_setting"
             android:layout_marginTop="20dp"
             style="@style/ImageItemLayout"
             >

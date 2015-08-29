@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        my:my_title="@string/setting"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/setting_activity_logout"
+                style="@style/ImageItemLayout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ListPrimaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/logout" />
+                </LinearLayout>
+
+                <ImageView style="@style/ImageItemRightIcon" />
+
+            </RelativeLayout>
+
+            <View style="@style/DividerView" />
+
+            <RelativeLayout
+                android:id="@+id/setting_activity_notify"
+                style="@style/ImageItemLayout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ListPrimaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/notify_setting" />
+                </LinearLayout>
+
+                <ImageView style="@style/ImageItemRightIcon" />
+
+            </RelativeLayout>
+
+            <View style="@style/DividerView" />
+
+            <RelativeLayout
+                android:id="@+id/setting_activity_feedback"
+                style="@style/ImageItemLayout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ListPrimaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/feed_back" />
+                </LinearLayout>
+
+                <ImageView style="@style/ImageItemRightIcon" />
+
+            </RelativeLayout>
+
+            <View style="@style/DividerView" />
+
+            <RelativeLayout
+                android:id="@+id/setting_activity_clean_cache"
+                style="@style/ImageItemLayout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ListPrimaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/clean_cache" />
+                </LinearLayout>
+
+                <ImageView style="@style/ImageItemRightIcon" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

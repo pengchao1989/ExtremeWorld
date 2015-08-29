@@ -82,6 +82,7 @@
         <activity android:name=".activity.UserHomeActivity"/>
         <activity android:name=".activity.RemindListActivity"/>
         <activity android:name=".activity.ReplyDetailActivity"/>
+        <activity android:name=".activity.SettingActivity"/>
         <activity
             android:configChanges="orientation|screenSize"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
