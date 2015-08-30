@@ -81,7 +81,7 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
             case 1:
                 return mContext.getResources().getString(R.string.discovery);
             case 2:
-                return "我";
+                return mContext.getResources().getString(R.string.mine);
 
 
         }

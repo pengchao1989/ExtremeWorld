@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="返回"
+                android:text="@string/back"
                 android:textColor="@color/blue"
                 android:textSize="18sp"
                 />

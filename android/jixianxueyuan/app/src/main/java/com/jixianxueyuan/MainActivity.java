@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
 
 
         //若本地有登录信息，则直接进行登录
-/*
+
         Mine mine = MyApplication.getContext().getMine();
         if(mine.getUserInfo() != null && mine.getUserInfo().getId() != null){
             //直接进入Hone页
@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
         else{
             //等待用户点击登录按钮进行登录
         }
-*/
+
 
 
 
@@ -181,7 +181,7 @@ public class MainActivity extends Activity {
                     @Override
                     public void onResponse(MyResponse<UserDTO> response) {
 
-  /*                      if (response.getStatus() == ServerMethod.STATUS_OK) {
+                        if (response.getStatus() == ServerMethod.STATUS_OK) {
 
                             //持久化用户信息
                             Mine mine = MyApplication.getContext().getMine();
@@ -203,8 +203,8 @@ public class MainActivity extends Activity {
                             MyLog.d("MainActivity", "STATUS_NO_CONTENT");
                             //请求QQ方userInfo
                             requestQQuserInfo();
-                        }*/
-                        requestQQuserInfo();
+                        }
+                        //requestQQuserInfo();
 
                     }
                 },
