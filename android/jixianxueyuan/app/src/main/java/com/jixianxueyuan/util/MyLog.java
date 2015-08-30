@@ -2,12 +2,14 @@ package com.jixianxueyuan.util;
 
 import android.util.Log;
 
+import com.jixianxueyuan.BuildConfig;
+
 /**
  * Created by pengchao on 5/23/15.
  */
 public class MyLog {
 
-    public static final boolean  DEBUG = true;
+    public static final boolean  DEBUG = BuildConfig.DEBUG;
 
     public static void v(String tag, String msg)
     {

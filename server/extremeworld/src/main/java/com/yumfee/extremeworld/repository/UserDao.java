@@ -11,6 +11,7 @@ public interface UserDao extends PagingAndSortingRepository<User, Long>
 {
 	User findById(Long id);
 	User findByLoginName(String loginName);
+	User findByName(String name);
 	User findByQqOpenId(String qqOpenId);
 	
 	Page<User> findByGeoHashLike(String geoHash, Pageable pageable);

@@ -11,6 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import com.yumfee.extremeworld.config.MyErrorCode;
 import com.yumfee.extremeworld.entity.Country;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
@@ -51,6 +53,7 @@ public class AccountRestController {
 		String qqOpenId = user.getQqOpenId();
 		user.setLoginName(qqOpenId);
 		user.setPlainPassword(qqOpenId);
+		user.setHobbyStamp(hobby);
 		
 		String birth = user.getBirth();
 		if(birth.length() == 4 )
@@ -58,7 +61,7 @@ public class AccountRestController {
 			birth += "-01-01";
 			user.setBirth(birth);
 		}else{
-			user.setBirth("1900-01-01");
+			user.setBirth("1995-01-01");
 		}
 		
 		
@@ -66,10 +69,15 @@ public class AccountRestController {
     	country.setId("CN");
     	
     	user.setCountry(country);
+    	
+    	User sameNameUser = accountService.findUserByName(user.getName());
+    	if(sameNameUser != null){
+    		return MyResponse.err(MyErrorCode.NAME_REPEAT);
+    	}
 		
-		accountService.registerUser(user);
+    	accountService.registerUser(user);
 		
-		
-		return MyResponse.ok(user);
+		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+		return MyResponse.ok(userDTO);
 	}
 }

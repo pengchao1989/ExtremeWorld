@@ -54,7 +54,7 @@ public class SettingActivity extends Activity {
             cacheSizeTextView.setText("(0.00MB)");
         }else {
             long cacheByte = diskLruCache.size();
-            double cacheMB = cacheByte / (1024*1024);
+            double cacheMB = cacheByte / (1024.0*1024.0);
             String cacheSizeString = "(" + String.format("%.2f", cacheMB) + "MB)";
             cacheSizeTextView.setText(cacheSizeString);
         }

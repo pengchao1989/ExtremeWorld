@@ -1,5 +1,7 @@
 package com.jixianxueyuan.http;
 
+import android.widget.Toast;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -11,6 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.util.MyLog;
 
@@ -78,6 +81,10 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
             JsonParser parser = new JsonParser();
             JsonObject jsonObject =  parser.parse(jsonStr).getAsJsonObject();
 
+            if(myResponse.getStatus() == MyResponse.status_error){
+
+            }
+
             if(jsonObject.has("content"))
             {
                 JsonElement contentObject = jsonObject.get("content");
@@ -90,7 +97,6 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
                     T content = gson.fromJson(contentObject, clazz);
                     myResponse.setContent(content);
                 }
-
             }
 
             return Response.success(myResponse, HttpHeaderParser.parseCacheHeaders(response));

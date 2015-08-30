@@ -12,7 +12,7 @@ public class ServerMethod {
 
 
     //static final String server_url = "http://jixianxueyuan.com/";
-    static final String server_url = "http://192.168.1.5:8023/";
+    static final String server_url = "http://192.168.1.4:8023/";
     static final String api_version = "api/v1/";
     static String hobby = "skateboard/";
 
@@ -41,5 +41,6 @@ public class ServerMethod {
     public static final String zan() {return method_url  + "topic_agree";}
     public static final String near_friend (){return method_url + hobby + "geo/near_friend";};
     public static final String remind() {return method_url + "remind/";};
+    public static final String reference_avatar(){return method_url + "reference_avatar";};
 
 }

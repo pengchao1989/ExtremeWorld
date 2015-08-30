@@ -4,34 +4,74 @@
     android:background="@color/primary_color"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:paddingTop="80dp"
+        android:paddingTop="56dp"
+        android:paddingBottom="70dp"
         >
 
-        <com.romainpiel.shimmer.ShimmerTextView
-            android:id="@+id/activity_main_appname"
-            android:text="极限学院"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="50sp"/>
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            >
 
-        <Button
-            android:id="@+id/activity_qq_login"
+            <com.romainpiel.shimmer.ShimmerTextView
+                android:id="@+id/activity_main_appname"
+                android:text="极限学院"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="50sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                android:text="全宇宙最好的极限运动原创视频与教学分享平台"
+                />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/qq_login"
-            />
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Button
+                android:id="@+id/activity_qq_login"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/qq_login"
+                style="@style/TransparentButton"
+                />
+            <Button
+                android:id="@+id/activity_weixin_login"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/weixin_login"
+                style="@style/TransparentButton"
+                />
+
+        </LinearLayout>
 
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 
 

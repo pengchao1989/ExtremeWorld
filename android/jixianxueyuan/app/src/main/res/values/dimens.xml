@@ -14,6 +14,7 @@
 
     <dimen name="avatar_width">42dp</dimen>
     <dimen name="avatar_height">42dp</dimen>
+    <dimen name="large_avatar_size">160dp</dimen>
 
     <dimen name="list_content_margin_head">4dp</dimen>
 
