@@ -29,6 +29,7 @@ import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.http.MyErrorHelper;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
@@ -344,8 +345,9 @@ public class TopicListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(TopicListFragment.this.getActivity(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(TopicListFragment.this.getActivity(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         swipeRefreshLayout.setRefreshing(false);
+                        MyErrorHelper.showError(TopicListFragment.this.getActivity(), error);
                     }
                 });
 

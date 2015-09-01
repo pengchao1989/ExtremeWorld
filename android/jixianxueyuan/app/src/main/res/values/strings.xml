@@ -74,6 +74,11 @@
     <string name="name_empty_err">nickname is not empty</string>
     <string name="name_repeat_err">nickname is repeat</string>
 
+    
+    //error
+    <string name="time_out">Time out</string>
+    <string name="network_err">Network error</string>
+    <string name="connection_err">Connection error</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
