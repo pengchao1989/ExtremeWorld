@@ -202,6 +202,7 @@ public class TopicListFragment extends Fragment {
         {
             case TopicType.MOOD:
             case TopicType.NEWS:
+            case TopicType.COURSE:
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 intent.putExtra(TopicType.TYPE, TopicType.MOOD);
                 break;
