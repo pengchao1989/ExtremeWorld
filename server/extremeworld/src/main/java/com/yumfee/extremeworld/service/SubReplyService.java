@@ -13,6 +13,7 @@ import com.yumfee.extremeworld.entity.SubReply;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.push.PushManage;
+import com.yumfee.extremeworld.push.PushMessageType;
 import com.yumfee.extremeworld.repository.RemindDao;
 import com.yumfee.extremeworld.repository.ReplyDao;
 import com.yumfee.extremeworld.repository.SubReplyDao;
@@ -77,7 +78,7 @@ public class SubReplyService {
 		Remind remind = new Remind();
 		remind.setType(RemindType.TYPE_SUB_REPLY);
 		remind.setContent(subReply.getContent());
-		remind.setSpeaker(subReply.getUser());
+		remind.setSpeaker(speaker);
 		
 		remind.setTargetId(reply.getId());
 		remind.setTargetType(RemindType.TARGET_TYPE_REPLY);
@@ -89,7 +90,7 @@ public class SubReplyService {
 			if(reply.getUser().getId() != subReply.getUser().getId()){
 				remindDao.save(remind);
 				//push
-				pushManage.pushNotice(reply.getUser(), speaker.getName() + "回复了你!", remind.getContent());
+				pushManage.pushMessage(reply.getUser(), PushMessageType.REMIND, remind);
 			}
 			
 		} else{
@@ -99,7 +100,7 @@ public class SubReplyService {
 				Remind preRemind = new Remind();
 				preRemind.setType(RemindType.TYPE_SUB_REPLY);
 				preRemind.setContent(subReply.getContent());
-				preRemind.setSpeaker(subReply.getUser());
+				preRemind.setSpeaker(speaker);
 				
 				
 				preRemind.setTargetId(reply.getId());
@@ -109,14 +110,14 @@ public class SubReplyService {
 				
 				remindDao.save(preRemind);
 				//push
-				pushManage.pushNotice(preSubReply.getUser(), speaker.getName() + "回复了你!", preRemind.getContent());
+				pushManage.pushMessage(preSubReply.getUser(), PushMessageType.REMIND, preRemind);
 			}
 			
 			if((reply.getUser().getId() != preSubReply.getUser().getId())
 					&&(reply.getUser().getId() != subReply.getUser().getId())){
 						remindDao.save(remind);
 						//push
-						pushManage.pushNotice(reply.getUser(), speaker.getName() + "回复了你!", remind.getContent());
+						pushManage.pushMessage(reply.getUser(), PushMessageType.REMIND, remind);
 			}
 		}
 

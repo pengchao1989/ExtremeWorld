@@ -14,6 +14,7 @@ import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.push.PushManage;
+import com.yumfee.extremeworld.push.PushMessageType;
 import com.yumfee.extremeworld.repository.RemindDao;
 import com.yumfee.extremeworld.repository.ReplyDao;
 import com.yumfee.extremeworld.repository.TopicDao;
@@ -85,12 +86,15 @@ public class ReplyService
 		remind.setListener(topic.getUser());
 
 		if (reply.getUser().getId() != topic.getUser().getId()) {
+			User speaker = userDao.findById(reply.getUser().getId());
+			remind.setSpeaker(speaker);
+			
 			remindDao.save(remind);
 			
-			User speaker = userDao.findById(reply.getUser().getId());
+			
 
 			// 在此处理推送
-			pushManage.pushNotice(topic.getUser(), speaker.getName() + "回复了你!", remind.getContent());
+			pushManage.pushMessage(topic.getUser(), PushMessageType.REMIND, remind);
 			
 		}
 

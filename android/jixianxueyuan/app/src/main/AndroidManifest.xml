@@ -67,7 +67,9 @@
         </activity>
         <activity
             android:name=".activity.HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            >
         </activity>
         <activity android:name=".activity.TopicDetailActivity"/>
         <activity android:name=".activity.MoodDetailActivity"/>
@@ -81,7 +83,8 @@
         <activity android:name=".activity.NearFriendActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.UserHomeActivity"/>
-        <activity android:name=".activity.RemindListActivity"/>
+        <activity android:name=".activity.RemindListActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".activity.ReplyDetailActivity"/>
         <activity android:name=".activity.SettingActivity"/>
         <activity

@@ -344,7 +344,8 @@ public class TopicListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(TopicListFragment.this.getActivity(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
 
