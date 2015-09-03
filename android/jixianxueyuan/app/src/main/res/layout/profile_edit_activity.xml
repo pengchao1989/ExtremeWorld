@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/profile_edit_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        my:my_title="@string/edit_profile"
+        my:type="submit"
+        my:action_text="@string/save"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_edit_avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_avatar"
+            style="@style/SecondText"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/list_horizontal_padding"
+            android:paddingRight="@dimen/list_horizontal_padding"
+            android:background="@drawable/list_item_background"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nickname"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                style="@style/SecondText"
+                />
+
+            <EditText
+                android:id="@+id/profile_edit_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="right"
+                android:layout_marginRight="16dp"
+                android:minWidth="180dp"
+                style="@style/PrimaryText"
+                />
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerView"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_horizontal_padding"
+            android:background="@drawable/list_item_background"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                    android:text="@string/gender"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                style="@style/SecondText"
+                />
+
+            <TextView
+                android:id="@+id/profile_edit_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                style="@style/PrimaryText"
+                />
+
+            <ImageView style="@style/ImageItemRightIcon" />
+        </RelativeLayout>
+
+        <View style="@style/DividerView"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_horizontal_padding"
+            android:background="@drawable/list_item_background"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signature"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                style="@style/SecondText"
+                />
+
+            <EditText
+                android:id="@+id/profile_edit_signature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="50dp"
+                style="@style/PrimaryText"
+                />
+
+            <ImageView style="@style/ImageItemRightIcon" />
+        </RelativeLayout>
+
+        <View style="@style/DividerView"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

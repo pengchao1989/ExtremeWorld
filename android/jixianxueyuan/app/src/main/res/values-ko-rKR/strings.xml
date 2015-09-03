@@ -9,6 +9,8 @@
     <string name="back">복귀</string>
     <string name="err">오류</string>
     <string name="success">성공</string>
+    <string name="unknown">알 수 없는</string>
+    <string name="save">저장</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">환영</string>
     <string name="qq_login">QQ 상륙하다</string>
@@ -51,16 +53,22 @@
     <string name="load_sub_reply" formatted="false">더 많은 %1$d가지 기록 보기</string>
     <string name="loadmore">보다</string>
 
+    <string name="edit_profile">편집 자료</string>
     <string name="random">임의</string>
     <string name="upload">업로드</string>
     <string name="select">선택</string>
     <string name="local">로컬</string>
     <string name="nickname">별명</string>
     <string name="birth">생일</string>
-    <string name="boy">남자</string>
-    <string name="girl">여자</string>
+    <string name="gender">성별</string>
+    <string name="male">남자</string>
+    <string name="female">여자</string>
     <string name="save_profile">정보 저장</string>
     <string name="register_success">등록 성공</string>
+    <string name="select_avatar">선택 아바타</string>
+    <string name="region">지역</string>
+    <string name="signature">서명</string>
+
 
     <string name="logout">종료 현재 계정</string>
     <string name="notify_setting">알림 설정</string>

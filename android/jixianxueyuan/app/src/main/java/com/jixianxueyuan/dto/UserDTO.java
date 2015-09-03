@@ -123,4 +123,14 @@ public class UserDTO implements Serializable {
     public void setGeoModifyTime(String geoModifyTime) {
         this.geoModifyTime = geoModifyTime;
     }
+
+/*    @Override
+    protected UserDTO clone() {
+        try {
+            return (UserDTO) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
 }

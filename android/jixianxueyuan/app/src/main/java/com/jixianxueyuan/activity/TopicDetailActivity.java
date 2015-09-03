@@ -44,7 +44,7 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
-import com.jixianxueyuan.util.MImageGetter;
+import com.jixianxueyuan.commons.MImageGetter;
 import com.jixianxueyuan.util.MTagHandler;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;

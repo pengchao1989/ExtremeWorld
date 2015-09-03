@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,16 +16,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.app.Mine;
+import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.MyErrorHelper;
+import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.dto.ErrorInfo;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.dto.request.ReferenceAvatarDTO;
-import com.jixianxueyuan.dto.request.UserInfoRequest;
+import com.jixianxueyuan.dto.request.UserRegisterRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.util.ToastUtils;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -43,7 +48,7 @@ public class RegisterActivity extends Activity {
     private QQOpenInfo qqOpenInfo;
     private QQUserInfo qqUserInfo;
 
-    private UserInfoRequest userInfoDTO;
+    private UserRegisterRequest userInfoDTO;
     private ReferenceAvatarDTO referenceAvatarDTO;
 
 
@@ -59,7 +64,7 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
-        userInfoDTO = new UserInfoRequest();
+        userInfoDTO = new UserRegisterRequest();
         userInfoDTO.setGender("female");
 
         ButterKnife.inject(this);
@@ -118,16 +123,17 @@ public class RegisterActivity extends Activity {
         int birth = Integer.parseInt(birthEditText.getText().toString());
         Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
+
+        String error = "";
         if(birth < (currentYear - 99) || birth > currentYear){
             Toast.makeText(RegisterActivity.this, getString(R.string.birth_err),Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if(nickNameEditText.getText().length() == 0){
-            Toast.makeText(RegisterActivity.this, getString(R.string.name_empty_err),Toast.LENGTH_SHORT).show();
+        if(!Verification.checkNickName(nickNameEditText.getText().toString(), error)){
+            Toast.makeText(RegisterActivity.this, error, Toast.LENGTH_SHORT).show();
             return false;
         }
-
 
         return true;
     }
@@ -141,15 +147,23 @@ public class RegisterActivity extends Activity {
         }
         buildUserIofoParam();
 
-        MyRequest<UserInfoRequest> myRequest = new MyRequest(Request.Method.POST,url,UserInfoRequest.class, userInfoDTO,
-                new Response.Listener<MyResponse>() {
+        MyRequest<UserDTO> myRequest = new MyRequest(Request.Method.POST,url,UserDTO.class, userInfoDTO,
+                new Response.Listener<MyResponse<UserDTO>>() {
                     @Override
-                    public void onResponse(MyResponse response) {
+                    public void onResponse(MyResponse<UserDTO> response) {
                         if(response.getStatus() == MyResponse.status_ok){
                             Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_LONG).show();
+
+                            UserDTO newUserDTO = response.getContent();
+                            Mine mine = MyApplication.getContext().getMine();
+                            mine.setUserInfo(newUserDTO);
+                            mine.WriteSerializationToLocal(RegisterActivity.this);
+
+                            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                            startActivity(intent);
                         }else if(response.getStatus() == MyResponse.status_error){
                             ErrorInfo errorInfo = response.getErrorInfo();
-                            Toast.makeText(RegisterActivity.this, getString(R.string.err_name_repeat), Toast.LENGTH_SHORT).show();
+                            MyErrorHelper.showErrorToast(RegisterActivity.this, errorInfo);
                         }
                     }
                 },

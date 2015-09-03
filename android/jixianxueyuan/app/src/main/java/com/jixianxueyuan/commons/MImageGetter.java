@@ -1,4 +1,4 @@
-package com.jixianxueyuan.util;
+package com.jixianxueyuan.commons;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

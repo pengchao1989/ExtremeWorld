@@ -42,7 +42,6 @@ public class UserBase  extends IdEntity{
 		this.id = id;
 	}
 
-	@NotBlank
 	public String getLoginName() {
 		return loginName;
 	}

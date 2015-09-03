@@ -56,23 +56,27 @@
         <item name="android:paddingBottom">@dimen/small_list_item_vertical_padding</item>
     </style>
 
-    <style name="ListPrimaryText">
+    <style name="PrimaryText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/primary_text</item>
     </style>
-    
-    <style name="ListPrimaryTextSmall" parent="@style/ListPrimaryText">
-        <item name="android:textSize">16sp</item>
-    </style>
 
-    <style name="ListSecondaryText">
+    <style name="SecondText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/secondary_text</item>
     </style>
+
+    <style name="ListPrimaryText" parent="PrimaryText"/>
+    
+    <style name="ListPrimaryTextSmall" parent="@style/ListPrimaryText">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ListSecondaryText" parent="SecondText"/>
 
     <style name="ListSecondaryTextSmall" parent="@style/ListSecondaryText">
         <item name="android:textSize">14sp</item>

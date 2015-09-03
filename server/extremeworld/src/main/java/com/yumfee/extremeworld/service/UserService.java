@@ -27,6 +27,10 @@ public class UserService {
 		return userDao.findOne(id);
 	}
 	
+	public User findUserByName(String name){
+		return userDao.findByName(name);
+	}
+	
 	public List<User> getAll()
 	{
 		return (List<User>) userDao.findAll();

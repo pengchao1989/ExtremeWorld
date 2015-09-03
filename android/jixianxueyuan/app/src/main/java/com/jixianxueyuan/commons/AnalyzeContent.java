@@ -1,6 +1,7 @@
-package com.jixianxueyuan.util;
+package com.jixianxueyuan.commons;
 
 import com.jixianxueyuan.server.StaticResourceConfig;
+import com.jixianxueyuan.util.MyLog;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,7 +19,7 @@ public class AnalyzeContent {
 
     public static LinkedList<ContentFragment> analyzeContent(String content)
     {
-        MyLog.d("TopicDetailActivity","enter analyzeContent()");
+        MyLog.d("TopicDetailActivity", "enter analyzeContent()");
         MyLog.d("TopicDetailActivity", "string=" + content);
 
         //String regex = "<img .*?>";

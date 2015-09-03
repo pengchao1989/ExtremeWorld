@@ -5,7 +5,7 @@ import com.jixianxueyuan.dto.UserDTO;
 /**
  * Created by pengchao on 7/19/15.
  */
-public class UserInfoRequest extends UserDTO {
+public class UserRegisterRequest extends UserDTO {
     private String qqOpenId;
 
     public String getQqOpenId() {

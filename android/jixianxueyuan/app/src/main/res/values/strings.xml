@@ -9,6 +9,8 @@
     <string name="back">back</string>
     <string name="err">error</string>
     <string name="success">success</string>
+    <string name="unknown">Unknown</string>
+    <string name="save">save</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">welcome</string>
     <string name="qq_login">QQ Login</string>
@@ -37,6 +39,7 @@
     <string name="setting">setting</string>
 
     <string name="topic_detail">topic detail</string>
+    <string name="course_detail">course detail</string>
     <string name="floor">f</string>
     <string name="reply">reply</string>
     <string name="we_speek">i speek</string>
@@ -52,16 +55,21 @@
     <string name="load_sub_reply" formatted="false">load%1$dreply</string>
     <string name="loadmore">load more</string>
 
+    <string name="edit_profile">edit profile</string>
     <string name="random">random</string>
     <string name="upload">upload</string>
     <string name="select">select</string>
     <string name="local">local</string>
-    <string name="nickname">nickname</string>
+    <string name="nickname">Nickname</string>
     <string name="birth">birth</string>
-    <string name="boy">boy</string>
-    <string name="girl">girl</string>
+    <string name="gender">Gender</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
     <string name="save_profile">save</string>
     <string name="register_success">register success</string>
+    <string name="select_avatar">select avatar</string>
+    <string name="region">Region</string>
+    <string name="signature">Signature</string>
 
     <string name="logout">logout</string>
     <string name="notify_setting">notify</string>

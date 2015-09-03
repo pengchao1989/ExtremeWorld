@@ -9,6 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.extremeworld.config.MyErrorCode;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.UserDTO;
@@ -22,7 +23,18 @@ public class ProfileRestController {
 	UserService userService;
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaTypes.JSON)
-	public MyResponse update(@RequestBody User user, UriComponentsBuilder uriBuilder){
+	public MyResponse update(@RequestBody User userParam, UriComponentsBuilder uriBuilder){
+		
+		User sameNameUser = userService.findUserByName(userParam.getName());
+    	if(sameNameUser != null && sameNameUser.getId() != userParam.getId()){
+    		return MyResponse.err(MyErrorCode.NAME_REPEAT);
+    	}
+    	
+    	User user = userService.getUser(userParam.getId());
+    	user.setName(userParam.getName());
+    	user.setAvatar(userParam.getAvatar());
+    	user.setSignature(userParam.getSignature());
+    	user.setGender(userParam.getGender());
 		
 		userService.saveUser(user);
 		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);

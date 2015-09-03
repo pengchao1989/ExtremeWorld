@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
 import com.jixianxueyuan.app.Mine;
@@ -28,6 +30,8 @@ public class MineFragment extends Fragment {
 
     @InjectView(R.id.mine_avatar_imageview)
     ImageView avatarImageView;
+    @InjectView(R.id.mine_fragment_signature)
+    TextView signatureTextView;
 
     MyApplication application;
 
@@ -51,6 +55,8 @@ public class MineFragment extends Fragment {
         ButterKnife.inject(this,view);
 
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView);
+
+        signatureTextView.setText(mine.getUserInfo().getSignature());
 
         return view;
 
@@ -82,6 +88,11 @@ public class MineFragment extends Fragment {
 
     @OnClick(R.id.mine_fragment_setting)void onSettingClick(){
         Intent intent = new Intent(this.getActivity(), SettingActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.mine_avatar_imageview)void avatarOnClick(){
+        Intent intent = new Intent(this.getActivity(), ProfileEditActivity.class);
         startActivity(intent);
     }
 }
