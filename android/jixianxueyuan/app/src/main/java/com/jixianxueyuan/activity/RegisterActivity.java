@@ -20,6 +20,7 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
+import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.ErrorInfo;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
@@ -34,15 +35,27 @@ import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
  * Created by pengchao on 7/9/15.
  */
 public class RegisterActivity extends Activity {
+
+    public static final int REQUEST_IMAGE_CODE = 1;
+
+    @InjectView(R.id.register_avatar)ImageView avatarImageView;
+    @InjectView(R.id.register_avatar_random)Button randomButton;
+    @InjectView(R.id.register_avatar_select)Button selectButton;
+    @InjectView(R.id.register_nick_name)EditText nickNameEditText;
+    @InjectView(R.id.register_birth)EditText birthEditText;
+    @InjectView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
+
 
     private String hobby;
     private QQOpenInfo qqOpenInfo;
@@ -51,13 +64,11 @@ public class RegisterActivity extends Activity {
     private UserRegisterRequest userInfoDTO;
     private ReferenceAvatarDTO referenceAvatarDTO;
 
+    private String localAvatarPath;
+    private ImageLoader imageLoader;
 
-    @InjectView(R.id.register_avatar)ImageView avatarImageView;
-    @InjectView(R.id.register_avatar_random)Button randomButton;
-    @InjectView(R.id.register_avatar_select)Button selectButton;
-    @InjectView(R.id.register_nick_name)EditText nickNameEditText;
-    @InjectView(R.id.register_birth)EditText birthEditText;
-    @InjectView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +79,8 @@ public class RegisterActivity extends Activity {
         userInfoDTO.setGender("female");
 
         ButterKnife.inject(this);
+
+        imageLoader = ImageLoader.getInstance();
 
         initView();
         requestReferenceAvatar();
@@ -103,18 +116,15 @@ public class RegisterActivity extends Activity {
     private void refreshAvatarView(){
         String url = referenceAvatarDTO.getUrl() + "!AndroidProfileAvatar";
 
-        ImageLoader.getInstance().displayImage(url, avatarImageView);
+        imageLoader.displayImage(url, avatarImageView, ImageLoaderConfig.getAvatarOption(this));
     }
 
-    @OnClick(R.id.register_submit)void onRegister(){
-        requestRegister();
-    }
+
 
     private boolean buildUserIofoParam(){
         userInfoDTO.setBirth(birthEditText.getText().toString());
         userInfoDTO.setName(nickNameEditText.getText().toString());
-        userInfoDTO.setAvatar(qqUserInfo.getFigureurl_qq_1());
-        userInfoDTO.setId(16L);
+        //userInfoDTO.setId(16L);
 
         return true;
     }
@@ -188,6 +198,7 @@ public class RegisterActivity extends Activity {
                     public void onResponse(MyResponse<ReferenceAvatarDTO> response) {
                         if(response.getStatus() == MyResponse.status_ok){
                             referenceAvatarDTO = response.getContent();
+                            userInfoDTO.setAvatar(referenceAvatarDTO.getUrl());
                             refreshAvatarView();
                         }
                     }
@@ -201,10 +212,46 @@ public class RegisterActivity extends Activity {
         queue.add(myRequest);
     }
 
+    private void uploadAvatar(){
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_IMAGE_CODE:
+                if (resultCode == RESULT_OK) {
+                    // Get the result list of select image paths
+                    List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                    // do your logic ....
+                    for (String p : path) {
+                        localAvatarPath = "file://" + p;
+                        ImageLoader imageLoader = ImageLoader.getInstance();
+                        imageLoader.displayImage(localAvatarPath, avatarImageView);
+                    }
+                }
+                break;
+        }
+    }
+
+    @OnClick(R.id.register_submit)void onRegister(){
+        requestRegister();
+    }
+
     @OnClick(R.id.register_avatar_random)void onRandomClick(){
         requestReferenceAvatar();
     }
     @OnClick(R.id.register_avatar_select)void onSelectClick(){
+        Intent intent = new Intent(this, MultiImageSelectorActivity.class);
 
+        // whether show camera
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
+
+        // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
+
+        startActivityForResult(intent, REQUEST_IMAGE_CODE);
     }
+
+
 }

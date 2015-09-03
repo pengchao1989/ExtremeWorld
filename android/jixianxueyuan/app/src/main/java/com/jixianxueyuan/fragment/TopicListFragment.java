@@ -289,6 +289,7 @@ public class TopicListFragment extends Fragment {
 
     private void requestTopicList()
     {
+        swipeRefreshLayout.setRefreshing(true);
 
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
 

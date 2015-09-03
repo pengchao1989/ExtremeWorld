@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.UserHomeActivity;
+import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
@@ -116,7 +117,8 @@ public class TopicListAdapter extends BaseAdapter {
         if(Util.isOurServerImage(avatarUrl)){
             avatarUrl += "!androidListAvatar";
         }
-        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.displayImage(avatarUrl, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
 
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 

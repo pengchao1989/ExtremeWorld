@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:text="凡是不可亵渎，必有龌蹉之事！"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -35,7 +34,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="118dp" />
+            android:layout_marginTop="118dp"
+            android:src="@mipmap/icon_avatar_middle"/>
 
 
     </RelativeLayout>

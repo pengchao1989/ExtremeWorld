@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.SubReplyDTO;
 import com.jixianxueyuan.server.StaticResourceConfig;
@@ -104,7 +105,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
 
 
         String url = replyDTO.getUser().getAvatar() + "!androidListAvatar";
-        ImageLoader.getInstance().displayImage(url, viewHolder.avatarImageView);
+        ImageLoader.getInstance().displayImage(url, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
 
         //sub reply
         showSubReply(viewHolder, replyDTO);
