@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ import com.jixianxueyuan.dto.request.ReferenceAvatarDTO;
 import com.jixianxueyuan.dto.request.UserRegisterRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.ACache;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -48,6 +50,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 public class RegisterActivity extends Activity {
 
     public static final int REQUEST_IMAGE_CODE = 1;
+    public static final int CROP_IMAGE_CODE = 2;
 
     @InjectView(R.id.register_avatar)ImageView avatarImageView;
     @InjectView(R.id.register_avatar_random)Button randomButton;
@@ -222,12 +225,23 @@ public class RegisterActivity extends Activity {
             case REQUEST_IMAGE_CODE:
                 if (resultCode == RESULT_OK) {
                     // Get the result list of select image paths
-                    List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                    List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                     // do your logic ....
-                    for (String p : path) {
-                        localAvatarPath = "file://" + p;
-                        ImageLoader imageLoader = ImageLoader.getInstance();
-                        imageLoader.displayImage(localAvatarPath, avatarImageView);
+                    if(pathList.size() > 0){
+                        String path = pathList.get(0);
+                        Intent intent = new Intent(RegisterActivity.this, CropAvatarActivity.class);
+                        intent.putExtra("imagePath", path);
+                        startActivityForResult(intent,CROP_IMAGE_CODE);
+                    }
+
+                }
+                break;
+            case CROP_IMAGE_CODE:
+                if (resultCode == RESULT_OK) {
+                    ACache aCache = ACache.get(this);
+                    Bitmap avatarBitmap = aCache.getAsBitmap("cropAvatar");
+                    if(avatarBitmap != null){
+                        avatarImageView.setImageBitmap(avatarBitmap);
                     }
                 }
                 break;

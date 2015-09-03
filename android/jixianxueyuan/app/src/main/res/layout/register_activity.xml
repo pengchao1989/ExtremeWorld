@@ -16,12 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         style="@style/MainContainer">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/register_avatar"
@@ -32,9 +29,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_toRightOf="@id/register_avatar"
-                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
                 >
 
                 <Button
@@ -44,6 +39,9 @@
                     android:text="@string/random"
                     style="@style/TransparentButtonSmall"
                     />
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"/>
                 <Button
                     android:id="@+id/register_avatar_select"
                     android:layout_width="wrap_content"
@@ -55,14 +53,11 @@
             </LinearLayout>
 
 
-        </RelativeLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -97,7 +92,7 @@
 
             <EditText
                 android:id="@+id/register_birth"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:inputType="numberSigned"
                 android:maxLength="4"
@@ -106,37 +101,39 @@
                 style="@style/ListPrimaryText"
                 />
 
+            <RadioGroup
+                android:id="@+id/register_gender_radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/male"
+                    android:id="@+id/register_gender_male"
+                    android:checked="true"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female"
+                    android:id="@+id/register_gender_female"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+
+
+            </RadioGroup>
+
         </LinearLayout>
 
-        <RadioGroup
-            android:id="@+id/register_gender_radiogroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/male"
-                android:id="@+id/register_gender_male"
-                android:checked="true"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/female"
-                android:id="@+id/register_gender_female"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
-
-
-        </RadioGroup>
 
         <Button
             android:id="@+id/register_submit"

@@ -6,6 +6,7 @@
     <string name="app_name_roller_skating">轮滑圈</string>
     <string name="app_name_skee">滑雪圈</string>
 
+    <string name="done">완성하다</string>
     <string name="back">복귀</string>
     <string name="err">오류</string>
     <string name="success">성공</string>
