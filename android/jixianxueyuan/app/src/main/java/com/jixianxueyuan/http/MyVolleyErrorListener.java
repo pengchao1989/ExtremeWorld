@@ -6,7 +6,7 @@ import com.android.volley.VolleyError;
 /**
  * Created by pengchao on 9/1/15.
  */
-public class MyNetworkErrorListener implements Response.ErrorListener {
+public class MyVolleyErrorListener implements Response.ErrorListener {
     @Override
     public void onErrorResponse(VolleyError error) {
 

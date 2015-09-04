@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -30,8 +31,8 @@ import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.dto.request.ReferenceAvatarDTO;
 import com.jixianxueyuan.dto.request.UserRegisterRequest;
 import com.jixianxueyuan.http.MyRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
@@ -44,6 +45,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
@@ -61,6 +63,8 @@ public class RegisterActivity extends Activity {
     @InjectView(R.id.register_birth)EditText birthEditText;
     @InjectView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
 
+    private AlertDialog progressDialog;
+
 
     private String hobby;
     private QQOpenInfo qqOpenInfo;
@@ -77,13 +81,14 @@ public class RegisterActivity extends Activity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
         userRequestParam = new UserRegisterRequest();
-        userRequestParam.setGender("female");
+        userRequestParam.setGender("male");
 
         ButterKnife.inject(this);
 
@@ -108,19 +113,25 @@ public class RegisterActivity extends Activity {
 
         nickNameEditText.setText(qqUserInfo.getNickname());
 
-
         genderRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int radioButtonId = group.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) RegisterActivity.this.findViewById(radioButtonId);
-                userRequestParam.setGender(rb.getText().toString());
+                if(radioButtonId == R.id.register_gender_male){
+                    userRequestParam.setGender("male");
+                }else if(radioButtonId == R.id.register_gender_female){
+                    userRequestParam.setGender("female");
+                }
+
             }
         });
 
     }
 
     private void submit(){
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+        progressDialog.show();
+
         if(isUseUploadAvatar){
             uploadAvatar();
         }else {
@@ -179,6 +190,8 @@ public class RegisterActivity extends Activity {
                         if(response.getStatus() == MyResponse.status_ok){
                             Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_LONG).show();
 
+                            progressDialog.dismiss();
+
                             UserDTO newUserDTO = response.getContent();
                             Mine mine = MyApplication.getContext().getMine();
                             mine.setUserInfo(newUserDTO);
@@ -186,6 +199,8 @@ public class RegisterActivity extends Activity {
 
                             Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                             startActivity(intent);
+
+                            finish();
                         }else if(response.getStatus() == MyResponse.status_error){
                             ErrorInfo errorInfo = response.getErrorInfo();
                             MyErrorHelper.showErrorToast(RegisterActivity.this, errorInfo);
@@ -195,7 +210,8 @@ public class RegisterActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        progressDialog.dismiss();
+                        MyVolleyErrorHelper.showError(RegisterActivity.this,error);
                     }
                 }
                 );

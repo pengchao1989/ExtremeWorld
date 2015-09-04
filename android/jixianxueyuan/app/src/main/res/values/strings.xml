@@ -12,6 +12,8 @@
     <string name="success">success</string>
     <string name="unknown">Unknown</string>
     <string name="save">save</string>
+    <string name="updating">updating</string>
+    <string name="wait">wait</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">welcome</string>
     <string name="qq_login">QQ Login</string>

@@ -59,6 +59,9 @@ public class MainActivity extends Activity {
     //String openId = null;
     QQOpenInfo qqOpenInfo = null;
 
+
+    boolean isTestRegister = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,21 +83,37 @@ public class MainActivity extends Activity {
         }
 
 
-
-        //若本地有登录信息，则直接进行登录
-
-        Mine mine = MyApplication.getContext().getMine();
-        if(mine.getUserInfo() != null && mine.getUserInfo().getId() != null){
-            //直接进入Hone页
-            if(mine.getUserInfo().getId() > 0){
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+        if(!isTestRegister){
+            //若本地有登录信息，则直接进行登录
+            Mine mine = MyApplication.getContext().getMine();
+            if(mine.getUserInfo() != null && mine.getUserInfo().getId() != null){
+                //直接进入Hone页
+                if(mine.getUserInfo().getId() > 0){
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
+            else{
+                //等待用户点击登录按钮进行登录
+            }
+        }else {
+
+            qqOpenInfo = new QQOpenInfo();
+            qqOpenInfo.setOpenid(Util.getUUID());
+
+            QQUserInfo qqUserInfo = new QQUserInfo();
+            qqUserInfo.setNickname(Util.getUUID());
+
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("qqOpenInfo", qqOpenInfo);
+            bundle.putSerializable("qqUserInfo", qqUserInfo);
+            intent.putExtras(bundle);
+            startActivity(intent);
+
         }
-        else{
-            //等待用户点击登录按钮进行登录
-        }
+
 
 
 
@@ -105,7 +124,6 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-        MyLog.d("MainActivity", "getDeviceInfo=" + getDeviceInfo(this));
     }
 
     @Override
@@ -222,7 +240,6 @@ public class MainActivity extends Activity {
     private void requestQQOpenId(){
 
         tencent = Tencent.createInstance("101228787", this.getApplicationContext());
-        tencent.setOpenId("");
         if (!tencent.isSessionValid()) {
             tencent.login(this, "get_user_info,add_t", new IUiListener() {
                 @Override
@@ -234,6 +251,8 @@ public class MainActivity extends Activity {
 
                     qqOpenInfo = gson.fromJson(response.toString(), QQOpenInfo.class);
                     if (qqOpenInfo != null) {
+                        //tencent.setOpenId(qqOpenInfo.getOpenid());
+                        //tencent.setAccessToken(qqOpenInfo.getAccess_token(),"10");
                         //qq登录成功后进行自家用户登录或注册
                         requestLogin();
                     }
@@ -254,6 +273,7 @@ public class MainActivity extends Activity {
     }
 
     private void requestQQuserInfo(){
+
 
         UserInfo userInfo = new UserInfo(this, tencent.getQQToken());
         userInfo.getUserInfo(new IUiListener() {

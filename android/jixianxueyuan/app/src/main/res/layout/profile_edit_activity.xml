@@ -129,7 +129,7 @@
 
             <EditText
                 android:id="@+id/profile_edit_signature"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"

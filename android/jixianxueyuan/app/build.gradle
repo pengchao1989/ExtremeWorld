@@ -88,6 +88,7 @@ dependencies {
     compile 'de.greenrobot:greendao:2.0.0'
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.isseiaoki:simplecropview:1.0.7'
+    compile 'com.github.d-max:spots-dialog:0.4@aar'
     compile project(':emoji')
     compile project(':multi-image-selector')
     compile files('libs/open_sdk_r5043_lite.jar')

@@ -13,6 +13,8 @@
     <string name="success">成功</string>
     <string name="unknown">未知</string>
     <string name="save">保存</string>
+    <string name="updating">更新中</string>
+    <string name="wait">稍等片刻</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">welcome</string>
     <string name="qq_login">QQ登陆</string>

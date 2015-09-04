@@ -16,9 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        style="@style/MainContainer">
+        android:gravity="center_horizontal">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            style="@style/MainContainer">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/register_avatar"
@@ -53,97 +58,112 @@
             </LinearLayout>
 
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nickname"
-                style="@style/ListPrimaryText"
-                />
-
-            <EditText
-                android:id="@+id/register_nick_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:maxLength="30"
-                style="@style/ListPrimaryText"
-                />
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@color/item_background"
+            style="@style/MainContainer"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birth"
-                style="@style/ListPrimaryText"
-                />
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/register_birth"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:inputType="numberSigned"
-                android:maxLength="4"
-                android:singleLine="true"
-                android:text="1995"
-                style="@style/ListPrimaryText"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nickname"
+                    style="@style/ListPrimaryText"
+                    />
 
-            <RadioGroup
-                android:id="@+id/register_gender_radiogroup"
-                android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/register_nick_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:maxLength="30"
+                    style="@style/ListPrimaryText"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
 
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/male"
-                    android:id="@+id/register_gender_male"
-                    android:checked="true"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:text="@string/birth"
+                    style="@style/ListPrimaryText"
                     />
 
-                <RadioButton
+                <EditText
+                    android:id="@+id/register_birth"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:text="1995"
+                    style="@style/ListPrimaryText"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/register_gender_radiogroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/female"
-                    android:id="@+id/register_gender_female"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"
+                        android:id="@+id/register_gender_male"
+                        android:checked="true"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:button="@drawable/check_box_bg"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female"
+                        android:id="@+id/register_gender_female"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="20dp"
+                        android:button="@drawable/check_box_bg"/>
 
 
-            </RadioGroup>
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/register_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_profile"
+                style="@style/TransparentButton"
+                />
 
         </LinearLayout>
-
-
-
-        <Button
-            android:id="@+id/register_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/save_profile"
-            style="@style/TransparentButton"
-            />
-
-
 
     </LinearLayout>
 

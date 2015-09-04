@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Created by pengchao on 9/1/15.
  */
-public class MyNetworkErrorHelper {
+public class MyVolleyErrorHelper {
 
     public static void showError(Context context, Object error){
         Toast.makeText(context, getMessage(error,context), Toast.LENGTH_SHORT).show();

@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.request.UserUpdateRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -30,6 +32,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by pengchao on 9/2/15.
@@ -44,6 +47,8 @@ public class ProfileEditActivity extends Activity {
     @InjectView(R.id.profile_edit_nickname)EditText nickNameEditText;
     @InjectView(R.id.profile_edit_gender)TextView genderTextView;
     @InjectView(R.id.profile_edit_signature)EditText signatureTextView;
+
+    private AlertDialog progressDialog;
 
 
     UserDTO userDTO;
@@ -100,7 +105,6 @@ public class ProfileEditActivity extends Activity {
 
         if(checkParam()){
 
-
             requestSaveProfile();
         }
     }
@@ -123,6 +127,9 @@ public class ProfileEditActivity extends Activity {
 
     private void requestSaveProfile(){
 
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+        progressDialog.show();
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.profile_update();
 
@@ -130,6 +137,9 @@ public class ProfileEditActivity extends Activity {
                 new Response.Listener<MyResponse<UserDTO>>() {
                     @Override
                     public void onResponse(MyResponse<UserDTO> response) {
+
+                        progressDialog.dismiss();
+
                         if (response.getStatus() == MyResponse.status_ok){
                             UserDTO newUserDTO = response.getContent();
                             Mine mine = MyApplication.getContext().getMine();
@@ -146,7 +156,8 @@ public class ProfileEditActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                progressDialog.dismiss();
+                MyVolleyErrorHelper.showError(ProfileEditActivity.this,error);
             }
         });
 

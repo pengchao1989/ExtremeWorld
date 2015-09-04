@@ -149,6 +149,14 @@
 
 
 
+    //progress dialog
+    <style name="ProgressDialogUpdating" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">@string/updating</item>
+        <item name="DialogSpotColor">@color/primary</item>
+        <item name="DialogSpotCount">4</item>
+    </style>
+
     <!-- 文本 - 滑动标签标题 -->
     <style name="text_slidingTabTitle">
         <item name="android:layout_width">wrap_content</item>
