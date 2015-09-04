@@ -18,7 +18,6 @@ import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
-import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;

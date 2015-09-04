@@ -11,7 +11,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.jixianxueyuan.dto.UploadToken;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.server.StaticResourceConfig;
+import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.qiniu.android.http.ResponseInfo;
@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by pengchao on 8/2/15.
  */
-public class QiNiuVideoUpload {
+public class QiniuVideoUpload {
 
     Context context;
 
@@ -37,15 +37,15 @@ public class QiNiuVideoUpload {
     List<String> videoPath;
     int videoPathUploadIndex = 0;
 
-    QiNiuVideoUploadListener listener;
+    QiniuVideoUploadListener listener;
 
     LinkedHashMap<String, VideoUploadResult> resultVideoPath;
 
-    public QiNiuVideoUpload(Context context){
+    public QiniuVideoUpload(Context context){
         this.context = context;
     }
 
-    public void upload(List<String> videoPath, QiNiuVideoUploadListener listener){
+    public void upload(List<String> videoPath, QiniuVideoUploadListener listener){
         this.videoPath = videoPath;
         this.listener = listener;
         resultVideoPath = new LinkedHashMap<String, VideoUploadResult>();
@@ -80,7 +80,9 @@ public class QiNiuVideoUpload {
     private void upLoadVideo(){
         UploadManager uploadManager = new UploadManager();
 
-        uploadManager.put(videoPath.get(videoPathUploadIndex), Util.getUUID(), videoUploadToken.getUptoken(),
+        final String fileNamePrefix = "video_";
+
+        uploadManager.put(videoPath.get(videoPathUploadIndex), fileNamePrefix + Util.getDateKey(), videoUploadToken.getUptoken(),
                 new UpCompletionHandler() {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject response) {

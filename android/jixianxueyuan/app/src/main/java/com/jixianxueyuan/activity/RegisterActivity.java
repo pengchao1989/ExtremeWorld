@@ -2,7 +2,6 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +21,7 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.ErrorInfo;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
@@ -31,9 +31,11 @@ import com.jixianxueyuan.dto.request.ReferenceAvatarDTO;
 import com.jixianxueyuan.dto.request.UserRegisterRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.util.ACache;
+import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
+import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.Calendar;
@@ -64,11 +66,13 @@ public class RegisterActivity extends Activity {
     private QQOpenInfo qqOpenInfo;
     private QQUserInfo qqUserInfo;
 
-    private UserRegisterRequest userInfoDTO;
+    private UserRegisterRequest userRequestParam;
     private ReferenceAvatarDTO referenceAvatarDTO;
 
     private String localAvatarPath;
     private ImageLoader imageLoader;
+
+    private Boolean isUseUploadAvatar = false;
 
 
 
@@ -78,8 +82,8 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
-        userInfoDTO = new UserRegisterRequest();
-        userInfoDTO.setGender("female");
+        userRequestParam = new UserRegisterRequest();
+        userRequestParam.setGender("female");
 
         ButterKnife.inject(this);
 
@@ -99,7 +103,7 @@ public class RegisterActivity extends Activity {
             qqOpenInfo = (QQOpenInfo) bundle.getSerializable("qqOpenInfo");
             qqUserInfo = (QQUserInfo) bundle.getSerializable("qqUserInfo");
 
-            userInfoDTO.setQqOpenId(qqOpenInfo.getOpenid());
+            userRequestParam.setQqOpenId(qqOpenInfo.getOpenid());
         }
 
         nickNameEditText.setText(qqUserInfo.getNickname());
@@ -110,10 +114,18 @@ public class RegisterActivity extends Activity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int radioButtonId = group.getCheckedRadioButtonId();
                 RadioButton rb = (RadioButton) RegisterActivity.this.findViewById(radioButtonId);
-                userInfoDTO.setGender(rb.getText().toString());
+                userRequestParam.setGender(rb.getText().toString());
             }
         });
 
+    }
+
+    private void submit(){
+        if(isUseUploadAvatar){
+            uploadAvatar();
+        }else {
+            requestRegister();
+        }
     }
 
     private void refreshAvatarView(){
@@ -125,9 +137,9 @@ public class RegisterActivity extends Activity {
 
 
     private boolean buildUserIofoParam(){
-        userInfoDTO.setBirth(birthEditText.getText().toString());
-        userInfoDTO.setName(nickNameEditText.getText().toString());
-        //userInfoDTO.setId(16L);
+        userRequestParam.setBirth(birthEditText.getText().toString());
+        userRequestParam.setName(nickNameEditText.getText().toString());
+        //userRequestParam.setId(16L);
 
         return true;
     }
@@ -160,7 +172,7 @@ public class RegisterActivity extends Activity {
         }
         buildUserIofoParam();
 
-        MyRequest<UserDTO> myRequest = new MyRequest(Request.Method.POST,url,UserDTO.class, userInfoDTO,
+        MyRequest<UserDTO> myRequest = new MyRequest(Request.Method.POST,url,UserDTO.class, userRequestParam,
                 new Response.Listener<MyResponse<UserDTO>>() {
                     @Override
                     public void onResponse(MyResponse<UserDTO> response) {
@@ -201,7 +213,8 @@ public class RegisterActivity extends Activity {
                     public void onResponse(MyResponse<ReferenceAvatarDTO> response) {
                         if(response.getStatus() == MyResponse.status_ok){
                             referenceAvatarDTO = response.getContent();
-                            userInfoDTO.setAvatar(referenceAvatarDTO.getUrl());
+                            userRequestParam.setAvatar(referenceAvatarDTO.getUrl());
+                            isUseUploadAvatar = false;
                             refreshAvatarView();
                         }
                     }
@@ -216,6 +229,26 @@ public class RegisterActivity extends Activity {
     }
 
     private void uploadAvatar(){
+        QiniuSingleImageUpload singleImageUpload = new QiniuSingleImageUpload(this);
+        singleImageUpload.upload(localAvatarPath, UploadPrefixName.AVATAR, new QiniuSingleImageUploadListener() {
+            @Override
+            public void onUploading(double percent) {
+
+            }
+
+            @Override
+            public void onUploadComplete(String url) {
+                userRequestParam.setAvatar(url);
+                MyLog.d("RegisterActivity" , "imageUrl=" + url);
+                requestRegister();
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+
 
     }
     @Override
@@ -238,18 +271,22 @@ public class RegisterActivity extends Activity {
                 break;
             case CROP_IMAGE_CODE:
                 if (resultCode == RESULT_OK) {
-                    ACache aCache = ACache.get(this);
-                    Bitmap avatarBitmap = aCache.getAsBitmap("cropAvatar");
-                    if(avatarBitmap != null){
-                        avatarImageView.setImageBitmap(avatarBitmap);
+
+                    String filePath = data.getStringExtra("filePath");
+                    if(filePath != null){
+                        localAvatarPath = filePath;
+                        isUseUploadAvatar = true;
+                        ImageLoaderConfig.getAvatarOption(this);
+                        imageLoader.displayImage("file://" + filePath, avatarImageView, ImageLoaderConfig.getAvatarOption(this));
                     }
+
                 }
                 break;
         }
     }
 
     @OnClick(R.id.register_submit)void onRegister(){
-        requestRegister();
+        submit();
     }
 
     @OnClick(R.id.register_avatar_random)void onRandomClick(){

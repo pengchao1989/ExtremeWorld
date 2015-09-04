@@ -1,6 +1,5 @@
 package com.jixianxueyuan.commons;
 
-import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
 
 import org.jsoup.Jsoup;
@@ -9,8 +8,6 @@ import org.jsoup.nodes.Element;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
 
 /**
  * Created by pengchao on 5/23/15.

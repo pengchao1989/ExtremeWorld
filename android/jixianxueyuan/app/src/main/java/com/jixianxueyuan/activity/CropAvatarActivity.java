@@ -42,9 +42,13 @@ public class CropAvatarActivity extends Activity{
     @OnClick(R.id.crop_avatar_done_button)void onClick(){
 
         Bitmap bitmap = cropImageView.getCroppedBitmap();
-        ACache aCache = ACache.get(this);
-        aCache.put("cropAvatar", bitmap);
-        setResult(RESULT_OK);
+        //ACache aCache = ACache.get(this);
+        //aCache.put("cropAvatar", bitmap);
+        String filePath = BitmapUtils.saveBitmapToFile(CropAvatarActivity.this, bitmap);
+
+        Intent intent = new Intent();
+        intent.putExtra("filePath", filePath);
+        setResult(RESULT_OK,intent);
         finish();
     }
 }

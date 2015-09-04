@@ -1,12 +1,10 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,12 +17,9 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.SubReplyDTO;
-import com.jixianxueyuan.server.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yumfee.emoji.EmojiconTextView;
-
-import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 import java.util.List;

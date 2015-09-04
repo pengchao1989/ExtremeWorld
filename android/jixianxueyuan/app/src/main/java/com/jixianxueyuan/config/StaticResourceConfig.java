@@ -1,4 +1,4 @@
-package com.jixianxueyuan.server;
+package com.jixianxueyuan.config;
 
 /**
  * Created by pengchao on 4/22/15.
@@ -6,5 +6,5 @@ package com.jixianxueyuan.server;
 public class StaticResourceConfig {
 
     public static final String IMG_DOMAIN = "http://img.jixianxueyuan.com/";
-    public static final String VIDEO_DOMAIN = "http://static.jixianxueyuan.com/";
+    public static final String VIDEO_DOMAIN = "http://video.jixianxueyuan.com/";
 }

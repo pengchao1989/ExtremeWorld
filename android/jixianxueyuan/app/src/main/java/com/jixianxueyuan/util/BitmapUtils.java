@@ -1,10 +1,15 @@
 package com.jixianxueyuan.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by pengchao on 9/3/15.
@@ -48,6 +53,35 @@ public class BitmapUtils {
         bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
         byte[] b = baos.toByteArray();
         return Base64.encodeToString(b, Base64.DEFAULT);
+    }
+
+
+    //保存bitmap至SD卡缓存
+    public static String saveBitmapToFile(Context context, Bitmap bitmap){
+
+        String imageName = Util.getShortUuid();
+        File file = new File(DiskCachePath.getDiskCacheDir(context, "image"), imageName);
+        if (file.exists()) {
+            file.delete();
+        }
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+
+            return file.getAbsolutePath();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
     }
 }
 

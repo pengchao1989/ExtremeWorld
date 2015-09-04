@@ -40,12 +40,12 @@ import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.server.StaticResourceConfig;
+import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.util.qiniu.QiNiuImageUpload;
-import com.jixianxueyuan.util.qiniu.QiNiuImageUploadListener;
-import com.jixianxueyuan.util.qiniu.QiNiuVideoUpload;
-import com.jixianxueyuan.util.qiniu.QiNiuVideoUploadListener;
+import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
+import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
+import com.jixianxueyuan.util.qiniu.QiniuVideoUpload;
+import com.jixianxueyuan.util.qiniu.QiniuVideoUploadListener;
 import com.jixianxueyuan.util.qiniu.VideoUploadResult;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.NewEditWidget;
@@ -243,8 +243,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     private void submitVideo()
     {
-        QiNiuVideoUpload qiNiuVideoUpload = new QiNiuVideoUpload(this);
-        qiNiuVideoUpload.upload(localVideoPathList, new QiNiuVideoUploadListener() {
+        QiniuVideoUpload qiniuVideoUpload = new QiniuVideoUpload(this);
+        qiniuVideoUpload.upload(localVideoPathList, new QiniuVideoUploadListener() {
             @Override
             public void onUploading(int index, String key, double percent) {
                 updateProgressView(2, index, percent);
@@ -279,8 +279,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     private void uploadImage()
     {
-        QiNiuImageUpload qiNiuPictureUpload = new QiNiuImageUpload(this);
-        qiNiuPictureUpload.upload(localImagePathList, new QiNiuImageUploadListener() {
+        QiniuMultiImageUpload qiNiuPictureUpload = new QiniuMultiImageUpload(this);
+        qiNiuPictureUpload.upload(localImagePathList, new QiniuMultiImageUploadListener() {
 
             @Override
             public void onUploading(int index, String key, double percent) {

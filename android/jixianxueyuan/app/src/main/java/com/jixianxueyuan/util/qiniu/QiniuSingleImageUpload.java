@@ -8,9 +8,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.jixianxueyuan.config.StaticResourceConfig;
+import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.UploadToken;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -20,30 +23,33 @@ import com.qiniu.android.storage.UploadOptions;
 
 import org.json.JSONObject;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-
 /**
- * Created by pengchao on 8/1/15.
+ * Created by pengchao on 9/4/15.
  */
-public class QiNiuImageUpload {
+public class QiniuSingleImageUpload {
 
     Context context;
-    UploadToken pictureUploadToken = null;
-    QiNiuImageUploadListener listener = null;
-    List<String> imagePathList;
-    LinkedHashMap<String,String> serverImagePathMap;
+    UploadToken pictureUploadToken;
+    String prefixKey;
+    String imagePath;
+    QiniuSingleImageUploadListener listener;
 
-    int imagePathUploadIndex = 0;
-
-    public QiNiuImageUpload(Context context){
+    public QiniuSingleImageUpload(Context context){
         this.context = context;
     }
 
-    public void upload(List<String> imagePath, QiNiuImageUploadListener listener){
+    public void upload(String imagePath, QiniuSingleImageUploadListener listener){
+        this.imagePath = imagePath;
         this.listener = listener;
-        this.imagePathList = imagePath;
-        serverImagePathMap = new LinkedHashMap<String,String>();
+
+        requestPictureToken();
+    }
+
+    public void upload(String imagePath, UploadPrefixName prefixKey, QiniuSingleImageUploadListener listener){
+        this.prefixKey = prefixKey.getPrefixName();
+        this.imagePath = imagePath;
+        this.listener = listener;
+
         requestPictureToken();
     }
 
@@ -58,19 +64,18 @@ public class QiNiuImageUpload {
                 Gson gson = new Gson();
                 pictureUploadToken = gson.fromJson(response, UploadToken.class);
 
-                MyLog.d("CreateTopicActivity", "pictureUploadToken=" + pictureUploadToken);
-
-                if(pictureUploadToken != null){
+                if (pictureUploadToken != null) {
                     upLoadImage();
                 }
-
 
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        if(listener != null){
+                            listener.onError(error.getMessage());
+                        }
                     }
                 });
 
@@ -79,31 +84,20 @@ public class QiNiuImageUpload {
 
     private void upLoadImage(){
         UploadManager uploadManager = new UploadManager();
+        if(StringUtils.isBlank(prefixKey)){
+            prefixKey = "";
+        }
 
-        MyLog.d("CreateTopicActivity","upLoadImage path index=" + imagePathUploadIndex);
-
-        uploadManager.put(imagePathList.get(imagePathUploadIndex), Util.getDateKey(), pictureUploadToken.getUptoken(),
-                new UpCompletionHandler() {
+        uploadManager.put(imagePath,prefixKey + Util.getDateKey(), pictureUploadToken.getUptoken(), new UpCompletionHandler() {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject response) {
 
                         MyLog.d("", "key=" + key);
+                        if(listener != null){
 
-
-                        serverImagePathMap.put(imagePathList.get(imagePathUploadIndex), key);
-
-                        if(imagePathUploadIndex < imagePathList.size() - 1)
-                        {
-                            imagePathUploadIndex++;
-                            upLoadImage();
+                            listener.onUploadComplete(StaticResourceConfig.IMG_DOMAIN+key);
                         }
-                        else
-                        {
-                            //全部上传完成
-                            if(listener != null){
-                                listener.onUploadComplete(serverImagePathMap);
-                            }
-                        }
+
 
                     }
                 },
@@ -111,11 +105,9 @@ public class QiNiuImageUpload {
                     @Override
                     public void progress(String key, double percent) {
                         if(listener != null){
-                            listener.onUploading(imagePathUploadIndex, key, percent);
+                            listener.onUploading(percent);
                         }
                     }
-                },null)
-        );
+                },null));
     }
-
 }
