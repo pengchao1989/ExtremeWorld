@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
+import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.ErrorInfo;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
@@ -29,15 +31,22 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
  * Created by pengchao on 9/2/15.
  */
 public class ProfileEditActivity extends Activity {
+
+    public static final int REQUEST_IMAGE_CODE = 1;
+    public static final int CROP_IMAGE_CODE = 2;
+
 
     public static final String GENDER_MALE = "male";
     public static final String GENDER_FEMALE = "female";
@@ -53,10 +62,9 @@ public class ProfileEditActivity extends Activity {
 
     UserDTO userDTO;
     UserUpdateRequestDTO userUpdateRequestParam;
+    String localAvatarPath;
 
-    String nickName;
-    String signature;
-    String gender;
+    ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +82,14 @@ public class ProfileEditActivity extends Activity {
         userUpdateRequestParam.setSignature(userDTO.getSignature());
 
 
+
         initView();
     }
 
     private void initView(){
-        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader = ImageLoader.getInstance();
         String avatarUrl = userDTO.getAvatar() + "!AndroidProfileAvatar";
-        imageLoader.displayImage(avatarUrl, avatarImageView);
+        imageLoader.displayImage(avatarUrl, avatarImageView, ImageLoaderConfig.getAvatarOption(this));
 
         nickNameEditText.setText(userDTO.getName());
         signatureTextView.setText(userDTO.getSignature());
@@ -165,9 +174,48 @@ public class ProfileEditActivity extends Activity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_IMAGE_CODE:
+                if (resultCode == RESULT_OK) {
+                    // Get the result list of select image paths
+                    List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                    // do your logic ....
+                    if(pathList.size() > 0){
+                        String path = pathList.get(0);
+                        Intent intent = new Intent(ProfileEditActivity.this, CropAvatarActivity.class);
+                        intent.putExtra("imagePath", path);
+                        startActivityForResult(intent,CROP_IMAGE_CODE);
+                    }
+
+                }
+                break;
+            case CROP_IMAGE_CODE:
+                if (resultCode == RESULT_OK) {
+
+                    String filePath = data.getStringExtra("filePath");
+                    if(filePath != null){
+                        localAvatarPath = filePath;
+                        ImageLoaderConfig.getAvatarOption(this);
+                        imageLoader.displayImage("file://" + filePath, avatarImageView, ImageLoaderConfig.getAvatarOption(this));
+                    }
+                }
+                break;
+        }
+    }
 
     @OnClick(R.id.profile_edit_avatar)void onAvatarClick(){
+        Intent intent = new Intent(this, MultiImageSelectorActivity.class);
 
+        // whether show camera
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
+
+        // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
+
+        startActivityForResult(intent, REQUEST_IMAGE_CODE);
     }
 
     @OnClick(R.id.profile_edit_gender)void onGenderClick(){

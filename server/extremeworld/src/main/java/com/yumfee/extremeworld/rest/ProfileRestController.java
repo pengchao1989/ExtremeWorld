@@ -41,4 +41,15 @@ public class ProfileRestController {
 		return MyResponse.ok(userDTO);
 	}
 	
+	@RequestMapping(value = "/update_bg", method = RequestMethod.POST, consumes = MediaTypes.JSON)
+	public MyResponse updateBackground(@RequestBody User userParam, UriComponentsBuilder uriBuilder){
+		
+    	User user = userService.getUser(userParam.getId());
+    	user.setBg(userParam.getBg());
+		
+		userService.saveUser(user);
+		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+		return MyResponse.ok(userDTO);
+	}
+	
 }

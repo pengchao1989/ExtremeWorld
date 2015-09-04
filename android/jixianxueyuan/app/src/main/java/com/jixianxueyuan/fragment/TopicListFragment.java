@@ -111,7 +111,11 @@ public class TopicListFragment extends Fragment {
 
 
         loadMoreView = new LoadMoreView(this.getActivity());
-        loadMoreView.setVisibility(View.GONE);
+        if(isRefreshData){
+            loadMoreView.setVisibility(View.VISIBLE);
+        }else{
+            loadMoreView.setVisibility(View.GONE);
+        }
         loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
             @Override
             public void runLoad() {

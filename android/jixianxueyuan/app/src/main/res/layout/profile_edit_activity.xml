@@ -25,9 +25,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_edit_avatar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@mipmap/icon_avatar_middle"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             />
         <TextView
             android:layout_width="wrap_content"

@@ -14,6 +14,7 @@ public class UserDTO implements Serializable {
     private String avatar;
     private String description;
     private String signature;
+    private String bg;
     private String hobbyStamp;
     private double distance;
     private String geoModifyTime;
@@ -90,6 +91,14 @@ public class UserDTO implements Serializable {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public String getBg() {
+        return bg;
+    }
+
+    public void setBg(String bg) {
+        this.bg = bg;
     }
 
     public String getHobbyStamp() {

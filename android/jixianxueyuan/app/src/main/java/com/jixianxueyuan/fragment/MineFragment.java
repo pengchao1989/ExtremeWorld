@@ -15,6 +15,7 @@ import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -54,7 +55,7 @@ public class MineFragment extends Fragment {
 
         ButterKnife.inject(this,view);
 
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView);
+        ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView, ImageLoaderConfig.getAvatarOption(this.getActivity()));
 
         signatureTextView.setText(mine.getUserInfo().getSignature());
 

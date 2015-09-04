@@ -29,11 +29,13 @@ import com.baidu.location.LocationClientOption;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.NearFriendListAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.LoadMoreView;
@@ -185,22 +187,24 @@ public class NearFriendActivity extends Activity  {
                     @Override
                     public void onResponse(MyResponse<MyPage<UserDTO>> response) {
 
-                        if(currentPage == 0)
-                        {
-                            adapter.refreshData(response.getContent().getContents());
+                        if(response.getStatus() == MyResponse.status_ok){
+                            if(currentPage == 0)
+                            {
+                                adapter.refreshData(response.getContent().getContents());
+                            }
+                            else
+                            {
+                                adapter.addDatas(response.getContent().getContents());
+                            }
+
+                            swipeRefreshLayout.setRefreshing(false);
+
+                            totalPage = response.getContent().getTotalPages();
+                            currentPage = response.getContent().getCurPage() + 1;
+                            doHideFootView();
+                        }else if(response.getStatus() == MyResponse.status_error){
+                            MyErrorHelper.showErrorToast(NearFriendActivity.this,response.getErrorInfo());
                         }
-                        else
-                        {
-                            adapter.addDatas(response.getContent().getContents());
-                        }
-
-                        swipeRefreshLayout.setRefreshing(false);
-
-                        totalPage = response.getContent().getTotalPages();
-                        currentPage = response.getContent().getCurPage() + 1;
-                        doHideFootView();
-
-
 
 
                     }
@@ -209,7 +213,7 @@ public class NearFriendActivity extends Activity  {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         swipeRefreshLayout.setRefreshing(false);
-
+                        MyVolleyErrorHelper.showError(NearFriendActivity.this, error);
                     }
                 }
 

@@ -28,6 +28,7 @@ public class User extends UserBase
 	private String avatar;
 	private String description;
 	private String signature;
+	private String bg;
 	private String qq;
 	private String weixin;
 	private String geoHash;
@@ -91,6 +92,13 @@ public class User extends UserBase
 	}
 	public void setSignature(String signature) {
 		this.signature = signature;
+	}
+	
+	public String getBg() {
+		return bg;
+	}
+	public void setBg(String bg) {
+		this.bg = bg;
 	}
 	public String getQq()
 	{
