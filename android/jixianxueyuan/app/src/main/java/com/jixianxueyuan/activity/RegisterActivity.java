@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,6 +27,7 @@ import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
+import com.jixianxueyuan.dto.AppConfigDTO;
 import com.jixianxueyuan.dto.ErrorInfo;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
@@ -62,6 +67,9 @@ public class RegisterActivity extends Activity {
     @InjectView(R.id.register_nick_name)EditText nickNameEditText;
     @InjectView(R.id.register_birth)EditText birthEditText;
     @InjectView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
+    @InjectView(R.id.register_invitation_layout)LinearLayout invitationLayout;
+    @InjectView(R.id.register_invitation_code_edittext)EditText invitationCodeEditText;
+    @InjectView(R.id.register_invitation_description)TextView invitationDescriptionTextView;
 
     private AlertDialog progressDialog;
 
@@ -69,9 +77,11 @@ public class RegisterActivity extends Activity {
     private String hobby;
     private QQOpenInfo qqOpenInfo;
     private QQUserInfo qqUserInfo;
+    private AppConfigDTO appConfigDTO;
 
     private UserRegisterRequest userRequestParam;
     private ReferenceAvatarDTO referenceAvatarDTO;
+
 
     private String localAvatarPath;
     private ImageLoader imageLoader;
@@ -111,20 +121,30 @@ public class RegisterActivity extends Activity {
             userRequestParam.setQqOpenId(qqOpenInfo.getOpenid());
         }
 
+        appConfigDTO = MyApplication.getContext().getAppInfomation().getCurrentHobbyInfo().getAppConfig();
+
         nickNameEditText.setText(qqUserInfo.getNickname());
 
         genderRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int radioButtonId = group.getCheckedRadioButtonId();
-                if(radioButtonId == R.id.register_gender_male){
+                if (radioButtonId == R.id.register_gender_male) {
                     userRequestParam.setGender("male");
-                }else if(radioButtonId == R.id.register_gender_female){
+                } else if (radioButtonId == R.id.register_gender_female) {
                     userRequestParam.setGender("female");
                 }
 
             }
         });
+
+
+        if(appConfigDTO != null){
+            if(!appConfigDTO.getOpenInvitation()){
+                invitationLayout.setVisibility(View.GONE);
+                invitationDescriptionTextView.setText(Html.fromHtml("<u>" + appConfigDTO.getInvitationDesTitle() + "</u>"));
+            }
+        }
 
     }
 
@@ -255,7 +275,7 @@ public class RegisterActivity extends Activity {
             @Override
             public void onUploadComplete(String url) {
                 userRequestParam.setAvatar(url);
-                MyLog.d("RegisterActivity" , "imageUrl=" + url);
+                MyLog.d("RegisterActivity", "imageUrl=" + url);
                 requestRegister();
             }
 
@@ -318,6 +338,12 @@ public class RegisterActivity extends Activity {
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
 
         startActivityForResult(intent, REQUEST_IMAGE_CODE);
+    }
+
+    @OnClick(R.id.register_invitation_description)void onInvitationDesClick(){
+        Intent intent = new Intent(RegisterActivity.this, WebActivity.class);
+        intent.putExtra("url", appConfigDTO.getInvitationDesUrl());
+        startActivity(intent);
     }
 
 

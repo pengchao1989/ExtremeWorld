@@ -9,6 +9,7 @@ public class HobbyDTO implements Serializable {
     private String eName;
     private String name;
     private List<TaxonomyDTO> taxonomys;
+    private AppConfigDTO appConfig;
 
     public Long getId() {
         return id;
@@ -40,5 +41,13 @@ public class HobbyDTO implements Serializable {
 
     public void setTaxonomys(List<TaxonomyDTO> taxonomys) {
         this.taxonomys = taxonomys;
+    }
+
+    public AppConfigDTO getAppConfig() {
+        return appConfig;
+    }
+
+    public void setAppConfig(AppConfigDTO appConfig) {
+        this.appConfig = appConfig;
     }
 }
