@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +25,8 @@ public class Hobby extends IdEntity
 	private List<Site> sites = new ArrayList<Site>();
 	private List<Topic> topics = new ArrayList<Topic>();
 	
+
+	private AppConfig appConfig;
 	
 	public String geteName() {
 		return eName;
@@ -95,6 +99,15 @@ public class Hobby extends IdEntity
 	}
 	public void setTaxonomys(List<Taxonomy> taxonomys) {
 		this.taxonomys = taxonomys;
+	}
+	
+	@OneToOne
+	@JoinColumn(name = "app_config_id")
+	public AppConfig getAppConfig() {
+		return appConfig;
+	}
+	public void setAppConfig(AppConfig appConfig) {
+		this.appConfig = appConfig;
 	}
 
 	

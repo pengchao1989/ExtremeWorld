@@ -164,7 +164,7 @@
                     android:text="@string/invitation_code"
                     style="@style/ListPrimaryText"
                     />
-                
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

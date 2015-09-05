@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 @XmlRootElement(name = "hobby")
 public class HobbyDTO {
 
@@ -11,6 +12,7 @@ public class HobbyDTO {
 	private String eName;
 	private String name;
 	private List<TaxonomyDTO> taxonomys;
+	AppConfigDTO appConfig;
 	public Long getId() {
 		return id;
 	}
@@ -35,8 +37,11 @@ public class HobbyDTO {
 	public void setTaxonomys(List<TaxonomyDTO> taxonomys) {
 		this.taxonomys = taxonomys;
 	}
-	
-	
-	
+	public AppConfigDTO getAppConfig() {
+		return appConfig;
+	}
+	public void setAppConfig(AppConfigDTO appConfig) {
+		this.appConfig = appConfig;
+	}
 	
 }
