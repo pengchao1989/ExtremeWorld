@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yumfee.extremeworld.entity.ClientConfig;
+import com.yumfee.extremeworld.entity.AppKey;
 import com.yumfee.extremeworld.repository.ClientConfigDao;
 
 //Spring Bean的标识.
@@ -18,14 +18,14 @@ public class ClientConfigManage {
 	
 	private ClientConfigDao clientConfigDao;
 	
-	List<ClientConfig> clientConfigList = null;
+	List<AppKey> clientConfigList = null;
 	
 	
-	public ClientConfig getCilentConfig(String hobbyName){
+	public AppKey getCilentConfig(String hobbyName){
 		
-		clientConfigList = (List<ClientConfig>) clientConfigDao.findAll();
+		clientConfigList = (List<AppKey>) clientConfigDao.findAll();
 		
-		for(ClientConfig clientConfig: clientConfigList){
+		for(AppKey clientConfig: clientConfigList){
 			if(clientConfig.getHobby().geteName().equals(hobbyName)){
 				return clientConfig;
 			}
@@ -33,7 +33,7 @@ public class ClientConfigManage {
 		return null;
 	}
 
-	public List<ClientConfig> getClientConfigList() {
+	public List<AppKey> getClientConfigList() {
 		return clientConfigList;
 	}
 

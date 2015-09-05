@@ -95,19 +95,19 @@ public class DiscoveryFragment extends Fragment {
                     case 3:
                         break;
 
-                    case 4:
+/*                    case 4:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
-                        break;
+                        break;*/
 
-                    case 5:
+                    case 4:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.TYPE, TopicType.VIDEO);
                         break;
-                    case 6:
+                    case 5:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
-                    case 7:
+                    case 6:
                         ItemService service = AlibabaSDK.getService(ItemService.class);
                         service.showItemDetailByItemId(DiscoveryFragment.this.getActivity(), new TradeProcessCallback(){
 

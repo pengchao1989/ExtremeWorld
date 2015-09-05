@@ -149,4 +149,6 @@ public class UserDTO
 		this.interests = interests;
 	}
 	
+	
+	
 }

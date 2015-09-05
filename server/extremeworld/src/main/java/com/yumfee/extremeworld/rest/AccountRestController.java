@@ -48,7 +48,9 @@ public class AccountRestController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaTypes.JSON)
 	public MyResponse register(@PathVariable String hobby,
-			@RequestBody User user, UriComponentsBuilder uriBuilder){
+			@RequestBody User user, 
+			@RequestParam(value = "invitationCode", defaultValue = "1") String invitationCode,
+			UriComponentsBuilder uriBuilder){
 		
 		String qqOpenId = user.getQqOpenId();
 		user.setLoginName(qqOpenId);

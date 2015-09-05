@@ -19,6 +19,7 @@
     <string name="welcome">welcome</string>
     <string name="qq_login">QQ登陆</string>
     <string name="weixin_login">微信登录</string>
+    <string name="invitation_code">邀请码</string>
 
     <string name="not_more">没有更多了</string>
 
@@ -31,7 +32,7 @@
     <string name="news">新闻</string>
     <string name="discuss">讨论</string>
     <string name="s_video">短视频</string>
-    <string name="video">长视频</string>
+    <string name="video">视频</string>
     <string name="activity">活动</string>
     <string name="course">教学</string>
     <string name="site">场地</string>

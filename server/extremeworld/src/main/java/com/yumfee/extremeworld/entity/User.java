@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -45,6 +46,8 @@ public class User extends UserBase
 	
 	private List<User> followings = new ArrayList<User>();
 	private List<User> followers = new ArrayList<User>();
+	
+	private User inviter;
 	 
 	
 	/*private List<Credit> credits = new ArrayList<Credit>(); //user自己的技能xue习列表
@@ -220,6 +223,15 @@ public class User extends UserBase
 		this.followers = followers;
 	}
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "inviter_id")
+	public User getInviter() {
+		return inviter;
+	}
+	public void setInviter(User inviter) {
+		this.inviter = inviter;
+	}
+	
 	
 /*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	public List<Credit> getCredits() {
@@ -229,7 +241,8 @@ public class User extends UserBase
 		this.credits = credits;
 	}*/
 	
-/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+
+	/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	public List<Score> getScores() {
 		return scores;
 	}
@@ -249,4 +262,6 @@ public class User extends UserBase
         }   
         return super.equals(obj); 
 	}
+	
+	
 }

@@ -19,6 +19,8 @@ public class UserDTO implements Serializable {
     private double distance;
     private String geoModifyTime;
 
+    private UserDTO inviter;
+
     private List<UserInterestDTO> interests;
 
     public Long getId() {
@@ -109,6 +111,7 @@ public class UserDTO implements Serializable {
         this.hobbyStamp = hobbyStamp;
     }
 
+
     public List<UserInterestDTO> getInterests() {
         return interests;
     }
@@ -133,7 +136,15 @@ public class UserDTO implements Serializable {
         this.geoModifyTime = geoModifyTime;
     }
 
-/*    @Override
+    public UserDTO getInviter() {
+        return inviter;
+    }
+
+    public void setInviter(UserDTO inviter) {
+        this.inviter = inviter;
+    }
+
+    /*    @Override
     protected UserDTO clone() {
         try {
             return (UserDTO) super.clone();

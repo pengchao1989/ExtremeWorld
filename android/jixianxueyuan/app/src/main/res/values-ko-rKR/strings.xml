@@ -18,6 +18,7 @@
     <string name="welcome">환영</string>
     <string name="qq_login">QQ 상륙하다</string>
     <string name="weixin_login">weixin 상륙하다</string>
+    <string name="invitation_code">요청 코드</string>
 
     <string name="not_more">없다</string>
 
@@ -35,7 +36,7 @@
     <string name="course">교육</string>
     <string name="site">장소</string>
     <string name="people">동네 사람들</string>
-    <string name="store">쇼핑</string>
+    <string name="store">상점</string>
 
     <string name="reply_of_me">대답, 내</string>
     <string name="agree_of_me">칭찬하다</string>

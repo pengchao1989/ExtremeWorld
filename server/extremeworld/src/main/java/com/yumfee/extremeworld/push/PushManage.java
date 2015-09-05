@@ -17,7 +17,7 @@ import com.taobao.api.request.CloudpushNoticeAndroidRequest;
 import com.taobao.api.response.CloudpushMessageAndroidResponse;
 import com.taobao.api.response.CloudpushNoticeAndroidResponse;
 import com.yumfee.extremeworld.config.ClientConfigManage;
-import com.yumfee.extremeworld.entity.ClientConfig;
+import com.yumfee.extremeworld.entity.AppKey;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.RemindDTO;
 
@@ -31,7 +31,7 @@ public class PushManage {
 	private ClientConfigManage clientConfigManage;
 
 	public void pushNotice(User listenerUser, String title, String content) {
-		ClientConfig clientConfig = clientConfigManage
+		AppKey clientConfig = clientConfigManage
 				.getCilentConfig(listenerUser.getHobbyStamp());
 		String appkey = clientConfig.getBaichuanAppKey();
 		String secret = clientConfig.getBaichuanAppSecret();
@@ -54,7 +54,7 @@ public class PushManage {
 	}
 
 	public void pushMessage(User listenerUser, int type, Object content) {
-		ClientConfig clientConfig = clientConfigManage
+		AppKey clientConfig = clientConfigManage
 				.getCilentConfig(listenerUser.getHobbyStamp());
 		String appkey = clientConfig.getBaichuanAppKey();
 		String secret = clientConfig.getBaichuanAppSecret();

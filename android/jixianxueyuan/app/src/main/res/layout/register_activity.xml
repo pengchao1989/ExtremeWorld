@@ -153,7 +153,26 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/invitation_code"
+                    style="@style/ListPrimaryText"
+                    />
+                
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberSigned"
+                    style="@style/ListPrimaryText"/>
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/register_submit"

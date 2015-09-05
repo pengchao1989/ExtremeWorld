@@ -18,6 +18,7 @@
     <string name="welcome">welcome</string>
     <string name="qq_login">QQ Login</string>
     <string name="weixin_login">weixin Login</string>
+    <string name="invitation_code">Invitation code</string>
 
     <string name="not_more">not more</string>
 
@@ -35,7 +36,7 @@
     <string name="course">course</string>
     <string name="site">site</string>
     <string name="people">near friend</string>
-    <string name="store">shopping</string>
+    <string name="store">store</string>
     
     <string name="reply_of_me">respond</string>
     <string name="agree_of_me">agree</string>

@@ -6,8 +6,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_client_config")
-public class ClientConfig extends IdEntity{
+@Table(name = "tb_app_key")
+public class AppKey extends IdEntity{
 	private String baichuanAppKey;
 	private String baichuanAppSecret;
 	

@@ -6,7 +6,6 @@
         <item>@string/discuss</item>
         <item>@string/course</item>
         <item>@string/site</item>
-        <item>@string/s_video</item>
         <item>@string/video</item>
         <item>@string/people</item>
         <item>@string/store</item>
@@ -18,7 +17,6 @@
         <item>@mipmap/ic_school_white_48dp</item>
         <item>@mipmap/ic_location_on_white_48dp</item>
         <item>@mipmap/ic_videocam_white_48dp</item>
-        <item>@mipmap/ic_theaters_white_48dp</item>
         <item>@mipmap/ic_supervisor_account_white_48dp</item>
         <item>@mipmap/ic_shopping_cart_white_48dp</item>
 
