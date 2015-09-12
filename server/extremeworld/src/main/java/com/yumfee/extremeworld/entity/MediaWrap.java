@@ -1,6 +1,5 @@
 package com.yumfee.extremeworld.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yumfee.extremeworld.proto.MediaWrapProto.MediaWrapDTO;
 
 @Entity
 @Table(name = "tb_mediawrap")
@@ -40,4 +40,14 @@ public class MediaWrap extends IdEntity{
 		this.medias = medias;
 	}
 	
+	public MediaWrapDTO buildMediaWrapDTO(){
+		MediaWrapDTO.Builder builder =  MediaWrapDTO.newBuilder()
+				.setCreateTime(this.createTime.toString());
+		
+		for(Media media : medias){
+			builder.addMedias(media.buildMediaDTO());
+		}
+		
+		return builder.build();
+	}
 }

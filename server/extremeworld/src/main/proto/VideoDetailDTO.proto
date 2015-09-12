@@ -1,0 +1,10 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "VideoDetailProto";
+
+message VideoDetailDTO{
+	required int64 id=1;
+	required string videoSource=2;
+	optional string thumbnail=3;
+}

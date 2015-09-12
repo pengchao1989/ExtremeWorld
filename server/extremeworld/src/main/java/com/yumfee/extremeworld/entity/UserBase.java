@@ -26,14 +26,14 @@ import com.google.common.collect.ImmutableList;
 @Table(name = "tb_user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UserBase  extends IdEntity{
-	private String loginName;
-	private String name;
-	private String plainPassword;
-	private String password;
-	private String salt;
-	private String roles;
-	private Date registerDate;
-	private String qqOpenId;
+	protected String loginName;
+	protected String name;
+	protected String plainPassword;
+	protected String password;
+	protected String salt;
+	protected String roles;
+	protected Date registerDate;
+	protected String qqOpenId;
 	
 	public UserBase() {
 	}

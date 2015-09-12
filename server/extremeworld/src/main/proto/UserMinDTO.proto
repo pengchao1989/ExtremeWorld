@@ -1,0 +1,11 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "UserMinProto";
+
+message UserMinDTO{
+	required int64 id=1;
+	required string name=2;
+	required string avatar=3;
+	required string gender=4;
+}

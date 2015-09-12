@@ -1,0 +1,10 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "TaxonomyProto";
+
+message TaxonomyDTO{
+	required int64 id=1;
+	required string name=2;
+	required string type=3;
+}

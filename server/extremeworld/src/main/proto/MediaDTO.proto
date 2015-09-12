@@ -1,0 +1,11 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "MediaProto";
+
+message MediaDTO{
+	required int64 id=1;
+	required string path=2;
+	optional string des=3;
+	required string type=4;	
+}

@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yumfee.extremeworld.proto.TaxonomyProto.TaxonomyDTO;
 
 
 @Entity
@@ -51,5 +52,13 @@ public class Taxonomy extends IdEntity {
 		this.hobby = hobby;
 	}
 	
+	
+	public TaxonomyDTO buildTaxonomyDTO() {
+		return TaxonomyDTO.newBuilder()
+				.setId(this.id)
+				.setName(this.name)
+				.setType(this.type)
+				.build();
+	}
 	
 }

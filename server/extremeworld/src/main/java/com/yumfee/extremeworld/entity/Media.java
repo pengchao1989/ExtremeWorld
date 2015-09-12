@@ -6,6 +6,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.yumfee.extremeworld.proto.MediaProto.MediaDTO;
+
 @Entity
 @Table(name = "tb_media")
 public class Media extends IdEntity{
@@ -45,6 +47,13 @@ public class Media extends IdEntity{
 		this.mediaWrap = mediaWrap;
 	}*/
 	
-	
+	public MediaDTO buildMediaDTO() {
+		return MediaDTO.newBuilder()
+				.setId(this.id)
+				.setPath(this.path)
+				.setDes(this.des)
+				.setType(this.type)
+				.build();
+	}
 	
 }

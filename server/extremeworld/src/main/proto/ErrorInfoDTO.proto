@@ -1,0 +1,9 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "ErrorInfoDTOProto";
+
+message ErrorInfoDTO{
+	required int32 errorCode=1;
+	optional string errorInfo=2;
+}

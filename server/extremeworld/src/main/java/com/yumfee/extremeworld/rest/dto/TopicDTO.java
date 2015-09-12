@@ -1,7 +1,6 @@
 package com.yumfee.extremeworld.rest.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

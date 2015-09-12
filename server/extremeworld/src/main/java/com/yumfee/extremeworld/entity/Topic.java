@@ -22,6 +22,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yumfee.extremeworld.proto.TopicProto.TopicDTO;
+import com.yumfee.extremeworld.util.DateUtils;
 
 @Entity
 @Table(name = "tb_topic")
@@ -245,6 +247,42 @@ public class Topic extends IdEntity
 	public void setAgrees(List<User> agrees)
 	{
 		this.agrees = agrees;
+	}
+	
+	
+	public TopicDTO buildTopicDTO() {
+		
+		TopicDTO.Builder builder =  TopicDTO.newBuilder();
+		builder.setType(this.type)
+				.setMagicType(this.magicType)
+				.setId(this.id)
+				.setTitle(this.title)
+				.setContent(this.content)
+				.setReplyCount(this.replyCount)
+				.setAllReplyCount(this.allReplyCount)
+				.setViewCount(this.viewCount)
+				.setAgreeCount(this.agreeCount)
+				.setImageCount(this.imageCount)
+				.setCreateTime(DateUtils.DateToString(this.createTime))
+				.setStatus(this.status);
+				
+		if(this.user != null){
+			builder.setUser(this.user.buildUserMinDTO());
+		}
+		if(this.videoDetail != null){
+			builder.setVideoDetail(this.videoDetail.builVideoDetaildDTO());
+		}
+		if(this.mediaWrap != null){
+			builder.setMediaWrap(this.mediaWrap.buildMediaWrapDTO());
+		}
+		if(this.taxonomy != null ){
+			builder.setTaxonomy(this.taxonomy.buildTaxonomyDTO());
+		}
+		if(this.course != null){
+			builder.setCourse(this.course.buildCourseMinDTO());
+		}
+		
+		return builder.build();
 	}
 
 	

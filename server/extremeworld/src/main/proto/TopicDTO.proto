@@ -1,0 +1,37 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "TopicProto";
+ 
+import "UserMinDTO.proto";
+import "VideoDetailDTO.proto";
+import "MediaWrapDTO.proto";
+import "TaxonomyDTO.proto";
+import "CourseMinDTO.proto";
+
+message TopicDTO{
+    
+    required int64 id=1;
+    required string type=2;
+    optional string magicType=3;
+    required string title=4;
+    required string content=5;
+    required int32 imageCount=6;
+    required int32 replyCount=7;
+    required int32 allReplyCount=8;
+    required int32 viewCount=9;
+    required int32 agreeCount=10;
+    required string createTime=11;
+    required int32 status=12;
+
+    required UserMinDTO user=13;
+
+    optional VideoDetailDTO videoDetail=14;
+
+    optional MediaWrapDTO mediaWrap=15;
+
+    optional TaxonomyDTO taxonomy=16;
+
+    optional CourseMinDTO course=17;
+
+}

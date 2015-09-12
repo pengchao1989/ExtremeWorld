@@ -1,30 +1,17 @@
 package com.yumfee.extremeworld.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.yumfee.extremeworld.proto.VideoDetailProto;
+import com.yumfee.extremeworld.proto.VideoDetailProto.VideoDetailDTO;
 
 @Entity
 @Table(name = "tb_video_detail")
-public class VideoDetail  
+public class VideoDetail extends IdEntity
 {
-	private Long id;
 	private String videoSource;
 	private String thumbnail;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId()
-	{
-		return id;
-	}
-	public void setId(Long videoId)
-	{
-		this.id = videoId;
-	}
-	
 	
 	public String getVideoSource()
 	{
@@ -43,7 +30,13 @@ public class VideoDetail
 	{
 		this.thumbnail = thumbnail;
 	}
-	
-	
+
+	public VideoDetailDTO builVideoDetaildDTO() {
+		return VideoDetailProto.VideoDetailDTO.newBuilder()
+		.setId(this.id)
+		.setVideoSource(this.videoSource)
+		.setThumbnail(this.thumbnail)
+		.build();
+	}
 	
 }

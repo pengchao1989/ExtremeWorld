@@ -1,0 +1,16 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "MyResponseDTOProto";
+
+import "ErrorInfo.proto";
+
+enum Status{
+	STATUS_ERROR = 0;
+	STATUS_OK = 1;
+}
+
+message MyResponseDTO{
+	required int32 status=1;
+	optional message content=2; 
+}

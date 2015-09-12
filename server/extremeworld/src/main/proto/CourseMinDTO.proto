@@ -1,0 +1,9 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "CourseMinProto";
+
+message CourseMinDTO{
+	required int64 id=1;
+	required string name=2;
+}

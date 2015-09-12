@@ -20,18 +20,18 @@
 		    	<constructor-arg value="UTF-8" />
 			</bean>
 			<!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
- 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+  			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="prettyPrint" value="true"/>
             </bean>
-            
-<!--             <bean class="org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter">
+             
+<!--              <bean class="org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter">
         	</bean> -->
             		
   		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
 		<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
-<!-- 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+<!--  	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 	    <property name="ignoreAcceptHeader" value="true" />
             <property name="defaultContentType" value="application/json" />
 	    <property name="mediaTypes" >

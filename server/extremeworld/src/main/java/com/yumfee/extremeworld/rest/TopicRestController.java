@@ -93,6 +93,7 @@ public class TopicRestController
 		}
 		
 		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);
+
 		return MyResponse.ok(topicDto);
 	}
 	

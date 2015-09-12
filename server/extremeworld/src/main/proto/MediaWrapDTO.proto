@@ -1,0 +1,11 @@
+package com.yumfee.extremeworld.proto;
+
+option java_package = "com.yumfee.extremeworld.proto";
+option java_outer_classname = "MediaWrapProto";
+
+import "MediaDTO.proto";
+
+message MediaWrapDTO{
+	required string createTime=1;
+	repeated MediaDTO medias=2;
+}

@@ -142,6 +142,8 @@ public class RegisterActivity extends Activity {
         if(appConfigDTO != null){
             if(!appConfigDTO.getOpenInvitation()){
                 invitationLayout.setVisibility(View.GONE);
+
+            }else {
                 invitationDescriptionTextView.setText(Html.fromHtml("<u>" + appConfigDTO.getInvitationDesTitle() + "</u>"));
             }
         }

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yumfee.extremeworld.proto.UserMinProto.UserMinDTO;
 
 @Entity
 @Table(name = "tb_userinfo")
@@ -249,6 +250,17 @@ public class User extends UserBase
 	public void setScores(List<Score> scores) {
 		this.scores = scores;
 	}*/
+	
+	public UserMinDTO buildUserMinDTO(){
+		return UserMinDTO.newBuilder()
+				.setId(this.id)
+				.setAvatar(this.avatar)
+				.setGender(this.gender)
+				.setName(this.name)
+				.build();
+
+	}
+	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

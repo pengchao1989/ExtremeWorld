@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.yumfee.extremeworld.proto.VideoDetailProto.VideoDetailDTO;
+
 /**
  * 统一定义id的entity基类.
  * 
@@ -33,4 +35,5 @@ public abstract class IdEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 }

@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yumfee.extremeworld.proto.CourseMinProto.CourseMinDTO;
 
 @Entity
 @Table(name = "tb_course")
@@ -117,5 +118,10 @@ public class Course extends IdEntity
 	public void setCourseTaxonomy(CourseTaxonomy courseTaxonomy)
 	{
 		this.courseTaxonomy = courseTaxonomy;
+	}
+	
+	public CourseMinDTO buildCourseMinDTO(){
+		return CourseMinDTO.newBuilder().setId(this.id).setName(this.name).build();
+		
 	}
 }

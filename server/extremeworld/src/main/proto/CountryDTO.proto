@@ -5,7 +5,6 @@ package com.yumfee.extremeworld.proto;
 
 message CountryDTO
 {
-	required string id = 1;
-	required string name=2;
-	required string nameZH=3;
+	required string name=1;
+	required string nameZH=2;
 }
