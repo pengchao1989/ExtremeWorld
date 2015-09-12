@@ -10,6 +10,7 @@
 		<pattern>/u/loadvideo/*</pattern>
 		<pattern>/*/course/loadQuestion/*</pattern>
 		<pattern>/*/course/loadExplain/*</pattern>
+		<pattern>/*/invite*</pattern>
 	</excludes>
 	
 	<decorator name="default" page="default.jsp">

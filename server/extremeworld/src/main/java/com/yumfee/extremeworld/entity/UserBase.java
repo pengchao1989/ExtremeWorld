@@ -33,6 +33,7 @@ public class UserBase  extends IdEntity{
 	protected String salt;
 	protected String roles;
 	protected Date registerDate;
+	protected String phone;
 	protected String qqOpenId;
 	
 	public UserBase() {
@@ -111,7 +112,13 @@ public class UserBase  extends IdEntity{
 		this.registerDate = registerDate;
 	}
 
-	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	public String getQqOpenId()
 	{
