@@ -14,6 +14,9 @@ public class MyErrorHelper {
 
     public static String getErrorStr(Context context, ErrorInfo errorInfo){
         String result = "";
+        if(errorInfo == null){
+            return result;
+        }
         if (errorInfo.getErrorCode() == MyErrorCode.NAME_REPEAT.getErrorCode()){
             result = context.getString(R.string.name_repeat_err);
         }else {

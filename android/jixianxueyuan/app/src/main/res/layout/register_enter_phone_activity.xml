@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_color">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/profile_edit_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        my:my_title="@string/register"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        style="@style/MainContainer">
+
+        <EditText
+            android:id="@+id/register_enter_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:hint="@string/phone_number"
+            android:textSize="20sp"
+            style="@style/PrimaryText"
+            />
+
+        <Button
+            android:id="@+id/register_enter_phone_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/get_verification_code"
+            style="@style/TransparentButton"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

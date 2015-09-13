@@ -7,6 +7,7 @@ import com.jixianxueyuan.dto.UserDTO;
  */
 public class UserRegisterRequest extends UserDTO {
     private String qqOpenId;
+    private String phone;
 
     public String getQqOpenId() {
         return qqOpenId;
@@ -14,5 +15,13 @@ public class UserRegisterRequest extends UserDTO {
 
     public void setQqOpenId(String qqOpenId) {
         this.qqOpenId = qqOpenId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

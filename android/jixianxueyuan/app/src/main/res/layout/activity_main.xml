@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingTop="56dp"
-        android:paddingBottom="70dp"
+        android:paddingBottom="40dp"
         >
 
         <LinearLayout
@@ -45,29 +45,57 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             >
 
-            <Button
-                android:id="@+id/activity_qq_login"
-                android:layout_width="160dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/qq_login"
-                style="@style/TransparentButton"
-                />
-            <Button
-                android:id="@+id/activity_weixin_login"
-                android:layout_width="160dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_login"
+                    android:drawableLeft="@drawable/ic_login_iphone"
+                    style="@style/TransparentImageTextView"
+                    />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    android:id="@+id/activity_qq_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qq_login"
+                    android:drawableLeft="@drawable/ic_login_qq"
+                    style="@style/TransparentImageTextView"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/activity_register"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/weixin_login"
-                style="@style/TransparentButton"
+                android:text="@string/register"
+                android:layout_marginTop="40dp"
+                style="@style/PrimaryText"
                 />
 
+
+
         </LinearLayout>
+
 
 
 

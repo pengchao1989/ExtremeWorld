@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.cchannel.plugin.CloudPushService;
 import com.alibaba.sdk.android.AlibabaSDK;
@@ -18,6 +20,7 @@ import com.google.gson.Gson;
 import com.jixianxueyuan.activity.HomeActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
+import com.jixianxueyuan.activity.RegisterEnterPhoneActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
@@ -49,7 +52,7 @@ import butterknife.OnClick;
 public class MainActivity extends Activity {
 
     @InjectView(R.id.activity_qq_login)
-    Button qqLoginButton;
+    TextView qqLoginButton;
 
     @InjectView(R.id.activity_main_appname)
     ShimmerTextView appNameTextView;
@@ -152,6 +155,11 @@ public class MainActivity extends Activity {
     void qqLogin() {
 
         requestQQOpenId();
+    }
+
+    @OnClick(R.id.activity_register) void onRegisterClick(){
+        Intent intent = new Intent(MainActivity.this, RegisterEnterPhoneActivity.class);
+        startActivity(intent);
     }
 
     private void requestHandshake() {
@@ -287,6 +295,7 @@ public class MainActivity extends Activity {
                 if (qqUserInfo != null) {
                     Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                     Bundle bundle = new Bundle();
+                    bundle.putString(RegisterActivity.REGISTER_TYPE, RegisterActivity.REGISTER_TYPE_QQ);
                     bundle.putSerializable("qqOpenInfo", qqOpenInfo);
                     bundle.putSerializable("qqUserInfo", qqUserInfo);
                     intent.putExtras(bundle);

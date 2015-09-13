@@ -23,4 +23,8 @@ public class InviteService {
 	public Invite getInvite(String id){
 		return inviteDao.findOne(id);
 	}
+	
+	public Invite findByPhone(String phone){
+		return inviteDao.findByPhone(phone);
+	}
 }

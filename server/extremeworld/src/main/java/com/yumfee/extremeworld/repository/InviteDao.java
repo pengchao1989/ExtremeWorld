@@ -6,4 +6,5 @@ import com.yumfee.extremeworld.entity.Invite;
 
 public interface InviteDao extends PagingAndSortingRepository<Invite,String>{
 
+	Invite findByPhone(String phone);
 }

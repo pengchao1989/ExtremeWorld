@@ -16,9 +16,15 @@
     <string name="wait">잠깐만.</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">환영</string>
+    <string name="register">등록</string>
+    <string name="login">로그인</string>
+    <string name="phone_login">핸드폰 번호 등록</string>
     <string name="qq_login">QQ 상륙하다</string>
     <string name="weixin_login">weixin 상륙하다</string>
     <string name="invitation_code">요청 코드</string>
+    <string name="inviting">초청 사람</string>
+    <string name="phone_number">핸드폰 번호</string>
+    <string name="get_verification_code">가져오기 인증 코드</string>
 
     <string name="not_more">없다</string>
 
@@ -84,6 +90,7 @@
     <string name="birth_err">생일 오류</string>
     <string name="name_empty_err">별명 못 비어</string>
     <string name="name_repeat_err">별명 이미 존재합니다.</string>
+    <string name="phone_number_err">핸드폰 번호 오류</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -16,9 +16,15 @@
     <string name="wait">wait</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">welcome</string>
+    <string name="register">register</string>
+    <string name="login">login</string>
+    <string name="phone_login">phone login</string>
     <string name="qq_login">QQ Login</string>
     <string name="weixin_login">weixin Login</string>
     <string name="invitation_code">Invitation code</string>
+    <string name="inviting">inviting</string>
+    <string name="phone_number">phone number</string>
+    <string name="get_verification_code">get verification code</string>
 
     <string name="not_more">not more</string>
 
@@ -85,6 +91,7 @@
     <string name="birth_err">birht error</string>
     <string name="name_empty_err">nickname is not empty</string>
     <string name="name_repeat_err">nickname is repeat</string>
+    <string name="phone_number_err">phone number error</string>
 
     
     //error

@@ -21,7 +21,7 @@ import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.service.VerificationCodeService;
 
 @RestController
-@RequestMapping(value = "/api/v1/verfication_code")
+@RequestMapping(value = "/api/v1/verification_code")
 public class VerificationCodeRestController {
 	
 	private static final int TIMEOUT_SECONDS = 10;
@@ -39,7 +39,8 @@ public class VerificationCodeRestController {
 		double radome = Math.random()*9000+1000;
 		String verCode = String.valueOf(new Double(radome).intValue());
 		
-		boolean isSuccess = requestVerificationCode(phone, verCode);
+		//boolean isSuccess = requestVerificationCode(phone, verCode);
+		boolean isSuccess = true;
 		if(isSuccess){
 			VerificationCode verificationCode = new VerificationCode();
 			verificationCode.setChecked(0);

@@ -29,8 +29,11 @@ import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.AppConfigDTO;
 import com.jixianxueyuan.dto.ErrorInfo;
+import com.jixianxueyuan.dto.HobbyDTO;
+import com.jixianxueyuan.dto.InviteDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.dto.request.ReferenceAvatarDTO;
@@ -58,6 +61,10 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
  */
 public class RegisterActivity extends Activity {
 
+    public static final String REGISTER_TYPE = "registerType";
+    public static final String REGISTER_TYPE_QQ = "qq";
+    public static final String REGISTER_TYPE_PHONE = "phone";
+
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
 
@@ -68,15 +75,19 @@ public class RegisterActivity extends Activity {
     @InjectView(R.id.register_birth)EditText birthEditText;
     @InjectView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
     @InjectView(R.id.register_invitation_layout)LinearLayout invitationLayout;
+    @InjectView(R.id.register_inviting_layout)LinearLayout invitingLayout;
     @InjectView(R.id.register_invitation_code_edittext)EditText invitationCodeEditText;
+    @InjectView(R.id.register_inviting_name)TextView invitingNameTextView;
     @InjectView(R.id.register_invitation_description)TextView invitationDescriptionTextView;
 
     private AlertDialog progressDialog;
 
 
     private String hobby;
+    private String registerType; //qq phone
     private QQOpenInfo qqOpenInfo;
     private QQUserInfo qqUserInfo;
+    private String phoneNumber;
     private AppConfigDTO appConfigDTO;
 
     private UserRegisterRequest userRequestParam;
@@ -114,16 +125,27 @@ public class RegisterActivity extends Activity {
         MyLog.d(this.getClass().getSimpleName(), "hobby=" + hobby);
 
         Bundle bundle = this.getIntent().getExtras();
-        if(bundle.containsKey("qqOpenInfo") && bundle.containsKey("qqUserInfo") ){
-            qqOpenInfo = (QQOpenInfo) bundle.getSerializable("qqOpenInfo");
-            qqUserInfo = (QQUserInfo) bundle.getSerializable("qqUserInfo");
+        registerType = bundle.getString("registerType");
 
-            userRequestParam.setQqOpenId(qqOpenInfo.getOpenid());
+        if(registerType.equals(REGISTER_TYPE_QQ)){
+            if(bundle.containsKey("qqOpenInfo") && bundle.containsKey("qqUserInfo") ){
+                qqOpenInfo = (QQOpenInfo) bundle.getSerializable("qqOpenInfo");
+                qqUserInfo = (QQUserInfo) bundle.getSerializable("qqUserInfo");
+
+                userRequestParam.setQqOpenId(qqOpenInfo.getOpenid());
+
+                nickNameEditText.setText(qqUserInfo.getNickname());
+            }
+        }else if(registerType.equals(REGISTER_TYPE_PHONE)){
+            phoneNumber = bundle.getString("phoneNumber");
+            userRequestParam.setPhone(phoneNumber);
         }
 
-        appConfigDTO = MyApplication.getContext().getAppInfomation().getCurrentHobbyInfo().getAppConfig();
+        HobbyDTO currentHobbyDTO = MyApplication.getContext().getAppInfomation().getCurrentHobbyInfo();
+        if(currentHobbyDTO != null){
+            appConfigDTO = currentHobbyDTO.getAppConfig();
+        }
 
-        nickNameEditText.setText(qqUserInfo.getNickname());
 
         genderRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -138,15 +160,19 @@ public class RegisterActivity extends Activity {
             }
         });
 
+        if(registerType.equals(REGISTER_TYPE_QQ)){
+            if(appConfigDTO != null){
+                if(!appConfigDTO.getOpenInvitation()){
+                    invitationLayout.setVisibility(View.GONE);
 
-        if(appConfigDTO != null){
-            if(!appConfigDTO.getOpenInvitation()){
-                invitationLayout.setVisibility(View.GONE);
-
-            }else {
-                invitationDescriptionTextView.setText(Html.fromHtml("<u>" + appConfigDTO.getInvitationDesTitle() + "</u>"));
+                }else {
+                    invitationDescriptionTextView.setText(Html.fromHtml("<u>" + appConfigDTO.getInvitationDesTitle() + "</u>"));
+                }
             }
+        }else if(registerType.equals(REGISTER_TYPE_PHONE)){
+            requestInvite();
         }
+
 
     }
 
@@ -254,6 +280,37 @@ public class RegisterActivity extends Activity {
                             userRequestParam.setAvatar(referenceAvatarDTO.getUrl());
                             isUseUploadAvatar = false;
                             refreshAvatarView();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(myRequest);
+    }
+
+    private void requestInvite(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ServerMethod.invite() + "?phone=" + phoneNumber;
+
+        MyRequest<InviteDTO> myRequest = new MyRequest<InviteDTO>(Request.Method.GET, url, InviteDTO.class,
+                new Response.Listener<MyResponse<InviteDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<InviteDTO> response) {
+                        if(response.getStatus() == MyResponse.status_ok){
+
+                            UserMinDTO invitingUser = response.getContent().getInviteUser();
+                            if(invitingUser != null){
+                                invitingLayout.setVisibility(View.VISIBLE);
+                                invitingNameTextView.setText(invitingUser.getName());
+                            }
+
+
+                        }else if(response.getStatus() == MyResponse.status_error){
+                            MyErrorHelper.showErrorToast(RegisterActivity.this, response.getErrorInfo());
                         }
                     }
                 }, new Response.ErrorListener() {

@@ -57,13 +57,14 @@ public class AppInfomation{
     }
 
     public HobbyDTO getCurrentHobbyInfo(){
-        List<HobbyDTO> hobbyDTOList = handshakeDTO.getHobbyDTOList();
-        for (HobbyDTO hobbyDTO : hobbyDTOList){
-            if(hobbyDTO.geteName().equals(currentHobbyStamp)){
-                return hobbyDTO;
+        if(handshakeDTO != null){
+            List<HobbyDTO> hobbyDTOList = handshakeDTO.getHobbyDTOList();
+            for (HobbyDTO hobbyDTO : hobbyDTOList){
+                if(hobbyDTO.geteName().equals(currentHobbyStamp)){
+                    return hobbyDTO;
+                }
             }
         }
-
         return null;
     }
 

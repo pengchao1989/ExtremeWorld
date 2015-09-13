@@ -41,7 +41,6 @@ public class InviteController {
 		return "/invite/invite";
 	}
 	
-	
 	@RequestMapping( method = RequestMethod.POST)
 	public String create(
 			@PathVariable String hobby,
