@@ -40,7 +40,7 @@
 				<form action="${ctx}/${hobby}/invite" method="post" class="form-inline" >
 				  <div class="form-group">
 				  <input type="hidden" name="inviterId" value="${inviter.id}"/>
-				    <input type="phone" class="form-control input-lg" name="phone" id="phone" placeholder="请输入手机号码">
+				    <input type=tel class="form-control input-lg" name="phone" id="phone" placeholder="请输入手机号码">
 				  </div>
 				  <button type="submit" class="btn btn-default btn-lg">立即加入</button>
 				</form>

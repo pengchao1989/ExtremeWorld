@@ -20,7 +20,7 @@ public class InviteService {
 		inviteDao.save(invite);
 	}
 	
-	public Invite getInvite(Long id){
+	public Invite getInvite(String id){
 		return inviteDao.findOne(id);
 	}
 }

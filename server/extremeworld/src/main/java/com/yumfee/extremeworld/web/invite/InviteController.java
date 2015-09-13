@@ -1,18 +1,15 @@
 package com.yumfee.extremeworld.web.invite;
 
 import javax.servlet.ServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.Invite;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.InviteService;
@@ -49,9 +46,6 @@ public class InviteController {
 	public String create(
 			@PathVariable String hobby,
 			ServletRequest request){
-		
-		System.out.println("inviterId=" + request.getParameter("inviterId"));
-		System.out.println("phone=" + request.getParameter("phone"));
 		
 		Long inviterId = Long.valueOf(request.getParameter("inviterId"));
 		String phone = request.getParameter("phone");
