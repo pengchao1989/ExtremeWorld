@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.extremeworld.config.MyErrorCode;
 import com.yumfee.extremeworld.entity.VerificationCode;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.service.VerificationCodeService;
@@ -31,7 +32,9 @@ public class VerificationCodeRestController {
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public MyResponse get(@RequestParam (value = "phone", defaultValue = "") String phone){
 		
-		StringUtils.isBlank(phone);
+		if(StringUtils.isBlank(phone)){
+			return MyResponse.err(MyErrorCode.PHONE_EMPTY);
+		}
 		
 		double radome = Math.random()*9000+1000;
 		String verCode = String.valueOf(new Double(radome).intValue());
@@ -46,13 +49,25 @@ public class VerificationCodeRestController {
 			return MyResponse.ok(true);
 		}
 		
-		return MyResponse.ok(false);
+		return MyResponse.err(MyErrorCode.UNKNOW_ERROR);
 	}
 
 	@RequestMapping(value= "check",method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse check(){
+	public MyResponse check(@RequestParam (value = "phone", defaultValue = "") String phone,
+			@RequestParam (value = "code", defaultValue = "") String code){
 		
-		return MyResponse.ok(null);
+		if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(code)){
+			return MyResponse.err(MyErrorCode.UNKNOW_ERROR);
+		}
+		
+		VerificationCode verificationCode = verificationCodeService.getVerificationCodeByPhoneAndCode(phone, code);
+		
+		if(verificationCode != null){
+			return MyResponse.ok(true);
+		}
+		
+		
+		return MyResponse.err(MyErrorCode.SMS_VERIFICATION_CODE_CHECK_ERROR);
 	}
 	
 	private boolean requestVerificationCode(String phone,String verCode){
@@ -65,9 +80,6 @@ public class VerificationCodeRestController {
 			String result = fetchContentByJDKConnection(url);
 			
 			boolean isStutas = result.contains("<code>2</code>");
-			
-			
-			System.out.println(result);
 			
 			return isStutas;
 			

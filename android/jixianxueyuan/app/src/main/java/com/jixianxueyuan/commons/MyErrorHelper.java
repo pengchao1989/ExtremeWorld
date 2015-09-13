@@ -14,14 +14,10 @@ public class MyErrorHelper {
 
     public static String getErrorStr(Context context, ErrorInfo errorInfo){
         String result = "";
-        switch (errorInfo.getErrorCode()){
-            case MyErrorCode.NAME_REPEAT:
-                result = context.getString(R.string.name_repeat_err);
-                break;
-
-            default:
-                result = errorInfo.getErrorInfo();
-                break;
+        if (errorInfo.getErrorCode() == MyErrorCode.NAME_REPEAT.getErrorCode()){
+            result = context.getString(R.string.name_repeat_err);
+        }else {
+            result = errorInfo.getErrorInfo();
         }
 
         return result;
