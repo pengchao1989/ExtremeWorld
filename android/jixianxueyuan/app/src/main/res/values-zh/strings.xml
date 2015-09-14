@@ -25,7 +25,9 @@
     <string name="invitation_code">邀请码</string>
     <string name="inviting">邀请人</string>
     <string name="phone_number">手机号</string>
+    <string name="verification_code">验证码</string>
     <string name="get_verification_code">获取验证码</string>
+    <string name="re_acquisition">重新获取</string>
 
     <string name="not_more">没有更多了</string>
 
@@ -72,6 +74,7 @@
     <string name="select">选择</string>
     <string name="local">本地</string>
     <string name="nickname">昵称</string>
+    <string name="password">密码</string>
     <string name="birth">生日</string>
     <string name="gender">性别</string>
     <string name="male">男</string>
@@ -88,12 +91,16 @@
     <string name="feed_back">意见反馈</string>
     <string name="clean_cache">清除缓存</string>
 
+    //client local error
 
-    //toast tips
-    <string name="birth_err">生日错误</string>
-    <string name="name_empty_err">昵称不能为空</string>
-    <string name="name_repeat_err">昵称已被他人盗用</string>
-    <string name="phone_number_err">手机号码错误</string>
+    //my global error
+    <string name="err_birth">生日错误</string>
+    <string name="err_name_empty">昵称不能为空</string>
+    <string name="err_name_repeat">昵称已被他人盗用</string>
+    <string name="err_phone_number">手机号码错误</string>
+    <string name="err_phone_registered">手机好码已注册</string>
+    <string name="err_verification_code">验证码错误</string>
+    <string name="err_password_empty">密码不能为空</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

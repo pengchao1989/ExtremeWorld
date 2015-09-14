@@ -1,5 +1,6 @@
 package com.yumfee.extremeworld.rest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,13 +12,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.yumfee.extremeworld.config.MyErrorCode;
 import com.yumfee.extremeworld.entity.Country;
-import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.VerificationCode;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.UserDTO;
+import com.yumfee.extremeworld.service.InviteService;
+import com.yumfee.extremeworld.service.VerificationCodeService;
 import com.yumfee.extremeworld.service.account.AccountService;
 
 @RestController
@@ -27,8 +29,14 @@ public class AccountRestController {
 	@Autowired
 	AccountService accountService;
 	
+	@Autowired
+	InviteService inviteService;
 	
-	@RequestMapping(value = "/qqlogin", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	@Autowired
+	VerificationCodeService verificationCodeService;
+	
+	
+	@RequestMapping(value = "/qq_login", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public MyResponse login(
 			@PathVariable String hobby,
 			@RequestParam(value = "qqOpenId", defaultValue = "0") String qqOpenId
@@ -46,7 +54,7 @@ public class AccountRestController {
 		return MyResponse.noContent();
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaTypes.JSON)
+	@RequestMapping(value = "/qq_register", method = RequestMethod.POST, consumes = MediaTypes.JSON)
 	public MyResponse register(@PathVariable String hobby,
 			@RequestBody User user, 
 			@RequestParam(value = "invitationCode", defaultValue = "1") String invitationCode,
@@ -76,6 +84,68 @@ public class AccountRestController {
     	if(sameNameUser != null){
     		return MyResponse.err(MyErrorCode.NAME_REPEAT);
     	}
+		
+    	accountService.registerUser(user);
+		
+		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+		return MyResponse.ok(userDTO);
+	}
+	
+	@RequestMapping(value = "/phone_register", method = RequestMethod.POST, consumes = MediaTypes.JSON)
+	public MyResponse phoneRegister(@PathVariable String hobby,
+			@RequestBody User user, 
+			@RequestParam(value = "verCode", defaultValue = "1") String verCode,
+			@RequestParam(value = "invitationCode", defaultValue = "1") String invitationCode,
+			UriComponentsBuilder uriBuilder){
+		
+		String phone = user.getPhone();
+		String password = user.getPassword();
+		user.setLoginName(phone);
+		user.setPhone(phone);
+		user.setPlainPassword(password);
+		user.setHobbyStamp(hobby);
+		
+		String birth = user.getBirth();
+		if(birth.length() == 4 )
+		{
+			birth += "-01-01";
+			user.setBirth(birth);
+		}else{
+			user.setBirth("1995-01-01");
+		}
+		
+		
+    	Country country = new Country();
+    	country.setId("CN");
+    	
+    	user.setCountry(country);
+    	
+    	User sameNameUser = accountService.findUserByName(user.getName());
+    	if(sameNameUser != null){
+    		return MyResponse.err(MyErrorCode.NAME_REPEAT);
+    	}
+    	
+    	
+    	VerificationCode verificationCode = verificationCodeService.getVerificationCodeByPhoneAndCode(phone, verCode);
+    	
+    	if(verificationCode == null){
+    		return MyResponse.err(MyErrorCode.VERIFICATION_CODE_ERROR);
+    	}
+    	
+    	if(StringUtils.isEmpty(password)){
+    		return MyResponse.err(MyErrorCode.PASSWORD_EMPTY);
+    	}
+    	
+    	if(StringUtils.isBlank(phone)){
+    		return MyResponse.err(MyErrorCode.PHONE_EMPTY);
+    	}
+    	
+    	User samePhoneUser = accountService.findByPhone(phone);
+    	if(samePhoneUser != null){
+    		return MyResponse.err(MyErrorCode.PHONE_REGISTERED);
+    	}
+    	
+
 		
     	accountService.registerUser(user);
 		

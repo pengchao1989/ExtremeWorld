@@ -65,6 +65,10 @@ public class AccountService {
 		return userDao.findByName(name);
 	}
 	
+	public User findByPhone(String phone){
+		return userDao.findByPhone(phone);
+	}
+	
 	public User findUserByQqOpenId(String qqOpenId)
 	{
 		return userDao.findByQqOpenId(qqOpenId);

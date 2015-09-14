@@ -3,14 +3,15 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.LabeledIntent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
@@ -79,8 +81,15 @@ public class RegisterActivity extends Activity {
     @InjectView(R.id.register_invitation_code_edittext)EditText invitationCodeEditText;
     @InjectView(R.id.register_inviting_name)TextView invitingNameTextView;
     @InjectView(R.id.register_invitation_description)TextView invitationDescriptionTextView;
+    @InjectView(R.id.register_verification_code_layout)LinearLayout verCodeLayout;
+    @InjectView(R.id.register_verification_code_edittext)EditText verCodeEditText;
+    @InjectView(R.id.register_verification_code_retry_button) TextView verCodeRetryButton;
+    @InjectView(R.id.register_password_layout)LinearLayout passwordLayout;
+    @InjectView(R.id.register_password_edittext)EditText passwordEditText;
+
 
     private AlertDialog progressDialog;
+    private TimeCount timeCount;
 
 
     private String hobby;
@@ -88,6 +97,8 @@ public class RegisterActivity extends Activity {
     private QQOpenInfo qqOpenInfo;
     private QQUserInfo qqUserInfo;
     private String phoneNumber;
+    private String invitationCode;
+    private String verCode;
     private AppConfigDTO appConfigDTO;
 
     private UserRegisterRequest userRequestParam;
@@ -134,11 +145,15 @@ public class RegisterActivity extends Activity {
 
                 userRequestParam.setQqOpenId(qqOpenInfo.getOpenid());
 
+                invitationLayout.setVisibility(View.VISIBLE);
                 nickNameEditText.setText(qqUserInfo.getNickname());
             }
         }else if(registerType.equals(REGISTER_TYPE_PHONE)){
+            passwordLayout.setVisibility(View.VISIBLE);
+            verCodeLayout.setVisibility(View.VISIBLE);
             phoneNumber = bundle.getString("phoneNumber");
             userRequestParam.setPhone(phoneNumber);
+            timeCount = new TimeCount(60000, 1000);
         }
 
         HobbyDTO currentHobbyDTO = MyApplication.getContext().getAppInfomation().getCurrentHobbyInfo();
@@ -196,8 +211,14 @@ public class RegisterActivity extends Activity {
 
 
     private boolean buildUserIofoParam(){
+
         userRequestParam.setBirth(birthEditText.getText().toString());
         userRequestParam.setName(nickNameEditText.getText().toString());
+        if(registerType.equals(REGISTER_TYPE_PHONE)){
+            userRequestParam.setPhone(phoneNumber);
+            userRequestParam.setPassword(passwordEditText.getText().toString());
+            verCode = verCodeEditText.getText().toString();
+        }
         //userRequestParam.setId(16L);
 
         return true;
@@ -210,7 +231,7 @@ public class RegisterActivity extends Activity {
 
         String error = "";
         if(birth < (currentYear - 99) || birth > currentYear){
-            Toast.makeText(RegisterActivity.this, getString(R.string.birth_err),Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, getString(R.string.err_birth),Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -219,17 +240,41 @@ public class RegisterActivity extends Activity {
             return false;
         }
 
+
+        if(registerType.equals(REGISTER_TYPE_PHONE)){
+
+            if(StringUtils.isBlank(passwordEditText.getText().toString())){
+                Toast.makeText(RegisterActivity.this, getString(R.string.err_password_empty),Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            if(StringUtils.isBlank(verCodeEditText.getText().toString())){
+                Toast.makeText(RegisterActivity.this, getString(R.string.err_verification_code),Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
         return true;
     }
 
     private void requestRegister(){
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_register();
 
         if(!checkParam()){
             return;
         }
         buildUserIofoParam();
+
+
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = null;
+        if(registerType.equals(REGISTER_TYPE_QQ)){
+            url = ServerMethod.account_qq_register() + "?invitationCode=" + invitationCode;
+        }else if(registerType.equals(REGISTER_TYPE_PHONE)){
+            url = ServerMethod.account_phone_register() + "?verCode=" + verCode + "&invitationCode=" + invitationCode;
+        }else {
+            return;
+        }
 
         MyRequest<UserDTO> myRequest = new MyRequest(Request.Method.POST,url,UserDTO.class, userRequestParam,
                 new Response.Listener<MyResponse<UserDTO>>() {
@@ -238,7 +283,6 @@ public class RegisterActivity extends Activity {
                         if(response.getStatus() == MyResponse.status_ok){
                             Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_LONG).show();
 
-                            progressDialog.dismiss();
 
                             UserDTO newUserDTO = response.getContent();
                             Mine mine = MyApplication.getContext().getMine();
@@ -252,7 +296,9 @@ public class RegisterActivity extends Activity {
                         }else if(response.getStatus() == MyResponse.status_error){
                             ErrorInfo errorInfo = response.getErrorInfo();
                             MyErrorHelper.showErrorToast(RegisterActivity.this, errorInfo);
+
                         }
+                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
@@ -405,5 +451,26 @@ public class RegisterActivity extends Activity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.register_verification_code_retry_button)void onVerCodeRetryClick(){
+        timeCount.start();
+    }
+
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);//参数依次为总时长,和计时的时间间隔
+        }
+
+        @Override
+        public void onFinish() {//计时完毕时触发
+            verCodeRetryButton.setText(getString(R.string.re_acquisition));
+            verCodeRetryButton.setClickable(true);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {//计时过程显示
+            verCodeRetryButton.setClickable(false);
+            verCodeRetryButton.setText( getString(R.string.re_acquisition) + millisUntilFinished / 1000 + "s");
+        }
+    }
 
 }

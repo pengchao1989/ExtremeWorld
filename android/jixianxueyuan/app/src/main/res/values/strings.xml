@@ -24,7 +24,9 @@
     <string name="invitation_code">Invitation code</string>
     <string name="inviting">inviting</string>
     <string name="phone_number">phone number</string>
+    <string name="verification_code">verification code</string>
     <string name="get_verification_code">get verification code</string>
+    <string name="re_acquisition">Re acquisition</string>
 
     <string name="not_more">not more</string>
 
@@ -71,6 +73,7 @@
     <string name="select">select</string>
     <string name="local">local</string>
     <string name="nickname">Nickname</string>
+    <string name="password">password</string>
     <string name="birth">birth</string>
     <string name="gender">Gender</string>
     <string name="male">male</string>
@@ -87,14 +90,19 @@
     <string name="clean_cache">clean cache</string>
 
 
-    //toast tips
-    <string name="birth_err">birht error</string>
-    <string name="name_empty_err">nickname is not empty</string>
-    <string name="name_repeat_err">nickname is repeat</string>
-    <string name="phone_number_err">phone number error</string>
+    //client local error
+
+    //my global error
+    <string name="err_birth">birht error</string>
+    <string name="err_name_empty">nickname is not empty</string>
+    <string name="err_name_repeat">nickname is repeat</string>
+    <string name="err_phone_number">phone number error</string>
+    <string name="err_phone_registered">phone registered</string>
+    <string name="err_verification_code">verification code failed</string>
+    <string name="err_password_empty">password not empty</string>
 
     
-    //error
+    //network error
     <string name="time_out">Time out</string>
     <string name="network_err">Network error</string>
     <string name="connection_err">Connection error</string>

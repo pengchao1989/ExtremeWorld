@@ -24,7 +24,9 @@
     <string name="invitation_code">요청 코드</string>
     <string name="inviting">초청 사람</string>
     <string name="phone_number">핸드폰 번호</string>
+    <string name="verification_code">패스워드</string>
     <string name="get_verification_code">가져오기 인증 코드</string>
+    <string name="re_acquisition">다시 가져오기</string>
 
     <string name="not_more">없다</string>
 
@@ -69,6 +71,7 @@
     <string name="select">선택</string>
     <string name="local">로컬</string>
     <string name="nickname">별명</string>
+    <string name="password">비밀번호</string>
     <string name="birth">생일</string>
     <string name="gender">성별</string>
     <string name="male">남자</string>
@@ -86,11 +89,16 @@
     <string name="clean_cache">캐시 비우기</string>
 
 
-    //toast tips
-    <string name="birth_err">생일 오류</string>
-    <string name="name_empty_err">별명 못 비어</string>
-    <string name="name_repeat_err">별명 이미 존재합니다.</string>
-    <string name="phone_number_err">핸드폰 번호 오류</string>
+    //client local error
+
+    //my global error
+    <string name="err_birth">생일 오류</string>
+    <string name="err_name_empty">별명 못 비어</string>
+    <string name="err_name_repeat">별명 이미 존재합니다.</string>
+    <string name="err_phone_number">핸드폰 번호 오류</string>
+    <string name="err_phone_registered">핸드폰 좋은 코드 이미 등록</string>
+    <string name="err_verification_code">인증 코드 오류</string>
+    <string name="err_password_empty">암호가 비어 수 없다</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

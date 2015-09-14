@@ -26,11 +26,12 @@ public class ServerMethod {
     public static final String imgUploadToken = server_url + api_version + "/uptoken/picture";
 
     public static final String handshake(){return method_url + "handshake";};
-    public static final String account_login() { return method_url + hobby + "account/qqlogin";};
+    public static final String account_qq_login() { return method_url + hobby + "account/qq_login";};
     public static final String verification_code(){return method_url + "verification_code";};
     public static final String verification_code_check(){return method_url + "verification_code/check";};
     public static final String invite(){return method_url + "invite";};
-    public static final String account_register () {return method_url + hobby + "account/register";};
+    public static final String account_qq_register() {return method_url + hobby + "account/qq_register";};
+    public static final String account_phone_register() {return method_url + hobby + "account/phone_register";};
     public static final String profile_update() {return method_url + "/profile/update";};
     public static final String user(){return method_url + "user/";};
     public static final String topic(){return method_url + hobby + "topic";};

@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -15,13 +16,14 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.http.MyRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.StringUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by pengchao on 9/13/15.
@@ -30,6 +32,10 @@ public class RegisterEnterPhoneActivity extends Activity{
 
     @InjectView(R.id.register_enter_phone_number)EditText phoneNumberEditText;
     private String phoneNumber;
+
+    private AlertDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,11 @@ public class RegisterEnterPhoneActivity extends Activity{
     }
 
     private void requestVerificationCode(){
+
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+        progressDialog.show();
+
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.verification_code() + "?phone=" + phoneNumber;
 
@@ -66,12 +77,15 @@ public class RegisterEnterPhoneActivity extends Activity{
                         }else if(response.getStatus() == MyResponse.status_ok){
                             MyErrorHelper.showErrorToast(RegisterEnterPhoneActivity.this, response.getErrorInfo());
                         }
+
+                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        progressDialog.dismiss();
+                        MyVolleyErrorHelper.showError(RegisterEnterPhoneActivity.this, error);
                     }
         });
 
@@ -84,7 +98,7 @@ public class RegisterEnterPhoneActivity extends Activity{
         phoneNumber = phoneNumberEditText.getText().toString();
         boolean checkResult = checkPhoneNumber(phoneNumber);
         if(!checkResult){
-            Toast.makeText(RegisterEnterPhoneActivity.this, getString(R.string.phone_number_err),Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterEnterPhoneActivity.this, getString(R.string.err_phone_number),Toast.LENGTH_SHORT).show();
             return;
         }
 

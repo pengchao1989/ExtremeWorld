@@ -14,6 +14,10 @@ public enum MyErrorCode {
     PHONE_EMPTY(10003, "phone empty"),
     SMS_VERIFICATION_CODE_ERROR(10004,"send sms code error"),
     SMS_VERIFICATION_CODE_CHECK_ERROR(10005, "sms code checked failed"),
+    PHONE_REGISTERED(10006,"phone registered"),
+    PASSWORD_EMPTY(10007,"password empty"),
+    PHONE_FAILED(10008,"phone failed"),
+    VERIFICATION_CODE_ERROR(10009,"verification code failed"),
     UNKNOW_ERROR(1001,"unknow error");
 
     private int errorCode;

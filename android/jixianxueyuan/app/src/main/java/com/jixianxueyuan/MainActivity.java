@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.cchannel.plugin.CloudPushService;
@@ -18,7 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.jixianxueyuan.activity.HomeActivity;
-import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.activity.RegisterEnterPhoneActivity;
 import com.jixianxueyuan.app.Mine;
@@ -34,8 +31,6 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 import com.tencent.connect.UserInfo;
@@ -200,7 +195,7 @@ public class MainActivity extends Activity {
 
     private void requestLogin() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_login() + "?qqOpenId=" + qqOpenInfo.getOpenid();
+        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + qqOpenInfo.getOpenid();
 
         MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
                 new Response.Listener<MyResponse<UserDTO>>() {

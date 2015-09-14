@@ -161,7 +161,7 @@
     //progress dialog
     <style name="ProgressDialogUpdating" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
-        <item name="DialogTitleText">@string/updating</item>
+        <item name="DialogTitleText">@string/wait</item>
         <item name="DialogSpotColor">@color/primary</item>
         <item name="DialogSpotCount">4</item>
     </style>

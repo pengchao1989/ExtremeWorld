@@ -18,8 +18,13 @@ public class MyErrorHelper {
             return result;
         }
         if (errorInfo.getErrorCode() == MyErrorCode.NAME_REPEAT.getErrorCode()){
-            result = context.getString(R.string.name_repeat_err);
-        }else {
+            result = context.getString(R.string.err_name_repeat);
+        }else if(errorInfo.getErrorCode() == MyErrorCode.VERIFICATION_CODE_ERROR.getErrorCode()){
+            result = context.getString(R.string.err_verification_code);
+        }else if(errorInfo.getErrorCode() == MyErrorCode.PHONE_REGISTERED.getErrorCode()){
+            result = context.getString(R.string.err_phone_registered);
+        }
+        else {
             result = errorInfo.getErrorInfo();
         }
 
