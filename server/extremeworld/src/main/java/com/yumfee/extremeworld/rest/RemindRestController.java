@@ -18,7 +18,7 @@ import com.yumfee.extremeworld.rest.dto.RemindDTO;
 import com.yumfee.extremeworld.service.RemindService;
 
 @RestController
-@RequestMapping(value = "/api/v1/remind")
+@RequestMapping(value = "/api/secure/v1/remind")
 public class RemindRestController {
 
 	private static Logger logger = LoggerFactory.getLogger(RemindRestController.class);

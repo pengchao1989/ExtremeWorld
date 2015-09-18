@@ -1,5 +1,8 @@
 package com.jixianxueyuan.http;
 
+import android.util.Base64;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,7 +26,9 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pengchao on 5/31/15.
@@ -151,6 +156,18 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
                     mRequestBody, PROTOCOL_CHARSET);
             return null;
         }
+    }
+
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        //return super.getHeaders();
+        Map<String,String> headers = new HashMap<String, String>();
+        String userName = "aaa";
+        String password = "aaa";
+        byte[] encodedPassword = (userName + ":" + password).getBytes();
+        String strBase64 = new String(Base64.encode(encodedPassword, Base64.DEFAULT));
+        headers.put("Authorization", "Basic " + strBase64);
+        return headers;
     }
 
 }

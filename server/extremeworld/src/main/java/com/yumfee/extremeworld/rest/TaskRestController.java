@@ -34,7 +34,7 @@ import org.springside.modules.web.MediaTypes;
  * @author calvin
  */
 @RestController
-@RequestMapping(value = "/api/v1/task")
+@RequestMapping(value = "/api/secure/v1/task")
 public class TaskRestController {
 
 	private static Logger logger = LoggerFactory.getLogger(TaskRestController.class);

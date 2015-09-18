@@ -14,7 +14,7 @@ import com.yumfee.extremeworld.rest.dto.UserDTO;
 import com.yumfee.extremeworld.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/v1/user")
+@RequestMapping(value = "/api/secure/v1/user")
 public class UserRestController {
 
 	@Autowired

@@ -16,7 +16,7 @@ import com.yumfee.extremeworld.rest.dto.ActivityDTO;
 import com.yumfee.extremeworld.service.ActivityService;
 
 @RestController
-@RequestMapping(value = "/api/v1/activity")
+@RequestMapping(value = "/api/secure/v1/activity")
 public class ActivityRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(ActivityRestController.class);

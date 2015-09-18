@@ -16,7 +16,7 @@ import com.yumfee.extremeworld.rest.dto.VideoDTO;
 import com.yumfee.extremeworld.service.VideoService;
 
 @RestController
-@RequestMapping(value = "/api/v1/video")
+@RequestMapping(value = "/api/secure/v1/video")
 public class VideoRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(VideoRestController.class);

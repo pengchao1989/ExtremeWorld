@@ -4,7 +4,6 @@ package com.yumfee.extremeworld.rest;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 
 import javax.validation.Validator;
 
@@ -16,24 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import ch.hsr.geohash.GeoHash;
 import ch.hsr.geohash.WGS84Point;
-import ch.hsr.geohash.queries.GeoHashCircleQuery;
 import ch.hsr.geohash.util.VincentyGeodesy;
 
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.UserDTO;
-import com.yumfee.extremeworld.rest.dto.UserMinDTO;
 import com.yumfee.extremeworld.rest.dto.request.PointDTO;
 import com.yumfee.extremeworld.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/v1/{hobby}/geo")
+@RequestMapping(value = "/api/secure/v1/{hobby}/geo")
 public class GeoRestController {
 	
 	private static final String PAGE_SIZE = "50";

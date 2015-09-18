@@ -18,7 +18,7 @@ import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.service.SiteService;
 
 @RestController
-@RequestMapping(value = "/api/v1/site")
+@RequestMapping(value = "/api/secure/v1/site")
 public class SiteRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(SiteRestController.class);

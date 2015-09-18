@@ -22,7 +22,7 @@ import com.yumfee.extremeworld.rest.dto.SubReplyDTO;
 import com.yumfee.extremeworld.service.SubReplyService;
 
 @RestController
-@RequestMapping(value = "/api/v1/sub_reply")
+@RequestMapping(value = "/api/secure/v1/sub_reply")
 public class SubReplyRestController {
 	private static Logger logger = LoggerFactory.getLogger(SubReplyRestController.class);
 	

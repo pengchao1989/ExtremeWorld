@@ -21,7 +21,7 @@ import com.yumfee.extremeworld.service.CourseService;
 import com.yumfee.extremeworld.service.TopicService;
 
 @RestController
-@RequestMapping(value = "/api/v1/{hobby}/course")
+@RequestMapping(value = "/api/secure/v1/{hobby}/course")
 public class CourseRestController {
 	
 	private static final String PAGE_SIZE = "30";

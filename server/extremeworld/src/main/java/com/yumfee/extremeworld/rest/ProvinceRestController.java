@@ -16,7 +16,7 @@ import com.yumfee.extremeworld.rest.dto.ProvinceDTO;
 import com.yumfee.extremeworld.service.ProvinceService;
 
 @RestController
-@RequestMapping(value = "/api/v1/province")
+@RequestMapping(value = "/api/secure/v1//province")
 public class ProvinceRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(ProvinceRestController.class);

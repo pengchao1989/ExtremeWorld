@@ -16,7 +16,7 @@ import com.yumfee.extremeworld.rest.dto.CityGroupDTO;
 import com.yumfee.extremeworld.service.CityGroupService;
 
 @RestController
-@RequestMapping(value = "/api/v1/city_group")
+@RequestMapping(value = "/api/secure/v1/city_group")
 public class CityGroupRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(CityGroupRestController.class);

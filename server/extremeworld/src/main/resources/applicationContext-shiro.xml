@@ -26,11 +26,12 @@
 				/login = authc
 				/logout = logout
 				/static/** = anon
-				/api/** = anon
 				/register/** = anon
 				/qqlogin/** = anon
 				/qqlogin_redirect = anon
 				/admin/** = roles[admin]
+				/api/secure/v1/** = authcBasic
+				/api/v1/** = anon
 				/** = anon
 			</value>
 		</property>

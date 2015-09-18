@@ -19,7 +19,7 @@ import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.service.CourseTaxonomyService;
 
 @RestController
-@RequestMapping(value = "/api/v1/{hobby}/course_taxonomy")
+@RequestMapping(value = "/api/secure/v1/{hobby}/course_taxonomy")
 public class CourseTaxonomyRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(CourseTaxonomyRestController.class);

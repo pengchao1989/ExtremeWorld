@@ -9,7 +9,7 @@ import com.yumfee.extremeworld.proto.CountryProto;
 import com.yumfee.extremeworld.rest.dto.CountryDTO;
 
 @RestController
-@RequestMapping(value = "/api/v1/country")
+@RequestMapping(value = "/api/secure/v1/country")
 public class CountryRestController {
 
 	@RequestMapping(method = RequestMethod.GET)

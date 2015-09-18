@@ -22,7 +22,7 @@ import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/v1/topic_agree")
+@RequestMapping(value = "/api/secure/v1/topic_agree")
 public class TopicAgreeRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(TopicAgreeRestController.class);

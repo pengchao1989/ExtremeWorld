@@ -50,7 +50,6 @@ public class AccountRestController {
 			return MyResponse.ok(userDTO);
 		}
 		
-		
 		return MyResponse.noContent();
 	}
 	

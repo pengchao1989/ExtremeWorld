@@ -24,7 +24,7 @@ import com.yumfee.extremeworld.rest.dto.ReplyDTO;
 import com.yumfee.extremeworld.service.ReplyService;
 
 @RestController
-@RequestMapping(value = "/api/v1/reply")
+@RequestMapping(value = "/api/secure/v1/reply")
 public class ReplyRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(ReplyRestController.class);

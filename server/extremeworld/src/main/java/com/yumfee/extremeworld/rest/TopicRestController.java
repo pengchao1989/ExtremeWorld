@@ -30,7 +30,7 @@ import com.yumfee.extremeworld.service.UserService;
 
 
 @RestController
-@RequestMapping(value = "/api/v1/{hobby}/topic")
+@RequestMapping(value = "/api/secure/v1/{hobby}/topic")
 public class TopicRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(TopicRestController.class);

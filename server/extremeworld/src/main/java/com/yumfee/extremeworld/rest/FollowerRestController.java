@@ -17,7 +17,7 @@ import com.yumfee.extremeworld.rest.dto.UserMinDTO;
 import com.yumfee.extremeworld.service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/v1/follower")
+@RequestMapping(value = "/api/secure/v1/follower")
 public class FollowerRestController {
 
 	private static Logger logger = LoggerFactory.getLogger(FollowerRestController.class);
