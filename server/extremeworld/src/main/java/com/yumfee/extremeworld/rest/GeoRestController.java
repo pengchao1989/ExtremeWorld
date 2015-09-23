@@ -97,7 +97,7 @@ public class GeoRestController {
 		});
 		
 		
-		return MyResponse.ok(userMinePage);
+		return MyResponse.ok(userMinePage,true);
 	}
 	
 	@RequestMapping(value = "/update_user_point", method = RequestMethod.POST, consumes = MediaTypes.JSON)

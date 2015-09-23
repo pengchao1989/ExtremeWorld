@@ -26,6 +26,4 @@ public class CityGroupService
 		this.cityGroupDao = cityGroupDao;
 	}
 	
-	
-	
 }

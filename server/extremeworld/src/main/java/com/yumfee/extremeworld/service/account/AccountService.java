@@ -22,6 +22,7 @@ import com.yumfee.extremeworld.repository.UserDao;
 import com.yumfee.extremeworld.service.ServiceException;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
+import org.springside.modules.security.utils.Cryptos;
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
@@ -80,6 +81,7 @@ public class AccountService {
 		
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
+		user.setToken(new String(Cryptos.generateAesKey()));
 
 		userDao.save(user);
 	}

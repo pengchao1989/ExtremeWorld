@@ -75,7 +75,7 @@ public class RegisterEnterPhoneActivity extends Activity{
                             startActivity(intent);
 
                         }else if(response.getStatus() == MyResponse.status_ok){
-                            MyErrorHelper.showErrorToast(RegisterEnterPhoneActivity.this, response.getErrorInfo());
+                            MyErrorHelper.showErrorToast(RegisterEnterPhoneActivity.this, response.getError());
                         }
 
                         progressDialog.dismiss();

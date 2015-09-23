@@ -39,7 +39,7 @@ public class RemindRestController {
 		
 		MyPage<RemindDTO, Remind> myRemindPage = new MyPage<RemindDTO, Remind>(RemindDTO.class, remindList);
 		
-		return MyResponse.ok(myRemindPage);
+		return MyResponse.ok(myRemindPage,true);
 		
 	}
 	

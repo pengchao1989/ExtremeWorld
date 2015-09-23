@@ -37,6 +37,6 @@ public class CourseTaxonomyRestController
 		CourseTaxonomysResponseDTO courseTaxonomysResponseDTO = new CourseTaxonomysResponseDTO();
 		courseTaxonomysResponseDTO.setCourseTaxonomyList(courseTaxonomyList);
 		
-		return MyResponse.ok(courseTaxonomysResponseDTO);
+		return MyResponse.ok(courseTaxonomysResponseDTO,true);
 	}
 }

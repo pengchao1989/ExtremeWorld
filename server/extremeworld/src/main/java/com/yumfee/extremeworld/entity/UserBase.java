@@ -35,6 +35,7 @@ public class UserBase  extends IdEntity{
 	protected Date registerDate;
 	protected String phone;
 	protected String qqOpenId;
+	protected String token;
 	
 	public UserBase() {
 	}
@@ -128,6 +129,14 @@ public class UserBase  extends IdEntity{
 	public void setQqOpenId(String qqOpenId)
 	{
 		this.qqOpenId = qqOpenId;
+	}
+	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Override

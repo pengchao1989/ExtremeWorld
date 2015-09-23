@@ -39,7 +39,7 @@ public class CourseRestController {
 		
 		CourseDTO courseDTO = BeanMapper.map(course, CourseDTO.class);
 		
-		return MyResponse.ok(courseDTO);
+		return MyResponse.ok(courseDTO,true);
 	}
 	
 	@RequestMapping(value = "/explain/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
@@ -52,7 +52,7 @@ public class CourseRestController {
 		
 		MyPage<TopicDTO,Topic>  topicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, explains);
 		
-		return MyResponse.ok(topicPage);
+		return MyResponse.ok(topicPage,true);
 	}
 	
 	

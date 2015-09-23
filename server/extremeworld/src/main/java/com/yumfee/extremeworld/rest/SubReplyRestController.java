@@ -45,7 +45,7 @@ public class SubReplyRestController {
 		MyPage<SubReplyDTO,SubReply> mySubReplyPage = new MyPage<SubReplyDTO,SubReply>(SubReplyDTO.class, subReplyPage);
 		
 		
-		return MyResponse.ok(mySubReplyPage);
+		return MyResponse.ok(mySubReplyPage,true);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)
@@ -56,7 +56,7 @@ public class SubReplyRestController {
 		subReplyService.saveSubReply(subReply);
 		SubReplyDTO subReplyDTO = BeanMapper.map(subReply, SubReplyDTO.class);
 		
-		return MyResponse.ok(subReplyDTO);
+		return MyResponse.ok(subReplyDTO,true);
 		
 	}
 	

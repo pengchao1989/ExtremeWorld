@@ -3,6 +3,7 @@ package com.yumfee.extremeworld.rest;
 
 import javax.validation.Validator;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 
 @RestController
@@ -74,11 +76,12 @@ public class TopicRestController
 		
 		}
 		
-		
+		Long userId = getCurrentUserId();
+		System.out.println("userId=" + userId);
 		
 		MyPage<TopicDTO, Topic> topicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPageSource);
 		
-		return MyResponse.ok(topicPage);
+		return MyResponse.ok(topicPage,true);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
@@ -93,8 +96,10 @@ public class TopicRestController
 		}
 		
 		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);
+		
+		
 
-		return MyResponse.ok(topicDto);
+		return MyResponse.ok(topicDto,true);
 	}
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
@@ -110,7 +115,7 @@ public class TopicRestController
 		MyPage<TopicDTO, Topic> myTopicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPage);
 		
 	
-		return MyResponse.ok(myTopicPage);
+		return MyResponse.ok(myTopicPage,true);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)
@@ -131,5 +136,11 @@ public class TopicRestController
 	}
 	
 
-	
+	/**
+	 * 取出Shiro中的当前用户Id.
+	 */
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
+	}
 }

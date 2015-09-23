@@ -25,6 +25,6 @@ public class UserRestController {
 	{
 		User user = userService.getUser(id);
 		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
-		return MyResponse.ok(userDTO);
+		return MyResponse.ok(userDTO,true);
 	}
 }

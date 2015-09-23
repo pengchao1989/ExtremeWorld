@@ -1,6 +1,12 @@
 package com.yumfee.extremeworld.rest.dto;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.shiro.SecurityUtils;
+import org.springside.modules.mapper.JsonMapper;
+import org.springside.modules.security.utils.Cryptos;
+
 import com.yumfee.extremeworld.config.MyErrorCode;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 public class MyResponse {
 	
@@ -8,25 +14,50 @@ public class MyResponse {
 	public static int STATUS_ERROR = -1;
 
 	public int status;
+	public boolean encryp = false;
 	
 	public Object content;
-	public ErrorInfo errorInfo;
+	public Error error;
 	
 	public static MyResponse ok(Object content)
 	{
 		MyResponse response = new MyResponse();
-		response.setStatus(STATUS_OK);
 		response.setContent(content);
+		response.setStatus(STATUS_OK);
+		return response;
+	}
+	
+	public static MyResponse ok(Object content,boolean isEncryp){
+		
+		
+		MyResponse response = new MyResponse();
+		if(isEncryp){
+			response.encryp = true;
+			
+			JsonMapper jsonMapper = new JsonMapper();
+			String jsonContent = jsonMapper.toJson(content);
+			byte[] vi = Cryptos.generateIV();
+			byte[] encryByte = Cryptos.aesEncrypt(jsonContent.getBytes(), response.getCurrentToken(), vi);
+			String encrypContent = Base64.encodeBase64String(encryByte);
+			String viStr = Base64.encodeBase64String(vi);
+			response.setContent(viStr + ":" + encrypContent);
+		}else
+		{
+			response.setContent(content);
+		}
+		
+		response.setStatus(STATUS_OK); 
+		
 		return response;
 	}
 	
 	public static MyResponse err(MyErrorCode errorCode){
 		MyResponse response = new MyResponse();
 		response.setStatus(STATUS_ERROR);
-		ErrorInfo error = new ErrorInfo();
+		Error error = new Error();
 		error.setErrorCode(errorCode.getErrorCode());
 		error.setErrorInfo(errorCode.getErrorInfo());
-		response.setErrorInfo(error);
+		response.setError(error);
 		return response;
 	}
 	
@@ -61,15 +92,24 @@ public class MyResponse {
 		this.content = content;
 	}
 
-	public ErrorInfo getErrorInfo() {
-		return errorInfo;
+	public Error getError() {
+		return error;
 	}
 
-	public void setErrorInfo(ErrorInfo errorInfo) {
-		this.errorInfo = errorInfo;
+	public void setError(Error error) {
+		this.error = error;
+	}
+
+	/**
+	 * 取出Shiro中的当前用户Id.
+	 */
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
 	}
 	
-	
-	
-	
+	private byte[] getCurrentToken(){
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.token.getBytes();
+	}
 }

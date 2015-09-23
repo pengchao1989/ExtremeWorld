@@ -23,8 +23,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.duanqu.qupai.sdk.android.QupaiService;
-import com.duanqu.qupai.sdk.callback.SaveFileCallback;
+//import com.duanqu.qupai.sdk.android.QupaiService;
+//import com.duanqu.qupai.sdk.callback.SaveFileCallback;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TaxonomySpinnerAdapter;
 import com.jixianxueyuan.app.MyApplication;
@@ -470,7 +470,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     }
 
     private void startVideoRecord(){
-        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
+/*        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
 
         qupaiService.initRecord(VideoRecordConfig.DEFAULT_DURATION_LIMIT, VideoRecordConfig.DEFAULT_BITRATE, null, true,null,2);
 
@@ -480,7 +480,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     public void onFailure(int i, String s) {
                         Toast.makeText(CreateTopicActivity.this, "onFailure:"+ s + "CODE"+ i, Toast.LENGTH_LONG).show();
                     }
-                });
+                });*/
     }
 
     @Override
@@ -498,7 +498,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     }
                 }
                 break;
-            case REQUEST_VIDEO_CODE:
+            /*case REQUEST_VIDEO_CODE:
                 if (resultCode == RESULT_OK) {
                     QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
                     videoPath = VideoRecordConfig.VIDEOPATH(this);
@@ -521,7 +521,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
                     });
                 }
-                break;
+                break;*/
         }
     }
 

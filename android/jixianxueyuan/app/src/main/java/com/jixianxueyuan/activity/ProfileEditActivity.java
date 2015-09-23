@@ -21,7 +21,7 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.config.ImageLoaderConfig;
-import com.jixianxueyuan.dto.ErrorInfo;
+import com.jixianxueyuan.dto.Error;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.request.UserUpdateRequestDTO;
@@ -158,8 +158,8 @@ public class ProfileEditActivity extends Activity {
                             Toast.makeText(ProfileEditActivity.this, getString(R.string.success),Toast.LENGTH_SHORT).show();
 
                         }else if(response.getStatus() == MyResponse.status_error){
-                            ErrorInfo errorInfo = response.getErrorInfo();
-                            MyErrorHelper.showErrorToast(ProfileEditActivity.this, errorInfo);
+                            Error error = response.getError();
+                            MyErrorHelper.showErrorToast(ProfileEditActivity.this, error);
                         }
                     }
                 }, new Response.ErrorListener() {

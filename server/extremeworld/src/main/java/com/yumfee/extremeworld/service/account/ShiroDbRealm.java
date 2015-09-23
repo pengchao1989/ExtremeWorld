@@ -37,8 +37,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	public AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		
-		System.out.println("doGetAuthenticationInfo");
-		
 		//UsernamePasswordToken就一shiro定义的user类
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		//根据userName 获取userEntity
@@ -47,7 +45,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		if (user != null) 
 		{
 			byte[] salt = Encodes.decodeHex(user.getSalt());
-			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getName()),
+			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getName(), user.getToken()),
 					user.getPassword(), ByteSource.Util.bytes(salt), getName());
 		} 
 		else 
@@ -96,12 +94,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		public String loginName;
 		public String name;
 		public String qqOpenId;
+		public String token;
 
-		public ShiroUser(Long id, String loginName, String name) 
+		public ShiroUser(Long id, String loginName, String name,String token) 
 		{
 			this.id = id;
 			this.loginName = loginName;
 			this.name = name;
+			this.token = token;
 		}
 
 		public String getName() 

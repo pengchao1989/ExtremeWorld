@@ -6,9 +6,10 @@ public class MyResponse<T> {
     public static final int status_error = -1;
 
 	public int status;
+	public boolean encryp;
 	
 	public T content;
-    public ErrorInfo errorInfo;
+    public Error error;
 
 	public int getStatus() {
 		return status;
@@ -18,7 +19,15 @@ public class MyResponse<T> {
 		this.status = status;
 	}
 
-	public T getContent() {
+	public boolean isEncryp() {
+		return encryp;
+	}
+
+	public void setEncryp(boolean encryp) {
+		this.encryp = encryp;
+	}
+
+    public T getContent() {
 		return content;
 	}
 
@@ -26,11 +35,11 @@ public class MyResponse<T> {
 		this.content = content;
 	}
 
-    public ErrorInfo getErrorInfo() {
-        return errorInfo;
+    public Error getError() {
+        return error;
     }
 
-    public void setErrorInfo(ErrorInfo errorInfo) {
-        this.errorInfo = errorInfo;
+    public void setError(Error error) {
+        this.error = error;
     }
 }

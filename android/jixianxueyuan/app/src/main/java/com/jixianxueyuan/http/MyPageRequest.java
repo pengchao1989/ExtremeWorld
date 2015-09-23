@@ -17,14 +17,11 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.util.Cryptos;
 import com.jixianxueyuan.util.MyLog;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,27 +87,84 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
             Type type = ((ParameterizedType)mySuperClass).getActualTypeArguments()[0];*/
 
 
-
-
-            MyResponse<MyPage<T>> myResponse = gson.fromJson(jsonStr, new TypeToken<MyResponse<MyPage<T>>>(){}.getType());
-
             JsonParser parser = new JsonParser();
             JsonObject jsonObject =  parser.parse(jsonStr).getAsJsonObject();
-            JsonObject jsonPage = jsonObject.getAsJsonObject("content");
-            JsonArray jsonArray = jsonPage.getAsJsonArray("contents");
 
-            List<T> listItems = new ArrayList<T>();
-            for (int i = 0; i != jsonArray.size(); i++)
-            {
-                JsonElement el = jsonArray.get(i);
-                T item = gson.fromJson(el, classz);
+            JsonElement statusElement = jsonObject.get("status");
+            int status = statusElement.getAsInt();
+            JsonElement encrypElement = jsonObject.get("encryp");
+            boolean encryp = encrypElement.getAsBoolean();
 
-                listItems.add(item);
+
+            MyResponse<String> baseResponse = gson.fromJson(jsonStr, new TypeToken<MyResponse<Object>>(){}.getType());
+
+            if(baseResponse.getStatus() == MyResponse.status_error){
+
             }
 
-            myResponse.getContent().setContents(listItems);
+            if(baseResponse.isEncryp()){
 
-            return Response.success(myResponse, HttpHeaderParser.parseCacheHeaders(response));
+                JsonElement contentElement = jsonObject.get("content");
+                String base64Content = contentElement.getAsString();
+                String[] encryItems =  base64Content.split(":");
+                byte[] ivBytes = Base64.decode(encryItems[0], Base64.DEFAULT);
+                byte[] encrypBytes =  Base64.decode(encryItems[1], Base64.DEFAULT);
+                String contentText = Cryptos.aesDecrypt(encrypBytes, new String("1111111111111111").getBytes(), ivBytes);
+
+
+                JsonObject jsonPage = parser.parse(contentText).getAsJsonObject();
+
+                MyPage<T> myPage = new MyPage<T>();
+                myPage.setTotalPages(jsonPage.get("totalPages").getAsInt());
+                myPage.setCurPage(jsonPage.get("curPage").getAsInt());
+                myPage.setTotalElements(jsonPage.get("totalElements").getAsLong());
+
+                JsonArray jsonArray = jsonPage.getAsJsonArray("contents");
+                //List<T> itemList = gson.fromJson(jsonPage.get("contents"), new TypeToken<List<T>>() {}.getType());
+                //myPage.setContents(itemList);
+                List<T> listItems = new ArrayList<T>();
+                for (int i = 0; i != jsonArray.size(); i++)
+                {
+                    JsonElement el = jsonArray.get(i);
+                    T item = gson.fromJson(el, classz);
+
+                    listItems.add(item);
+                }
+                myPage.setContents(listItems);
+
+
+
+                MyResponse<MyPage<T>> resultResponse = new MyResponse<MyPage<T>>();
+
+                resultResponse.setStatus(baseResponse.getStatus());
+                resultResponse.setError(baseResponse.getError());
+                resultResponse.setContent(myPage);
+
+                return Response.success(resultResponse, HttpHeaderParser.parseCacheHeaders(response));
+
+
+            }else {
+
+                MyResponse<MyPage<T>> resultResponse = gson.fromJson(jsonStr, new TypeToken<MyResponse<MyPage<T>>>() {}.getType());
+
+                JsonObject jsonPage = jsonObject.getAsJsonObject("content");
+                JsonArray jsonArray = jsonPage.getAsJsonArray("contents");
+
+                List<T> listItems = new ArrayList<T>();
+                for (int i = 0; i != jsonArray.size(); i++)
+                {
+                    JsonElement el = jsonArray.get(i);
+                    T item = gson.fromJson(el, classz);
+
+                    listItems.add(item);
+                }
+
+                resultResponse.getContent().setContents(listItems);
+                return Response.success(resultResponse, HttpHeaderParser.parseCacheHeaders(response));
+            }
+
+
+
         }
         catch (UnsupportedEncodingException e)
         {

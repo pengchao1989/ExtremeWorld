@@ -49,7 +49,7 @@ public class ReplyRestController
 		
 		MyPage<ReplyDTO, Reply> myReplyPage = new MyPage<ReplyDTO, Reply>(ReplyDTO.class, replyPage);
 		
-		return MyResponse.ok(myReplyPage);
+		return MyResponse.ok(myReplyPage,true);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
@@ -65,7 +65,7 @@ public class ReplyRestController
 		
 		ReplyDTO replyDTO = BeanMapper.map(reply, ReplyDTO.class);
 		
-		return MyResponse.ok(replyDTO);
+		return MyResponse.ok(replyDTO,true);
 	}
 	
 	//consumes = MediaTypes.JSON 若设置了MediaTYpes 则在http的header中设置Content-Type为application/json才能成功映射，否则返回415
@@ -82,7 +82,7 @@ public class ReplyRestController
 		
 		ReplyDTO dto = BeanMapper.map(reply, ReplyDTO.class);
 
-		return MyResponse.ok(dto);
+		return MyResponse.ok(dto,true);
 	}
 	
 }

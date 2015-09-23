@@ -17,9 +17,12 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.util.AesCbcWithIntegrity;
+import com.jixianxueyuan.util.Cryptos;
 import com.jixianxueyuan.util.MyLog;
 
 import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -91,16 +94,29 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
 
             if(jsonObject.has("content"))
             {
-                JsonElement contentObject = jsonObject.get("content");
-                if(contentObject == null)
-                {
-                    myResponse.setContent(null);
-                }
-                else
-                {
-                    T content = gson.fromJson(contentObject, clazz);
+                if(myResponse.isEncryp()){
+                    JsonElement contentObject = jsonObject.get("content");
+                    String base64EncrypText = contentObject.getAsString();
+                    String[] encryItems =  base64EncrypText.split(":");
+                    byte[] ivBytes = Base64.decode(encryItems[0], Base64.DEFAULT);
+                    byte[] aesEncrypText =  Base64.decode(encryItems[1], Base64.DEFAULT);
+                    String contentText = Cryptos.aesDecrypt(aesEncrypText, new String("1111111111111111").getBytes(), ivBytes);
+                    T content = gson.fromJson(contentText, clazz);
                     myResponse.setContent(content);
                 }
+                else {
+                    JsonElement contentObject = jsonObject.get("content");
+                    if(contentObject == null)
+                    {
+                        myResponse.setContent(null);
+                    }
+                    else
+                    {
+                        T content = gson.fromJson(contentObject, clazz);
+                        myResponse.setContent(content);
+                    }
+                }
+
             }
 
             return Response.success(myResponse, HttpHeaderParser.parseCacheHeaders(response));

@@ -3,7 +3,6 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
@@ -29,7 +28,7 @@ import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.AppConfigDTO;
-import com.jixianxueyuan.dto.ErrorInfo;
+import com.jixianxueyuan.dto.Error;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.InviteDTO;
 import com.jixianxueyuan.dto.MyResponse;
@@ -294,8 +293,8 @@ public class RegisterActivity extends Activity {
 
                             finish();
                         }else if(response.getStatus() == MyResponse.status_error){
-                            ErrorInfo errorInfo = response.getErrorInfo();
-                            MyErrorHelper.showErrorToast(RegisterActivity.this, errorInfo);
+                            Error error = response.getError();
+                            MyErrorHelper.showErrorToast(RegisterActivity.this, error);
 
                         }
                         progressDialog.dismiss();
@@ -356,7 +355,7 @@ public class RegisterActivity extends Activity {
 
 
                         }else if(response.getStatus() == MyResponse.status_error){
-                            MyErrorHelper.showErrorToast(RegisterActivity.this, response.getErrorInfo());
+                            MyErrorHelper.showErrorToast(RegisterActivity.this, response.getError());
                         }
                     }
                 }, new Response.ErrorListener() {

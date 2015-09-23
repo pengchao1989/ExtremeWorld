@@ -92,6 +92,6 @@ public class TopicAgreeRestController
 		agreeResult.setCount(topic.getAgreeCount());
 		
 		
-		return MyResponse.ok(agreeResult);
+		return MyResponse.ok(agreeResult,true);
 	}
 }

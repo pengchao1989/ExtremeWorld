@@ -38,7 +38,7 @@ public class ProfileRestController {
 		
 		userService.saveUser(user);
 		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
-		return MyResponse.ok(userDTO);
+		return MyResponse.ok(userDTO,true);
 	}
 	
 	@RequestMapping(value = "/update_bg", method = RequestMethod.POST, consumes = MediaTypes.JSON)
@@ -49,7 +49,7 @@ public class ProfileRestController {
 		
 		userService.saveUser(user);
 		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
-		return MyResponse.ok(userDTO);
+		return MyResponse.ok(userDTO,true);
 	}
 	
 }
