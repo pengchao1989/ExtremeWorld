@@ -168,7 +168,11 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             Toast.makeText(this,getString(R.string.err), Toast.LENGTH_SHORT).show();
             finish();
         }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -343,7 +347,6 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
     }
 
     private void requestTopicDetail(){
-        RequestQueue queue = Volley.newRequestQueue(this);
 
         String url = ServerMethod.topic() + "/" + topicId;
         MyRequest<TopicDTO> myRequest = new MyRequest<TopicDTO>(Request.Method.GET, url, TopicDTO.class,
@@ -363,13 +366,11 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             }
         });
 
-        queue.add(myRequest);
-
+        MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
     private void requestReplyList()
     {
-        RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.reply() + "?topicId="+ topicDTO.getId() + "&page=" + (currentPage + 1) ;
 
         MyPageRequest<ReplyDTO> myPageRequest = new MyPageRequest<ReplyDTO>(Request.Method.GET,url,ReplyDTO.class,
@@ -400,7 +401,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                     }
                 });
 
-        queue.add(myPageRequest);
+        MyApplication.getContext().getRequestQueue().add(myPageRequest);
     }
 
     private void submitReply(String replyContent)

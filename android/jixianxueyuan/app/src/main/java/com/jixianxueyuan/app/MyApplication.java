@@ -12,6 +12,8 @@ import com.alibaba.cchannel.plugin.CloudPushService;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.alibaba.cchannel.core.task.RunnableCallbackAdapter;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.HandshakeDTO;
 import com.jixianxueyuan.server.ServerMethod;
@@ -29,6 +31,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 public class MyApplication extends Application {
 
 	private static MyApplication application;
+    private RequestQueue mRequestQueue;
 
 
     Mine mine;
@@ -131,6 +134,15 @@ public class MyApplication extends Application {
 
     public void setAppInfomation(AppInfomation appInfomation) {
         this.appInfomation = appInfomation;
+    }
+
+    public RequestQueue getRequestQueue() {
+        if (mRequestQueue == null) {
+            //在这里调用Volley.newRequestQueue()
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+
+        return mRequestQueue;
     }
 
 
