@@ -69,6 +69,16 @@ API Document
 |profile_update|http://115.28.8.25/api/secure/v1/profile/update|更新profile|
 
 
+----------
+	七牛云使用注意事项
+	首先简单看下七牛的编程模型http://developer.qiniu.com/docs/v6/api/overview/programming-model.html
+	七牛每次上传一个文件需要一个uploadToken，这个token直接通过我们自己的rest接口获取
+	获取图片的uploadToken，接口地址为：http://115.28.8.25/api/v1/uptoken/picture
+	获取视频的uploadToken，接口地址为：http://115.28.8.25/api/v1/uptoken/video
+	拿到这个token后结合七牛的上传sdk就能把文件上传到存储服务器了，上传的空间及一些策略信息都包含在这个token中，客户端会指定一下文件名
+	文件名前缀定义：avatar_（头像）、video_（视频）；例如avatar_2015-09-04-TvJJjZWj
+	我们的文件存储空间有两个，对应的域名分别为img.jixianxueyuan.com、video.jixianxueyuan.com
+
 ----------------------------------------------------------------------------------------------
 上下行json对应的数据传输对象（DTO）参考地址
 https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src/main/java/com/yumfee/extremeworld/rest/dto
