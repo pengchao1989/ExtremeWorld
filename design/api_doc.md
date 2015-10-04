@@ -77,15 +77,27 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 一种是httpParam,是直接跟在url后的参数,形如http://test.com?param=value,一般作为GET方式的参数
 另一种是POST方式的raw数据格式(区别于form-data\x-www-form-urlencoded),一般作为POST方式的参数
 
+
+----------
+
+
 接口名称：handshake
 URL地址：http://http://115.28.8.25/api/v1/handshake
 请求方式：GET
 入参：无
 
+
+----------
+
+
 接口名称:account_qq_login
 URL地址:http://115.28.8.25/api/v1/hobby/account/qq_login
 请求方式:GET
 入参：无
+
+
+----------
+
 
 接口名称：account_qq_register
 URL地址：http://115.28.8.25/api/v1/hobby/account/qq_register	
@@ -100,6 +112,10 @@ URL地址：http://115.28.8.25/api/v1/hobby/account/qq_register
 }
 补充：URL中的hobby替换为对应的hobby值，gender的值为male/female，birth只传年份的数字
 
+
+----------
+
+
 接口名称：topic
 URL地址：http://115.28.8.25/api/v1/hobby/topic
 请求方式：GET
@@ -107,12 +123,20 @@ URL地址：http://115.28.8.25/api/v1/hobby/topic
 参考示例：http://115.28.8.25/api/v1/hobby/topic?page=1
 说明：该接口为获取主题列表。支持客户端定义pageSize，参数值为page.size,默认pageSize为15
 
+
+----------
+
+
 接口名称：topic
 URL地址：http://115.28.8.25/api/v1/hobby/topic
 请求方式：GET
 入参：无
 参考示例：http://115.28.8.25/api/v1/hobby/topic/151
 补充：该接口获取主题详情。
+
+
+----------
+
 
 接口名称：topic
 请求方式：POST
