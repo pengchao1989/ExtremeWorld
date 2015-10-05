@@ -100,7 +100,8 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	接口名称:account_qq_login
 	URL地址:http://115.28.8.25/api/v1/hobby/account/qq_login
 	请求方式:GET
-	入参：无
+	入参：qqOpenId
+	示例：http://115.28.8.25/api/v1/bmx/account/qq_login?qqOpenId=3F888E5AF0F11CE9707E551E637E63CF
 
 
 ----------
