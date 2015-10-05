@@ -24,6 +24,7 @@ public class Hobby extends IdEntity
 	private List<User> users= new ArrayList<User>();
 	private List<Site> sites = new ArrayList<Site>();
 	private List<Topic> topics = new ArrayList<Topic>();
+	private List<Shop> shops = new ArrayList<Shop>();
 	
 
 	private AppConfig appConfig;
@@ -91,6 +92,16 @@ public class Hobby extends IdEntity
 		this.topics = topics;
 	}
 	
+	
+	//关系被维护端
+	//referencedColumnName指向对象的列名
+	@ManyToMany(mappedBy = "hobbys")
+	public List<Shop> getShops() {
+		return shops;
+	}
+	public void setShops(List<Shop> shops) {
+		this.shops = shops;
+	}
 	//关系被维护端
 	//referencedColumnName指向对象的列名
 	@OneToMany(mappedBy = "hobby")

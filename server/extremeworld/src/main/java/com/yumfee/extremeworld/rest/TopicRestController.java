@@ -58,7 +58,7 @@ public class TopicRestController
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
 	{
 		
-		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		long hobbyId = HobbyPathConfig.getHobbyId(hobby);
 		
 		Page<Topic> topicPageSource = null;
 		
