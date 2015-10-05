@@ -156,6 +156,7 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
         try
         {
             mRequestBody = gson.toJson(mRequestBodyObject);
+            MyLog.d("MyRequest", "json content=" + mRequestBody);
 
             return mRequestBody == null ? null : mRequestBody.getBytes(PROTOCOL_CHARSET);
         }

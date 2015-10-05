@@ -14,6 +14,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +28,7 @@ import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
 import com.yumfee.extremeworld.entity.Country;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.service.ReferenceAvatarService;
 import com.yumfee.extremeworld.service.account.AccountService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -37,14 +39,20 @@ public class QQLoginController
 	@Autowired
 	private AccountService accountService;
 	
+	@Autowired 
+	private ReferenceAvatarService referenceAvatarService;
+	
 	private com.yumfee.extremeworld.entity.User myUser = null;
 	
 	private boolean isNewUser = true;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public void qqLogin(ServletRequest request ,HttpServletResponse response) throws IOException {
+	public void qqLogin(@CookieValue(value = "inviteid", defaultValue = "1") String inviteidCookie,
+			ServletRequest request ,HttpServletResponse response) throws IOException {
 		
 		System.out.println("/qqlogin");
+		System.out.println("inviteidCookie=" + inviteidCookie);
+
 		
 		response.setContentType("text/html;charset=utf-8");
         try 
@@ -62,18 +70,18 @@ public class QQLoginController
 	
 	
 	@RequestMapping(value = "redirect", method = RequestMethod.GET)
-	public String qqLoginRedirect(HttpServletRequest  request ,HttpServletResponse response) throws IOException
+	public String qqLoginRedirect(@CookieValue(value = "inviteid", defaultValue = "1") String inviteidCookie, HttpServletRequest  request ,HttpServletResponse response) throws IOException
 	{
 		System.out.println("/redirect");
-		return qqLoginAfter(request,response);
+		return qqLoginAfter(inviteidCookie, request,response);
 	}
 	
 	@RequestMapping(value = "redirect",method = RequestMethod.POST)
-	public String qqLoginAfter(HttpServletRequest  request ,HttpServletResponse response) throws IOException
+	public String qqLoginAfter(String inviteid, HttpServletRequest  request ,HttpServletResponse response) throws IOException
 	{
 		System.out.println("/qqLoginAfter");
-		
-		System.out.println("/qqloginafter");
+	
+		System.out.println("inviteidCookie=" + inviteid);
 		
 		response.setContentType("text/html; charset=utf-8");
 
@@ -132,16 +140,18 @@ public class QQLoginController
                 	myUser.setLoginName(openID);
                 	myUser.setName(userInfoBean.getNickname());
                 	myUser.setPlainPassword(openID);
-                	myUser.setAvatar(userInfoBean.getAvatar().getAvatarURL50());
+                	myUser.setAvatar(referenceAvatarService.getRandom().getUrl());
 
                 	
                 	Country country = new Country();
                 	country.setId("CN");
                 	myUser.setCountry(country);
                 	
+                	com.yumfee.extremeworld.entity.User inviter = new com.yumfee.extremeworld.entity.User();
+                	inviter.setId(Long.parseLong(inviteid));
+                	myUser.setInviter(inviter);
+                	
                 	accountService.registerUser(myUser);
-                	
-                	
                 	
                 	
                 	//第一次qq登录进入欢迎页
@@ -168,7 +178,7 @@ public class QQLoginController
         
         if(isNewUser)
         {
-        	return "redirect:/qqlogin/welcome";
+        	return "redirect:/hobby/invite2/download";
         }
         else
         {

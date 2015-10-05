@@ -12,7 +12,7 @@ public class ServerMethod {
 
 
     //static final String server_url = "http://jixianxueyuan.com/";
-    static final String server_url = "http://192.168.1.2:8023/";
+    static final String server_url = "http://192.168.0.107:8023/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
     static String hobby = "skateboard/";
