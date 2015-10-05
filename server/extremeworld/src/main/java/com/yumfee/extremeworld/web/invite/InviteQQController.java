@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.entity.AppVersion;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.service.AppVersionService;
 import com.yumfee.extremeworld.service.InviteService;
 import com.yumfee.extremeworld.service.UserService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
@@ -28,6 +31,9 @@ public class InviteQQController {
 	
 	@Autowired
 	private InviteService inviteService;
+	
+	@Autowired
+	private AppVersionService appVersionService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String invite(
@@ -55,7 +61,8 @@ public class InviteQQController {
 	@RequestMapping(value = "download", method = RequestMethod.GET)
 	public String download(@PathVariable String hobby,
 			@CookieValue(value = "inviteid", defaultValue = "1") String inviteidCookie,
-			@CookieValue(value = "inviteHobby", defaultValue = "skateboard") String inviteHobby)
+			@CookieValue(value = "inviteHobby", defaultValue = "skateboard") String inviteHobby,
+			Model model)
 	{
 		System.out.println("download,inviteidCookie=" + inviteidCookie);
 		System.out.println("download,inviteHobby=" + inviteHobby);
@@ -68,7 +75,11 @@ public class InviteQQController {
 		
 		currUserInfo.setInviter(inviteUser);
 		userService.saveUser(currUserInfo);
-		return "/invite/download";
+		
+		Long hobbyId = HobbyPathConfig.getHobbyId(inviteHobby);
+		AppVersion appVersion = appVersionService.getAppVersion(hobbyId);
+		model.addAttribute("appVersion", appVersion);
+		return "/invite/download2";
 	}
 	
 	/**

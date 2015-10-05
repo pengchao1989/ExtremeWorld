@@ -34,10 +34,7 @@
 				<h3 class="tagline">
 					此次重新开发了滑板圈应用，增加了短视频功能，以及将会开启弹幕视频功能，软件完整性有了很大的改善.<br>
 				</h3>
-				
 				<h3 class="tagline">${inviter.name}邀请你加入</h3>>
-				<h3 class="tagline">Cookie=${cookie.inviteid.value}</h3>>
-				
 				<a class="btn btn-default btn-lg" href="${ctx}/qqlogin?inviteid=${inviter.id}" role="button">立即加入</a>
 	
 			</div> <!-- /col -->
