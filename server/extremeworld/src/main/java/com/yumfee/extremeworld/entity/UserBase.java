@@ -36,6 +36,7 @@ public class UserBase  extends IdEntity{
 	protected String phone;
 	protected String qqOpenId;
 	protected String token;
+	protected boolean inited;
 	
 	public UserBase() {
 	}
@@ -137,6 +138,14 @@ public class UserBase  extends IdEntity{
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public boolean isInited() {
+		return inited;
+	}
+
+	public void setInited(boolean inited) {
+		this.inited = inited;
 	}
 
 	@Override

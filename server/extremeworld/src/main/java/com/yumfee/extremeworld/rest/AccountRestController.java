@@ -44,7 +44,7 @@ public class AccountRestController {
 	{
 		
 		User user = accountService.findUserByQqOpenId(qqOpenId);
-		if(user != null)
+		if(user != null && user.isInited())
 		{
 			UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
 			return MyResponse.ok(userDTO);
@@ -60,34 +60,50 @@ public class AccountRestController {
 			UriComponentsBuilder uriBuilder){
 		
 		String qqOpenId = user.getQqOpenId();
-		user.setLoginName(qqOpenId);
-		user.setPlainPassword(qqOpenId);
-		user.setHobbyStamp(hobby);
 		
-		String birth = user.getBirth();
-		if(birth.length() == 4 )
-		{
-			birth += "-01-01";
-			user.setBirth(birth);
-		}else{
-			user.setBirth("1995-01-01");
-		}
+		User registedUser = accountService.findUserByQqOpenId(qqOpenId);
 		
-		
-    	Country country = new Country();
-    	country.setId("CN");
-    	
-    	user.setCountry(country);
-    	
-    	User sameNameUser = accountService.findUserByName(user.getName());
-    	if(sameNameUser != null){
-    		return MyResponse.err(MyErrorCode.NAME_REPEAT);
-    	}
-		
-    	accountService.registerUser(user);
-		
-		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
-		return MyResponse.ok(userDTO);
+			user.setLoginName(qqOpenId);
+			user.setPlainPassword(qqOpenId);
+			user.setHobbyStamp(hobby);
+			
+			String birth = user.getBirth();
+			if(birth.length() == 4 ){
+				birth += "-01-01";
+				user.setBirth(birth);
+			}else{
+				user.setBirth("1995-01-01");
+			}
+			
+	    	Country country = new Country();
+	    	country.setId("CN");
+	    	
+	    	user.setCountry(country);
+	    	
+	    	User sameNameUser = accountService.findUserByName(user.getName());
+	    	if(sameNameUser != null){
+	    		return MyResponse.err(MyErrorCode.NAME_REPEAT);
+	    	}
+	    	
+	    	user.setInited(true);
+	    	
+	    	if(registedUser == null){
+	    		accountService.registerUser(user);
+	    		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+				return MyResponse.ok(userDTO);
+	    	}else
+	    	{
+	    		registedUser.setAvatar(user.getAvatar());
+	    		registedUser.setName(user.getName());
+	    		registedUser.setBirth(user.getBirth());
+	    		registedUser.setCountry(user.getCountry());
+	    		registedUser.setInited(true);
+	    		
+	    		accountService.updateUser(registedUser);
+	    		
+	    		UserDTO userDTO = BeanMapper.map(registedUser, UserDTO.class);
+				return MyResponse.ok(userDTO);
+	    	}
 	}
 	
 	@RequestMapping(value = "/phone_register", method = RequestMethod.POST, consumes = MediaTypes.JSON)
