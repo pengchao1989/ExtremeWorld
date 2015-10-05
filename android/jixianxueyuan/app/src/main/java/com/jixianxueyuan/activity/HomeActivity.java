@@ -9,6 +9,7 @@ import android.widget.TabHost;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.HomeFragmentAdapter;
+import com.jixianxueyuan.commons.UpdateManager;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -55,6 +56,9 @@ public class HomeActivity extends ActionBarActivity implements MaterialTabListen
             );
 
         }
+
+        UpdateManager updateManager = new UpdateManager(this);
+        updateManager.checkUpdateInfo(false);
     }
 
 

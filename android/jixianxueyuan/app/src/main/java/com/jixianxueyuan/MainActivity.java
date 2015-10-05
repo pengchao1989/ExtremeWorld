@@ -20,6 +20,7 @@ import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.activity.RegisterEnterPhoneActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.UpdateManager;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.dto.HandshakeDTO;
 import com.jixianxueyuan.dto.MyResponse;
@@ -111,11 +112,6 @@ public class MainActivity extends Activity {
             startActivity(intent);
 
         }
-
-
-
-
-
     }
 
     @Override
@@ -158,7 +154,6 @@ public class MainActivity extends Activity {
     }
 
     private void requestHandshake() {
-        RequestQueue queue = Volley.newRequestQueue(this);
         //带上client-hobby信息给服务器，以告知最后是登录的那个应用程序
         String url = ServerMethod.handshake();
         HandshakeRequestDTO handshakeRequestDTO = new HandshakeRequestDTO();
@@ -190,7 +185,7 @@ public class MainActivity extends Activity {
                     }
                 });
 
-        queue.add(myRequest);
+        MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
     private void requestLogin() {

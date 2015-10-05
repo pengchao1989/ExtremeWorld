@@ -7,11 +7,13 @@
     <string name="app_name_skee">滑雪圈</string>
 
     <string name="done">완성하다</string>
+    <string name="cancel">취소</string>
     <string name="back">복귀</string>
     <string name="err">오류</string>
     <string name="success">성공</string>
     <string name="unknown">알 수 없는</string>
     <string name="save">저장</string>
+    <string name="update">업데이트</string>
     <string name="updating">업데이트 중</string>
     <string name="wait">잠깐만.</string>
     <string name="action_settings">Settings</string>

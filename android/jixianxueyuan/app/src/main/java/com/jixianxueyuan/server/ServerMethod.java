@@ -35,6 +35,7 @@ public class ServerMethod {
     public static final String account_qq_register() {return method_url_none + hobby + "account/qq_register";};
     public static final String account_phone_register() {return method_url_none + hobby + "account/phone_register";};
     public static final String reference_avatar(){return method_url_none + "reference_avatar";};
+    public static final String check_version(){return method_url_none + hobby + "check_version";}
 
     public static final String profile_update() {return method_url_secure + "/profile/update";};
     public static final String user(){return method_url_secure + "user/";};

@@ -7,11 +7,13 @@
     <string name="app_name_skee">skee group</string>
 
     <string name="done">done</string>
+    <string name="cancel">cancel</string>
     <string name="back">back</string>
     <string name="err">error</string>
     <string name="success">success</string>
     <string name="unknown">Unknown</string>
     <string name="save">save</string>
+    <string name="update">update</string>
     <string name="updating">updating</string>
     <string name="wait">wait</string>
     <string name="action_settings">Settings</string>
