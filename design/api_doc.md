@@ -89,7 +89,6 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 
 ----------
-
 	Blockquote
 	接口名称：handshake
 	URL地址：http://http://115.28.8.25/api/v1/handshake
@@ -98,8 +97,6 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 
 ----------
-
-
 	接口名称:account_qq_login
 	URL地址:http://115.28.8.25/api/v1/hobby/account/qq_login
 	请求方式:GET
@@ -107,8 +104,6 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 
 ----------
-
-
 	接口名称：account_qq_register
 	URL地址：http://115.28.8.25/api/v1/hobby/account/qq_register	
 	请求方式：POST
@@ -124,8 +119,6 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 
 ----------
-
-
 	接口名称：topic
 	URL地址：http://115.28.8.25/api/v1/hobby/topic
 	请求方式：GET
@@ -135,8 +128,6 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 
 ----------
-
-
 	接口名称：topic
 	URL地址：http://115.28.8.25/api/v1/hobby/topic
 	请求方式：GET
@@ -146,10 +137,42 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 
 ----------
-
-
 	接口名称：topic
+	URL地址：http://115.28.8.25/api/v1/hobby/topic
 	请求方式：POST
 	入参：
-	{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11},"status":0,"replyCount":0,"imageCount":0,"allReplyCount":0,"agreeCount":0,"viewCount":0}
+	{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
 	说明:必传参数user、title、type、taxonomy、hobbys，		user、hobby等的定义可参见上面提到的DTO对象
+	
+
+----------
+	接口名称：reply
+	URL地址：http://115.28.8.25/api/v1/reply
+	请求方式：GET
+	入参：topicId、page
+	说明：获取某个主题下的回复。
+
+
+----------
+	接口名称：reply
+	URL地址：http://115.28.8.25/api/v1/reply
+	请求方式：POST
+	入参：
+	{"content":"测试回复","topic":{"id":153},"user":{"id":15}}
+	说明：该接口为提交回复。
+
+
+----------
+接口名称：sub_reply
+URL地址：http://115.28.8.25/api/v1/sub_reply
+请求方式：GET
+入参：topicId、page
+说明：目前android没有直接调用该接口，因为reply接口中已经把子回复数据带下来了
+
+
+----------
+接口名称：sub_reply
+URL地址：http://115.28.8.25/api/v1/sub_reply
+请求方式：POST
+入参：{"content":"测试子回复","reply":{"id":153},"user":{"id":15}}
+说明：该接口为提交子回复。
