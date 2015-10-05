@@ -163,16 +163,16 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 
 ----------
-接口名称：sub_reply
-URL地址：http://115.28.8.25/api/v1/sub_reply
-请求方式：GET
-入参：topicId、page
-说明：目前android没有直接调用该接口，因为reply接口中已经把子回复数据带下来了
+	接口名称：sub_reply
+	URL地址：http://115.28.8.25/api/v1/sub_reply
+	请求方式：GET
+	入参：topicId、page
+	说明：目前android没有直接调用该接口，因为reply接口中已经把子回复数据带下来了
 
 
 ----------
-接口名称：sub_reply
-URL地址：http://115.28.8.25/api/v1/sub_reply
-请求方式：POST
-入参：{"content":"测试子回复","reply":{"id":153},"user":{"id":15}}
-说明：该接口为提交子回复。
+	接口名称：sub_reply
+	URL地址：http://115.28.8.25/api/v1/sub_reply
+	请求方式：POST
+	入参：{"content":"测试子回复","reply":{"id":153},"user":{"id":15}}
+	说明：该接口为提交子回复。
