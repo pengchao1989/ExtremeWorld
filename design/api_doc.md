@@ -122,16 +122,18 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	接口名称：topic
 	URL地址：http://115.28.8.25/api/v1/hobby/topic
 	请求方式：GET
-	入参：page
-	参考示例：http://115.28.8.25/api/v1/hobby/topic?page=1
-	说明：该接口为获取主题列表。支持客户端定义pageSize，参数值为page.size,默认pageSize为15
+	入参：type、taxonomyId、page
+	参考示例：http://115.28.8.25/api/v1/skateboard/topic?page=1（请求该hobby下所有topic）
+						http://115.28.8.25/api/v1/skateboard/topic?type=discuss&taxonomyId=2&page=1
+	说明：该接口为获取主题列表。支持客户端定义pageSize，参数值为page.size,默认pageSize为15;
+	type的取值为预定义的值、taxonomyId通过握手接口获得。若不填这两个参数则获取该hobby下所有数据
 
 
 ----------
 	接口名称：topic
-	URL地址：http://115.28.8.25/api/v1/hobby/topic
+	URL地址：http://115.28.8.25/api/v1/hobby/topic/{id}
 	请求方式：GET
-	入参：无
+	入参：
 	参考示例：http://115.28.8.25/api/v1/hobby/topic/151
 	补充：该接口获取主题详情。
 
@@ -176,3 +178,44 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	请求方式：POST
 	入参：{"content":"测试子回复","reply":{"id":153},"user":{"id":15}}
 	说明：该接口为提交子回复。
+	
+
+----------
+	接口名称：topic_agree
+	URL地址：http://115.28.8.25/api/v1/topic_agree
+	请求方式：POST
+	入参：{"topicId":153,"userId":15}
+	说明：对一个主题点赞
+	
+
+----------
+	接口名称：user
+	URL地址：http://115.28.8.25/api/v1/user/{id}
+	请求方式：GET
+	示例：http://115.28.8.25/api/v1/user/15
+	说明：获取某个user的信息
+	
+
+
+----------
+	接口名称：remind
+	URL地址：http://115.28.8.25/api/v1/remind/{userId}
+	请求方式：GET
+	示例：http://115.28.8.25/api/v1/remind/15?page=1
+	入参：page
+	说明：获取用户的提醒列表
+	返回值中的speaker、listener分别是发言者和倾听者
+	返回值中的content为提醒内容、targetContent为引用内容
+	targetType的定义：
+		public static final int TARGET_TYPE_TOPIC = 1;
+		public static final int TARGET_TYPE_REPLY = 2;
+		public static final int TARGET_TYPE_SUB_REPLY = 3;
+
+
+----------
+	接口名称：near_friend
+	URL地址：http://115.28.8.25/api/v1/{hobby}/geo/near_friend
+	请求方式：GET
+	入参：userId、latitude、longitude、page
+	示例：http://192.168.0.107:8023/api/v1/bmx/geo/near_friend?userId=15&latitude=31.271252&longitude=104.650953&page=1
+	说明：附近的人
