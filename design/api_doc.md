@@ -141,7 +141,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：topic
-	URL地址：http://115.28.8.25/api/v1/hobby/topic
+	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic
 	请求方式：POST
 	入参：
 	{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
@@ -175,7 +175,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：sub_reply
-	URL地址：http://115.28.8.25/api/v1/sub_reply
+	URL地址：http://115.28.8.25/api/secure/v1/sub_reply
 	请求方式：POST
 	入参：{"content":"测试子回复","reply":{"id":153},"user":{"id":15}}
 	说明：该接口为提交子回复。
@@ -183,7 +183,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：topic_agree
-	URL地址：http://115.28.8.25/api/v1/topic_agree
+	URL地址：http://115.28.8.25/api/secure/v1/topic_agree
 	请求方式：POST
 	入参：{"topicId":153,"userId":15}
 	说明：对一个主题点赞
@@ -191,7 +191,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：user
-	URL地址：http://115.28.8.25/api/v1/user/{id}
+	URL地址：http://115.28.8.25/api/secure/v1/user/{id}
 	请求方式：GET
 	示例：http://115.28.8.25/api/v1/user/15
 	说明：获取某个user的信息
