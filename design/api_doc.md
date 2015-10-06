@@ -121,7 +121,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：topic
-	URL地址：http://115.28.8.25/api/v1/hobby/topic
+	URL地址：http://115.28.8.25/api/v1/secure/hobby/topic
 	请求方式：GET
 	入参：type、taxonomyId、page
 	参考示例：http://115.28.8.25/api/v1/secure/skateboard/topic?page=1（请求该hobby下所有topic）
@@ -132,16 +132,16 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：topic
-	URL地址：http://115.28.8.25/api/v1/hobby/topic/{id}
+	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic/{id}
 	请求方式：GET
 	入参：
-	参考示例：http://115.28.8.25/api/v1/hobby/topic/151
+	参考示例：http://115.28.8.25/api/secure/v1/hobby/topic/151
 	补充：该接口获取主题详情。
 
 
 ----------
 	接口名称：topic
-	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic
+	URL地址：http://115.28.8.25/api/v1/hobby/topic
 	请求方式：POST
 	入参：
 	{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
@@ -175,7 +175,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：sub_reply
-	URL地址：http://115.28.8.25/api/v1/secure/sub_reply
+	URL地址：http://115.28.8.25/api/v1/sub_reply
 	请求方式：POST
 	入参：{"content":"测试子回复","reply":{"id":153},"user":{"id":15}}
 	说明：该接口为提交子回复。
