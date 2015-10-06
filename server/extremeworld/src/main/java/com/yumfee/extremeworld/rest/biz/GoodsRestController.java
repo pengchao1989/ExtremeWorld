@@ -1,4 +1,4 @@
-package com.yumfee.extremeworld.rest;
+package com.yumfee.extremeworld.rest.biz;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.web.MediaTypes;
 
-import com.yumfee.extremeworld.entity.Goods;
-import com.yumfee.extremeworld.rest.dto.GoodsDTO;
+import com.yumfee.extremeworld.entity.biz.Goods;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
-import com.yumfee.extremeworld.service.GoodsService;
+import com.yumfee.extremeworld.rest.dto.biz.GoodsDTO;
+import com.yumfee.extremeworld.service.biz.GoodsService;
 
 @RestController
-@RequestMapping(value = "/api/secure/v1/goods")
+@RequestMapping(value = "/api/secure/v1/biz/goods")
 public class GoodsRestController {
 	private static Logger logger = LoggerFactory.getLogger(GoodsRestController.class);
 	

@@ -1,4 +1,4 @@
-package com.yumfee.extremeworld.rest.dto;
+package com.yumfee.extremeworld.rest.dto.biz;
 
 public class GoodsDTO {
 

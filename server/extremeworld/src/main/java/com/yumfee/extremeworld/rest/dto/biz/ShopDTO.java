@@ -1,6 +1,8 @@
-package com.yumfee.extremeworld.rest.dto;
+package com.yumfee.extremeworld.rest.dto.biz;
 
 import java.util.Date;
+
+import com.yumfee.extremeworld.rest.dto.UserMinDTO;
 
 public class ShopDTO {
 	private long id;

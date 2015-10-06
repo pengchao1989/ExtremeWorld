@@ -1,4 +1,4 @@
-package com.yumfee.extremeworld.service;
+package com.yumfee.extremeworld.service.biz;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,26 +8,26 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yumfee.extremeworld.entity.Shop;
-import com.yumfee.extremeworld.repository.ShopDao;
+import com.yumfee.extremeworld.entity.biz.Goods;
+import com.yumfee.extremeworld.repository.biz.GoodsDao;
 
 //Spring Bean的标识.
 @Component
 //类中所有public函数都纳入事务管理的标识.
 @Transactional
-public class ShopService {
-	
+public class GoodsService {
+
 	@Autowired
-	ShopDao shopDao;
+	GoodsDao goodsDao;
 	
-	public Page<Shop> getAll(int pageNumber, int pageSize,String sortType){
+	public Page<Goods> getAll(int pageNumber, int pageSize,String sortType){
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return shopDao.findAll(pageRequest);
+		return goodsDao.findAll(pageRequest);
 	}
 	
-	public Page<Shop> getAllByHobbyId(long hobbyId, int pageNumber, int pageSize,String sortType){
+	public Page<Goods> getByShoopId(long shopId, int pageNumber, int pageSize,String sortType){
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return shopDao.findByHobby(hobbyId,pageRequest);
+		return goodsDao.findByShopId(shopId,pageRequest);
 	}
 	
 	/**

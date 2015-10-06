@@ -1,4 +1,4 @@
-package com.yumfee.extremeworld.entity;
+package com.yumfee.extremeworld.entity.biz;
 
 import java.util.Date;
 import java.util.List;
@@ -11,8 +11,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.yumfee.extremeworld.entity.Hobby;
+import com.yumfee.extremeworld.entity.IdEntity;
+import com.yumfee.extremeworld.entity.User;
+
 @Entity
-@Table(name = "tb_shop")
+@Table(name = "biz_shop")
 public class Shop extends IdEntity{
 	
 	private String name;
@@ -73,7 +77,7 @@ public class Shop extends IdEntity{
 	}
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tb_shop_hobby",
+	@JoinTable(name = "biz_shop_hobby",
 	joinColumns = { @JoinColumn(name = "shop_id", referencedColumnName = "id" ) },
 	inverseJoinColumns = { @JoinColumn(name="hobby_id", referencedColumnName = "id") })
 	public List<Hobby> getHobbys() {

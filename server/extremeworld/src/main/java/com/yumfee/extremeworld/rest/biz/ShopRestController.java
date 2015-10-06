@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.yumfee.extremeworld.rest;
+package com.yumfee.extremeworld.rest.biz;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
-import com.yumfee.extremeworld.entity.Shop;
+import com.yumfee.extremeworld.entity.biz.Shop;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
-import com.yumfee.extremeworld.rest.dto.ShopDTO;
-import com.yumfee.extremeworld.service.ShopService;
+import com.yumfee.extremeworld.rest.dto.biz.ShopDTO;
+import com.yumfee.extremeworld.service.biz.ShopService;
 
 /**
  * @author pengchao
  *
  */
 @RestController
-@RequestMapping(value = "/api/secure/v1/{hobby}/shop")
+@RequestMapping(value = "/api/secure/v1/{hobby}/biz/shop")
 public class ShopRestController {
 	private static Logger logger = LoggerFactory.getLogger(ShopRestController.class);
 	
@@ -41,7 +41,7 @@ public class ShopRestController {
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
 		
-		long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
 		Page<Shop> shopPage = shopService.getAllByHobbyId(hobbyId, pageNumber, pageSize, sortType);
 		MyPage<ShopDTO,Shop> myShopPage = new MyPage<ShopDTO,Shop>(ShopDTO.class, shopPage);
 		

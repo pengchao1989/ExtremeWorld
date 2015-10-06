@@ -1,12 +1,19 @@
-package com.yumfee.extremeworld.entity;
+package com.yumfee.extremeworld.entity.biz;
+
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.yumfee.extremeworld.entity.IdEntity;
+
 @Entity
-@Table(name = "tb_goods")
+@Table(name = "biz_goods")
 public class Goods extends IdEntity{
 
 	private String name;
@@ -17,6 +24,8 @@ public class Goods extends IdEntity{
 	private int weight;
 	
 	private Shop shop;
+	
+	private List<Category> categorys;
 	
 	public String getName() {
 		return name;
@@ -63,5 +72,14 @@ public class Goods extends IdEntity{
 		this.shop = shop;
 	}
 	
-	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "biz_goods_category",
+	joinColumns = { @JoinColumn(name = "goods_id", referencedColumnName = "id" ) },
+	inverseJoinColumns = { @JoinColumn(name="category_id", referencedColumnName = "id") })
+	public List<Category> getCategorys() {
+		return categorys;
+	}
+	public void setCategorys(List<Category> categorys) {
+		this.categorys = categorys;
+	}
 }

@@ -11,6 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.yumfee.extremeworld.entity.biz.Category;
+import com.yumfee.extremeworld.entity.biz.Shop;
+
 @Entity
 @Table(name = "tb_hobby")
 public class Hobby extends IdEntity
@@ -25,6 +28,7 @@ public class Hobby extends IdEntity
 	private List<Site> sites = new ArrayList<Site>();
 	private List<Topic> topics = new ArrayList<Topic>();
 	private List<Shop> shops = new ArrayList<Shop>();
+
 	
 
 	private AppConfig appConfig;
@@ -120,9 +124,4 @@ public class Hobby extends IdEntity
 	public void setAppConfig(AppConfig appConfig) {
 		this.appConfig = appConfig;
 	}
-
-	
-	
-	
-	
 }
