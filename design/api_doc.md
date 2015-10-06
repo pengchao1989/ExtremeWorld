@@ -124,8 +124,8 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	URL地址：http://115.28.8.25/api/v1/hobby/topic
 	请求方式：GET
 	入参：type、taxonomyId、page
-	参考示例：http://115.28.8.25/api/v1/skateboard/topic?page=1（请求该hobby下所有topic）
-						http://115.28.8.25/api/v1/skateboard/topic?type=discuss&taxonomyId=2&page=1
+	参考示例：http://115.28.8.25/api/v1/secure/skateboard/topic?page=1（请求该hobby下所有topic）
+						http://115.28.8.25/api/v1/secure/skateboard/topic?type=discuss&taxonomyId=2&page=1
 	说明：该接口为获取主题列表。支持客户端定义pageSize，参数值为page.size,默认pageSize为15;
 	type的取值为预定义的值、taxonomyId通过握手接口获得。若不填这两个参数则获取该hobby下所有数据
 
@@ -141,7 +141,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：topic
-	URL地址：http://115.28.8.25/api/v1/hobby/topic
+	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic
 	请求方式：POST
 	入参：
 	{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
@@ -150,7 +150,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：reply
-	URL地址：http://115.28.8.25/api/v1/reply
+	URL地址：http://115.28.8.25/api/secure/v1/reply
 	请求方式：GET
 	入参：topicId、page
 	说明：获取某个主题下的回复。
@@ -158,7 +158,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：reply
-	URL地址：http://115.28.8.25/api/v1/reply
+	URL地址：http://115.28.8.25/secure/api/v1/reply
 	请求方式：POST
 	入参：
 	{"content":"测试回复","topic":{"id":153},"user":{"id":15}}
@@ -167,7 +167,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：sub_reply
-	URL地址：http://115.28.8.25/api/v1/sub_reply
+	URL地址：http://115.28.8.25/api/secure/v1/sub_reply
 	请求方式：GET
 	入参：topicId、page
 	说明：目前android没有直接调用该接口，因为reply接口中已经把子回复数据带下来了
@@ -175,7 +175,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：sub_reply
-	URL地址：http://115.28.8.25/api/v1/sub_reply
+	URL地址：http://115.28.8.25/api/v1/secure/sub_reply
 	请求方式：POST
 	入参：{"content":"测试子回复","reply":{"id":153},"user":{"id":15}}
 	说明：该接口为提交子回复。
@@ -200,9 +200,9 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：remind
-	URL地址：http://115.28.8.25/api/v1/remind/{userId}
+	URL地址：http://115.28.8.25/api/secure/v1/remind/{userId}
 	请求方式：GET
-	示例：http://115.28.8.25/api/v1/remind/15?page=1
+	示例：http://115.28.8.25/api/v1/secure/remind/15?page=1
 	入参：page
 	说明：获取用户的提醒列表
 	返回值中的speaker、listener分别是发言者和倾听者
