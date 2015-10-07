@@ -30,6 +30,11 @@ public class GoodsService {
 		return goodsDao.findByShopId(shopId,pageRequest);
 	}
 	
+	public Page<Goods> getByCategoryId(Long categoryId, int pageNumber, int pageSize, String sortType){
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		return goodsDao.findByCategoryId(categoryId, pageRequest);
+	}
+	
 	/**
 	 * 创建分页请求.
 	 */

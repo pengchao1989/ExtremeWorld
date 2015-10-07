@@ -47,4 +47,7 @@ public class ShopRestController {
 		
 		return MyResponse.ok(myShopPage);
 	}
+	
+
+	
 }
