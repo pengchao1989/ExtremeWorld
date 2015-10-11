@@ -193,7 +193,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	接口名称：user
 	URL地址：http://115.28.8.25/api/secure/v1/user/{id}
 	请求方式：GET
-	示例：http://115.28.8.25/api/v1/user/15
+	示例：http://115.28.8.25/api/secure/v1/user/15
 	说明：获取某个user的信息
 	
 
