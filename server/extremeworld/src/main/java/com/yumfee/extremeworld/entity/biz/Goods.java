@@ -22,6 +22,8 @@ public class Goods extends IdEntity{
 	private double startPrice;
 	private double endPrice;
 	private int weight;
+	private String cover;
+	private String des;
 	
 	private Shop shop;
 	
@@ -62,6 +64,20 @@ public class Goods extends IdEntity{
 	}
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	
+	public String getDes() {
+		return des;
+	}
+	public void setDes(String des) {
+		this.des = des;
 	}
 	@ManyToOne
 	@JoinColumn(name = "shop_id")

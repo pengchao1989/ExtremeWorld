@@ -20,6 +20,14 @@ public class ShopService {
 	@Autowired
 	ShopDao shopDao;
 	
+	public Shop findById(Long id){
+		return shopDao.findOne(id);
+	}
+	
+	public Shop findByUserId(Long userId){
+		return shopDao.findByUserId(userId);
+	}
+	
 	public Page<Shop> getAll(int pageNumber, int pageSize,String sortType){
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		return shopDao.findAll(pageRequest);

@@ -238,7 +238,10 @@ FileProgress.prototype.setComplete = function(up, info) {
     progressNameTd.append(Wrapper);
 
     if (!isImg) {
- 
+    	showImg.attr('src', url);
+    	Wrapper.addClass('default');
+    	imgWrapper.append(showImg);
+    	Wrapper.append(imgWrapper);
     	
     } else {
         linkWrapper.append(showImg);

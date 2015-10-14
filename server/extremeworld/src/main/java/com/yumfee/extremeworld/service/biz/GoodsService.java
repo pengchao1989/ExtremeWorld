@@ -35,6 +35,10 @@ public class GoodsService {
 		return goodsDao.findByCategoryId(categoryId, pageRequest);
 	}
 	
+	public Goods save(Goods goods){
+		return goodsDao.save(goods);
+	}
+	
 	/**
 	 * 创建分页请求.
 	 */
@@ -44,6 +48,8 @@ public class GoodsService {
 			sort = new Sort(Direction.DESC, "weight");
 		} else if ("title".equals(sortType)) {
 			sort = new Sort(Direction.ASC, "title");
+		}else if("id".equals(sortType)){
+			sort = new Sort(Direction.DESC, "id");
 		}
 
 		return new PageRequest(pageNumber - 1, pagzSize, sort);

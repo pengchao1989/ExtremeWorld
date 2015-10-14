@@ -15,6 +15,10 @@
 	
 	<decorator name="default" page="default.jsp">
 		<pattern>/*</pattern>
-		
 	</decorator>
+	
+	<decorator name="shop" page="shop/shop.jsp">
+		<pattern>/shop/*</pattern>
+	</decorator>
+	
 </decorators>

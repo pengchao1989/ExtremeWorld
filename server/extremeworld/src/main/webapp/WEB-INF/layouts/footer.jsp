@@ -17,9 +17,14 @@
 	<footer class="page-footer cyan">
 		<div class="container">
 			<div class="row">
-				<div class="col l6 s12">
-					<h5 class="white-text">本网站纯属娱乐</h5>
-					<p class="grey-text text-lighten-4">随时可能崩溃，现故障概不负责。<a href="${ctx}/${hobby}/todoList">待开发功能</a></p>
+				<div class="col l4 s12">
+					<h5 class="white-text">合作伙伴</h5>
+					<ul>
+						<li><a class="grey-text text-lighten-3" href="http://www.taobao.com/" target="_blank">淘宝网</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.qq.com/" target="_blank">腾讯</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.aliyun.com/" target="_blank">阿里云</a></li>
+						<li><a class="grey-text text-lighten-3" href="http://www.qiniu.cn/" target="_blank">七牛云存储</a></li>
+					</ul>
 				</div>
 				<div class="col l4 offset-l2 s12">
 					<h5 class="white-text">赞助商链接</h5>
@@ -27,8 +32,11 @@
 						<li><a class="grey-text text-lighten-3" href="http://www.vans.com.cn/" target="_blank">Vans中国</a></li>
 						<li><a class="grey-text text-lighten-3" href="http://www.nike.com/cn/zh_cn/" target="_blank">Nike中国</a></li>
 						<li><a class="grey-text text-lighten-3" href="http://shop.adidas.cn/" target="_blank">Adidas中国</a></li>
-						<li><a class="grey-text text-lighten-3" href="http://www.chinaskateboards.cn/" target="_blank">中国滑板网</a></li>
 					</ul>
+				</div>
+				
+				<div class="col l2 offset-2 s12">
+					<a href="${ctx}/shop/"><h5 class="white-text">商家后台</h5></a>
 				</div>
 			</div>
 		</div>

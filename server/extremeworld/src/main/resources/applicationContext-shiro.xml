@@ -30,6 +30,7 @@
 				/qqlogin/** = anon
 				/qqlogin_redirect = anon
 				/admin/** = roles[admin]
+				/shop/** = user
 				/api/secure/v1/** = authcBasic
 				/api/v1/** = anon
 				/** = anon

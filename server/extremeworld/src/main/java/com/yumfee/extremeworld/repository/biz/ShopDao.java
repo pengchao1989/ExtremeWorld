@@ -9,6 +9,8 @@ import com.yumfee.extremeworld.entity.biz.Shop;
 
 public interface ShopDao extends  PagingAndSortingRepository<Shop,Long>{
 
+	public Shop findByUserId(Long userId);
+	
 	@Query("SELECT t FROM Shop t LEFT JOIN t.hobbys h WHERE h.id=?")
 	public Page<Shop> findByHobby(Long hobbyId,  Pageable pageable);
 }

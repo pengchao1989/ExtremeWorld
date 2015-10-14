@@ -8,6 +8,8 @@ public class GoodsDTO {
 	private String type;
 	private double startPrice;
 	private double endPrice;
+	private String cover;
+	private String des;
 	public long getId() {
 		return id;
 	}
@@ -43,6 +45,18 @@ public class GoodsDTO {
 	}
 	public void setEndPrice(double endPrice) {
 		this.endPrice = endPrice;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	public String getDes() {
+		return des;
+	}
+	public void setDes(String des) {
+		this.des = des;
 	}
 	
 	
