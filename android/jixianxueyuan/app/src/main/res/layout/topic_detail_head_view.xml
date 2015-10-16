@@ -4,18 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="4dp"
     android:background="@color/background"
-    style="@style/ListItemLayout"
     >
-
-    <include layout="@layout/user_info_head_view"/>
-
-    <com.yumfee.emoji.EmojiconTextView
-        android:id="@+id/topic_detail_title"
-        emojicon:emojiconSize="28sp"
-        style="@style/titleText"
-        />
 
     <FrameLayout
         android:id="@+id/topic_detail_head_view_video_layout"
@@ -40,60 +30,72 @@
 
     </FrameLayout>
 
-
     <LinearLayout
-        android:id="@+id/topic_detail_content_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
         android:orientation="vertical"
-        />
+        android:paddingTop="4dp"
+        style="@style/ListItemLayout">
 
-    <TextView
-        android:id="@+id/topic_detail_content_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        style="@style/ListSecondaryText"
-        />
+        <include layout="@layout/user_info_head_view"/>
 
-    <LinearLayout
-        android:id="@+id/topic_detail_head_zhan_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:padding="4dp"
-        android:gravity="bottom"
-        android:clickable="true"
-        >
+        <com.yumfee.emoji.EmojiconTextView
+            android:id="@+id/topic_detail_title"
+            emojicon:emojiconSize="28sp"
+            style="@style/titleText"
+            />
 
-        <TextView
-            android:id="@+id/topic_detail_head_zan_count"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/topic_detail_content_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/timeAgoText"
+            android:gravity="left"
+            android:orientation="vertical"
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/topic_detail_content_textview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="赞"
-            style="@style/timeAgoText"
+            android:textSize="20sp"
+            style="@style/ListSecondaryText"
             />
 
-        <ImageButton
-            android:id="@+id/topic_detail_head_zan"
+        <LinearLayout
+            android:id="@+id/topic_detail_head_zhan_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="4dp"
+            android:gravity="bottom"
+            android:clickable="true"
+            >
 
-            android:src="@mipmap/icon_hand_normal_1"
-            android:background="@null"
-            />
+            <TextView
+                android:id="@+id/topic_detail_head_zan_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/timeAgoText"
+                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="赞"
+                style="@style/timeAgoText"
+                />
+
+            <ImageButton
+                android:id="@+id/topic_detail_head_zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@mipmap/icon_hand_normal_1"
+                android:background="@null"
+                />
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

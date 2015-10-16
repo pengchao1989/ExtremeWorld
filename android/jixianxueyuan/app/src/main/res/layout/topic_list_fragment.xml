@@ -19,7 +19,7 @@
 
             <ListView
                 android:id="@+id/topic_list_fragment_listview"
-                style="@style/ListViewNoDivider"
+                style="@style/ListView"
                 android:scrollbars="none"
                 />
 

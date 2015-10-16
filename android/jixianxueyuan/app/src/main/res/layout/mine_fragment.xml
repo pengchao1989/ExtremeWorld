@@ -67,7 +67,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_notifications_none_white_48dp" />
+                    android:src="@mipmap/ic_notifications_none_black_48dp" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -101,7 +101,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_settings_white_48dp" />
+                    android:src="@mipmap/ic_settings_black_48dp" />
 
                 <TextView
                     style="@style/ListPrimaryText"

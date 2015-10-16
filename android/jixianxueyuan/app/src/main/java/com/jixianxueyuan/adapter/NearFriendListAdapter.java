@@ -95,8 +95,7 @@ public class NearFriendListAdapter extends BaseAdapter {
             viewHolder.timeAgoTextView.setText(timeAgo);
         }
 
-
-        if(userDTO.getGender().equals("male")){
+        if(userDTO.getGender() == null || userDTO.getGender().equals("male")){
             viewHolder.genderImageView.setImageResource(R.mipmap.ic_sex_male);
         }else if(userDTO.getGender().equals("female")){
             viewHolder.genderImageView.setImageResource(R.mipmap.ic_sex_female);
