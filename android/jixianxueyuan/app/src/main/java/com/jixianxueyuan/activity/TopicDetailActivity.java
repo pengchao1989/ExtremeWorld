@@ -8,8 +8,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -29,6 +31,7 @@ import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.AnalyzeContent;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.AgreeResultDTO;
 import com.jixianxueyuan.dto.MyPage;
@@ -61,6 +64,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -216,7 +220,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         //参考链接
         // http://www.ibm.com/developerworks/cn/web/1407_zhangqian_androidhtml/#_清单 4._fromHtml()方法定义
         //http://www.jb51.net/article/46799.htm
-        Thread t = new Thread(new Runnable() {
+/*        Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -228,11 +232,11 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                 handler.sendMessage(msg);
             }
         });
-        t.start();
+        t.start();*/
 
 
 
-        /*List<AnalyzeContent.ContentFragment> contentFragmentList = new LinkedList<AnalyzeContent.ContentFragment>();
+        List<AnalyzeContent.ContentFragment> contentFragmentList = new LinkedList<AnalyzeContent.ContentFragment>();
         contentFragmentList = AnalyzeContent.analyzeContent2(topicDTO.getContent());
 
         for(int n=0; n != contentFragmentList.size() ; n++ )
@@ -242,6 +246,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
                 ImageView imageviwe = new ImageView(this);
                 imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                imageviwe.setPadding(0,4,0,4);
 
                 headViewHolder.contentLayout.addView(imageviwe);
 
@@ -260,7 +265,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
             }
 
         }
-*/
+
         if (topicDTO.getType() == TopicType.VIDEO || topicDTO.getVideoDetail() != null)
         {
             if(topicDTO.getVideoDetail().getVideoSource() != null)
@@ -524,6 +529,7 @@ public class TopicDetailActivity extends Activity implements ReplyWidgetListener
         @InjectView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
         @InjectView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
         @InjectView(R.id.topic_detail_content_textview)TextView contentTextView;
+        @InjectView(R.id.topic_detail_content_container)LinearLayout contentLayout;
 
 
         public HeadViewHolder(View headView)
