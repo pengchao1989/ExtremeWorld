@@ -17,7 +17,7 @@ import com.yumfee.extremeworld.entity.IdEntity;
 public class Goods extends IdEntity{
 
 	private String name;
-	private String taobaoId;
+	private long taobaoId;
 	private String type;
 	private double startPrice;
 	private double endPrice;
@@ -35,10 +35,10 @@ public class Goods extends IdEntity{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getTaobaoId() {
+	public long getTaobaoId() {
 		return taobaoId;
 	}
-	public void setTaobaoId(String taobaoId) {
+	public void setTaobaoId(long taobaoId) {
 		this.taobaoId = taobaoId;
 	}
 	public String getType() {

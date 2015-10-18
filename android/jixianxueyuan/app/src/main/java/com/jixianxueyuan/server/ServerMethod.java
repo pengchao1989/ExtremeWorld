@@ -9,8 +9,6 @@ public class ServerMethod {
     static public final int STATUS_OK = 1;
     static public final int STATUS_NO_CONTENT = 204;
 
-
-
     //static final String server_url = "http://jixianxueyuan.com/";
     static final String server_url = "http://192.168.1.2:8023/";
     static final String api_version_secure = "api/secure/v1/";
@@ -53,4 +51,7 @@ public class ServerMethod {
     public static final String remind() {return method_url_secure + "remind/";};
     public static final String biz_market(){return method_url_secure + hobby + "biz/market";};
     public static final String biz_shop(){return method_url_secure + hobby + "biz/shop";};
+    public static final String goods(){return  method_url_secure + hobby + "biz/goods";};
+    public static final String goods_of_shop(){return method_url_secure + hobby + "biz/goods/shop/";};
+    public static final String goods_of_category (){return method_url_secure + hobby + "biz/goods/category/";}
 }

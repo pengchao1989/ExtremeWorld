@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/goods_list_activity_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/near_friend_swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <com.jixianxueyuan.widget.GridViewWithHeaderAndFooter
+            android:id="@+id/goods_list_activity_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:horizontalSpacing="4dp"
+            android:verticalSpacing="4dp"
+            android:numColumns="2"
+            android:gravity="fill"
+            android:stretchMode="columnWidth"
+            android:listSelector="@null"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

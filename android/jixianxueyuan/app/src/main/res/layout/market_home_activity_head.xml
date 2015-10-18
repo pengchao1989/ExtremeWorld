@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp"
-        android:numColumns="3"
+        android:numColumns="4"
         android:gravity="fill"
         android:stretchMode="columnWidth"
         android:listSelector="@null">

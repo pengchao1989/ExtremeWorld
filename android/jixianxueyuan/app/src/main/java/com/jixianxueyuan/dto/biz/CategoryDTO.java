@@ -1,7 +1,9 @@
 package com.jixianxueyuan.dto.biz;
 
 
-public class CategoryDTO {
+import java.io.Serializable;
+
+public class CategoryDTO implements Serializable{
 	private Long id;
 	private String ename;
 	private String name;

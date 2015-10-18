@@ -68,7 +68,7 @@ public class ShopGridAdapter extends BaseAdapter {
 
         viewHolder.nameTextView.setText(shopDTO.getName());
         viewHolder.signatureTextView.setText(shopDTO.getSignature());
-        String imageUrl = shopDTO.getCover();
+        String imageUrl = shopDTO.getCover() + "!AndroidGridItem";
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.displayImage(imageUrl, viewHolder.iconImageView, ImageLoaderConfig.getImageOption(context));
 

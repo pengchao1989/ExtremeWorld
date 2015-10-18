@@ -1,9 +1,11 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.android.volley.Request;
@@ -31,6 +33,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 /**
  * Created by pengchao on 10/17/15.
@@ -59,12 +62,22 @@ public class MarketHomeActivity extends Activity {
 
 
         requestCategoryList();
-
     }
 
     private void initHeadView(){
         View headerView = LayoutInflater.from(this).inflate(R.layout.market_home_activity_head,null);
         NoScorllBarGridView categoryGridView = (NoScorllBarGridView) headerView.findViewById(R.id.market_home_activity_head_gridview);
+
+        categoryGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MarketHomeActivity.this, GoodsListActivity.class);
+                intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_CATEGORY);
+                intent.putExtra(GoodsListActivity.SOURCE_TYPE_CATEGORY, categoryGridAdapter.getItem(position));
+                startActivity(intent);
+            }
+        });
+
         categoryGridAdapter = new CategoryGridAdapter(this);
         categoryGridView.setAdapter(categoryGridAdapter);
 
@@ -111,6 +124,13 @@ public class MarketHomeActivity extends Activity {
         });
 
         MyApplication.getContext().getRequestQueue().add(myPageRequest);
+    }
+
+    @OnItemClick(R.id.market_home_activity_gridview) void onShopClick(int position){
+        Intent intent = new Intent(MarketHomeActivity.this, GoodsListActivity.class);
+        intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_SHOP);
+        intent.putExtra(GoodsListActivity.SOURCE_TYPE_SHOP, shopGridAdapter.getItem(position));
+        startActivity(intent);
     }
 
 }
