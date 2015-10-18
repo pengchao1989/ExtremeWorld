@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jixianxueyuan.widget.NoScorllBarGridView
+        android:id="@+id/market_home_activity_head_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        android:numColumns="3"
+        android:gravity="fill"
+        android:stretchMode="columnWidth"
+        android:listSelector="@null">
+
+    </com.jixianxueyuan.widget.NoScorllBarGridView>
+
+</LinearLayout>

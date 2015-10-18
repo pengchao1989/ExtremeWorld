@@ -14,11 +14,12 @@ import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.entity.biz.Category;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.biz.CategoryDTO;
+import com.yumfee.extremeworld.rest.dto.biz.MarketDTO;
 import com.yumfee.extremeworld.service.biz.CategoryService;
 
 @RestController
-@RequestMapping(value = "/api/secure/v1/{hobby}/biz/category")
-public class CategoryRestController {
+@RequestMapping(value = "/api/secure/v1/{hobby}/biz/market")
+public class MarketRestController {
 
 	@Autowired
 	CategoryService categoryService;
@@ -30,7 +31,10 @@ public class CategoryRestController {
 		List<Category> categoryList = categoryService.getAllByHobbyId(hobbyId);
 		List<CategoryDTO> categoryDTOList = BeanMapper.mapList(categoryList, CategoryDTO.class);
 		
-		return MyResponse.ok(categoryDTOList);
+		MarketDTO storeInfo = new MarketDTO();
+		storeInfo.setCategoryList(categoryDTOList);
+		
+		return MyResponse.ok(storeInfo);
 		
 	}
 }

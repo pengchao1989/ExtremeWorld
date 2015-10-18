@@ -1,17 +1,17 @@
-package com.yumfee.extremeworld.rest.dto.biz;
+package com.jixianxueyuan.dto.biz;
 
-import java.util.Date;
+import com.jixianxueyuan.dto.UserMinDTO;
 
-import com.yumfee.extremeworld.rest.dto.UserMinDTO;
+import java.io.Serializable;
 
-public class ShopDTO {
+public class ShopDTO implements Serializable{
 	private long id;
 	private String name;
 	private String description;
 	private String signature;
 	private String address;
 	private String cover;
-	private Date createTime;
+	private String createTime;
 	private int weight;
 	
 	private UserMinDTO user;
@@ -53,10 +53,10 @@ public class ShopDTO {
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	public int getWeight() {

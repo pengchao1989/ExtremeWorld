@@ -21,10 +21,12 @@ public class Shop extends IdEntity{
 	
 	private String name;
 	private String description;
+	private String signature;
 	private String address;
 	private String cover;
 	private Date createTime;
 	private int weight;
+	
 	
 	private User user;
 	
@@ -41,6 +43,12 @@ public class Shop extends IdEntity{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 	public String getAddress() {
 		return address;
@@ -66,7 +74,6 @@ public class Shop extends IdEntity{
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	public User getUser() {

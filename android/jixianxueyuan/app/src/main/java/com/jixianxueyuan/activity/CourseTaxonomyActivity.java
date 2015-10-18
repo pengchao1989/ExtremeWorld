@@ -85,7 +85,7 @@ public class CourseTaxonomyActivity extends Activity{
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.courseTaxonomy();
 
-        MyRequest<CourseTaxonomysResponseDTO> stringRequest = new MyRequest<CourseTaxonomysResponseDTO>(Request.Method.GET,url,CourseTaxonomysResponseDTO.class,
+        MyRequest<CourseTaxonomysResponseDTO> myRequest = new MyRequest<CourseTaxonomysResponseDTO>(Request.Method.GET,url,CourseTaxonomysResponseDTO.class,
                 new Response.Listener<MyResponse<CourseTaxonomysResponseDTO>>() {
                     @Override
                     public void onResponse(MyResponse<CourseTaxonomysResponseDTO> response) {
@@ -113,7 +113,7 @@ public class CourseTaxonomyActivity extends Activity{
                     }
                 });
 
-        queue.add(stringRequest);
+        queue.add(myRequest);
     }
 
 }

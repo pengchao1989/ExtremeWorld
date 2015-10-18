@@ -11,13 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.trade.ItemService;
-import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
-import com.alibaba.sdk.android.trade.model.TradeResult;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
+import com.jixianxueyuan.activity.MarketHomeActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryListAdapter;
 import com.jixianxueyuan.config.TopicType;
@@ -108,7 +105,7 @@ public class DiscoveryFragment extends Fragment {
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
                     case 6:
-                        ItemService service = AlibabaSDK.getService(ItemService.class);
+/*                        ItemService service = AlibabaSDK.getService(ItemService.class);
                         service.showItemDetailByItemId(DiscoveryFragment.this.getActivity(), new TradeProcessCallback(){
 
                             @Override
@@ -120,7 +117,8 @@ public class DiscoveryFragment extends Fragment {
                             public void onPaySuccess(TradeResult tradeResult) {
 
                             }
-                        }, null, 35745641972L, 1, null);
+                        }, null, 35745641972L, 1, null);*/
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), MarketHomeActivity.class);
                         break;
                 }
 

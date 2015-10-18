@@ -9,7 +9,7 @@
     <com.jixianxueyuan.widget.MyActionBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        my:my_title="附近的人"
+        my:my_title="@string/people"
         />
 
     <android.support.v4.widget.SwipeRefreshLayout

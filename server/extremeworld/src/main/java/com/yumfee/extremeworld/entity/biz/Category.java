@@ -16,6 +16,7 @@ public class Category extends IdEntity {
 
 	private String ename;
 	private String name;
+	private String icon;
 	private Date createTime;
 	private Hobby hobby;
 	private CategoryPredefined categoryPredefined;
@@ -31,6 +32,12 @@ public class Category extends IdEntity {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	public Date getCreateTime() {
 		return createTime;

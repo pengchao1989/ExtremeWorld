@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/list_item_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/shop_gird_item_icon"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            style="@style/TransparentLayout">
+
+            <TextView
+                android:id="@+id/shop_gird_item_name"
+                style="@style/TransparentLayoutText"/>
+
+            <TextView
+                android:id="@+id/shop_gird_item_signature"
+                android:textSize="12sp"
+                style="@style/TransparentLayoutText"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

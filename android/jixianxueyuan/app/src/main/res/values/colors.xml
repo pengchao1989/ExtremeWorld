@@ -8,7 +8,7 @@
 
     <color name="background">#ffffff</color>
     <color name="item_background">#ffffff</color>
-    <color name="item_background_pressed">#1d0e5619</color>
+    <color name="item_background_pressed">#47bbff8e</color>
     <color name="divider">#cccccc</color>
 
     <color name="white">#FFFAFAFA</color>

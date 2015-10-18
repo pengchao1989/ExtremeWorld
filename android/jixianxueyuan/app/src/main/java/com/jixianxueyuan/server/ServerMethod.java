@@ -51,6 +51,6 @@ public class ServerMethod {
     public static final String zan() {return method_url_secure + "topic_agree";}
     public static final String near_friend (){return method_url_secure + hobby + "geo/near_friend";};
     public static final String remind() {return method_url_secure + "remind/";};
-
-
+    public static final String biz_market(){return method_url_secure + hobby + "biz/market";};
+    public static final String biz_shop(){return method_url_secure + hobby + "biz/shop";};
 }

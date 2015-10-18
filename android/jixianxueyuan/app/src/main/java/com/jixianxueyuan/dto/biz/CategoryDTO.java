@@ -1,13 +1,12 @@
-package com.yumfee.extremeworld.rest.dto.biz;
+package com.jixianxueyuan.dto.biz;
 
-import java.util.Date;
 
 public class CategoryDTO {
 	private Long id;
 	private String ename;
 	private String name;
 	private String icon;
-	private Date createTime;
+	private String createTime;
 
 	public Long getId() {
 		return id;
@@ -33,10 +32,10 @@ public class CategoryDTO {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 }

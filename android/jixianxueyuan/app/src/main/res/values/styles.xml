@@ -156,6 +156,21 @@
         <item name="android:src">@drawable/arrows_bg</item>
     </style>
 
+    //半透明文本layout
+    <style name="TransparentLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/transparent_black_85</item>
+    </style>
+
+    <style name="TransparentLayoutText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 
 
     //progress dialog
