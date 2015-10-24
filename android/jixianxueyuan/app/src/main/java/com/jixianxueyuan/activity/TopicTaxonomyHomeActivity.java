@@ -21,7 +21,7 @@ import me.amiee.nicetab.NiceTabStrip;
 /**
  * Created by pengchao on 6/29/15.
  */
-public class TopicTaxonomyHomeActivity extends FragmentActivity {
+public class TopicTaxonomyHomeActivity extends BaseActivity {
 
     @InjectView(R.id.discuss_home_actionbar)MyActionBar myActionBar;
     @InjectView(R.id.discuss_home_activity_pager)ViewPager viewPager;

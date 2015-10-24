@@ -20,7 +20,7 @@ import com.yumfee.emoji.emoji.Emojicon;
 /**
  * Created by pengchao on 4/26/15.
  */
-public class MoodDetailActivity extends Activity{
+public class MoodDetailActivity extends BaseActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

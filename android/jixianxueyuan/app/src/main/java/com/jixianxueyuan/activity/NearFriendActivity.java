@@ -38,7 +38,7 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 7/3/15.
  */
-public class NearFriendActivity extends Activity  {
+public class NearFriendActivity extends BaseActivity  {
 
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();

@@ -25,7 +25,7 @@ import butterknife.OnClick;
 /**
  * Created by pengchao on 6/2/15.
  */
-public class SettingActivity extends Activity {
+public class SettingActivity extends BaseActivity {
 
     @InjectView(R.id.setting_activity_cache_size)TextView cacheSizeTextView;
 

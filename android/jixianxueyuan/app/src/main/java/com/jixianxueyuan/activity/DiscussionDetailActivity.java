@@ -13,7 +13,7 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 4/25/15.
  */
-public class DiscussionDetailActivity extends Activity{
+public class DiscussionDetailActivity extends BaseActivity{
 
     @InjectView(R.id.discussion_detail_title)TextView titleTextView;
     @InjectView(R.id.discussion_detail_content)TextView contentTextView;

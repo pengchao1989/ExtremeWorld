@@ -42,7 +42,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 /**
  * Created by pengchao on 9/2/15.
  */
-public class ProfileEditActivity extends Activity {
+public class ProfileEditActivity extends BaseActivity {
 
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;

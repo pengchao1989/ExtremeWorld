@@ -39,7 +39,7 @@ import butterknife.OnItemClick;
 /**
  * Created by pengchao on 5/22/15.
  */
-public class UserHomeActivity extends Activity {
+public class UserHomeActivity extends BaseActivity {
 
     @InjectView(R.id.user_home_actionbar)MyActionBar actionBar;
     @InjectView(R.id.user_home_listview)ListView listView;

@@ -31,7 +31,7 @@ import butterknife.InjectView;
  * 1.下载video文件
  * 2.通过videoview打开
  */
-public class ShortVideoDetailActivity extends Activity {
+public class ShortVideoDetailActivity extends BaseActivity {
 
     public static final String tag = ShortVideoDetailActivity.class.getSimpleName();
 

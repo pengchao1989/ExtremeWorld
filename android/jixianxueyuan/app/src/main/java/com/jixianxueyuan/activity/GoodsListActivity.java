@@ -32,7 +32,7 @@ import butterknife.OnItemClick;
 /**
  * Created by pengchao on 10/18/15.
  */
-public class GoodsListActivity extends Activity {
+public class GoodsListActivity extends BaseActivity {
 
 
     public static final String SOURCE_TYPE = "SOURCE_TYPE";

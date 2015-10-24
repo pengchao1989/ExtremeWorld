@@ -45,7 +45,7 @@ import me.nereo.multi_image_selector.bean.Image;
 /**
  * Created by pengchao on 8/22/15.
  */
-public class ReplyDetailActivity extends Activity implements ReplyWidgetListener {
+public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetListener {
 
 
     @InjectView(R.id.reply_detail_actionbar)MyActionBar myActionBar;

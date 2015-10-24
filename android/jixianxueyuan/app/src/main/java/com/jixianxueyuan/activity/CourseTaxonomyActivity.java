@@ -31,7 +31,7 @@ import butterknife.InjectView;
 /**
  * Created by pengchao on 4/30/15.
  */
-public class CourseTaxonomyActivity extends Activity{
+public class CourseTaxonomyActivity extends BaseActivity{
 
     @InjectView(R.id.course_taxonomy_activity_expandablelistview)
     ExpandableListView expandableListView;

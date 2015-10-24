@@ -36,7 +36,7 @@ import butterknife.OnItemClick;
 /**
  * Created by pengchao on 8/9/15.
  */
-public class RemindListActivity extends Activity {
+public class RemindListActivity extends BaseActivity {
 
     MyApplication myApplication;
     Mine mine;

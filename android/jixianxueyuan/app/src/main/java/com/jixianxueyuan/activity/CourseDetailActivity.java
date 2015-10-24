@@ -39,7 +39,7 @@ import butterknife.OnItemClick;
 /**
  * Created by pengchao on 7/2/15.
  */
-public class CourseDetailActivity extends Activity {
+public class CourseDetailActivity extends BaseActivity {
 
     @InjectView(R.id.course_detail_actionbar)MyActionBar myActionBar;
     @InjectView(R.id.course_detail_listview)ListView listView;

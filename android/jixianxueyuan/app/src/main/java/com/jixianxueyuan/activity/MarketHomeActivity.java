@@ -38,7 +38,7 @@ import butterknife.OnItemClick;
 /**
  * Created by pengchao on 10/17/15.
  */
-public class MarketHomeActivity extends Activity {
+public class MarketHomeActivity extends BaseActivity {
 
     public static final String tag = MarketHomeActivity.class.getSimpleName();
 

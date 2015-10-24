@@ -37,7 +37,7 @@ import butterknife.OnClick;
 /**
  * Created by pengchao on 6/24/15.
  */
-public class CreateShortVideoActivity extends Activity {
+public class CreateShortVideoActivity extends BaseActivity {
 
     @InjectView(R.id.create_short_video_submit)Button submitButton;
     @InjectView(R.id.create_short_video_thumb)ImageView thumbImageView;
