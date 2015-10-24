@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SeekBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="7dp"
+    android:paddingRight="7dp"
+    android:minHeight="4dp"
+    android:maxHeight="4dp"
+    android:progressDrawable="@drawable/live_seek_bar_style"
+    android:thumb="@drawable/seek_bar_progress">
+    
+
+</SeekBar>

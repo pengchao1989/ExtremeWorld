@@ -1,0 +1,275 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="letv_text_18_ffdfdfdf_shadow">
+        <item name="android:textColor">@color/letv_color_ffdfdfdf</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_18</item>
+        <item name="android:shadowColor">@color/letv_color_cd000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">5.0</item>
+    </style>
+
+    <style name="letv_text_18_ffffffff_shadow">
+        <item name="android:textColor">@color/letv_color_ffffffff</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_18</item>
+        <item name="android:shadowColor">@color/letv_color_cd000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">5.0</item>
+    </style>
+
+    <style name="letv_text_30_bold_shadow_ffffff">
+        <item name="android:textColor">@color/letv_color_ffffffff</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_30</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/letv_color_ff000000</item>
+        <item name="android:shadowDx">2.0</item>
+        <item name="android:shadowDy">2.0</item>
+        <item name="android:shadowRadius">5.0</item>
+    </style>
+
+    <style name="letv_text_20_ffffffff">
+        <item name="android:textColor">@color/letv_color_ffffffff</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_20</item>
+    </style>
+
+    <style name="letv_text_20_ff5c5c5c">
+        <item name="android:textColor">@color/letv_color_ff5c5c5c</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_20</item>
+    </style>
+
+    <style name="letv_text_21_ff000000">
+        <item name="android:textColor">@color/letv_color_ff000000</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_21</item>
+    </style>
+
+    <style name="letv_text_21_ff393939">
+        <item name="android:textColor">@color/letv_color_ff393939</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_21</item>
+    </style>
+
+    <style name="letv_text_15_ff393939">
+        <item name="android:textColor">@color/letv_color_ff393939</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_21_ffa1a1a1">
+        <item name="android:textColor">@color/letv_color_ffa1a1a1</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_21</item>
+    </style>
+
+    <style name="letv_text_11_ffdfdfdf">
+        <item name="android:textColor">@color/letv_color_ffdfdfdf</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_11</item>
+    </style>
+
+    <style name="letv_text_11_ff969696">
+        <item name="android:textColor">@color/letv_color_ff969696</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_11</item>
+    </style>
+
+    <style name="letv_text_8_ffffffff">
+        <item name="android:textColor">@color/letv_color_ffffffff</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_8</item>
+    </style>
+
+    <style name="letv_text_13_ffdfdfdf">
+        <item name="android:textColor">@color/letv_color_ffdfdfdf</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_13_ffdfdfdf_shadow">
+        <item name="android:textColor">@color/letv_color_ffdfdfdf</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+        <item name="android:shadowColor">@color/letv_color_cd000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">5.0</item>
+    </style>
+
+    <style name="letv_text_13_ff393939">
+        <item name="android:textColor">@color/letv_color_ff393939</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_13_ffa1a1a1">
+        <item name="android:textColor">@color/letv_color_ffa1a1a1</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_18_ffdfdfdf">
+        <item name="android:textColor">@color/letv_color_ffdfdfdf</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_18</item>
+    </style>
+
+    <style name="letv_text_30_ffdfdfdf">
+        <item name="android:textColor">@color/letv_color_ffdfdfdf</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_30</item>
+    </style>
+
+    <style name="letv_text_30_ffdfdfdf_shadow">
+        <item name="android:textColor">@color/letv_color_ffdfdfdf</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_30</item>
+        <item name="android:shadowColor">@color/letv_color_cd000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">5.0</item>
+    </style>
+
+    <style name="letv_text_15_ffa1a1a1">
+        <item name="android:textColor">@color/letv_color_ffa1a1a1</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_13_ff00a0e9">
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+        <item name="android:textColor">@color/letv_color_ff00a0e9</item>
+    </style>
+
+    <style name="letv_text_13_fff6f6f6">
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_13_ffffffff">
+        <item name="android:textColor">@color/letv_color_ffffffff</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_14_ff00a0e9">
+        <item name="android:textColor">@color/letv_color_ff00a0e9</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_14</item>
+    </style>
+
+    <style name="letv_text_14_ff969696">
+        <item name="android:textColor">@color/letv_color_ff969696</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_14</item>
+    </style>
+
+    <style name="letv_text_14_ffffffff">
+        <item name="android:textColor">@color/letv_color_ffffffff</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_14</item>
+    </style>
+
+    <style name="letv_text_15_ff969696">
+        <item name="android:textColor">@color/letv_color_ff969696</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_15_ff00a0e9">
+        <item name="android:textColor">@color/letv_color_ff00a0e9</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_15_ff000000">
+        <item name="android:textColor">@color/letv_color_ff000000</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_15_ffececec">
+        <item name="android:textColor">@color/letv_color_ffececec</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_13_ffeaeaea">
+        <item name="android:textColor">@color/letv_color_ffeaeaea</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_13_ffececec">
+        <item name="android:textColor">@color/letv_color_ffececec</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_15_ff5c5c5c">
+        <item name="android:textColor">@color/letv_color_ff5c5c5c</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_28_ffbababa">
+        <item name="android:textColor">@color/letv_color_ffbababa</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+    </style>
+
+    <style name="letv_text_13_main_white">
+        <item name="android:textColor">@color/main_white</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_16_ececec">
+        <item name="android:textColor">#FF393939</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="letv_channel_filter_txt" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/letv_dimens_text_15</item>
+        <item name="android:textColor">@color/letv_color_ff393939</item>
+        <item name="android:focusable">@color/letv_color_ff00a0e9</item>
+        <item name="android:selectAllOnFocus">@color/letv_color_ff00a0e9</item>
+    </style>
+
+    <style name="letv_application_theme" parent="@android:style/Theme.NoTitleBar">
+        <item name="android:windowBackground">@color/letv_color_fff6f6f6</item>
+    </style>
+
+    <!-- Activity主题动画 -->
+    <style name="ThemeEnterActivity">
+        <item name="android:windowAnimationStyle">@style/AnimationEnterActivity</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AnimationEnterActivity" parent="@android:style/Animation.Activity"></style>
+
+    <style name="letv_text_18_ff393939">
+        <item name="android:textColor">@color/letv_color_ff393939</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_18</item>
+    </style>
+
+    <style name="letv_text_18_ff616161">
+        <item name="android:textColor">@color/letv_color_ff616161</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_18</item>
+    </style>
+
+    <style name="letv_text_13_ff969696">
+        <item name="android:textColor">@color/letv_color_ff969696</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_text_13_ff5c5c5c">
+        <item name="android:textColor">@color/letv_color_ff5c5c5c</item>
+        <item name="android:textSize">@dimen/letv_dimens_text_13</item>
+    </style>
+
+    <style name="letv_19_9a9a9a">
+        <item name="android:textColor">#9a9a9a</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <style name="letv_19_e6e6e6">
+        <item name="android:textColor">#e6e6e6</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <style name="Dialog_MaskLayer">
+        <item name="android:windowBackground">@color/letv_color_55000000</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="Dialog_Fullscreen">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="LoadingDialog_Fullscreen">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="popwin_anim_style">
+        <!-- <item name="android:windowEnterAnimation">@anim/channel_selecter_show</item> -->
+    </style>
+
+</resources>

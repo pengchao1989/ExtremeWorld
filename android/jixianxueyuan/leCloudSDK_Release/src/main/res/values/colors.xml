@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="transparent">#00000000</color>
+    <color name="black">#ffffffff</color>
+    <color name="letv_color_00000000">#00000000</color>
+    <color name="letv_color_ff000000">#ff000000</color>
+    <color name="letv_color_ffffffff">#ffffffff</color>
+    <!-- 背景灰 -->
+    <color name="letv_color_fff6f6f6">#fff6f6f6</color>
+    <!-- 字体黑 -->
+    <color name="letv_color_ff616161">#ff616161</color>
+    <!-- 字体蓝 -->
+    <color name="letv_color_ff00a0e9">#ff00a0e9</color>
+    <!-- 字体绿 -->
+    <color name="letv_color_ff08c809">#ff08c809</color>
+    <!-- 字体蓝50%透明 -->
+    <color name="letv_color_8000a0e9">#8000a0e9</color>
+    <!-- 字体灰 -->
+    <color name="letv_color_ffa1a1a1">#ffa1a1a1</color>
+    <!-- list分割线 -->
+    <color name="letv_color_ffdfdfdf">#ffdfdfdf</color>
+    <color name="letv_color_ffdadada">#ffdadada</color>
+    <color name="letv_color_ff969696">#ff969696</color>
+    <color name="letv_color_ff393939">#ff393939</color>
+    <!-- 红色字体 -->
+    <color name="letv_color_ffe60012">#ffe60012</color>
+    <color name="letv_color_cd000000">#cd000000</color>
+    <color name="letv_color_55000000">#55000000</color>
+    <color name="letv_color_99000000">#99000000</color>
+    <color name="letv_color_80000000">#80000000</color>
+    <color name="letv_color_00ffffff">#00ffffff</color>
+    <color name="letv_color_fff0f0f0">#fff0f0f0</color>
+    <color name="letv_color_00f0f0f0">#00f0f0f0</color>
+    <color name="letv_color_ffe14b4b">#ffe14b4b</color>
+    <color name="letv_color_ffe6e6e6">#ffe6e6e6</color>
+    <color name="letv_color_77e14b4b">#77e14b4b</color>
+    <color name="letv_color_ffec7171">#ffec7171</color>
+    <color name="letv_color_ff07c708">#ff07c708</color>
+    <color name="letv_color_77067ac7">#77067ac7</color>
+    <color name="letv_color_773995d2">#773995d2</color>
+    <color name="letv_color_b3000000">#b3000000</color>
+    <color name="letv_color_ff5c5c5c">#ff5c5c5c</color>
+    <color name="letv_color_ff808080">#ff808080</color>
+    <!-- 金黄色字体 -->
+    <color name="letv_color_fff9a038">#fff9a038</color>
+    <color name="letv_color_ffececec">#ffececec</color>
+    <color name="letv_color_ffb4b4b4">#ffb4b4b4</color>
+    <color name="letv_color_cc3c3c3c">#cc3c3c3c</color>
+    <color name="letv_color_cc494949">#cc494949</color>
+    <color name="letv_color_ffbababa">#ffbababa</color>
+    <color name="letv_color_ffadadad">#ffadadad</color>
+    <color name="letv_color_ffdc0101">#ffdc0101</color>
+    <color name="letv_color_ffeaeaea">#ffeaeaea</color>
+    <color name="letv_color_ff3995d2">#ff3995d2</color>
+    <color name="letv_color_ff067ac7">#ff067ac7</color>
+    <color name="letv_color_ff474747">#ff474747</color>
+    <color name="letv_color_ff606060">#ff606060</color>
+    <color name="main_blue">#FF54bceb</color>
+    <color name="main_gray">#FFaeaeae</color>
+    <color name="main_white">#FFececec</color>
+    <color name="main_darkgray">#FF333333</color>
+    <color name="main_disable">#FFa5a5a5</color>
+    <color name="letv_color_ff46474a">#ff46474a</color>
+    <color name="letv_ff494949">#FF494949</color>
+    
+    <color name="download_btn_normal">#cc000000</color>
+    <color name="download_btn_pressed">#e5198fdd</color>
+    <color name="download_btn_enable">#e57d7d7d</color>
+    <!-- 这个是活动中的颜色样式 -->
+    <color name="action_mult_live_shape">#ff1073BF</color>
+
+</resources>

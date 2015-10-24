@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/letv_pl_brightness_icon" />
+    <RelativeLayout 
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/vertical_progress_height"
+        >
+        
+    <ImageView 
+        android:id="@+id/iv_backgroud"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/letv_pl_gesture_seek_bg"
+        android:scaleType="fitXY"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/iv_backgroud"
+        android:layout_alignTop="@id/iv_backgroud"
+        android:layout_alignBottom="@id/iv_backgroud"
+        android:layout_alignRight="@id/iv_backgroud"
+        android:layout_margin="8.5dp"
+        android:progressDrawable="@drawable/progress_vertical_style" />
+    </RelativeLayout>
+
+</LinearLayout>

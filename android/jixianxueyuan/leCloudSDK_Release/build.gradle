@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 18
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.1'
+    compile files('libs/LeCloudSDK_V3.1_2015_10_20.jar')
+    compile files('libs/avdsmart_sdk.jar')
+    compile files('libs/cde-sdk-0.9.82-16.jar')
+    compile files('libs/iplayer.jar')
+    compile files('libs/javabase64-1.3.1.jar')
+    compile files('libs/letvadlib_lecloud.jar')
+}

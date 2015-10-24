@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/full_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true" >
+
+    <include
+        android:id="@+id/full_floating_buttom"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        layout="@layout/layout_floating_bottom_live_full"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/pip_floating_buttom"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:layout_alignParentBottom="true"
+        layout="@layout/layout_floating_bottom_live_pip" />
+
+</RelativeLayout>

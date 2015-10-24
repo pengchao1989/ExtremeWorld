@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:background="@drawable/letv_pl_play_controller_bottom_bg" >
+
+        <!-- 全屏状态 点播 浮层 底部布局 -->
+
+        <RelativeLayout
+            android:id="@+id/full_play_seekbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="20dip"
+            android:gravity="center_vertical"
+            android:padding="0dip" >
+
+            <SeekBar
+                android:id="@+id/full_play_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:layout_alignParentLeft="true"
+                android:maxHeight="16dip"
+                android:minHeight="16dip"
+                android:progressDrawable="@drawable/letv_pl_play_controller_progress_style"
+                android:thumb="@drawable/letv_pl_play_controller_player_thumb"
+                android:thumbOffset="0dip" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/full_play_seekbar_layout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="0" >
+
+            <LinearLayout
+                android:id="@+id/full_hd_layout"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:paddingLeft="10dip" >
+
+                <Button
+                    android:id="@+id/full_hd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/letv_pl_play_hd_bg"
+                    android:text="高清"
+                    android:textColor="@color/letv_color_ffffffff"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="2dip"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <!-- 左快退 -->
+
+                <ImageView
+                    android:id="@+id/full_play_skip_begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dip"
+                    android:src="@drawable/letv_pl_play_controller_left_btn" />
+
+                <!-- 播放和暂停 -->
+
+                <ImageView
+                    android:id="@+id/iv_full_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/letv_pl_play_controller_play_btn" />
+
+                <ImageView
+                    android:id="@+id/iv_full_pause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/letv_pl_play_controller_pause_btn"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/full_play_skip_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dip"
+                    android:src="@drawable/letv_pl_play_controller_right_btn" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="3" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/full_play_time"
+                        style="@style/letv_text_14_ffffffff"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="3dp"
+                        android:singleLine="true"
+                        android:text="00:00:00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="/" />
+
+                    <TextView
+                        android:id="@+id/full_play_alltime"
+                        style="@style/letv_text_14_ffffffff"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="3dp"
+                        android:singleLine="true"
+                        android:text="00:00:00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/full_sound_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/level_sound_image" />
+
+                    <ImageView
+                        android:id="@+id/iv_full_half_selected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:src="@drawable/selector_full_to_half" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

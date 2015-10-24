@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:drawable="@drawable/mute_selecter"
+        android:maxLevel="5"/>
+    <item
+        android:drawable="@drawable/btn_play_volume_low_selecter"
+        android:maxLevel="30"/>
+    <item
+        android:drawable="@drawable/btn_play_volume_middle_selecter"
+        android:maxLevel="70"/>
+    <item
+        android:drawable="@drawable/btn_play_volume_high_selecter"
+        android:maxLevel="100"/>
+
+</level-list>

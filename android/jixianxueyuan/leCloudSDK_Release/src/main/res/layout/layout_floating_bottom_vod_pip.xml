@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="43dp"
+    android:background="@color/letv_color_b3000000"
+    android:gravity="center_vertical" >
+
+    <!-- 全屏状态 点播 浮层 底部布局 -->
+
+    <RelativeLayout
+        android:id="@+id/play_pause_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" >
+
+        <ImageView
+            android:id="@+id/iv_pip_play"
+            android:layout_width="43dip"
+            android:layout_height="43dip"
+            android:padding="6dp"
+            android:paddingTop="2dp"
+            android:src="@drawable/selector_pip_paly" />
+
+        <ImageView
+            android:id="@+id/iv_pip_pause"
+            android:layout_width="43dip"
+            android:layout_height="43dip"
+            android:padding="6dp"
+            android:src="@drawable/selector_pip_pause"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_pip_full_seletor"
+        android:layout_width="43dip"
+        android:layout_height="43dip"
+        android:layout_alignParentRight="true"
+        android:padding="12dp"
+        android:paddingTop="2dp"
+        android:src="@drawable/selector_pip_half_to_full" />
+
+    <SeekBar
+        android:id="@+id/pip_seekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="43dip"
+        android:layout_toLeftOf="@id/iv_pip_full_seletor"
+        android:layout_toRightOf="@id/play_pause_lay"
+        android:maxHeight="43dp"
+        android:minHeight="43dp"
+        android:paddingTop="1dp"
+        android:progress="9"
+        android:progressDrawable="@drawable/bottom_seekbar_pip_style"
+        android:thumb="@drawable/pip_seekbar_thumb"
+        android:thumbOffset="0dp" />
+
+</RelativeLayout>

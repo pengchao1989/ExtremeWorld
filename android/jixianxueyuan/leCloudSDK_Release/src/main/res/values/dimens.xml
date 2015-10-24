@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="letv_dimens_text_5">5sp</dimen>
+    <dimen name="letv_dimens_text_7">7sp</dimen>
+    <dimen name="letv_dimens_text_8">8sp</dimen>
+	<dimen name="letv_dimens_text_10">10sp</dimen>
+    <dimen name="letv_dimens_text_11">11sp</dimen>
+    <dimen name="letv_dimens_text_12">12sp</dimen>
+    <dimen name="letv_dimens_text_13">13sp</dimen>
+    <dimen name="letv_dimens_text_14">14sp</dimen>
+    <dimen name="letv_dimens_text_15">15sp</dimen>
+    <dimen name="letv_dimens_text_16">16sp</dimen>
+    <dimen name="letv_dimens_text_17">17sp</dimen>
+    <dimen name="letv_dimens_text_18">18sp</dimen>
+    <dimen name="letv_dimens_text_20">20sp</dimen>
+    <dimen name="letv_dimens_text_21">21sp</dimen>
+    <dimen name="letv_dimens_text_24">24sp</dimen>
+    <dimen name="letv_dimens_text_28">28sp</dimen>
+    <dimen name="letv_dimens_text_30">30sp</dimen>
+    
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="activity_vertical_margin">0dp</dimen>
+    
+    <!-- Text sizes -->
+
+
+    <dimen name="letv_pl_btn_height_30dp">30dp</dimen>
+    <dimen name="letv_pl_btn_width_56dp">56dp</dimen>
+    
+  
+    <!-- list item分割线的高度 -->
+    <dimen name="letv_pl_line_height">1px</dimen>
+    
+    <dimen name="streams_item_width">50dp</dimen>
+    <dimen name="streams_item_height">30dp</dimen>
+    
+    <dimen name="volume_seekbar_width">35dp</dimen>
+    <dimen name="volume_seekbar_height">130dp</dimen>
+    
+    <dimen name="vertical_progress_height">174dp</dimen>
+
+</resources>

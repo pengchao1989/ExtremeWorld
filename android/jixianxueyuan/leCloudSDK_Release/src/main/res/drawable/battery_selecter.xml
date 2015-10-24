@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:drawable="@drawable/letv_pl_battery1"
+        android:maxLevel="20"/>
+    <item
+        android:drawable="@drawable/letv_pl_battery2"
+        android:maxLevel="40"/>
+    <item
+        android:drawable="@drawable/letv_pl_battery3"
+        android:maxLevel="60"/>
+    <item
+        android:drawable="@drawable/letv_pl_battery4"
+        android:maxLevel="80"/>
+    <item
+        android:drawable="@drawable/letv_pl_battery5"
+        android:maxLevel="100"/>
+    <item
+        android:drawable="@drawable/letv_pl_battery_charge"
+        android:maxLevel="120"/>
+</level-list>

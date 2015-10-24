@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/action_jubao_back"
+    android:orientation="vertical"
+    android:weightSum="2" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center|bottom" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/action_querenjubao_3"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:text="确认举报吗？"
+            android:textColor="#ffffffff"
+            android:textSize="15dp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center" 
+        android:orientation="horizontal"
+        >
+        <Button 
+           android:id="@+id/btn_confirm_inform"
+            android:layout_width="70dp"
+            android:layout_height="27dp"
+            android:background="#ff1074c2"
+            android:text="确认"
+            android:textColor="#ffffffff"
+            android:textSize="15dp"
+            />
+        <Button 
+            android:id="@+id/btn_cancel_inform"
+            android:layout_width="70dp"
+            android:layout_height="27dp"
+            android:background="#001074c2"
+            android:text="取消"
+            android:textColor="#ffffffff"
+            android:textSize="15dp"
+            />
+      
+    </LinearLayout>
+
+</LinearLayout>

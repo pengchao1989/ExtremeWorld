@@ -1,0 +1,147 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/full_bottom"
+    android:layout_width="fill_parent"
+    android:layout_height="60.0dp" >
+
+    <!-- 全屏状态  直播 浮层 底部布局 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dp"
+        android:background="@drawable/letv_pl_play_controller_bottom_bg"
+        android:gravity="center_vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="10.5" >
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="5"
+                android:gravity="left" >
+
+                <!-- 播放和暂停 -->
+
+                <ImageView
+                    android:id="@+id/iv_full_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/action_play" />
+
+                <ImageView
+                    android:id="@+id/iv_full_pause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/action_pause"
+                    android:visibility="gone" />
+               <RelativeLayout
+                    android:id="@+id/live_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    >
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                 >
+				<ImageView
+                    android:id="@+id/full_sound_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/sound_image" />
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/full_hd_layout"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                 >
+	
+                <Button
+                    android:id="@+id/full_hd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@null"
+                    android:text="高清"
+                    android:textColor="@color/letv_color_ffffffff"
+                    android:textSize="16dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                 >
+	
+                
+                <ImageView
+                    android:id="@+id/iv_full_half_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/fullhalf" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                 >
+              
+                <ImageView
+                    android:id="@+id/lecloud_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/logo_2" />
+            </RelativeLayout>
+
+         <!--    <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:id="@+id/iv_full_half_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/lecloud_logo"
+                    android:layout_marginRight="25dp"
+                    android:src="@drawable/full2half" />
+
+                <ImageView
+                    android:id="@+id/lecloud_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/logo_2" />
+            </RelativeLayout> -->
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

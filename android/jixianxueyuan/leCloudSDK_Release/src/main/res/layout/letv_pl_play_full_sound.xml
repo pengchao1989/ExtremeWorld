@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/full_sound_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dip"
+        android:src="@drawable/letv_pl_sound_one" />
+
+    <SeekBar
+        android:id="@+id/full_sound_seekbar"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dip"
+        android:layout_weight="1"
+        android:maxHeight="8dip"
+        android:minHeight="8dip"
+        android:progressDrawable="@drawable/letv_pl_sound_seekbar_style"
+        android:thumb="@drawable/letv_pl_play_controller_volume_thumb"
+        android:thumbOffset="0dip" />
+
+</LinearLayout>

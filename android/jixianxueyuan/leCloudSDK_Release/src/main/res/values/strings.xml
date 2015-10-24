@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LeCloudVedio</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="no_network">目前没有联网，请检查网络重新加载</string>
+    <string name="reload">刷新重试</string>
+    
+    <string name="error_code">错误代码：%1$s!</string>
+    
+    <string name="player_failed_defualt">(>﹏&lt;)播放失败了，不如刷新一下试试？</string>
+    
+    <string name="error_flash_button">刷新重试</string>
+
+</resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <com.letv.admodule.VideoView
+                android:id="@+id/ad_play_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <com.letv.admodule.AdTimerView
+            android:id="@+id/ad_timer_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/fanhui" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_ad_floating_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="43dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical" 
+        >
+
+        <!-- 全屏状态 点播 浮层 底部布局 -->
+
+        <RelativeLayout
+            android:id="@+id/play_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true" >
+
+            <ImageView
+                android:id="@+id/iv_play_has_sound"
+                android:layout_width="43dip"
+                android:layout_height="43dip"
+                android:padding="6dp"
+                android:paddingTop="2dp"
+                android:src="@drawable/shengyin" />
+
+            <ImageView
+                android:id="@+id/iv_play_no_sound"
+                android:layout_width="43dip"
+                android:layout_height="43dip"
+                android:padding="6dp"
+                android:src="@drawable/shengyinguanbi"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_ad_pip_full_seletor"
+            android:layout_width="43dip"
+            android:layout_height="43dip"
+            android:layout_alignParentRight="true"
+            android:padding="6dp"
+            android:src="@drawable/fangda" />
+        
+        <ImageView
+            android:id="@+id/iv_ad_full_half_seletor"
+            android:layout_width="43dip"
+            android:layout_height="43dip"
+            android:layout_alignParentRight="true"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:src="@drawable/full2half" />
+        
+
+        <Button
+            android:id="@+id/btn_click_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="45dp"
+            android:background="@null"
+            android:text="了解更多详情>"
+            android:textColor="#1ab2f1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

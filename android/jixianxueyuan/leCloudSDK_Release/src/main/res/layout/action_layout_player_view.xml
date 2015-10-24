@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center" >
+
+
+        <!-- 这里在包裹一层是没办法的事情。我不想大量改动BasePlayCenter。所有我只能尽量的包裹一层 RelativeLayout。这样就可以达到和其他的子playCenter适配 -->
+
+        <RelativeLayout
+            android:id="@+id/fl_player_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <!-- 负责播放的view -->
+
+            <RelativeLayout
+                android:id="@+id/layout_player_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black" >
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_player_watermark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/layout_player_view"
+                android:layout_alignTop="@id/layout_player_view"
+                android:layout_alignRight="@id/layout_player_view"
+                android:layout_alignBottom="@id/layout_player_view"
+               	android:padding="40dp"
+                >
+
+                <com.android.levolley.toolbox.NetworkImageView
+                    android:id="@+id/iv_player_watermark"
+                    android:layout_width="40dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正在加载！！！" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/layout_floating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/fl_player_view"
+        android:layout_alignTop="@id/fl_player_view"
+        layout="@layout/action_layout_floating" />
+
+    <com.lecloud.skin.widget.LeCloudNoticeView
+        android:id="@+id/layout_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/fl_player_view"
+        android:layout_alignTop="@id/fl_player_view"
+        android:visibility="gone" />
+	
+    <FrameLayout
+        android:id="@+id/mutl_live_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="150dp"
+        android:layout_alignParentRight="true" >
+
+        <LinearLayout
+            android:id="@+id/floating_right_mutl_live_lay"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#60000000"
+            android:orientation="horizontal"
+            android:paddingLeft="60dp" 
+            android:paddingBottom="15dp">
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mutl_live_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/action_on" />
+    </FrameLayout>
+</RelativeLayout>

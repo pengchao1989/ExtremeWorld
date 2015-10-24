@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/streamLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#DD0D0D0D"
+    android:orientation="vertical" >
+
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <!-- 头部浮层 -->
+
+    <include
+        android:id="@+id/floating_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/action_layout_floating_top"
+        android:gravity="center_vertical"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/vertical_floating_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/action_layout_floating_vertical_top"
+        android:gravity="center_vertical" />
+    <!-- 底部浮层 -->
+
+    <RelativeLayout
+        android:id="@+id/floating_right_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" >
+
+        <ImageView
+            android:id="@+id/floating_download_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/download_btn_bg"
+            android:src="@drawable/download_btn"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <!-- <FrameLayout
+        android:id="@+id/mutl_live_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_above="@+id/floating_bottom"
+        android:layout_alignParentRight="true" >
+
+        <LinearLayout
+            android:id="@+id/floating_right_mutl_live_lay"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#60000000"
+            android:orientation="horizontal"
+            android:paddingLeft="60dp" 
+            android:paddingBottom="15dp">
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mutl_live_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/action_on" />
+    </FrameLayout> -->
+
+    <RelativeLayout
+        android:id="@+id/floating_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+    </RelativeLayout>
+
+    <!-- 锁定已经锁定屏幕按钮 -->
+    <!-- 左部浮层 -->
+    <!-- 右部浮层 -->
+
+</RelativeLayout>

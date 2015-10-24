@@ -1,1 +1,2 @@
 include ':app', ':emoji', ':multi-image-selector', ':OneSDK',':qupaisdk', ':daogenerator'
+include ':leCloudSDK_Release'
