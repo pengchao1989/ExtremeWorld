@@ -54,43 +54,26 @@
             >
 
             <LinearLayout
+                android:id="@+id/activity_qq_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:padding="@dimen/list_item_vertical_padding"
+                android:clickable="true"
+                android:gravity="center"
+                android:background="@drawable/trans_button_background">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone_login"
-                    android:drawableLeft="@drawable/ic_login_iphone"
-                    style="@style/TransparentImageTextView"
-                    />
-
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="1dp"/>
-
-                <TextView
-                    android:id="@+id/activity_qq_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/qq_login"
-                    android:drawableLeft="@drawable/ic_login_qq"
-                    style="@style/TransparentImageTextView"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icon_upload_qq_a"
+                    style="@style/SecondText"
                     />
 
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/activity_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:layout_marginTop="40dp"
-                style="@style/PrimaryText"
-                />
 
 
 

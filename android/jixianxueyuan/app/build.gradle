@@ -30,6 +30,14 @@ android {
 
     productFlavors{
 
+        xueyuan{
+            applicationId = "com.jixianxueyuan"
+            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan",
+                                    HOBBY : "all",
+                                    JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}"]
+        }
+
         parkour{
             applicationId = "com.jixianxueyuan.parkour"
             manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.parkour",

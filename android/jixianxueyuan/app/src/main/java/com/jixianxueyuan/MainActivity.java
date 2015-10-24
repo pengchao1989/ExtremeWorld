@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.cchannel.plugin.CloudPushService;
@@ -48,7 +49,7 @@ import butterknife.OnClick;
 public class MainActivity extends Activity {
 
     @InjectView(R.id.activity_qq_login)
-    TextView qqLoginButton;
+    LinearLayout qqLoginButton;
 
     @InjectView(R.id.activity_main_appname)
     ShimmerTextView appNameTextView;
@@ -106,6 +107,7 @@ public class MainActivity extends Activity {
 
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             Bundle bundle = new Bundle();
+            bundle.putString(RegisterActivity.REGISTER_TYPE, RegisterActivity.REGISTER_TYPE_QQ);
             bundle.putSerializable("qqOpenInfo", qqOpenInfo);
             bundle.putSerializable("qqUserInfo", qqUserInfo);
             intent.putExtras(bundle);
@@ -129,7 +131,7 @@ public class MainActivity extends Activity {
     private void initView()
     {
         String hobby = Util.getApplicationMetaString(this, "HOBBY");
-        switch (hobby){
+/*        switch (hobby){
             case HobbyType.SKATEBOARD:
                 appNameTextView.setText(this.getResources().getText(R.string.app_name_skateboard));
                 break;
@@ -139,18 +141,14 @@ public class MainActivity extends Activity {
             case HobbyType.BMX:
                 appNameTextView.setText(this.getResources().getText(R.string.app_name_bmx));
                 break;
-        }
+        }*/
+        appNameTextView.setText(this.getResources().getText(R.string.app_name));
     }
 
     @OnClick(R.id.activity_qq_login)
     void qqLogin() {
 
         requestQQOpenId();
-    }
-
-    @OnClick(R.id.activity_register) void onRegisterClick(){
-        Intent intent = new Intent(MainActivity.this, RegisterEnterPhoneActivity.class);
-        startActivity(intent);
     }
 
     private void requestHandshake() {

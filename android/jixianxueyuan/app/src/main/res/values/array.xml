@@ -2,7 +2,6 @@
 <resources>
 
     <string-array name="discovery_names">
-        <item>@string/news</item>
         <item>@string/discuss</item>
         <item>@string/course</item>
         <item>@string/site</item>
@@ -12,7 +11,6 @@
     </string-array>
 
     <string-array name="discovery_images">
-        <item>@mipmap/ic_picture_in_picture_black_48dp</item>
         <item>@mipmap/ic_message_black_48dp</item>
         <item>@mipmap/ic_school_black_48dp</item>
         <item>@mipmap/ic_location_on_black_48dp</item>

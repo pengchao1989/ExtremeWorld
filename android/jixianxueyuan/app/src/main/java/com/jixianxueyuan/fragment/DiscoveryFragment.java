@@ -75,7 +75,7 @@ public class DiscoveryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = null;
-                switch (position)
+                switch (position+1)
                 {
                     case 0:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
