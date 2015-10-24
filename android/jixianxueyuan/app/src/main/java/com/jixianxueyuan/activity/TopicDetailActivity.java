@@ -1,6 +1,5 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,8 +46,6 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
-import com.jixianxueyuan.commons.MImageGetter;
-import com.jixianxueyuan.util.MTagHandler;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.LoadMoreView;
@@ -70,16 +67,19 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends Activity implements ReplyWidgetListener {
+public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener {
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
 
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
+
 
     long topicId = -1;
     TopicDTO topicDTO;
