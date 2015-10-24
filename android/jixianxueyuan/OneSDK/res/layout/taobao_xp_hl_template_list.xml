@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.taobao.newxp.view.handler.pulltorefresh.PullToRefreshListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_xp_ew_gridview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"/>

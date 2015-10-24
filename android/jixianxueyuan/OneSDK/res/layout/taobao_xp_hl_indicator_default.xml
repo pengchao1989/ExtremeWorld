@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.taobao.newxp.view.handler.umwall.tab.TabPageIndicator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_xp_ew_pageIndicator"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/taobao_xp_hl_indicator_bg"
+    android:visibility="visible"/>

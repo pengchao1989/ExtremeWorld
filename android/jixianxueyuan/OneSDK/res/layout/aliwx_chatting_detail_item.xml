@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/aliwx_large_padding"
     android:paddingLeft="@dimen/aliwx_large_padding"
-    android:paddingRight="@dimen/aliwx_large_padding" >
+    android:paddingRight="@dimen/aliwx_large_padding">
 
     <include layout="@layout/aliwx_chatting_detail_item_time" />
 
@@ -42,17 +42,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/left_name"
-        android:layout_marginRight="26dp"
+        android:layout_marginRight="36dp"
         android:layout_toRightOf="@id/left_head"
         android:background="?attr/aliwx_comment_left_bg"
-        android:gravity="center" >
+        android:gravity="center">
 
         <com.alibaba.mobileim.fundamental.widget.PatchedTextView
             android:id="@+id/left_text"
             style="@style/aliwx_chatting_detail_text_left_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:autoLink="web|phone"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -61,8 +60,8 @@
             android:textColor="?attr/aliwx_chatcontent_left_textcolor"
             android:textColorHighlight="@android:color/transparent"
             android:textSize="?attr/aliwx_chatcontent_left_textsize" />
-        
-         <TextView
+
+        <TextView
             android:id="@+id/left_geo"
             android:layout_width="@dimen/aliwx_geo_width"
             android:layout_height="wrap_content"
@@ -77,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginBottom="7dip"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
@@ -86,8 +86,7 @@
             android:id="@+id/left_audio_layout"
             layout="@layout/aliwx_audio_flipper_from" />
 
-        <com.alibaba.mobileim.fundamental.widget.ProgressWheel
-            xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+        <com.alibaba.mobileim.fundamental.widget.ProgressWheel xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
             android:id="@+id/download_image_progress"
             android:layout_width="31dp"
             android:layout_height="31dp"
@@ -103,7 +102,7 @@
             android:indeterminate="true"
             android:indeterminateDrawable="@drawable/aliwx_my_progress"
             android:visibility="gone" />
-        
+
         <LinearLayout
             android:id="@+id/left_geo_msg"
             android:layout_width="wrap_content"
@@ -111,7 +110,7 @@
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="gone" />
-        
+
         <LinearLayout
             android:id="@+id/left_custom_msg"
             android:layout_width="wrap_content"
@@ -134,15 +133,23 @@
 
     <!-- 系统提示 -->
 
-    <TextView
+    <RelativeLayout
         android:id="@+id/sysmsg"
         style="@style/aliwx_chatting_detail_sysmsg_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/show_time"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/aliwx_sysmsgbg" />
+        android:background="@drawable/aliwx_sysmsgbg">
 
+        <TextView
+            android:id="@+id/sysmsg_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/aliwx_chatting_detail_sysmsg_color"
+            android:textSize="@dimen/aliwx_font_third_grade" />
+    </RelativeLayout>
     <!-- 语音未播放标识 -->
 
     <ImageView
@@ -173,23 +180,23 @@
         android:visibility="gone" />
 
     <!-- right -->
-
     <RelativeLayout
         android:id="@+id/right_content_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/show_time"
-        android:layout_marginLeft="26dp"
+        android:layout_marginLeft="36dp"
         android:layout_marginRight="39dip"
         android:background="?attr/aliwx_comment_right_bg"
-        android:gravity="center" >
+        android:gravity="center">
 
         <com.alibaba.mobileim.fundamental.widget.GifView
             android:id="@+id/right_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginBottom="7dip"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
@@ -208,7 +215,6 @@
             style="@style/aliwx_chatting_detail_text_right_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:autoLink="web|phone"
             android:gravity="center_vertical"
             android:textColor="?attr/aliwx_chatcontent_right_textcolor"
@@ -221,17 +227,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginBottom="7dip"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:gravity="center" />
-        
+
         <RelativeLayout
             android:id="@+id/right_geo_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/right_geo"
@@ -256,7 +263,7 @@
         <include
             android:id="@+id/right_audio_layout"
             layout="@layout/aliwx_audio_flipper_to" />
-        
+
         <LinearLayout
             android:id="@+id/right_geo_msg"
             android:layout_width="wrap_content"
@@ -264,7 +271,7 @@
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="gone" />
-        
+
         <LinearLayout
             android:id="@+id/right_custom_msg"
             android:layout_width="wrap_content"
@@ -272,6 +279,7 @@
             android:layout_centerInParent="true"
             android:orientation="vertical"
             android:visibility="gone" />
+
     </RelativeLayout>
 
     <TextView
@@ -301,7 +309,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/right_content_layout"
         android:layout_alignTop="@id/right_content_layout"
-        android:layout_marginRight="-16dp"
+        android:layout_marginRight="-26dp"
         android:layout_toLeftOf="@id/right_content_layout"
         android:gravity="center_vertical"
         android:src="@drawable/aliwx_msg_unsent" />
@@ -314,9 +322,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/right_content_layout"
         android:layout_alignTop="@id/right_content_layout"
-        android:layout_marginRight="-23dip"
+        android:layout_marginRight="-33dip"
         android:layout_toLeftOf="@id/right_content_layout"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="20dip"
@@ -327,5 +335,20 @@
             android:indeterminate="true"
             android:indeterminateDrawable="@drawable/aliwx_my_progress" />
     </RelativeLayout>
+
+    <!---@消息未读数展示-->
+    <TextView
+        android:id="@+id/msg_unread_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/right_content_layout"
+        android:layout_alignTop="@id/right_content_layout"
+        android:layout_marginRight="-35dip"
+        android:layout_toLeftOf="@id/right_content_layout"
+        android:gravity="center"
+        android:maxEms="3"
+        android:visibility="gone"
+        android:text="@string/aliwx_at_msg_unread_count"
+        android:textSize="@dimen/aliwx_font_third_grade" />
 
 </RelativeLayout>

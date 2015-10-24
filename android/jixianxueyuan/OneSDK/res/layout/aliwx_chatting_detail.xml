@@ -1,64 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/whole_back"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
     android:background="?attr/aliwx_bg_color" >
 
-	 <RelativeLayout
-	     android:layout_width="fill_parent"
-	     android:layout_height="wrap_content"
-	     android:id="@+id/title_layout">
-	    <RelativeLayout
-	        android:id="@+id/default_title"
-	        style="@style/aliwx_common_title_style" >
-	
-	        <TextView
-	            android:id="@+id/chat_back"
-	            style="@style/aliwx_common_title_left_btn_shadow"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textSize="?attr/aliwx_title_left_textsize"
-	            android:textColor="?attr/aliwx_title_left_textcolor"
-	            android:drawableLeft="?attr/aliwx_title_left_icon"
-	            android:text="?attr/aliwx_title_left_text" />
-	
-	        <ImageView
-	            android:id="@+id/aliwx_title_button"
-	            android:layout_width="@dimen/aliwx_title_bar_height"
-	            android:layout_height="@dimen/aliwx_title_bar_height"
-	            android:layout_alignParentRight="true"
-	            android:scaleType="center"
-	            android:visibility="?attr/aliwx_title_rightbutton_visible"
-	            android:src="@drawable/aliwx_topbar_icon_message_bg" />
-	
-	        <ImageView
-	            android:id="@+id/aliwx_title_unread"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_marginTop="10dip"
-	            android:layout_marginRight="10dip"
-	            android:visibility="gone"
-	            android:src="@drawable/aliwx_topbar_icon_new" />
-	
-	        <TextView
-	            android:id="@+id/chat_title"
-	            style="@style/aliwx_common_title_text_shadow"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_centerInParent="true"
-	            android:maxWidth="200dp"
-	            android:paddingLeft="0dip"
-	            android:paddingRight="0dip"
-	            android:textSize="@dimen/aliwx_common_text_size" />
-	    </RelativeLayout>
-	</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_layout">
+        <RelativeLayout
+            android:id="@+id/default_title"
+            style="@style/aliwx_common_title_style" >
+
+            <TextView
+                android:id="@+id/chat_back"
+                style="@style/aliwx_common_title_left_btn_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="?attr/aliwx_title_left_textsize"
+                android:textColor="?attr/aliwx_title_left_textcolor"
+                android:drawableLeft="?attr/aliwx_title_left_icon"
+                android:text="?attr/aliwx_title_left_text" />
+
+            <ImageView
+                android:id="@+id/aliwx_title_button"
+                android:layout_width="@dimen/aliwx_title_bar_height"
+                android:layout_height="@dimen/aliwx_title_bar_height"
+                android:layout_alignParentRight="true"
+                android:scaleType="center"
+                android:visibility="?attr/aliwx_title_rightbutton_visible"
+                android:src="@drawable/aliwx_topbar_icon_message_bg" />
+
+            <ImageView
+                android:id="@+id/aliwx_title_unread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dip"
+                android:layout_marginRight="10dip"
+                android:visibility="gone"
+                android:src="@drawable/aliwx_topbar_icon_new" />
+
+            <RelativeLayout
+                android:id="@+id/aliwx_at_content"
+                android:layout_width="@dimen/aliwx_title_bar_height"
+                android:layout_height="@dimen/aliwx_title_bar_height"
+                android:layout_toLeftOf="@id/aliwx_title_button"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_centerInParent="true"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/aliwx_at_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/aliwx_tribe_at_icon_black"
+                    android:visibility="visible"/>
+                <ImageView
+                    android:id="@+id/aliwx_at_msg_unread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_alignRight="@id/aliwx_at_image"
+                    android:layout_alignTop="@id/aliwx_at_image"
+                    android:src="@drawable/aliwx_topbar_at_icon_new" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/chat_title"
+                style="@style/aliwx_common_title_text_shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:maxWidth="200dp"
+                android:paddingLeft="0dip"
+                android:paddingRight="0dip"
+                android:textSize="@dimen/aliwx_common_text_size" />
+        </RelativeLayout>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/chat_main_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="?attr/aliwx_bg_color"
         android:orientation="vertical" >
 
         <ViewStub
@@ -68,6 +96,12 @@
             android:inflatedId="@+id/reply_gridview"
             android:layout="@layout/aliwx_chatting_detail_grid" >
         </ViewStub>
+        <ViewStub
+            android:id="@+id/fastReplyListStub"
+            android:layout_width="fill_parent"
+            android:layout_height="244dip"
+            android:inflatedId="@+id/fastReplyList"
+            android:layout="@layout/aliwx_chatting_detail_phrase_list" />
 
         <ViewStub
             android:id="@+id/smile_layout_stub"
@@ -84,7 +118,7 @@
             android:inflatedId="@+id/phraseList"
             android:layout="@layout/aliwx_chatting_detail_phrase_list"
             android:visibility="gone" />
-        
+
         <ViewStub
             android:id="@+id/asr_layout_stub"
             android:layout_width="fill_parent"
@@ -104,7 +138,7 @@
     <LinearLayout
         android:id="@+id/reply_bar_layout"
         android:layout_width="fill_parent"
-        android:layout_height="42dip"
+        android:layout_height="wrap_content"
         android:layout_above="@id/chat_main_layout"
         android:background="?attr/aliwx_chatbottom_bg"
         android:gravity="center_vertical"
@@ -149,7 +183,38 @@
             style="@style/aliwx_chatting_detail_record_style"
             android:background="?attr/aliwx_chatbottom_record" />
     </LinearLayout>
-    
+    <RelativeLayout
+        android:id="@+id/enter_chatting_room_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="45dip"
+        android:layout_above="@id/chat_main_layout"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:paddingBottom="2dp"
+        android:visibility="gone"
+        android:paddingLeft="@dimen/aliwx_common_unit_margin"
+        android:paddingTop="3dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/enter_room"
+            android:src="@drawable/aliwx_reply_bar_expand_normal" />
+
+        <TextView
+            android:id="@+id/enter_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#ffffff"
+            android:text="进入聊天室"
+            android:textColor="#666666"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/custom_view"
         android:layout_width="fill_parent"
@@ -167,6 +232,23 @@
         android:layout_below="@id/custom_view"
         android:layout="@layout/aliwx_chatting_detail_list" />
 
+    <TextView
+        android:id="@+id/goto_chat_list_bottom_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/reply_bar_layout"
+        android:layout_alignRight="@id/reply_bar_layout"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:drawablePadding="4dp"
+        android:singleLine="true"
+        android:textSize="13sp"
+        android:textColor="#FFFFFFFF"/>
+
     <ViewStub
         android:id="@+id/record_dialog_stub"
         android:layout_width="148dip"
@@ -174,7 +256,9 @@
         android:layout_centerInParent="true"
         android:layout="@layout/aliwx_record_dialog" />
 
-    <include layout="@layout/aliwx_title_bar_shadow" />
+    <include
+        android:id="@+id/title_bar_shadow_view"
+        layout="@layout/aliwx_title_bar_shadow" />
 
     <RelativeLayout
         android:id="@+id/cover"

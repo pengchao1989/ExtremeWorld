@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_xp_banner"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:gravity="center" >
+
+    <RelativeLayout
+        android:id="@+id/umeng_xp_icon_area"
+        android:layout_width="126dp"
+        android:layout_height="90dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="1dp" >
+
+        <ImageView
+            android:id="@+id/umeng_xp_image"
+            android:layout_width="112dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/taobao_xp_cm_thumb_loading" >
+        </ImageView>
+
+        <View
+            android:id="@+id/umeng_xp_order"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/taobao_xp_hl_reservation"
+            android:scaleType="fitXY" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="55dp"
+        android:layout_toRightOf="@+id/umeng_xp_icon_area"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/umeng_xp_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:focusable="true"
+            android:lines="2"
+            android:textColor="#000000"
+            android:textSize="14sp" >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/umeng_xp_promoterPrice"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:textColor="#2a5093"
+                android:textSize="16sp"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/umeng_xp_price"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:ellipsize="marquee"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:textColor="#666666"
+                android:textSize="12sp" >
+            </TextView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@null" />
+
+        <TextView
+            android:id="@+id/umeng_xp_orders"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:lines="1"
+            android:scrollHorizontally="true"
+            android:textColor="#666666"
+            android:textStyle="bold" >
+        </TextView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/umeng_xp_action_btn"
+        android:layout_width="35dp"
+        android:layout_height="38dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/taobao_xp_hl_tuan_button_selector"
+        android:lines="2"
+        android:orientation="vertical"
+        android:shadowColor="#FFF"
+        android:shadowRadius="3.0"
+        android:textColor="#000"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/umeng_xp_addr"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center_horizontal"
+        android:lines="1"
+        android:textColor="#666666"
+        android:textSize="8sp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/umeng_xp_publisher"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/taobao_xp_hl_tuan_publisher"
+        android:focusable="true"
+        android:gravity="center"
+        android:lines="1"
+        android:ems="3"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="2dp"
+        android:textColor="#fff"
+        android:textSize="10sp"
+        android:visibility="visible" >
+    </TextView>
+
+</RelativeLayout>

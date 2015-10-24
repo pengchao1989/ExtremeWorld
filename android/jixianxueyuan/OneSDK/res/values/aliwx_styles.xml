@@ -2,7 +2,29 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 主客户端加载进度条 -->
-
+    <style name="aliwx_dividedListStyle" parent="@android:style/Widget.ListView">
+        <item name="android:divider">#E9E9E9</item>
+        <item name="android:dividerHeight">1px</item>
+    </style>
+    <style name="aliwx_common_first_text_style">
+        <item name="android:textSize">15dip</item>
+        <item name="android:textColor">@color/aliwx_common_text_color</item>
+        <item name="android:duplicateParentState">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="aliwx_common_white_btn_text_style">
+        <item name="android:textSize">@dimen/aliwx_font_third_grade</item>
+        <item name="android:textColor">@color/aliwx_white_btn_text_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="aliwx_common_head_style">
+        <item name="android:layout_width">38dip</item>
+        <item name="android:layout_height">38dip</item>
+        <item name="android:layout_marginLeft">14dip</item>
+        <item name="android:layout_marginRight">14dip</item>
+    </style>
     <style name="Aliwx_ContentOverlay" parent="@android:style/Theme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -69,6 +91,13 @@
 
     <style name="aliwx_common_title_style">
         <item name="android:background">@color/aliwx_common_bg_white_color</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/aliwx_title_bar_height</item>
+    </style>
+
+    <style name="aliwx_common_title_style_blue">
+        <item name="android:background">@color/aliwx_common_bg_blue_color</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/aliwx_title_bar_height</item>
@@ -300,4 +329,122 @@
         <item name="android:paddingTop">@dimen/aliwx_common_half_safe_margin</item>
     </style>
 
+    <style name="trade_focus_title_style">
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:paddingRight">5dip</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/aliwx_black</item>
+        <item name="android:textSize">@dimen/aliwx_common_text_size</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+
+    <style name="order_focus_id_grey_style" parent="@style/order_focus_id_style">
+        <item name="android:textColor">@color/aliwx_order_grey_color</item>
+    </style>
+
+    <style name="order_focus_id_style">
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:paddingRight">5dip</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/aliwx_black</item>
+        <item name="android:textSize">@dimen/aliwx_font_second_grade</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+
+    <style name="order_focus_grey_style">
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:paddingRight">5dip</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/aliwx_order_grey_color</item>
+        <item name="android:textSize">@dimen/aliwx_font_second_grade</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+
+    <style name="goods_focus_price_style">
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:textColor">@color/aliwx_order_price_color</item>
+        <item name="android:textSize">@dimen/aliwx_font_second_grade</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+
+    <style name="aliwx_common_popup_bg_animation">
+        <item name="android:windowEnterAnimation">@anim/aliwx_alpha_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/aliwx_alpha_fade_out</item>
+    </style>
+
+    <style name="aliwx_messageactivity_menu_animation">
+        <item name="android:windowEnterAnimation">@anim/aliwx_menu_in</item>
+        <item name="android:windowExitAnimation">@anim/aliwx_menu_out</item>
+    </style>
+
+	  <style name="aliwx_column_first_grade_style" parent="aliwx_common_text_shadow_white_offset_0_2_75_down">
+        <item name="android:textSize">@dimen/aliwx_font_first_grade</item>
+        <item name="android:textColor">@color/aliwx_first_grade_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="aliwx_column_first_grade_with_click_style" parent="aliwx_column_first_grade_style">
+        <item name="android:textColor">@drawable/aliwx_column_first_grade_color</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+    <style name="aliwx_column_third_grade_style" parent="aliwx_common_text_shadow_white_offset_0_2_75_down">
+        <item name="android:textSize">@dimen/aliwx_font_third_grade</item>
+        <item name="android:textColor">@color/aliwx_third_grade_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="aliwx_column_third_grade_with_click_style" parent="aliwx_column_third_grade_style">
+        <item name="android:textColor">@drawable/aliwx_column_third_grade_color</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+    <style name="aliwx_common_text_shadow_white_offset_0_2_75_down">
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="aliwx_column_second_grade_style" parent="aliwx_common_text_shadow_white_offset_0_2_75_down">
+        <item name="android:textSize">@dimen/aliwx_font_second_grade</item>
+        <item name="android:textColor">@color/aliwx_second_grade_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="aliwx_column_second_grade_with_click_style" parent="aliwx_column_second_grade_style">
+        <item name="android:textColor">@drawable/aliwx_column_second_grade_color</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+
+
+    <style name="aliwx_common_head_view_style_external">
+        <item name="android:paddingLeft">2.6dip</item>
+        <item name="android:paddingRight">4dip</item>
+        <item name="android:paddingTop">2.6dip</item>
+        <item name="android:paddingBottom">4dip</item>
+        <item name="android:layout_width">@dimen/aliwx_normal_head_size</item>
+        <item name="android:layout_height">@dimen/aliwx_normal_head_size</item>
+        <item name="android:scaleType">center</item>
+    </style>
+	
 </resources>

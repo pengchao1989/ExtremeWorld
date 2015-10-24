@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/taobao_xp_hl_ew_item_bg"
+    android:orientation="vertical"
+    android:padding="1px" >
+
+    <com.taobao.newxp.view.widget.CYCImageView
+        android:id="@+id/umeng_xp_ew_item_imv"
+        android:layout_width="fill_parent"
+        android:layout_height="148dp"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#CBCBCB" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" >
+
+        <TextView
+            android:id="@+id/umeng_xp_ew_item_price_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="4dp"
+            android:text="￥ "
+            android:textColor="#999999"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/umeng_xp_ew_item_price"
+            android:layout_toRightOf="@id/umeng_xp_ew_item_price_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="#ff5000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/umeng_xp_ew_item_sells"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:textColor="#999999"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+</LinearLayout>

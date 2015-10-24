@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'jixianxueyuan'
+            keyPassword 'TANGrui2'
+            storeFile file('/home/pengchao/github/ExtremeWorld/private/mykeystore.jks')
+            storePassword 'TANGrui2'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
@@ -12,72 +19,61 @@ android {
         versionName "1.0"
         multiDexEnabled true
     }
-
-    repositories{
-        flatDir(){
+    repositories {
+        flatDir() {
             dirs 'libs'
         }
         maven {
             url "https://jitpack.io"
         }
     }
-
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
-
-
-    productFlavors{
-
-        xueyuan{
+    productFlavors {
+        xueyuan {
             applicationId = "com.jixianxueyuan"
-            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan",
-                                    HOBBY : "all",
+            manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan",
+                                    HOBBY        : "all",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}"]
         }
-
-        parkour{
+        parkour {
             applicationId = "com.jixianxueyuan.parkour"
-            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.parkour",
-                                    HOBBY : "parkour",
+            manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.parkour",
+                                    HOBBY        : "parkour",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}"]
-
         }
-        bmx{
+        bmx {
             applicationId = "com.jixianxueyuan.bmx"
-            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.bmx",
-                                    HOBBY : "bmx",
+            manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.bmx",
+                                    HOBBY        : "bmx",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}"]
-
         }
-        skateboard{
+        skateboard {
             applicationId = "com.jixianxueyuan.skateboard"
-            manifestPlaceholders = [APPLICATIONID : "com.jixianxueyuan.skateboard",
-                                    HOBBY : "skateboard",
+            manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.skateboard",
+                                    HOBBY        : "skateboard",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}"]
-
+            signingConfig signingConfigs.config
         }
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     //这个是解决lint报错的代码
     lintOptions {
         abortOnError false
         // 防止在发布的时候出现因MissingTranslation导致Build Failed!
         disable 'MissingTranslation'
     }
-
 }
 
 dependencies {

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_xp_banner"
+    android:layout_width="fill_parent"
+    android:layout_height="70dp"
+    android:background="@drawable/taobao_xp_hl_list_item_bg"
+    android:gravity="center">
+
+  <RelativeLayout
+      android:id="@+id/taobao_xp_icon_area"
+      android:layout_width="65dp"
+      android:layout_height="65dp"
+      android:layout_marginLeft="8dp"
+      android:layout_centerVertical="true">
+
+    <ImageView
+        android:id="@+id/taobao_xp_icon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/taobao_xp_cm_zhanwei">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/taobao_xp_new_tip"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/taobao_xp_cm_new_tip_button"
+        android:scaleType="fitXY"
+        android:visibility="gone"/>
+  </RelativeLayout>
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_marginTop="5dp"
+      android:layout_marginRight="75dp"
+      android:layout_toRightOf="@+id/taobao_xp_icon_area"
+      android:orientation="vertical"
+      android:paddingBottom="2dp"
+      android:paddingTop="3dp">
+
+    <TextView
+        android:id="@+id/taobao_xp_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:focusable="true"
+        android:lines="1"
+        android:text="开心听"
+        android:textColor="#5D5D5D"
+        android:textSize="16sp">
+    </TextView>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="@null"/>
+
+    <TextView
+        android:id="@+id/taobao_xp_des"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="超过三亿人使用的手机应用。超过三亿人使用的手机应用。超过三亿人使用的手机应用。超过三亿人使用的手机应用。"
+        android:scrollHorizontally="true"
+        android:textColor="#a0a0a0"
+        android:textSize="12sp">
+    </TextView>
+  </LinearLayout>
+
+  <Button
+      android:id="@+id/taobao_xp_ad_action_btn"
+      android:layout_width="60dp"
+      android:layout_height="30dp"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:layout_marginRight="8dp"
+      android:background="@drawable/taobao_xp_cm_item_button"
+      android:gravity="center"
+      android:lines="1"
+      android:shadowColor="#FFF"
+      android:shadowDx="0"
+      android:shadowDy="0"
+      android:shadowRadius="3"
+      android:text="下载"
+      android:textColor="#616161"
+      android:textSize="12sp"/>
+</RelativeLayout>

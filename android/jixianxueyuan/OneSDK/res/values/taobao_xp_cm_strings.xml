@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+    <string name="pull_to_refresh_pull_label">Pull to refresh…</string>
+    <string name="pull_to_refresh_release_label">Release to refresh…</string>
+    <string name="pull_to_refresh_refreshing_label">Loading…</string>
+
+    <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
+    <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
+    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+
+    <item name="gridview" type="id"/>
+    <item name="webview" type="id"/>
+    <item name="scrollview" type="id"/>
+
+    <dimen name="alphabet_size">12dip</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+
+    <!-- common title bar -->
+    <dimen name="um_cm_actionbar_height">48dip</dimen>
+    <dimen name="um_cm_actionbar_item_height">46dip</dimen>
+    <dimen name="um_cm_actionbar_item_width">46dip</dimen>
+    <dimen name="um_cm_actionbar_button_item_width">54dip</dimen>
+
+    <string name="taobao_xp_size">Size</string>
+    <string name="taobao_xp_action_open">open</string>
+    <string name="taobao_xp_action_browse">browse</string>
+    <string name="taobao_xp_action_download">download</string>
+    <string name="taobao_xp_action_call">call</string>
+    <string name="taobao_xp_network_break_alert">Please make sure you are connected to internet, download failed</string>
+    <string name="taobao_xp_back_to_top">Top</string>
+    <string name="taobao_xp_more">more</string>
+    <string name="taobao_xp_back">Back</string>
+    <string name="taobao_xp_title_info">Featured</string>
+    <string name="taobao_xp_dowload_dialog_dinfo">Download</string>
+    <string name="taobao_xp_dowload_dialog_cinfo">Call</string>
+    <string name="taobao_xp_dowloadOrNot">Download the app?</string>
+    <string name="taobao_xp_failed_loading">Failed loading...</string>
+    <string name="taobao_xp_tip_download_pre">Start download </string>
+    <string name="taobao_xp_info_banner_deprecated">Banner style is not supported for current version of SDK, please contact us for support.</string>
+    <string name="taobao_xp_no_browser_tips">no browser found..</string>
+    <string name="taobao_xp_more_content">more</string>
+    <string name="taobao_xp_pickup">pick up</string>
+
+</resources>

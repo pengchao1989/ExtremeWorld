@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/taobao_xp_panelHeight"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5E5E5"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:background="#99CC00" >
+
+        <Button
+            android:id="@+id/test_left"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="GoLeft" />
+
+        <EditText
+            android:id="@+id/test_step"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:inputType="number"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true" />
+
+        <Button
+            android:id="@+id/test_right"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="GoRight" />
+    </RelativeLayout>
+
+    <com.taobao.newxp.view.widget.SwipeView
+        android:id="@+id/taobao_xp_swipeview"
+        android:background="#000000"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:visibility="visible" />
+    
+</LinearLayout>

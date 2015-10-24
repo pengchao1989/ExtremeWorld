@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+    <!-- stat layout -->
+
+    <style name="taobao_xp_dialog_download">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/taobao_xp_cm_button_download_selector</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="taobao_xp_dialog_download_window" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:windowAnimationStyle">@style/taobao_xp_dialog_animations</item>
+    </style>
+
+    <style name="taobao_xp_dialog_animations">
+        <item name="android:windowEnterAnimation">@anim/taobao_xp_cm_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/taobao_xp_cm_fade_out</item>
+    </style>
+
+    <style name="taobao_xp_suppose_cell_image">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="taobao_xp_suppose_cell_text">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:ellipsize">middle</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">#818181</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="taobao_xp_welcome_dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/taobao_xp_cm_slide_in_from_top</item>
+        <item name="android:windowExitAnimation">@anim/taobao_xp_cm_fade_out</item>
+    </style>
+
+    <style name="taobao_xp_cloud_dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/taobao_xp_cm_slide_in_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/taobao_xp_cm_slide_out_from_bottom</item>
+    </style>
+
+    <style name="taobao_xp_welcome_dialog_style" parent="@android:style/Theme.NoTitleBar.Fullscreen"></style>
+
+    <declare-styleable name="TaoPullToRefresh">
+
+        <!-- A drawable to use as the background of the Refreshable View -->
+        <attr name="taoRefreshableViewBackground" format="reference|color" />
+
+        <!-- A drawable to use as the background of the Header and Footer Loading Views -->
+        <attr name="taoHeaderBackground" format="reference|color" />
+
+        <!-- Text Color of the Header and Footer Loading Views -->
+        <attr name="taoHeaderTextColor" format="reference|color" />
+
+        <!-- Text Color of the Header and Footer Loading Views Sub Header -->
+        <attr name="taoHeaderSubTextColor" format="reference|color" />
+
+        <!-- Mode of Pull-to-Refresh that should be used -->
+        <attr name="taoMode">
+            <flag name="disabled" value="0x0" />
+            <flag name="pullFromStart" value="0x1" />
+            <flag name="pullFromEnd" value="0x2" />
+            <flag name="both" value="0x3" />
+            <flag name="manualOnly" value="0x4" />
+
+            <!-- These last two are depreacted -->
+            <flag name="pullDownFromTop" value="0x1" />
+            <flag name="pullUpFromBottom" value="0x2" />
+        </attr>
+
+        <!-- Whether the Indicator overlay(s) should be used -->
+        <attr name="taoShowIndicator" format="reference|boolean" />
+
+        <!-- Drawable to use as Loading Indicator. Changes both Header and Footer. -->
+        <attr name="taoDrawable" format="reference" />
+
+        <!-- Drawable to use as Loading Indicator in the Header View. Overrides value set in taoDrawable. -->
+        <attr name="taoDrawableStart" format="reference" />
+
+        <!-- Drawable to use as Loading Indicator in the Footer View. Overrides value set in taoDrawable. -->
+        <attr name="taoDrawableEnd" format="reference" />
+
+        <!-- Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh. -->
+        <attr name="taoOverScroll" format="reference|boolean" />
+
+        <!-- Base text color, typeface, size, and style for Header and Footer Loading Views -->
+        <attr name="taoHeaderTextAppearance" format="reference" />
+
+        <!-- Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header -->
+        <attr name="taoSubHeaderTextAppearance" format="reference" />
+
+        <!-- Style of Animation should be used displayed when pulling. -->
+        <attr name="taoAnimationStyle">
+            <flag name="rotate" value="0x0" />
+            <flag name="flip" value="0x1" />
+        </attr>
+
+        <!-- Whether the user can scroll while the View is Refreshing -->
+        <attr name="taoScrollingWhileRefreshingEnabled" format="reference|boolean" />
+
+        <!--
+        	Whether TaoPullToRefreshListView has it's extras enabled. This allows the user to be
+        	able to scroll while refreshing, and behaves better. It acheives this by adding
+        	Header and/or Footer Views to the ListView.
+        -->
+        <attr name="taoListViewExtrasEnabled" format="reference|boolean" />
+
+        <!--
+        	Whether the Drawable should be continually rotated as you pull. This only
+        	takes effect when using the 'Rotate' Animation Style.
+        -->
+        <attr name="taoRotateDrawableWhilePulling" format="reference|boolean" />
+
+        <!-- BELOW HERE ARE DEPRECEATED. DO NOT USE. -->
+        <attr name="taoAdapterViewBackground" format="reference|color" />
+        <attr name="taoDrawableTop" format="reference" />
+        <attr name="taoDrawableBottom" format="reference" />
+    </declare-styleable>
+
+    <style name="UmengActionbarDefault">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/um_cm_actionbar_height</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/taobao_xp_cm_title_bg_default</item>
+    </style>
+
+    <style name="UmengActionBarItem">
+        <item name="android:layout_width">@dimen/um_cm_actionbar_item_width</item>
+        <item name="android:layout_height">@dimen/um_cm_actionbar_height</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginLeft">1px</item>
+    </style>
+
+
+</resources>

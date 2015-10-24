@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.taobao.newxp.view.handler.actionbar.ActionBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/munion_actionbar"
+    style="@style/UmengActionbarDefault" />

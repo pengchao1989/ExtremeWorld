@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.taobao.newxp.view.handler.pulltorefresh.PullToRefreshGridView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_xp_ew_gridview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f6f6"
+    android:horizontalSpacing="4dp"
+    android:numColumns="2"
+    android:verticalSpacing="6dp">
+</com.taobao.newxp.view.handler.pulltorefresh.PullToRefreshGridView>

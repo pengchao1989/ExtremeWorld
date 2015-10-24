@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_xp_ew_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <FrameLayout
+        android:id="@+id/umeng_xp_ew_content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff" />
+
+    <TextView
+        android:id="@+id/umeng_xp_ew_footview"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:text="努力加载中，请稍等一下哦，亲～"
+        android:textColor="#333333"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/umeng_xp_ew_page_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:visibility="gone" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/umeng_xp_ew_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-90dp"
+        android:background="#ffffff"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/error_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="20dp" >
+
+            <TextView
+                android:id="@+id/common_mask_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#ffffff"
+                android:shadowRadius="2"
+                android:text="加载失败"
+                android:textColor="#ff707070"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/common_mask_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:shadowColor="#ffffff"
+                android:shadowRadius="2"
+                android:text="请检查您的手机是否联网，并重新刷新页面。"
+                android:textColor="#ffa0a0a0"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/umeng_xp_ew_error_btn"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/taobao_xp_hl_webview_error_button_background_selector"
+                android:text="重试"
+                android:textColor="@drawable/taobao_xp_hl_webview_error_button_color_selector"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

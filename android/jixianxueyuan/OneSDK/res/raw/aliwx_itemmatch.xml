@@ -7,7 +7,7 @@
 		<start>/i</start>
 		<end>.htm</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)a\.(m|waptest|wapa)\.taobao\.com/i.*\.htm)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)a\.(m|waptest|wapa)\.taobao\.com/i.*\.htm)]]></regular>
 	</items>
 
 	<items>
@@ -16,7 +16,7 @@
 		<start>&amp;default_item_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?.*default_item_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?.*default_item_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -25,7 +25,7 @@
 		<start>?default_item_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?default_item_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?default_item_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -34,7 +34,7 @@
 		<start>&amp;mallstitemid=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?.*mallstitemid=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?.*mallstitemid=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -43,7 +43,7 @@
 		<start>?mallstitemid=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?mallstitemid=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/venus/spu_detail\.htm\?mallstitemid=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -52,7 +52,7 @@
 		<start>&amp;item_num_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/auction/item_detail\.htm\?.*item_num_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/auction/item_detail\.htm\?.*item_num_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -61,7 +61,7 @@
 		<start>?item_num_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/auction/item_detail\.htm\?item_num_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/auction/item_detail\.htm\?item_num_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -70,7 +70,7 @@
 		<start>&amp;id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.(beta\.){0,1}taobao\.com/item\.htm\?.*id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.(beta\.){0,1}taobao\.com/item\.htm\?.*id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -79,7 +79,7 @@
 		<start>?id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.(beta\.){0,1}taobao\.com/item\.htm\?id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.(beta\.){0,1}taobao\.com/item\.htm\?id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -88,7 +88,7 @@
 		<start>&amp;id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -97,7 +97,7 @@
 		<start>?id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.taobao\.com/item\.htm\?id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.taobao\.com/item\.htm\?id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -106,7 +106,7 @@
 		<start>&amp;id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.tmall\.com/item\.htm\?.*id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.tmall\.com/item\.htm\?.*id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -115,7 +115,7 @@
 		<start>?id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.tmall\.com/item\.htm\?id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.tmall\.com/item\.htm\?id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -124,7 +124,7 @@
 		<start>&amp;id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/item\.htm\?.*id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/item\.htm\?.*id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -133,7 +133,7 @@
 		<start>?id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)detail\.tmall\.com/item\.htm\?id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)detail\.tmall\.com/item\.htm\?id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -142,7 +142,7 @@
 		<start>&amp;id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)ershou\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)ershou\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -151,7 +151,7 @@
 		<start>?id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)ershou\.taobao\.com/item\.htm\?id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)ershou\.taobao\.com/item\.htm\?id=\d+)]]></regular>
 	</items>
 	<items>
 		<querytype>auction</querytype>
@@ -159,7 +159,7 @@
 		<start>-</start>
 		<end>.</end>
 		<idargument>sid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.taobao\.com/auction/item_detail-[^-]+-\w+\.(htm|jhtml))]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.taobao\.com/auction/item_detail-[^-]+-\w+\.(htm|jhtml))]]></regular>
 	</items>
 
 	<items>
@@ -168,7 +168,7 @@
 		<start>item_id=</start>
 		<end>&amp;</end>
 		<idargument>sid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*item_id=\w+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*item_id=\w+)]]></regular>
 	</items>
 
 	<items>
@@ -177,7 +177,7 @@
 		<start>itemid=</start>
 		<end>&amp;</end>
 		<idargument>sid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*itemId=\w+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*itemId=\w+)]]></regular>
 	</items>
 
 	<items>
@@ -186,7 +186,7 @@
 		<start>item_num_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*item_num_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*item_num_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -195,7 +195,7 @@
 		<start>itemidargument=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*itemidargument=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.taobao\.com/auction/item_detail\.(htm|jhtml)\?.*itemidargument=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -204,7 +204,7 @@
 		<start>-</start>
 		<end>.</end>
 		<idargument>sid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.tmall\.com/auction/item_detail-[^-]+-\w+\.(htm|jhtml))]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.tmall\.com/auction/item_detail-[^-]+-\w+\.(htm|jhtml))]]></regular>
 	</items>
 
 	<items>
@@ -213,7 +213,7 @@
 		<start>item_id=</start>
 		<end>&amp;</end>
 		<idargument>sid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*item_id=\w+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*item_id=\w+)]]></regular>
 	</items>
 
 	<items>
@@ -222,7 +222,7 @@
 		<start>itemid=</start>
 		<end>&amp;</end>
 		<idargument>sid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*itemId=\w+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*itemId=\w+)]]></regular>
 	</items>
 
 	<items>
@@ -231,7 +231,7 @@
 		<start>item_num_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*item_num_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*item_num_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -240,7 +240,7 @@
 		<start>itemidargument=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*itemidargument=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.tmall\.com/auction/item_detail\.(htm|jhtml)\?.*itemidargument=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -249,7 +249,7 @@
 		<start>spu-</start>
 		<end>.htm</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)list\.3c\.taobao\.com/spu-\d+\.htm)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)list\.3c\.taobao\.com/spu-\d+\.htm)]]></regular>
 	</items>
 
 	<items>
@@ -258,7 +258,7 @@
 		<start>spuid=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)list\.xie\.taobao\.com/spu_detail\.htm\?.*spuid=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)list\.xie\.taobao\.com/spu_detail\.htm\?.*spuid=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -267,7 +267,7 @@
 		<start>item_num=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)game\.taobao\.com/item\.htm\?.*item_num=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)game\.taobao\.com/item\.htm\?.*item_num=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -276,7 +276,7 @@
 		<start>?id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.lp\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.lp\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -285,7 +285,7 @@
 		<start>&amp;id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.lp\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.lp\.taobao\.com/item\.htm\?.*id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -294,7 +294,7 @@
 		<start>&amp;item_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.lp\.taobao\.com/item\.htm\?.*item_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.lp\.taobao\.com/item\.htm\?.*item_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -303,7 +303,7 @@
 		<start>?item_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.lp\.taobao\.com/item\.htm\?.*item_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.lp\.taobao\.com/item\.htm\?.*item_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -312,7 +312,7 @@
 		<start>item_num_id=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.lp\.taobao\.com/item\.htm\?.*item_num_id=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.lp\.taobao\.com/item\.htm\?.*item_num_id=\d+)]]></regular>
 	</items>
 
 	<items>
@@ -321,6 +321,54 @@
 		<start>itemid=</start>
 		<end>&amp;</end>
 		<idargument>nid</idargument>
-		<regular><![CDATA[(((^http://)|^)item\.lp\.taobao\.com/item\.htm\?.*itemId=\d+)]]></regular>
+		<regular><![CDATA[(((^http(s)?://)|^)item\.lp\.taobao\.com/item\.htm\?.*itemId=\d+)]]></regular>
+	</items>
+	<items>
+	    <querytype>auction</querytype>
+	    <prefix>taobao.com</prefix>
+	    <start>?id=</start>
+	    <end>&amp;</end>
+	    <idargument>nid</idargument>
+	    <regular><![CDATA[(((^http(s)?://)|^)h5\.(m|waptest|wapa)\.taobao\.com/awp.*\.htm)]]></regular>
+	</items>
+	<items>
+	    <querytype>auction</querytype>
+	    <prefix>taobao.com</prefix>
+	    <start>&amp;id=</start>
+	    <end>&amp;</end>
+	    <idargument>nid</idargument>
+	    <regular><![CDATA[(((^http(s)?://)|^)h5\.(m|waptest|wapa)\.taobao\.com/awp.*\.htm)]]></regular>
+	</items>
+	<items>
+	    <querytype>auction</querytype>
+	    <prefix>m.tmall.com</prefix>
+	    <start>?id=</start>
+	    <end>&amp;</end>
+	    <idargument>nid</idargument>
+	    <regular><![CDATA[(((^http(s)?://)|^)detail\.(m|waptest|wapa)\.tmall\.com/item\.htm)]]></regular>
+	</items>
+	<items>
+	    <querytype>auction</querytype>
+	    <prefix>m.tmall.com</prefix>
+	    <start>&amp;id=</start>
+	    <end>&amp;</end>
+	    <idargument>nid</idargument>
+	    <regular><![CDATA[(((^http(s)?://)|^)detail\.(m|waptest|wapa)\.tmall\.com/item\.htm)]]></regular>
+	</items>
+	<items>
+	    <querytype>auction</querytype>
+	    <prefix>m.tmall.com</prefix>
+	    <start>&amp;id=</start>
+	    <end></end>
+	    <idargument>nid</idargument>
+	    <regular><![CDATA[(((^http(s)?://)|^)detail\.(m|waptest|wapa)\.tmall\.com/item\.htm)]]></regular>
+	</items>
+	<items>
+	    <querytype>auction</querytype>
+	    <prefix>taobao.com</prefix>
+	    <start>&amp;id=</start>
+	    <end></end>
+	    <idargument>nid</idargument>
+	    <regular><![CDATA[(((^http(s)?://)|^)h5\.(m|waptest|wapa)\.taobao\.com/awp.*\.htm)]]></regular>
 	</items>
 </UrlMatch>

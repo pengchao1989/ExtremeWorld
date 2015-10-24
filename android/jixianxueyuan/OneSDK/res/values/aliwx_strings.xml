@@ -91,5 +91,76 @@
     <string name="aliwx_multi_delete_image_title">图片%1$d/%2$d</string>
     <string name="aliwx_sync_success">同步成功</string>
     <string name="aliwx_sync_failed">同步失败</string>
+    <string name="aliwx_more">更多</string>
+    <string name="aliwx_save">保存</string>
+    <string name="aliwx_forward">转发</string>
+    <string name="aliwx_more_function">更多功能</string>
+
+    <!-- 商品详情交易焦点 -->
+    <string name="aliwx_now_price">现价：</string>
+    <string name="aliwx_origin_price">原价：</string>
+    <string name="aliwx_freight">运费：</string>
+    <string name="aliwx_buy">立即购买</string>
+    <string name="aliwx_send_url">发送宝贝链接</string>
+    <string name="aliwx_goods_offline">该商品已下架</string>
+    <string name="aliwx_rmb_character">¥ %1$s</string>
+
+
+    <!--@消息相关-->
+    <string name="aliwx_at_msg_unread_count">%1$s人未读</string>
+    <string name="aliwx_at_msg_notify">[有人@我]</string>
+    <string name="aliwx_at_message_receive">\@我的</string>
+    <string name="aliwx_at_message_send">我@的</string>
+    <string name="aliwx_at_message_mark_all_read">全部标为已读</string>
+    <string name="aliwx_at_message_title">全部@消息</string>
+    <string name="aliwx_at_message_detail_title">消息详情</string>
+    <string name="aliwx_at_message_read_unread">[%1$s人未读 - %2$s人已读]</string>
+    <string name="aliwx_at_message_all_read">[全部已读]</string>
+    <string name="aliwx_at_message_unread">[未读]</string>
+    <string name="aliwx_at_message_read">[已读]</string>
+    <string name="aliwx_at_message_all_unread">[全部未读]</string>
+    <string name="aliwx_at_message_at_again">再次@TA们</string>
+    <string name="aliwx_at_message_read_time">阅读时间</string>
+    <string name="aliwx_send_at_message_unread">未读</string>
+    <string name="aliwx_send_at_message_read">已读</string>
+    <string name="aliwx_send_at_all_message_read">全部已读</string>
+    <string name="aliwx_send_at_all_message_unread">全部未读</string>
+    <string name="aliwx_send_at_message_see_detail">查看详情</string>
+    
+    <string name="aliwx_send_at_msg_detail_content">消息内容:</string>
+    <string name="aliwx_send_at_msg_detail_at_again">重新@TA们</string>
+    <string name="aliwx_send_at_msg_detail_unread">未读(%1$s):</string>
+    <string name="aliwx_send_at_msg_detail_read">已读(%1$s):</string>
+
+    <string name="aliwx_mark_all_at_msg_read_success">标记成功</string>
+    <string name="aliwx_mark_all_at_msg_read_failed">标记失败</string>
+
+    <string name="aliwx_at_message_receive_title_unread">未读(%1$s):</string>
+    <string name="aliwx_at_message_receive_title_read">已读(%1$s):</string>
+
+    <string name="aliwx_pull_up_to_load_more_at_msg_pull">下拉加载更多@消息</string>
+    <string name="aliwx_pull_up_to_load_more_at_msg_loading">正在加载&#8230;</string>
+    <string name="aliwx_pull_up_to_load_more_at_msg_release">松开开始加载</string>
+
+    <string name="aliwx_tribe_normal_notification_tip">[群消息]</string>
+    <string name="aliwx_tribe_at_notification_tip">在群聊中@了你</string>
+
+    <string name="aliwx_search">搜索</string>
+    <string name="aliwx_friend_search">搜</string>
+    <string name="aliwx_pull_to_refresh_tribe_members_pull_label">同步群成员</string>
+    <string name="aliwx_pull_to_refresh_tribe_members_refreshing_label">正在加载&#8230;</string>
+    <string name="aliwx_pull_to_refresh_tribe_members_release_label">松开同步群成员</string>
+
+    <string name="aliwx_ungroup">未分组</string>
+    <string name="aliwx_search_text_hint">搜索我的好友</string>
+    <string name="aliwx_pull_to_refresh_friend_pull_label">向下滑动刷新&#8230;</string>
+    <string name="aliwx_conversation_list_empty">暂时没有消息</string>
+    <string name="aliwx_no_ww_friend">没有阿里旺旺好友</string>
+
+
+    <string name="aliwx_goto_chat_list_bottom">回到底部</string>
+    <string name="aliwx_goto_chat_list_bottom_with_unread_msg">%1$s条新消息</string>
+
+    <string name="aliwx_start">确定%1$s</string>
 
 </resources>

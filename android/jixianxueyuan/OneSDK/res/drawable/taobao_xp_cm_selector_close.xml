@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/taobao_xp_cm_close" android:state_pressed="false" android:state_window_focused="false"/>
+    <item android:drawable="@drawable/taobao_xp_cm_close_click" android:state_pressed="true" android:state_window_focused="true"/>
+    <item android:drawable="@drawable/taobao_xp_cm_close_click" android:state_focused="true"/>
+
+</selector>

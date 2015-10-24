@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/taobao_xp_panelHeight"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5E5E5"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/taobao_xp_actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/taobao_xp_cm_title_bg_default"
+        android:gravity="center_vertical" >
+
+        <Button
+            android:id="@+id/taobao_xp_cancel"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/taobao_xp_cm_title_back"
+            android:paddingLeft="8dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/taobao_xp_cm_title_bar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/taobao_xp_title_info"
+            android:textColor="#000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="108dp" >
+
+        <ImageView
+            android:id="@+id/taobao_xp_appIcon0"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/taobao_xp_cm_zhanwei" >
+        </ImageView>
+
+        <TextView
+            android:id="@+id/taobao_xp_appname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/taobao_xp_appIcon0"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="left"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="天天想你"
+            android:textColor="#333333"
+            android:textSize="20sp" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/taobao_xp_dev"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/taobao_xp_appname"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@+id/taobao_xp_appIcon0"
+            android:gravity="left"
+            android:singleLine="true"
+            android:text="北京天天饮食"
+            android:textColor="#949494"
+            android:textSize="12sp" >
+        </TextView>
+
+        <Button
+            android:id="@+id/taobao_xp_ok"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/taobao_xp_cm_item_button"
+            android:gravity="center"
+            android:text="下载"
+            android:textColor="#000000"
+            android:textSize="14sp" >
+        </Button>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/taobao_xp_cm_title_bg_default" />
+
+    <com.taobao.newxp.view.UMScrollView
+        android:id="@+id/taobao_xp_ScrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@+id/taobao_xp_gallery_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="4dp" >
+
+                <com.taobao.newxp.view.HorizontalStrip
+                    android:id="@+id/taobao_xp_horizontalstip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:spacing="10dp"
+                    android:visibility="invisible" />
+
+                <ProgressBar
+                    android:id="@+id/taobao_xp_gallery_progress"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/taobao_xp_dlCon"
+                    android:padding="5dp"
+                    android:text="简介："
+                    android:textColor="#000000"
+                    android:textSize="16sp" >
+                </TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/taobao_xp_des0"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="2dp"
+                android:scrollbars="none"
+                android:text="手机暴风影音左眼版----手机也能左眼了！手机暴风影音左眼版----手机也能左眼了！手机暴风影音左眼版----手机也能左眼了！手机暴风影音左眼版----手机也能左眼了！手机暴风影音左眼版----手机也能左眼了！手机暴风影音左眼版----手机也能左眼了！手机暴风影音左眼版----手机也能左眼了！手机暴风影音左眼版----手机也能左眼了！"
+                android:textColor="#515151"
+                android:textSize="14sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/taobao_xp_more"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:padding="5dp"
+                android:scrollbars="none"
+                android:text="更多"
+                android:textColor="#000000"
+                android:textSize="12sp" >
+            </TextView>
+
+            <include layout="@layout/taobao_xp_cm_suppose" />
+        </LinearLayout>
+    </com.taobao.newxp.view.UMScrollView>
+
+</LinearLayout>

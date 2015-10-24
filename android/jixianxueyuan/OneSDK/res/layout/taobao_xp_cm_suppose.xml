@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/taobao_xp_suppose"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/taobao_xp_dlCon"
+        android:padding="5dp"
+        android:text="猜你喜欢："
+        android:textColor="#000000"
+        android:textSize="16sp" >
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/taobao_xp_suppose_iconparent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/taobao_xp_appicon0"
+                style="@style/taobao_xp_suppose_cell_image"
+                android:src="@drawable/taobao_xp_cm_zhanwei" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/taobao_xp_apptext0"
+                style="@style/taobao_xp_suppose_cell_text"
+                android:layout_below="@id/taobao_xp_appicon0" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/taobao_xp_appicon1"
+                style="@style/taobao_xp_suppose_cell_image"
+                android:src="@drawable/taobao_xp_cm_zhanwei" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/taobao_xp_apptext1"
+                style="@style/taobao_xp_suppose_cell_text"
+                android:layout_below="@id/taobao_xp_appicon1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/taobao_xp_appicon2"
+                style="@style/taobao_xp_suppose_cell_image"
+                android:src="@drawable/taobao_xp_cm_zhanwei" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/taobao_xp_apptext2"
+                style="@style/taobao_xp_suppose_cell_text"
+                android:layout_below="@id/taobao_xp_appicon2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/taobao_xp_appicon3"
+                style="@style/taobao_xp_suppose_cell_image"
+                android:src="@drawable/taobao_xp_cm_zhanwei" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/taobao_xp_apptext3"
+                style="@style/taobao_xp_suppose_cell_text"
+                android:layout_below="@id/taobao_xp_appicon3" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

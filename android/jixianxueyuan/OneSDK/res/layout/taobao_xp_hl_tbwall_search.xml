@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <com.taobao.newxp.view.handler.umwall.CurtainView
+        android:id="@+id/umeng_xp_ew_curtain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#B2000000"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/umeng_xp_ew_search_result_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <FrameLayout
+            android:id="@+id/umeng_xp_ew_search_result_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

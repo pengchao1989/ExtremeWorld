@@ -45,6 +45,14 @@
     <string name="alisdk_message_15_message">{0} 模块 请求服务端出错，错误消息为 {1}</string>
     <string name="alisdk_message_15_action"></string>
     <string name="alisdk_message_15_type">E</string>
+    <string name="alisdk_message_16_name">CLASS_NOT_FOUND_ERROR</string>
+    <string name="alisdk_message_16_message">运行时不能载入类 {0}</string>
+    <string name="alisdk_message_16_action">请检查包含此类的库文件是否存在，或者是否因为代码混淆没有配置 SDK 对应的 -keep 选项，具体配置请参照在线网站</string>
+    <string name="alisdk_message_16_type">E</string>
+    <string name="alisdk_message_17_name">SERVICE_NOT_AVAILABLE_ERROR</string>
+    <string name="alisdk_message_17_message">不能获取类名为 {0}，过滤条件为 {1} 的服务</string>
+    <string name="alisdk_message_17_action">请检查 SDK 是否初始化成功，或者如果 APK 采取特定的打包方式 (e.g. multi-dex), 确保百川 SDK 的包含的 jar 文件中的 assets/ 文件包含在最终的 APK 中</string>
+    <string name="alisdk_message_17_type">E</string>
     <string name="alisdk_message_10014_name">NETWORK_NOT_AVAILABLE</string>
     <string name="alisdk_message_10014_message">当前网络不可用</string>
     <string name="alisdk_message_10014_action">请检查网络设置后，并重试当前操作</string>

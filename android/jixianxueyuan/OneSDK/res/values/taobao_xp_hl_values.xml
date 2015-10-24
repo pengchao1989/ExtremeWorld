@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="wallTabPageIndicatorStyle" format="reference" />
+    </declare-styleable>
+
+    <style name="DefaultStyledIndicators" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="wallTabPageIndicatorStyle">@style/DefaltTabIndicator</item>
+    </style>
+
+    <style name="TaobaoStyledIndicators" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="wallTabPageIndicatorStyle">@style/TaobaoTabIndicator</item>
+    </style>
+
+    <style name="DefaltTabIndicator" parent="Widget.TabPageIndicator">
+        <item name="android:background">@drawable/taobao_xp_hl_indicator_default</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:divider">@drawable/taobao_xp_hl_indicator_divider</item>
+        <item name="android:showDividers" tools:ignore="NewApi">middle</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="TaobaoTabIndicator" parent="Widget.TabPageIndicator">
+        <item name="android:background">@null</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:divider">@null</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="Widget"></style>
+
+    <style name="Widget.TabPageIndicator" parent="Widget">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">22dip</item>
+        <item name="android:paddingRight">22dip</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.TabPageIndicator</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="TextAppearance.TabPageIndicator" parent="Widget">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.IconPageIndicator" parent="Widget">
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:layout_marginRight">6dp</item>
+    </style>
+
+    <color name="taobao_xp_hl_tab_text_default">#5d5d5d</color>
+    <color name="taobao_xp_hl_tab_text_force_default">#000000</color>
+    <color name="taobao_xp_hl_tab_text_tb">#adccff</color>
+    <color name="taobao_xp_hl_tab_text_force_tb">#FFFFFF</color>
+
+    <integer name="taobao_xp_hl_tab_text_size_tb">13</integer>
+    <integer name="taobao_xp_hl_tab_text_size_force_tb">16</integer>
+    
+    <dimen name="taobao_xp_hl_tab_width_tb">0dp</dimen><!-- 0dp warp_content -->
+
+</resources>

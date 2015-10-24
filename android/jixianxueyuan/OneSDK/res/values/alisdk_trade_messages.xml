@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- trade  801-900 -->
+    <string name="alisdk_message_10008_name">GET_ORDER_URL_EXCEPTION</string>
+    <string name="alisdk_message_10008_message">生成订单地址出错, 错误信息为 {0}</string>
+    <string name="alisdk_message_10008_action">请稍后重试当前操作，若仍然出错，请反馈至论坛，技术支持或 Android SDK 开发咨询群</string>
+    <string name="alisdk_message_10008_type">E</string>
+    <string name="alisdk_message_10009_name">QUERY_ORDER_RESULT_EXCEPTION</string>
+    <string name="alisdk_message_10009_message">查询订单出错, 错误信息为 {0}</string>
+    <string name="alisdk_message_10009_action">请稍后重试当前操作，若仍然出错，请反馈至论坛，技术支持或 Android SDK 开发咨询群</string>
+    <string name="alisdk_message_10009_type">E</string>
+    <string name="alisdk_message_801_name">QUANTITY_FORMAT_ERROR</string>
+    <string name="alisdk_message_801_message">商品数量必须为整数并大于 0</string>
+    <string name="alisdk_message_801_action">请调整参数后重试当前操作</string>
+    <string name="alisdk_message_801_type">E</string>
+    <string name="alisdk_message_802_name">INVALID_TAOKE_PID_ERROR</string>
+    <string name="alisdk_message_802_message">当前传入的淘客 pid {0} 非法，正确格式应以 mm_ 为前缀</string>
+    <string name="alisdk_message_802_action">请修改传入的淘客 pid，如不确认，请联系淘客相关人员</string>
+    <string name="alisdk_message_802_type">E</string>
+    <string name="alisdk_message_803_name">INVALID_DEFAULT_TAOKE_PID</string>
+    <string name="alisdk_message_803_message">未设置默认的淘客 pid</string>
+    <string name="alisdk_message_803_action">请在初始化之前调用 TradeConfigs.defaultTaokePid="mm_****" 设置默认的淘客 pid 值, 此值会在相关方法调用时未指定 pid 时使用</string>
+    <string name="alisdk_message_803_type">W</string>
+</resources>
