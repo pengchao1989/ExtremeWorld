@@ -7,6 +7,7 @@ package com.yumfee.extremeworld.service.account;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -81,7 +82,8 @@ public class AccountService {
 		
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
-		user.setToken(new String(Cryptos.generateAesKey()));
+		String base64Token = Base64.encodeBase64String(Cryptos.generateAesKey());
+		user.setToken(base64Token);
 
 		userDao.save(user);
 	}

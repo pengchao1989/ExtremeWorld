@@ -7,7 +7,7 @@
         <item>@string/site</item>
         <item>@string/video</item>
         <item>@string/people</item>
-        <!--<item>@string/store</item>-->
+        <item>@string/store</item>
     </string-array>
 
     <string-array name="discovery_images">
@@ -16,7 +16,7 @@
         <item>@mipmap/ic_location_on_black_48dp</item>
         <item>@mipmap/ic_videocam_black_48dp</item>
         <item>@mipmap/ic_supervisor_account_black_36dp</item>
-        <!--<item>@mipmap/ic_shopping_cart_black_48dp</item>-->
+        <item>@mipmap/ic_shopping_cart_black_48dp</item>
 
     </string-array>
 
