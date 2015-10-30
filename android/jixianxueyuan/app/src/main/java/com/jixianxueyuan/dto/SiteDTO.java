@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class SiteDTO implements Serializable
 {
+	private long id;
 	private String name;
 	private String description;
 	private int type;
@@ -13,6 +14,15 @@ public class SiteDTO implements Serializable
 	private String longitude;
 	private String latitude;
 	private String createTime;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getName()
 	{
 		return name;

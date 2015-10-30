@@ -92,6 +92,7 @@
         <activity android:name=".activity.CropAvatarActivity"/>
         <activity android:name=".activity.MarketHomeActivity"/>
         <activity android:name=".activity.GoodsListActivity"/>
+        <activity android:name=".activity.SiteListActivity"/>
         <activity android:name=".activity.WebActivity"/>
         <activity
             android:configChanges="orientation|screenSize"

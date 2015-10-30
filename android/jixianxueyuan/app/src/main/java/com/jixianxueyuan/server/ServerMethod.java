@@ -44,6 +44,7 @@ public class ServerMethod {
     public static final String courseTaxonomy() {return method_url_secure + hobby  + "course_taxonomy";};
     public static final String course(){return method_url_secure + hobby + "course/";};
     public static final String course_explain () {return method_url_secure + hobby + "course/explain/";};
+    public static final String site(){return method_url_secure + hobby + "site";};
     public static final String damaku(){return method_url_secure + "danmubi";};
     public static final String reply(){return  method_url_secure + "reply";};
     public static final String sub_reply(){return method_url_secure + "sub_reply";};

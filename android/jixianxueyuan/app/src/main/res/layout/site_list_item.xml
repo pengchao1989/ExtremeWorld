@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/site_list_item_name_textview"
+        android:layout_gravity="center_horizontal"
+        style="@style/PrimaryText" />
+
+    <ImageView
+        android:id="@+id/site_list_item_front_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/site_list_item_address_textview"
+        style="@style/SecondText"/>
+
+</LinearLayout>

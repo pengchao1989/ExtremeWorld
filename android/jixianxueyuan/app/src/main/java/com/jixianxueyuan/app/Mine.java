@@ -53,7 +53,9 @@ public class Mine {
 
         SharedPreferences shared = context.getSharedPreferences(SAVE_NAME, Context.MODE_PRIVATE);
 
-
+        if(shared.contains("loginName")){
+            userInfo.setLoginName(shared.getString("loginName", ""));
+        }
         if(shared.contains("qqOpenId")){
             qqOpenId = shared.getString("qqOpenId", "");
         }
@@ -91,6 +93,7 @@ public class Mine {
 
         editor.putString("qqOpenId", qqOpenId);
         editor.putLong("id", userInfo.getId());
+        editor.putString("loginName", userInfo.getLoginName());
         editor.putString("name", userInfo.getName());
         editor.putString("gender", userInfo.getGender());
         editor.putString("avatar", userInfo.getAvatar());
@@ -100,8 +103,6 @@ public class Mine {
 
         editor.commit();
     }
-
-
 
 }
 
