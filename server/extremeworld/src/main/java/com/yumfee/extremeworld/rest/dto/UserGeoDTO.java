@@ -7,12 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-@XmlRootElement(name = "UserInfo")
-public class UserDTO
-{
+@XmlRootElement(name = "UserGeo")
+public class UserGeoDTO {
 	private Long id;
-	private String loginName;
 	private String name;
 	private Date registerDate;
 	private String gender;
@@ -25,7 +22,6 @@ public class UserDTO
 	private String geoHash;
 	private Date geoModifyTime;
 	private double distance;
-	private String token;
 	
 	private CountryDTO country;
 	
@@ -38,12 +34,6 @@ public class UserDTO
 	public void setId(Long id)
 	{
 		this.id = id;
-	}
-	public String getLoginName() {
-		return loginName;
-	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
 	}
 	public String getName()
 	{
@@ -147,11 +137,4 @@ public class UserDTO
 	{
 		this.interests = interests;
 	}
-	public String getToken() {
-		return token;
-	}
-	public void setToken(String token) {
-		this.token = token;
-	}
-	
 }

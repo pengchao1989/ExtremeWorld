@@ -139,7 +139,6 @@ public class User extends UserBase
 	public void setGeoModifyTime(Date geoModifyTime) {
 		this.geoModifyTime = geoModifyTime;
 	}
-	
 	@OneToOne
 	@JoinColumn(name = "country_id")
 	public Country getCountry() {

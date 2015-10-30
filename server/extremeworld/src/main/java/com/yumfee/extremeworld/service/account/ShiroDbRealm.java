@@ -94,14 +94,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		public String loginName;
 		public String name;
 		public String qqOpenId;
-		public String token;
+		public byte[] token;
 
 		public ShiroUser(Long id, String loginName, String name,String token) 
 		{
 			this.id = id;
 			this.loginName = loginName;
 			this.name = name;
-			this.token = token;
+			this.token = Encodes.decodeBase64(token);
 		}
 
 		public String getName() 

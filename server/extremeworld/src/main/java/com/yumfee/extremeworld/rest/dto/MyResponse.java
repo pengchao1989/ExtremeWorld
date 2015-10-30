@@ -111,6 +111,6 @@ public class MyResponse {
 	
 	private byte[] getCurrentToken(){
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		return user.token.getBytes();
+		return user.token;
 	}
 }

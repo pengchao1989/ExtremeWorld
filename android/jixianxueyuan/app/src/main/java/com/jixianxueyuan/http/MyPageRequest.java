@@ -15,8 +15,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.util.Cryptos;
 import com.jixianxueyuan.util.MyLog;
 
@@ -31,6 +33,8 @@ import java.util.Map;
  * Created by pengchao on 5/31/15.
  */
 public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
+
+    private static final String URL_SECURE_KEYWORD = "secure";
 
     /** Default charset for JSON request. */
     protected static final String PROTOCOL_CHARSET = "utf-8";
@@ -215,13 +219,19 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         //return super.getHeaders();
-        Map<String,String> headers = new HashMap<String, String>();
-        String userName = "aaa";
-        String password = "aaa";
-        byte[] encodedPassword = (userName + ":" + password).getBytes();
-        String strBase64 = new String(Base64.encode(encodedPassword, Base64.DEFAULT));
-        headers.put("Authorization", "Basic " + strBase64);
-        return headers;
+        if(getOriginUrl().contains(URL_SECURE_KEYWORD)){
+            UserDTO userDTO = MyApplication.getContext().getMine().getUserInfo();
+            Map<String,String> headers = new HashMap<String, String>();
+            String userName = userDTO.getLoginName();
+            String password = userDTO.getLoginName();
+            byte[] encodedPassword = (userName + ":" + password).getBytes();
+            String strBase64 = new String(Base64.encode(encodedPassword, Base64.DEFAULT));
+            strBase64 = strBase64.replace("\n", "");
+            headers.put("Authorization", "Basic " + strBase64);
+            return headers;
+        }else {
+            return super.getHeaders();
+        }
     }
 
 }

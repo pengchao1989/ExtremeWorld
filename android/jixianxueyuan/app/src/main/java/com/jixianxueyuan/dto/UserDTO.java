@@ -18,6 +18,7 @@ public class UserDTO implements Serializable {
     private String hobbyStamp;
     private double distance;
     private String geoModifyTime;
+    private String token;
 
     private UserDTO inviter;
 
@@ -134,6 +135,14 @@ public class UserDTO implements Serializable {
 
     public void setGeoModifyTime(String geoModifyTime) {
         this.geoModifyTime = geoModifyTime;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public UserDTO getInviter() {

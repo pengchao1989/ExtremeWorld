@@ -75,7 +75,7 @@ public class DiscoveryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = null;
-                switch (position+1)
+                switch (position)
                 {
                     case 0:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
@@ -105,19 +105,6 @@ public class DiscoveryFragment extends Fragment {
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
                     case 6:
-/*                        ItemService service = AlibabaSDK.getService(ItemService.class);
-                        service.showItemDetailByItemId(DiscoveryFragment.this.getActivity(), new TradeProcessCallback(){
-
-                            @Override
-                            public void onFailure(int i, String s) {
-
-                            }
-
-                            @Override
-                            public void onPaySuccess(TradeResult tradeResult) {
-
-                            }
-                        }, null, 35745641972L, 1, null);*/
                         intent = new Intent(DiscoveryFragment.this.getActivity(), MarketHomeActivity.class);
                         break;
                 }

@@ -41,6 +41,7 @@ public class AccountService {
 	public static final String HASH_ALGORITHM = "SHA-1";
 	public static final int HASH_INTERATIONS = 1024;
 	private static final int SALT_SIZE = 8;
+	private static final int TOKEN_SIZE = 16;
 
 	private static Logger logger = LoggerFactory.getLogger(AccountService.class);
 
@@ -82,7 +83,7 @@ public class AccountService {
 		
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
-		String base64Token = Base64.encodeBase64String(Cryptos.generateAesKey());
+		String base64Token = Encodes.encodeBase64(Cryptos.generateAesKey());
 		user.setToken(base64Token);
 
 		userDao.save(user);
@@ -132,7 +133,7 @@ public class AccountService {
 	{
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
 		user.setSalt(Encodes.encodeHex(salt));
-
+		
 		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
 	}
@@ -152,5 +153,13 @@ public class AccountService {
 	public void setClock(Clock clock) 
 	{
 		this.clock = clock;
+	}
+	
+	private String buildToken(String originalStr){
+		String result = new String(originalStr);
+		while(result.length() < TOKEN_SIZE){
+			result += '0';
+		}
+		return result;
 	}
 }
