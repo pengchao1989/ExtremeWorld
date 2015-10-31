@@ -181,6 +181,7 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
             String password = userDTO.getLoginName();
             byte[] encodedPassword = (userName + ":" + password).getBytes();
             String strBase64 = new String(Base64.encode(encodedPassword, Base64.DEFAULT));
+            strBase64 = strBase64.replace("\n", "");
             headers.put("Authorization", "Basic " + strBase64);
             return headers;
         }else {

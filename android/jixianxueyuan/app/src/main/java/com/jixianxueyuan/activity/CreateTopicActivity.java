@@ -361,7 +361,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         }
         else
         {
-            topicDTO.setContent(contentEditWidget.getText());
+            topicDTO.setContent(contentEditWidget.getHtml());
         }
 
 
