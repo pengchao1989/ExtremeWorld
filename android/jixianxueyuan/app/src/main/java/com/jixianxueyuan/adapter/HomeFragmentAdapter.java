@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.fragment.CourseListFragment;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.MineFragment;
@@ -43,7 +44,7 @@ public class HomeFragmentAdapter extends FragmentPagerAdapter {
         {
             case 0:
                 Bundle bundle = new Bundle();
-                bundle.putString("topicType", "all");
+                bundle.putString("topicType", TopicType.ALL);
                 fragment = new TopicListFragment();
                 fragment.setArguments(bundle);
                 break;

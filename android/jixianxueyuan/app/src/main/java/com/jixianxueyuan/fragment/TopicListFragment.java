@@ -64,7 +64,7 @@ public class TopicListFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     /*以下两个参数用于定义topic范围，从arg传递过来*/
-    String topicType;
+    String topicType = TopicType.ALL;
     Long topicTaxonomyId;
 
     LoadMoreView loadMoreView;

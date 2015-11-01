@@ -15,6 +15,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseTaxonomyActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.MarketHomeActivity;
+import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.SiteListActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryListAdapter;
@@ -108,7 +109,8 @@ public class DiscoveryFragment extends Fragment {
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
                     case 6:
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), MarketHomeActivity.class);
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), NewHomeActivity.class);
+                        //intent = new Intent(DiscoveryFragment.this.getActivity(), MarketHomeActivity.class);
                         break;
                 }
 
