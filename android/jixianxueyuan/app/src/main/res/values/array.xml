@@ -8,17 +8,15 @@
         <item>@string/site</item>
         <item>@string/video</item>
         <item>@string/people</item>
-        <item>@string/store</item>
     </string-array>
 
     <string-array name="discovery_images">
-        <item>@mipmap/ic_picture_in_picture_black_48dp</item>
-        <item>@mipmap/ic_message_black_48dp</item>
-        <item>@mipmap/ic_school_black_48dp</item>
-        <item>@mipmap/ic_location_on_black_48dp</item>
-        <item>@mipmap/ic_videocam_black_48dp</item>
-        <item>@mipmap/ic_supervisor_account_black_36dp</item>
-        <item>@mipmap/ic_shopping_cart_black_48dp</item>
+        <item>@mipmap/find_news</item>
+        <item>@mipmap/find_discuss</item>
+        <item>@mipmap/find_teach</item>
+        <item>@mipmap/find_place</item>
+        <item>@mipmap/find_video</item>
+        <item>@mipmap/find_near</item>
 
     </string-array>
 
@@ -28,8 +26,8 @@
     </string-array>
 
     <string-array name="mine_images">
-        <item>@mipmap/ic_msg_comment</item>
-        <item>@mipmap/ic_msg_like</item>
+        <item>@mipmap/mine_message</item>
+        <item>@mipmap/mine_set</item>
     </string-array>
 
 </resources>

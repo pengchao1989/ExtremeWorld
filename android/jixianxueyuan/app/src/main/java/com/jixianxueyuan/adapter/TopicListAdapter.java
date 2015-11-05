@@ -130,29 +130,32 @@ public class TopicListAdapter extends BaseAdapter {
             switch (topicDTO.getType())
             {
                 case TopicType.MOOD:
-                    viewHolder.titleTextView.setText("["+context.getString(R.string.mood)+"]" + topicDTO.getTitle());
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_mood);
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.DISCUSS:
-                    viewHolder.titleTextView.setText("["+context.getString(R.string.discuss)+"]" + topicDTO.getTitle());
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_discuss);
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.VIDEO:
-                    viewHolder.titleTextView.setText("["+context.getString(R.string.s_video)+"]" + topicDTO.getTitle());
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.S_VIDEO:
-                    viewHolder.titleTextView.setText("["+context.getString(R.string.video)+"]" + topicDTO.getTitle());
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.ACTIVITY:
-                    viewHolder.titleTextView.setText("["+context.getString(R.string.activity)+"]" + topicDTO.getTitle());
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
                 case TopicType.NEWS:
-                    viewHolder.titleTextView.setText("["+context.getString(R.string.news)+"]" + topicDTO.getTitle());
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_news);
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
                 case TopicType.COURSE:
-                    viewHolder.titleTextView.setText("["+context.getString(R.string.course)+"]" + topicDTO.getTitle());
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
             }
         }
@@ -235,8 +238,8 @@ public class TopicListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-/*        @InjectView(R.id.topic_list_item_type)
-        ImageView typeImageView;*/
+        @InjectView(R.id.topic_list_item_type)
+        ImageView typeImageView;
         @InjectView(R.id.topic_list_item_title)
         EmojiconTextView titleTextView;
         @InjectView(R.id.topic_list_item_avatar)

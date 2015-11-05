@@ -288,7 +288,7 @@ public class RegisterActivity extends Activity {
                             mine.setUserInfo(newUserDTO);
                             mine.WriteSerializationToLocal(RegisterActivity.this);
 
-                            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(RegisterActivity.this, NewHomeActivity.class);
                             startActivity(intent);
 
                             finish();

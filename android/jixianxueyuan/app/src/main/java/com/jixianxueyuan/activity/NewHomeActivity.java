@@ -100,9 +100,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         hideFragments(transaction);
         switch (index) {
             case 0:
-                trendsImageView.setImageResource(R.mipmap.ic_message_black_48dp);
+                trendsImageView.setImageResource(R.mipmap.bottombar_message2);
                 trendsTextView.setTextColor(getResources().getColor(R.color.primary));
-                trendsLayout.setBackgroundResource(R.color.grey);
                 if (topicListFragment == null) {
                     // 如果fg1为空，则创建一个并添加到界面上
                     topicListFragment = new TopicListFragment();
@@ -117,9 +116,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 break;
 
             case 1:
-                discoverImageView.setImageResource(R.mipmap.ic_picture_in_picture_black_48dp);
+                discoverImageView.setImageResource(R.mipmap.bottombar_find2);
                 discoverTextView.setTextColor(getResources().getColor(R.color.primary));
-                discoverLayout.setBackgroundResource(R.color.grey);
                 if (discoveryFragment == null) {
                     // 如果fg1为空，则创建一个并添加到界面上
                     discoveryFragment = new DiscoveryFragment();
@@ -131,9 +129,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 break;
 
             case 3:
-                mineImageView.setImageResource(R.mipmap.ic_perm_identity_black_36dp);
+                mineImageView.setImageResource(R.mipmap.bottombar_mine_2);
                 mineTextView.setTextColor(getResources().getColor(R.color.primary));
-                mineLayout.setBackgroundResource(R.color.grey);
                 if (mineFragment == null) {
                     // 如果fg1为空，则创建一个并添加到界面上
                     mineFragment = new MineFragment();
@@ -144,9 +141,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 }
                 break;
             case 4:
-                marketImageView.setImageResource(R.mipmap.ic_shopping_cart_black_48dp);
+                marketImageView.setImageResource(R.mipmap.bottombar_shop2);
                 marketTextView.setTextColor(getResources().getColor(R.color.primary));
-                marketLayout.setBackgroundResource(R.color.grey);
                 if(marketFragment == null){
                     marketFragment = new MarketFragment();
                     transaction.add(R.id.content, marketFragment);
@@ -177,22 +173,17 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     //定义一个重置所有选项的方法
     public void clearChioce()
     {
-        trendsImageView.setImageResource(R.mipmap.ic_message_black_48dp);
-        trendsLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        trendsImageView.setImageResource(R.mipmap.bottombar_message);
         trendsTextView.setTextColor(getResources().getColor(R.color.secondary_text));
 
-        discoverImageView.setImageResource(R.mipmap.ic_picture_in_picture_black_48dp);
-        discoverLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        discoverImageView.setImageResource(R.mipmap.bottombar_find);
         discoverTextView.setTextColor(getResources().getColor(R.color.secondary_text));
 
-        mineImageView.setImageResource(R.mipmap.ic_perm_identity_black_36dp);
-        mineLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        mineImageView.setImageResource(R.mipmap.bottombar_mine);
         mineTextView.setTextColor(getResources().getColor(R.color.secondary_text));
 
-        marketImageView.setImageResource(R.mipmap.ic_shopping_cart_black_48dp);
-        marketLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        marketImageView.setImageResource(R.mipmap.bottombar_shop);
         marketTextView.setTextColor(getResources().getColor(R.color.secondary_text));
-
     }
 
 }

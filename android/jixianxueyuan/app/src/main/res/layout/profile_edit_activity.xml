@@ -77,7 +77,7 @@
 
         </RelativeLayout>
 
-        <View style="@style/DividerView"/>
+        <View style="@style/HorizontalDividerView"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -108,7 +108,7 @@
             <ImageView style="@style/ImageItemRightIcon" />
         </RelativeLayout>
 
-        <View style="@style/DividerView"/>
+        <View style="@style/HorizontalDividerView"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -140,7 +140,7 @@
             <ImageView style="@style/ImageItemRightIcon" />
         </RelativeLayout>
 
-        <View style="@style/DividerView"/>
+        <View style="@style/HorizontalDividerView"/>
 
     </LinearLayout>
 

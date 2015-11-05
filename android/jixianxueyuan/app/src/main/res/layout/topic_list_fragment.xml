@@ -20,15 +20,11 @@
             <ListView
                 android:id="@+id/topic_list_fragment_listview"
                 style="@style/ListView"
+                android:divider="@null"
                 android:scrollbars="none"
                 />
 
         </android.support.v4.widget.SwipeRefreshLayout>
-
-
-
-
-
 
 
         <com.melnykov.fab.FloatingActionButton
@@ -40,7 +36,8 @@
             android:src="@mipmap/ic_add_white_24dp"
             fab:fab_colorNormal="@color/primary"
             fab:fab_colorPressed="@color/primary_pressed"
-            fab:fab_colorRipple="@color/ripple"/>
+            fab:fab_colorRipple="@color/ripple"
+            android:visibility="gone"/>
 
 
         <FrameLayout
@@ -90,8 +87,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/discuss"
                         />
-
-
 
                 </LinearLayout>
 

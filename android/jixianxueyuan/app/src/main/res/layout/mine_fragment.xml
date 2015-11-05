@@ -68,7 +68,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_notifications_none_black_48dp" />
+                    android:src="@mipmap/mine_message" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -82,10 +82,10 @@
 
         </RelativeLayout>
 
-        <View style="@style/DividerView" />
+        <View style="@style/HorizontalDividerView" />
 
 
-        <View style="@style/DividerView" />
+        <View style="@style/HorizontalDividerView" />
 
         <RelativeLayout
             android:id="@+id/mine_fragment_setting"
@@ -102,7 +102,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_settings_black_48dp" />
+                    android:src="@mipmap/mine_set" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -116,7 +116,7 @@
 
         </RelativeLayout>
 
-        <View style="@style/DividerView" />
+        <View style="@style/HorizontalDividerView" />
 
 
     </LinearLayout>

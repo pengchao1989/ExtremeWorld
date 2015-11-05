@@ -16,7 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.jixianxueyuan.activity.HomeActivity;
+import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.activity.RegisterEnterPhoneActivity;
 import com.jixianxueyuan.app.Mine;
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
             if(mine.getUserInfo() != null && mine.getUserInfo().getId() != null){
                 //直接进入Hone页
                 if(mine.getUserInfo().getId() > 0){
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -208,7 +208,7 @@ public class MainActivity extends Activity {
                             requestHandshake();
 
                             //登录完成，进入HOME页
-                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
                             startActivity(intent);
                             finish();
                         } else if (response.getStatus() == ServerMethod.STATUS_NO_CONTENT) {

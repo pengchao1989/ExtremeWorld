@@ -109,6 +109,9 @@ public class TopicListFragment extends Fragment {
             topicTaxonomyId = bundle.getLong("topicTaxonomyId");
         }
 
+        //head view
+        View headView = LayoutInflater.from(this.getActivity()).inflate(R.layout.topic_list_head_view,null);
+        listView.addHeaderView(headView);
 
         loadMoreView = new LoadMoreView(this.getActivity());
         if(isRefreshData){
@@ -200,7 +203,7 @@ public class TopicListFragment extends Fragment {
 
     @OnItemClick(R.id.topic_list_fragment_listview) void onItemClicked(int position)
     {
-        TopicDTO topicDTO = adapter.getItem(position);
+        TopicDTO topicDTO = adapter.getItem(position - 1);
 
         Intent intent = null;
         switch (topicDTO.getType())

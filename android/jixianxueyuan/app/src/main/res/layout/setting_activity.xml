@@ -44,7 +44,7 @@
 
             </RelativeLayout>
 
-            <View style="@style/DividerView" />
+            <View style="@style/HorizontalDividerView" />
 
             <RelativeLayout
                 android:id="@+id/setting_activity_notify"
@@ -68,7 +68,7 @@
 
             </RelativeLayout>
 
-            <View style="@style/DividerView" />
+            <View style="@style/HorizontalDividerView" />
 
             <RelativeLayout
                 android:id="@+id/setting_activity_feedback"
@@ -92,7 +92,7 @@
 
             </RelativeLayout>
 
-            <View style="@style/DividerView" />
+            <View style="@style/HorizontalDividerView" />
 
             <RelativeLayout
                 android:id="@+id/setting_activity_clean_cache"

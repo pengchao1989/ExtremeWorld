@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:paddingBottom="14dp"
+    android:background="#FFFAFAFA"
     >
 
     <LinearLayout
@@ -70,12 +72,24 @@
                 android:orientation="horizontal"
                 >
 
+                <ImageView
+                    android:id="@+id/topic_list_item_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:src="@mipmap/ic_mood"
+                    />
+
                 <com.yumfee.emoji.EmojiconTextView
                     android:id="@+id/topic_list_item_title"
                     android:layout_marginLeft="2dp"
                     emojicon:emojiconSize="28sp"
+                    android:layout_toRightOf="@id/topic_list_item_type"
+                    android:text="asdfasdfsdfsdfasdfasdfsadfsadfasdfasdfsadfasdf"
                     style="@style/ListPrimaryText"
                     />
+
+
 
             </RelativeLayout>
 
@@ -150,42 +164,67 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/HorizontalDividerView"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingRight="20dp"
-                android:gravity="center_vertical|right"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                android:weightSum="2"
                 >
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_comment_s_1"
-                    />
-                <TextView
-                    android:id="@+id/topic_list_item_view_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    style="@style/ListSecondaryText"
-                    />
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_hand_normal_1"
-                    android:layout_marginLeft="20dp"
-                    />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_like"
+                        />
 
-                <TextView
-                    android:id="@+id/topic_list_item_agree_count"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/topic_list_item_agree_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        style="@style/ListSecondaryText"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/VerticalDividerView"/>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    style="@style/ListSecondaryText"
-                    />
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_message"
+                        />
+                    <TextView
+                        android:id="@+id/topic_list_item_view_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        style="@style/ListSecondaryText"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 

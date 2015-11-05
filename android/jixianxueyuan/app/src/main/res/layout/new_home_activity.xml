@@ -35,16 +35,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/ic_message_black_48dp">
+                    android:src="@mipmap/bottombar_message">
                 </ImageView>
 
-                    <TextView
-                        android:id="@+id/tab_trends_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/topic"
-                        android:textColor="#7597B3"></TextView>
+                <TextView
+                    android:id="@+id/tab_trends_text"
+                    android:text="@string/topic"
+                    style="@style/HomeTabItemText"/>
 
             </LinearLayout>
         </RelativeLayout>
@@ -66,16 +63,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/ic_picture_in_picture_black_48dp">
+                    android:src="@mipmap/bottombar_find">
                 </ImageView>
 
-                    <TextView
-                        android:id="@+id/tab_discover_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/discovery"
-                        android:textColor="#7597B3"></TextView>
+                <TextView
+                    android:id="@+id/tab_discover_text"
+                    android:text="@string/discovery"
+                    style="@style/HomeTabItemText"/>
 
             </LinearLayout>
         </RelativeLayout>
@@ -98,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/btn_pb_add_n">
+                    android:src="@mipmap/bottombar_add">
                 </ImageView>
 
 
@@ -122,16 +116,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/ic_perm_identity_black_36dp">
+                    android:src="@mipmap/bottombar_mine">
                 </ImageView>
 
                 <TextView
                     android:id="@+id/tab_mine_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:text="@string/mine"
-                    android:textColor="#7597B3"></TextView>
+                    style="@style/HomeTabItemText"/>
 
             </LinearLayout>
         </RelativeLayout>
@@ -153,16 +144,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/ic_shopping_cart_black_48dp">
+                    android:src="@mipmap/bottombar_shop">
                 </ImageView>
 
                 <TextView
                     android:id="@+id/tab_market_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:text="@string/store"
-                    android:textColor="#7597B3"></TextView>
+                    style="@style/HomeTabItemText"/>
 
             </LinearLayout>
         </RelativeLayout>
