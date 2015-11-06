@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'jixianxueyuan'
-            keyPassword 'TANGrui2'
+            keyAlias "${project.KEY_ALIAS}"
+            keyPassword "${project.KEY_PASSWORD}"
             storeFile file('/home/pengchao/github/ExtremeWorld/private/mykeystore.jks')
-            storePassword 'TANGrui2'
+            storePassword "${project.STORE_PASSWORD}"
         }
     }
     compileSdkVersion 22
