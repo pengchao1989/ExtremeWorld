@@ -6,6 +6,7 @@ package com.yumfee.extremeworld.rest.dto.request;
 public class HandshakeRequestDTO {
 	private Long userId;
     private String hobbyStamp;
+    private String device;
 
     
     
@@ -24,4 +25,13 @@ public class HandshakeRequestDTO {
     public void setHobbyStamp(String hobbyStamp) {
         this.hobbyStamp = hobbyStamp;
     }
+
+	public String getDevice() {
+		return device;
+	}
+
+	public void setDevice(String device) {
+		this.device = device;
+	}
+    
 }

@@ -9,6 +9,7 @@ public class HandshakeRequestDTO implements Serializable {
 
     private Long userId;
     private String hobbyStamp;
+    private String device;
 
     public Long getUserId() {
         return userId;
@@ -24,5 +25,13 @@ public class HandshakeRequestDTO implements Serializable {
 
     public void setHobbyStamp(String hobbyStamp) {
         this.hobbyStamp = hobbyStamp;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
     }
 }

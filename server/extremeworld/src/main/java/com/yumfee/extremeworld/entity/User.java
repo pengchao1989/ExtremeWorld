@@ -36,6 +36,7 @@ public class User extends UserBase
 	private String geoHash;
 	private String hobbyStamp;
 	private Date   geoModifyTime;
+	private String device;
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
@@ -138,6 +139,12 @@ public class User extends UserBase
 	}
 	public void setGeoModifyTime(Date geoModifyTime) {
 		this.geoModifyTime = geoModifyTime;
+	}
+	public String getDevice() {
+		return device;
+	}
+	public void setDevice(String device) {
+		this.device = device;
 	}
 	@OneToOne
 	@JoinColumn(name = "country_id")

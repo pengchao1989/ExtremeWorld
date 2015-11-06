@@ -162,6 +162,7 @@ public class MainActivity extends Activity {
             userId = userDTO.getId();
         }
         handshakeRequestDTO.setHobbyStamp(hobbyStamp);
+        handshakeRequestDTO.setDevice("android");
         handshakeRequestDTO.setUserId(userId);
 
 
