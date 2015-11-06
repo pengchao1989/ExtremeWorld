@@ -1,5 +1,5 @@
 .gradle
-gradle.properties
+local.properties
 .idea/
 *.iml
 .DS_Store
