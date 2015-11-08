@@ -24,7 +24,6 @@
         android:paddingTop="6dp"
         >
         <FrameLayout
-            android:layout_weight="0.5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
@@ -33,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:padding="4dp"
-                android:src="@drawable/btn_pb_add"
+                android:src="@mipmap/more"
                 />
             <ImageView
                 android:id="@+id/reply_widget_has_dot"
@@ -53,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:padding="4dp"
-            android:src="@mipmap/btn_pb_add_expression"
+            android:src="@mipmap/expression"
             />
 
 
@@ -130,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/btn_pb_add_pic"
-                        android:src="@mipmap/btn_pb_add_pic"
+                        android:src="@mipmap/reply_photo"
                         />
                     <TextView
                         android:layout_width="wrap_content"

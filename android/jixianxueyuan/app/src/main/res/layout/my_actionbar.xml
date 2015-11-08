@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/actionbar_height"
     android:orientation="vertical"
-    android:background="@color/primary_color"
+    android:background="@color/white"
     >
 
     <RelativeLayout
@@ -20,12 +20,10 @@
             android:padding="6dp"
             >
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/back"
-                android:textColor="@color/blue"
-                android:textSize="18sp"
+                android:src="@mipmap/back"
                 />
 
         </LinearLayout>
@@ -35,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/secondary_text"
+            android:textColor="@color/primary_text"
             android:textSize="20sp"
             />
 
@@ -54,7 +52,7 @@
                 android:id="@+id/page_head_action_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/primary_color"
                 android:textSize="18sp"
                 />
 

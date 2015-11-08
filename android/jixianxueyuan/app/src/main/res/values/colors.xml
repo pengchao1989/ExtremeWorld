@@ -1,6 +1,6 @@
 <resources>
 
-    <color name="primary_color">#efbd35</color>
+    <color name="primary_color">#fbd10b</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="white_overlay">#66FAFAFA</color>
@@ -28,7 +28,7 @@
     <color name="accent_pressed">#C2185B</color>
 
 
-    <color name="primary_text">#333333</color>
+    <color name="primary_text">#191919</color>
     <color name="secondary_text">#666666</color>
 
 
