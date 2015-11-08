@@ -11,6 +11,7 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.TaxonomyDTO;
+import com.jixianxueyuan.fragment.NewsListFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
 
 import java.util.ArrayList;
@@ -51,10 +52,16 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
     @Override
     public Fragment getItem(int position) {
 
+        Fragment fragment;
+        if(topicType.equals(TopicType.NEWS)){
+            fragment = new NewsListFragment();
+        }
+        else {
+            fragment = new TopicListFragment();
+        }
         Bundle bundle = new Bundle();
         bundle.putString(TopicType.TYPE, topicType);
         bundle.putLong("topicTaxonomyId", taxonomyDTOList.get(position).getId());
-        TopicListFragment fragment = new TopicListFragment();
         fragment.setArguments(bundle);
         return fragment;
     }

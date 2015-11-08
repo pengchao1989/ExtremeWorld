@@ -58,6 +58,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         fragmentManager = getSupportFragmentManager();
 
         initView();
+
+        setChioceItem(0);
     }
 
     private void initView(){

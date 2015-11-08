@@ -56,6 +56,7 @@
     <string name="course_detail">course detail</string>
     <string name="floor">f</string>
     <string name="reply">reply</string>
+    <string name="view">view</string>
     <string name="we_speek">i speek</string>
     <string name="want_speek">wang speek</string>
     <string name="send">send</string>
@@ -68,6 +69,7 @@
     <string name="add_topic_success">submit topic success</string>
     <string name="load_sub_reply" formatted="false">load%1$dreply</string>
     <string name="loadmore">load more</string>
+
 
     <string name="edit_profile">edit profile</string>
     <string name="random">random</string>

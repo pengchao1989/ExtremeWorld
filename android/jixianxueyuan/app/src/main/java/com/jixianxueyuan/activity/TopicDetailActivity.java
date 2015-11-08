@@ -76,6 +76,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener {
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
+    public final static String INTENT_TOPIC = "topic";
 
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/list_item_background"
+    >
+
+    <TextView
+        android:id="@+id/news_list_item_title"
+        android:singleLine="true"
+        style="@style/ListPrimaryText"
+        android:text="标题标题标题标题标题标题标题标题"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="5">
+
+        <ImageView
+            android:id="@+id/news_list_item_front_image"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/news_list_item_content"
+                android:maxLines="4"
+                style="@style/ListSecondaryTextSmall"
+                android:text="内容内容容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/news_list_item_agree_textview"
+                    android:text="33阅读"
+                    style="@style/ListSecondaryTextSmall"/>
+
+                <View
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    style="@style/VerticalDividerView"/>
+
+                <TextView
+                    android:id="@+id/news_list_item_reply_textview"
+                    android:text="14回复"
+                    style="@style/ListSecondaryTextSmall"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+

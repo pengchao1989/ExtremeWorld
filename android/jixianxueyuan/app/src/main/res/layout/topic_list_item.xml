@@ -77,7 +77,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:src="@mipmap/ic_mood"
                     />
 
                 <com.yumfee.emoji.EmojiconTextView
@@ -85,7 +84,6 @@
                     android:layout_marginLeft="2dp"
                     emojicon:emojiconSize="28sp"
                     android:layout_toRightOf="@id/topic_list_item_type"
-                    android:text="asdfasdfsdfsdfasdfasdfsadfsadfasdfasdfsadfasdf"
                     style="@style/ListPrimaryText"
                     />
 

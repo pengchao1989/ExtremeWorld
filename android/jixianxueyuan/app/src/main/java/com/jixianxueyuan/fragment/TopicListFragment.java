@@ -228,7 +228,7 @@ public class TopicListFragment extends Fragment {
 
         if(intent != null)
         {
-            intent.putExtra("topic", topicDTO);
+            intent.putExtra(TopicDetailActivity.INTENT_TOPIC, topicDTO);
             startActivity(intent);
         }
     }
