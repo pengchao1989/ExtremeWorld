@@ -107,7 +107,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
 
             @Override
             public void onDismiss() {
-                //changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.smiley);
+                changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.expression);
             }
         });
 
@@ -180,7 +180,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
                     //If keyboard is visible, simply show the emoji popup
                     if (popup.isKeyBoardOpen()) {
                         popup.showAtBottom();
-                        //changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.ic_action_keyboard);
+                        changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.ic_action_keyboard);
                     }
 
                     //else, open the text keyboard first and immediately after that show the emoji popup
@@ -190,7 +190,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
                         popup.showAtBottomPending();
                         final InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                         inputMethodManager.showSoftInput(emojiconEditText, InputMethodManager.SHOW_IMPLICIT);
-                        //changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.ic_action_keyboard);
+                        changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.ic_action_keyboard);
                     }
                 }
 

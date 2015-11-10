@@ -148,7 +148,8 @@ public class MainActivity extends Activity {
     @OnClick(R.id.activity_qq_login)
     void qqLogin() {
 
-        requestQQOpenId();
+        //requestQQOpenId();
+        requestLogin();
     }
 
     private void requestHandshake() {
@@ -189,7 +190,7 @@ public class MainActivity extends Activity {
 
     private void requestLogin() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + qqOpenInfo.getOpenid();
+        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + "C7BBA2F103FDEB1248871654D6255B52"/*qqOpenInfo.getOpenid()*/;
 
         MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
                 new Response.Listener<MyResponse<UserDTO>>() {
