@@ -1,5 +1,6 @@
 package com.jixianxueyuan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -67,6 +68,14 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         discoverLayout.setOnClickListener(this);
         mineLayout.setOnClickListener(this);
         marketLayout.setOnClickListener(this);
+
+        newLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewHomeActivity.this, CreateTopicPreActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -75,6 +84,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
             case R.id.tab_trends_layout:
                 setChioceItem(0);
+/*                Intent intent = new Intent(NewHomeActivity.this, CreateTopicPreActivity.class);
+                startActivity(intent);*/
                 break;
 
             case R.id.tab_discover_layout:
@@ -82,6 +93,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 break;
 
             case R.id.tab_new_layout:
+
                 break;
 
             case R.id.tab_mine_layout:
@@ -128,6 +140,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                     // 如果MessageFragment不为空，则直接将它显示出来
                     transaction.show(discoveryFragment);
                 }
+                break;
+            case 2:
                 break;
 
             case 3:

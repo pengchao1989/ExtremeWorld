@@ -77,6 +77,7 @@
             android:launchMode="singleTask"
             >
         </activity>
+        <activity android:name=".activity.CreateTopicPreActivity"/>
         <activity android:name=".activity.TopicDetailActivity"/>
         <activity android:name=".activity.MoodDetailActivity"/>
         <activity android:name=".activity.DiscussionDetailActivity"/>

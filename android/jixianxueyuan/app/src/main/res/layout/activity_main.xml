@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/MainContainer"
-    android:background="@color/primary_color"
+    android:background="@drawable/main"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -51,6 +51,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
             >
 
             <LinearLayout
