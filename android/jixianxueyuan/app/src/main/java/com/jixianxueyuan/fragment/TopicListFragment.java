@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,7 +39,6 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
-import com.melnykov.fab.FloatingActionButton;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -48,6 +47,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -63,18 +63,18 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
     ObservableListView listView;
     @InjectView(R.id.top_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
+    @InjectView(R.id.topic_list_fragment_switch)
+    ImageView switchImageView;
     @InjectView(R.id.list_background)
     View mListBackgroundView;
-    @InjectView(R.id.overlay)
-    View mOverlayView;
     @InjectView(R.id.image)
     ImageView mImageView;
     @InjectView(R.id.fab)
     CircleImageView mFab;
-    @InjectView(R.id.title)
-    TextView mTitleView;
+    @InjectView(R.id.toolbar)
+    LinearLayout mToolbarView;
+    private View paddingView;
 
-    private ImageView switchButton;
     private int mActionBarSize;
     private int mFlexibleSpaceShowFabOffset;
     private int mFlexibleSpaceImageHeight;
@@ -176,7 +176,7 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
         mActionBarSize = 0;
-        View paddingView = new View(this.getActivity());
+        paddingView = new View(this.getActivity());
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
                 mFlexibleSpaceImageHeight);
         paddingView.setLayoutParams(lp);
@@ -186,7 +186,7 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
         listView.addHeaderView(paddingView);
         listView.setScrollViewCallbacks(this);
 
-        mTitleView.setText(getResources().getString(R.string.app_name));
+        mToolbarView.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, getResources().getColor(R.color.primary)));
 
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,6 +204,15 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
     private void initFooterView(){
         autoLoadMoreView = new AutoLoadMoreView(this.getActivity());
         listView.addFooterView(autoLoadMoreView);
+    }
+
+    private void goToHeader(){
+        listView.setSelection(0);
+        listView.setScrollY(0);
+    }
+
+    @OnClick(R.id.topic_list_fragment_switch) void onSwitch(){
+        switchFine();
     }
 
     @OnItemClick(R.id.topic_list_fragment_listview)
@@ -242,9 +251,9 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
     private void switchFine() {
         isFine = !isFine;
         if (isFine) {
-            switchButton.setImageResource(R.mipmap.ic_option);
+            switchImageView.setImageResource(R.mipmap.ic_option);
         } else {
-            switchButton.setImageResource(R.mipmap.ic_option_2);
+            switchImageView.setImageResource(R.mipmap.ic_option_2);
         }
         refreshTopicList();
     }
@@ -311,6 +320,9 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
                             List<TopicDTO> topicDTOs = page.getContents();
                             if (currentPage == 0) {
                                 adapter.refresh(topicDTOs);
+                                if(topicDTOs.size() > 0){
+                                    //goToHeader();
+                                }
                             } else {
                                 adapter.addDatas(topicDTOs);
                             }
@@ -341,29 +353,15 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
 
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+        MyLog.e(tag, "srcollY=" + scrollY);
         // Translate overlay and image
-        float flexibleRange = mFlexibleSpaceImageHeight - mActionBarSize;
-        int minOverlayTransitionY = mActionBarSize - mOverlayView.getHeight();
-        ViewHelper.setTranslationY(mOverlayView, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
-        ViewHelper.setTranslationY(mImageView, ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0));
+        int baseColor = getResources().getColor(R.color.primary);
+        float alpha = Math.min(1, (float) scrollY / mFlexibleSpaceImageHeight);
+        mToolbarView.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha, baseColor));
+        ViewHelper.setTranslationY(mImageView, -scrollY / 2);
 
         // Translate list background
         ViewHelper.setTranslationY(mListBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
-
-        // Change alpha of overlay
-        ViewHelper.setAlpha(mOverlayView, ScrollUtils.getFloat((float) scrollY / flexibleRange, 0, 1));
-
-        // Scale title text
-        float scale = 1 + ScrollUtils.getFloat((flexibleRange - scrollY) / flexibleRange, 0, MAX_TEXT_SCALE_DELTA);
-        setPivotXToTitle();
-        ViewHelper.setPivotY(mTitleView, 0);
-        ViewHelper.setScaleX(mTitleView, scale);
-        ViewHelper.setScaleY(mTitleView, scale);
-
-        // Translate title text
-        int maxTitleTranslationY = (int) (mFlexibleSpaceImageHeight - mTitleView.getHeight() * scale);
-        int titleTranslationY = maxTitleTranslationY - scrollY;
-        ViewHelper.setTranslationY(mTitleView, titleTranslationY);
 
         // Translate FAB
         int maxFabTranslationY = mFlexibleSpaceImageHeight - mFab.getHeight() / 2;
@@ -375,11 +373,11 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
             // On pre-honeycomb, ViewHelper.setTranslationX/Y does not set margin,
             // which causes FAB's OnClickListener not working.
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFab.getLayoutParams();
-            lp.leftMargin = mOverlayView.getWidth() - mFabMargin - mFab.getWidth();
+            lp.leftMargin = mImageView.getWidth() - mFabMargin - mFab.getWidth();
             lp.topMargin = (int) fabTranslationY;
             mFab.requestLayout();
         } else {
-            ViewHelper.setTranslationX(mFab, mOverlayView.getWidth() - mFabMargin - mFab.getWidth());
+            ViewHelper.setTranslationX(mFab, mImageView.getWidth() - mFabMargin - mFab.getWidth());
             ViewHelper.setTranslationY(mFab, fabTranslationY);
         }
 
@@ -399,17 +397,6 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void setPivotXToTitle() {
-        Configuration config = getResources().getConfiguration();
-        if (Build.VERSION_CODES.JELLY_BEAN_MR1 <= Build.VERSION.SDK_INT
-                && config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
-            ViewHelper.setPivotX(mTitleView, TopicListFragment.this.getActivity().findViewById(android.R.id.content).getWidth());
-        } else {
-            ViewHelper.setPivotX(mTitleView, 0);
-        }
     }
 
     private void showFab() {

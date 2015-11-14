@@ -13,12 +13,6 @@
         android:src="@mipmap/user_head_bg"/>
 
     <View
-        android:id="@+id/overlay"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/flexible_space_image_height"
-        android:background="@color/primary" />
-
-    <View
         android:id="@+id/list_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,29 +36,20 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:minHeight="?attr/actionBarSize">
+        android:orientation="horizontal"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:gravity="center">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/topic_list_fragment_switch"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:minHeight="?attr/actionBarSize"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:src="@mipmap/ic_option_2"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/flexible_space_image_height"
-            android:background="@android:color/transparent" />
     </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView

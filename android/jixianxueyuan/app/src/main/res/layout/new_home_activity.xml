@@ -80,13 +80,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:clickable="true">
 
             <ImageView
                 android:id="@+id/tab_new_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:src="@mipmap/bottombar_add">
             </ImageView>
         </RelativeLayout>

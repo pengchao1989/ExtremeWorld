@@ -60,7 +60,7 @@ public class TopicListAdapter extends BaseAdapter {
         topicDTOList.clear();
         topicDTOList.addAll(list);
 
-        this.notifyDataSetChanged();
+        this.notifyDataSetInvalidated();
     }
 
     public void addDatas(List<TopicDTO> topicDTOs)
