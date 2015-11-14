@@ -8,20 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
+import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
@@ -30,7 +27,7 @@ import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.widget.ClickLoadMoreView;
+import com.jixianxueyuan.widget.AutoLoadMoreView;
 
 import java.util.List;
 
@@ -56,7 +53,7 @@ public class TopicListFragment extends Fragment {
     private String topicType = TopicType.ALL;
     private Long topicTaxonomyId;
 
-    private ClickLoadMoreView clickLoadMoreView;
+    private AutoLoadMoreView autoLoadMoreView;
     private int currentPage = 0;
     private int totalPage = 0;
     private boolean isFine = false;
@@ -64,39 +61,31 @@ public class TopicListFragment extends Fragment {
 
     TopicListAdapter adapter;
 
+    boolean isRequesting = false;
     boolean isRefreshData = false;
 
 
-    private TranslateAnimation showAddPanl;
-    private TranslateAnimation hideAddPanl;
-    private AlphaAnimation showBlandPanlAnimation;
-    private AlphaAnimation hideBlankPanlAnimation;
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new TopicListAdapter(this.getActivity());
 
-        Log.d(tag,"onCreate");
+        Log.d(tag, "onCreate");
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
-    {
-        Log.d(tag,"onCreateView");
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(tag, "onCreateView");
 
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
 
-        ButterKnife.inject(this,view);
+        ButterKnife.inject(this, view);
 
         Bundle bundle = getArguments();
-        if(bundle.containsKey(TopicType.TYPE))
-        {
+        if (bundle.containsKey(TopicType.TYPE)) {
             topicType = bundle.getString(TopicType.TYPE);
         }
-        if(bundle.containsKey("topicTaxonomyId"))
-        {
+        if (bundle.containsKey("topicTaxonomyId")) {
             topicTaxonomyId = bundle.getLong("topicTaxonomyId");
         }
 
@@ -111,19 +100,8 @@ public class TopicListFragment extends Fragment {
         });
         listView.addHeaderView(headView);
 
-        clickLoadMoreView = new ClickLoadMoreView(this.getActivity());
-        if(isRefreshData){
-            clickLoadMoreView.setVisibility(View.VISIBLE);
-        }else{
-            clickLoadMoreView.setVisibility(View.GONE);
-        }
-        clickLoadMoreView.setClickLoadMoreViewListener(new ClickLoadMoreView.ClickLoadMoreViewListener() {
-            @Override
-            public void runLoad() {
-                getNextPage();
-            }
-        });
-        listView.addFooterView(clickLoadMoreView);
+        autoLoadMoreView = new AutoLoadMoreView(this.getActivity());
+        listView.addFooterView(autoLoadMoreView);
 
         listView.setAdapter(adapter);
 
@@ -136,35 +114,48 @@ public class TopicListFragment extends Fragment {
             }
         });
 
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    //滚动到底部
+                    if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                        getNextPage();
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+
         return view;
     }
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
-        if(!isRefreshData)
-        {
+        if (!isRefreshData) {
             refreshTopicList();
         }
     }
 
-    @OnItemClick(R.id.topic_list_fragment_listview) void onItemClicked(int position)
-    {
-        if (position == 0){
+    @OnItemClick(R.id.topic_list_fragment_listview)
+    void onItemClicked(int position) {
+        if (position == 0 || position >= adapter.getCount()) {
             return;
         }
         TopicDTO topicDTO = adapter.getItem(position - 1);
 
         Intent intent = null;
-        switch (topicDTO.getType())
-        {
+        switch (topicDTO.getType()) {
             case TopicType.MOOD:
             case TopicType.NEWS:
             case TopicType.COURSE:
@@ -183,110 +174,85 @@ public class TopicListFragment extends Fragment {
 
         }
 
-        if(intent != null)
-        {
+        if (intent != null) {
             intent.putExtra(TopicDetailActivity.INTENT_TOPIC, topicDTO);
             startActivity(intent);
         }
     }
 
-    private void switchFine(){
+    private void switchFine() {
         isFine = !isFine;
-        if(isFine){
+        if (isFine) {
             switchButton.setImageResource(R.mipmap.ic_option);
-        }else {
+        } else {
             switchButton.setImageResource(R.mipmap.ic_option_2);
         }
         refreshTopicList();
     }
 
-    private void refreshTopicList()
-    {
+    private void refreshTopicList() {
         currentPage = 0;
 
         requestTopicList();
     }
 
-    private void getNextPage()
-    {
-
-        if(currentPage < totalPage )
-        {
+    private void getNextPage() {
+        if (currentPage < totalPage) {
             requestTopicList();
         }
-        else
-        {
-            Toast.makeText(this.getActivity(), R.string.not_more, Toast.LENGTH_SHORT).show();
-        }
-
     }
 
-    private void doHideFootView()
-    {
-        if(totalPage > 1)
-        {
-            if(clickLoadMoreView.isLoading() == true)
-            {
-                clickLoadMoreView.onFinish();
-            }
-
-            if(currentPage >= totalPage)
-            {
-                clickLoadMoreView.setOver();
-            }
-
+    private void doHideFootView() {
+        if (totalPage > 0 && currentPage >= totalPage) {
+            autoLoadMoreView.setOver();
+        }else {
+            autoLoadMoreView.reset();
         }
-
     }
 
-    private void requestTopicList()
-    {
+    private void requestTopicList() {
+        if (isRequesting) {
+            return;
+        }
+
         swipeRefreshLayout.setRefreshing(true);
-
-        RequestQueue queue = Volley.newRequestQueue(this.getActivity());
 
         String url = null;
 
-        if(isFine){
+        if (isFine) {
             url = ServerMethod.topic_fine() + "?page=" + (currentPage + 1);
-        }else {
-            switch (topicType)
-            {
+        } else {
+            switch (topicType) {
                 case TopicType.ALL:
                     url = ServerMethod.topic() + "?page=" + (currentPage + 1);
                     break;
                 case TopicType.DISCUSS:
                 case TopicType.NEWS:
-                    url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                    url = ServerMethod.topic() + "?type=" + topicType + "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
                     break;
                 case TopicType.S_VIDEO:
-                    url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                    url = ServerMethod.topic() + "?type=" + topicType + "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
                     break;
             }
         }
 
 
         MyLog.d(tag, "request url=" + url);
-        if(url == null)
-        {
+        if (url == null) {
             return;
         }
 
-        MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest(Request.Method.GET,url,TopicDTO.class,
+        MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest(Request.Method.GET, url, TopicDTO.class,
                 new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {
                     @Override
                     public void onResponse(MyResponse<MyPage<TopicDTO>> response) {
 
-                        if(response.getStatus() == MyResponse.status_ok)
-                        {
+                        if (response.getStatus() == MyResponse.status_ok) {
                             MyPage page = response.getContent();
                             List<TopicDTO> topicDTOs = page.getContents();
-                            if(currentPage == 0)
-                            {
+                            if (currentPage == 0) {
                                 adapter.refresh(topicDTOs);
-                            }
-                            else
-                            {
+                            } else {
                                 adapter.addDatas(topicDTOs);
                             }
 
@@ -298,17 +264,19 @@ public class TopicListFragment extends Fragment {
                             swipeRefreshLayout.setRefreshing(false);
 
                         }
+                        isRequesting = false;
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(TopicListFragment.this.getActivity(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        isRequesting = false;
                         swipeRefreshLayout.setRefreshing(false);
                         MyVolleyErrorHelper.showError(TopicListFragment.this.getActivity(), error);
                     }
                 });
 
-        queue.add(myPageRequest);
+        isRequesting = true;
+        MyApplication.getContext().getRequestQueue().add(myPageRequest);
     }
 }

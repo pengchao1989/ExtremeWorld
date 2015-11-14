@@ -80,7 +80,11 @@ public class TopicListAdapter extends BaseAdapter {
 
     @Override
     public TopicDTO getItem(int position) {
-        return topicDTOList.get(position);
+        if(position < topicDTOList.size()){
+            return topicDTOList.get(position);
+        }else {
+            return null;
+        }
     }
 
     @Override
