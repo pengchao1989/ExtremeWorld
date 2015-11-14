@@ -12,6 +12,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -63,13 +64,17 @@ public class TopicListFragment extends Fragment {
     @InjectView(R.id.top_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    /*以下两个参数用于定义topic范围，从arg传递过来*/
-    String topicType = TopicType.ALL;
-    Long topicTaxonomyId;
+    private ImageView switchButton;
 
-    LoadMoreView loadMoreView;
-    int currentPage = 0;
-    int totalPage = 0;
+    /*以下两个参数用于定义topic范围，从arg传递过来*/
+    private String topicType = TopicType.ALL;
+    private Long topicTaxonomyId;
+
+    private LoadMoreView loadMoreView;
+    private int currentPage = 0;
+    private int totalPage = 0;
+    private boolean isFine = false;
+
 
     TopicListAdapter adapter;
 
@@ -110,7 +115,14 @@ public class TopicListFragment extends Fragment {
         }
 
         //head view
-        View headView = LayoutInflater.from(this.getActivity()).inflate(R.layout.topic_list_head_view,null);
+        View headView = LayoutInflater.from(this.getActivity()).inflate(R.layout.topic_list_head_view, null);
+        switchButton = (ImageView) headView.findViewById(R.id.topic_list_head_switch);
+        switchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchFine();
+            }
+        });
         listView.addHeaderView(headView);
 
         loadMoreView = new LoadMoreView(this.getActivity());
@@ -258,6 +270,16 @@ public class TopicListFragment extends Fragment {
         startActivity(intent);
     }
 
+    private void switchFine(){
+        isFine = !isFine;
+        if(isFine){
+            switchButton.setImageResource(R.mipmap.ic_option);
+        }else {
+            switchButton.setImageResource(R.mipmap.ic_option_2);
+        }
+        refreshTopicList();
+    }
+
     private void refreshTopicList()
     {
         currentPage = 0;
@@ -305,19 +327,24 @@ public class TopicListFragment extends Fragment {
 
         String url = null;
 
-        switch (topicType)
-        {
-            case TopicType.ALL:
-                url = ServerMethod.topic() + "?page=" + (currentPage + 1);
-                break;
-            case TopicType.DISCUSS:
-            case TopicType.NEWS:
-                url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
-                break;
-            case TopicType.S_VIDEO:
-                url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
-                break;
+        if(isFine){
+            url = ServerMethod.topic_fine() + "?page=" + (currentPage + 1);
+        }else {
+            switch (topicType)
+            {
+                case TopicType.ALL:
+                    url = ServerMethod.topic() + "?page=" + (currentPage + 1);
+                    break;
+                case TopicType.DISCUSS:
+                case TopicType.NEWS:
+                    url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                    break;
+                case TopicType.S_VIDEO:
+                    url = ServerMethod.topic() + "?type=" + topicType +  "&taxonomyId=" + topicTaxonomyId + "&page=" + (currentPage + 1);
+                    break;
+            }
         }
+
 
         MyLog.d(tag, "request url=" + url);
         if(url == null)
