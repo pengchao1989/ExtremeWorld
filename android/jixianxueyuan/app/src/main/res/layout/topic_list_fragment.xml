@@ -6,145 +6,20 @@
     android:background="@color/background"
     >
 
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/top_list_swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/top_list_swiperefresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+        <ListView
+            android:id="@+id/topic_list_fragment_listview"
+            style="@style/ListView"
+            android:divider="@null"
+            android:scrollbars="none"
+            />
 
-            <ListView
-                android:id="@+id/topic_list_fragment_listview"
-                style="@style/ListView"
-                android:divider="@null"
-                android:scrollbars="none"
-                />
-
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/topic_list_fragment_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:src="@mipmap/ic_add_white_24dp"
-            fab:fab_colorNormal="@color/primary"
-            fab:fab_colorPressed="@color/primary_pressed"
-            fab:fab_colorRipple="@color/ripple"
-            android:visibility="gone"/>
-
-
-        <FrameLayout
-            android:id="@+id/topic_list_fragment_add_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            >
-
-            <View
-                android:id="@+id/topic_list_fragment_add_blank_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/semi_transparent"
-                android:clickable="true"
-                />
-
-            <LinearLayout
-                android:id="@+id/topic_list_fragment_add_button_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="bottom"
-                android:paddingTop="16dp"
-                android:paddingBottom="20dp"
-                android:background="@color/white"
-                android:weightSum="3"
-                >
-
-
-                <LinearLayout
-                    android:id="@+id/topic_list_fragment_add_discuss"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:clickable="true">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/btn_pb_add_pic"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/discuss"
-                        />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/topic_list_fragment_add_mood"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:clickable="true">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/btn_pb_add_expression"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mood"
-                        />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/topic_list_fragment_add_short_video"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:clickable="true"
-                    >
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/btn_pb_add_camera"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/short_video"
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-        </FrameLayout>
-
-
-    </FrameLayout>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

@@ -35,7 +35,6 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.LoadMoreView;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -53,14 +52,6 @@ public class TopicListFragment extends Fragment {
 
     @InjectView(R.id.topic_list_fragment_listview)
     ListView listView;
-    @InjectView(R.id.topic_list_fragment_fab)
-    FloatingActionButton floatingActionButton;
-    @InjectView(R.id.topic_list_fragment_add_layout)
-    FrameLayout addLayout;
-    @InjectView(R.id.topic_list_fragment_add_button_layout)
-    LinearLayout addButtonLayout;
-    @InjectView(R.id.topic_list_fragment_add_blank_view)
-    View addBlankView;
     @InjectView(R.id.top_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -141,43 +132,6 @@ public class TopicListFragment extends Fragment {
 
         listView.setAdapter(adapter);
 
-        floatingActionButton.attachToListView(listView);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //判定当前是哪个模块，确定add动作
-                switch (topicType)
-                {
-                    case TopicType.ALL:
-                        showAddLayout();
-                        break;
-                    case TopicType.NEWS:
-                        Intent intent = new Intent(TopicListFragment.this.getActivity(), CreateTopicActivity.class);
-                        intent.putExtra(TopicType.TYPE, TopicType.NEWS);
-                        intent.putExtra(TopicType.TOPIC_TAXONOMY_ID, topicTaxonomyId);
-                        startActivity(intent);
-                        break;
-                    case TopicType.DISCUSS:
-                        Intent intent2 = new Intent(TopicListFragment.this.getActivity(), CreateTopicActivity.class);
-                        intent2.putExtra(TopicType.TYPE, TopicType.DISCUSS);
-                        intent2.putExtra(TopicType.TOPIC_TAXONOMY_ID, topicTaxonomyId);
-                        startActivity(intent2);
-                        break;
-                    case TopicType.S_VIDEO:
-                        //Intent intent3 = new Intent(TopicListFragment.this.getActivity(), MediaRecorderActivity.class);
-                        //startActivity(intent3);
-                        break;
-
-                    case TopicType.VIDEO:
-                        floatingActionButton.setVisibility(View.GONE);
-                        break;
-                }
-                floatingActionButton.hide();
-
-            }
-        });
-
         swipeRefreshLayout.setColorSchemeResources(R.color.primary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -186,8 +140,6 @@ public class TopicListFragment extends Fragment {
                 refreshTopicList();
             }
         });
-
-        initTranslateAnimation();
 
         return view;
     }
@@ -206,11 +158,6 @@ public class TopicListFragment extends Fragment {
         {
             refreshTopicList();
         }
-    }
-
-    @OnClick(R.id.topic_list_fragment_add_blank_view)void cancelAdd()
-    {
-        hideAddLayout();
     }
 
     @OnItemClick(R.id.topic_list_fragment_listview) void onItemClicked(int position)
@@ -246,28 +193,6 @@ public class TopicListFragment extends Fragment {
             intent.putExtra(TopicDetailActivity.INTENT_TOPIC, topicDTO);
             startActivity(intent);
         }
-    }
-
-    @OnClick(R.id.topic_list_fragment_add_discuss)void onCreateDiscuss()
-    {
-        hideAddLayout();
-        Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
-        intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
-        startActivity(intent);
-    }
-    @OnClick(R.id.topic_list_fragment_add_mood)void onCreateMood()
-    {
-        hideAddLayout();
-        Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
-        intent.putExtra(TopicType.TYPE, TopicType.MOOD);
-        startActivity(intent);
-    }
-    @OnClick(R.id.topic_list_fragment_add_short_video)void onCreateShortVideo()
-    {
-        hideAddLayout();
-        Intent intent = new Intent(this.getActivity(), CreateTopicActivity.class);
-        intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
-        startActivity(intent);
     }
 
     private void switchFine(){
@@ -391,62 +316,4 @@ public class TopicListFragment extends Fragment {
 
         queue.add(myPageRequest);
     }
-
-    private void showAddLayout()
-    {
-        addButtonLayout.startAnimation(showAddPanl);
-        addBlankView.startAnimation(showBlandPanlAnimation);
-        addButtonLayout.setVisibility(View.VISIBLE);
-        addLayout.setVisibility(View.VISIBLE);
-
-    }
-
-    private void hideAddLayout()
-    {
-        addButtonLayout.startAnimation(hideAddPanl);
-        addBlankView.startAnimation(hideBlankPanlAnimation);
-    }
-
-    private void initTranslateAnimation()
-    {
-        hideAddPanl = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_PARENT,  1.0f);
-        hideAddPanl.setDuration(200);
-
-        showAddPanl = new TranslateAnimation(
-                Animation.RELATIVE_TO_SELF,  0.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 1.0f,
-                Animation.RELATIVE_TO_PARENT, 0.0f);
-        showAddPanl.setDuration(200);
-
-        showBlandPanlAnimation = new AlphaAnimation(0, 1);
-        showBlandPanlAnimation.setDuration(200);
-
-
-        hideBlankPanlAnimation = new AlphaAnimation(1,0);
-        hideBlankPanlAnimation.setDuration(200);
-        hideBlankPanlAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                addButtonLayout.setVisibility(View.GONE);
-                addLayout.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-    }
-
 }

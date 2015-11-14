@@ -18,10 +18,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.VideoListAdapter;
-import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.VideoDTO;
 import com.jixianxueyuan.server.ServerMethod;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -35,13 +33,8 @@ public class VideoListFragment extends Fragment{
 
     public static final String TAG = VideoListFragment.class.getSimpleName();
 
-
-
     @InjectView(R.id.video_list_fragment_listview)
     ListView listView;
-
-    @InjectView(R.id.video_list_fragment_fab)
-    FloatingActionButton floatingActionButton;
 
     VideoListAdapter adapter;
 
@@ -67,8 +60,6 @@ public class VideoListFragment extends Fragment{
         ButterKnife.inject(this, view);
 
         listView.setAdapter(adapter);
-
-        floatingActionButton.attachToListView(listView);
 
         return view;
     }
