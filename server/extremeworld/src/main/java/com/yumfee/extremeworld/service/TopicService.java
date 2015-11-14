@@ -187,7 +187,12 @@ public class TopicService
 		return topicDao.findByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId,pageRequest);
 	}
 	
-	
+	public Page<Topic> getFineTopic(Long hobbyId, int pageNumber, int pageSize, String sortType)
+	{
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		return topicDao.findByHobbyAndFine(hobbyId,pageRequest);
+		
+	}
 	
 	/**
 	 * 创建分页请求.

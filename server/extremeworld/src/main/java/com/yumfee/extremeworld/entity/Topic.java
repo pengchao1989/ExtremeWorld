@@ -45,6 +45,7 @@ public class Topic extends IdEntity
 	private Date createTime;
 	private Date updateTime;
 	private int status;
+	private int fine;
 	private String ip;
 	
 	private VideoDetail videoDetail;
@@ -159,6 +160,12 @@ public class Topic extends IdEntity
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+	public int getFine() {
+		return fine;
+	}
+	public void setFine(int fine) {
+		this.fine = fine;
 	}
 	public String getIp()
 	{

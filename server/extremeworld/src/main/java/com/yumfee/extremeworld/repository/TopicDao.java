@@ -30,5 +30,8 @@ public interface TopicDao extends PagingAndSortingRepository<Topic, Long>
 	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE h.id=? AND type=? AND t.taxonomy.id=?")
 	public Page<Topic> findByHobbyAndTypeAndTaxonomy(Long hobbyId,  String type, Long taxonomyId,Pageable pageable);
 	
+	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE h.id=? AND t.fine=1")
+	public Page<Topic> findByHobbyAndFine(Long hobbyId, Pageable pageable);
+	
 	
 }

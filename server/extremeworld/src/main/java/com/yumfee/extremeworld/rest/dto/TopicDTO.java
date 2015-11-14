@@ -21,6 +21,7 @@ public class TopicDTO
 	private int agreeCount;
 	private Date createTime;
 	private int status;
+	private int fine;
 	
 	private UserMinDTO user;
 	
@@ -121,9 +122,12 @@ public class TopicDTO
 	{
 		this.status = status;
 	}
-	
-	
-
+	public int getFine() {
+		return fine;
+	}
+	public void setFine(int fine) {
+		this.fine = fine;
+	}
 	public VideoDetailDTO getVideoDetail() {
 		return videoDetail;
 	}

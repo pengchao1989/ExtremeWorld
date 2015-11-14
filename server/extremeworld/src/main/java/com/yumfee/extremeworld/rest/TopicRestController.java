@@ -118,6 +118,24 @@ public class TopicRestController
 		return MyResponse.ok(myTopicPage,true);
 	}
 	
+	@RequestMapping(value = "/fine", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public MyResponse getTopicOfFine(
+			@PathVariable String hobby,
+			@RequestParam (value = "type", defaultValue = "all") String type,
+			@RequestParam(value = "taxonomyId", defaultValue = "0") Long taxonomyId,
+			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
+	{
+		long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		
+		Page<Topic> topicPage = topicService.getFineTopic(hobbyId,pageNumber, pageSize, sortType);
+		
+		MyPage<TopicDTO, Topic> myTopicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPage);
+		
+		return MyResponse.ok(myTopicPage,true);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)
 	public MyResponse create(@RequestBody Topic topic, UriComponentsBuilder uriBuilder)
 	{
