@@ -9,11 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.config.TopicType;
@@ -34,13 +30,12 @@ import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.widget.LoadMoreView;
+import com.jixianxueyuan.widget.ClickLoadMoreView;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
@@ -61,7 +56,7 @@ public class TopicListFragment extends Fragment {
     private String topicType = TopicType.ALL;
     private Long topicTaxonomyId;
 
-    private LoadMoreView loadMoreView;
+    private ClickLoadMoreView clickLoadMoreView;
     private int currentPage = 0;
     private int totalPage = 0;
     private boolean isFine = false;
@@ -116,19 +111,19 @@ public class TopicListFragment extends Fragment {
         });
         listView.addHeaderView(headView);
 
-        loadMoreView = new LoadMoreView(this.getActivity());
+        clickLoadMoreView = new ClickLoadMoreView(this.getActivity());
         if(isRefreshData){
-            loadMoreView.setVisibility(View.VISIBLE);
+            clickLoadMoreView.setVisibility(View.VISIBLE);
         }else{
-            loadMoreView.setVisibility(View.GONE);
+            clickLoadMoreView.setVisibility(View.GONE);
         }
-        loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+        clickLoadMoreView.setClickLoadMoreViewListener(new ClickLoadMoreView.ClickLoadMoreViewListener() {
             @Override
             public void runLoad() {
                 getNextPage();
             }
         });
-        listView.addFooterView(loadMoreView);
+        listView.addFooterView(clickLoadMoreView);
 
         listView.setAdapter(adapter);
 
@@ -230,14 +225,14 @@ public class TopicListFragment extends Fragment {
     {
         if(totalPage > 1)
         {
-            if(loadMoreView.isLoading() == true)
+            if(clickLoadMoreView.isLoading() == true)
             {
-                loadMoreView.onFinish();
+                clickLoadMoreView.onFinish();
             }
 
             if(currentPage >= totalPage)
             {
-                loadMoreView.setOver();
+                clickLoadMoreView.setOver();
             }
 
         }

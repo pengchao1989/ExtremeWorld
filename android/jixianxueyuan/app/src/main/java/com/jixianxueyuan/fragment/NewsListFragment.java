@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.widget.LoadMoreView;
 
 import java.util.List;
 

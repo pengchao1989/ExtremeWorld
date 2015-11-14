@@ -14,7 +14,7 @@ import com.jixianxueyuan.R;
 /**
  * Created by pengchao on 6/27/15.
  */
-public class LoadMoreView extends RelativeLayout {
+public class ClickLoadMoreView extends RelativeLayout {
 
     Context context;
 
@@ -26,16 +26,16 @@ public class LoadMoreView extends RelativeLayout {
     boolean isOver = false;
 
 
-    LoadMoreViewListener loadMoreViewListener = null;
+    ClickLoadMoreViewListener clickLoadMoreViewListener = null;
 
-    public LoadMoreView(Context context)
+    public ClickLoadMoreView(Context context)
     {
         super(context);
         this.context = context;
         initView();
     }
 
-    public LoadMoreView(Context context, AttributeSet attrs)
+    public ClickLoadMoreView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         this.context = context;
@@ -44,19 +44,19 @@ public class LoadMoreView extends RelativeLayout {
 
     private void initView()
     {
-        View.inflate(context, R.layout.loadmore, this);
-        loadButton = (Button) findViewById(R.id.loadmore_button);
+        View.inflate(context, R.layout.click_loadmore, this);
+        loadButton = (Button) findViewById(R.id.click_loadmore_button);
         loadButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!isLoading && isOver==false)
                 {
-                    if(loadMoreViewListener != null){
-                        loadMoreViewListener.runLoad();
+                    if(clickLoadMoreViewListener != null){
+                        clickLoadMoreViewListener.runLoad();
                     }
 
-                    LoadMoreView.this.loadButton.setVisibility(View.GONE);
-                    LoadMoreView.this.progressBar.setVisibility(View.VISIBLE);
+                    ClickLoadMoreView.this.loadButton.setVisibility(View.GONE);
+                    ClickLoadMoreView.this.progressBar.setVisibility(View.VISIBLE);
                     isLoading = true;
                 }
                 else if(isOver == true)
@@ -66,7 +66,7 @@ public class LoadMoreView extends RelativeLayout {
             }
         });
 
-        progressBar = (ProgressBar) findViewById(R.id.loadmore_progress);
+        progressBar = (ProgressBar) findViewById(R.id.click_loadmore_progress);
     }
 
     public boolean isLoading()
@@ -82,22 +82,22 @@ public class LoadMoreView extends RelativeLayout {
 
     public void onFinish()
     {
-        if(LoadMoreView.this.getVisibility() != VISIBLE)
+        if(ClickLoadMoreView.this.getVisibility() != VISIBLE)
         {
-            LoadMoreView.this.setVisibility(VISIBLE);
+            ClickLoadMoreView.this.setVisibility(VISIBLE);
         }
 
         isLoading = false;
-        LoadMoreView.this.loadButton.setVisibility(View.VISIBLE);
-        LoadMoreView.this.progressBar.setVisibility(View.GONE);
+        ClickLoadMoreView.this.loadButton.setVisibility(View.VISIBLE);
+        ClickLoadMoreView.this.progressBar.setVisibility(View.GONE);
     }
 
-    public void setLoadMoreViewListener(LoadMoreViewListener loadMoreViewListener)
+    public void setClickLoadMoreViewListener(ClickLoadMoreViewListener clickLoadMoreViewListener)
     {
-        this.loadMoreViewListener = loadMoreViewListener;
+        this.clickLoadMoreViewListener = clickLoadMoreViewListener;
     }
 
-    public interface LoadMoreViewListener
+    public interface ClickLoadMoreViewListener
     {
         void runLoad();
     }

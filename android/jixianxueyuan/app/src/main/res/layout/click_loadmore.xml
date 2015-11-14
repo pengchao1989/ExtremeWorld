@@ -8,7 +8,7 @@
     >
 
     <Button
-        android:id="@+id/loadmore_button"
+        android:id="@+id/click_loadmore_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loadmore"
@@ -16,12 +16,11 @@
         />
 
     <ProgressBar
-        android:id="@+id/loadmore_progress"
+        android:id="@+id/click_loadmore_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:visibility="gone"
         />
-
-
+    
 </LinearLayout>

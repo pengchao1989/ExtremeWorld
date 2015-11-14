@@ -1,11 +1,9 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,7 +24,7 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.widget.LoadMoreView;
+import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -49,7 +47,7 @@ public class UserHomeActivity extends BaseActivity {
     UserMinDTO userMinDTO;
     UserDTO userDTO;
 
-    LoadMoreView loadMoreView;
+    ClickLoadMoreView clickLoadMoreView;
     TextView signatureTextView;
 
 

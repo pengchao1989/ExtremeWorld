@@ -48,7 +48,7 @@ import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
-import com.jixianxueyuan.widget.LoadMoreView;
+import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
@@ -67,8 +67,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by pengchao on 5/22/15.
@@ -92,7 +90,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     View headView;
     HeadViewHolder headViewHolder;
-    LoadMoreView loadMoreButton;
+    ClickLoadMoreView loadMoreButton;
 
     ReplyWidget replyWidget;
 
@@ -196,9 +194,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     private void initFooterView()
     {
 
-        loadMoreButton = new LoadMoreView(this);
+        loadMoreButton = new ClickLoadMoreView(this);
         loadMoreButton.setVisibility(View.GONE);
-        loadMoreButton.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+        loadMoreButton.setClickLoadMoreViewListener(new ClickLoadMoreView.ClickLoadMoreViewListener() {
             @Override
             public void runLoad() {
                 getNextPage();

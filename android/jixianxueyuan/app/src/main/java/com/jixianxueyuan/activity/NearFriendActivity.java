@@ -1,6 +1,5 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,7 +29,7 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.widget.LoadMoreView;
+import com.jixianxueyuan.widget.ClickLoadMoreView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -51,7 +50,7 @@ public class NearFriendActivity extends BaseActivity  {
 
     NearFriendListAdapter adapter;
 
-    LoadMoreView loadMoreView;
+    ClickLoadMoreView clickLoadMoreView;
     int currentPage = 0;
     int totalPage = 0;
 
@@ -83,16 +82,16 @@ public class NearFriendActivity extends BaseActivity  {
             }
         });
 
-        loadMoreView = new LoadMoreView(this);
-        loadMoreView.setVisibility(View.GONE);
-        loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+        clickLoadMoreView = new ClickLoadMoreView(this);
+        clickLoadMoreView.setVisibility(View.GONE);
+        clickLoadMoreView.setClickLoadMoreViewListener(new ClickLoadMoreView.ClickLoadMoreViewListener() {
             @Override
             public void runLoad() {
                 nextPage();
             }
         });
 
-        listView.addFooterView(loadMoreView);
+        listView.addFooterView(clickLoadMoreView);
 
         listView.setAdapter(adapter);
 
@@ -148,14 +147,14 @@ public class NearFriendActivity extends BaseActivity  {
     {
         if(totalPage > 1)
         {
-            if(loadMoreView.isLoading() == true)
+            if(clickLoadMoreView.isLoading() == true)
             {
-                loadMoreView.onFinish();
+                clickLoadMoreView.onFinish();
             }
 
             if(currentPage >= totalPage)
             {
-                loadMoreView.setOver();
+                clickLoadMoreView.setOver();
             }
 
         }

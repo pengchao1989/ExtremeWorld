@@ -1,6 +1,5 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,7 +23,7 @@ import com.jixianxueyuan.dto.RemindDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.widget.LoadMoreView;
+import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 
 import java.util.List;
@@ -48,7 +47,7 @@ public class RemindListActivity extends BaseActivity {
     @InjectView(R.id.remind_list_listview)
     ListView listView;
 
-    LoadMoreView loadMoreView;
+    ClickLoadMoreView clickLoadMoreView;
 
 
     RemindListAdapter adapter;
@@ -87,29 +86,29 @@ public class RemindListActivity extends BaseActivity {
     }
 
     private void initFootView(){
-        loadMoreView = new LoadMoreView(this);
-        loadMoreView.setVisibility(View.GONE);
-        loadMoreView.setLoadMoreViewListener(new LoadMoreView.LoadMoreViewListener() {
+        clickLoadMoreView = new ClickLoadMoreView(this);
+        clickLoadMoreView.setVisibility(View.GONE);
+        clickLoadMoreView.setClickLoadMoreViewListener(new ClickLoadMoreView.ClickLoadMoreViewListener() {
             @Override
             public void runLoad() {
                 getNextPage();
             }
         });
-        listView.addFooterView(loadMoreView);
+        listView.addFooterView(clickLoadMoreView);
     }
 
     private void doHideFootView()
     {
         if(totalPage > 1)
         {
-            if(loadMoreView.isLoading() == true)
+            if(clickLoadMoreView.isLoading() == true)
             {
-                loadMoreView.onFinish();
+                clickLoadMoreView.onFinish();
             }
 
             if(currentPage >= totalPage)
             {
-                loadMoreView.setOver();
+                clickLoadMoreView.setOver();
             }
 
         }
