@@ -28,6 +28,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.FlexibleSpaceWithImageWithViewPagerTabActivity;
+import com.jixianxueyuan.commons.ScrollReceive;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
@@ -116,10 +117,14 @@ public class FlexibleSpaceWithImageListViewFragment extends FlexibleSpaceWithIma
         ViewHelper.setTranslationY(listBackgroundView, Math.max(0, -scrollY + flexibleSpaceImageHeight));
 
         // Also pass this event to parent Activity
-        FlexibleSpaceWithImageWithViewPagerTabActivity parentActivity =
+/*        FlexibleSpaceWithImageWithViewPagerTabActivity parentActivity =
                 (FlexibleSpaceWithImageWithViewPagerTabActivity) getActivity();
         if (parentActivity != null) {
             parentActivity.onScrollChanged(scrollY, (ObservableListView) view.findViewById(R.id.scroll));
+        }*/
+        ScrollReceive parentFragment = (ScrollReceive) getParentFragment();
+        if (parentFragment != null) {
+            parentFragment.onScrollChanged(scrollY, (ObservableListView) view.findViewById(R.id.scroll));
         }
     }
 

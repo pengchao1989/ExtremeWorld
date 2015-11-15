@@ -19,7 +19,7 @@
         android:background="#FFFFFF">
 
         <RelativeLayout
-            android:id="@+id/tab_trends_layout"
+            android:id="@+id/tab_dynamic_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

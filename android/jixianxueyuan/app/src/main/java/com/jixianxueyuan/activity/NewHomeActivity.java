@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
+import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
@@ -26,7 +27,7 @@ import butterknife.InjectView;
 public class NewHomeActivity extends FragmentActivity implements View.OnClickListener {
 
     @InjectView(R.id.tab_new_layout)RelativeLayout newLayout;
-    @InjectView(R.id.tab_trends_layout)RelativeLayout trendsLayout;
+    @InjectView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
     @InjectView(R.id.tab_discover_layout)RelativeLayout discoverLayout;
     @InjectView(R.id.tab_mine_layout)RelativeLayout mineLayout;
     @InjectView(R.id.tab_market_layout)RelativeLayout marketLayout;
@@ -43,7 +44,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     @InjectView(R.id.tab_market_text)TextView marketTextView;
 
     private FragmentManager fragmentManager;
-    private TopicListFragment topicListFragment;
+    private DynamicHomeFragment topicListFragment;
     private DiscoveryFragment discoveryFragment;
     private MineFragment mineFragment;
     private MarketFragment marketFragment;
@@ -82,7 +83,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
 
-            case R.id.tab_trends_layout:
+            case R.id.tab_dynamic_layout:
                 setChioceItem(0);
 /*                Intent intent = new Intent(NewHomeActivity.this, CreateTopicPreActivity.class);
                 startActivity(intent);*/
@@ -118,7 +119,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 trendsTextView.setTextColor(getResources().getColor(R.color.primary));
                 if (topicListFragment == null) {
                     // 如果fg1为空，则创建一个并添加到界面上
-                    topicListFragment = new TopicListFragment();
+                    topicListFragment = new DynamicHomeFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("topicType", TopicType.ALL);
                     topicListFragment.setArguments(bundle);
