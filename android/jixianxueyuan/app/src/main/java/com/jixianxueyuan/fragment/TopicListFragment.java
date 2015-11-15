@@ -25,6 +25,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.FlexibleSpaceWithImageWithViewPagerTabActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.app.Mine;
@@ -188,12 +189,6 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
 
         mToolbarView.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, getResources().getColor(R.color.primary)));
 
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(TopicListFragment.this.getActivity(), "FAB is clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
         mFabMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
         ViewHelper.setScaleX(mFab, 0);
         ViewHelper.setScaleY(mFab, 0);
@@ -207,8 +202,13 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
     }
 
     private void goToHeader(){
-        listView.setSelection(0);
-        listView.setScrollY(0);
+/*        listView.setSelection(0);
+        listView.setScrollY(0);*/
+        listView.scrollVerticallyTo(0);
+    }
+    @OnClick(R.id.fab)void onFab(){
+        Intent intent = new Intent(this.getActivity(), FlexibleSpaceWithImageWithViewPagerTabActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.topic_list_fragment_switch) void onSwitch(){
@@ -321,7 +321,7 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
                             if (currentPage == 0) {
                                 adapter.refresh(topicDTOs);
                                 if(topicDTOs.size() > 0){
-                                    //goToHeader();
+                                    goToHeader();
                                 }
                             } else {
                                 adapter.addDatas(topicDTOs);
