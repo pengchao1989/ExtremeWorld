@@ -60,7 +60,7 @@
         android:layout_gravity="center_horizontal"
         android:paddingTop="8dp"
         android:background="@android:color/transparent"
-        android:src="@mipmap/ic_option_2"/>
+        android:src="@mipmap/ic_option"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/fab"

@@ -29,6 +29,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.FlexibleSpaceWithImageWithViewPagerTabActivity;
 import com.jixianxueyuan.commons.ScrollReceive;
+import com.jixianxueyuan.util.MyLog;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
@@ -86,6 +87,7 @@ public class FlexibleSpaceWithImageListViewFragment extends FlexibleSpaceWithIma
     @SuppressWarnings("NewApi")
     @Override
     public void setScrollY(int scrollY, int threshold) {
+        MyLog.d("FlexibleSpaceWithImageListViewFragment", "setScrollY");
         View view = getView();
         if (view == null) {
             return;
@@ -135,7 +137,15 @@ public class FlexibleSpaceWithImageListViewFragment extends FlexibleSpaceWithIma
     public static ArrayList<String> getDummyData(int num) {
         ArrayList<String> items = new ArrayList<>();
         for (int i = 1; i <= num; i++) {
-            items.add("Item " + i);
+
+            int mod = i % 3;
+            if(mod == 0){
+                items.add("Item " + i);
+            }else if (mod == 1){
+                items.add("Item \n Item" + i);
+            }else {
+                items.add("Item \n Item \n item" + i);
+            }
         }
         return items;
     }

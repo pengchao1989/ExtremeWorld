@@ -13,24 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.ImageLoaderConfig;
-import com.jixianxueyuan.widget.google.SlidingTabLayout;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -40,15 +40,14 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
     protected static final float MAX_TEXT_SCALE_DELTA = 0.3f;
 
-    @InjectView(R.id.fab)
-    CircleImageView mFab;
+    @InjectView(R.id.fab) CircleImageView mFab;
+    @InjectView(R.id.sliding_tabs) ImageView mSlidingTabLayout;
+    @InjectView(R.id.image) View imageView;
+    @InjectView(R.id.overlay) View overlayView;
+    @InjectView(R.id.title) TextView titleView;
+    @InjectView(R.id.pager) ViewPager mPager;
 
-    private View imageView;
-    private View overlayView;
-    private TextView titleView;
-    private ViewPager mPager;
     private NavigationAdapter mPagerAdapter;
-    private ImageView mSlidingTabLayout;
     private int mFlexibleSpaceHeight;
     private int mFlexibleSpaceShowFabOffset;
     private int mTabHeight;
@@ -57,6 +56,8 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
     private MyApplication application;
     private Mine mine;
+
+    private boolean mIsFine = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,20 +72,37 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         View view = inflater.inflate(R.layout.dynamic_home_fragment,container,false);
         ButterKnife.inject(this, view);
 
-        imageView = view.findViewById(R.id.image);
-        overlayView = view.findViewById(R.id.overlay);
-        titleView = (TextView) view.findViewById(R.id.title);
         titleView.setText(mine.getUserInfo().getSignature());
 
         mPagerAdapter = new NavigationAdapter(this.getChildFragmentManager());
-        mPager = (ViewPager) view.findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0){
+                    mIsFine = true;
+                    mSlidingTabLayout.setImageResource(R.mipmap.ic_option);
+                }else if(position == 1){
+                    mIsFine = false;
+                    mSlidingTabLayout.setImageResource(R.mipmap.ic_option_2);
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
         mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
 
-
-        mSlidingTabLayout = (ImageView) view.findViewById(R.id.sliding_tabs);
 
         mFabMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
         ViewHelper.setScaleX(mFab, 0);
@@ -254,13 +272,25 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         }
     }
 
+
+    @OnClick(R.id.sliding_tabs) void onSwitch(){
+        mIsFine = !mIsFine;
+        if (mIsFine){
+            mPager.setCurrentItem(0);
+            mSlidingTabLayout.setImageResource(R.mipmap.ic_option);
+        }else {
+            mPager.setCurrentItem(1);
+            mSlidingTabLayout.setImageResource(R.mipmap.ic_option_2);
+        }
+    }
+
     /**
      * This adapter provides three types of fragments as an example.
      * {@linkplain #createItem(int)} should be modified if you use this example for your app.
      */
     private static class NavigationAdapter extends CacheFragmentStatePagerAdapter {
 
-        private static final String[] TITLES = new String[]{"Applepie", "Butter Cookie", "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread", "Honeycomb", "Ice Cream Sandwich", "Jelly Bean", "KitKat", "Lollipop"};
+        private static final String[] TITLES = new String[]{"fine", "near"};
 
         private int mScrollY;
 
@@ -275,27 +305,26 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         @Override
         protected Fragment createItem(int position) {
             FlexibleSpaceWithImageBaseFragment f;
-            final int pattern = position % 4;
-            switch (pattern) {
+            Bundle args = new Bundle();
+            switch (position) {
                 case 0: {
-                    f = new FlexibleSpaceWithImageListViewFragment();
+                    f = new TopicListFragment();
+                    args.putBoolean(TopicListFragment.INTENT_IS_FINE, true);
+                    args.putBoolean(TopicListFragment.INTENT_IS_FIRST, true);
                     break;
                 }
                 case 1: {
-                    f = new FlexibleSpaceWithImageListViewFragment();
+                    f = new TopicListFragment();
+                    args.putBoolean(TopicListFragment.INTENT_IS_FINE, false);
                     break;
                 }
-                case 2: {
-                    f = new FlexibleSpaceWithImageListViewFragment();
-                    break;
-                }
-                case 3:
                 default: {
-                    f = new FlexibleSpaceWithImageListViewFragment();
+                    f = new TopicListFragment();
                     break;
                 }
             }
             f.setArguments(mScrollY);
+            f.setArguments(args);
             return f;
         }
 

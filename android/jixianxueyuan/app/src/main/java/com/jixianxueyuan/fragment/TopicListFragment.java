@@ -1,36 +1,28 @@
 package com.jixianxueyuan.fragment;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.FlexibleSpaceWithImageWithViewPagerTabActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
@@ -41,46 +33,28 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
 import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by pengchao on 2015/4/12.
  */
-public class TopicListFragment extends Fragment implements ObservableScrollViewCallbacks {
+public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<ObservableListView> {
 
     public static final String tag = TopicListFragment.class.getSimpleName();
+    public static final String INTENT_IS_FIRST = "INTENT_IS_FIRST";
+    public static final String INTENT_IS_FINE = "INTENT_IS_FINE";
 
-    private static final float MAX_TEXT_SCALE_DELTA = 0.3f;
-    @InjectView(R.id.topic_list_fragment_listview)
+    @InjectView(R.id.scroll)
     ObservableListView listView;
-    @InjectView(R.id.top_list_swiperefresh)
-    SwipeRefreshLayout swipeRefreshLayout;
-    @InjectView(R.id.topic_list_fragment_switch)
-    ImageView switchImageView;
+/*    @InjectView(R.id.top_list_swiperefresh)
+    SwipeRefreshLayout swipeRefreshLayout;*/
     @InjectView(R.id.list_background)
     View mListBackgroundView;
-    @InjectView(R.id.image)
-    ImageView mImageView;
-    @InjectView(R.id.fab)
-    CircleImageView mFab;
-    @InjectView(R.id.toolbar)
-    LinearLayout mToolbarView;
-    private View paddingView;
-
-    private int mActionBarSize;
-    private int mFlexibleSpaceShowFabOffset;
-    private int mFlexibleSpaceImageHeight;
-    private int mFabMargin;
-    private boolean mFabIsShown;
 
 
     /*以下两个参数用于定义topic范围，从arg传递过来*/
@@ -94,20 +68,17 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
 
 
     TopicListAdapter adapter;
+    boolean isFirst = false;
+    boolean isInitData = false;
+    boolean isInitView = false;
 
     boolean isRequesting = false;
     boolean isRefreshData = false;
-
-    private MyApplication application;
-    private Mine mine;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new TopicListAdapter(this.getActivity());
-        application = (MyApplication) this.getActivity().getApplicationContext();
-        mine = application.getMine();
     }
 
     @Override
@@ -125,20 +96,27 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
         if (bundle.containsKey("topicTaxonomyId")) {
             topicTaxonomyId = bundle.getLong("topicTaxonomyId");
         }
+        if(bundle.containsKey(INTENT_IS_FINE)){
+            isFine = bundle.getBoolean(INTENT_IS_FINE);
+        }
+        if(bundle.containsKey(INTENT_IS_FIRST)){
+            isFirst = bundle.getBoolean(INTENT_IS_FIRST);
+        }
 
-        initHeadView();
+        initHeaderView(view);
         initFooterView();
 
         listView.setAdapter(adapter);
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
+/*        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
+                MyLog.d(tag, "onRefresh");
                 refreshTopicList();
             }
-        });
+        });*/
 
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -157,6 +135,7 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
             }
         });
 
+        isInitView = true;
         return view;
     }
 
@@ -168,54 +147,65 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
     @Override
     public void onResume() {
         super.onResume();
-        if (!isRefreshData) {
+        if (!isRefreshData && isFirst) {
             refreshTopicList();
         }
     }
 
-    private void initHeadView(){
-        mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
-        mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
-        mActionBarSize = 0;
-        paddingView = new View(this.getActivity());
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        if(isVisibleToUser && isInitView && !isFirst){
+            if(!isInitData){
+                isInitData = true;
+                MyLog.d(tag, "setUserVisibleHint");
+                refreshTopicList();
+            }
+        }
+    }
+
+    private void initHeaderView(View view){
+        View paddingView = new View(getActivity());
+        final int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
-                mFlexibleSpaceImageHeight);
+                flexibleSpaceImageHeight);
         paddingView.setLayoutParams(lp);
 
         // This is required to disable header's list selector effect
         paddingView.setClickable(true);
+
         listView.addHeaderView(paddingView);
+
+        listView.setTouchInterceptionViewGroup((ViewGroup) view.findViewById(R.id.fragment_root));
+
+        // Scroll to the specified offset after layout
+        Bundle args = getArguments();
+        if (args != null && args.containsKey(ARG_SCROLL_Y)) {
+            final int scrollY = args.getInt(ARG_SCROLL_Y, 0);
+            ScrollUtils.addOnGlobalLayoutListener(listView, new Runnable() {
+                @SuppressLint("NewApi")
+                @Override
+                public void run() {
+                    int offset = scrollY % flexibleSpaceImageHeight;
+                    listView.setSelectionFromTop(0, -offset);
+                }
+            });
+            updateFlexibleSpace(scrollY, view);
+        } else {
+            updateFlexibleSpace(0, view);
+        }
+
         listView.setScrollViewCallbacks(this);
 
-        mToolbarView.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, getResources().getColor(R.color.primary)));
-
-        mFabMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-        ViewHelper.setScaleX(mFab, 0);
-        ViewHelper.setScaleY(mFab, 0);
-
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), mFab, ImageLoaderConfig.getAvatarOption(this.getActivity()));
+        updateFlexibleSpace(0, view);
     }
+
 
     private void initFooterView(){
         autoLoadMoreView = new AutoLoadMoreView(this.getActivity());
         listView.addFooterView(autoLoadMoreView);
     }
 
-    private void goToHeader(){
-/*        listView.setSelection(0);
-        listView.setScrollY(0);*/
-        listView.scrollVerticallyTo(0);
-    }
-    @OnClick(R.id.fab)void onFab(){
-        Intent intent = new Intent(this.getActivity(), FlexibleSpaceWithImageWithViewPagerTabActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.topic_list_fragment_switch) void onSwitch(){
-        switchFine();
-    }
-
-    @OnItemClick(R.id.topic_list_fragment_listview)
+    @OnItemClick(R.id.scroll)
     void onItemClicked(int position) {
         if (position == 0 || position >= adapter.getCount()) {
             return;
@@ -248,16 +238,6 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
         }
     }
 
-    private void switchFine() {
-        isFine = !isFine;
-        if (isFine) {
-            switchImageView.setImageResource(R.mipmap.ic_option);
-        } else {
-            switchImageView.setImageResource(R.mipmap.ic_option_2);
-        }
-        refreshTopicList();
-    }
-
     private void refreshTopicList() {
         currentPage = 0;
 
@@ -283,7 +263,7 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
             return;
         }
 
-        swipeRefreshLayout.setRefreshing(true);
+        //swipeRefreshLayout.setRefreshing(true);
 
         String url = null;
 
@@ -320,9 +300,6 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
                             List<TopicDTO> topicDTOs = page.getContents();
                             if (currentPage == 0) {
                                 adapter.refresh(topicDTOs);
-                                if(topicDTOs.size() > 0){
-                                    goToHeader();
-                                }
                             } else {
                                 adapter.addDatas(topicDTOs);
                             }
@@ -332,7 +309,7 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
                             totalPage = page.getTotalPages();
                             currentPage = page.getCurPage() + 1;
                             doHideFootView();
-                            swipeRefreshLayout.setRefreshing(false);
+                            //swipeRefreshLayout.setRefreshing(false);
 
                         }
                         isRequesting = false;
@@ -342,7 +319,7 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         isRequesting = false;
-                        swipeRefreshLayout.setRefreshing(false);
+                        //swipeRefreshLayout.setRefreshing(false);
                         MyVolleyErrorHelper.showError(TopicListFragment.this.getActivity(), error);
                     }
                 });
@@ -351,67 +328,44 @@ public class TopicListFragment extends Fragment implements ObservableScrollViewC
         MyApplication.getContext().getRequestQueue().add(myPageRequest);
     }
 
+    @SuppressWarnings("NewApi")
     @Override
-    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-        MyLog.e(tag, "srcollY=" + scrollY);
-        // Translate overlay and image
-        int baseColor = getResources().getColor(R.color.primary);
-        float alpha = Math.min(1, (float) scrollY / mFlexibleSpaceImageHeight);
-        mToolbarView.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha, baseColor));
-        ViewHelper.setTranslationY(mImageView, -scrollY / 2);
+    public void setScrollY(int scrollY, int threshold) {
+        MyLog.d(tag, "setScrollY");
+        View view = getView();
+        if (view == null) {
+            return;
+        }
+        ObservableListView listView = (ObservableListView) view.findViewById(R.id.scroll);
+        if (listView == null) {
+            return;
+        }
+        View firstVisibleChild = listView.getChildAt(0);
+        if (firstVisibleChild != null) {
+            int offset = scrollY;
+            int position = 0;
+            if (threshold < scrollY) {
+                int baseHeight = firstVisibleChild.getHeight();
+                position = scrollY / baseHeight;
+                offset = scrollY % baseHeight;
+            }
+            listView.setSelectionFromTop(position, -offset);
+        }
+    }
+
+    @Override
+    protected void updateFlexibleSpace(int scrollY, View view) {
+        int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+
+        View listBackgroundView = view.findViewById(R.id.list_background);
 
         // Translate list background
-        ViewHelper.setTranslationY(mListBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+        ViewHelper.setTranslationY(listBackgroundView, Math.max(0, -scrollY + flexibleSpaceImageHeight));
 
-        // Translate FAB
-        int maxFabTranslationY = mFlexibleSpaceImageHeight - mFab.getHeight() / 2;
-        float fabTranslationY = ScrollUtils.getFloat(
-                -scrollY + mFlexibleSpaceImageHeight - mFab.getHeight() / 2,
-                mActionBarSize - mFab.getHeight() / 2,
-                maxFabTranslationY);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            // On pre-honeycomb, ViewHelper.setTranslationX/Y does not set margin,
-            // which causes FAB's OnClickListener not working.
-            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFab.getLayoutParams();
-            lp.leftMargin = mImageView.getWidth() - mFabMargin - mFab.getWidth();
-            lp.topMargin = (int) fabTranslationY;
-            mFab.requestLayout();
-        } else {
-            ViewHelper.setTranslationX(mFab, mImageView.getWidth() - mFabMargin - mFab.getWidth());
-            ViewHelper.setTranslationY(mFab, fabTranslationY);
-        }
-
-        // Show/hide FAB
-        if (fabTranslationY < mFlexibleSpaceShowFabOffset) {
-            hideFab();
-        } else {
-            showFab();
-        }
-    }
-
-    @Override
-    public void onDownMotionEvent() {
-
-    }
-
-    @Override
-    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-
-    }
-
-    private void showFab() {
-        if (!mFabIsShown) {
-            ViewPropertyAnimator.animate(mFab).cancel();
-            ViewPropertyAnimator.animate(mFab).scaleX(1).scaleY(1).setDuration(200).start();
-            mFabIsShown = true;
-        }
-    }
-
-    private void hideFab() {
-        if (mFabIsShown) {
-            ViewPropertyAnimator.animate(mFab).cancel();
-            ViewPropertyAnimator.animate(mFab).scaleX(0).scaleY(0).setDuration(200).start();
-            mFabIsShown = false;
+        // Also pass this event to parent Fragment
+        ScrollReceive parentFragment = (ScrollReceive) getParentFragment();
+        if (parentFragment != null) {
+            parentFragment.onScrollChanged(scrollY, (ObservableListView) view.findViewById(R.id.scroll));
         }
     }
 }
