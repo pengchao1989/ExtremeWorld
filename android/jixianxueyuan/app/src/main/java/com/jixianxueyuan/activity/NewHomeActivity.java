@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
@@ -26,6 +30,7 @@ import butterknife.InjectView;
  */
 public class NewHomeActivity extends FragmentActivity implements View.OnClickListener {
 
+    @InjectView(R.id.bottomsheet)BottomSheetLayout bottomSheetLayout;
     @InjectView(R.id.tab_new_layout)RelativeLayout newLayout;
     @InjectView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
     @InjectView(R.id.tab_discover_layout)RelativeLayout discoverLayout;
@@ -65,6 +70,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     }
 
     private void initView(){
+        bottomSheetLayout.setPeekOnDismiss(true);
+
         trendsLayout.setOnClickListener(this);
         discoverLayout.setOnClickListener(this);
         mineLayout.setOnClickListener(this);
@@ -73,8 +80,9 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         newLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewHomeActivity.this, CreateTopicPreActivity.class);
-                startActivity(intent);
+/*                Intent intent = new Intent(NewHomeActivity.this, CreateTopicPreActivity.class);
+                startActivity(intent);*/
+                showMenuSheet(MenuSheetView.MenuType.GRID);
             }
         });
     }
@@ -201,6 +209,22 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
         marketImageView.setImageResource(R.mipmap.bottombar_shop);
         marketTextView.setTextColor(getResources().getColor(R.color.secondary_text));
+    }
+
+    private void showMenuSheet(final MenuSheetView.MenuType menuType) {
+        MenuSheetView menuSheetView =
+                new MenuSheetView(NewHomeActivity.this, menuType, "Create...", new MenuSheetView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(NewHomeActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                        if (bottomSheetLayout.isSheetShowing()) {
+                            bottomSheetLayout.dismissSheet();
+                        }
+                        return true;
+                    }
+                });
+        menuSheetView.inflateMenu(R.menu.create);
+        bottomSheetLayout.showWithSheetView(menuSheetView);
     }
 
 }

@@ -97,6 +97,8 @@ dependencies {
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
     compile 'com.github.ksoichiro:android-observablescrollview'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.flipboard:bottomsheet-core:1.4.3'
+    compile 'com.flipboard:bottomsheet-commons:1.4.3' // optional
     compile project(':emoji')
     compile project(':multi-image-selector')
     compile files('libs/open_sdk_r5043_lite.jar')
