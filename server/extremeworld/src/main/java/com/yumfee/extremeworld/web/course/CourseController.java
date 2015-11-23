@@ -31,9 +31,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
 import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Course;
+import com.yumfee.extremeworld.entity.CourseCatalogue;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
@@ -150,9 +152,9 @@ public class CourseController
 			@Valid Course newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
 	{
 		System.out.println("create");
-		System.out.println("courseTaxonomyId" + request.getParameter("courseTaxonomyId"));
+		System.out.println("courseCatalogueId" + request.getParameter("courseCatalogueId"));
 
-		Long courseTaxonomyId = Long.valueOf(request.getParameter("courseTaxonomyId"));
+		Long courseCatalogueId = Long.valueOf(request.getParameter("courseCatalogueId"));
 		
 		User user = new User();
 		user.setId(getCurrentUserId());
@@ -160,10 +162,10 @@ public class CourseController
 		newCourse.setPid(0L);
 		newCourse.setType("course");
 		
-		CourseTaxonomy courseTaxonomy = new CourseTaxonomy();
-		courseTaxonomy.setId(courseTaxonomyId);
+		CourseCatalogue courseTaxonomy = new CourseCatalogue();
+		courseTaxonomy.setId(courseCatalogueId);
 		
-		newCourse.setCourseTaxonomy(courseTaxonomy);
+		newCourse.setCourseCatalogue(courseTaxonomy);
 		
 
 		courseService.saveCourse(newCourse);
@@ -201,7 +203,7 @@ public class CourseController
 		courseRevision.setContent(curCourse.getContent());
 		courseRevision.setType("revision");
 		courseRevision.setUser(curCourse.getUser());
-		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
+		courseRevision.setCourseCatalogue(curCourse.getCourseCatalogue());
 		courseRevision.setPid(curCourse.getId());
 		courseService.saveCourse(courseRevision);
 		

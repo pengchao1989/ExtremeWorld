@@ -24,7 +24,7 @@ public class Course extends IdEntity
 	private Date modifyTime;
 	private Long pid;
 	
-	private CourseTaxonomy courseTaxonomy;
+	private CourseCatalogue courseCatalogue;
 	
 	private User user;  //create user
 	
@@ -109,15 +109,15 @@ public class Course extends IdEntity
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "taxonomy_id")
-	public CourseTaxonomy getCourseTaxonomy()
+	@JoinColumn(name = "catalogue_id")
+	public CourseCatalogue getCourseCatalogue()
 	{
-		return courseTaxonomy;
+		return courseCatalogue;
 	}
 
-	public void setCourseTaxonomy(CourseTaxonomy courseTaxonomy)
+	public void setCourseCatalogue(CourseCatalogue courseTaxonomy)
 	{
-		this.courseTaxonomy = courseTaxonomy;
+		this.courseCatalogue = courseTaxonomy;
 	}
 	
 	public CourseMinDTO buildCourseMinDTO(){

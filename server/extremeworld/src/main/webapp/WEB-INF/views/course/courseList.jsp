@@ -20,9 +20,13 @@
 			
 			<div class="list-group">
 			
-			
-				<c:forEach items="${courseTaxonomy.courses}" var="course">
-					<a class="list-group-item" href="${ctx}/${hobby}/course/${course.id}">${course.name}</a>
+				<c:forEach items="${courseTaxonomy.courseCatalogues}" var="courseCatalogue">
+					<h3>${courseCatalogue.name}</h3>
+						<div class="list-group">
+						<c:forEach items="${courseCatalogue.courses}" var="course">
+							<a class="list-group-item" href="${ctx}/${hobby}/course/${course.id}">${course.name}</a>
+						</c:forEach>
+						</div>
 				</c:forEach>
 			
 			</div>

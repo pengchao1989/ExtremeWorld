@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,8 +19,8 @@ public class CourseTaxonomy extends IdEntity
 	private Date createTime;
 	
 	private Hobby hobby;
-	private List<Course> courses;
 
+	private List<CourseCatalogue> courseCatalogues;
 	
 	public String getName()
 	{
@@ -55,18 +54,11 @@ public class CourseTaxonomy extends IdEntity
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "courseTaxonomy")
-	public List<Course> getCourses()
-	{
-		return courses;
+	public List<CourseCatalogue> getCourseCatalogues() {
+		return courseCatalogues;
 	}
 
-	public void setCourses(List<Course> courses)
-	{
-		this.courses = courses;
+	public void setCourseCatalogues(List<CourseCatalogue> courseCatalogues) {
+		this.courseCatalogues = courseCatalogues;
 	}
-	
-	
-	
-	
-	
 }

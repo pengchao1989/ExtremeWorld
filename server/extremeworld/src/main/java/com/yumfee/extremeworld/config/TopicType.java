@@ -14,6 +14,7 @@ public class TopicType {
 	
 	public static final String magicExplain = "explain";
 	public static final String magicQuestion = "question";
+	public static final String magicAchievement = "achievement";
 
 	public static String getTypeString(int type)
 	{

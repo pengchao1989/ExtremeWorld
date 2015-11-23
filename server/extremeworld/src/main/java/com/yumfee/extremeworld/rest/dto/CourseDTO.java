@@ -71,9 +71,4 @@ public class CourseDTO
 	public void setUser(UserMinDTO user) {
 		this.user = user;
 	}
-
-	
-	
-	
-	
 }
