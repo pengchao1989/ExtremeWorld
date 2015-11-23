@@ -223,7 +223,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称:market
-	URL地址:http://115.28.8.25/api/secure/v1/hobby/biz/market/
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/biz/market/
 	请求方式：GET
 	入参:无
 	示例:http://115.28.8.25/api/secure/v1/skateboard/biz/market/
@@ -239,16 +239,16 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称:goods/shop
-	URL地址:http://115.28.8.25/api/secure/v1/hobby/biz/goods/shop/{id}
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/biz/goods/shop/{id}
 	请求方式:GET
 	入参:page
-	示例:http://115.28.8.25/api/secure/v1/hobby/biz/goods/shop/1
+	示例:http://115.28.8.25/api/secure/v1/skateboard/biz/goods/shop/1
 	说明:获取某个店铺下的商品列表,{id}为商店id
 
 ----------
 	接口名称:goods/category
-	URL地址:http://115.28.8.25/api/secure/v1/hobby/biz/goods/category/{id}
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/biz/goods/category/{id}
 	请求方式:GET
 	入参:page
-	示例:http://115.28.8.25/api/secure/v1/hobby/biz/goods/category/1
+	示例:http://115.28.8.25/api/secure/v1/skateboard/biz/goods/category/1
 	说明:获取某个category(分类-如鞋子)下的商品列表,{id}为商店category id, 这个id从market接口中能够拿到
