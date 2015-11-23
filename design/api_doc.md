@@ -220,3 +220,35 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	入参：userId、latitude、longitude、page
 	示例：http://192.168.0.107:8023/api/v1/bmx/geo/near_friend?userId=15&latitude=31.271252&longitude=104.650953&page=1
 	说明：附近的人
+
+----------
+	接口名称:market
+	URL地址:http://115.28.8.25/api/secure/v1/hobby/biz/market/
+	请求方式：GET
+	入参:无
+	示例:http://115.28.8.25/api/secure/v1/skateboard/biz/market/
+	说明:获取商城信息,目前里面只包含一个categoryList商品分类,随着功能扩展可能会逐渐包含其它信息.
+
+----------
+	接口名称:shop
+	URL地址:http://115.28.8.25/api/secure/v1/hobby/biz/shop/
+	请求方式:GET
+	入参:page
+	示例:http://115.28.8.25/api/secure/v1/skateboard/biz/shop/
+	说明:获取某个hobby下的商店列表
+
+----------
+	接口名称:goods/shop
+	URL地址:http://115.28.8.25/api/secure/v1/hobby/biz/goods/shop/{id}
+	请求方式:GET
+	入参:page
+	示例:http://115.28.8.25/api/secure/v1/hobby/biz/goods/shop/1
+	说明:获取某个店铺下的商品列表,{id}为商店id
+
+----------
+	接口名称:goods/category
+	URL地址:http://115.28.8.25/api/secure/v1/hobby/biz/goods/category/{id}
+	请求方式:GET
+	入参:page
+	示例:http://115.28.8.25/api/secure/v1/hobby/biz/goods/category/1
+	说明:获取某个category(分类-如鞋子)下的商品列表,{id}为商店category id, 这个id从market接口中能够拿到
