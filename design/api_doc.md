@@ -3,8 +3,8 @@ API Document
 
 ## 简要说明 ##
 
- - 服务器地址http://www.jxianxueyuan.com
- - api构成url + "api" + "secure" + "version" + “method”
+ - 服务器地址http://dev.jxianxueyuan.com
+ - api构成url + "api" + "secure" + "#version" + "#hobby" + “method”
  - 标准RESTful方式
 	 返回值如
 	 {
@@ -14,11 +14,11 @@ API Document
 		  "errorInfo" : null
 	  }
 	  content 类型分为普通bean和page类型，以适应典型的普通对象数据及分页数据，bean的定义可参考server、android中dto文件下的class，或者直接参考接口中的json数据
-	  普通bean示例http://www.jxianxueyuan.com/api/v1/bmx/topic/146
-	  分页示例http://www.jxianxueyuan.com/api/v1/bmx/topic
+	  普通bean示例http://dev.jxianxueyuan.com/api/v1/skateboard/topic/146
+	  分页示例http://dev.jxianxueyuan.com/api/v1/skateboard/topic
  - 接口分为加密和未加密
-	未加密：http://www.jxianxueyuan.com/api/v1/bmx/topic/146 
-	加密：http://www.jxianxueyuan.com/api/secure/v1/bmx/topic/146
+	未加密：http://dev.jxianxueyuan.com/api/v1/skateboard/topic/146 
+	加密：http://dev.jxianxueyuan.com/api/secure/v1/skateboard/topic/146
 	加密方式：AES/128/CBC/PKCS5Padding,加密内容为json中content部分
 
 
