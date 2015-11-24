@@ -1,17 +1,15 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.dto.CourseDto;
-import com.jixianxueyuan.dto.CourseTaxonomyDTO;
+import com.jixianxueyuan.dto.CourseCatalogueDTO;
+import com.jixianxueyuan.dto.CourseMinDTO;
 
 
 import java.util.ArrayList;
@@ -24,19 +22,19 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
 
     Context context;
 
-    List<CourseTaxonomyDTO> courseTaxonomyDTOList;
+    List<CourseCatalogueDTO> courseCatalogueDTOList;
 
     public CourseListAdapter(Context context){
         this.context = context;
-        courseTaxonomyDTOList = new ArrayList<CourseTaxonomyDTO>();
+        courseCatalogueDTOList = new ArrayList<CourseCatalogueDTO>();
 
     }
 
-    public void addDatas(List<CourseTaxonomyDTO> courseTaxonomyDTOs)
+    public void addDatas(List<CourseCatalogueDTO> courseTaxonomyDTOs)
     {
-        for(CourseTaxonomyDTO courseTaxonomyDTO:courseTaxonomyDTOs)
+        for(CourseCatalogueDTO courseTaxonomyDTO:courseTaxonomyDTOs)
         {
-            courseTaxonomyDTOList.add(courseTaxonomyDTO);
+            courseCatalogueDTOList.add(courseTaxonomyDTO);
         }
 
         this.notifyDataSetChanged();
@@ -45,32 +43,32 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return courseTaxonomyDTOList.size();
+        return courseCatalogueDTOList.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return courseTaxonomyDTOList.get(groupPosition).getCourses().size();
+        return courseCatalogueDTOList.get(groupPosition).getCourses().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return courseTaxonomyDTOList.get(groupPosition);
+        return courseCatalogueDTOList.get(groupPosition);
     }
 
     @Override
-    public CourseDto getChild(int groupPosition, int childPosition) {
-        return courseTaxonomyDTOList.get(groupPosition).getCourses().get(childPosition);
+    public CourseMinDTO getChild(int groupPosition, int childPosition) {
+        return courseCatalogueDTOList.get(groupPosition).getCourses().get(childPosition);
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        return courseTaxonomyDTOList.get(groupPosition).getId();
+        return courseCatalogueDTOList.get(groupPosition).getId();
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return courseTaxonomyDTOList.get(groupPosition).getCourses().get(childPosition).getId();
+        return courseCatalogueDTOList.get(groupPosition).getCourses().get(childPosition).getId();
     }
 
     @Override
@@ -85,7 +83,7 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
 
         TextView nameTextView = (TextView) convertView.findViewById(R.id.course_list_taxonomy_item_name);
 
-        nameTextView.setText(courseTaxonomyDTOList.get(groupPosition).getName());
+        nameTextView.setText(courseCatalogueDTOList.get(groupPosition).getName());
 
         return convertView;
     }
@@ -97,7 +95,7 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
 
         TextView nameTextView = (TextView) convertView.findViewById(R.id.course_list_item_name);
 
-        nameTextView.setText(courseTaxonomyDTOList.get(groupPosition).getCourses().get(childPosition).getName());
+        nameTextView.setText(courseCatalogueDTOList.get(groupPosition).getCourses().get(childPosition).getName());
 
         return convertView;
     }

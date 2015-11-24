@@ -99,7 +99,8 @@ public class CourseListFragment extends Fragment{
                         List<CourseTaxonomyDTO> courseTaxonomyDTOs = gson.fromJson(response, new TypeToken<List<CourseTaxonomyDTO>>(){}.getType());
                         if(courseTaxonomyDTOs != null)
                         {
-                            adapter.addDatas(courseTaxonomyDTOs);
+
+                            adapter.addDatas(courseTaxonomyDTOs.get(1).getCourseCatalogues());
 
                             isRefreshData = true;
                         }

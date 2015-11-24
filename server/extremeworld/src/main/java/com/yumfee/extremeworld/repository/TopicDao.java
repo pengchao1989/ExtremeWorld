@@ -19,6 +19,7 @@ public interface TopicDao extends PagingAndSortingRepository<Topic, Long>
 	public Page<Topic> findByUserId(Long user, Pageable pageable);
 	public Page<Topic> findByUserIdAndMediaWrapNotNull(Long user,  Pageable pageable);
 	
+	public Page<Topic> findByType(String type, Pageable pageable);
 	
 	
 	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE h.id=?")

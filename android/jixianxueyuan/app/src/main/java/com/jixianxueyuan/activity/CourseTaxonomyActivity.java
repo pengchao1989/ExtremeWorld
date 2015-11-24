@@ -95,7 +95,7 @@ public class CourseTaxonomyActivity extends BaseActivity{
 
                         if(response.getContent() != null)
                         {
-                            adapter.addDatas(response.getContent().getCourseTaxonomyList());
+                            adapter.addDatas(response.getContent().getCourseTaxonomyList().get(0).getCourseCatalogues());
 
                             for(int i = 0; i != adapter.getGroupCount(); i++)
                             {

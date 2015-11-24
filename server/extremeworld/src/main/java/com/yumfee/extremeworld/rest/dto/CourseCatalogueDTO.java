@@ -8,7 +8,7 @@ public class CourseCatalogueDTO {
 	private String name;
 	private Date createTime;
 	
-	private List<CourseDTO> courses;
+	private List<CourseMinDTO> courses;
 
 	public Long getId()
 	{
@@ -40,12 +40,12 @@ public class CourseCatalogueDTO {
 		this.createTime = createTime;
 	}
 
-	public List<CourseDTO> getCourses()
+	public List<CourseMinDTO> getCourses()
 	{
 		return courses;
 	}
 
-	public void setCourses(List<CourseDTO> courses)
+	public void setCourses(List<CourseMinDTO> courses)
 	{
 		this.courses = courses;
 	}

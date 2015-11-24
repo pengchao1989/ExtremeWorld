@@ -71,7 +71,11 @@ public class TopicRestController
 		case TopicType.NEWS:
 		case TopicType.VIDEO:
 		case TopicType.S_VIDEO:
-			topicPageSource = topicService.getTopicByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId, pageNumber, pageSize, sortType);
+			if(0 == taxonomyId){
+				topicPageSource = topicService.getTopicByHobbyAndType(hobbyId, type, pageNumber, pageSize, sortType);
+			}else{
+				topicPageSource = topicService.getTopicByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId, pageNumber, pageSize, sortType);
+			}
 			break;
 		
 		}

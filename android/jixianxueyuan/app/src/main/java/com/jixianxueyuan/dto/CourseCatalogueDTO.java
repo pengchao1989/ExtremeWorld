@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class CourseTaxonomyDTO implements Serializable
-{
+public class CourseCatalogueDTO implements Serializable{
 	private Long id;
 	private String name;
-	private String createTime;
-
-	private List<CourseCatalogueDTO> courseCatalogues;
+	private Date createTime;
+	
+	private List<CourseMinDTO> courses;
 
 	public Long getId()
 	{
@@ -32,21 +31,23 @@ public class CourseTaxonomyDTO implements Serializable
 		this.name = name;
 	}
 
-	public String getCreateTime()
+	public Date getCreateTime()
 	{
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime)
+	public void setCreateTime(Date createTime)
 	{
 		this.createTime = createTime;
 	}
 
-	public List<CourseCatalogueDTO> getCourseCatalogues() {
-		return courseCatalogues;
+	public List<CourseMinDTO> getCourses()
+	{
+		return courses;
 	}
 
-	public void setCourseCatalogues(List<CourseCatalogueDTO> courseCatalogues) {
-		this.courseCatalogues = courseCatalogues;
+	public void setCourses(List<CourseMinDTO> courses)
+	{
+		this.courses = courses;
 	}
 }
