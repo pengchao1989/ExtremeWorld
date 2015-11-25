@@ -4,11 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,7 +18,6 @@ import android.widget.PopupWindow;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.util.MyLog;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.picasso.Picasso;
 import com.yumfee.emoji.EmojiconEditText;
 import com.yumfee.emoji.EmojiconGridView;
@@ -29,18 +26,15 @@ import com.yumfee.emoji.emoji.Emojicon;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by pengchao on 5/24/15.
  */
-public class NewEditWidget {
+public class RichEditWidget {
 
     Context context;
     ReplyWidgetListener replyWidgetListener;
@@ -75,7 +69,7 @@ public class NewEditWidget {
             }
         }
     };
-    public NewEditWidget(Context context, LinearLayout contentContainer)
+    public RichEditWidget(Context context, LinearLayout contentContainer)
     {
         this.context = context;
         this.contentContainer = contentContainer;
@@ -85,7 +79,7 @@ public class NewEditWidget {
 
     private void initView()
     {
-        View view = LayoutInflater.from(context).inflate(R.layout.new_edit_widget, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.rich_edit_widget, null);
 
         emojiButton = (ImageView) view.findViewById(R.id.new_edit_widget_emoji_button);
         imgButton = (ImageView) view.findViewById(R.id.new_edit_widget_img_button);
@@ -253,7 +247,7 @@ public class NewEditWidget {
         localImagePathList = new LinkedList<String>();
 
         String contentStrWithHtml = Html.toHtml(emojiconEditText.getText());
-        MyLog.d("NewEditWidget", "initLocalFilePathKey contentStrWithHtml="+contentStrWithHtml);
+        MyLog.d("RichEditWidget", "initLocalFilePathKey contentStrWithHtml="+contentStrWithHtml);
         String regex = "<(?=img)[^>]+>";
         String regexPath = "\".*\"";
 

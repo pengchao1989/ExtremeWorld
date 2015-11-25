@@ -5,19 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.callback.FailureCallback;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,13 +25,16 @@ import com.android.volley.toolbox.Volley;
 //import com.duanqu.qupai.sdk.android.QupaiService;
 //import com.duanqu.qupai.sdk.callback.SaveFileCallback;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.adapter.CreateActivityImageListAdapter;
 import com.jixianxueyuan.adapter.TaxonomySpinnerAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
+import com.jixianxueyuan.config.MediaType;
 import com.jixianxueyuan.config.TopicType;
-import com.jixianxueyuan.config.VideoRecordConfig;
 import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.HobbyDTO;
+import com.jixianxueyuan.dto.MediaDTO;
+import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TaxonomyDTO;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -48,14 +50,12 @@ import com.jixianxueyuan.util.qiniu.QiniuVideoUpload;
 import com.jixianxueyuan.util.qiniu.QiniuVideoUploadListener;
 import com.jixianxueyuan.util.qiniu.VideoUploadResult;
 import com.jixianxueyuan.widget.MyActionBar;
-import com.jixianxueyuan.widget.NewEditWidget;
-import com.jixianxueyuan.widget.NewEditWidgetListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.yumfee.emoji.EmojiconEditText;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +66,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 /**
  * Created by pengchao on 5/24/15.
  */
-public class CreateTopicActivity extends Activity implements NewEditWidgetListener {
+public class CreateTopicActivity extends Activity implements CreateActivityImageListAdapter.OnImageOperatorListener {
 
     public static final String tag = CreateTopicActivity.class.getSimpleName();
 
@@ -76,10 +76,12 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     @InjectView(R.id.create_topic_actionbar)MyActionBar myActionBar;
     @InjectView(R.id.create_topic_taxonomy_spinner)Spinner taxonomySpinner;
     @InjectView(R.id.create_topic_title)EditText titleEditText;
-    @InjectView(R.id.create_edit_widget_layout)
-    LinearLayout editWidgetLayout;
+    @InjectView(R.id.create_topic_content_edittext)
+    EmojiconEditText contentEditText;
     @InjectView(R.id.create_topic_video_thumble_layout)
     RelativeLayout videoThumbleLayout;
+    @InjectView(R.id.create_topic_image_list_view)
+    RecyclerView recyclerView;
     @InjectView(R.id.create_topic_video_thumble_imageview)
     ImageView videoThumbleImage;
 
@@ -90,7 +92,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     @InjectView(R.id.create_topic_upload_progress_textview)
     TextView progressTextView;
 
-    NewEditWidget contentEditWidget;
 
     String topicType = null;
     Long topicTaxonomyId = null;
@@ -113,6 +114,8 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     TopicDTO topicDTO;
     VideoDetailDTO videoDetailDTO;
+
+    CreateActivityImageListAdapter imageListAdapter;
 
     boolean isUploadedImage = false;
     boolean isUploadedVideo = false;
@@ -150,9 +153,12 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
             }
         });
 
-        contentEditWidget = new NewEditWidget(this, editWidgetLayout);
-
-        contentEditWidget.setNewEditWidgetListener(this);
+        imageListAdapter = new CreateActivityImageListAdapter(this);
+        imageListAdapter.setImageDeleteListener(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(imageListAdapter);
 
         initExtra();
     }
@@ -219,8 +225,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
         showUploadProgressView();
 
-        localImagePathList = contentEditWidget.getLocalImagePathList();
-
+        localImagePathList = imageListAdapter.getImagePathList();
 
         //若不存在视频但存在图片，则走图片上传链
         if(localImagePathList != null && localImagePathList.size() > 0)
@@ -347,23 +352,9 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
     }
 
 
-
     private void buildTopicParam()
     {
         topicDTO = new TopicDTO();
-        topicDTO.setTitle(titleEditText.getText().toString());
-
-        if(localImagePathList!= null && localImagePathList.size() > 0)
-        {
-            String content = analyzeContent(contentEditWidget.getHtml(), null);
-            topicDTO.setContent(content);
-
-        }
-        else
-        {
-            topicDTO.setContent(contentEditWidget.getHtml());
-        }
-
 
         UserMinDTO userMinDTO = new UserMinDTO();
         userMinDTO.setId(MyApplication.getContext().getMine().getUserInfo().getId());
@@ -375,10 +366,14 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         hobbys.add(hobbyDTO);
         topicDTO.setHobbys(hobbys);
 
+        topicDTO.setTitle(titleEditText.getText().toString());
+        topicDTO.setContent(contentEditText.getText().toString());
         switch(topicType)
         {
             case TopicType.MOOD:
                 topicDTO.setType(TopicType.MOOD);
+                topicDTO.setTitle(contentEditText.getText().toString());
+                topicDTO.setContent("");
                 break;
             case TopicType.DISCUSS:
                 topicDTO.setType(TopicType.DISCUSS);
@@ -410,7 +405,25 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
             topicDTO.setTaxonomy(taxonomyDTO);
         }
 
+        //image
+        MediaWrapDTO mediaWrapDTO = new MediaWrapDTO();
+        List<MediaDTO> mediaDTOList = new ArrayList<MediaDTO>();
+        Iterator iter = serverImagePathMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
 
+            String key = (String) entry.getKey();
+            String url = StaticResourceConfig.IMG_DOMAIN + (String) entry.getValue();
+            MediaDTO mediaDTO = new MediaDTO();
+            mediaDTO.setType(MediaType.IMAGE);
+            mediaDTO.setPath(url);
+            mediaDTOList.add(mediaDTO);
+        }
+        mediaWrapDTO.setMedias(mediaDTOList);
+        topicDTO.setMediaWrap(mediaWrapDTO);
+
+
+        //video
         if(videoDetailDTO != null){
             topicDTO.setVideoDetail(videoDetailDTO);
         }
@@ -446,8 +459,7 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         return str;
     }
 
-    @Override
-    public void onImage()
+    public void addImage()
     {
         Intent intent = new Intent(this, MultiImageSelectorActivity.class);
 
@@ -464,7 +476,6 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
 
     }
 
-    @Override
     public void onVideo() {
         startVideoRecord();
     }
@@ -494,8 +505,9 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
                     // do your logic ....
                     for (String p : path) {
                         MyLog.d(tag, "imgPath=" + p);
-                        contentEditWidget.insertImg(p);
+
                     }
+                    imageListAdapter.setImagePathList(path);
                 }
                 break;
             /*case REQUEST_VIDEO_CODE:
@@ -559,5 +571,15 @@ public class CreateTopicActivity extends Activity implements NewEditWidgetListen
         msg.setData(progressData);
         handler.sendMessage(msg);
 
+    }
+
+    @Override
+    public void onDelete(int size) {
+
+    }
+
+    @Override
+    public void onAdd() {
+        addImage();
     }
 }

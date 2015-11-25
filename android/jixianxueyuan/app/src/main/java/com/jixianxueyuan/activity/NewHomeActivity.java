@@ -216,7 +216,20 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 new MenuSheetView(NewHomeActivity.this, menuType, "Create...", new MenuSheetView.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(NewHomeActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(NewHomeActivity.this, CreateTopicActivity.class);
+                        switch (item.getItemId()){
+                            case R.id.menu_create_mood:
+                                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+                                break;
+                            case R.id.menu_create_discuss:
+                                intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
+                                break;
+                            case R.id.menu_create_short_video:
+                                intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
+                                break;
+                        }
+                        startActivity(intent);
+
                         if (bottomSheetLayout.isSheetShowing()) {
                             bottomSheetLayout.dismissSheet();
                         }

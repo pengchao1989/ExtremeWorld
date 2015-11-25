@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_create_mood"
         android:title="@string/mood"
         android:icon="@mipmap/add_mood"
         />
     <item
+        android:id="@+id/menu_create_discuss"
         android:title="@string/discuss"
         android:icon="@mipmap/add_discuss"
         />
     <item
+        android:id="@+id/menu_create_short_video"
         android:title="@string/video"
         android:icon="@mipmap/add_video"
         />
