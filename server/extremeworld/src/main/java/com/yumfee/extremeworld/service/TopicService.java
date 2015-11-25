@@ -65,7 +65,20 @@ public class TopicService
 		return topic;
 	}
 	
-	public void saveTopic(Topic entity)
+	public void saveTopic(Topic entity){
+		String content = entity.getContent();
+		if(content.length() > 160)
+		{
+			entity.setExcerpt(content.substring(0, 159) + "....");
+		}
+		else
+		{
+			entity.setExcerpt(content);
+		}
+		topicDao.save(entity);
+	}
+	
+	public void saveHtmlTopic(Topic entity)
 	{
 		
 		//提交上来的topic.content都是标准html内容

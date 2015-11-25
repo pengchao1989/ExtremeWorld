@@ -121,7 +121,7 @@ public class DiscussController {
 		newTopic.setType(TopicType.DISCUSS);
 		
 		
-		topicService.saveTopic(newTopic);
+		topicService.saveHtmlTopic(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
 		return "redirect:/" + hobby + "/discuss?taxonomy=" + taxonomyId;
 	}

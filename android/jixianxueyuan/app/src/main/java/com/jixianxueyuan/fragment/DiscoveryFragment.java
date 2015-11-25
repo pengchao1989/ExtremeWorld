@@ -12,16 +12,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.CourseTaxonomyActivity;
+import com.jixianxueyuan.activity.CourseHomeActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
-import com.jixianxueyuan.activity.MarketHomeActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.SiteListActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryListAdapter;
 import com.jixianxueyuan.config.TopicType;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -90,7 +88,7 @@ public class DiscoveryFragment extends Fragment {
                         break;
 
                     case 2:
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), CourseTaxonomyActivity.class);
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), CourseHomeActivity.class);
                         break;
                     case 3:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), SiteListActivity.class);

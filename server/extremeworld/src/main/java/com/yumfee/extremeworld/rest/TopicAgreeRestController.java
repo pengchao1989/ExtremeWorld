@@ -58,7 +58,7 @@ public class TopicAgreeRestController
 			
 		}
 		
-		topicService.saveTopic(topic);
+		topicService.saveHtmlTopic(topic);
 		
 		return MyResponse.ok(null);
 	}
@@ -83,7 +83,7 @@ public class TopicAgreeRestController
 			
 		}
 		
-		topicService.saveTopic(topic);
+		topicService.saveHtmlTopic(topic);
 		
 		
 		

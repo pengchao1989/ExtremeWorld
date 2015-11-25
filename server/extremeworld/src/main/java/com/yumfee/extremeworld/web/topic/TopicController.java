@@ -69,7 +69,7 @@ public class TopicController
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
 		
-		topicService.saveTopic(newTopic);
+		topicService.saveHtmlTopic(newTopic);
 		redirectAttributes.addFlashAttribute("message", "添加话题成功");
 		return "redirect:/" + hobby + "/discuss/";
 	}
