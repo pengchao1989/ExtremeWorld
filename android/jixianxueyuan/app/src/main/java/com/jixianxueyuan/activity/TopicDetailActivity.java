@@ -31,8 +31,11 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.AnalyzeContent;
+import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.AgreeResultDTO;
+import com.jixianxueyuan.dto.MediaDTO;
+import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
@@ -235,6 +238,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
 
 
+/*
         List<AnalyzeContent.ContentFragment> contentFragmentList = new LinkedList<AnalyzeContent.ContentFragment>();
         contentFragmentList = AnalyzeContent.analyzeContent2(topicDTO.getContent());
 
@@ -264,7 +268,32 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             }
 
         }
+*/
 
+        //content
+        EmojiconTextView textView = new EmojiconTextView(this);
+        textView.setTextSize(20);
+        textView.setEmojiconSize(48);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+
+        headViewHolder.contentLayout.addView(textView);
+        textView.setText(topicDTO.getContent());
+
+        //image
+        MediaWrapDTO mediaWrapDTO = topicDTO.getMediaWrap();
+        if(mediaWrapDTO != null){
+            for(MediaDTO mediaDTO: mediaWrapDTO.getMedias()){
+                ImageView imageviwe = new ImageView(this);
+                imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                imageviwe.setPadding(0, 8, 0, 8);
+                headViewHolder.contentLayout.addView(imageviwe);
+                ImageLoader.getInstance().displayImage(mediaDTO.getPath() + "!AndroidDetail", imageviwe, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+            }
+        }
+
+
+        //video
         if (topicDTO.getType() == TopicType.VIDEO || topicDTO.getVideoDetail() != null)
         {
             if(topicDTO.getVideoDetail().getVideoSource() != null)
