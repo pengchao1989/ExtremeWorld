@@ -12,7 +12,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="148dp"
-            android:background="@mipmap/user_head_bg"
+            android:background="@mipmap/default_head"
             android:paddingBottom="20dp"
             android:paddingLeft="52dp"
             android:paddingRight="8dp">

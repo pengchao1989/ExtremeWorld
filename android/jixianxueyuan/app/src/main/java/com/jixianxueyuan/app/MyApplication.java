@@ -2,7 +2,6 @@ package com.jixianxueyuan.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,19 +13,10 @@ import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.alibaba.cchannel.core.task.RunnableCallbackAdapter;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.jixianxueyuan.R;
-import com.jixianxueyuan.dto.HandshakeDTO;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.Util;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 public class MyApplication extends Application {
 
@@ -113,12 +103,9 @@ public class MyApplication extends Application {
 
     }
 
-
-
     public static MyApplication getContext() {
 		return application;
 	}
-
 
     public Mine getMine() {
         return mine;
@@ -144,9 +131,6 @@ public class MyApplication extends Application {
 
         return mRequestQueue;
     }
-
-
-
 
     private void initImageLoader(){
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(MyApplication.this));

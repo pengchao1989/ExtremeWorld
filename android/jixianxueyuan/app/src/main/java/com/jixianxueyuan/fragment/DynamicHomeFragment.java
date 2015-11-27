@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
@@ -24,6 +23,7 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.util.MyLog;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -42,7 +42,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
     @InjectView(R.id.fab) CircleImageView mFab;
     @InjectView(R.id.sliding_tabs) ImageView mSlidingTabLayout;
-    @InjectView(R.id.image) View imageView;
+    @InjectView(R.id.image) ImageView headImageView;
     @InjectView(R.id.overlay) View overlayView;
     @InjectView(R.id.title) TextView titleView;
     @InjectView(R.id.pager) ViewPager mPager;
@@ -84,10 +84,10 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0){
+                if (position == 0) {
                     mIsFine = true;
                     mSlidingTabLayout.setImageResource(R.mipmap.ic_option);
-                }else if(position == 1){
+                } else if (position == 1) {
                     mIsFine = false;
                     mSlidingTabLayout.setImageResource(R.mipmap.ic_option_2);
                 }
@@ -109,7 +109,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         ViewHelper.setScaleY(mFab, 0);
 
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), mFab, ImageLoaderConfig.getAvatarOption(this.getActivity()));
-
+        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg(), headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
         // Initialize the first Fragment's state when layout is completed.
         ScrollUtils.addOnGlobalLayoutListener(mSlidingTabLayout, new Runnable() {
             @Override
@@ -157,7 +157,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         float flexibleRange = flexibleSpaceImageHeight - getActionBarSize();
         int minOverlayTransitionY = tabHeight - overlayView.getHeight();
         ViewHelper.setTranslationY(overlayView, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
-        ViewHelper.setTranslationY(imageView, ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0));
+        ViewHelper.setTranslationY(headImageView, ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0));
 
         // Change alpha of overlay
         ViewHelper.setAlpha(overlayView, ScrollUtils.getFloat((float) scrollY / flexibleRange, 0, 1));
@@ -201,11 +201,11 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             // On pre-honeycomb, ViewHelper.setTranslationX/Y does not set margin,
             // which causes FAB's OnClickListener not working.
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFab.getLayoutParams();
-            lp.leftMargin = imageView.getWidth() - mFabMargin - mFab.getWidth();
+            lp.leftMargin = headImageView.getWidth() - mFabMargin - mFab.getWidth();
             lp.topMargin = (int) fabTranslationY;
             mFab.requestLayout();
         } else {
-            ViewHelper.setTranslationX(mFab, imageView.getWidth() - mFabMargin - mFab.getWidth());
+            ViewHelper.setTranslationX(mFab, headImageView.getWidth() - mFabMargin - mFab.getWidth());
             ViewHelper.setTranslationY(mFab, fabTranslationY);
         }
 

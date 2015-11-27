@@ -331,7 +331,6 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
     @SuppressWarnings("NewApi")
     @Override
     public void setScrollY(int scrollY, int threshold) {
-        MyLog.d(tag, "setScrollY");
         View view = getView();
         if (view == null) {
             return;

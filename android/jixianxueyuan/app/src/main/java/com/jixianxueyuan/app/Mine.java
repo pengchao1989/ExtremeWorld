@@ -80,6 +80,9 @@ public class Mine {
         if(shared.contains("signature")){
             userInfo.setSignature(shared.getString("signature", ""));
         }
+        if(shared.contains("bg")){
+            userInfo.setBg(shared.getString("bg", ""));
+        }
 
 
         return true;
@@ -100,6 +103,7 @@ public class Mine {
         editor.putString("birth", userInfo.getBirth());
         editor.putString("description", userInfo.getDescription());
         editor.putString("signature", userInfo.getSignature());
+        editor.putString("bg", userInfo.getBg());
 
         editor.commit();
     }

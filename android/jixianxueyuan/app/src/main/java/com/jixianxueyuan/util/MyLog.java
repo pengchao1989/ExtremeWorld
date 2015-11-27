@@ -37,6 +37,6 @@ public class MyLog {
     public static void e(String tag, String msg)
     {
         if(DEBUG)
-            Log.w(tag, msg);
+            Log.e(tag, msg);
     }
 }
