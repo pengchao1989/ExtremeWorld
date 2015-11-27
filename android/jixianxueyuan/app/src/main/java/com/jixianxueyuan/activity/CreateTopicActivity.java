@@ -11,26 +11,31 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.callback.FailureCallback;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-//import com.duanqu.qupai.sdk.android.QupaiService;
-//import com.duanqu.qupai.sdk.callback.SaveFileCallback;
+import com.duanqu.qupai.sdk.android.QupaiService;
+import com.duanqu.qupai.sdk.callback.SaveFileCallback;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CreateActivityImageListAdapter;
 import com.jixianxueyuan.adapter.TaxonomySpinnerAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.MediaType;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.VideoRecordConfig;
 import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MediaDTO;
@@ -41,6 +46,7 @@ import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.http.MyRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.util.MyLog;
@@ -56,6 +62,7 @@ import com.yumfee.emoji.EmojiconEditText;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +81,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     public static final int REQUEST_VIDEO_CODE = 2;
 
     @InjectView(R.id.create_topic_actionbar)MyActionBar myActionBar;
+    @InjectView(R.id.create_topic_title_layout)LinearLayout mTaxonomySpinnerLayout;
     @InjectView(R.id.create_topic_taxonomy_spinner)Spinner taxonomySpinner;
     @InjectView(R.id.create_topic_title)EditText titleEditText;
     @InjectView(R.id.create_topic_content_edittext)
@@ -198,6 +206,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     }
 
     private void initTaxonomySpinner(){
+        mTaxonomySpinnerLayout.setVisibility(View.VISIBLE);
         taxonomySpinner.setVisibility(View.VISIBLE);
         taxonomyDTOList = MyApplication.getContext().getAppInfomation().getCurrentHobbyTaxonomyListOfType(topicType);
 
@@ -344,7 +353,9 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideUploadProgressView();
                         MyLog.d(tag, "onErrorResponse" + error.toString());
+                        MyVolleyErrorHelper.showError(CreateTopicActivity.this, error);
                     }
                 });
 
@@ -379,10 +390,11 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                 topicDTO.setType(TopicType.DISCUSS);
                 break;
             case TopicType.VIDEO:
-                topicDTO.setType(TopicType.S_VIDEO);
+                topicDTO.setContent("");
                 break;
             case TopicType.S_VIDEO:
-                topicDTO.setVideoDetail(videoDetailDTO);
+                topicDTO.setType(TopicType.S_VIDEO);
+                topicDTO.setTitle(contentEditText.getText().toString());
                 topicDTO.setType(TopicType.S_VIDEO);
                 break;
             case TopicType.NEWS:
@@ -408,19 +420,21 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
         //image
         MediaWrapDTO mediaWrapDTO = new MediaWrapDTO();
         List<MediaDTO> mediaDTOList = new ArrayList<MediaDTO>();
-        Iterator iter = serverImagePathMap.entrySet().iterator();
-        while (iter.hasNext()) {
-            Map.Entry entry = (Map.Entry) iter.next();
+        if(serverImagePathMap != null){
+            Iterator iter = serverImagePathMap.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
 
-            String key = (String) entry.getKey();
-            String url = StaticResourceConfig.IMG_DOMAIN + (String) entry.getValue();
-            MediaDTO mediaDTO = new MediaDTO();
-            mediaDTO.setType(MediaType.IMAGE);
-            mediaDTO.setPath(url);
-            mediaDTOList.add(mediaDTO);
+                String key = (String) entry.getKey();
+                String url = StaticResourceConfig.IMG_DOMAIN + (String) entry.getValue();
+                MediaDTO mediaDTO = new MediaDTO();
+                mediaDTO.setType(MediaType.IMAGE);
+                mediaDTO.setPath(url);
+                mediaDTOList.add(mediaDTO);
+            }
+            mediaWrapDTO.setMedias(mediaDTOList);
+            topicDTO.setMediaWrap(mediaWrapDTO);
         }
-        mediaWrapDTO.setMedias(mediaDTOList);
-        topicDTO.setMediaWrap(mediaWrapDTO);
 
 
         //video
@@ -481,7 +495,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     }
 
     private void startVideoRecord(){
-/*        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
+        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
 
         qupaiService.initRecord(VideoRecordConfig.DEFAULT_DURATION_LIMIT, VideoRecordConfig.DEFAULT_BITRATE, null, true,null,2);
 
@@ -491,7 +505,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                     public void onFailure(int i, String s) {
                         Toast.makeText(CreateTopicActivity.this, "onFailure:"+ s + "CODE"+ i, Toast.LENGTH_LONG).show();
                     }
-                });*/
+                });
     }
 
     @Override
@@ -510,7 +524,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                     imageListAdapter.setImagePathList(path);
                 }
                 break;
-            /*case REQUEST_VIDEO_CODE:
+            case REQUEST_VIDEO_CODE:
                 if (resultCode == RESULT_OK) {
                     QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
                     videoPath = VideoRecordConfig.VIDEOPATH(this);
@@ -533,7 +547,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
                     });
                 }
-                break;*/
+                break;
         }
     }
 

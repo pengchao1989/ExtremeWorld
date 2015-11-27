@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.commons.UpdateManager;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
@@ -67,6 +68,9 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         initView();
 
         setChioceItem(0);
+
+        UpdateManager updateManager = new UpdateManager(this);
+        updateManager.checkUpdateInfo(false);
     }
 
     private void initView(){

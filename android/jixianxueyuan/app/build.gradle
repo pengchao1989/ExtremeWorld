@@ -15,7 +15,7 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 3
+        versionCode 4
         versionName "1.0.0"
         multiDexEnabled true
     }
@@ -78,10 +78,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v13:22.0.0'
-    compile 'com.android.support:recyclerview-v7:22.2.0'
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.mcxiaoke.volley:library:1.0.17'
     compile 'com.google.code.gson:gson:2.3.1'
@@ -98,7 +94,8 @@ dependencies {
     compile 'com.github.ksoichiro:android-observablescrollview'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.flipboard:bottomsheet-core:1.4.3'
-    compile 'com.flipboard:bottomsheet-commons:1.4.3' // optional
+    compile 'com.flipboard:bottomsheet-commons:1.4.3'
+    // optional
     compile project(':emoji')
     compile project(':multi-image-selector')
     compile files('libs/open_sdk_r5043_lite.jar')
@@ -106,4 +103,5 @@ dependencies {
     compile files('libs/renderscript-v8.jar')
     compile 'com.android.support:multidex:1.0.0'
     compile project(':OneSDK')
+    compile project(':qupaisdk')
 }
