@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/actionbar_height"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/primary_color"
     >
 
     <RelativeLayout
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/white"
             android:textSize="20sp"
             />
 
@@ -62,11 +62,11 @@
 
     </RelativeLayout>
 
-    <View
+<!--    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/grey_deep"
         android:layout_alignParentBottom="true"
-        />
+        />-->
 
 </RelativeLayout>
