@@ -306,6 +306,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         protected Fragment createItem(int position) {
             FlexibleSpaceWithImageBaseFragment f;
             Bundle args = new Bundle();
+            args.putBoolean(TopicListFragment.INTENT_HAS_HEAD, true);
             switch (position) {
                 case 0: {
                     f = new TopicListFragment();

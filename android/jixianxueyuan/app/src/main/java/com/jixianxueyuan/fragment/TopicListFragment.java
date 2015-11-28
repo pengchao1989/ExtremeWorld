@@ -48,6 +48,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
     public static final String tag = TopicListFragment.class.getSimpleName();
     public static final String INTENT_IS_FIRST = "INTENT_IS_FIRST";
     public static final String INTENT_IS_FINE = "INTENT_IS_FINE";
+    public static final String INTENT_HAS_HEAD = "INTENT_HAS_HEAD";
 
     @InjectView(R.id.scroll)
     ObservableListView listView;
@@ -71,6 +72,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
     boolean isFirst = false;
     boolean isInitData = false;
     boolean isInitView = false;
+    boolean hasHead = false;
 
     boolean isRequesting = false;
     boolean isRefreshData = false;
@@ -101,6 +103,9 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
         }
         if(bundle.containsKey(INTENT_IS_FIRST)){
             isFirst = bundle.getBoolean(INTENT_IS_FIRST);
+        }
+        if(bundle.containsKey(INTENT_HAS_HEAD)){
+            hasHead = bundle.getBoolean(INTENT_HAS_HEAD,false);
         }
 
         initHeaderView(view);
@@ -164,6 +169,9 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
     }
 
     private void initHeaderView(View view){
+        if(!hasHead){
+            return;
+        }
         View paddingView = new View(getActivity());
         final int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
