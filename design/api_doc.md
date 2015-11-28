@@ -221,6 +221,15 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	示例：http://192.168.0.107:8023/api/v1/bmx/geo/near_friend?userId=15&latitude=31.271252&longitude=104.650953&page=1
 	说明：附近的人
 
+
+----------
+	接口名称:course_taxonomy
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/course_taxonomy/
+	请求方式：GET
+	入参:无
+	示例:http://115.28.8.25/api/secure/v1/skateboard/course_taxonomy/
+	说明:获取某个hobby下的完整的教学目录(就是动作集合),建议本地缓存(虽然很小才50k,但是基本不会变化),增加下拉刷新.
+
 ----------
 	接口名称:market
 	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/biz/market/
