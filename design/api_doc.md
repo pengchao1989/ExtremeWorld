@@ -145,7 +145,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	URL地址：http://115.28.8.25/api/secure/v1/{hobby}/topic
 	请求方式：POST
 	{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
-	说明:必传参数user、title、type、taxonomy、hobbys，		user、hobby等的定义可参见上面提到的DTO对象
+	说明:发布主题接口。必传参数user、title、type、taxonomy、hobbys，		user、hobby等的定义可参见上面提到的DTO对象
 
 > 简单情况：{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
 > 
