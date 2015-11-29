@@ -11,7 +11,6 @@ public class TopicDTO implements Serializable
     private String magicType;
     private String title;
     private String content;
-    private int imageCount;
     private int replyCount;
     private int allReplyCount;
     private int viewCount;
@@ -72,14 +71,6 @@ public class TopicDTO implements Serializable
     public void setContent(String content)
     {
         this.content = content;
-    }
-    public int getImageCount()
-    {
-        return imageCount;
-    }
-    public void setImageCount(int imageCount)
-    {
-        this.imageCount = imageCount;
     }
     public int getReplyCount()
     {

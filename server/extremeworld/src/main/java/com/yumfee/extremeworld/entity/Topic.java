@@ -37,7 +37,6 @@ public class Topic extends IdEntity
 	private String title;
 	private String excerpt;
 	private String content;
-	private int imageCount;
 	private int replyCount;
 	private int allReplyCount;
 	private int viewCount;
@@ -99,14 +98,6 @@ public class Topic extends IdEntity
 	public void setContent(String content)
 	{
 		this.content = content;
-	}
-	public int getImageCount()
-	{
-		return imageCount;
-	}
-	public void setImageCount(int imageCount)
-	{
-		this.imageCount = imageCount;
 	}
 	public int getReplyCount()
 	{
@@ -269,7 +260,6 @@ public class Topic extends IdEntity
 				.setAllReplyCount(this.allReplyCount)
 				.setViewCount(this.viewCount)
 				.setAgreeCount(this.agreeCount)
-				.setImageCount(this.imageCount)
 				.setCreateTime(DateUtils.DateToString(this.createTime))
 				.setStatus(this.status);
 				
