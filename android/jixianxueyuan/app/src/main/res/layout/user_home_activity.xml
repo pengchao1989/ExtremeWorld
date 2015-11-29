@@ -17,7 +17,8 @@
         android:id="@+id/user_home_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/ListView"
+        android:divider="@null"
+        style="@style/ListViewNoDivider"
         />
 
 

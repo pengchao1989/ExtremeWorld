@@ -6,11 +6,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="178dp">
+        android:layout_height="270dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="148dp"
+            android:layout_height="@dimen/flexible_space_image_height"
             android:paddingBottom="20dp"
             android:paddingLeft="52dp"
             android:paddingRight="8dp"
@@ -35,8 +35,8 @@
             android:id="@+id/user_home_head_avatar"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:layout_marginTop="118dp"
-            android:layout_marginLeft="32dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="208dp"
             />
     </RelativeLayout>
 

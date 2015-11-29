@@ -103,6 +103,23 @@ public class TopicListOfUserAdapter extends BaseAdapter {
         TopicDTO topicDTO = topicDTOList.get(position);
         viewHolder.titleTextView.setText(topicDTO.getTitle());
 
+        switch (topicDTO.getType()){
+            case TopicType.MOOD:
+                viewHolder.typeImageView.setImageResource(R.mipmap.find_news);
+                break;
+            case TopicType.DISCUSS:
+                viewHolder.typeImageView.setImageResource(R.mipmap.find_discuss);
+                break;
+            case TopicType.S_VIDEO:
+            case TopicType.VIDEO:
+                viewHolder.typeImageView.setImageResource(R.mipmap.find_video);
+                break;
+            case TopicType.NEWS:
+                viewHolder.typeImageView.setImageResource(R.mipmap.find_news);
+                break;
+        }
+
+
         //time
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
         viewHolder.dateTextView.setText(DateTimeFormatter.getLargeTime(topicDTO.getCreateTime()));
@@ -180,6 +197,8 @@ public class TopicListOfUserAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder{
+        @InjectView(R.id.topic_list_of_user_item_type_image)
+        ImageView typeImageView;
         @InjectView(R.id.topic_list_of_user_item_date)
         TextView dateTextView;
         @InjectView(R.id.topic_list_of_user_item_title)

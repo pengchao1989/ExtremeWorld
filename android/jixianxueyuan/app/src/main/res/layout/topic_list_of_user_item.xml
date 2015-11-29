@@ -4,28 +4,44 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="6dp"
-    android:paddingBottom="6dp"
     android:weightSum="4"
     >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
         >
+
+        <ImageView
+            android:id="@+id/topic_list_of_user_item_type_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/find_news"/>
 
         <TextView
             android:id="@+id/topic_list_of_user_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            style="@style/ListPrimaryText"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/topic_list_of_user_item_type_image"
+            android:text="10月9日"
+            style="@style/ListSecondaryTextSmall"
             />
 
+        <View
+            style="@style/VerticalDividerView"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/topic_list_of_user_item_date"/>
 
-    </LinearLayout>
+        <View
+            style="@style/VerticalDividerView"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/topic_list_of_user_item_type_image"/>
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_weight="3"
@@ -33,6 +49,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingRight="6dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/grey"
         >
 
         <com.yumfee.emoji.EmojiconTextView
@@ -108,9 +127,9 @@
                 android:padding="2dp"
                 />
 
+
+
         </LinearLayout>
-
-
 
     </LinearLayout>
 
