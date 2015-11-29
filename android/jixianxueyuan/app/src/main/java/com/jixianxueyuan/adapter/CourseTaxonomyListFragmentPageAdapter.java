@@ -85,7 +85,7 @@ public class CourseTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter
         private final int mDividerColor;
 
         SamplePagerItem(CharSequence title, int iosIconResId, int androidIconResId, int indicatorColor, int dividerColor) {
-            mTitle = title;
+            mTitle = "title";
             mIosIconResId = iosIconResId;
             mAndroidIconResId = androidIconResId;
             mIndicatorColor = indicatorColor;

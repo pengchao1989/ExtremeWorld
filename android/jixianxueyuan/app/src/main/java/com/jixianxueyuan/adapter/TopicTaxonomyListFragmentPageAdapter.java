@@ -59,10 +59,13 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
         else {
             fragment = new TopicListFragment();
         }
-        Bundle bundle = new Bundle();
-        bundle.putString(TopicType.TYPE, topicType);
-        bundle.putLong("topicTaxonomyId", taxonomyDTOList.get(position).getId());
-        fragment.setArguments(bundle);
+        Bundle args = new Bundle();
+        args.putString(TopicType.TYPE, topicType);
+        args.putLong("topicTaxonomyId", taxonomyDTOList.get(position).getId());
+        if(position == 0){
+            args.putBoolean(TopicListFragment.INTENT_IS_FIRST, true);
+        }
+        fragment.setArguments(args);
         return fragment;
     }
 

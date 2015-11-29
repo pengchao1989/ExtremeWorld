@@ -24,7 +24,7 @@
         app:ntlIndicatorHeight="2dp"
         app:ntlOverlayColor="#aa1a237e"
         app:ntlTabMode="both"
-        app:ntlTextSize="20sp"
+        app:ntlTextSize="18sp"
         app:ntlTextStyle="normal"
         app:ntlUnderlineHeight="1dp"/>
 

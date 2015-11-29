@@ -43,7 +43,6 @@ public class CourseHomeActivity extends BaseActivity{
         ButterKnife.inject(this);
 
         mAdapter = new CourseTaxonomyListFragmentPageAdapter(getSupportFragmentManager(), this);
-        viewPager.setAdapter(mAdapter);
 
         requestCourseList();
     }
@@ -68,10 +67,9 @@ public class CourseHomeActivity extends BaseActivity{
                     @Override
                     public void onResponse(MyResponse<CourseTaxonomysResponseDTO> response) {
 
-
-                        Gson gson = new Gson();
-
                         if(response.getContent() != null) {
+
+                            viewPager.setAdapter(mAdapter);
                             mAdapter.setData(response.getContent().getCourseTaxonomyList());
 
                             setTabs();
