@@ -141,12 +141,21 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 
 ----------
 	接口名称：topic
-	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic
+	URL地址：http://115.28.8.25/api/secure/v1/{hobby}/topic
 	请求方式：POST
 	入参：
 	{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
 	说明:必传参数user、title、type、taxonomy、hobbys，		user、hobby等的定义可参见上面提到的DTO对象
 	
+
+
+----------
+	接口名称：topic_user
+	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic/user/{id}
+	请求方式：GET
+	入参: page
+	示例：http://115.28.8.25/api/secure/v1/hobby/topic/user/1?page=1
+	说明：获取某个user的topic列表
 
 ----------
 	接口名称：reply
@@ -195,7 +204,6 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	请求方式：GET
 	示例：http://115.28.8.25/api/secure/v1/user/15
 	说明：获取某个user的信息
-	
 
 
 ----------
