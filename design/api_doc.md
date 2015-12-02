@@ -275,3 +275,21 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	入参:page
 	示例:http://115.28.8.25/api/secure/v1/skateboard/biz/goods/category/1
 	说明:获取某个category(分类-如鞋子)下的商品列表,{id}为商店category id, 这个id从market接口中能够拿到
+
+
+----------
+	接口名称:sponsorship
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/sponsorship
+	请求方式:GET
+	入参:page
+	示例:http://115.28.8.25/api/secure/v1/skateboard/sponsorship?page=1
+	说明:获取某个hobby下的赞助列表
+
+----------
+	接口名称:sponsorship
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/sponsorship
+	请求方式:POST
+	入参:page
+	示例:http://115.28.8.25/api/secure/v1/skateboard/sponsorship
+	说明:创建一条赞助
+	参数示例：{"sum":0.01,"message":"不用找了","user":{"id":1},"hobby":{"id":1}}
