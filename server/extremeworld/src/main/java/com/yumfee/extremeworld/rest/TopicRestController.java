@@ -147,7 +147,6 @@ public class TopicRestController
 		BeanValidators.validateWithException(validator,topic);
 		
 		
-		
 		topicService.saveTopic(topic);
 		
 
