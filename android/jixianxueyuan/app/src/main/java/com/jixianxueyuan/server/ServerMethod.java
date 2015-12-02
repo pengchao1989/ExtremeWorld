@@ -57,4 +57,5 @@ public class ServerMethod {
     public static final String goods(){return  method_url_secure + hobby + "biz/goods";};
     public static final String goods_of_shop(){return method_url_secure + hobby + "biz/goods/shop/";};
     public static final String goods_of_category (){return method_url_secure + hobby + "biz/goods/category/";}
+    public static final String sponsorship(){return method_url_secure + hobby + "sponsorship";}
 }

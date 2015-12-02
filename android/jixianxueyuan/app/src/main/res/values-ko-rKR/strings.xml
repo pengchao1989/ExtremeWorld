@@ -51,6 +51,8 @@
 
     <string name="reply_of_me">대답, 내</string>
     <string name="agree_of_me">칭찬하다</string>
+    <string name="setting">설치</string>
+    <string name="sponsorship">기증 목록</string>
 
     <string name="topic_detail">화제 정보</string>
     <string name="floor">건물</string>

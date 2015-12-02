@@ -29,6 +29,8 @@ public class MineFragment extends Fragment {
 
     public static final String tag = MineFragment.class.getSimpleName();
 
+    @InjectView(R.id.mine_fragment_head_image_view)
+    ImageView headImageView;
     @InjectView(R.id.mine_avatar_imageview)
     ImageView avatarImageView;
     @InjectView(R.id.mine_fragment_signature)
@@ -56,6 +58,7 @@ public class MineFragment extends Fragment {
         ButterKnife.inject(this,view);
 
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView, ImageLoaderConfig.getAvatarOption(this.getActivity()));
+        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg(), headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
 
         signatureTextView.setText(mine.getUserInfo().getSignature());
 

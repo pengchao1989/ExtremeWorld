@@ -11,11 +11,13 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="148dp"
-            android:background="@mipmap/default_head"
-            android:paddingBottom="20dp"
-            android:paddingLeft="52dp"
-            android:paddingRight="8dp">
+            android:layout_height="148dp">
+
+            <ImageView
+                android:id="@+id/mine_fragment_head_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/mine_fragment_signature"
@@ -23,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginBottom="20dp"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -110,6 +113,38 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="@string/setting" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
+        <View style="@style/HorizontalDividerView" />
+
+
+        <RelativeLayout
+            android:id="@+id/mine_fragment_sponsorship"
+            android:layout_marginTop="20dp"
+            style="@style/ImageItemLayout"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_mygift_gift" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/sponsorship" />
             </LinearLayout>
 
             <ImageView style="@style/ImageItemRightIcon" />
