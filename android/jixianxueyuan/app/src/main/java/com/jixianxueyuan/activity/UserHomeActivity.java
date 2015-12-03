@@ -39,6 +39,9 @@ import butterknife.OnItemClick;
  */
 public class UserHomeActivity extends BaseActivity {
 
+    public static final String INTENT_USER_MIN = "INTENT_USER_MIN";
+    public static final String INTENT_USER = "INTENT_USER";
+
     @InjectView(R.id.user_home_actionbar)MyActionBar actionBar;
     @InjectView(R.id.user_home_listview)ListView listView;
 
@@ -62,21 +65,28 @@ public class UserHomeActivity extends BaseActivity {
         ButterKnife.inject(this);
 
         Bundle bundle = this.getIntent().getExtras();
-        if(bundle.containsKey("userMinDTO")){
-            userMinDTO = (UserMinDTO) bundle.getSerializable("userMinDTO");
+        if(bundle.containsKey(INTENT_USER_MIN)){
+            userMinDTO = (UserMinDTO) bundle.getSerializable(INTENT_USER_MIN);
+            actionBar.setTitle(userMinDTO.getName());
+        }
+        else if(bundle.containsKey(INTENT_USER)){
+            userDTO = (UserDTO) bundle.getSerializable(INTENT_USER);
+            actionBar.setTitle(userDTO.getName());
         }
         else {
             finish();
         }
-
-        actionBar.setTitle(userMinDTO.getName());
 
 
         initHeadView();
 
         adapter = new TopicListOfUserAdapter(this);
         listView.setAdapter(adapter);
-        requestUserInfo();
+        if(userDTO != null){
+            setUserDetailView();
+        }else {
+            requestUserInfo();
+        }
         requestTopicList();
     }
 
@@ -84,10 +94,16 @@ public class UserHomeActivity extends BaseActivity {
         View headView = LayoutInflater.from(this).inflate(R.layout.user_home_head_view, null);
         signatureTextView = (TextView) headView.findViewById(R.id.user_home_head_signature);
         ImageView avatarImageView = (ImageView) headView.findViewById(R.id.user_home_head_avatar);
-        String avatarUrl = userMinDTO.getAvatar() + "!AndroidProfileAvatar";
-        MyLog.d("UserHomeActivity", "avatar=" +avatarUrl);
+
+        String avatarUrl = userMinDTO != null?userMinDTO.getAvatar() + "!AndroidProfileAvatar"
+                :userDTO.getAvatar() + "!AndroidProfileAvatar";
+        MyLog.d("UserHomeActivity", "avatar=" + avatarUrl);
         ImageLoader.getInstance().displayImage(avatarUrl, avatarImageView);
         listView.addHeaderView(headView);
+    }
+
+    private void setUserDetailView(){
+        signatureTextView.setText(userDTO.getSignature());
     }
 
     private void requestUserInfo(){
@@ -101,10 +117,8 @@ public class UserHomeActivity extends BaseActivity {
 
                         if(response.getStatus() == MyResponse.status_ok){
                             userDTO = response.getContent();
-                            signatureTextView.setText(userDTO.getSignature());
+                            setUserDetailView();
                         }
-
-
 
                     }
                 }, new Response.ErrorListener() {
@@ -119,7 +133,8 @@ public class UserHomeActivity extends BaseActivity {
     private void requestTopicList(){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.topic_user()+userMinDTO.getId();
+        Long userId = userMinDTO != null ? userMinDTO.getId() : userDTO.getId();
+        String url = ServerMethod.topic_user()+userId;
 
         MyPageRequest<TopicDTO> stringRequest = new MyPageRequest(Request.Method.GET,url,TopicDTO.class,
                 new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {

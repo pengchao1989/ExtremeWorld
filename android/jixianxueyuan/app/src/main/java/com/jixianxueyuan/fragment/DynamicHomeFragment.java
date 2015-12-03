@@ -1,6 +1,7 @@
 package com.jixianxueyuan.fragment;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePager
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
@@ -284,6 +286,12 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         }
     }
 
+    @OnClick(R.id.fab)void onAvatarClick(){
+        Intent intent = new Intent(this.getActivity(), UserHomeActivity.class);
+        intent.putExtra(UserHomeActivity.INTENT_USER, mine.getUserInfo());
+        startActivity(intent);
+
+    }
     /**
      * This adapter provides three types of fragments as an example.
      * {@linkplain #createItem(int)} should be modified if you use this example for your app.

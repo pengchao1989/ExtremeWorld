@@ -228,7 +228,7 @@ public class TopicListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, UserHomeActivity.class);
-                intent.putExtra("userMinDTO", topicDTOList.get(position).getUser());
+                intent.putExtra(UserHomeActivity.INTENT_USER_MIN, topicDTOList.get(position).getUser());
                 context.startActivity(intent);
             }
         });
