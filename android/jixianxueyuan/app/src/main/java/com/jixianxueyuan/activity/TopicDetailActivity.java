@@ -32,6 +32,7 @@ import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.AnalyzeContent;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.AgreeResultDTO;
 import com.jixianxueyuan.dto.MediaDTO;
@@ -215,8 +216,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         headViewHolder.timeTextView.setText(timeAgo);
         headViewHolder.zanCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
-        String url =  topicDTO.getUser().getAvatar() + "!androidListAvatar";
-        ImageLoader.getInstance().displayImage(url, headViewHolder.avatarImageView);
+        String avatarUrl = topicDTO.getUser().getAvatar();
+        if(Util.isOurServerImage(avatarUrl)){
+            avatarUrl += QiniuImageStyle.LIST_AVATAR;
+        }
+        ImageLoader.getInstance().displayImage(avatarUrl, headViewHolder.avatarImageView);
 
 
         //参考链接

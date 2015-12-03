@@ -100,6 +100,7 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.flipboard:bottomsheet-core:1.4.3'
     compile 'com.flipboard:bottomsheet-commons:1.4.3'
+    compile 'cn.pedant.sweetalert:library:1.3'
     // optional
     compile project(':emoji')
     compile project(':multi-image-selector')

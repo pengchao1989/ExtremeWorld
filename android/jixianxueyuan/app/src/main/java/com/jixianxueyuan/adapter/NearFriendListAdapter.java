@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.Util;
@@ -84,7 +85,7 @@ public class NearFriendListAdapter extends BaseAdapter {
 
         String avatarUrl = userDTO.getAvatar();
         if(Util.isOurServerImage(avatarUrl)){
-            avatarUrl += "!androidListAvatar";
+            avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
 
         ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);

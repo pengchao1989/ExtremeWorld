@@ -22,6 +22,7 @@ import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MyPage;
@@ -319,6 +320,8 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                             doHideFootView();
                             //swipeRefreshLayout.setRefreshing(false);
 
+                        }else {
+                            MyErrorHelper.showErrorToast(TopicListFragment.this.getActivity(), response.getError());
                         }
                         isRequesting = false;
                     }

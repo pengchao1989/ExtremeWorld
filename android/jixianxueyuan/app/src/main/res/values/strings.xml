@@ -90,6 +90,11 @@
     <string name="region">Region</string>
     <string name="signature">Signature</string>
 
+    <!--sponsorship-->
+    <string name="month_tycoon_list">month tycoon list</string>
+    <string name="donation">donation</string>
+    <string name="money_unit">USD</string>
+
     <string name="logout">logout</string>
     <string name="notify_setting">notify</string>
     <string name="feed_back">feed back</string>

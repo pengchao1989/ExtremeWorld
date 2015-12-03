@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
+import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
@@ -21,6 +23,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by pengchao on 4/20/15.
@@ -95,8 +99,21 @@ public class MineFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.mine_avatar_imageview)void avatarOnClick(){
+    @OnClick(R.id.mine_avatar_imageview)void onAvatarOnClick(){
         Intent intent = new Intent(this.getActivity(), ProfileEditActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.mine_fragment_sponsorship)void onSponsorship(){
+        Intent intent = new Intent(this.getActivity(), SponsorshipActivity.class);
+        startActivity(intent);
+    }
+
+    @OnLongClick(R.id.mine_fragment_head_image_view)boolean onHeadLongClick(){
+        new SweetAlertDialog(this.getContext())
+                .setTitleText("更新封面")
+                .setContentText("YES！")
+                .show();
+        return true;
     }
 }

@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.RemindDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yumfee.emoji.EmojiconTextView;
 
@@ -81,8 +83,11 @@ public class RemindListAdapter extends BaseAdapter {
 
         UserMinDTO speaker = remindDTO.getSpeaker();
 
-        String url = speaker.getAvatar() + "!androidListAvatar";
-        ImageLoader.getInstance().displayImage(url, viewHolder.avatarImageView);
+        String avatarUrl = speaker.getAvatar();
+        if(Util.isOurServerImage(avatarUrl)){
+            avatarUrl += QiniuImageStyle.LIST_AVATAR;
+        }
+        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
         viewHolder.nameTextView.setText(speaker.getName());
 
         viewHolder.timeTextView.setText(remindDTO.getCreateTime());

@@ -48,12 +48,12 @@
     <string name="course">教学</string>
     <string name="site">场地</string>
     <string name="people">附近的人</string>
-    <string name="store">商店</string>
+    <string name="store">集市</string>
 
     <string name="reply_of_me">回应我的</string>
     <string name="agree_of_me">赞</string>
     <string name="setting">设置</string>
-    <string name="sponsorship">捐赠榜单</string>
+    <string name="sponsorship">捐赠榜</string>
 
     <string name="topic_detail">话题详情</string>
     <string name="course_detail">教学详情</string>
@@ -90,6 +90,10 @@
     <string name="region">地区</string>
     <string name="signature">签名</string>
 
+    <!--sponsorship-->
+    <string name="month_tycoon_list">本月土豪榜</string>
+    <string name="donation">捐赠</string>
+    <string name="money_unit">元</string>
 
     <string name="logout">退出当前账号</string>
     <string name="notify_setting">提醒设置</string>

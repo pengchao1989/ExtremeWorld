@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
@@ -114,10 +115,10 @@ public class TopicListAdapter extends BaseAdapter {
 
         String avatarUrl = topicDTO.getUser().getAvatar();
         if(Util.isOurServerImage(avatarUrl)){
-            avatarUrl += "!androidListAvatar";
+            avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(avatarUrl, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
+        imageLoader.displayImage(avatarUrl, viewHolder.avatarImageView , ImageLoaderConfig.getAvatarOption(context));
 
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 

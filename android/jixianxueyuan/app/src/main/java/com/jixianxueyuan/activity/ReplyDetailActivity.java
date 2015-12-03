@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.SubReplylListAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
@@ -120,7 +121,7 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
         myActionBar.setTitle(replyDTO.getFloor() + getString(R.string.floor));
 
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(replyDTO.getUser().getAvatar() + "!androidListAvatar", headViewHolder.avatarImageView);
+        imageLoader.displayImage(replyDTO.getUser().getAvatar() + QiniuImageStyle.LIST_AVATAR, headViewHolder.avatarImageView);
         headViewHolder.nameTextView.setText(replyDTO.getUser().getName());
         headViewHolder.timeTextView.setText(replyDTO.getCreateTime());
         headViewHolder.contentTextView.setText(replyDTO.getContent());

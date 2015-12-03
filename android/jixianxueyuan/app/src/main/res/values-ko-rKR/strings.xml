@@ -6,6 +6,7 @@
     <string name="app_name_roller_skating">轮滑圈</string>
     <string name="app_name_skee">滑雪圈</string>
 
+
     <string name="done">완성하다</string>
     <string name="cancel">취소</string>
     <string name="back">복귀</string>
@@ -55,6 +56,7 @@
     <string name="sponsorship">기증 목록</string>
 
     <string name="topic_detail">화제 정보</string>
+    <string name="course_detail">교육정보</string>
     <string name="floor">건물</string>
     <string name="reply">답장</string>
     <string name="view">읽다</string>
@@ -88,6 +90,10 @@
     <string name="region">지역</string>
     <string name="signature">서명</string>
 
+    <!--sponsorship-->
+    <string name="month_tycoon_list">이번 달 탁월한 게시</string>
+    <string name="donation">기부</string>
+    <string name="money_unit">KRW</string>
 
     <string name="logout">종료 현재 계정</string>
     <string name="notify_setting">알림 설정</string>

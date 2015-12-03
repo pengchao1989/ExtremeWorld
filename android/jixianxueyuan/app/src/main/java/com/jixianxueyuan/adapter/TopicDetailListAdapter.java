@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.SubReplyDTO;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yumfee.emoji.EmojiconTextView;
 
@@ -98,9 +100,11 @@ public class TopicDetailListAdapter extends BaseAdapter {
         viewHolder.replyContentTextView.setText(replyDTO.getContent());
         viewHolder.floorTextView.setText(replyDTO.getFloor() + context.getString(R.string.floor));
 
-
-        String url = replyDTO.getUser().getAvatar() + "!androidListAvatar";
-        ImageLoader.getInstance().displayImage(url, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
+        String avatarUrl = replyDTO.getUser().getAvatar();
+        if(Util.isOurServerImage(avatarUrl)){
+            avatarUrl += QiniuImageStyle.LIST_AVATAR;
+        }
+        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
 
         //sub reply
         showSubReply(viewHolder, replyDTO);
