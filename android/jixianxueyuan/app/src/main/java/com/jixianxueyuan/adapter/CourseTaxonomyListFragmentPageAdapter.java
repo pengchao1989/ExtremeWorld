@@ -57,6 +57,11 @@ public class CourseTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter
     }
 
     @Override
+    public CharSequence getPageTitle(int position) {
+        return mTabs.get(position).getTitle();
+    }
+
+    @Override
     public int getPageIconResId(int position) {
         return mTabs.get(position).getAndroidIconResId();
     }
@@ -85,7 +90,7 @@ public class CourseTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter
         private final int mDividerColor;
 
         SamplePagerItem(CharSequence title, int iosIconResId, int androidIconResId, int indicatorColor, int dividerColor) {
-            mTitle = "title";
+            mTitle = title;
             mIosIconResId = iosIconResId;
             mAndroidIconResId = androidIconResId;
             mIndicatorColor = indicatorColor;
