@@ -88,7 +88,8 @@ public class DiscoveryFragment extends Fragment {
                         break;
 
                     case 2:
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), CourseHomeActivity.class);
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
+                        intent.putExtra(TopicType.TYPE, TopicType.VIDEO);
                         break;
                     case 3:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), SiteListActivity.class);
@@ -100,8 +101,7 @@ public class DiscoveryFragment extends Fragment {
                         break;*/
 
                     case 4:
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
-                        intent.putExtra(TopicType.TYPE, TopicType.VIDEO);
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), CourseHomeActivity.class);
                         break;
                     case 5:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
