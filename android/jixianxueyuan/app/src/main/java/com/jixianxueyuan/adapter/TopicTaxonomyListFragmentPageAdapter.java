@@ -9,10 +9,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.TopicType;
-import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.TaxonomyDTO;
 import com.jixianxueyuan.fragment.NewsListFragment;
-import com.jixianxueyuan.fragment.TopicListFragment;
+import com.jixianxueyuan.fragment.SimpleTopicListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,13 +56,13 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
             fragment = new NewsListFragment();
         }
         else {
-            fragment = new TopicListFragment();
+            fragment = new SimpleTopicListFragment();
         }
         Bundle args = new Bundle();
         args.putString(TopicType.TYPE, topicType);
-        args.putLong("topicTaxonomyId", taxonomyDTOList.get(position).getId());
+        args.putLong(TopicType.TOPIC_TAXONOMY_ID, taxonomyDTOList.get(position).getId());
         if(position == 0){
-            args.putBoolean(TopicListFragment.INTENT_IS_FIRST, true);
+            args.putBoolean(SimpleTopicListFragment.INTENT_IS_FIRST, true);
         }
         fragment.setArguments(args);
         return fragment;

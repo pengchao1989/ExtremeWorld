@@ -12,10 +12,18 @@
         app:my_title="@string/sponsorship"
         />
 
-    <ListView
-        android:id="@+id/sponsorship_activity_list_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sponsorship_list_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/ListView"/>
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/sponsorship_activity_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/ListView"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

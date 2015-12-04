@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -68,12 +69,36 @@ public class NewsListFragment extends Fragment {
         ButterKnife.inject(this, view);
 
         Bundle bundle = getArguments();
-        if(bundle.containsKey("topicTaxonomyId"))
+        if(bundle.containsKey(TopicType.TOPIC_TAXONOMY_ID))
         {
-            topicTaxonomyId = bundle.getLong("topicTaxonomyId");
+            topicTaxonomyId = bundle.getLong(TopicType.TOPIC_TAXONOMY_ID);
         }
 
         listView.setAdapter(adapter);
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    //滚动到底部
+                    if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                        getNextPage();
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshTopicList();
+            }
+        });
 
         refreshTopicList();
 

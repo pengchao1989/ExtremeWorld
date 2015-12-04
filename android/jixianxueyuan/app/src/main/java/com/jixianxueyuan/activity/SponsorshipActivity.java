@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -29,6 +30,8 @@ public class SponsorshipActivity extends BaseActivity {
 
     public static final String TAG = SponsorshipActivity.class.getSimpleName();
 
+    @InjectView(R.id.sponsorship_list_swipe_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
     @InjectView(R.id.sponsorship_activity_list_view)
     ListView listView;
 
