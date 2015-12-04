@@ -97,6 +97,7 @@
         <activity android:name=".activity.SiteListActivity"/>
         <activity android:name=".activity.SponsorshipActivity"/>
         <activity android:name=".activity.WebActivity"/>
+        <activity android:name=".activity.DanmuDetailActivity"/>
         <activity
             android:configChanges="orientation|screenSize"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />

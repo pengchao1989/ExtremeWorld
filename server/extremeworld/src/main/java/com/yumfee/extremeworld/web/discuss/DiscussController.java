@@ -115,7 +115,6 @@ public class DiscussController {
 		User user = new User();
 		user.setId(getCurrentUserId());
 		newTopic.setUser(user);
-		newTopic.setImageCount(0);
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
 		newTopic.setType(TopicType.DISCUSS);
