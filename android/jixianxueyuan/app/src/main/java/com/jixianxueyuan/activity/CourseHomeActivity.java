@@ -10,13 +10,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CourseTaxonomyListFragmentPageAdapter;
+import com.jixianxueyuan.dto.CourseTaxonomyDTO;
 import com.jixianxueyuan.dto.CourseTaxonomysResponseDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.ACache;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -43,8 +46,10 @@ public class CourseHomeActivity extends BaseActivity{
         ButterKnife.inject(this);
 
         mAdapter = new CourseTaxonomyListFragmentPageAdapter(getSupportFragmentManager(), this);
+        viewPager.setAdapter(mAdapter);
 
-        requestCourseList();
+
+        initCourseList();
     }
 
     @Override
@@ -57,10 +62,21 @@ public class CourseHomeActivity extends BaseActivity{
         super.onResume();
     }
 
+    private void initCourseList(){
+        ACache aCache = ACache.get(this);
+        String url = ServerMethod.courseTaxonomy();
+        CourseTaxonomysResponseDTO courseTaxonomysResponseDTO= (CourseTaxonomysResponseDTO) aCache.getAsObject(url);
+        if(courseTaxonomysResponseDTO != null){
+            mAdapter.setData(courseTaxonomysResponseDTO.getCourseTaxonomyList());
+            setTabs();
+        }else {
+            requestCourseList();
+        }
+    }
     private void requestCourseList()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.courseTaxonomy();
+        final String url = ServerMethod.courseTaxonomy();
 
         MyRequest<CourseTaxonomysResponseDTO> myRequest = new MyRequest<CourseTaxonomysResponseDTO>(Request.Method.GET,url,CourseTaxonomysResponseDTO.class,
                 new Response.Listener<MyResponse<CourseTaxonomysResponseDTO>>() {
@@ -69,10 +85,13 @@ public class CourseHomeActivity extends BaseActivity{
 
                         if(response.getContent() != null) {
 
-                            viewPager.setAdapter(mAdapter);
+
                             mAdapter.setData(response.getContent().getCourseTaxonomyList());
 
                             setTabs();
+
+                            ACache aCache = ACache.get(CourseHomeActivity.this);
+                            aCache.put(url, response.getContent(), ACache.TIME_DAY);
                         }
                     }
                 },

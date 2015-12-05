@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.flipboard.bottomsheet.BottomSheetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
-    <com.jixianxueyuan.widget.MyActionBar
-        android:id="@+id/course_detail_actionbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:my_title="@string/sponsorship"
-        />
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/sponsorship_list_swipe_refresh"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/sponsorship_activity_list_view"
+        <com.jixianxueyuan.widget.MyActionBar
+            android:id="@+id/course_detail_actionbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/ListView"/>
+            android:layout_height="wrap_content"
+            app:my_title="@string/sponsorship"
+            />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/sponsorship_list_swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/sponsorship_activity_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/ListView"/>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+            <Button
+                android:id="@+id/sponsorship_activity_donation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/donation"
+                style="@style/BlueButton"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</com.flipboard.bottomsheet.BottomSheetLayout>

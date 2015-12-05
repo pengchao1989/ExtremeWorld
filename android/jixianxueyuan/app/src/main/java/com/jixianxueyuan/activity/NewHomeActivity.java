@@ -31,7 +31,7 @@ import butterknife.InjectView;
  */
 public class NewHomeActivity extends FragmentActivity implements View.OnClickListener {
 
-    @InjectView(R.id.bottomsheet)BottomSheetLayout bottomSheetLayout;
+    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @InjectView(R.id.tab_new_layout)RelativeLayout newLayout;
     @InjectView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
     @InjectView(R.id.tab_discover_layout)RelativeLayout discoverLayout;
