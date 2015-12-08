@@ -1,5 +1,10 @@
 package com.yumfee.extremeworld.rest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
+
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +21,17 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.TradePayType;
+import com.yumfee.extremeworld.config.TradeStutas;
+import com.yumfee.extremeworld.config.TradeType;
 import com.yumfee.extremeworld.entity.Sponsorship;
+import com.yumfee.extremeworld.entity.Trade;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.SponsorshipDTO;
+import com.yumfee.extremeworld.rest.dto.SponsorshipTradeDTO;
 import com.yumfee.extremeworld.service.SponsorshipService;
+import com.yumfee.extremeworld.service.TradeService;
 
 @RestController
 @RequestMapping(value = "/api/secure/v1/{hobby}/sponsorship")
@@ -29,6 +40,8 @@ public class SponsorshipRestController {
 	
 	@Autowired
 	SponsorshipService sponsorshipService;
+	@Autowired
+	TradeService tradeService;
 	@Autowired
 	private Validator validator;
 	
@@ -52,12 +65,32 @@ public class SponsorshipRestController {
 		//JSR303
 		BeanValidators.validateWithException(validator,sponsorship);
 
+		Trade trade = new Trade();
+		trade.setInternalTradeNo(buildInternalTradeNo());
+		trade.setTradeType(TradeType.SPONSORSHIP);
+		trade.setPayType(TradePayType.ALIPAY);
+		trade.setTradeStatus(TradeStutas.WAIT_BUYER_PAY);
+		tradeService.save(trade);
+		
+		sponsorship.setTrade(trade);
+		
 		sponsorshipService.save(sponsorship);
 		
 		Sponsorship result = sponsorshipService.get(sponsorship.getId());
-		SponsorshipDTO dto = BeanMapper.map(result, SponsorshipDTO.class);
-		
+		SponsorshipTradeDTO dto = BeanMapper.map(result, SponsorshipTradeDTO.class);
 		
 		return MyResponse.ok(dto);
 	}
+	
+    public String buildInternalTradeNo() {
+        SimpleDateFormat format = new SimpleDateFormat("YYYYMMddHHmmss",
+                Locale.getDefault());
+        Date date = new Date();
+        String key = format.format(date);
+
+        Random r = new Random();
+        key = key + r.nextInt();
+        key = key.substring(0, 19);
+        return key;
+    }
 }

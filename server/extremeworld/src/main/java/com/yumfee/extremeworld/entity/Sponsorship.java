@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,8 +14,11 @@ public class Sponsorship extends IdEntity{
 
 	private double sum;
 	private String message;
+	private String ticket;
 	private Date createTime;
 	
+	
+	private Trade trade;
 	private User user;
 	private Hobby hobby;
 	
@@ -30,6 +34,13 @@ public class Sponsorship extends IdEntity{
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	public String getTicket() {
+		return ticket;
+	}
+	public void setTicket(String ticket) {
+		this.ticket = ticket;
+	}
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -37,6 +48,14 @@ public class Sponsorship extends IdEntity{
 		this.createTime = createTime;
 	}
 	
+	@OneToOne
+	@JoinColumn(name = "trade_id")
+	public Trade getTrade() {
+		return trade;
+	}
+	public void setTrade(Trade trade) {
+		this.trade = trade;
+	}
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	public User getUser() {

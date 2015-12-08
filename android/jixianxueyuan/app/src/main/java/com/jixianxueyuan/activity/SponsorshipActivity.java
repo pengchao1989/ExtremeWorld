@@ -16,15 +16,18 @@ import com.jixianxueyuan.adapter.SponsorshipListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.pay.PayHelper;
+import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.TopicType;
-import com.jixianxueyuan.dto.MyPage;
-import com.jixianxueyuan.dto.MyResponse;
-import com.jixianxueyuan.dto.SponsorshipDTO;
+import com.jixianxueyuan.dto.*;
+import com.jixianxueyuan.dto.Error;
+import com.jixianxueyuan.dto.request.SponsorshipRequestDTO;
 import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -49,6 +52,8 @@ public class SponsorshipActivity extends BaseActivity {
     private List<SponsorshipDTO> sponsorshipDTOList;
 
     private PayHelper payHelper;
+
+    private SponsorshipRequestDTO sponsorshipRequestDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +119,42 @@ public class SponsorshipActivity extends BaseActivity {
         MyApplication.getContext().getRequestQueue().add(myPageRequest);
     }
 
+    private void createSponsorshipOrder(){
+
+        String url = ServerMethod.sponsorship();
+        MyRequest<SponsorshipTradeDTO> myRequest = new MyRequest<SponsorshipTradeDTO>(Request.Method.POST,
+                url, SponsorshipTradeDTO.class,
+                sponsorshipRequestDTO,
+                new Response.Listener<MyResponse<SponsorshipTradeDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<SponsorshipTradeDTO> response) {
+
+                        if(response.getStatus() == MyResponse.status_ok){
+                            if(payHelper == null){
+                                payHelper = new PayHelper(SponsorshipActivity.this);
+                            }
+                            SponsorshipTradeDTO sponsorshipTradeDTO = response.getContent();
+                            if(sponsorshipTradeDTO != null){
+
+                            }else {
+
+                            }
+                            payHelper.pay(sponsorshipTradeDTO.getTrade().getInternalTradeNo(),
+                                    String.valueOf(sponsorshipTradeDTO.getSum()));
+                        }else {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
     private void showMoneySheet(final MenuSheetView.MenuType menuType){
         MenuSheetView menuSheetView =
                 new MenuSheetView(SponsorshipActivity.this, menuType, getString(R.string.donation), new MenuSheetView.OnMenuItemClickListener() {
@@ -122,7 +163,7 @@ public class SponsorshipActivity extends BaseActivity {
                         String money = "0.01";
                         switch (item.getItemId()){
                             case R.id.menu_donation_1:
-                                money = "1.00";
+                                money = "0.1";
                                 break;
                             case R.id.menu_donation_5:
                                 money = "5.00";
@@ -138,15 +179,28 @@ public class SponsorshipActivity extends BaseActivity {
                                 break;
                         }
 
-                        if(payHelper == null){
-                            payHelper = new PayHelper(SponsorshipActivity.this);
-                        }
-                        payHelper.pay(money);
+                        buildSponsorshipRequestDTO(money);
+                        createSponsorshipOrder();
 
                         if (bottomSheetLayout.isSheetShowing()) {
                             bottomSheetLayout.dismissSheet();
                         }
                         return true;
+                    }
+
+                    private void buildSponsorshipRequestDTO(String money) {
+                        if(sponsorshipRequestDTO == null){
+                            sponsorshipRequestDTO = new SponsorshipRequestDTO();
+                        }
+                        sponsorshipRequestDTO.setSum(Double.parseDouble(money));
+                        HobbyDTO hobbyDTO = new HobbyDTO();
+                        Long hobbyId = HobbyType.getHobbyId(MyApplication.getContext().getAppInfomation().getCurrentHobbyStamp());
+                        hobbyDTO.setId(hobbyId);
+                        sponsorshipRequestDTO.setHobby(hobbyDTO);
+                        UserMinDTO userMinDTO = new UserMinDTO();
+                        userMinDTO.setId(MyApplication.getContext().getMine().getUserInfo().getId());
+                        sponsorshipRequestDTO.setUser(userMinDTO);
+                        sponsorshipRequestDTO.setTicket(UUID.randomUUID().toString());
                     }
                 });
         menuSheetView.inflateMenu(R.menu.donation_money);

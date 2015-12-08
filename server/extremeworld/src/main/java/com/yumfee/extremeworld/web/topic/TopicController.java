@@ -65,7 +65,6 @@ public class TopicController
 		User user = new User();
 		user.setId(getCurrentUserId());
 		newTopic.setUser(user);
-		newTopic.setImageCount(0);
 		newTopic.setReplyCount(0);
 		newTopic.setStatus(1);
 		

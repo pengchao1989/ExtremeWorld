@@ -115,7 +115,6 @@ public class VideoController
 		User user = new User();
 		user.setId(getCurrentUserId());
 		newVideo.setUser(user);
-		newVideo.setImageCount(0);
 		newVideo.setReplyCount(0);
 		newVideo.setStatus(1);
 		newVideo.setExcerpt(newVideo.getContent());

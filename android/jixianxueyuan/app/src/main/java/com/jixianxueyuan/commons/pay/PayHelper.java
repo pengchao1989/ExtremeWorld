@@ -100,7 +100,7 @@ public class PayHelper {
     };
 
 
-    public void pay(String money) {
+    public void pay(String internalTradeNo, String money) {
         if (TextUtils.isEmpty(PARTNER) || TextUtils.isEmpty(RSA_PRIVATE)
                 || TextUtils.isEmpty(SELLER)) {
             new AlertDialog.Builder(context)
@@ -117,7 +117,7 @@ public class PayHelper {
             return;
         }
         // 订单
-        String orderInfo = getOrderInfo("捐赠"+context.getString(R.string.app_name), "biu~biu~biu", money);
+        String orderInfo = getOrderInfo(internalTradeNo, "捐赠"+context.getString(R.string.app_name), "biu~biu~biu", money);
 
         // 对订单做RSA 签名
         String sign = sign(orderInfo);
@@ -194,7 +194,7 @@ public class PayHelper {
      * create the order info. 创建订单信息
      *
      */
-    public String getOrderInfo(String subject, String body, String price) {
+    public String getOrderInfo(String internalTradeNo, String subject, String body, String price) {
 
         // 签约合作者身份ID
         String orderInfo = "partner=" + "\"" + PARTNER + "\"";
@@ -203,7 +203,7 @@ public class PayHelper {
         orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
 
         // 商户网站唯一订单号
-        orderInfo += "&out_trade_no=" + "\"" + getOutTradeNo() + "\"";
+        orderInfo += "&out_trade_no=" + "\"" + internalTradeNo + "\"";
 
         // 商品名称
         orderInfo += "&subject=" + "\"" + subject + "\"";
@@ -217,7 +217,7 @@ public class PayHelper {
         /*"http://notify.msp.hk/notify.htm"*/
 
         // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + "http://dev.jixianxueyuan.com/api/v1/alipay/notify"
+        orderInfo += "&notify_url=" + "\"" + "http://dev.jixianxueyuan.com/api/alipay/notify"
                 + "\"";
 
         // 服务接口名称， 固定值

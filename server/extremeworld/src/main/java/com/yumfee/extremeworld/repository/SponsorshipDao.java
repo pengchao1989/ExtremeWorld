@@ -9,6 +9,6 @@ import com.yumfee.extremeworld.entity.Sponsorship;
 
 public interface SponsorshipDao extends PagingAndSortingRepository<Sponsorship,Long>{
 
-	@Query("SELECT s FROM Sponsorship s WHERE s.hobby.id=?")
+	@Query("SELECT s FROM Sponsorship s WHERE s.hobby.id=? AND s.trade.tradeStatus='TRADE_SUCCESS'")
 	Page<Sponsorship> findByHobbyId(Long hobbyId, Pageable pageable);
 }
