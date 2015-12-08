@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.alibaba.cchannel.plugin.CloudPushService;
 import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.push.CloudPushService;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;

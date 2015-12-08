@@ -6,9 +6,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.alibaba.cchannel.push.receiver.CPushMessage;
-import com.alibaba.cchannel.push.receiver.CPushMessageReceiver;
-import com.alibaba.cchannel.push.receiver.ChannelStatus;
+import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.MessageReceiver;
+import com.alibaba.sdk.android.push.notification.CPushMessage;
 import com.google.gson.Gson;
 import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.R;
@@ -23,42 +24,51 @@ import java.util.Map;
 /**
  * Created by pengchao on 8/6/15.
  */
-public class CustomReceiver extends CPushMessageReceiver {
-
-    public static final  String tag = CustomReceiver.class.getSimpleName();
-
-    /**
-     * 接收到消息的处理
-     * @param context
-     * @param message
-     */
-    @Override
-    protected void onMessage(Context context, CPushMessage message) {
-        MyLog.d(tag, "onMessage msg=" + message.getTitle());
-        MyLog.d(tag, "onMessage content=" + message.getContent());
-
-        Gson gson = new Gson();
-        PushMessage pushMessage = gson.fromJson(new String(message.getContent()),PushMessage.class);
-        switch (pushMessage.getType()){
-            case PushMessageType.REMIND:
-                notifyRemind(context,pushMessage.getContent());
-                break;
-        }
-
-
-
-    }
+public class CustomReceiver  extends MessageReceiver {
+    // 消息接收部分的LOG_TAG
+    public static final String REC_TAG = "receiver";
 
     /**
-     * 接收到通知的扩展处理
+     * 推送通知的回调方法
      * @param context
      * @param title
      * @param summary
      * @param extraMap
      */
     @Override
-    protected void onNotification(Context context, String title, String summary, Map<String, String> extraMap) {
-        MyLog.d(tag, "onNotification msg=" + title);
+    public void onNotification(Context context, String title, String summary, Map<String, String> extraMap) {
+        // TODO 处理推送通知
+        if ( null != extraMap ) {
+            MyLog.d(REC_TAG, "onNotification msg=" + title);
+
+        } else {
+            MyLog.d(REC_TAG,"@收到通知 && 自定义消息为空");
+        }
+        MyLog.d(REC_TAG,"收到一条推送通知 ： " + title );
+    }
+
+    /**
+     * 推送消息的回调方法
+     *
+     * @param context
+     */
+    @Override
+    public void onMessage(Context context, CPushMessage message) {
+        try {
+            MyLog.d(REC_TAG, "onMessage msg=" + message.getTitle());
+            MyLog.d(REC_TAG, "onMessage content=" + message.getContent());
+
+            Gson gson = new Gson();
+            PushMessage pushMessage = gson.fromJson(new String(message.getContent()),PushMessage.class);
+            switch (pushMessage.getType()){
+                case PushMessageType.REMIND:
+                    notifyRemind(context,pushMessage.getContent());
+                    break;
+            }
+
+        } catch (Exception e) {
+            MyLog.d(REC_TAG, e.toString());
+        }
     }
 
     /**
@@ -69,27 +79,7 @@ public class CustomReceiver extends CPushMessageReceiver {
      * @param extraMap
      */
     @Override
-    protected void onNotificationOpened(Context context, String title, String summary, String extraMap) {
-
-    }
-
-    /**
-     * 从通知栏删除通知的扩展处理
-     * @param context
-     * @param messageId
-     */
-    @Override
-    protected void onNotificationRemoved(Context context, long messageId) {
-
-    }
-
-    /**
-     * 通道状态改变
-     * @param context
-     * @param channelStatus
-     */
-    @Override
-    protected void onChannelStatusChanged(Context context, ChannelStatus channelStatus) {
+    public void onNotificationOpened(Context context, String title, String summary, String extraMap) {
 
     }
 

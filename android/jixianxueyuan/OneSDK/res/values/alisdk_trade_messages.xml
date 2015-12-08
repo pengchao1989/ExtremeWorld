@@ -22,4 +22,24 @@
     <string name="alisdk_message_803_message">未设置默认的淘客 pid</string>
     <string name="alisdk_message_803_action">请在初始化之前调用 TradeConfigs.defaultTaokePid="mm_****" 设置默认的淘客 pid 值, 此值会在相关方法调用时未指定 pid 时使用</string>
     <string name="alisdk_message_803_type">W</string>
+    <string name="alisdk_message_804_name">PAY_IN_PROGRESS</string>
+    <string name="alisdk_message_804_message">使用支付宝支付失败，支付宝错误码为 8000, 含义为正在处理中</string>
+    <string name="alisdk_message_804_action">请准备订单号和错误码至旺旺支付宝移动支持群(移动收单daily)咨询</string>
+    <string name="alisdk_message_804_type">E</string>
+    <string name="alisdk_message_805_name">PAY_ORDER_FAILED</string>
+    <string name="alisdk_message_805_message">使用支付宝支付失败，支付宝错误码为 4000, 含义为订单支付失败</string>
+    <string name="alisdk_message_805_action">请准备订单号和错误码至旺旺支付宝移动支持群(移动收单daily)咨询</string>
+    <string name="alisdk_message_805_type">E</string>
+    <string name="alisdk_message_806_name">PAY_USER_CANCEL</string>
+    <string name="alisdk_message_806_message">使用支付宝支付失败，支付宝错误码为 6001, 含义为用户中途取消</string>
+    <string name="alisdk_message_806_action">请准备订单号和错误码至旺旺支付宝移动支持群(移动收单daily)咨询</string>
+    <string name="alisdk_message_806_type">E</string>
+    <string name="alisdk_message_807_name">PAY_NETWORK_FAILED</string>
+    <string name="alisdk_message_807_message">使用支付宝支付失败，支付宝错误码为 6002, 含义为网络连接出错</string>
+    <string name="alisdk_message_807_action">请准备订单号和错误码至旺旺支付宝移动支持群(移动收单daily)咨询</string>
+    <string name="alisdk_message_807_type">E</string>
+    <string name="alisdk_message_808_name">PAY_COMMON_ERROR</string>
+    <string name="alisdk_message_808_message">使用支付宝支付失败，支付宝错误码为 {0}</string>
+    <string name="alisdk_message_808_action">请准备订单号和错误码至旺旺支付宝移动支持群(移动收单daily)咨询</string>
+    <string name="alisdk_message_808_type">E</string>
 </resources>

@@ -4,12 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
-    android:background="?attr/aliwx_bg_color" >
+    android:background="@color/aliwx_common_bg_white_color">
 
     <RelativeLayout
+        android:id="@+id/title_layout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/title_layout">
+        android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/default_title"
             style="@style/aliwx_common_title_style" >
@@ -19,10 +20,10 @@
                 style="@style/aliwx_common_title_left_btn_shadow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="?attr/aliwx_title_left_textsize"
-                android:textColor="?attr/aliwx_title_left_textcolor"
-                android:drawableLeft="?attr/aliwx_title_left_icon"
-                android:text="?attr/aliwx_title_left_text" />
+                android:textSize="@dimen/aliwx_common_text_size"
+                android:textColor="@color/aliwx_common_text_color"
+                android:drawableLeft="@drawable/aliwx_common_back_btn_bg"
+                android:text="@string/aliwx_back" />
 
             <ImageView
                 android:id="@+id/aliwx_title_button"
@@ -30,7 +31,7 @@
                 android:layout_height="@dimen/aliwx_title_bar_height"
                 android:layout_alignParentRight="true"
                 android:scaleType="center"
-                android:visibility="?attr/aliwx_title_rightbutton_visible"
+                android:visibility="visible"
                 android:src="@drawable/aliwx_topbar_icon_message_bg" />
 
             <ImageView
@@ -38,34 +39,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="10dip"
                 android:layout_marginRight="10dip"
-                android:visibility="gone"
-                android:src="@drawable/aliwx_topbar_icon_new" />
+                android:layout_marginTop="10dip"
+                android:src="@drawable/aliwx_topbar_icon_new"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:id="@+id/aliwx_at_content"
                 android:layout_width="@dimen/aliwx_title_bar_height"
                 android:layout_height="@dimen/aliwx_title_bar_height"
-                android:layout_toLeftOf="@id/aliwx_title_button"
                 android:layout_alignWithParentIfMissing="true"
                 android:layout_centerInParent="true"
+                android:layout_toLeftOf="@id/aliwx_title_button"
                 android:visibility="gone">
+
                 <ImageView
                     android:id="@+id/aliwx_at_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:src="@drawable/aliwx_tribe_at_icon_black"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
+
                 <ImageView
                     android:id="@+id/aliwx_at_msg_unread"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
                     android:layout_alignRight="@id/aliwx_at_image"
                     android:layout_alignTop="@id/aliwx_at_image"
-                    android:src="@drawable/aliwx_topbar_at_icon_new" />
+                    android:src="@drawable/aliwx_topbar_at_icon_new"
+                    android:visibility="visible" />
 
             </RelativeLayout>
 
@@ -81,12 +84,13 @@
                 android:textSize="@dimen/aliwx_common_text_size" />
         </RelativeLayout>
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/chat_main_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="?attr/aliwx_bg_color"
+        android:background="@color/aliwx_common_bg_white_color"
         android:orientation="vertical" >
 
         <ViewStub
@@ -94,8 +98,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inflatedId="@+id/reply_gridview"
-            android:layout="@layout/aliwx_chatting_detail_grid" >
-        </ViewStub>
+            android:layout="@layout/aliwx_chatting_detail_grid"/>
+
         <ViewStub
             android:id="@+id/fastReplyListStub"
             android:layout_width="fill_parent"
@@ -140,11 +144,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/chat_main_layout"
-        android:background="?attr/aliwx_chatbottom_bg"
+        android:background="@color/aliwx_common_bg_white_color"
         android:gravity="center_vertical"
         android:paddingBottom="2dp"
         android:paddingLeft="@dimen/aliwx_common_unit_margin"
-        android:paddingTop="3dp" >
+        android:paddingTop="3dp">
 
         <CheckBox
             android:id="@+id/reply_bar_expand"
@@ -160,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <com.alibaba.mobileim.ui.common.clipboard.ClipboardEditText
                 android:id="@+id/chat_inputtext"
@@ -181,8 +185,22 @@
         <CheckBox
             android:id="@+id/reply_bar_record"
             style="@style/aliwx_chatting_detail_record_style"
-            android:background="?attr/aliwx_chatbottom_record" />
+            android:background="@drawable/aliwx_reply_bar_record" />
     </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/aliwx_title_bar_shadow_color"
+        android:layout_above="@+id/reply_bar_layout"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/aliwx_title_bar_shadow_color"
+        android:layout_below="@+id/reply_bar_layout"/>
+
     <RelativeLayout
         android:id="@+id/enter_chatting_room_layout"
         android:layout_width="fill_parent"
@@ -191,9 +209,9 @@
         android:background="#ffffff"
         android:gravity="center"
         android:paddingBottom="2dp"
-        android:visibility="gone"
         android:paddingLeft="@dimen/aliwx_common_unit_margin"
-        android:paddingTop="3dp">
+        android:paddingTop="3dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -238,16 +256,16 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/reply_bar_layout"
         android:layout_alignRight="@id/reply_bar_layout"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:drawablePadding="4dp"
         android:gravity="center"
+        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="5dp"
-        android:drawablePadding="4dp"
         android:singleLine="true"
-        android:textSize="13sp"
-        android:textColor="#FFFFFFFF"/>
+        android:textColor="#FFFFFFFF"
+        android:textSize="13sp" />
 
     <ViewStub
         android:id="@+id/record_dialog_stub"
@@ -265,7 +283,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/aliwx_halftransparent"
-        android:visibility="gone" >
-    </RelativeLayout>
+        android:visibility="gone"/>
 
 </RelativeLayout>

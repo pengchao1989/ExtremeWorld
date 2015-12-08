@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.cchannel.plugin.CloudPushService;
+
 import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.push.CloudPushService;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.R;
@@ -64,7 +65,7 @@ public class SettingActivity extends BaseActivity {
     @OnClick(R.id.setting_activity_logout)void onLogoutClick(){
         MyApplication.getContext().getMine().loginOut(this);
         CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
-        cloudPushService.logout();
+        cloudPushService.unbindAccount();
         Intent intent = new Intent(SettingActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

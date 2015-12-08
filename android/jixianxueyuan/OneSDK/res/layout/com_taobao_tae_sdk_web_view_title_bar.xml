@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/com_taobao_tae_sdk_web_view_title_bar_back_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
@@ -29,7 +29,7 @@
     <ImageView
         android:id="@+id/com_taobao_tae_sdk_web_view_title_bar_close_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"

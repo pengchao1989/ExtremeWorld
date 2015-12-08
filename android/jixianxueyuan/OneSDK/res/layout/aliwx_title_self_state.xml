@@ -19,7 +19,7 @@
                 style="@style/aliwx_common_title_left_btn_shadow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="?attr/aliwx_title_leftbutton_visible" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/title_self_title"
@@ -65,7 +65,7 @@
             <TextView
                 android:id="@+id/right_button"
                 style="@style/aliwx_common_title_right_btn_shadow"
-                android:visibility="?attr/aliwx_title_leftbutton_visible"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

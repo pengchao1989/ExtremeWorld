@@ -47,7 +47,7 @@
     <string name="alisdk_message_15_type">E</string>
     <string name="alisdk_message_16_name">CLASS_NOT_FOUND_ERROR</string>
     <string name="alisdk_message_16_message">运行时不能载入类 {0}</string>
-    <string name="alisdk_message_16_action">请检查包含此类的库文件是否存在，或者是否因为代码混淆没有配置 SDK 对应的 -keep 选项，具体配置请参照在线网站</string>
+    <string name="alisdk_message_16_action">请在 IDE 中检查类是否存在，或者是否因为代码混淆没有配置 SDK 对应的 -keep 选项，具体配置请参照在线网站</string>
     <string name="alisdk_message_16_type">E</string>
     <string name="alisdk_message_17_name">SERVICE_NOT_AVAILABLE_ERROR</string>
     <string name="alisdk_message_17_message">不能获取类名为 {0}，过滤条件为 {1} 的服务</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.alibaba.mobileim.fundamental.widget.refreshlist.PullToRefreshListView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.alibaba.mobileim.fundamental.widget.refreshlist.PullToRefreshListView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/chat_list"
     android:layout_width="fill_parent"
     android:layout_height="0dp"
@@ -8,6 +9,6 @@
     android:divider="@null"
     android:fadingEdge="none"
     android:listSelector="#00000000"
-    android:transcriptMode="normal" >
+    android:transcriptMode="disabled" >
 
 </com.alibaba.mobileim.fundamental.widget.refreshlist.PullToRefreshListView>

@@ -26,7 +26,7 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="23213238.nativeTaobao" android:scheme="alisdk"/>
+                <data android:host="23213197.nativeTaobao" android:scheme="alisdk"/>
             </intent-filter>
         </activity>
         <activity android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:name="com.alipay.sdk.app.H5PayActivity" android:screenOrientation="behind" android:windowSoftInputMode="adjustResize|stateHidden">
@@ -75,9 +75,40 @@
         <!-- 用于接收从TCMSService发送的命令 -->
         <service android:exported="true" android:name="com.alibaba.tcms.service.ListenerService">
         </service>
+        <meta-data android:name="UMENG_APPKEY" android:value="55c37823266c1be112000e49">
+        </meta-data>
         <activity android:name="com.alibaba.sdk.android.login.ui.LoginWebViewActivity"/>
         <activity android:name="com.alibaba.sdk.android.login.ui.QrLoginConfirmActivity"/>
         <activity android:name="com.alibaba.sdk.android.login.ui.QrLoginActivity" android:theme="@style/tae_sdk_login_qr_activity_style"/>
+
+
+        <!-- 通道保持服务（幽灵进程自动保活该服务） -->
+        <service android:exported="true" android:name="com.alibaba.sdk.android.push.ChannelService" android:process=":channel">
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.SERVICE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.PING_V4"/>
+                <category android:name="taobao"/>
+            </intent-filter>
+        </service>
+
+        <!-- 消息接收服务 -->
+        <service android:exported="false" android:name="com.alibaba.sdk.android.push.MsgService">
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.RECEIVE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.NOTIFY_ACTION"/>
+            </intent-filter>
+        </service>
+
+        <!-- 连接心跳保持监听器 -->
+        <receiver android:name="anet.channel.heartbeat.HeartbeatManager$Receiver">
+            <intent-filter>
+                <action android:name="anetwork.channel.intent.action.COMMAND"/>
+            </intent-filter>
+        </receiver>
         <activity android:name="com.alibaba.sdk.android.webview.BaseWebViewActivity"/>
         <receiver android:exported="false" android:name="com.alibaba.sdk.android.hotpatch.HotPatchBroadcastReceiver" android:process=":hotpatch">
             <intent-filter>
@@ -93,9 +124,11 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
-<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
-<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>    
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>    
     <uses-permission android:name="android.permission.BLUETOOTH"/>
 
 </manifest>

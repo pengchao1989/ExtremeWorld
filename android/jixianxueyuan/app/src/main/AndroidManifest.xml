@@ -17,11 +17,17 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 允许程序接收到广播在系统完成启动 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -127,27 +133,65 @@
 
 
         <!--baichuan push-->
-        <service android:name="com.alibaba.cchannel.core.ServiceContainer"
-            android:exported="true">
+        <!-- 通道保持服务（幽灵进程自动保活该服务） -->
+        <service android:name="com.alibaba.sdk.android.push.ChannelService"
+            android:exported="true" android:process=":channel">
             <intent-filter>
-                <action android:name="com.alibaba.cchannel.action.SERVICE_CONTAINER" />
+                <action android:name="com.taobao.accs.intent.action.SERVICE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.PING_V4" />
+                <category android:name="taobao" />
             </intent-filter>
         </service>
 
-        <receiver android:name="com.jixianxueyuan.receiver.CustomReceiver">
+        <!-- 消息接收服务 -->
+        <service android:name="com.alibaba.sdk.android.push.MsgService"
+            android:exported="false">
             <intent-filter>
-                <!-- 消息处理事件（用来弹出消息提醒以及收取应用的自定义消息，必选。） -->
-                <action android:name="com.alibaba.cchannel.action.NOTIFICATION" />
+                <action android:name="com.taobao.accs.intent.action.RECEIVE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.NOTIFY_ACTION" />
+            </intent-filter>
+        </service>
 
-                <!-- 通道被打开的事件，应用可以用来缓存当前收到的通知（可选） -->
-                <action android:name="com.alibaba.cchannel.action.NOTIFICATION_OPENED" />
-                <!-- 通道状态切换事件（应用端可以根据此状态来显示当前的通道健康状态，需要继承CPushMessageReceiver并重载onChannelStatusChanged方法，可选。）-->
-                <action android:name="com.alibaba.cchannel.action.CHANNEL_STATUS" />
+        <!-- 连接心跳保持监听器 -->
+        <receiver android:name="anet.channel.heartbeat.HeartbeatManager$Receiver" >
+            <intent-filter>
+                <action android:name="anetwork.channel.intent.action.COMMAND" />
+            </intent-filter>
+        </receiver>
 
-                <!-- 开屏事件（用来尝试唤起已经不可用的服务，可选。建议打开） -->
+        <!--消息接收监听器 （用户可自主扩展）-->
+        <receiver android:name="com.jixianxueyuan.receiver.CustomReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.taobao.accs.intent.action.COMMAND" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.taobao.taobao.intent.action.COMMAND" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
-                <!-- 开机事件（用来在手机重启后，自动启动云通道后台服务，可选。建议打开） -->
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
 

@@ -6,11 +6,11 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.alibaba.cchannel.CloudChannelConstants;
-import com.alibaba.cchannel.plugin.CloudPushService;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.callback.InitResultCallback;
-import com.alibaba.cchannel.core.task.RunnableCallbackAdapter;
+import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.trade.TradeConfigs;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.server.ServerMethod;
@@ -52,6 +52,7 @@ public class MyApplication extends Application {
         //初始化imageLoader
         initImageLoader();
 
+        TradeConfigs.defaultTaokePid="";
         AlibabaSDK.turnOnDebug();
         AlibabaSDK.asyncInit(this, new InitResultCallback() {
 
@@ -77,31 +78,34 @@ public class MyApplication extends Application {
      * @param applicationContext
      */
     private void initCloudChannel(Context applicationContext) {
-        CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
+        final CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
         if(cloudPushService != null) {
-            if(getMine().getUserInfo() != null){
-                if(getMine().getUserInfo().getId() != null){
-                    long userId = getMine().getUserInfo().getId();
-                    cloudPushService.bindAccount(String.valueOf(userId));
-                }
-            }
 
-            cloudPushService.register(applicationContext,  new RunnableCallbackAdapter<Void>() {
-                @Override
-                public void onSuccess(Void result) {
-                    Log.d(CloudChannelConstants.TAG, "init cloudchannel success");
-                }
+
+
+            cloudPushService.register(applicationContext,  new CommonCallback() {
 
                 @Override
-                public void onFailed(Exception exception){
-                    Log.d(CloudChannelConstants.TAG, "init cloudchannel failed");
+                public void onSuccess() {
+                    Log.d("MyApplication", "init cloudchannel success");
+                    if(getMine().getUserInfo() != null){
+                        if(getMine().getUserInfo().getId() != null){
+                            long userId = getMine().getUserInfo().getId();
+                            cloudPushService.bindAccount(String.valueOf(userId));
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailed(String errorCode, String errorMessage) {
+                    Log.d("MyApplication", "init cloudchannel fail" + "err:" + errorCode + " - message:"+ errorMessage);
                 }
             });
         }else{
-            Log.i(CloudChannelConstants.TAG, "CloudPushService is null");
+            Log.i("MyApplication", "CloudPushService is null");
         }
-
     }
+
 
     public static MyApplication getContext() {
 		return application;

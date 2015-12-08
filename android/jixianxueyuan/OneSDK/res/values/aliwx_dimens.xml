@@ -51,7 +51,7 @@
     <dimen name="aliwx_popup_height">300dip</dimen>
 
     <dimen name="aliwx_friend_alpha_height">25dp</dimen>
-    <dimen name="aliwx_friend_item_height">100dip</dimen>
+    <dimen name="aliwx_friend_item_height">50dip</dimen>
     <dimen name="aliwx_second_text_size">12sp</dimen>
     <dimen name="aliwx_common_checkbox_size">25dip</dimen>
     <dimen name="aliwx_search_btn_width">48dip</dimen>

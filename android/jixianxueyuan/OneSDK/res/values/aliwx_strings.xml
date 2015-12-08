@@ -38,8 +38,10 @@
     <string name="aliwx_releast_send">松开发送</string>
     <string name="aliwx_start_camera_error">相机罢工了，再启动试试吧！</string>
     <string name="aliwx_release_stop_record">松开取消发送</string>
-    <string name="aliwx_pull_to_refresh_pull_label">同步最近联系人&#8230;</string>
-    <string name="aliwx_pull_to_refresh_release_label">松开同步最近联系人&#8230;</string>
+    <string name="aliwx_pull_to_refresh_pull_label">下拉刷新&#8230;</string>
+    <string name="aliwx_pull_to_refresh_release_label">松开加载&#8230;</string>
+    <string name="aliwx_pull_to_refresh_contact_pull_label">同步最近联系人&#8230;</string>
+    <string name="aliwx_pull_to_refresh_contact_release_label">松开同步最近联系人&#8230;</string>
     <string name="aliwx_pull_to_refresh_refreshing_label">正在加载&#8230;</string>
     <string name="aliwx_pull_to_refresh_from_bottom_pull_label">向上滑动加载更多&#8230;</string>
     <string name="aliwx_pull_to_refresh_from_bottom_release_label">@string/aliwx_pull_to_refresh_release_label</string>
@@ -138,12 +140,14 @@
     <string name="aliwx_at_message_receive_title_unread">未读(%1$s):</string>
     <string name="aliwx_at_message_receive_title_read">已读(%1$s):</string>
 
-    <string name="aliwx_pull_up_to_load_more_at_msg_pull">下拉加载更多@消息</string>
+    <string name="aliwx_pull_up_to_load_more_at_msg_pull">上拉加载更多@消息</string>
     <string name="aliwx_pull_up_to_load_more_at_msg_loading">正在加载&#8230;</string>
     <string name="aliwx_pull_up_to_load_more_at_msg_release">松开开始加载</string>
 
     <string name="aliwx_tribe_normal_notification_tip">[群消息]</string>
     <string name="aliwx_tribe_at_notification_tip">在群聊中@了你</string>
+
+    <string name="aliwx_no_more_at_msg_context">已经没有新消息了</string>
 
     <string name="aliwx_search">搜索</string>
     <string name="aliwx_friend_search">搜</string>
@@ -163,4 +167,6 @@
 
     <string name="aliwx_start">确定%1$s</string>
 
+    <string name="aliwx_no_microphone_permission_alert_title">[录音权限]可能被禁止</string>
+    <string name="aliwx_no_microphone_permission_alert_message">您好，应用的[录音权限]可能被禁止，请重新开启本应用的[录音权限]以发送[语音消息]~</string>
 </resources>

@@ -10,12 +10,11 @@
 
     <com.alibaba.mobileim.fundamental.widget.refreshlist.PullToRefreshListView
         android:id="@+id/message_list"
+        style="@style/aliwx_dividedListStyle"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/title_self_state"
         android:cacheColorHint="#00000000"
-        android:divider="?attr/aliwx_divider_color"
-        android:dividerHeight="?attr/aliwx_divider_height"
         android:fadingEdge="none"
         android:fastScrollEnabled="true"
         android:listSelector="#00000000" />

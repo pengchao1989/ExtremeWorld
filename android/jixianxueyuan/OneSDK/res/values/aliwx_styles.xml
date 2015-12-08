@@ -131,8 +131,8 @@
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">middle</item>
-        <item name="android:textColor">?attr/aliwx_title_textcolor</item>
-        <item name="android:textSize">?attr/aliwx_title_textsize</item>
+        <item name="android:textColor">@drawable/aliwx_commont_title_btn_text</item>
+        <item name="android:textSize">@dimen/aliwx_common_text_size</item>
         <item name="android:paddingLeft">@dimen/aliwx_title_middle_margin</item>
         <item name="android:paddingRight">@dimen/aliwx_title_middle_margin</item>
     </style>
@@ -140,8 +140,8 @@
     <style name="aliwx_self_title_text_shadow">
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">?attr/aliwx_title_textcolor</item>
-        <item name="android:textSize">?attr/aliwx_title_textsize</item>
+        <item name="android:textColor">@drawable/aliwx_commont_title_btn_text</item>
+        <item name="android:textSize">@dimen/aliwx_common_text_size</item>
     </style>
 
     <style name="aliwx_radio_button_style">
@@ -215,8 +215,8 @@
         <item name="android:textSize">@dimen/aliwx_common_text_size</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">30dip</item>
-        <item name="android:background">?attr/aliwx_record_btn_bg</item>
+        <item name="android:layout_height">33dip</item>
+        <item name="android:background">@drawable/aliwx_record_btn_bg</item>
         <item name="android:text">@string/aliwx_speak_toast</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
@@ -238,7 +238,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginRight">8dip</item>
         <item name="android:button">@null</item>
-        <item name="android:background">?attr/aliwx_chatbottom_expand</item>
+        <item name="android:background">@drawable/aliwx_reply_bar_expand</item>
     </style>
 
     <style name="aliwx_chatting_detail_phrase_style">
@@ -246,7 +246,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginRight">8dip</item>
         <item name="android:button">@null</item>
-        <item name="android:background">?attr/aliwx_chatbottom_smily</item>
+        <item name="android:background">@drawable/aliwx_reply_bar_face_bg</item>
     </style>
 
     <style name="aliwx_chatting_detail_record_style">

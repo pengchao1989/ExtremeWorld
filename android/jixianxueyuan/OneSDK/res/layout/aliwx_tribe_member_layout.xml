@@ -33,6 +33,7 @@
         android:layout_height="fill_parent"
         android:divider="@color/aliwx_column_bg_color_pressed"
         android:layout_below="@id/aliwx_title"
+        android:layout_above="@+id/aliwx_switcherLayout"
         android:cacheColorHint="#00000000"
         android:fadingEdge="none"
         android:groupIndicator="@null"
@@ -45,6 +46,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_below="@id/aliwx_title"
+        android:layout_above="@+id/aliwx_switcherLayout"
         android:layout_marginTop="50dp"
         android:visibility="gone" />
 
@@ -122,6 +124,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/aliwx_halftransparent"
+        android:layout_above="@+id/aliwx_switcherLayout"
         android:orientation="vertical"
         android:visibility="gone" >
 

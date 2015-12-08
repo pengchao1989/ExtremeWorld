@@ -32,8 +32,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/head"
         android:layout_marginRight="@dimen/aliwx_common_safe_margin"
-        android:textColor="?attr/aliwx_cvstime_textcolor"
-        android:textSize="?attr/aliwx_cvstime_textsize" />
+        android:textColor="@color/aliwx_third_grade_color"
+        android:textSize="@dimen/aliwx_font_third_grade" />
 
     <TextView
         android:id="@+id/name"
@@ -47,8 +47,9 @@
         android:layout_toRightOf="@id/head"
         android:ellipsize="middle"
         android:includeFontPadding="false"
-        android:textColor="?attr/aliwx_cvsname_textcolor"
-        android:textSize="?attr/aliwx_cvsnname_textsize" />
+        android:textColor="@color/aliwx_common_text_color"
+        android:textSize="@dimen/aliwx_font_second_grade"
+        android:text="名称"/>
 
     <LinearLayout
         android:id="@+id/content_layout"
@@ -68,7 +69,7 @@
             android:text="@string/aliwx_at_msg_notify"
             android:paddingRight="10dip"
             android:textColor="@color/aliwx_text_color_at_notify"
-            android:textSize="?attr/aliwx_cvscontent_textsize"
+            android:textSize="@dimen/aliwx_font_third_grade"
             android:layout_gravity="bottom"
             android:visibility="gone"/>
 
@@ -78,8 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:textColor="?attr/aliwx_cvscontent_textcolor"
-            android:textSize="?attr/aliwx_cvscontent_textsize" />
+            android:textColor="@color/aliwx_common_alpha_black"
+            android:textSize="@dimen/aliwx_font_third_grade"
+            android:text="最新内容"/>
     </LinearLayout>
 
     <ImageView

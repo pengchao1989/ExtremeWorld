@@ -17,7 +17,7 @@
                 style="@style/aliwx_common_title_left_btn_shadow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="?attr/aliwx_title_left_text" />
+                android:text="@string/aliwx_title_back" />
 
             <TextView
                 android:id="@+id/chat_title"

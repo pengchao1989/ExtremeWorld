@@ -2,11 +2,12 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    <TextView
+
+    <TextView
         android:id="@+id/show_time"
         style="@style/aliwx_chatting_detail_show_time_style"
         android:shadowDy="0"
-        android:background="?attr/aliwx_chattime_bg"
+        android:background="@drawable/aliwx_sysmsgbg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
