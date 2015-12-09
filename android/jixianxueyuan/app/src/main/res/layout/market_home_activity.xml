@@ -6,11 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jixianxueyuan.widget.MyActionBar
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        my:my_title="@string/store"
-        />
+        android:layout_height="@dimen/actionbar_height"
+        android:background="@color/primary_color">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:text="@string/store"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
 
     <com.jixianxueyuan.widget.GridViewWithHeaderAndFooter
         android:id="@+id/market_home_activity_gridview"

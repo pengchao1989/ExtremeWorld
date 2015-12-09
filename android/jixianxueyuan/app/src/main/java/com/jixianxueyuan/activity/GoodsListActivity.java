@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.trade.ItemService;
+import com.alibaba.sdk.android.trade.TradeService;
 import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
 import com.alibaba.sdk.android.trade.model.TradeResult;
+import com.alibaba.sdk.android.trade.page.ItemDetailPage;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -136,8 +139,9 @@ public class GoodsListActivity extends BaseActivity {
 
         GoodsDTO goodsDTO = adapter.getItem(position);
 
-        ItemService service = AlibabaSDK.getService(ItemService.class);
-        service.showItemDetailByItemId(GoodsListActivity.this, new TradeProcessCallback(){
+        TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+        ItemDetailPage itemDetailPage = new ItemDetailPage(String.valueOf(goodsDTO.getTaobaoId()), null);
+        tradeService.show(itemDetailPage, null, GoodsListActivity.this, null, new TradeProcessCallback(){
 
             @Override
             public void onFailure(int i, String s) {
@@ -146,8 +150,9 @@ public class GoodsListActivity extends BaseActivity {
 
             @Override
             public void onPaySuccess(TradeResult tradeResult) {
-
+                Toast.makeText(GoodsListActivity.this, "成功", Toast.LENGTH_SHORT)
+                        .show();
             }
-        }, null, goodsDTO.getTaobaoId(), 1, null);
+        });
     }
 }

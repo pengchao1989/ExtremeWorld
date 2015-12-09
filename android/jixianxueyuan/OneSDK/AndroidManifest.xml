@@ -75,8 +75,6 @@
         <!-- 用于接收从TCMSService发送的命令 -->
         <service android:exported="true" android:name="com.alibaba.tcms.service.ListenerService">
         </service>
-        <meta-data android:name="UMENG_APPKEY" android:value="55c37823266c1be112000e49">
-        </meta-data>
         <activity android:name="com.alibaba.sdk.android.login.ui.LoginWebViewActivity"/>
         <activity android:name="com.alibaba.sdk.android.login.ui.QrLoginConfirmActivity"/>
         <activity android:name="com.alibaba.sdk.android.login.ui.QrLoginActivity" android:theme="@style/tae_sdk_login_qr_activity_style"/>
