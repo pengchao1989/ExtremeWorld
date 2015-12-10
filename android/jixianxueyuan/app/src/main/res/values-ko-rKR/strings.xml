@@ -90,6 +90,11 @@
     <string name="region">지역</string>
     <string name="signature">서명</string>
 
+    <!--store-->
+    <string name="shopping_cart">장바구니</string>
+    <string name="order">주문</string>
+    <string name="secondary_market">중고 시장</string>
+
     <!--sponsorship-->
     <string name="month_tycoon_list">이번 달 탁월한 게시</string>
     <string name="donation">기부</string>

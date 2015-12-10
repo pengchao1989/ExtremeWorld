@@ -15,6 +15,6 @@
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textColor="@color/magenta"
-        android:text="二手市场"/>
+        android:text="@string/secondary_market"/>
 
 </LinearLayout>

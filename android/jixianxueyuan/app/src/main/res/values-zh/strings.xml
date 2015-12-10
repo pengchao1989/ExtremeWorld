@@ -90,6 +90,11 @@
     <string name="region">地区</string>
     <string name="signature">签名</string>
 
+    <!--store-->
+    <string name="shopping_cart">购物车</string>
+    <string name="order">订单</string>
+    <string name="secondary_market">二手市场</string>
+
     <!--sponsorship-->
     <string name="month_tycoon_list">本月土豪榜</string>
     <string name="donation">捐赠</string>

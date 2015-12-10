@@ -90,6 +90,11 @@
     <string name="region">Region</string>
     <string name="signature">Signature</string>
 
+    <!--store-->
+    <string name="shopping_cart">shopping cart</string>
+    <string name="order">order</string>
+    <string name="secondary_market">secondary market</string>
+
     <!--sponsorship-->
     <string name="month_tycoon_list">month tycoon list</string>
     <string name="donation">donation</string>
