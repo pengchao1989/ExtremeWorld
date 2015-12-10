@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_height"
@@ -20,6 +21,7 @@
             android:textColor="@color/white"/>
 
     </RelativeLayout>
+-->
 
     <com.jixianxueyuan.widget.GridViewWithHeaderAndFooter
         android:id="@+id/market_home_activity_gridview"

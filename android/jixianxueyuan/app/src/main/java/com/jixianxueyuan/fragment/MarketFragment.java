@@ -9,6 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.trade.TradeService;
+import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
+import com.alibaba.sdk.android.trade.model.TradeResult;
+import com.alibaba.sdk.android.trade.page.MyCartsPage;
+import com.alibaba.sdk.android.trade.page.MyOrdersPage;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -67,22 +73,68 @@ public class MarketFragment extends Fragment {
         return view;
     }
 
-    private void initHeadView(){
+    private void initHeadView() {
         View headerView = LayoutInflater.from(MarketFragment.this.getActivity()).inflate(R.layout.market_home_activity_head, null);
         NoScorllBarGridView categoryGridView = (NoScorllBarGridView) headerView.findViewById(R.id.market_home_activity_head_gridview);
 
         categoryGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
-                intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_CATEGORY);
-                intent.putExtra(GoodsListActivity.SOURCE_TYPE_CATEGORY, categoryGridAdapter.getItem(position));
-                startActivity(intent);
+                if (categoryGridAdapter.getItemViewType(position) == CategoryGridAdapter.VIEW_TYPE_CATEGORY) {
+                    Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
+                    intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_CATEGORY);
+                    intent.putExtra(GoodsListActivity.SOURCE_TYPE_CATEGORY, categoryGridAdapter.getItem(position));
+                    startActivity(intent);
+                } else if (categoryGridAdapter.getItemViewType(position) == CategoryGridAdapter.VIEW_TYPE_ORDER) {
+
+                }
+
             }
         });
 
         categoryGridAdapter = new CategoryGridAdapter(MarketFragment.this.getActivity());
         categoryGridView.setAdapter(categoryGridAdapter);
+
+        headerView.findViewById(R.id.market_home_shopping_cart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+                MyCartsPage myCartsPage = new MyCartsPage();
+                tradeService.show(myCartsPage, null, MarketFragment.this.getActivity(), null, new TradeProcessCallback() {
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+
+
+                    }
+
+                    @Override
+                    public void onPaySuccess(TradeResult tradeResult) {
+
+
+                    }
+                });
+            }
+        });
+
+        headerView.findViewById(R.id.market_home_order).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+                MyOrdersPage myOrdersPage = new MyOrdersPage(0, false);
+                tradeService.show(myOrdersPage, null, MarketFragment.this.getActivity(), null, new TradeProcessCallback(){
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+
+                    }
+
+                    @Override
+                    public void onPaySuccess(TradeResult tradeResult) {
+
+                    }});
+            }
+        });
 
         gridView.addHeaderView(headerView);
 
@@ -130,9 +182,11 @@ public class MarketFragment extends Fragment {
     }
 
     @OnItemClick(R.id.market_home_activity_gridview) void onShopClick(int position){
-        Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
-        intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_SHOP);
-        intent.putExtra(GoodsListActivity.SOURCE_TYPE_SHOP, shopGridAdapter.getItem(position));
-        startActivity(intent);
+
+
+            Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
+            intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_SHOP);
+            intent.putExtra(GoodsListActivity.SOURCE_TYPE_SHOP, shopGridAdapter.getItem(position));
+            startActivity(intent);
     }
 }

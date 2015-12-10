@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.biz.CategoryDTO;
 import com.jixianxueyuan.util.ACache;
@@ -29,6 +28,10 @@ import butterknife.InjectView;
  */
 public class CategoryGridAdapter extends BaseAdapter{
 
+    private final int EXTRA_COUNT = 1;
+    public static final int VIEW_TYPE_CATEGORY = 0x10001;
+    public static final int VIEW_TYPE_ORDER = 0x10002;
+
     private Context context;
     private List<CategoryDTO> categoryDTOList;
 
@@ -43,68 +46,96 @@ public class CategoryGridAdapter extends BaseAdapter{
         this.notifyDataSetChanged();
     }
 
-    @Override
-    public int getCount() {
+    public int getCategoryCount(){
         return categoryDTOList.size();
     }
 
     @Override
+    public int getCount() {
+        return categoryDTOList.size() + EXTRA_COUNT;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position < categoryDTOList.size()){
+            return VIEW_TYPE_CATEGORY;
+        }else {
+            return VIEW_TYPE_ORDER;
+        }
+    }
+
+    @Override
     public CategoryDTO getItem(int position) {
-        return categoryDTOList.get(position);
+        if(position < categoryDTOList.size()){
+            return categoryDTOList.get(position);
+        }else {
+            return null;
+        }
+
     }
 
     @Override
     public long getItemId(int position) {
-        return categoryDTOList.get(position).getId();
+        if(position < categoryDTOList.size()){
+            return categoryDTOList.get(position).getId();
+        }else {
+            return -1;
+        }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         ViewHolder viewHolder = null;
-        if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.category_grid_item,null);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        }else {
-            viewHolder = (ViewHolder) convertView.getTag();
+
+        if(getItemViewType(position) == VIEW_TYPE_CATEGORY){
+            if(/*convertView == null*/true){
+                convertView = LayoutInflater.from(context).inflate(R.layout.category_grid_item,null);
+                viewHolder = new ViewHolder(convertView);
+                convertView.setTag(viewHolder);
+            }else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            final CategoryDTO categoryDTO = categoryDTOList.get(position);
+            viewHolder.nameTextView.setText(categoryDTO.getName());
+            final ACache mCache = ACache.get(context);
+            Bitmap bitmap = mCache.getAsBitmap(categoryDTO.getIcon());
+            if(bitmap != null){
+                viewHolder.iconImageView.setImageBitmap(bitmap);
+            }else {
+                ImageLoader imageLoader = ImageLoader.getInstance();
+                final ViewHolder finalViewHolder = viewHolder;
+                imageLoader.loadImage(categoryDTO.getIcon(), ImageLoaderConfig.getImageOption(context), new ImageLoadingListener() {
+                    @Override
+                    public void onLoadingStarted(String imageUri, View view) {
+
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+                    }
+
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        finalViewHolder.iconImageView.setImageBitmap(loadedImage);
+                        mCache.put(categoryDTO.getIcon(), loadedImage, ACache.TIME_DAY * 7);
+                    }
+
+                    @Override
+                    public void onLoadingCancelled(String imageUri, View view) {
+
+                    }
+                });
+            }
+
+
+        }else if(getItemViewType(position) == VIEW_TYPE_ORDER){
+            convertView = LayoutInflater.from(context).inflate(R.layout.category_grid_item_used,null);
         }
 
-        final CategoryDTO categoryDTO = categoryDTOList.get(position);
-        viewHolder.nameTextView.setText(categoryDTO.getName());
-        final ACache mCache = ACache.get(context);
-        Bitmap bitmap = mCache.getAsBitmap(categoryDTO.getIcon());
-        if(bitmap != null){
-            viewHolder.iconImageView.setImageBitmap(bitmap);
-        }else {
-            ImageLoader imageLoader = ImageLoader.getInstance();
-            final ViewHolder finalViewHolder = viewHolder;
-            imageLoader.loadImage(categoryDTO.getIcon(), ImageLoaderConfig.getImageOption(context), new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String imageUri, View view) {
 
-                }
-
-                @Override
-                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                }
-
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    finalViewHolder.iconImageView.setImageBitmap(loadedImage);
-                    mCache.put(categoryDTO.getIcon(), loadedImage, ACache.TIME_DAY * 7);
-                }
-
-                @Override
-                public void onLoadingCancelled(String imageUri, View view) {
-
-                }
-            });
-        }
-
-
-
-        //imageLoader.displayImage(categoryDTO.getIcon(), viewHolder.iconImageView, ImageLoaderConfig.getImageOption(context));
 
         return convertView;
     }
