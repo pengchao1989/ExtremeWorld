@@ -10,6 +10,7 @@ import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.trade.ItemService;
 import com.alibaba.sdk.android.trade.TradeService;
 import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
+import com.alibaba.sdk.android.trade.model.TaokeParams;
 import com.alibaba.sdk.android.trade.model.TradeResult;
 import com.alibaba.sdk.android.trade.page.ItemDetailPage;
 import com.android.volley.Request;
@@ -140,8 +141,10 @@ public class GoodsListActivity extends BaseActivity {
         GoodsDTO goodsDTO = adapter.getItem(position);
 
         TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+        TaokeParams taokeParams = new TaokeParams();
+        taokeParams.pid = "mm_111250070_0_0";
         ItemDetailPage itemDetailPage = new ItemDetailPage(String.valueOf(goodsDTO.getTaobaoId()), null);
-        tradeService.show(itemDetailPage, null, GoodsListActivity.this, null, new TradeProcessCallback(){
+        tradeService.show(itemDetailPage, taokeParams, GoodsListActivity.this, null, new TradeProcessCallback(){
 
             @Override
             public void onFailure(int i, String s) {
