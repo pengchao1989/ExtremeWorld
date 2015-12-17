@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
@@ -18,6 +22,9 @@ import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.util.AndroidShare;
+import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -33,6 +40,7 @@ public class MineFragment extends Fragment {
 
     public static final String tag = MineFragment.class.getSimpleName();
 
+    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @InjectView(R.id.mine_fragment_head_image_view)
     ImageView headImageView;
     @InjectView(R.id.mine_avatar_imageview)
@@ -116,4 +124,45 @@ public class MineFragment extends Fragment {
                 .show();
         return true;
     }
+    @OnClick(R.id.mine_fragment_share)void onShareClick(){
+        String inviteMessage = mine.getUserInfo().getName()
+                + "邀请你加入"
+                + Util.getApplicationMetaString(MineFragment.this.getContext(),"HOBBY")
+                + "http://dev.jixianxueyuan.com/skateboard/invite2"
+                + "?inviteid="
+                + mine.getUserInfo().getId();
+
+        showMenuSheet(MenuSheetView.MenuType.GRID);
+
+    }
+
+    private void showMenuSheet(final MenuSheetView.MenuType menuType) {
+        MenuSheetView menuSheetView =
+                new MenuSheetView(MineFragment.this.getContext(), menuType, "邀请3个好友升级为永久会员...", new MenuSheetView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Intent intent = new Intent(MineFragment.this.getActivity(), CreateTopicActivity.class);
+                        switch (item.getItemId()){
+                            case R.id.menu_create_mood:
+                                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+                                break;
+                            case R.id.menu_create_discuss:
+                                intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
+                                break;
+                            case R.id.menu_create_short_video:
+                                intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
+                                break;
+                        }
+                        startActivity(intent);
+
+                        if (bottomSheetLayout.isSheetShowing()) {
+                            bottomSheetLayout.dismissSheet();
+                        }
+                        return true;
+                    }
+                });
+        menuSheetView.inflateMenu(R.menu.share);
+        bottomSheetLayout.showWithSheetView(menuSheetView);
+    }
+
 }

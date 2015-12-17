@@ -6,7 +6,6 @@
     <string name="app_name_roller_skating">轮滑圈</string>
     <string name="app_name_skee">滑雪圈</string>
 
-
     <string name="done">완성하다</string>
     <string name="cancel">취소</string>
     <string name="back">복귀</string>
@@ -54,6 +53,7 @@
     <string name="agree_of_me">칭찬하다</string>
     <string name="setting">설치</string>
     <string name="sponsorship">기증 목록</string>
+    <string name="invite">초대</string>
 
     <string name="topic_detail">화제 정보</string>
     <string name="course_detail">교육정보</string>

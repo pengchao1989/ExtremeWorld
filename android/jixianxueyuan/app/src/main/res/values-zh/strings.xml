@@ -6,7 +6,6 @@
     <string name="app_name_roller_skating">轮滑圈</string>
     <string name="app_name_skee">滑雪圈</string>
 
-
     <string name="done">完成</string>
     <string name="cancel">取消</string>
     <string name="back">返回</string>
@@ -54,6 +53,7 @@
     <string name="agree_of_me">赞</string>
     <string name="setting">设置</string>
     <string name="sponsorship">捐赠榜</string>
+    <string name="invite">邀请</string>
 
     <string name="topic_detail">话题详情</string>
     <string name="course_detail">教学详情</string>
