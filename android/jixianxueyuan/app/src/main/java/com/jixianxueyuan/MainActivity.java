@@ -130,6 +130,8 @@ public class MainActivity extends Activity {
     private void initView()
     {
         String hobby = Util.getApplicationMetaString(this, "HOBBY");
+        String umengKey = Util.getApplicationMetaString(this,"UMENG_APPKEY");
+        MyLog.e("MainActivity", "UMENT_KEY=" + umengKey);
 /*        switch (hobby){
             case HobbyType.SKATEBOARD:
                 appNameTextView.setText(this.getResources().getText(R.string.app_name_skateboard));
@@ -205,6 +207,8 @@ public class MainActivity extends Activity {
 
                             CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
                             cloudPushService.bindAccount(String.valueOf(mine.getUserInfo().getId()));
+
+                            MobclickAgent.onProfileSignIn(String.valueOf(mine.getUserInfo().getId()));
 
                             requestHandshake();
 

@@ -214,7 +214,7 @@
             android:value="${UMENG_APPKEY}"/>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="default"/>
+            android:value="xueyuan"/>
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>

@@ -17,11 +17,13 @@ import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.commons.UpdateManager;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -71,6 +73,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
         UpdateManager updateManager = new UpdateManager(this);
         updateManager.checkUpdateInfo(false);
+
+        MobclickAgent.setDebugMode(true);
     }
 
     private void initView(){
@@ -87,6 +91,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 /*                Intent intent = new Intent(NewHomeActivity.this, CreateTopicPreActivity.class);
                 startActivity(intent);*/
                 showMenuSheet(MenuSheetView.MenuType.GRID);
+                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_CREATE_CLICK);
             }
         });
     }
@@ -103,6 +108,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
             case R.id.tab_discover_layout:
                 setChioceItem(1);
+                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_DISCOVERY_CLICK);
                 break;
 
             case R.id.tab_new_layout:
@@ -111,10 +117,12 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
             case R.id.tab_mine_layout:
                 setChioceItem(3);
+                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_MINE_CLICK);
                 break;
 
             case R.id.tab_market_layout:
                 setChioceItem(4);
+                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_STORE_CLICK);
                 break;
         }
     }

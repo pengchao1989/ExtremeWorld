@@ -57,6 +57,7 @@ import com.jixianxueyuan.util.qiniu.QiniuVideoUploadListener;
 import com.jixianxueyuan.util.qiniu.VideoUploadResult;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import com.yumfee.emoji.EmojiconEditText;
 
 import java.util.ArrayList;
@@ -169,6 +170,18 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
         recyclerView.setAdapter(imageListAdapter);
 
         initExtra();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private void initExtra()

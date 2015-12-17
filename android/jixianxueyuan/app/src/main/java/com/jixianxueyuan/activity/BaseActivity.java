@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 
 import com.jixianxueyuan.R;
+import com.umeng.analytics.MobclickAgent;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -33,5 +34,17 @@ public class BaseActivity extends SwipeBackActivity {
         int actionBarSize = a.getDimensionPixelSize(indexOfAttrTextSize, -1);
         a.recycle();
         return actionBarSize;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
