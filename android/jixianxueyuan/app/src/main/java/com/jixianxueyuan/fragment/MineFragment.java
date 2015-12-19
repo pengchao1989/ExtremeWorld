@@ -24,6 +24,7 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.util.AndroidShare;
+import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -141,19 +142,39 @@ public class MineFragment extends Fragment {
                 new MenuSheetView(MineFragment.this.getContext(), menuType, "邀请3个好友升级为永久会员...", new MenuSheetView.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Intent intent = new Intent(MineFragment.this.getActivity(), CreateTopicActivity.class);
+
+                        ShareUtils.ShareItem shareItem = null;
+
                         switch (item.getItemId()){
-                            case R.id.menu_create_mood:
-                                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+                            case R.id.menu_share_wechat:
+                                shareItem = new ShareUtils.ShareItem("微信", R.drawable.umeng_socialize_wechat,
+                                        "com.tencent.mm.ui.tools.ShareImgUI", "com.tencent.mm");
                                 break;
-                            case R.id.menu_create_discuss:
-                                intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
+                            case R.id.menu_share_friend_group:
+                                shareItem = new ShareUtils.ShareItem("朋友圈", R.drawable.umeng_socialize_wxcircle,
+                                        "com.tencent.mm.ui.tools.ShareToTimeLineUI", "com.tencent.mm");
                                 break;
-                            case R.id.menu_create_short_video:
-                                intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
+                            case R.id.menu_share_qq:
+                                shareItem = new ShareUtils.ShareItem("QQ", R.drawable.umeng_socialize_qq_on,
+                                        "com.tencent.mobileqq.activity.JumpActivity","com.tencent.mobileqq");
+                                break;
+                            case R.id.menu_share_kongjian:
+                                shareItem = new ShareUtils.ShareItem("空间", R.drawable.umeng_socialize_qzone_on,
+                                        "com.qzone.ui.operation.QZonePublishMoodActivity","com.qzone");
+                                break;
+                            case R.id.menu_share_weibo:
+                                shareItem = new ShareUtils.ShareItem("微博", R.drawable.umeng_socialize_sina_on,
+                                        "com.sina.weibo.EditActivity", "com.sina.weibo");
                                 break;
                         }
-                        startActivity(intent);
+
+
+                        if(shareItem != null){
+                            ShareUtils.share(MineFragment.this.getContext(),"title", "text", "", shareItem);
+                        }
+
+
+
 
                         if (bottomSheetLayout.isSheetShowing()) {
                             bottomSheetLayout.dismissSheet();

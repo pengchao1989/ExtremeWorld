@@ -219,7 +219,7 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
     private void shareMsg(Context context, String msgTitle, String msgText,
                           String imgPath, ShareItem share) {
         if (!share.packageName.isEmpty() && !isAvilible(getContext(), share.packageName)) {
-            Toast.makeText(getContext(), "请先安装" + share.title, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "请先-安装" + share.title, Toast.LENGTH_SHORT).show();
             return;
         }
 
