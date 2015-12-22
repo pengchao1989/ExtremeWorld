@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.modules.web.MediaTypes;
@@ -42,6 +43,22 @@ public class UptokenRestController
 		//视频切片vframe/jpg/offset/7/w/480/h/360
 		//MP4->FLV avthumb/flv/r/24/vcodec/libx264
 	    String token =  auth.uploadToken(bucketName, null);	
+	    
+	    
+		return new Token(token);
+	}
+	
+	@RequestMapping(value = "picture_modify", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public Token getPictureModifyUptoken(
+			@RequestParam(value = "key", defaultValue = "key") String key) throws JSONException
+	{
+
+		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+		
+		String bucketName = "extreme";
+		
+	    String token =  auth.uploadToken(bucketName, key);	
+	    System.out.print("picture_modify key=" + key);
 	    
 	    
 		return new Token(token);

@@ -1,6 +1,7 @@
 package com.jixianxueyuan.util.qiniu;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,8 +30,10 @@ import org.json.JSONObject;
 public class QiniuSingleImageUpload {
 
     Context context;
+    private boolean isModify = false;
     UploadToken pictureUploadToken;
-    String prefixKey;
+    String mPrefixKey = "";
+    String mFileKey;
     String imagePath;
     QiniuSingleImageUploadListener listener;
 
@@ -38,15 +41,18 @@ public class QiniuSingleImageUpload {
         this.context = context;
     }
 
-    public void upload(String imagePath, QiniuSingleImageUploadListener listener){
+    public void modify(String imagePath, UploadPrefixName prefixKey, String fileKey, QiniuSingleImageUploadListener listener){
+        this.mPrefixKey = prefixKey.getPrefixName();
+        this.mFileKey = fileKey;
         this.imagePath = imagePath;
         this.listener = listener;
+        isModify = true;
 
         requestPictureToken();
     }
 
     public void upload(String imagePath, UploadPrefixName prefixKey, QiniuSingleImageUploadListener listener){
-        this.prefixKey = prefixKey.getPrefixName();
+        this.mPrefixKey = prefixKey.getPrefixName();
         this.imagePath = imagePath;
         this.listener = listener;
 
@@ -57,7 +63,14 @@ public class QiniuSingleImageUpload {
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        StringRequest stringRequest = new StringRequest(ServerMethod.imgUploadToken, new Response.Listener<String>() {
+        String tokenUrl;
+        if(isModify){
+            String key = mPrefixKey + mFileKey;
+            tokenUrl = ServerMethod.imageModifyToken + "?key=" + key;
+        }else {
+            tokenUrl = ServerMethod.imgUploadToken;
+        }
+        StringRequest stringRequest = new StringRequest(tokenUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -84,19 +97,27 @@ public class QiniuSingleImageUpload {
 
     private void upLoadImage(){
         UploadManager uploadManager = new UploadManager();
-        if(StringUtils.isBlank(prefixKey)){
-            prefixKey = "";
+        if(StringUtils.isBlank(mPrefixKey)){
+            mPrefixKey = "";
+        }
+        if(TextUtils.isEmpty(mFileKey)){
+            mFileKey = Util.getDateKey();
         }
 
-        uploadManager.put(imagePath,prefixKey + Util.getDateKey(), pictureUploadToken.getUptoken(), new UpCompletionHandler() {
+        uploadManager.put(imagePath, mPrefixKey + mFileKey, pictureUploadToken.getUptoken(), new UpCompletionHandler() {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject response) {
 
                         MyLog.d("", "key=" + key);
-                        if(listener != null){
+                        if(info.isOK()){
+                            if(listener != null){
 
-                            listener.onUploadComplete(StaticResourceConfig.IMG_DOMAIN+key);
+                                listener.onUploadComplete(StaticResourceConfig.IMG_DOMAIN+key);
+                            }
+                        }else {
+                            listener.onError(info.error);
                         }
+
 
 
                     }

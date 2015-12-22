@@ -11,7 +11,7 @@ public class ServerMethod {
 
     static final String server_url = "http://dev.jixianxueyuan.com/";
     //static final String server_url = "http://www.jixianxueyuan.com/";
-    //static final String server_url = "http://192.168.1.7:8023/";
+    //static final String server_url = "http://192.168.1.6:8023/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
     static String hobby = "skateboard/";
@@ -25,6 +25,7 @@ public class ServerMethod {
 
     public static final String videoUploadToken = server_url + api_version_anon + "uptoken/video";
     public static final String imgUploadToken = server_url + api_version_anon + "uptoken/picture";
+    public static final String imageModifyToken = server_url + api_version_anon + "uptoken/picture_modify";
 
     public static final String handshake(){return method_url_none + "handshake";};
     public static final String account_qq_login() { return method_url_none + hobby + "account/qq_login";};

@@ -46,7 +46,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
     LinearLayout bottomContainer;
     ImageView addButton;
     ImageView addEmojiButton;
-    LinearLayout addImageButton;
+    ImageView addImageButton;
     ImageView submitButton;
     EmojiconEditText emojiconEditText;
     ImageView hasDotImageView;
@@ -87,7 +87,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
 
         addButton = (ImageView) view.findViewById(R.id.reply_widget_add_button);
         addEmojiButton = (ImageView) view.findViewById(R.id.reply_widget_emoji_button);
-        addImageButton = (LinearLayout) view.findViewById(R.id.reply_add_image_button);
+        addImageButton = (ImageView) view.findViewById(R.id.reply_add_image_button);
         recyclerView = (RecyclerView) view.findViewById(R.id.reply_widget_image_listview);
 
         submitButton = (ImageView) view.findViewById(R.id.reply_widget_submit_button);

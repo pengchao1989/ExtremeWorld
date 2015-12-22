@@ -102,6 +102,7 @@ dependencies {
     compile 'com.flipboard:bottomsheet-commons:1.5.0'
     compile 'cn.pedant.sweetalert:library:1.3'
     compile 'com.github.ctiao:dfm:0.3.9'
+    compile 'me.drakeet.materialdialog:library:1.2.8'
     // optional
     compile project(':emoji')
     compile project(':multi-image-selector')

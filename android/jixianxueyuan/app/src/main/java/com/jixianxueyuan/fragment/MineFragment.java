@@ -1,5 +1,7 @@
 package com.jixianxueyuan.fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CropAvatarActivity;
 import com.jixianxueyuan.activity.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
@@ -20,15 +24,22 @@ import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
+import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
+import dmax.dialog.SpotsDialog;
+import me.drakeet.materialdialog.MaterialDialog;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
  * Created by pengchao on 4/20/15.
@@ -36,6 +47,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class MineFragment extends Fragment {
 
     public static final String tag = MineFragment.class.getSimpleName();
+
+    public static final int REQUEST_IMAGE_CODE = 1;
+    public static final int CROP_IMAGE_CODE = 2;
 
     @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @InjectView(R.id.mine_fragment_head_image_view)
@@ -45,9 +59,16 @@ public class MineFragment extends Fragment {
     @InjectView(R.id.mine_fragment_signature)
     TextView signatureTextView;
 
-    MyApplication application;
+    private AlertDialog progressDialog;
 
-    Mine mine;
+    private MyApplication application;
+
+    private Mine mine;
+
+    private String bgImagePath;
+    private QiniuSingleImageUpload qiniuSingleImageUpload;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -115,10 +136,29 @@ public class MineFragment extends Fragment {
     }
 
     @OnLongClick(R.id.mine_fragment_head_image_view)boolean onHeadLongClick(){
-        new SweetAlertDialog(this.getContext())
+/*        new SweetAlertDialog(this.getContext())
                 .setTitleText("更新封面")
                 .setContentText("YES！")
-                .show();
+                .show();*/
+        final MaterialDialog mMaterialDialog = new MaterialDialog(MineFragment.this.getContext());
+        mMaterialDialog.setTitle("更新封面？");
+        mMaterialDialog.setMessage("点击OK上传你自定义封面");
+        mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+                showImageSelectActivity();
+
+            }
+        });
+        mMaterialDialog.setNegativeButton("CANCEL", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
+        mMaterialDialog.show();
+
         return true;
     }
     @OnClick(R.id.mine_fragment_share)void onShareClick(){
@@ -182,4 +222,73 @@ public class MineFragment extends Fragment {
         bottomSheetLayout.showWithSheetView(menuSheetView);
     }
 
+    private void showImageSelectActivity(){
+        Intent intent = new Intent(MineFragment.this.getActivity(), MultiImageSelectorActivity.class);
+        // whether show camera
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
+
+        // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
+
+        startActivityForResult(intent, REQUEST_IMAGE_CODE);
+    }
+
+    private void uploadUserBg(){
+
+        progressDialog = new SpotsDialog(MineFragment.this.getContext(),R.style.ProgressDialogUpdating);
+        progressDialog.show();
+
+        if(qiniuSingleImageUpload == null){
+            qiniuSingleImageUpload = new QiniuSingleImageUpload(MineFragment.this.getContext());
+        }
+        qiniuSingleImageUpload.modify(bgImagePath, UploadPrefixName.COVER, String.valueOf(mine.getUserInfo().getId()), new QiniuSingleImageUploadListener() {
+            @Override
+            public void onUploading(double percent) {
+
+            }
+
+            @Override
+            public void onUploadComplete(String url) {
+                progressDialog.dismiss();
+                Toast.makeText(MineFragment.this.getContext(), R.string.success, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String error) {
+                progressDialog.dismiss();
+                Toast.makeText(MineFragment.this.getContext(), R.string.err, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_IMAGE_CODE:
+                if (resultCode == Activity.RESULT_OK) {
+                    // Get the result list of select image paths
+                    List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                    // do your logic ....
+                    if(pathList.size() > 0){
+                        String path = pathList.get(0);
+                            Intent intent = new Intent(MineFragment.this.getActivity(), CropAvatarActivity.class);
+                            intent.putExtra("imagePath", path);
+                            startActivityForResult(intent,CROP_IMAGE_CODE);
+                        }
+                    }
+                break;
+            case CROP_IMAGE_CODE:
+                if (resultCode == Activity.RESULT_OK) {
+
+                    String filePath = data.getStringExtra("filePath");
+                    if(filePath != null){
+                        bgImagePath = filePath;
+                        uploadUserBg();
+                    }
+                }
+
+                break;
+        }
+    }
 }

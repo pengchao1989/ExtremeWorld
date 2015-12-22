@@ -6,7 +6,8 @@ package com.jixianxueyuan.config;
 public enum UploadPrefixName {
 
     AVATAR("avatar_"),
-    VIDEO("video_");
+    VIDEO("video_"),
+    COVER("cover_");
 
     private String prefixName;
 
