@@ -46,7 +46,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:divider">@color/divider</item>
-        <item name="android:dividerHeight">0.5dp</item>
+        <item name="android:dividerHeight">1px</item>
         <item name="android:listSelector">#00000000</item>
     </style>
 
