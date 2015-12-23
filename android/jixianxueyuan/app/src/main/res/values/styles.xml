@@ -129,7 +129,7 @@
     </style>
 
     <style name="TransparentButton" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textColor">@color/primary_color</item>
         <item name="android:background">@drawable/trans_button_background</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:textSize">20sp</item>
@@ -137,7 +137,7 @@
     </style>
 
     <style name="TransparentButtonSmall" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textColor">@color/primary_color</item>
         <item name="android:background">@drawable/trans_button_background</item>
         <item name="android:layout_marginTop">14dp</item>
         <item name="android:textSize">14sp</item>
