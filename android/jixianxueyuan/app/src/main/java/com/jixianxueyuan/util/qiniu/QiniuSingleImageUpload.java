@@ -9,6 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.UploadToken;
@@ -74,12 +75,24 @@ public class QiniuSingleImageUpload {
             @Override
             public void onResponse(String response) {
 
-                Gson gson = new Gson();
-                pictureUploadToken = gson.fromJson(response, UploadToken.class);
+                if(!StringUtils.isEmpty(response)){
+                    Gson gson = new Gson();
+                    try {
+                        pictureUploadToken = gson.fromJson(response, UploadToken.class);
 
-                if (pictureUploadToken != null) {
-                    upLoadImage();
+                        if (pictureUploadToken != null) {
+                            upLoadImage();
+                        }
+                    }catch (JsonSyntaxException e){
+                        listener.onError("token is failed");
+                    }
+
+                }else {
+                    if(listener != null){
+                        listener.onError("token is null");
+                    }
                 }
+
 
             }
         },

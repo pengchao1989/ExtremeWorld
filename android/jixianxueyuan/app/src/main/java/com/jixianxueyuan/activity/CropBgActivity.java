@@ -24,7 +24,7 @@ public class CropBgActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.crop_avatar_activity);
+        setContentView(R.layout.crop_bg_activity);
         ButterKnife.inject(this);
 
         Intent intent = getIntent();

@@ -17,6 +17,7 @@ import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CropAvatarActivity;
+import com.jixianxueyuan.activity.CropBgActivity;
 import com.jixianxueyuan.activity.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
@@ -272,7 +273,7 @@ public class MineFragment extends Fragment {
                     // do your logic ....
                     if(pathList.size() > 0){
                         String path = pathList.get(0);
-                            Intent intent = new Intent(MineFragment.this.getActivity(), CropAvatarActivity.class);
+                            Intent intent = new Intent(MineFragment.this.getActivity(), CropBgActivity.class);
                             intent.putExtra("imagePath", path);
                             startActivityForResult(intent,CROP_IMAGE_CODE);
                         }
