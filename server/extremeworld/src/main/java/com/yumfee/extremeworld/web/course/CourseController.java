@@ -17,25 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Course;
-import com.yumfee.extremeworld.entity.CourseCatalogue;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
@@ -162,7 +146,7 @@ public class CourseController
 		newCourse.setPid(0L);
 		newCourse.setType("course");
 		
-		CourseCatalogue courseTaxonomy = new CourseCatalogue();
+		CourseTaxonomy courseTaxonomy = new CourseTaxonomy();
 		courseTaxonomy.setId(courseCatalogueId);
 		
 		newCourse.setCourseCatalogue(courseTaxonomy);

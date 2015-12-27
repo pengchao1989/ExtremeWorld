@@ -11,6 +11,6 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Long>
 {
 	List<Course> findByPid(Long pid);
 	
-	@Query("SELECT c FROM  Course c WHERE c.courseCatalogue.id=? AND type=?")
-	List<Course> findByCourseCatalogueIdAndType(Long courseCatalogueId,String type);
+	@Query("SELECT c FROM  Course c WHERE c.courseTaxonomy.id=? AND type=?")
+	List<Course> findByCourseTaxonomyIdAndType(Long courseCatalogueId,String type);
 }

@@ -12,10 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yumfee.extremeworld.entity.Course;
-import com.yumfee.extremeworld.entity.CourseCatalogue;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
 import com.yumfee.extremeworld.modules.nosql.redis.MyJedisExecutor;
-import com.yumfee.extremeworld.repository.CourseCatalogueDao;
 import com.yumfee.extremeworld.repository.CourseDao;
 import com.yumfee.extremeworld.repository.CourseTaxonomyDao;
 
@@ -26,7 +24,6 @@ import com.yumfee.extremeworld.repository.CourseTaxonomyDao;
 public class CourseTaxonomyService
 {
 	private CourseTaxonomyDao courseTaxonomyDao;
-	private CourseCatalogueDao courseCatalogueDao;
 	private CourseDao courseDao;
 	
 	
@@ -98,16 +95,9 @@ public class CourseTaxonomyService
 		List<CourseTaxonomy> courseTaxonomys = courseTaxonomyDao.findByHobby(hobbyId);
 		
 		for(CourseTaxonomy courseTaxonomy : courseTaxonomys){
-			List<CourseCatalogue> courseCatalogues = courseCatalogueDao.findByCourseCatalogueId(courseTaxonomy.getId());
 			
-			//再循环取出每个目录下的course
-			for(CourseCatalogue courseCatalogue : courseCatalogues)
-			{
-				List<Course> courses = courseDao.findByCourseCatalogueIdAndType(courseCatalogue.getId(), "course");
-				courseCatalogue.setCourses(courses);
-			}
-			
-			courseTaxonomy.setCourseCatalogues(courseCatalogues);
+			List<Course> courses = courseDao.findByCourseTaxonomyIdAndType(courseTaxonomy.getId(), "course");
+			courseTaxonomy.setCourses(courses);
 		}
 		
 
@@ -121,11 +111,6 @@ public class CourseTaxonomyService
 	public void setCourseTaxonomyDao(CourseTaxonomyDao courseTaxonomyDao)
 	{
 		this.courseTaxonomyDao = courseTaxonomyDao;
-	}
-
-	@Autowired
-	public void setCourseCatalogueDao(CourseCatalogueDao courseCatalogueDao) {
-		this.courseCatalogueDao = courseCatalogueDao;
 	}
 
 	@Autowired

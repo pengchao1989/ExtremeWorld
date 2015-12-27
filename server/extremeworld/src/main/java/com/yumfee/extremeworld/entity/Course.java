@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yumfee.extremeworld.proto.CourseMinProto.CourseMinDTO;
 
 @Entity
-@Table(name = "tb_course")
+@Table(name = "tb_course_new")
 public class Course extends IdEntity
 {
 	private String name;
@@ -24,7 +24,7 @@ public class Course extends IdEntity
 	private Date modifyTime;
 	private Long pid;
 	
-	private CourseCatalogue courseCatalogue;
+	private CourseTaxonomy courseTaxonomy;
 	
 	private User user;  //create user
 	
@@ -109,15 +109,15 @@ public class Course extends IdEntity
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "catalogue_id")
-	public CourseCatalogue getCourseCatalogue()
+	@JoinColumn(name = "taxonomy_id")
+	public CourseTaxonomy getCourseTaxonomy()
 	{
-		return courseCatalogue;
+		return courseTaxonomy;
 	}
 
-	public void setCourseCatalogue(CourseCatalogue courseTaxonomy)
+	public void setCourseTaxonomy(CourseTaxonomy courseTaxonomy)
 	{
-		this.courseCatalogue = courseTaxonomy;
+		this.courseTaxonomy = courseTaxonomy;
 	}
 	
 	public CourseMinDTO buildCourseMinDTO(){

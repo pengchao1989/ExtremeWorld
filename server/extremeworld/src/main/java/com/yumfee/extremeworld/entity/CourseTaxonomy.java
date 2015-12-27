@@ -20,7 +20,7 @@ public class CourseTaxonomy extends IdEntity
 	
 	private Hobby hobby;
 
-	private List<CourseCatalogue> courseCatalogues;
+	private List<Course> courses;
 	
 	public String getName()
 	{
@@ -54,11 +54,11 @@ public class CourseTaxonomy extends IdEntity
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "courseTaxonomy")
-	public List<CourseCatalogue> getCourseCatalogues() {
-		return courseCatalogues;
+	public List<Course> getCourses() {
+		return courses;
 	}
 
-	public void setCourseCatalogues(List<CourseCatalogue> courseCatalogues) {
-		this.courseCatalogues = courseCatalogues;
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 }
