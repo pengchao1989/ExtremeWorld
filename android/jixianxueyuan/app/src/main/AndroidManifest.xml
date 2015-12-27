@@ -98,7 +98,8 @@
             android:launchMode="singleTop"/>
         <activity android:name=".activity.ReplyDetailActivity"/>
         <activity android:name=".activity.SettingActivity"/>
-        <activity android:name=".activity.ProfileEditActivity"/>
+        <activity android:name=".activity.profile.ProfileEditActivity"/>
+        <activity android:name=".activity.profile.ModifyProfileAttrEditTextActivity"/>
         <activity android:name=".activity.CropAvatarActivity"/>
         <activity android:name=".activity.CropBgActivity"/>
         <activity android:name=".activity.MarketHomeActivity"/>

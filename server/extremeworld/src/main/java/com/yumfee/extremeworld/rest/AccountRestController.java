@@ -50,7 +50,7 @@ public class AccountRestController {
 			return MyResponse.ok(userDTO);
 		}
 		
-		return MyResponse.noContent();
+		return MyResponse.err(MyErrorCode.NO_USER);
 	}
 	
 	@RequestMapping(value = "/qq_register", method = RequestMethod.POST, consumes = MediaTypes.JSON)

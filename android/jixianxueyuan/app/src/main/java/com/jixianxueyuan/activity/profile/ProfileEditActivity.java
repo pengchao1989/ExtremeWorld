@@ -1,11 +1,9 @@
-package com.jixianxueyuan.activity;
+package com.jixianxueyuan.activity.profile;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +14,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.BaseActivity;
+import com.jixianxueyuan.activity.CropAvatarActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
@@ -47,15 +47,19 @@ public class ProfileEditActivity extends BaseActivity {
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
 
+    private static final int REQUEST_CODE_GENDER = 0x1001;
+    private static final int REQUEST_CODE_SIGNATURE = 0x1002;
+
+
 
     public static final String GENDER_MALE = "male";
     public static final String GENDER_FEMALE = "female";
 
     @InjectView(R.id.profile_edit_actionbar)MyActionBar myActionBar;
     @InjectView(R.id.profile_edit_avatar)ImageView avatarImageView;
-    @InjectView(R.id.profile_edit_nickname)EditText nickNameEditText;
+    @InjectView(R.id.profile_edit_nickname)TextView nickNameEditText;
     @InjectView(R.id.profile_edit_gender)TextView genderTextView;
-    @InjectView(R.id.profile_edit_signature)EditText signatureTextView;
+    @InjectView(R.id.profile_edit_signature)TextView signatureTextView;
 
     private AlertDialog progressDialog;
 
@@ -203,6 +207,11 @@ public class ProfileEditActivity extends BaseActivity {
                     }
                 }
                 break;
+            case REQUEST_CODE_SIGNATURE:
+                if (resultCode == RESULT_OK) {
+                    userDTO.setSignature("");
+                }
+                break;
         }
     }
 
@@ -218,8 +227,19 @@ public class ProfileEditActivity extends BaseActivity {
         startActivityForResult(intent, REQUEST_IMAGE_CODE);
     }
 
-    @OnClick(R.id.profile_edit_gender)void onGenderClick(){
+    @OnClick(R.id.profile_edit_gender_layout)void onGenderClick(){
 
     }
+
+    @OnClick(R.id.profile_edit_signature_layout)void onSignatureClick(){
+        Intent intent = new Intent(this, ModifyProfileAttrEditTextActivity.class);
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_TITLE, getString(R.string.signature));
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_HINT, getString(R.string.please_enter));
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_KEY, ModifyProfileAttrEditTextActivity.ATTR_SIGNATURE);
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_VALUE, userDTO.getSignature());
+        startActivityForResult(intent, REQUEST_CODE_SIGNATURE);
+    }
+
+
 
 }

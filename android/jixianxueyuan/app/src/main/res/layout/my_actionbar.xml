@@ -52,7 +52,7 @@
                 android:id="@+id/page_head_action_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@drawable/action_right_button"
                 android:textSize="18sp"
                 />
 

@@ -9,9 +9,9 @@ public class ServerMethod {
     static public final int STATUS_OK = 1;
     static public final int STATUS_NO_CONTENT = 204;
 
-    static final String server_url = "http://dev.jixianxueyuan.com/";
+    //static final String server_url = "http://dev.jixianxueyuan.com/";
     //static final String server_url = "http://www.jixianxueyuan.com/";
-    //static final String server_url = "http://192.168.1.6:8023/";
+    static final String server_url = "http://192.168.1.6:8023/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
     static String hobby = "skateboard/";
@@ -38,6 +38,7 @@ public class ServerMethod {
     public static final String check_version(){return method_url_none + hobby + "check_version";}
 
     public static final String profile_update() {return method_url_secure + "/profile/update";};
+    public static final String profile_update_attribute(){return method_url_secure + "/profile/update_attribute";};
     public static final String user(){return method_url_secure + "user/";};
     public static final String topic(){return method_url_secure + hobby + "topic";};
     public static final String topic_fine(){return method_url_secure + hobby + "topic/fine";};

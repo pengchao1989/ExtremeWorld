@@ -1,5 +1,6 @@
 package com.yumfee.extremeworld.rest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,9 @@ import com.yumfee.extremeworld.config.MyErrorCode;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.UserDTO;
+import com.yumfee.extremeworld.rest.dto.request.UserAttributeRequestDTO;
 import com.yumfee.extremeworld.service.UserService;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @RestController
 @RequestMapping(value = "/api/secure/v1/profile")
@@ -41,6 +44,34 @@ public class ProfileRestController {
 		return MyResponse.ok(userDTO,true);
 	}
 	
+	@RequestMapping(value = "/update_attribute", method = RequestMethod.POST, consumes = MediaTypes.JSON)
+	public MyResponse updateAttribute(@RequestBody UserAttributeRequestDTO attribute, UriComponentsBuilder uriBuilder){
+		
+		User user = userService.getUser(getCurrentUserId());
+		
+		if(user == null){
+			return MyResponse.err(MyErrorCode.NO_USER);
+		}
+		
+		String fieldName = attribute.getAttributeName();
+		if(fieldName != null){
+			if(fieldName.equals("nickName")){
+				
+			}else if(fieldName.equals("gender")){
+				user.setGender(attribute.getAttributeValue());
+				
+			}else if(fieldName.equals("signature")){
+				user.setSignature(attribute.getAttributeValue());
+			}
+		}
+
+		userService.saveUser(user);
+		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+		
+		
+		return MyResponse.ok(userDTO,true);
+	}
+	
 	@RequestMapping(value = "/update_bg", method = RequestMethod.POST, consumes = MediaTypes.JSON)
 	public MyResponse updateBackground(@RequestBody User userParam, UriComponentsBuilder uriBuilder){
 		
@@ -50,6 +81,14 @@ public class ProfileRestController {
 		userService.saveUser(user);
 		UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
 		return MyResponse.ok(userDTO,true);
+	}
+	
+	/**
+	 * 取出Shiro中的当前用户Id.
+	 */
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
 	}
 	
 }
