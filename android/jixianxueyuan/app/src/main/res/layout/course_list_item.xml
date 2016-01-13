@@ -7,6 +7,7 @@
     android:paddingRight="16dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
+    style="@style/ListItemLayout"
     >
 
     <LinearLayout

@@ -4,37 +4,39 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.dto.CourseCatalogueDTO;
 import com.jixianxueyuan.dto.CourseMinDTO;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by pengchao on 2015/4/12.
  */
-public class CourseListAdapter extends BaseExpandableListAdapter {
+public class CourseListAdapter extends BaseAdapter {
 
     Context context;
 
-    List<CourseCatalogueDTO> courseCatalogueDTOList;
+    List<CourseMinDTO> courseDTOList;
 
     public CourseListAdapter(Context context){
         this.context = context;
-        courseCatalogueDTOList = new ArrayList<CourseCatalogueDTO>();
+        courseDTOList = new ArrayList<CourseMinDTO>();
 
     }
 
-    public void addDatas(List<CourseCatalogueDTO> courseTaxonomyDTOs)
+    public void addDatas(List<CourseMinDTO> courseTaxonomyDTOs)
     {
-        for(CourseCatalogueDTO courseTaxonomyDTO:courseTaxonomyDTOs)
+        for(CourseMinDTO courseTaxonomyDTO:courseTaxonomyDTOs)
         {
-            courseCatalogueDTOList.add(courseTaxonomyDTO);
+            courseDTOList.add(courseTaxonomyDTO);
         }
 
         this.notifyDataSetChanged();
@@ -42,73 +44,42 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public int getGroupCount() {
-        return courseCatalogueDTOList.size();
+    public int getCount() {
+        return courseDTOList.size();
     }
 
     @Override
-    public int getChildrenCount(int groupPosition) {
-        return courseCatalogueDTOList.get(groupPosition).getCourses().size();
+    public CourseMinDTO getItem(int position) {
+        return courseDTOList.get(position);
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
-        return courseCatalogueDTOList.get(groupPosition);
+    public long getItemId(int position) {
+        return courseDTOList.get(position).getId();
     }
 
     @Override
-    public CourseMinDTO getChild(int groupPosition, int childPosition) {
-        return courseCatalogueDTOList.get(groupPosition).getCourses().get(childPosition);
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return courseCatalogueDTOList.get(groupPosition).getId();
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return courseCatalogueDTOList.get(groupPosition).getCourses().get(childPosition).getId();
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-
-        convertView = LayoutInflater.from(context).inflate(R.layout.course_list_taxonomy_item,null);
-
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.course_list_taxonomy_item_name);
-
-        nameTextView.setText(courseCatalogueDTOList.get(groupPosition).getName());
-
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder = null;
+        if(convertView == null){
+            convertView = LayoutInflater.from(context).inflate(R.layout.course_list_item,null);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        CourseMinDTO courseMinDTO = courseDTOList.get(position);
+        viewHolder.nameTextView.setText(courseMinDTO.getName());
         return convertView;
     }
 
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public static class ViewHolder{
+        @InjectView(R.id.course_list_item_name)
+        TextView nameTextView;
 
-        convertView = LayoutInflater.from(context).inflate(R.layout.course_list_item,null);
-
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.course_list_item_name);
-
-        nameTextView.setText(courseCatalogueDTOList.get(groupPosition).getCourses().get(childPosition).getName());
-
-        return convertView;
+        public ViewHolder(View itemView){
+            ButterKnife.inject(this, itemView);
+        }
     }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
 
 }

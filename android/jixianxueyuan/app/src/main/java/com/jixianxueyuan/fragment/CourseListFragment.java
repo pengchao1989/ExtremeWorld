@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CourseListAdapter;
 import com.jixianxueyuan.dto.CourseTaxonomyDTO;
-
-import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,7 +25,7 @@ public class CourseListFragment extends Fragment{
     public static final String INTENT_COURSE_LIST = "INTENT_COURSE_LIST";
 
     @InjectView(R.id.course_list_fragment_expandablelistview)
-    ExpandableListView expandableListView;
+    ListView expandableListView;
 
     private CourseListAdapter adapter;
 
@@ -44,7 +43,7 @@ public class CourseListFragment extends Fragment{
         }
 
         adapter = new CourseListAdapter(this.getActivity());
-        adapter.addDatas(courseTaxonomyDTO.getCourseCatalogues());
+        adapter.addDatas(courseTaxonomyDTO.getCourses());
         Log.d("CourseListFragment", "onCreate");
     }
 
@@ -72,5 +71,6 @@ public class CourseListFragment extends Fragment{
     {
         super.onResume();
     }
+
 
 }

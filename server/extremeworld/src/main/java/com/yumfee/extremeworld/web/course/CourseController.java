@@ -149,7 +149,7 @@ public class CourseController
 		CourseTaxonomy courseTaxonomy = new CourseTaxonomy();
 		courseTaxonomy.setId(courseCatalogueId);
 		
-		newCourse.setCourseCatalogue(courseTaxonomy);
+		newCourse.setCourseTaxonomy(courseTaxonomy);
 		
 
 		courseService.saveCourse(newCourse);
@@ -187,7 +187,7 @@ public class CourseController
 		courseRevision.setContent(curCourse.getContent());
 		courseRevision.setType("revision");
 		courseRevision.setUser(curCourse.getUser());
-		courseRevision.setCourseCatalogue(curCourse.getCourseCatalogue());
+		courseRevision.setCourseTaxonomy(curCourse.getCourseTaxonomy());
 		courseRevision.setPid(curCourse.getId());
 		courseService.saveCourse(courseRevision);
 		

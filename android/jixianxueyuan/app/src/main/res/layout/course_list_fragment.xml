@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/MainContainer">
 
-    <ExpandableListView
+    <ListView
         android:id="@+id/course_list_fragment_expandablelistview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        style="@style/ListView"/>
 
 </RelativeLayout>

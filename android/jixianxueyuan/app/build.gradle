@@ -49,7 +49,7 @@ android {
         bmx {
             applicationId = "com.jixianxueyuan.bmx"
             manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.bmx",
-                                    HOBBY        : "bmx",
+                                    HOBBY        : "skateboard",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}"]
         }

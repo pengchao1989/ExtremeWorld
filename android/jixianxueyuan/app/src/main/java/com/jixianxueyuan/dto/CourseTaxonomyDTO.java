@@ -1,7 +1,6 @@
 package com.jixianxueyuan.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 public class CourseTaxonomyDTO implements Serializable
@@ -10,7 +9,7 @@ public class CourseTaxonomyDTO implements Serializable
 	private String name;
 	private String createTime;
 
-	private List<CourseCatalogueDTO> courseCatalogues;
+	private List<CourseMinDTO> courses;
 
 	public Long getId()
 	{
@@ -42,11 +41,11 @@ public class CourseTaxonomyDTO implements Serializable
 		this.createTime = createTime;
 	}
 
-	public List<CourseCatalogueDTO> getCourseCatalogues() {
-		return courseCatalogues;
+	public List<CourseMinDTO> getCourses() {
+		return courses;
 	}
 
-	public void setCourseCatalogues(List<CourseCatalogueDTO> courseCatalogues) {
-		this.courseCatalogues = courseCatalogues;
+	public void setCourses(List<CourseMinDTO> courses) {
+		this.courses = courses;
 	}
 }
