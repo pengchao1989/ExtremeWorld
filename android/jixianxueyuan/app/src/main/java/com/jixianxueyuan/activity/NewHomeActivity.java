@@ -23,6 +23,7 @@ import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
+import com.jixianxueyuan.util.ShareUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
@@ -250,6 +251,55 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                     }
                 });
         menuSheetView.inflateMenu(R.menu.create);
+        bottomSheetLayout.showWithSheetView(menuSheetView);
+    }
+
+    public void showShareMenuSheet(final MenuSheetView.MenuType menuType) {
+        MenuSheetView menuSheetView =
+                new MenuSheetView(NewHomeActivity.this, menuType, "邀请3个好友升级为永久会员...", new MenuSheetView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        ShareUtils.ShareItem shareItem = null;
+
+                        switch (item.getItemId()){
+                            case R.id.menu_share_wechat:
+                                shareItem = new ShareUtils.ShareItem("微信", R.drawable.umeng_socialize_wechat,
+                                        "com.tencent.mm.ui.tools.ShareImgUI", "com.tencent.mm");
+                                break;
+                            case R.id.menu_share_friend_group:
+                                shareItem = new ShareUtils.ShareItem("朋友圈", R.drawable.umeng_socialize_wxcircle,
+                                        "com.tencent.mm.ui.tools.ShareToTimeLineUI", "com.tencent.mm");
+                                break;
+                            case R.id.menu_share_qq:
+                                shareItem = new ShareUtils.ShareItem("QQ", R.drawable.umeng_socialize_qq_on,
+                                        "com.tencent.mobileqq.activity.JumpActivity","com.tencent.mobileqq");
+                                break;
+                            case R.id.menu_share_kongjian:
+                                shareItem = new ShareUtils.ShareItem("空间", R.drawable.umeng_socialize_qzone_on,
+                                        "com.qzone.ui.operation.QZonePublishMoodActivity","com.qzone");
+                                break;
+                            case R.id.menu_share_weibo:
+                                shareItem = new ShareUtils.ShareItem("微博", R.drawable.umeng_socialize_sina_on,
+                                        "com.sina.weibo.EditActivity", "com.sina.weibo");
+                                break;
+                        }
+
+
+                        if(shareItem != null){
+                            ShareUtils.share(NewHomeActivity.this,"title", "text", "", shareItem);
+                        }
+
+
+
+
+                        if (bottomSheetLayout.isSheetShowing()) {
+                            bottomSheetLayout.dismissSheet();
+                        }
+                        return true;
+                    }
+                });
+        menuSheetView.inflateMenu(R.menu.share);
         bottomSheetLayout.showWithSheetView(menuSheetView);
     }
 

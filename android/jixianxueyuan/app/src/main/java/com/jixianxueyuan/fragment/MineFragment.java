@@ -17,6 +17,7 @@ import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CropBgActivity;
+import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.profile.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
@@ -50,14 +51,15 @@ public class MineFragment extends Fragment {
 
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
-
-    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
+    
     @InjectView(R.id.mine_fragment_head_image_view)
     ImageView headImageView;
     @InjectView(R.id.mine_avatar_imageview)
     ImageView avatarImageView;
     @InjectView(R.id.mine_fragment_signature)
     TextView signatureTextView;
+
+    private NewHomeActivity activity;
 
     private AlertDialog progressDialog;
 
@@ -77,6 +79,7 @@ public class MineFragment extends Fragment {
 
         application = (MyApplication) this.getActivity().getApplicationContext();
         mine = application.getMine();
+        activity = (NewHomeActivity) getActivity();
     }
 
 
@@ -169,58 +172,11 @@ public class MineFragment extends Fragment {
                 + "?inviteid="
                 + mine.getUserInfo().getId();
 
-        showMenuSheet(MenuSheetView.MenuType.GRID);
+        activity.showShareMenuSheet(MenuSheetView.MenuType.GRID);
 
     }
 
-    private void showMenuSheet(final MenuSheetView.MenuType menuType) {
-        MenuSheetView menuSheetView =
-                new MenuSheetView(MineFragment.this.getContext(), menuType, "邀请3个好友升级为永久会员...", new MenuSheetView.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
 
-                        ShareUtils.ShareItem shareItem = null;
-
-                        switch (item.getItemId()){
-                            case R.id.menu_share_wechat:
-                                shareItem = new ShareUtils.ShareItem("微信", R.drawable.umeng_socialize_wechat,
-                                        "com.tencent.mm.ui.tools.ShareImgUI", "com.tencent.mm");
-                                break;
-                            case R.id.menu_share_friend_group:
-                                shareItem = new ShareUtils.ShareItem("朋友圈", R.drawable.umeng_socialize_wxcircle,
-                                        "com.tencent.mm.ui.tools.ShareToTimeLineUI", "com.tencent.mm");
-                                break;
-                            case R.id.menu_share_qq:
-                                shareItem = new ShareUtils.ShareItem("QQ", R.drawable.umeng_socialize_qq_on,
-                                        "com.tencent.mobileqq.activity.JumpActivity","com.tencent.mobileqq");
-                                break;
-                            case R.id.menu_share_kongjian:
-                                shareItem = new ShareUtils.ShareItem("空间", R.drawable.umeng_socialize_qzone_on,
-                                        "com.qzone.ui.operation.QZonePublishMoodActivity","com.qzone");
-                                break;
-                            case R.id.menu_share_weibo:
-                                shareItem = new ShareUtils.ShareItem("微博", R.drawable.umeng_socialize_sina_on,
-                                        "com.sina.weibo.EditActivity", "com.sina.weibo");
-                                break;
-                        }
-
-
-                        if(shareItem != null){
-                            ShareUtils.share(MineFragment.this.getContext(),"title", "text", "", shareItem);
-                        }
-
-
-
-
-                        if (bottomSheetLayout.isSheetShowing()) {
-                            bottomSheetLayout.dismissSheet();
-                        }
-                        return true;
-                    }
-                });
-        menuSheetView.inflateMenu(R.menu.share);
-        bottomSheetLayout.showWithSheetView(menuSheetView);
-    }
 
     private void showImageSelectActivity(){
         Intent intent = new Intent(MineFragment.this.getActivity(), MultiImageSelectorActivity.class);
