@@ -19,6 +19,9 @@ import com.jixianxueyuan.activity.SiteListActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryListAdapter;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.UmengEventId;
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,19 +82,23 @@ public class DiscoveryFragment extends Fragment {
                 switch (position)
                 {
                     case 0:
+                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_NEWS_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.TYPE, TopicType.NEWS);
                         break;
                     case 1:
+                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_DISCUSS_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
                         break;
 
                     case 2:
+                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_VIDEO_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.TYPE, TopicType.VIDEO);
                         break;
                     case 3:
+                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_COURSE_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), CourseHomeActivity.class);
                         break;
 
@@ -101,9 +108,11 @@ public class DiscoveryFragment extends Fragment {
                         break;*/
 
                     case 4:
+                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_SITE_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), SiteListActivity.class);
                         break;
                     case 5:
+                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_NEAR_FRIEND_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
                     case 6:

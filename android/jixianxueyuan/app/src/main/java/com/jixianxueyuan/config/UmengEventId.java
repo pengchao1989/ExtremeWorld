@@ -28,4 +28,13 @@ public class UmengEventId {
 
 
     /*mine*/
+
+    /*discovery*/
+    public static final String DISCOVERY_NEWS_CLICK = "discovery_news_click";
+    public static final String DISCOVERY_DISCUSS_CLICK = "discovery_discuss_click";
+    public static final String DISCOVERY_VIDEO_CLICK = "discovery_video_click";
+    public static final String DISCOVERY_COURSE_CLICK = "discovery_course_click";
+    public static final String DISCOVERY_SITE_CLICK = "discovery_site_click";
+    public static final String DISCOVERY_NEAR_FRIEND_CLICK = "discovery_near_friend_click";
+
 }
