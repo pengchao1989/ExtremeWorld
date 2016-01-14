@@ -25,10 +25,12 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.util.MyLog;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -284,9 +286,11 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             mPager.setCurrentItem(1);
             mSlidingTabLayout.setImageResource(R.mipmap.ic_option_2);
         }
+        MobclickAgent.onEvent(DynamicHomeFragment.this.getContext(), UmengEventId.HOME_SWITCH_BUTTON_CLICK);
     }
 
     @OnClick(R.id.fab)void onAvatarClick(){
+        MobclickAgent.onEvent(DynamicHomeFragment.this.getContext(), UmengEventId.HOME_MINE_AVATAR_CLICK);
         Intent intent = new Intent(this.getActivity(), UserHomeActivity.class);
         intent.putExtra(UserHomeActivity.INTENT_USER, mine.getUserInfo());
         startActivity(intent);

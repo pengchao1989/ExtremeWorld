@@ -241,6 +241,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                                 break;
                         }
                         startActivity(intent);
+                        MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, intent.getStringExtra(TopicType.TYPE));
 
                         if (bottomSheetLayout.isSheetShowing()) {
                             bottomSheetLayout.dismissSheet();

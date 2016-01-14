@@ -24,6 +24,8 @@ public class BaseActivity extends SwipeBackActivity {
 
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+
+        overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
     }
 
     protected int getActionBarSize() {

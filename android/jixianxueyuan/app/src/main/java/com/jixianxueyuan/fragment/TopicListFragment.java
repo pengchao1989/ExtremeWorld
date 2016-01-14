@@ -1,11 +1,8 @@
 package com.jixianxueyuan.fragment;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +17,11 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
-import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -34,6 +31,7 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
 import com.nineoldandroids.view.ViewHelper;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -240,6 +238,8 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                 break;
 
         }
+
+        MobclickAgent.onEvent(TopicListFragment.this.getContext(), UmengEventId.HOME_TOPIC_LIST_ITEM_CLICK, topicDTO.getType());
 
         if (intent != null) {
             intent.putExtra(TopicDetailActivity.INTENT_TOPIC, topicDTO);

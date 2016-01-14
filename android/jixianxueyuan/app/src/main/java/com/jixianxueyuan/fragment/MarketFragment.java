@@ -23,6 +23,7 @@ import com.jixianxueyuan.activity.GoodsListActivity;
 import com.jixianxueyuan.adapter.CategoryGridAdapter;
 import com.jixianxueyuan.adapter.ShopGridAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.biz.CategoryDTO;
@@ -33,6 +34,7 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.GridViewWithHeaderAndFooter;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -81,6 +83,7 @@ public class MarketFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (categoryGridAdapter.getItemViewType(position) == CategoryGridAdapter.VIEW_TYPE_CATEGORY) {
+                    MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_CATEGORY_ITEM_CLICK, categoryGridAdapter.getItem(position).getName());
                     Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
                     intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_CATEGORY);
                     intent.putExtra(GoodsListActivity.SOURCE_TYPE_CATEGORY, categoryGridAdapter.getItem(position));
@@ -114,6 +117,7 @@ public class MarketFragment extends Fragment {
 
                     }
                 });
+                MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_SHOPPING_CART_CLICK);
             }
         });
 
@@ -122,7 +126,7 @@ public class MarketFragment extends Fragment {
             public void onClick(View v) {
                 TradeService tradeService = AlibabaSDK.getService(TradeService.class);
                 MyOrdersPage myOrdersPage = new MyOrdersPage(0, false);
-                tradeService.show(myOrdersPage, null, MarketFragment.this.getActivity(), null, new TradeProcessCallback(){
+                tradeService.show(myOrdersPage, null, MarketFragment.this.getActivity(), null, new TradeProcessCallback() {
 
                     @Override
                     public void onFailure(int code, String msg) {
@@ -132,9 +136,12 @@ public class MarketFragment extends Fragment {
                     @Override
                     public void onPaySuccess(TradeResult tradeResult) {
 
-                    }});
+                    }
+                });
+                MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_ORDER_CLICK);
             }
         });
+
 
         gridView.addHeaderView(headerView);
 
@@ -183,7 +190,7 @@ public class MarketFragment extends Fragment {
 
     @OnItemClick(R.id.market_home_activity_gridview) void onShopClick(int position){
 
-
+            MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_SHOP_ITEM_CLICK, shopGridAdapter.getItem(position).getName());
             Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
             intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_SHOP);
             intent.putExtra(GoodsListActivity.SOURCE_TYPE_SHOP, shopGridAdapter.getItem(position));

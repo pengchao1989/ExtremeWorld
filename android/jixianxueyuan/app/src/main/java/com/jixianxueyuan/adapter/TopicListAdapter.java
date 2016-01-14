@@ -15,6 +15,7 @@ import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -24,6 +25,7 @@ import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.umeng.analytics.MobclickAgent;
 import com.yumfee.emoji.EmojiconTextView;
 
 import java.util.ArrayList;
@@ -227,6 +229,7 @@ public class TopicListAdapter extends BaseAdapter {
         viewHolder.avatarImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MobclickAgent.onEvent(context, UmengEventId.TOPIC_LIST_AVATAR_CLICK);
                 Intent intent = new Intent(context, UserHomeActivity.class);
                 intent.putExtra(UserHomeActivity.INTENT_USER_MIN, topicDTOList.get(position).getUser());
                 context.startActivity(intent);

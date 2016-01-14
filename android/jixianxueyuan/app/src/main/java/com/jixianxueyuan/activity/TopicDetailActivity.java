@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -30,7 +29,6 @@ import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.commons.AnalyzeContent;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.TopicType;
@@ -65,7 +63,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -662,7 +659,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 if(mProgressNum  > oldProgressNum)
                 {
                     oldProgressNum = mProgressNum;
-                    MyLog.d(ShortVideoDetailActivity.tag, "progress=" + mProgressNum);
                     handler.sendEmptyMessage(HANDLER_DOWNLOAD_UPDATE);
                 }
 
