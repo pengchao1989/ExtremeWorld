@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CropBgActivity;
@@ -26,11 +24,12 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
-import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.utils.DiskCacheUtils;
+import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
 
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class MineFragment extends Fragment {
 
     private Mine mine;
 
-    private String bgImagePath;
+    private String bgImageFilePath;
     private QiniuSingleImageUpload qiniuSingleImageUpload;
 
 
@@ -197,7 +196,7 @@ public class MineFragment extends Fragment {
         if(qiniuSingleImageUpload == null){
             qiniuSingleImageUpload = new QiniuSingleImageUpload(MineFragment.this.getContext());
         }
-        qiniuSingleImageUpload.modify(bgImagePath, UploadPrefixName.COVER, String.valueOf(mine.getUserInfo().getId()), new QiniuSingleImageUploadListener() {
+        qiniuSingleImageUpload.modify(bgImageFilePath, UploadPrefixName.COVER, String.valueOf(mine.getUserInfo().getId()), new QiniuSingleImageUploadListener() {
             @Override
             public void onUploading(double percent) {
 
@@ -207,6 +206,12 @@ public class MineFragment extends Fragment {
             public void onUploadComplete(String url) {
                 progressDialog.dismiss();
                 //清除该图片的本地缓存
+                ImageLoader imageLoader = ImageLoader.getInstance();
+                DiskCacheUtils.removeFromCache(url, imageLoader.getDiskCache());
+                MemoryCacheUtils.removeFromCache(url, imageLoader.getMemoryCache());
+                //显示图片
+                imageLoader.displayImage("file://" + bgImageFilePath,headImageView,ImageLoaderConfig.getHeadOption(MineFragment.this.getContext()) );
+
 
                 Toast.makeText(MineFragment.this.getContext(), R.string.success, Toast.LENGTH_SHORT).show();
             }
@@ -241,7 +246,7 @@ public class MineFragment extends Fragment {
 
                     String filePath = data.getStringExtra("filePath");
                     if(filePath != null){
-                        bgImagePath = filePath;
+                        bgImageFilePath = filePath;
                         uploadUserBg();
                     }
                 }
