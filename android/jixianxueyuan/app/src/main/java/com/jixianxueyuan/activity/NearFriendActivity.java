@@ -106,7 +106,7 @@ public class NearFriendActivity extends BaseActivity  {
                 userMinDTO.setGender(userDTO.getGender());
                 userMinDTO.setName(userDTO.getName());
                 Intent intent = new Intent(NearFriendActivity.this, UserHomeActivity.class);
-                intent.putExtra("userMinDTO", userMinDTO);
+                intent.putExtra(UserHomeActivity.INTENT_USER_MIN, userMinDTO);
                 startActivity(intent);
 
             }
