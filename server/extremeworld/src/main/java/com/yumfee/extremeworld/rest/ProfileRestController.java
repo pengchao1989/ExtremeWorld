@@ -62,6 +62,8 @@ public class ProfileRestController {
 				
 			}else if(fieldName.equals("signature")){
 				user.setSignature(attribute.getAttributeValue());
+			}else if(fieldName.equals("bg")){
+				user.setBg(attribute.getAttributeValue());
 			}
 		}
 

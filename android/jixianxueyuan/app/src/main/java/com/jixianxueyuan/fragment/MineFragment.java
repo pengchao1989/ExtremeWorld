@@ -51,7 +51,7 @@ public class MineFragment extends Fragment {
 
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
-    
+
     @InjectView(R.id.mine_fragment_head_image_view)
     ImageView headImageView;
     @InjectView(R.id.mine_avatar_imageview)
@@ -206,6 +206,8 @@ public class MineFragment extends Fragment {
             @Override
             public void onUploadComplete(String url) {
                 progressDialog.dismiss();
+                //清除该图片的本地缓存
+
                 Toast.makeText(MineFragment.this.getContext(), R.string.success, Toast.LENGTH_SHORT).show();
             }
 

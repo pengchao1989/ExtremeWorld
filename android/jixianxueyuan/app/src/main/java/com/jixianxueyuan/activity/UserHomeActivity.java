@@ -15,6 +15,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicListOfUserAdapter;
+import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -26,6 +28,7 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -33,6 +36,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import me.nereo.multi_image_selector.bean.Image;
 
 /**
  * Created by pengchao on 5/22/15.
@@ -42,16 +46,20 @@ public class UserHomeActivity extends BaseActivity {
     public static final String INTENT_USER_MIN = "INTENT_USER_MIN";
     public static final String INTENT_USER = "INTENT_USER";
 
-    @InjectView(R.id.user_home_actionbar)MyActionBar actionBar;
+    //@InjectView(R.id.user_home_actionbar)MyActionBar actionBar;
     @InjectView(R.id.user_home_listview)ListView listView;
+    private ImageView avatarImageView;
+    private ImageView coverImageView;
+    private TextView nameTextView;
 
-    TopicListOfUserAdapter adapter;
 
-    UserMinDTO userMinDTO;
-    UserDTO userDTO;
+    private TopicListOfUserAdapter adapter;
 
-    ClickLoadMoreView clickLoadMoreView;
-    TextView signatureTextView;
+    private UserMinDTO userMinDTO;
+    private UserDTO userDTO;
+
+    private ClickLoadMoreView clickLoadMoreView;
+    private TextView signatureTextView;
 
 
     int currentPage = 0;
@@ -63,20 +71,6 @@ public class UserHomeActivity extends BaseActivity {
         setContentView(R.layout.user_home_activity);
 
         ButterKnife.inject(this);
-
-        Bundle bundle = this.getIntent().getExtras();
-        if(bundle.containsKey(INTENT_USER_MIN)){
-            userMinDTO = (UserMinDTO) bundle.getSerializable(INTENT_USER_MIN);
-            actionBar.setTitle(userMinDTO.getName());
-        }
-        else if(bundle.containsKey(INTENT_USER)){
-            userDTO = (UserDTO) bundle.getSerializable(INTENT_USER);
-            actionBar.setTitle(userDTO.getName());
-        }
-        else {
-            finish();
-        }
-
 
         initHeadView();
 
@@ -93,17 +87,45 @@ public class UserHomeActivity extends BaseActivity {
     private void initHeadView(){
         View headView = LayoutInflater.from(this).inflate(R.layout.user_home_head_view, null);
         signatureTextView = (TextView) headView.findViewById(R.id.user_home_head_signature);
-        ImageView avatarImageView = (ImageView) headView.findViewById(R.id.user_home_head_avatar);
+        avatarImageView = (ImageView) headView.findViewById(R.id.user_home_head_avatar);
+        coverImageView = (ImageView) headView.findViewById(R.id.user_home_head_cover);
+        nameTextView = (TextView) headView.findViewById(R.id.user_home_head_name);
 
-        String avatarUrl = userMinDTO != null?userMinDTO.getAvatar() + "!AndroidProfileAvatar"
+        Bundle bundle = this.getIntent().getExtras();
+        if(bundle.containsKey(INTENT_USER_MIN)){
+            userMinDTO = (UserMinDTO) bundle.getSerializable(INTENT_USER_MIN);
+            nameTextView.setText(userMinDTO.getName());
+        }
+        else if(bundle.containsKey(INTENT_USER)){
+            userDTO = (UserDTO) bundle.getSerializable(INTENT_USER);
+            nameTextView.setText(userDTO.getName());
+        }
+        else {
+            finish();
+        }
+
+        String avatarUrl = userMinDTO != null?userMinDTO.getAvatar() + QiniuImageStyle.PROFILE_AVATAR
                 :userDTO.getAvatar() + "!AndroidProfileAvatar";
         MyLog.d("UserHomeActivity", "avatar=" + avatarUrl);
         ImageLoader.getInstance().displayImage(avatarUrl, avatarImageView);
+
+        showCover();
+
         listView.addHeaderView(headView);
+    }
+
+    private void showCover() {
+        if(userDTO != null){
+            String coverUrl = userDTO.getBg() + QiniuImageStyle.DETAIL;
+            ImageLoader.getInstance().displayImage(coverUrl, coverImageView, ImageLoaderConfig.getHeadOption(this));
+        }
     }
 
     private void setUserDetailView(){
         signatureTextView.setText(userDTO.getSignature());
+        nameTextView.setText(userDTO.getName());
+        showCover();
+
     }
 
     private void requestUserInfo(){

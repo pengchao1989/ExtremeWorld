@@ -1,43 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="270dp">
+        android:layout_height="190dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/flexible_space_image_height"
-            android:paddingBottom="20dp"
-            android:paddingLeft="52dp"
-            android:paddingRight="8dp"
-            android:background="@mipmap/default_head"
-            >
+            android:layout_height="150dp"
+            android:background="@color/grey">
 
-            <TextView
-                android:id="@+id/user_home_head_signature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:layout_alignParentRight="true"
-                />
+            <ImageView
+                android:id="@+id/user_home_head_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="100dp"
+            android:padding="4dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/bg_flost_im_avatar">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_home_head_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"/>
 
         </RelativeLayout>
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_home_head_avatar"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="208dp"
-            />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/user_home_head_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp"
+        tools:text="扳手扳死你"/>
+
+    <TextView
+        android:id="@+id/user_home_head_signature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:textSize="14sp"
+        android:textColor="@color/grey_deep"
+        android:layout_gravity="center_horizontal"
+        tools:text="种个南瓜像地球，架在五岳山上头。\n把它扔进太平洋，地球又多一个洲。"/>
 
 </LinearLayout>

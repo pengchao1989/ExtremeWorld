@@ -5,4 +5,6 @@ package com.jixianxueyuan.config;
  */
 public class QiniuImageStyle {
     public static final String LIST_AVATAR = "!androidListAvatar";
+    public static final String PROFILE_AVATAR = "!AndroidProfileAvatar";
+    public static final String DETAIL = "!AndroidDetail";
 }
