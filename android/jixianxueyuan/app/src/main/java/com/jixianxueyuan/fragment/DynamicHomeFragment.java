@@ -25,6 +25,7 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.util.MyLog;
 import com.nineoldandroids.view.ViewHelper;
@@ -113,7 +114,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         ViewHelper.setScaleY(mFab, 0);
 
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), mFab, ImageLoaderConfig.getAvatarOption(this.getActivity()));
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg(), headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
+        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg() + QiniuImageStyle.COVER, headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
         // Initialize the first Fragment's state when layout is completed.
         ScrollUtils.addOnGlobalLayoutListener(mSlidingTabLayout, new Runnable() {
             @Override

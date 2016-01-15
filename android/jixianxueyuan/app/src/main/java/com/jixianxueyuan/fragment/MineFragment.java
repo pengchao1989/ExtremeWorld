@@ -23,6 +23,7 @@ import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
@@ -90,7 +91,7 @@ public class MineFragment extends Fragment {
         ButterKnife.inject(this,view);
 
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView, ImageLoaderConfig.getAvatarOption(this.getActivity()));
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg(), headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
+        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg() + QiniuImageStyle.COVER, headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
 
         signatureTextView.setText(mine.getUserInfo().getSignature());
 

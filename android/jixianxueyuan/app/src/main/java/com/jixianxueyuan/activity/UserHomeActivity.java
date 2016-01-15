@@ -116,7 +116,7 @@ public class UserHomeActivity extends BaseActivity {
 
     private void showCover() {
         if(userDTO != null){
-            String coverUrl = userDTO.getBg() + QiniuImageStyle.DETAIL;
+            String coverUrl = userDTO.getBg() + QiniuImageStyle.COVER;
             ImageLoader.getInstance().displayImage(coverUrl, coverImageView, ImageLoaderConfig.getHeadOption(this));
         }
     }
