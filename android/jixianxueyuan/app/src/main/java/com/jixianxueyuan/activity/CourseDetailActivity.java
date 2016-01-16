@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.CourseDto;
+import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -41,8 +43,12 @@ import butterknife.OnItemClick;
  */
 public class CourseDetailActivity extends BaseActivity {
 
-    @InjectView(R.id.course_detail_actionbar)MyActionBar myActionBar;
-    @InjectView(R.id.course_detail_listview)ListView listView;
+    private static final String INTENT_COURSE_MIN_DTO = "INTENT_COURSE_MIN_DTO";
+
+    @InjectView(R.id.course_detail_actionbar)
+    MyActionBar myActionBar;
+    @InjectView(R.id.course_detail_listview)
+    ListView listView;
 
     TopicListAdapter adapter;
 
@@ -50,9 +56,8 @@ public class CourseDetailActivity extends BaseActivity {
     View footerView;
     HeadViewHolder headViewHolder;
 
-    Long courseId;
-    String courseName;
-    CourseDto courseDto;
+    private CourseMinDTO courseMinDTO;
+    private CourseDto courseDto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,22 +77,17 @@ public class CourseDetailActivity extends BaseActivity {
         requestCourseDetail();
     }
 
-    private void getBundle()
-    {
+    private void getBundle() {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        if(bundle.containsKey("courseId"))
-        {
-            courseId = bundle.getLong("courseId");
-        }
-        if(bundle.containsKey("courseName"))
-        {
-            courseName = bundle.getString("courseName");
+        if (bundle.containsKey(INTENT_COURSE_MIN_DTO)) {
+            courseMinDTO = (CourseMinDTO) bundle.getSerializable(INTENT_COURSE_MIN_DTO);
+        } else {
+            finish();
         }
     }
 
-    private void initHeadView()
-    {
+    private void initHeadView() {
         myActionBar.setActionOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +100,7 @@ public class CourseDetailActivity extends BaseActivity {
 
         headViewHolder = new HeadViewHolder(headView);
 
-        headViewHolder.titleTextView.setText(courseName);
+        headViewHolder.titleTextView.setText(courseMinDTO.getName());
         headViewHolder.userNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,8 +114,7 @@ public class CourseDetailActivity extends BaseActivity {
 
     }
 
-    private void initFooterView()
-    {
+    private void initFooterView() {
         footerView = LayoutInflater.from(this).inflate(R.layout.list_footer_button, null);
         Button button = (Button) footerView.findViewById(R.id.list_footer_button);
         button.setText("上传教学");
@@ -125,20 +124,20 @@ public class CourseDetailActivity extends BaseActivity {
                 Intent intent = new Intent(CourseDetailActivity.this, CreateTopicActivity.class);
                 intent.putExtra(TopicType.TYPE, TopicType.COURSE);
                 intent.putExtra("courseId", courseDto.getId());
-                intent.putExtra("courseType","explain");
+                intent.putExtra("courseType", "explain");
                 startActivity(intent);
             }
         });
         listView.addFooterView(footerView);
     }
 
-    private void requestCourseDetail()
-    {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.course() + courseId;
+    private void requestCourseDetail() {
 
-        MyRequest<CourseDto> myRequest = new MyRequest<CourseDto>(Request.Method.GET,url, CourseDto.class,
-                new Response.Listener<MyResponse<CourseDto>>(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = ServerMethod.course() + courseMinDTO.getId();
+
+        MyRequest<CourseDto> myRequest = new MyRequest<CourseDto>(Request.Method.GET, url, CourseDto.class,
+                new Response.Listener<MyResponse<CourseDto>>() {
 
                     @Override
                     public void onResponse(MyResponse<CourseDto> response) {
@@ -156,34 +155,31 @@ public class CourseDetailActivity extends BaseActivity {
                     }
                 },
                 new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
-            }
-        });
+                    }
+                });
 
         queue.add(myRequest);
     }
 
-    private void requestTopicList()
-    {
+    private void requestTopicList() {
+
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = ServerMethod.course_explain() + courseId;
+        String url = ServerMethod.course_explain() + courseMinDTO.getId();
 
-        MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest<TopicDTO>(Request.Method.GET,url, TopicDTO.class,
-                new Response.Listener<MyResponse<MyPage<TopicDTO>>>(){
+        MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest<TopicDTO>(Request.Method.GET, url, TopicDTO.class,
+                new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {
 
                     @Override
                     public void onResponse(MyResponse<MyPage<TopicDTO>> response) {
 
-                        if(response.getStatus() == MyResponse.status_ok)
-                        {
+                        if (response.getStatus() == MyResponse.status_ok) {
                             MyPage<TopicDTO> myPage = response.getContent();
                             adapter.addDatas(myPage.getContents());
-                        }
-                        else
-                        {
+                        } else {
 
                         }
                     }
@@ -195,27 +191,30 @@ public class CourseDetailActivity extends BaseActivity {
 
                     }
                 }
-                );
+        );
 
         queue.add(myPageRequest);
     }
 
 
-    public class HeadViewHolder
-    {
-        @InjectView(R.id.course_detail_head_title)TextView titleTextView;
-        @InjectView(R.id.course_detail_head_content)TextView contentTextView;
-        @InjectView(R.id.course_detail_head_user_name)TextView userNameTextView;
-        @InjectView(R.id.course_detail_head_modify_time)TextView modifyTimeTextView;
+    public class HeadViewHolder {
+        @InjectView(R.id.course_detail_head_title)
+        TextView titleTextView;
+        @InjectView(R.id.course_detail_head_content)
+        TextView contentTextView;
+        @InjectView(R.id.course_detail_head_user_name)
+        TextView userNameTextView;
+        @InjectView(R.id.course_detail_head_modify_time)
+        TextView modifyTimeTextView;
 
-        public HeadViewHolder(View headView)
-        {
+        public HeadViewHolder(View headView) {
             ButterKnife.inject(this, headView);
         }
     }
 
-    @OnItemClick(R.id.course_detail_listview)void onItemClick(int position){
-        if(position == 0){
+    @OnItemClick(R.id.course_detail_listview)
+    void onItemClick(int position) {
+        if (position == 0) {
             return;
         }
         Intent intent = new Intent(CourseDetailActivity.this, TopicDetailActivity.class);
@@ -223,5 +222,10 @@ public class CourseDetailActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    public static void startActivity(Context context, CourseMinDTO courseMinDTO) {
+        Intent intent = new Intent(context, CourseDetailActivity.class);
+        intent.putExtra(INTENT_COURSE_MIN_DTO, courseMinDTO);
+        context.startActivity(intent);
+    }
 
 }

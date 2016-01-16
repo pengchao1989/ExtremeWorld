@@ -6,15 +6,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CourseDetailActivity;
 import com.jixianxueyuan.adapter.CourseListAdapter;
+import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.CourseTaxonomyDTO;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -24,8 +26,8 @@ public class CourseListFragment extends Fragment{
     public static final String TAG = CourseListFragment.class.getSimpleName();
     public static final String INTENT_COURSE_LIST = "INTENT_COURSE_LIST";
 
-    @InjectView(R.id.course_list_fragment_expandablelistview)
-    ListView expandableListView;
+    @InjectView(R.id.course_list_fragment_listview)
+    ListView listView;
 
     private CourseListAdapter adapter;
 
@@ -56,7 +58,7 @@ public class CourseListFragment extends Fragment{
         View view = inflater.inflate(R.layout.course_list_fragment, container, false);
         ButterKnife.inject(this, view);
 
-        expandableListView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         return view;
     }
@@ -72,5 +74,8 @@ public class CourseListFragment extends Fragment{
         super.onResume();
     }
 
-
+    @OnItemClick(R.id.course_list_fragment_listview)void onCourseItemClick(int position){
+        CourseMinDTO courseMinDTO = adapter.getItem(position);
+        CourseDetailActivity.startActivity(CourseListFragment.this.getContext(), courseMinDTO);
+    }
 }
