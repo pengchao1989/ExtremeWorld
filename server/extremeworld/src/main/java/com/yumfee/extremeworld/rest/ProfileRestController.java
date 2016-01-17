@@ -10,11 +10,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.extremeworld.config.ImageHistoryType;
 import com.yumfee.extremeworld.config.MyErrorCode;
+import com.yumfee.extremeworld.entity.ImageHistory;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.UserDTO;
 import com.yumfee.extremeworld.rest.dto.request.UserAttributeRequestDTO;
+import com.yumfee.extremeworld.service.ImageHistoryService;
 import com.yumfee.extremeworld.service.UserService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -24,6 +27,9 @@ public class ProfileRestController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ImageHistoryService imageHistoryService;
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaTypes.JSON)
 	public MyResponse update(@RequestBody User userParam, UriComponentsBuilder uriBuilder){
@@ -63,7 +69,19 @@ public class ProfileRestController {
 			}else if(fieldName.equals("signature")){
 				user.setSignature(attribute.getAttributeValue());
 			}else if(fieldName.equals("bg")){
+				ImageHistory imageHistory = new ImageHistory();
+				imageHistory.setKey(attribute.getAttributeValue());
+				imageHistory.setType(ImageHistoryType.USER_BACKGROUND);
+				imageHistory.setUserId(user.getId());
+				imageHistoryService.save(imageHistory);
 				user.setBg(attribute.getAttributeValue());
+			}else if(fieldName.equals("avatar")){
+				ImageHistory imageHistory = new ImageHistory();
+				imageHistory.setKey(attribute.getAttributeValue());
+				imageHistory.setType(ImageHistoryType.USER_AVATAR);
+				imageHistory.setUserId(user.getId());
+				imageHistoryService.save(imageHistory);
+				user.setAvatar(attribute.getAttributeValue());
 			}
 		}
 

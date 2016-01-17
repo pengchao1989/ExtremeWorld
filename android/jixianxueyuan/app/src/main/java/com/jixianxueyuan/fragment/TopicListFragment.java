@@ -214,7 +214,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
 
     @OnItemClick(R.id.scroll)
     void onItemClicked(int position) {
-        if (position == 0 || position >= adapter.getCount()) {
+        if (position == 0 || position > adapter.getCount()) {
             return;
         }
         TopicDTO topicDTO = adapter.getItem(position - 1);
