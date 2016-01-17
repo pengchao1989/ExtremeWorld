@@ -9,11 +9,7 @@
     <com.jixianxueyuan.widget.MyActionBar
         android:id="@+id/profile_edit_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:my_title="@string/edit_profile"
-        app:type="submit"
-        app:action_text="@string/save"
-        />
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"

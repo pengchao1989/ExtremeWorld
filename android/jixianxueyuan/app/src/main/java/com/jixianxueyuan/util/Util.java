@@ -78,7 +78,7 @@ public class Util {
     {
         //Long timeMillis =  System.currentTimeMillis();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_");
 
         Date now = new Date();
         return sdf.format(now) + getShortUuid();

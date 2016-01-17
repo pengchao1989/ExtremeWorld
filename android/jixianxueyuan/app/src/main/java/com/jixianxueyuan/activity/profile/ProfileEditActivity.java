@@ -22,13 +22,17 @@ import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.ProfileAttributeName;
+import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.Error;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.dto.request.UserAttributeRequestDTO;
 import com.jixianxueyuan.dto.request.UserUpdateRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
+import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -65,11 +69,12 @@ public class ProfileEditActivity extends BaseActivity {
     private AlertDialog progressDialog;
 
 
-    UserDTO userDTO;
-    UserUpdateRequestDTO userUpdateRequestParam;
-    String localAvatarPath;
+    private UserDTO userDTO;
+    private String localAvatarPath;
 
-    ImageLoader imageLoader;
+    private ImageLoader imageLoader;
+
+    private QiniuSingleImageUpload qiniuSingleImageUpload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +84,6 @@ public class ProfileEditActivity extends BaseActivity {
         ButterKnife.inject(this);
 
         userDTO = MyApplication.getContext().getMine().getUserInfo();
-        userUpdateRequestParam = new UserUpdateRequestDTO();
-        userUpdateRequestParam.setId(userDTO.getId());
-        userUpdateRequestParam.setAvatar(userDTO.getAvatar());
-        userUpdateRequestParam.setName(userDTO.getName());
-        userUpdateRequestParam.setGender(userDTO.getGender());
-        userUpdateRequestParam.setSignature(userDTO.getSignature());
-
 
 
         initView();
@@ -106,78 +104,73 @@ public class ProfileEditActivity extends BaseActivity {
             genderTextView.setText(getString(R.string.unknown));
         }
 
-        myActionBar.setActionOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submit();
-            }
-        });
     }
 
-    private void submit(){
-        buildParam();
-
-        if(checkParam()){
-
-            requestSaveProfile();
-        }
-    }
-
-    private boolean checkParam(){
-
-        String error = "";
-        if(!Verification.checkNickName(userUpdateRequestParam.getName(),error)){
-            Toast.makeText(ProfileEditActivity.this, error, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
-    }
-
-    private void buildParam(){
-        userUpdateRequestParam.setName(nickNameEditText.getText().toString());
-        userUpdateRequestParam.setSignature(signatureTextView.getText().toString());
-    }
-
-    private void requestSaveProfile(){
+    private void uploadUserAvatar(){
 
         progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
         progressDialog.show();
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.profile_update();
+        if(qiniuSingleImageUpload == null){
+            qiniuSingleImageUpload = new QiniuSingleImageUpload(this);
+        }
+        qiniuSingleImageUpload.upload(localAvatarPath, UploadPrefixName.AVATAR, new QiniuSingleImageUploadListener() {
+            @Override
+            public void onUploading(double percent) {
 
-        MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.POST, url, UserDTO.class, userUpdateRequestParam,
+            }
+
+            @Override
+            public void onUploadComplete(String url) {
+                progressDialog.dismiss();
+                //更新后台信息
+                requestUpdateUserAvatar(url);
+            }
+
+            @Override
+            public void onError(String error) {
+                progressDialog.dismiss();
+                Toast.makeText(ProfileEditActivity.this, R.string.err, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void requestUpdateUserAvatar(String imageUrl){
+
+        String url = ServerMethod.profile_update_attribute();
+
+        UserAttributeRequestDTO userAttributeRequestDTO = new UserAttributeRequestDTO();
+        userAttributeRequestDTO.setAttributeName(ProfileAttributeName.AVATAR);
+        userAttributeRequestDTO.setAttributeValue(imageUrl);
+
+        MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.POST, url, UserDTO.class, userAttributeRequestDTO,
                 new Response.Listener<MyResponse<UserDTO>>() {
                     @Override
                     public void onResponse(MyResponse<UserDTO> response) {
-
                         progressDialog.dismiss();
+                        if(response.getStatus() == MyResponse.status_ok){
+                            MyApplication.getContext().getMine().setUserInfo(response.getContent());
+                            MyApplication.getContext().getMine().WriteSerializationToLocal(ProfileEditActivity.this);
 
-                        if (response.getStatus() == MyResponse.status_ok){
-                            UserDTO newUserDTO = response.getContent();
-                            Mine mine = MyApplication.getContext().getMine();
-                            mine.setUserInfo(newUserDTO);
-                            mine.WriteSerializationToLocal(ProfileEditActivity.this);
-                            finish();
-                            Toast.makeText(ProfileEditActivity.this, getString(R.string.success),Toast.LENGTH_SHORT).show();
+                            //显示图片
+                            ImageLoader imageLoader = ImageLoader.getInstance();
+                            imageLoader.displayImage("file://" + localAvatarPath, avatarImageView, ImageLoaderConfig.getAvatarOption(ProfileEditActivity.this));
 
-                        }else if(response.getStatus() == MyResponse.status_error){
-                            Error error = response.getError();
-                            MyErrorHelper.showErrorToast(ProfileEditActivity.this, error);
+                            Toast.makeText(ProfileEditActivity.this, R.string.success, Toast.LENGTH_SHORT).show();
+                        }else {
+                            MyErrorHelper.showErrorToast(ProfileEditActivity.this, response.getError());
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                MyVolleyErrorHelper.showError(ProfileEditActivity.this,error);
+                MyVolleyErrorHelper.showError(ProfileEditActivity.this, error);
             }
         });
 
-        queue.add(myRequest);
+        MyApplication.getContext().getRequestQueue().add(myRequest);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -203,8 +196,7 @@ public class ProfileEditActivity extends BaseActivity {
                     String filePath = data.getStringExtra("filePath");
                     if(filePath != null){
                         localAvatarPath = filePath;
-                        ImageLoaderConfig.getAvatarOption(this);
-                        imageLoader.displayImage("file://" + filePath, avatarImageView, ImageLoaderConfig.getAvatarOption(this));
+                        uploadUserAvatar();
                     }
                 }
                 break;

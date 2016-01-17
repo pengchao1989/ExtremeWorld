@@ -6,4 +6,5 @@ package com.jixianxueyuan.config;
 public class ProfileAttributeName {
     public static final String SIGNATURE = "signature";
     public static final String BACKGROUND = "bg";
+    public static final String AVATAR = "avatar";
 }
