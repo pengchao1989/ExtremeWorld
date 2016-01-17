@@ -12,6 +12,7 @@ public class UserUpdateRequestDTO implements Serializable{
     private String gender;
     private String signature;
     private String birth;
+    private String bg;
     public Long getId()
     {
         return id;
@@ -59,5 +60,13 @@ public class UserUpdateRequestDTO implements Serializable{
 
     public void setBirth(String birth) {
         this.birth = birth;
+    }
+
+    public String getBg() {
+        return bg;
+    }
+
+    public void setBg(String bg) {
+        this.bg = bg;
     }
 }

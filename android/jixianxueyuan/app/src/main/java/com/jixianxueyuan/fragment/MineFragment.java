@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CropBgActivity;
@@ -22,9 +25,17 @@ import com.jixianxueyuan.activity.SettingActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.ProfileAttributeName;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.UploadPrefixName;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.dto.request.UserAttributeRequestDTO;
+import com.jixianxueyuan.http.MyRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
+import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
@@ -88,7 +99,7 @@ public class MineFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.mine_fragment, container, false);
 
-        ButterKnife.inject(this,view);
+        ButterKnife.inject(this, view);
 
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView, ImageLoaderConfig.getAvatarOption(this.getActivity()));
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg() + QiniuImageStyle.COVER, headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
@@ -164,6 +175,7 @@ public class MineFragment extends Fragment {
 
         return true;
     }
+
     @OnClick(R.id.mine_fragment_share)void onShareClick(){
         String inviteMessage = mine.getUserInfo().getName()
                 + "邀请你加入"
@@ -176,8 +188,6 @@ public class MineFragment extends Fragment {
 
     }
 
-
-
     private void showImageSelectActivity(){
         Intent intent = new Intent(MineFragment.this.getActivity(), MultiImageSelectorActivity.class);
         // whether show camera
@@ -187,42 +197,6 @@ public class MineFragment extends Fragment {
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
 
         startActivityForResult(intent, REQUEST_IMAGE_CODE);
-    }
-
-    private void uploadUserBg(){
-
-        progressDialog = new SpotsDialog(MineFragment.this.getContext(),R.style.ProgressDialogUpdating);
-        progressDialog.show();
-
-        if(qiniuSingleImageUpload == null){
-            qiniuSingleImageUpload = new QiniuSingleImageUpload(MineFragment.this.getContext());
-        }
-        qiniuSingleImageUpload.modify(bgImageFilePath, UploadPrefixName.COVER, String.valueOf(mine.getUserInfo().getId()), new QiniuSingleImageUploadListener() {
-            @Override
-            public void onUploading(double percent) {
-
-            }
-
-            @Override
-            public void onUploadComplete(String url) {
-                progressDialog.dismiss();
-                //清除该图片的本地缓存
-                ImageLoader imageLoader = ImageLoader.getInstance();
-                DiskCacheUtils.removeFromCache(url, imageLoader.getDiskCache());
-                MemoryCacheUtils.removeFromCache(url, imageLoader.getMemoryCache());
-                //显示图片
-                imageLoader.displayImage("file://" + bgImageFilePath,headImageView,ImageLoaderConfig.getHeadOption(MineFragment.this.getContext()) );
-
-
-                Toast.makeText(MineFragment.this.getContext(), R.string.success, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(String error) {
-                progressDialog.dismiss();
-                Toast.makeText(MineFragment.this.getContext(), R.string.err, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -255,4 +229,71 @@ public class MineFragment extends Fragment {
                 break;
         }
     }
+
+    private void uploadUserBg(){
+
+        progressDialog = new SpotsDialog(MineFragment.this.getContext(),R.style.ProgressDialogUpdating);
+        progressDialog.show();
+
+        if(qiniuSingleImageUpload == null){
+            qiniuSingleImageUpload = new QiniuSingleImageUpload(MineFragment.this.getContext());
+        }
+        qiniuSingleImageUpload.upload(bgImageFilePath, UploadPrefixName.COVER, new QiniuSingleImageUploadListener() {
+            @Override
+            public void onUploading(double percent) {
+
+            }
+
+            @Override
+            public void onUploadComplete(String url) {
+                progressDialog.dismiss();
+                //更新后台信息
+                requestUpdateUserBackground(url);
+            }
+
+            @Override
+            public void onError(String error) {
+                progressDialog.dismiss();
+                Toast.makeText(MineFragment.this.getContext(), R.string.err, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void requestUpdateUserBackground(String imageUrl){
+
+        String url = ServerMethod.profile_update_attribute();
+
+        UserAttributeRequestDTO userAttributeRequestDTO = new UserAttributeRequestDTO();
+        userAttributeRequestDTO.setAttributeName(ProfileAttributeName.BACKGROUND);
+        userAttributeRequestDTO.setAttributeValue(imageUrl);
+
+        MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.POST, url, UserDTO.class, userAttributeRequestDTO,
+                new Response.Listener<MyResponse<UserDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<UserDTO> response) {
+                        progressDialog.dismiss();
+                        if(response.getStatus() == MyResponse.status_ok){
+                            MyApplication.getContext().getMine().setUserInfo(response.getContent());
+                            MyApplication.getContext().getMine().WriteSerializationToLocal(MineFragment.this.getContext());
+
+                            //显示图片
+                            ImageLoader imageLoader = ImageLoader.getInstance();
+                            imageLoader.displayImage("file://" + bgImageFilePath, headImageView, ImageLoaderConfig.getHeadOption(MineFragment.this.getContext()));
+
+                            Toast.makeText(MineFragment.this.getContext(), R.string.success, Toast.LENGTH_SHORT).show();
+                        }else {
+                            MyErrorHelper.showErrorToast(MineFragment.this.getContext(), response.getError());
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                MyVolleyErrorHelper.showError(MineFragment.this.getContext(), error);
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
 }

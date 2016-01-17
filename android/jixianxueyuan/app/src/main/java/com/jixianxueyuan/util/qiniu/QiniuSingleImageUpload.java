@@ -113,7 +113,7 @@ public class QiniuSingleImageUpload {
         if(StringUtils.isBlank(mPrefixKey)){
             mPrefixKey = "";
         }
-        if(TextUtils.isEmpty(mFileKey)){
+        if(!isModify){
             mFileKey = Util.getDateKey();
         }
 
@@ -128,6 +128,7 @@ public class QiniuSingleImageUpload {
                                 listener.onUploadComplete(StaticResourceConfig.IMG_DOMAIN+key);
                             }
                         }else {
+                            MyLog.e("QiniuSingleImageUpload", info.error);
                             listener.onError(info.error);
                         }
 

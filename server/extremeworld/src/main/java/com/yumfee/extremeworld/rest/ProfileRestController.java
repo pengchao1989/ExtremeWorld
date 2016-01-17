@@ -70,15 +70,15 @@ public class ProfileRestController {
 				user.setSignature(attribute.getAttributeValue());
 			}else if(fieldName.equals("bg")){
 				ImageHistory imageHistory = new ImageHistory();
-				imageHistory.setKey(attribute.getAttributeValue());
-				imageHistory.setType(ImageHistoryType.USER_BACKGROUND);
+				imageHistory.setFileKey(attribute.getAttributeValue());
+				imageHistory.setImageType(ImageHistoryType.USER_BACKGROUND);
 				imageHistory.setUserId(user.getId());
 				imageHistoryService.save(imageHistory);
 				user.setBg(attribute.getAttributeValue());
 			}else if(fieldName.equals("avatar")){
 				ImageHistory imageHistory = new ImageHistory();
-				imageHistory.setKey(attribute.getAttributeValue());
-				imageHistory.setType(ImageHistoryType.USER_AVATAR);
+				imageHistory.setFileKey(attribute.getAttributeValue());
+				imageHistory.setImageType(ImageHistoryType.USER_AVATAR);
 				imageHistory.setUserId(user.getId());
 				imageHistoryService.save(imageHistory);
 				user.setAvatar(attribute.getAttributeValue());

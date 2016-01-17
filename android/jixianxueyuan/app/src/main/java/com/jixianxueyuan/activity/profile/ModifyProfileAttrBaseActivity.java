@@ -30,8 +30,6 @@ public class ModifyProfileAttrBaseActivity extends BaseActivity {
     public static final String INTENT_TITLE = "INTENT_TITLE";
     public static final String INTENT_HINT = "INTENT_HINT";
 
-    public static final String ATTR_SIGNATURE = "signature";
-
     protected String attributeKey;
     protected String attributeValue;
     protected String title;

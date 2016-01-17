@@ -6,24 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_hobby")
+@Table(name = "tb_image_history")
 public class ImageHistory extends IdEntity{
-	private String key;
-	private String type;
+	private String fileKey;
+	private String imageType;
 	private long userId;
 	private Date createTime;
 	
-	public String getKey() {
-		return key;
+	public String getFileKey() {
+		return fileKey;
 	}
-	public void setKey(String key) {
-		this.key = key;
+	public void setFileKey(String fileKey) {
+		this.fileKey = fileKey;
 	}
-	public String getType() {
-		return type;
+	public String getImageType() {
+		return imageType;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
 	}
 	public long getUserId() {
 		return userId;

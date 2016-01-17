@@ -21,6 +21,7 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.ProfileAttributeName;
 import com.jixianxueyuan.dto.Error;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
@@ -235,7 +236,7 @@ public class ProfileEditActivity extends BaseActivity {
         Intent intent = new Intent(this, ModifyProfileAttrEditTextActivity.class);
         intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_TITLE, getString(R.string.signature));
         intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_HINT, getString(R.string.please_enter));
-        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_KEY, ModifyProfileAttrEditTextActivity.ATTR_SIGNATURE);
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_KEY, ProfileAttributeName.SIGNATURE);
         intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_VALUE, userDTO.getSignature());
         startActivityForResult(intent, REQUEST_CODE_SIGNATURE);
     }
