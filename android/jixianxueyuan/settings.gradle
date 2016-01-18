@@ -1,2 +1,2 @@
-include ':app', ':emoji', ':multi-image-selector', ':OneSDK',':qupaisdk', ':daogenerator'
+include ':app', ':emoji', ':multi-image-selector', ':OneSDK', ':qupaisdk', ':daogenerator', ':wkvideoplayer'
 include ':leCloudSDK_Release'

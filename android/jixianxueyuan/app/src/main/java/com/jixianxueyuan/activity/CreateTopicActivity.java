@@ -25,8 +25,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.duanqu.qupai.sdk.android.QupaiService;
-import com.duanqu.qupai.sdk.callback.SaveFileCallback;
+/*import com.duanqu.qupai.sdk.android.QupaiService;
+import com.duanqu.qupai.sdk.callback.SaveFileCallback;*/
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CreateActivityImageListAdapter;
 import com.jixianxueyuan.adapter.TaxonomySpinnerAdapter;
@@ -205,7 +205,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                     break;
                 case TopicType.S_VIDEO:
                     myActionBar.setTitle("发布短视频");
-                    startVideoRecord();
+                    //startVideoRecord();
                     break;
                 case TopicType.NEWS:
                     myActionBar.setTitle("发布新闻");
@@ -503,11 +503,8 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
     }
 
-    public void onVideo() {
-        startVideoRecord();
-    }
 
-    private void startVideoRecord(){
+/*    private void startVideoRecord(){
         QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
 
         qupaiService.initRecord(VideoRecordConfig.DEFAULT_DURATION_LIMIT, VideoRecordConfig.DEFAULT_BITRATE, null, true,null,2);
@@ -519,7 +516,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                         Toast.makeText(CreateTopicActivity.this, "onFailure:"+ s + "CODE"+ i, Toast.LENGTH_LONG).show();
                     }
                 });
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -538,7 +535,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                 }
                 break;
             case REQUEST_VIDEO_CODE:
-                if (resultCode == RESULT_OK) {
+                /*if (resultCode == RESULT_OK) {
                     QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
                     videoPath = VideoRecordConfig.VIDEOPATH(this);
                     thumblePath = VideoRecordConfig.THUMBPATH(this);
@@ -559,7 +556,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                         }
 
                     });
-                }
+                }*/
                 break;
         }
     }

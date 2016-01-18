@@ -53,7 +53,7 @@ public class MyApplication extends Application {
         initImageLoader();
 
         TradeConfigs.defaultTaokePid="mm_111250070_0_0";
-        AlibabaSDK.turnOnDebug();
+        //AlibabaSDK.turnOnDebug();
         AlibabaSDK.asyncInit(this, new InitResultCallback() {
 
             @Override
