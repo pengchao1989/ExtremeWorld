@@ -86,7 +86,6 @@
         <activity android:name=".activity.DiscussionDetailActivity"/>
         <activity android:name=".activity.CourseHomeActivity"/>
         <activity android:name=".activity.CreateTopicActivity"/>
-        <activity android:name=".activity.ShortVideoDetailActivity"/>
         <activity android:name=".activity.CreateShortVideoActivity"/>
         <activity android:name=".activity.TopicTaxonomyHomeActivity"/>
         <activity android:name=".activity.CourseDetailActivity"/>
@@ -107,7 +106,6 @@
         <activity android:name=".activity.SiteListActivity"/>
         <activity android:name=".activity.SponsorshipActivity"/>
         <activity android:name=".activity.WebActivity"/>
-        <activity android:name=".activity.DanmuDetailActivity"/>
         <activity
             android:configChanges="orientation|screenSize"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
