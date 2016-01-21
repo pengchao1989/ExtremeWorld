@@ -168,7 +168,7 @@ public class CourseDetailActivity extends BaseActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = ServerMethod.course_explain() + courseMinDTO.getId();
+        String url = ServerMethod.topic() + "?type=course&magicType=sb&courseId=" + courseMinDTO.getId();
 
         MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest<TopicDTO>(Request.Method.GET, url, TopicDTO.class,
                 new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {

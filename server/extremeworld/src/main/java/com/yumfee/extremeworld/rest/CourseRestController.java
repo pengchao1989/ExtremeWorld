@@ -46,8 +46,8 @@ public class CourseRestController {
 	public MyResponse explainList(@PathVariable("id") Long id,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
-			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
-	{
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
+		
 		Page<Topic> explains = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicExplain, pageNumber, pageSize, sortType);
 		
 		MyPage<TopicDTO,Topic>  topicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, explains);

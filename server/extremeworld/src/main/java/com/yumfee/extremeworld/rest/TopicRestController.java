@@ -52,6 +52,8 @@ public class TopicRestController
 	public  MyResponse list(
 			@PathVariable String hobby,
 			@RequestParam (value = "type", defaultValue = "all") String type,
+			@RequestParam (value = "magicType", defaultValue = "") String magicType,
+			@RequestParam (value = "courseId", defaultValue = "0") long courseId,
 			@RequestParam(value = "taxonomyId", defaultValue = "0") Long taxonomyId,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
@@ -77,7 +79,9 @@ public class TopicRestController
 				topicPageSource = topicService.getTopicByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId, pageNumber, pageSize, sortType);
 			}
 			break;
-		
+		case TopicType.COURSE:
+			topicPageSource = topicService.getAllTopicByCourseAndMagicType(courseId, magicType, pageNumber, pageSize, sortType);
+			break;
 		}
 		
 		Long userId = getCurrentUserId();

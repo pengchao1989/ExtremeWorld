@@ -7,6 +7,7 @@ package com.jixianxueyuan.server;
 public class ServerMethod {
 
     static public final int STATUS_OK = 1;
+    static public final int STATUS_ERROR = -1;
     static public final int STATUS_NO_CONTENT = 204;
 
     //static final String server_url = "http://dev.jixianxueyuan.com/";

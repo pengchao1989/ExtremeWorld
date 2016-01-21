@@ -22,9 +22,8 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.UpdateManager;
 import com.jixianxueyuan.config.HobbyType;
-import com.jixianxueyuan.dto.HandshakeDTO;
-import com.jixianxueyuan.dto.MyResponse;
-import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.config.MyErrorCode;
+import com.jixianxueyuan.dto.*;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.dto.request.HandshakeRequestDTO;
@@ -130,7 +129,7 @@ public class MainActivity extends Activity {
     private void initView()
     {
         String hobby = Util.getApplicationMetaString(this, "HOBBY");
-        String umengKey = Util.getApplicationMetaString(this,"UMENG_APPKEY");
+        String umengKey = Util.getApplicationMetaString(this, "UMENG_APPKEY");
         MyLog.e("MainActivity", "UMENT_KEY=" + umengKey);
 /*        switch (hobby){
             case HobbyType.SKATEBOARD:
@@ -149,8 +148,8 @@ public class MainActivity extends Activity {
     @OnClick(R.id.activity_qq_login)
     void qqLogin() {
 
-        //requestQQOpenId();
-        requestLogin();
+        requestQQOpenId();
+        //requestLogin();
     }
 
     private void requestHandshake() {
@@ -190,8 +189,8 @@ public class MainActivity extends Activity {
     }
 
     private void requestLogin() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + "C7BBA2F103FDEB1248871654D6255B52"/*qqOpenInfo.getOpenid()*/;
+
+        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + qqOpenInfo.getOpenid();
 
         MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
                 new Response.Listener<MyResponse<UserDTO>>() {
@@ -216,12 +215,15 @@ public class MainActivity extends Activity {
                             Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
                             startActivity(intent);
                             finish();
-                        } else if (response.getStatus() == ServerMethod.STATUS_NO_CONTENT) {
+                        } else if (response.getStatus() == ServerMethod.STATUS_ERROR) {
+                            if(response.getError().getErrorCode() == MyErrorCode.NO_USER.getErrorCode()){
+                                MyLog.d("MainActivity", "no user");
+                                //请求QQ方userInfo
+                                requestQQuserInfo();
+                            }
 
 
-                            MyLog.d("MainActivity", "STATUS_NO_CONTENT");
-                            //请求QQ方userInfo
-                            requestQQuserInfo();
+
                         }
                         //requestQQuserInfo();
 
@@ -235,7 +237,7 @@ public class MainActivity extends Activity {
                 }
         );
 
-        queue.add(myRequest);
+        MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
     private void requestQQOpenId(){
