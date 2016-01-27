@@ -114,4 +114,5 @@ dependencies {
     compile files('libs/renderscript-v8.jar')
     compile 'com.android.support:multidex:1.0.0'
     compile project(':OneSDK')
+    compile project(':wkvideoplayer')
 }

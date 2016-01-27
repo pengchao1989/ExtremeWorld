@@ -213,7 +213,7 @@ public class SuperVideoPlayer extends RelativeLayout {
             stopHideTimer(true);
             mMediaController.playFinish(mSuperVideoView.getDuration());
             mVideoPlayCallback.onPlayFinish();
-            Toast.makeText(mContext, "视频播放完成", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "视频播放完成", Toast.LENGTH_SHORT).show();
         }
     };
 

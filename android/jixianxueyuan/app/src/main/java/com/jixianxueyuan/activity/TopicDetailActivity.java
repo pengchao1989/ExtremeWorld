@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.android.tedcoder.wkvideoplayer.model.Video;
+import com.android.tedcoder.wkvideoplayer.view.MediaController;
+import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -299,7 +303,16 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         {
             if(topicDTO.getVideoDetail().getVideoSource() != null)
             {
-                initVideo();
+                headViewHolder.videoLayout.setVisibility(View.VISIBLE);
+                ImageLoader.getInstance().displayImage(topicDTO.getVideoDetail().getThumbnail() + "!detail", headViewHolder.coverImageView, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+
+
+                headViewHolder.playButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initVideo();
+                    }
+                });
             }
         }
 
@@ -315,7 +328,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private void initVideo()
     {
-        headViewHolder.videoLayout.setVisibility(View.VISIBLE);
+        headViewHolder.playButton.setVisibility(View.GONE);
+        headViewHolder.videoView.setVideoPlayCallback(mVideoPlayCallback);
 
         openDiskLruCache();
 
@@ -323,14 +337,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
 
         try {
+
             DiskLruCache.Snapshot snapShot = mDiskLruCache.get(key);
 
-            if(snapShot != null)
-            {
+            if(snapShot != null) {
                 playVideo(DiskCachePath.getDiskCacheDir(this, "short_video").getPath() +"/" + key + ".0" );
             }
-            else
-            {
+            else {
                 headViewHolder.roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
                 downloadVideoFile();
             }
@@ -339,6 +352,33 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             e.printStackTrace();
         }
     }
+
+    private SuperVideoPlayer.VideoPlayCallbackImpl mVideoPlayCallback = new SuperVideoPlayer.VideoPlayCallbackImpl() {
+        @Override
+        public void onCloseVideo() {
+            headViewHolder.videoView.close();
+            headViewHolder.playButton.setVisibility(View.VISIBLE);
+            headViewHolder.coverImageView.setVisibility(View.VISIBLE);
+            headViewHolder.videoView.setVisibility(View.GONE);
+            resetPageToPortrait();
+        }
+
+        @Override
+        public void onSwitchPageType() {
+            if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                headViewHolder.videoView.setPageType(MediaController.PageType.SHRINK);
+            } else {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                headViewHolder.videoView.setPageType(MediaController.PageType.EXPAND);
+            }
+        }
+
+        @Override
+        public void onPlayFinish() {
+
+        }
+    };
 
     private void doHideFootView()
     {
@@ -550,7 +590,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
-        @InjectView(R.id.videoview)VideoView videoView;
+        @InjectView(R.id.videoview)SuperVideoPlayer videoView;
+        @InjectView(R.id.topic_detail_head_view_video_cover_image)
+        ImageView coverImageView;
+        @InjectView(R.id.topic_detail_head_view_video_play_btn)
+        ImageView playButton;
         @InjectView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;
         @InjectView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
@@ -573,9 +617,23 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     {
         MyLog.d(tag, "videoPath=" + path);
 
-        headViewHolder.videoView.setVideoPath(path);
+        headViewHolder.coverImageView.setVisibility(View.GONE);
+        headViewHolder.videoView.setVisibility(View.VISIBLE);
+
+        Video video = new Video();
+
+        headViewHolder.videoView.loadLocalVideo(path);
         headViewHolder.videoView.requestFocus();
-        headViewHolder.videoView.start();
+    }
+
+    /***
+     * 恢复屏幕至竖屏
+     */
+    private void resetPageToPortrait() {
+        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            headViewHolder.videoView.setPageType(MediaController.PageType.SHRINK);
+        }
     }
 
 
