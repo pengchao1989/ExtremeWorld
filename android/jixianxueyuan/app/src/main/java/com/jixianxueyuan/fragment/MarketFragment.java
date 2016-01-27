@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 
 import com.alibaba.sdk.android.AlibabaSDK;
@@ -32,6 +33,7 @@ import com.jixianxueyuan.dto.biz.ShopDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.widget.AutoLoadMoreView;
 import com.jixianxueyuan.widget.GridViewWithHeaderAndFooter;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
 import com.umeng.analytics.MobclickAgent;
@@ -51,6 +53,12 @@ public class MarketFragment extends Fragment {
 
     private CategoryGridAdapter categoryGridAdapter;
     private ShopGridAdapter shopGridAdapter;
+
+    NoScorllBarGridView categoryGridView;
+
+    private AutoLoadMoreView autoLoadMoreView;
+    private int currentPage = 0;
+    private int totalPage = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -142,9 +150,32 @@ public class MarketFragment extends Fragment {
             }
         });
 
+        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    //滚动到底部
+                    if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                        getNextPage();
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+
 
         gridView.addHeaderView(headerView);
+        initFooterView();
 
+    }
+
+    private void initFooterView(){
+        autoLoadMoreView = new AutoLoadMoreView(this.getActivity());
+        gridView.addFooterView(autoLoadMoreView);
     }
 
     private void requestCategoryList(){
@@ -169,14 +200,34 @@ public class MarketFragment extends Fragment {
         MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
+
+    private void getNextPage(){
+        if (currentPage < totalPage) {
+            requestShopList();
+        }
+    }
+
+    private void doHideFootView() {
+        if (totalPage > 0 && currentPage >= totalPage) {
+            autoLoadMoreView.setOver();
+        }else {
+            autoLoadMoreView.reset();
+        }
+    }
+
     private void requestShopList(){
 
-        String url = ServerMethod.biz_shop();
+        String url = ServerMethod.biz_shop() + "?page.size=14&page=" + (currentPage + 1);
         MyPageRequest<ShopDTO> myPageRequest = new MyPageRequest<ShopDTO>(Request.Method.GET, url, ShopDTO.class,
                 new Response.Listener<MyResponse<MyPage<ShopDTO>>>() {
                     @Override
                     public void onResponse(MyResponse<MyPage<ShopDTO>> response) {
-                        shopGridAdapter.setShopDTOList(response.getContent().getContents());
+
+                        MyPage page = response.getContent();
+                        shopGridAdapter.addShopDTOLIst(page.getContents());
+                        totalPage = page.getTotalPages();
+                        currentPage = page.getCurPage() + 1;
+                        doHideFootView();
                     }
                 }, new Response.ErrorListener() {
             @Override

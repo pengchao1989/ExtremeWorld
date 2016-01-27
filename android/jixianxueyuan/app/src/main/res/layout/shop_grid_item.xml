@@ -26,6 +26,7 @@
             <TextView
                 android:id="@+id/shop_gird_item_signature"
                 android:textSize="12sp"
+                android:maxLines="2"
                 style="@style/TransparentLayoutText"/>
 
         </LinearLayout>

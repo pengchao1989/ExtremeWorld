@@ -38,6 +38,11 @@ public class ShopGridAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public void addShopDTOLIst(List<ShopDTO> shopDTOs){
+        shopDTOList.addAll(shopDTOs);
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return shopDTOList.size();

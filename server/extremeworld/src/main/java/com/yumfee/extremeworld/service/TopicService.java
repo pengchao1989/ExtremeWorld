@@ -221,6 +221,8 @@ public class TopicService
 			sort = new Sort(Direction.DESC, "id");
 		} else if ("title".equals(sortType)) {
 			sort = new Sort(Direction.ASC, "title");
+		}else if("agree".equals(sortType)){
+			sort = new Sort(Direction.DESC, "agreeCount");
 		}
 
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
