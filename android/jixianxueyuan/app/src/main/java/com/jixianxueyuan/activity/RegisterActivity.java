@@ -3,6 +3,7 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
@@ -41,13 +42,21 @@ import com.jixianxueyuan.dto.request.UserRegisterRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
+import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -62,6 +71,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
  */
 public class RegisterActivity extends Activity {
 
+    private static final String tag = "RegisterActivity";
     public static final String REGISTER_TYPE = "registerType";
     public static final String REGISTER_TYPE_QQ = "qq";
     public static final String REGISTER_TYPE_PHONE = "phone";
@@ -70,7 +80,6 @@ public class RegisterActivity extends Activity {
     public static final int CROP_IMAGE_CODE = 2;
 
     @InjectView(R.id.register_avatar)ImageView avatarImageView;
-    @InjectView(R.id.register_avatar_random)Button randomButton;
     @InjectView(R.id.register_avatar_select)Button selectButton;
     @InjectView(R.id.register_nick_name)EditText nickNameEditText;
     @InjectView(R.id.register_birth)EditText birthEditText;
@@ -126,7 +135,8 @@ public class RegisterActivity extends Activity {
         imageLoader = ImageLoader.getInstance();
 
         initView();
-        requestReferenceAvatar();
+
+        //requestReferenceAvatar();
     }
 
     private void initView(){
@@ -146,6 +156,7 @@ public class RegisterActivity extends Activity {
 
                 invitationLayout.setVisibility(View.VISIBLE);
                 nickNameEditText.setText(qqUserInfo.getNickname());
+                downLoadQQAvatar();
             }
         }else if(registerType.equals(REGISTER_TYPE_PHONE)){
             passwordLayout.setVisibility(View.VISIBLE);
@@ -312,31 +323,6 @@ public class RegisterActivity extends Activity {
         queue.add(myRequest);
     }
 
-    private void requestReferenceAvatar(){
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.reference_avatar();
-
-        MyRequest<ReferenceAvatarDTO> myRequest = new MyRequest<ReferenceAvatarDTO>(Request.Method.GET, url, ReferenceAvatarDTO.class,
-                new Response.Listener<MyResponse<ReferenceAvatarDTO>>() {
-                    @Override
-                    public void onResponse(MyResponse<ReferenceAvatarDTO> response) {
-                        if(response.getStatus() == MyResponse.status_ok){
-                            referenceAvatarDTO = response.getContent();
-                            userRequestParam.setAvatar(referenceAvatarDTO.getUrl());
-                            isUseUploadAvatar = false;
-                            refreshAvatarView();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        queue.add(myRequest);
-    }
-
     private void requestInvite(){
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.invite() + "?phone=" + phoneNumber;
@@ -368,6 +354,56 @@ public class RegisterActivity extends Activity {
         queue.add(myRequest);
     }
 
+    private void downLoadQQAvatar(){
+        if(qqUserInfo != null){
+            final ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.loadImage(qqUserInfo.getFigureurl_qq_2(), new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String s, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+                }
+
+                @Override
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+
+                    //show
+                    avatarImageView.setImageBitmap(bitmap);
+
+                    isUseUploadAvatar = true;
+
+                    //save
+                    File f = new File(DiskCachePath.getDiskCacheDir(RegisterActivity.this, "avatarCache"), "qq_avatar");
+                    localAvatarPath = DiskCachePath.getDiskCacheDir(RegisterActivity.this, "avatarCache") + "/qq_avatar";
+                    if (f.exists()) {
+                        f.delete();
+                    }
+                    try {
+                        FileOutputStream out = new FileOutputStream(f);
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                        out.flush();
+                        out.close();
+                        MyLog.i("Regis", "已经保存");
+                    } catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onLoadingCancelled(String s, View view) {
+
+                }
+            });
+        }
+    }
     private void uploadAvatar(){
         QiniuSingleImageUpload singleImageUpload = new QiniuSingleImageUpload(this);
         singleImageUpload.upload(localAvatarPath, UploadPrefixName.AVATAR, new QiniuSingleImageUploadListener() {
@@ -429,9 +465,6 @@ public class RegisterActivity extends Activity {
         submit();
     }
 
-    @OnClick(R.id.register_avatar_random)void onRandomClick(){
-        requestReferenceAvatar();
-    }
     @OnClick(R.id.register_avatar_select)void onSelectClick(){
         Intent intent = new Intent(this, MultiImageSelectorActivity.class);
 

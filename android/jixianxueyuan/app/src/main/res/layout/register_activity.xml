@@ -31,32 +31,13 @@
                 android:layout_height="@dimen/large_avatar_size"
                 />
 
-            <LinearLayout
+            <Button
+                android:id="@+id/register_avatar_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-
-                <Button
-                    android:id="@+id/register_avatar_random"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/random"
-                    style="@style/TransparentButtonSmall"
-                    />
-                <View
-                    android:layout_width="30dp"
-                    android:layout_height="1dp"/>
-                <Button
-                    android:id="@+id/register_avatar_select"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select"
-                    style="@style/TransparentButtonSmall"
-                    />
-
-            </LinearLayout>
-
+                android:text="@string/select"
+                style="@style/TransparentButtonSmall"
+                />
 
         </LinearLayout>
 
@@ -164,7 +145,7 @@
                             android:id="@+id/register_gender_male"
                             android:checked="true"
                             android:layout_gravity="center_horizontal"
-                            android:textColor="@color/white"
+                            android:textColor="#03A9F4"
                             android:textSize="20sp"
                             android:button="@drawable/check_box_bg"
                             />
@@ -175,7 +156,7 @@
                             android:text="@string/female"
                             android:id="@+id/register_gender_female"
                             android:layout_gravity="center_horizontal"
-                            android:textColor="@color/white"
+                            android:textColor="#FF4081"
                             android:textSize="20sp"
                             android:layout_marginLeft="20dp"
                             android:button="@drawable/check_box_bg"/>
