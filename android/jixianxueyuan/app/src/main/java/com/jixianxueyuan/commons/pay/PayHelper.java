@@ -217,7 +217,8 @@ public class PayHelper {
         /*"http://notify.msp.hk/notify.htm"*/
 
         // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + "http://dev.jixianxueyuan.com/api/alipay/notify"
+        //TODO 将notify_url进行配置
+        orderInfo += "&notify_url=" + "\"" + "http://www.jixianxueyuan.com/api/alipay/notify"
                 + "\"";
 
         // 服务接口名称， 固定值

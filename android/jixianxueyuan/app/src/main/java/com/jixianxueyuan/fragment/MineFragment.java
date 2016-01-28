@@ -177,10 +177,11 @@ public class MineFragment extends Fragment {
     }
 
     @OnClick(R.id.mine_fragment_share)void onShareClick(){
+        //TODO 将url进行配置
         String inviteMessage = mine.getUserInfo().getName()
                 + "邀请你加入"
                 + Util.getApplicationMetaString(MineFragment.this.getContext(),"HOBBY")
-                + "http://dev.jixianxueyuan.com/skateboard/invite2"
+                + "http://www.jixianxueyuan.com/skateboard/invite2"
                 + "?inviteid="
                 + mine.getUserInfo().getId();
 
