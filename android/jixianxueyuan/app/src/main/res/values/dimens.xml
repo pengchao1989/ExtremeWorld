@@ -3,6 +3,7 @@
     <dimen name="margin_standard">16dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="qupai_recorder_capture_height_size">118dp</dimen>
 
     <dimen name="actionbar_height">44dp</dimen>
     <dimen name="tab_height">48dp</dimen>

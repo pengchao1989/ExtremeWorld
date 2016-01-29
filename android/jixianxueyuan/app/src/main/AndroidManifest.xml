@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jixianxueyuan" >
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.jixianxueyuan">
 
     <permission android:name="${APPLICATIONID}.permission.JPUSH_MESSAGE" android:protectionLevel="signature"/>
     <uses-permission android:name="${APPLICATIONID}.permission.JPUSH_MESSAGE"/>
@@ -61,7 +62,7 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

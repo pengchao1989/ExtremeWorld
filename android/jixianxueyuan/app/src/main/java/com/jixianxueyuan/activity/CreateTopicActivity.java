@@ -2,11 +2,13 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -18,19 +20,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.callback.FailureCallback;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-/*import com.duanqu.qupai.sdk.android.QupaiService;
-import com.duanqu.qupai.sdk.callback.SaveFileCallback;*/
+import com.duanqu.qupai.android.app.QupaiServiceImpl;
+import com.duanqu.qupai.editor.EditorResult;
+import com.duanqu.qupai.engine.session.MovieExportOptions;
+import com.duanqu.qupai.engine.session.VideoSessionCreateInfo;
+import com.duanqu.qupai.recorder.EditorCreateInfo;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CreateActivityImageListAdapter;
 import com.jixianxueyuan.adapter.TaxonomySpinnerAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.Contant;
+import com.jixianxueyuan.commons.FileUtils;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.MediaType;
@@ -49,6 +54,7 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.config.StaticResourceConfig;
+import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
@@ -125,6 +131,10 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     VideoDetailDTO videoDetailDTO;
 
     CreateActivityImageListAdapter imageListAdapter;
+
+    //video
+    private String videoUrl;
+    private final EditorCreateInfo _CreateInfo = new EditorCreateInfo();
 
     boolean isUploadedImage = false;
     boolean isUploadedVideo = false;
@@ -205,7 +215,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                     break;
                 case TopicType.S_VIDEO:
                     myActionBar.setTitle("发布短视频");
-                    //startVideoRecord();
+                    startVideoRecord();
                     break;
                 case TopicType.NEWS:
                     myActionBar.setTitle("发布新闻");
@@ -322,15 +332,15 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
             @Override
             public void onUploadComplete(LinkedHashMap<String, String> result) {
                 serverImagePathMap = result;
-                if(serverImagePathMap != null){
+                if (serverImagePathMap != null) {
                     isUploadedImage = true;
-                    if(videoPath != null && isUploadedVideo == false){
+                    if (videoPath != null && isUploadedVideo == false) {
                         submitVideo();
-                    }else {
+                    } else {
                         submitContent();
                     }
 
-                }else {
+                } else {
 
                 }
             }
@@ -504,19 +514,49 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     }
 
 
-/*    private void startVideoRecord(){
-        QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
+    private void startVideoRecord(){
+        /**
+         * 压缩参数，可以自由调节
+         */
+        MovieExportOptions movie_options = new MovieExportOptions.Builder()
+                .setVideoProfile("high")
+                .setVideoBitrate(Contant.DEFAULT_BITRATE)
+                .setVideoPreset(Contant.DEFAULT_VIDEO_Preset).setVideoRateCRF(Contant.DEFAULT_VIDEO_RATE_CRF)
+                .setOutputVideoLevel(Contant.DEFAULT_VIDEO_LEVEL)
+                .setOutputVideoTune(Contant.DEFAULT_VIDEO_TUNE)
+                .configureMuxer(Contant.DEFAULT_VIDEO_MOV_FLAGS_KEY, Contant.DEFAULT_VIDEO_MOV_FLAGS_VALUE)
+                .build();
 
-        qupaiService.initRecord(VideoRecordConfig.DEFAULT_DURATION_LIMIT, VideoRecordConfig.DEFAULT_BITRATE, null, true,null,2);
+        /**
+         * 界面参数
+         */
+        VideoSessionCreateInfo create_info = new VideoSessionCreateInfo.Builder()
+                .setOutputDurationLimit(15)//最大时长
+                .setOutputDurationMin(3)//最短时长
+                .setMovieExportOptions(movie_options)
+                .setWaterMarkPath(Contant.WATER_MARK_PATH)
+                .setWaterMarkPosition(1)
+                .setBeautyProgress(0)
+                .setBeautySkinOn(false)
+                .setCameraFacing(Camera.CameraInfo.CAMERA_FACING_BACK)
+                .setVideoSize(360, 640)
+                .setCaptureHeight(getResources().getDimension(R.dimen.qupai_recorder_capture_height_size))
+                .setBeautySkinViewOn(false)
+                .setFlashLightOn(false)
+                .setTimelineTimeIndicator(true)
+                .build();
 
-        qupaiService.showRecordPage(this, REQUEST_VIDEO_CODE, true,
-                new FailureCallback() {
-                    @Override
-                    public void onFailure(int i, String s) {
-                        Toast.makeText(CreateTopicActivity.this, "onFailure:"+ s + "CODE"+ i, Toast.LENGTH_LONG).show();
-                    }
-                });
-    }*/
+        _CreateInfo.setSessionCreateInfo(create_info);
+        _CreateInfo.setNextIntent(null);
+        _CreateInfo.setOutputThumbnailSize(360, 640);//输出图片宽高
+        videoPath = FileUtils.newOutgoingFilePath(this);
+        _CreateInfo.setOutputVideoPath(videoPath);//输出视频路径
+        _CreateInfo.setOutputThumbnailPath(videoPath + ".png");//输出图片路径
+
+        QupaiServiceImpl qupaiService= new QupaiServiceImpl.Builder()
+                .setEditorCreateInfo(_CreateInfo).build();
+        qupaiService.showRecordPage(this, REQUEST_VIDEO_CODE);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -535,28 +575,16 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                 }
                 break;
             case REQUEST_VIDEO_CODE:
-                /*if (resultCode == RESULT_OK) {
-                    QupaiService qupaiService = AlibabaSDK.getService(QupaiService.class);
-                    videoPath = VideoRecordConfig.VIDEOPATH(this);
-                    thumblePath = VideoRecordConfig.THUMBPATH(this);
-                    qupaiService.copyVideoFile(data, videoPath, thumblePath, new SaveFileCallback() {
-                        @Override
-                        public void onSuccess() {
-                            Toast.makeText(CreateTopicActivity.this, "视频录制成功", Toast.LENGTH_LONG).show();
-                            showVideoThumble();
-                            localVideoPathList = new LinkedList<String>();
-                            localVideoPathList.add(videoPath);
-                        }
+                if (resultCode == RESULT_OK) {
 
-                        @Override
-                        public void onFailure(int i, String s) {
-                            Toast.makeText(CreateTopicActivity.this, "视频录制失败", Toast.LENGTH_LONG).show();
-                            videoPath = null;
-                            thumblePath = null;
-                        }
-
-                    });
-                }*/
+                    EditorResult result = new EditorResult(data);
+                    videoPath = result.getPath();
+                    String []thumbailArray = result.getThumbnail();
+                    if(thumbailArray.length > 2){
+                        thumblePath = thumbailArray[2];
+                    }
+                    localVideoPathList.add(videoPath);
+                }
                 break;
         }
     }
@@ -606,4 +634,6 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     public void onAdd() {
         addImage();
     }
+
+
 }

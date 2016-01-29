@@ -13,7 +13,11 @@ import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.trade.TradeConfigs;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.duanqu.qupai.upload.AuthService;
+import com.duanqu.qupai.upload.QupaiAuthListener;
+import com.jixianxueyuan.commons.Contant;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -71,6 +75,9 @@ public class MyApplication extends Application {
             }
 
         });
+
+        //init qupai
+        initQuPai();
 	}
 
     /**
@@ -106,6 +113,10 @@ public class MyApplication extends Application {
         }
     }
 
+    private void initQuPai(){
+        initAuth(getApplicationContext(),Contant.appkey,Contant.appsecret,Contant.space);
+    }
+
 
     public static MyApplication getContext() {
 		return application;
@@ -138,5 +149,21 @@ public class MyApplication extends Application {
 
     private void initImageLoader(){
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(MyApplication.this));
+    }
+
+    private void initAuth(Context context ,String appKey,String appsecret,String space){
+        AuthService service = AuthService.getInstance();
+        service.setQupaiAuthListener(new QupaiAuthListener() {
+            @Override
+            public void onAuthError(int errorCode, String message) {
+                MyLog.e("Application", "ErrorCode" + errorCode + "message" + message);
+            }
+
+            @Override
+            public void onAuthComplte(int responseCode, String responseMessage) {
+                Contant.accessToken = responseMessage;
+            }
+        });
+        service.startAuth(context, appKey, appsecret, space);
     }
 }
