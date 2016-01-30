@@ -577,12 +577,15 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
             case REQUEST_VIDEO_CODE:
                 if (resultCode == RESULT_OK) {
 
+                    Toast.makeText(CreateTopicActivity.this, "视频录制成功", Toast.LENGTH_LONG).show();
+                    showVideoThumble();
                     EditorResult result = new EditorResult(data);
                     videoPath = result.getPath();
                     String []thumbailArray = result.getThumbnail();
                     if(thumbailArray.length > 2){
                         thumblePath = thumbailArray[2];
                     }
+                    localVideoPathList = new ArrayList<String>();
                     localVideoPathList.add(videoPath);
                 }
                 break;

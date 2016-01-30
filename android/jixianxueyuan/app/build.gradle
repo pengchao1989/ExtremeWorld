@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'bugly'
 
 
 android {
@@ -19,6 +20,10 @@ android {
         versionCode 4
         versionName "1.0.0"
         multiDexEnabled true
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
     repositories {
         flatDir() {
@@ -112,15 +117,21 @@ dependencies {
     compile "com.google.dagger:dagger:2.0.1"
     compile "com.google.code.findbugs:jsr305:3.0.0"
     compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.tencent.bugly:crashreport:1.2.7'
+    compile 'com.android.support:multidex:1.0.0'
 
-    // optional
-    compile project(':emoji')
-    compile project(':multi-image-selector')
     compile files('libs/open_sdk_r5043_lite.jar')
     compile files('libs/locSDK_3.3.jar')
     compile files('libs/renderscript-v8.jar')
-    compile 'com.android.support:multidex:1.0.0'
+    // optional
+    compile project(':emoji')
+    compile project(':multi-image-selector')
     compile project(':OneSDK')
     compile project(':wkvideoplayer')
     compile project(':Minisdk-release')
+}
+
+bugly {
+    appId = '900018639'
+    appKey = '6H1BuGJoxCxNEcYx'
 }

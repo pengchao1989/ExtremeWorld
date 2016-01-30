@@ -59,6 +59,7 @@ import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.yumfee.emoji.EmojiconTextView;
 
 import java.io.File;

@@ -1,8 +1,8 @@
 package com.jixianxueyuan.app;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,8 +21,9 @@ import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.tencent.bugly.crashreport.CrashReport;
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
 	private static MyApplication application;
     private RequestQueue mRequestQueue;
@@ -43,6 +44,9 @@ public class MyApplication extends Application {
 		application = this;
 
         appInfomation = AppInfomation.getInstance();
+
+        //init bugly
+        initBugly();
 
         //设置app rest api的hobby值
         String currentHobbyStamp = Util.getApplicationMetaString(this, "HOBBY");
@@ -78,6 +82,7 @@ public class MyApplication extends Application {
 
         //init qupai
         initQuPai();
+
 	}
 
     /**
@@ -165,5 +170,9 @@ public class MyApplication extends Application {
             }
         });
         service.startAuth(context, appKey, appsecret, space);
+    }
+
+    private void initBugly(){
+        CrashReport.initCrashReport(this, "900018639", false);
     }
 }
