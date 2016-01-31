@@ -159,6 +159,7 @@
             android:id="@+id/mine_fragment_share"
             android:layout_marginTop="20dp"
             style="@style/ImageItemLayout"
+            android:visibility="gone"
             >
 
             <LinearLayout

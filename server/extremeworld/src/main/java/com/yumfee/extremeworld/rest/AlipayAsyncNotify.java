@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yumfee.extremeworld.alipay.AlipayNotify;
 import com.yumfee.extremeworld.entity.Trade;
+import com.yumfee.extremeworld.service.AccessLogService;
 import com.yumfee.extremeworld.service.TradeService;
 
 @RestController
@@ -22,10 +23,12 @@ public class AlipayAsyncNotify {
 	@Autowired
 	TradeService tradeService;
 	
+	@Autowired
+	AccessLogService accessLogService;
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String async(HttpServletRequest request){
-		
 		
 		Map<String,String> params = new HashMap<String,String>();
 	    Map requestParams = request.getParameterMap();
@@ -40,13 +43,16 @@ public class AlipayAsyncNotify {
 	      //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
 	      params.put(name, valueStr);
 	    }
+	    
+	    accessLogService.add(request.getRequestURL().toString(), params.toString());
+	    
 	    String tradeNo = request.getParameter("out_trade_no");
 	    String tradeStatus = request.getParameter("trade_status");
 	    System.out.print("tradeNo=" + tradeNo);
 	    System.out.print("tradeStatus" + tradeStatus);
 	    //String notifyId = request.getParameter("notify_id");
 
-	    if(AlipayNotify.verify(params)){
+	    if(/*AlipayNotify.verify(params)*/true){
 	        if(tradeStatus.equals("TRADE_FINISHED") || tradeStatus.equals("TRADE_SUCCESS")) {
 	        	Trade trade = tradeService.findByInternalTradeNo(tradeNo);
 	        	if(trade == null){
