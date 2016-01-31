@@ -98,12 +98,17 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
             if(jsonObject.has("content"))
             {
                 if(myResponse.isEncryp()){
+
+                    UserDTO userDTO = MyApplication.getContext().getMine().getUserInfo();
+
+
                     JsonElement contentObject = jsonObject.get("content");
                     String base64EncrypText = contentObject.getAsString();
                     String[] encryItems =  base64EncrypText.split(":");
                     byte[] ivBytes = Base64.decode(encryItems[0], Base64.DEFAULT);
+                    byte[] secretKey = Base64.decode(userDTO.getToken(),Base64.DEFAULT);
                     byte[] aesEncrypText =  Base64.decode(encryItems[1], Base64.DEFAULT);
-                    String contentText = Cryptos.aesDecrypt(aesEncrypText, new String("1111111111111111").getBytes(), ivBytes);
+                    String contentText = Cryptos.aesDecrypt(aesEncrypText, secretKey, ivBytes);
                     T content = gson.fromJson(contentText, clazz);
                     myResponse.setContent(content);
                 }

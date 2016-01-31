@@ -85,14 +85,22 @@
 
                     <RelativeLayout
                         android:id="@+id/create_topic_video_thumble_layout"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
                         android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="视频已准备好"/>
 
                         <ImageView
                             android:id="@+id/create_topic_video_thumble_imageview"
                             android:layout_width="100dp"
-                            android:layout_height="100dp" />
+                            android:layout_height="100dp"
+                            android:layout_centerInParent="true"/>
 
                         <ImageView
                             android:layout_width="wrap_content"

@@ -578,7 +578,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                 if (resultCode == RESULT_OK) {
 
                     Toast.makeText(CreateTopicActivity.this, "视频录制成功", Toast.LENGTH_LONG).show();
-                    showVideoThumble();
+
                     EditorResult result = new EditorResult(data);
                     videoPath = result.getPath();
                     String []thumbailArray = result.getThumbnail();
@@ -587,6 +587,8 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                     }
                     localVideoPathList = new ArrayList<String>();
                     localVideoPathList.add(videoPath);
+
+                    showVideoThumble();
                 }
                 break;
         }

@@ -1,5 +1,9 @@
 package com.yumfee.extremeworld.rest.dto;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.zip.GZIPOutputStream;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.shiro.SecurityUtils;
 import org.springside.modules.mapper.JsonMapper;
@@ -29,19 +33,30 @@ public class MyResponse {
 	
 	public static MyResponse ok(Object content,boolean isEncryp){
 		
-		isEncryp = false;
-		
 		MyResponse response = new MyResponse();
 		if(isEncryp){
 			response.encryp = true;
 			
 			JsonMapper jsonMapper = new JsonMapper();
 			String jsonContent = jsonMapper.toJson(content);
-			byte[] vi = Cryptos.generateIV();
-			byte[] encryByte = Cryptos.aesEncrypt(jsonContent.getBytes(), response.getCurrentToken(), vi);
-			String encrypContent = Base64.encodeBase64String(encryByte);
-			String viStr = Base64.encodeBase64String(vi);
-			response.setContent(viStr + ":" + encrypContent);
+
+			//try {
+				//gzip压缩
+/*				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				GZIPOutputStream gzip = new GZIPOutputStream(out);
+				gzip.write(jsonContent.getBytes());
+				gzip.close();*/
+				
+				byte[] vi = Cryptos.generateIV();
+				byte[] encryByte = Cryptos.aesEncrypt(jsonContent.getBytes(), response.getCurrentToken(), vi);
+				String encrypContent = Base64.encodeBase64String(encryByte);
+				String viStr = Base64.encodeBase64String(vi);
+				response.setContent(viStr + ":" + encrypContent);
+			//} catch (IOException e) {
+				// TODO Auto-generated catch block
+			//	e.printStackTrace();
+			//}   
+			
 		}else
 		{
 			response.setContent(content);

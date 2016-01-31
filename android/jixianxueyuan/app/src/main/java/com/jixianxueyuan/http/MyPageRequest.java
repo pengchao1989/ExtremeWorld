@@ -108,12 +108,15 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
 
             if(baseResponse.isEncryp()){
 
+                UserDTO userDTO = MyApplication.getContext().getMine().getUserInfo();
+
                 JsonElement contentElement = jsonObject.get("content");
                 String base64Content = contentElement.getAsString();
                 String[] encryItems =  base64Content.split(":");
                 byte[] ivBytes = Base64.decode(encryItems[0], Base64.DEFAULT);
                 byte[] encrypBytes =  Base64.decode(encryItems[1], Base64.DEFAULT);
-                String contentText = Cryptos.aesDecrypt(encrypBytes, new String("1111111111111111").getBytes(), ivBytes);
+                byte[] secretKey = Base64.decode(userDTO.getToken(),Base64.DEFAULT);
+                String contentText = Cryptos.aesDecrypt(encrypBytes, secretKey, ivBytes);
 
 
                 JsonObject jsonPage = parser.parse(contentText).getAsJsonObject();
