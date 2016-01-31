@@ -40,22 +40,22 @@ public class MyResponse {
 			JsonMapper jsonMapper = new JsonMapper();
 			String jsonContent = jsonMapper.toJson(content);
 
-			//try {
+			try {
 				//gzip压缩
-/*				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				GZIPOutputStream gzip = new GZIPOutputStream(out);
 				gzip.write(jsonContent.getBytes());
-				gzip.close();*/
+				gzip.close();
 				
 				byte[] vi = Cryptos.generateIV();
-				byte[] encryByte = Cryptos.aesEncrypt(jsonContent.getBytes(), response.getCurrentToken(), vi);
+				byte[] encryByte = Cryptos.aesEncrypt(out.toByteArray(), response.getCurrentToken(), vi);
 				String encrypContent = Base64.encodeBase64String(encryByte);
 				String viStr = Base64.encodeBase64String(vi);
 				response.setContent(viStr + ":" + encrypContent);
-			//} catch (IOException e) {
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
-			//	e.printStackTrace();
-			//}   
+				e.printStackTrace();
+			}   
 			
 		}else
 		{
