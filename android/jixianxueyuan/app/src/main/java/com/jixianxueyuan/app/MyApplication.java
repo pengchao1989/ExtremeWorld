@@ -66,8 +66,7 @@ public class MyApplication extends MultiDexApplication {
 
             @Override
             public void onSuccess() {
-                Toast.makeText(MyApplication.this, "初始化成功", Toast.LENGTH_SHORT)
-                        .show();
+                //Toast.makeText(MyApplication.this, "初始化成功", Toast.LENGTH_SHORT).show();
 
                 initCloudChannel(MyApplication.this);
             }

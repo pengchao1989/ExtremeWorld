@@ -17,8 +17,8 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 7
-        versionName "1.2.0"
+        versionCode 8
+        versionName "1.2.1"
         multiDexEnabled true
         ndk {
             //设置支持的SO库架构
@@ -90,6 +90,14 @@ android {
     dexOptions {
         incremental true
         javaMaxHeapSize "4g"
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace(".apk", "-parkingGuard-${variant.versionName}.apk"))
+        }
     }
 }
 
