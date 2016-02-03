@@ -115,7 +115,7 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
                     String contentText = Cryptos.aesDecrypt(aesEncrypText, secretKey, ivBytes);
 
                     //unzip
-                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+/*                    ByteArrayOutputStream out = new ByteArrayOutputStream();
                     ByteArrayInputStream in = new ByteArrayInputStream(contentText.getBytes());
                     try {
                         GZIPInputStream gunzip = new GZIPInputStream(in);
@@ -129,7 +129,7 @@ public class MyRequest<T> extends JsonRequest<MyResponse<T>> {
 
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
 
                     T content = gson.fromJson(contentText, clazz);

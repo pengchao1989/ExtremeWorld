@@ -40,22 +40,23 @@ public class MyResponse {
 			JsonMapper jsonMapper = new JsonMapper();
 			String jsonContent = jsonMapper.toJson(content);
 
-			try {
+/*			try {
 				//gzip压缩
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				GZIPOutputStream gzip = new GZIPOutputStream(out);
-				gzip.write(jsonContent.getBytes());
-				gzip.close();
+				gzip.write(jsonContent.getBytes("ISO8859-1"));
+				gzip.close();*/
+				
 				
 				byte[] vi = Cryptos.generateIV();
-				byte[] encryByte = Cryptos.aesEncrypt(out.toByteArray(), response.getCurrentToken(), vi);
+				byte[] encryByte = Cryptos.aesEncrypt(jsonContent.getBytes(), response.getCurrentToken(), vi);
 				String encrypContent = Base64.encodeBase64String(encryByte);
 				String viStr = Base64.encodeBase64String(vi);
 				response.setContent(viStr + ":" + encrypContent);
-			} catch (IOException e) {
+/*			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}   
+			}  */
 			
 		}else
 		{
@@ -126,6 +127,7 @@ public class MyResponse {
 	
 	private byte[] getCurrentToken(){
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		System.out.print("user=" + user.getName() + " token=" + new String(user.token));
 		return user.token;
 	}
 }

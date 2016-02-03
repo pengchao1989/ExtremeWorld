@@ -84,7 +84,7 @@ public class Mine {
             userInfo.setBg(shared.getString("bg", ""));
         }
         if(shared.contains("token")){
-            userInfo.setBg(shared.getString("token", ""));
+            userInfo.setToken(shared.getString("token", ""));
         }
 
 

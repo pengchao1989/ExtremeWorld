@@ -1,6 +1,7 @@
 package com.jixianxueyuan.http;
 
 import android.util.Base64;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -120,11 +121,12 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
                 String[] encryItems =  base64Content.split(":");
                 byte[] ivBytes = Base64.decode(encryItems[0], Base64.DEFAULT);
                 byte[] encrypBytes =  Base64.decode(encryItems[1], Base64.DEFAULT);
-                byte[] secretKey = Base64.decode(userDTO.getToken(),Base64.DEFAULT);
+                byte[] secretKey = Base64.decode(userDTO.getToken(), Base64.DEFAULT);
+                MyLog.e("MyPageRequest", "token=" + new String(secretKey));
                 String contentText = Cryptos.aesDecrypt(encrypBytes, secretKey, ivBytes);
 
                 //unzip
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
+/*                ByteArrayOutputStream out = new ByteArrayOutputStream();
                 ByteArrayInputStream in = new ByteArrayInputStream(contentText.getBytes());
                 try {
                     GZIPInputStream gunzip = new GZIPInputStream(in);
@@ -138,7 +140,7 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
 
 
                 JsonObject jsonPage = parser.parse(contentText).getAsJsonObject();
