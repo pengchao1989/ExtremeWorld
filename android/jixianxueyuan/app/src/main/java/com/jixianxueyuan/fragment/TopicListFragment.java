@@ -3,6 +3,7 @@ package com.jixianxueyuan.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,8 +52,8 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
 
     @InjectView(R.id.scroll)
     ObservableListView listView;
-/*    @InjectView(R.id.top_list_swiperefresh)
-    SwipeRefreshLayout swipeRefreshLayout;*/
+    @InjectView(R.id.top_list_swiperefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
     @InjectView(R.id.list_background)
     View mListBackgroundView;
 
@@ -112,7 +113,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
 
         listView.setAdapter(adapter);
 
-/*        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -120,7 +121,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                 MyLog.d(tag, "onRefresh");
                 refreshTopicList();
             }
-        });*/
+        });
 
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -272,7 +273,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
             return;
         }
 
-        //swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setRefreshing(true);
 
         String url = null;
 
@@ -318,7 +319,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                             totalPage = page.getTotalPages();
                             currentPage = page.getCurPage() + 1;
                             doHideFootView();
-                            //swipeRefreshLayout.setRefreshing(false);
+                            swipeRefreshLayout.setRefreshing(false);
 
                         }else {
                             MyErrorHelper.showErrorToast(TopicListFragment.this.getActivity(), response.getError());
@@ -330,7 +331,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         isRequesting = false;
-                        //swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout.setRefreshing(false);
                         MyVolleyErrorHelper.showError(TopicListFragment.this.getActivity(), error);
                     }
                 });
