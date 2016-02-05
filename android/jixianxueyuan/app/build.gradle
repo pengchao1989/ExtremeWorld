@@ -56,9 +56,10 @@ android {
         bmx {
             applicationId = "com.jixianxueyuan.bmx"
             manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.bmx",
-                                    HOBBY        : "skateboard",
+                                    HOBBY        : "bmx",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}"]
+            signingConfig signingConfigs.config
         }
         skateboard {
             applicationId = "com.jixianxueyuan.skateboard"
@@ -96,7 +97,7 @@ android {
         variant.outputs.each { output ->
             output.outputFile = new File(
                     output.outputFile.parent,
-                    output.outputFile.name.replace(".apk", "-parkingGuard-${variant.versionName}.apk"))
+                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
         }
     }
 }

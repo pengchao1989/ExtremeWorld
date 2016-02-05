@@ -371,6 +371,10 @@ public class RegisterActivity extends Activity {
                 @Override
                 public void onLoadingComplete(String s, View view, Bitmap bitmap) {
 
+                    if(bitmap == null){
+                        avatarImageView.setImageResource(R.mipmap.avatar_def);
+                        return;
+                    }
                     //show
                     avatarImageView.setImageBitmap(bitmap);
 
