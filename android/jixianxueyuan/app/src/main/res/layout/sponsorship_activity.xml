@@ -41,7 +41,7 @@
                 android:id="@+id/sponsorship_activity_donation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="140dp"
+                android:minWidth="@dimen/button_min_width"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/list_item_vertical_padding"

@@ -7,7 +7,6 @@ package com.yumfee.extremeworld.service.account;
 
 import java.util.List;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.ali.IMHelper;
 import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.repository.TaskDao;
@@ -86,7 +86,13 @@ public class AccountService {
 		String base64Token = Encodes.encodeBase64(Cryptos.generateAesKey());
 		user.setToken(base64Token);
 
+		//registerUser引用待注册的用户信息，userDao save过后估计user变量指向了新的对象，然而这个对象里某些属性为null
+		User registerUser = user;
+		
 		userDao.save(user);
+		
+		//同步IM账号
+		IMHelper.registerIMAccount(user);
 	}
 
 	public void updateUser(User user) 

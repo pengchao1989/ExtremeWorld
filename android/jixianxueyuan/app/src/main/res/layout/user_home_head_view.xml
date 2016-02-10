@@ -62,4 +62,12 @@
         android:layout_gravity="center_horizontal"
         tools:text="种个南瓜像地球，架在五岳山上头。\n把它扔进太平洋，地球又多一个洲。"/>
 
+    <Button
+        android:id="@+id/user_home_head_send_msg"
+        android:text="Message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/button_min_width"
+        android:layout_gravity="center_horizontal"
+        style="@style/BlueButton"/>
 </LinearLayout>

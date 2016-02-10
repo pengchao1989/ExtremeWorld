@@ -3,10 +3,19 @@ package com.jixianxueyuan;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+import android.widget.VideoView;
 
+import com.alibaba.mobileim.IYWLoginService;
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.YWLoginParam;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.android.volley.Request;
@@ -21,6 +30,7 @@ import com.jixianxueyuan.activity.RegisterEnterPhoneActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.UpdateManager;
+import com.jixianxueyuan.commons.im.IMHelper;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.MyErrorCode;
 import com.jixianxueyuan.dto.*;
@@ -46,6 +56,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends Activity {
 
+    @InjectView(R.id.main_video_view)
+    VideoView videoView;
     @InjectView(R.id.activity_qq_login)
     LinearLayout qqLoginButton;
 
@@ -117,6 +129,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        showVideo();
         MobclickAgent.onResume(this);
     }
 
@@ -143,6 +156,24 @@ public class MainActivity extends Activity {
                 break;
         }*/
         appNameTextView.setText(this.getResources().getText(R.string.app_name));
+    }
+
+    private void showVideo(){
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+
+            }
+        });
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+
+            }
+        });
+        Uri url  = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cover);
+        videoView.setVideoURI(url);
+        videoView.start();
     }
 
     @OnClick(R.id.activity_qq_login)
@@ -211,10 +242,14 @@ public class MainActivity extends Activity {
 
                             requestHandshake();
 
+
+                            //登录IM
+                            loginIM();
+
                             //登录完成，进入HOME页
-                            Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
-                            startActivity(intent);
-                            finish();
+                            //Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
+                            //startActivity(intent);
+                            //finish();
                         } else if (response.getStatus() == ServerMethod.STATUS_ERROR) {
                             if(response.getError().getErrorCode() == MyErrorCode.NO_USER.getErrorCode()){
                                 MyLog.d("MainActivity", "no user");
@@ -316,6 +351,23 @@ public class MainActivity extends Activity {
         tencent.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void loginIM(){
+
+        IMHelper imHelper = new IMHelper(this);
+        imHelper.Login(new IMHelper.LoginResultListener() {
+            @Override
+            public void onSuccess() {
+                Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onError(String err) {
+                Toast.makeText(MainActivity.this, err, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     public static String getDeviceInfo(Context context) {
         try{

@@ -26,6 +26,7 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
+import com.jixianxueyuan.commons.im.IMHelper;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.AppConfigDTO;
@@ -274,8 +275,6 @@ public class RegisterActivity extends Activity {
         }
         buildUserIofoParam();
 
-
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = null;
         if(registerType.equals(REGISTER_TYPE_QQ)){
@@ -299,10 +298,9 @@ public class RegisterActivity extends Activity {
                             mine.setUserInfo(newUserDTO);
                             mine.WriteSerializationToLocal(RegisterActivity.this);
 
-                            Intent intent = new Intent(RegisterActivity.this, NewHomeActivity.class);
-                            startActivity(intent);
+                            //注册成功，登录IM
+                            loginIM();
 
-                            finish();
                         }else if(response.getStatus() == MyResponse.status_error){
                             Error error = response.getError();
                             MyErrorHelper.showErrorToast(RegisterActivity.this, error);
@@ -507,6 +505,24 @@ public class RegisterActivity extends Activity {
             verCodeRetryButton.setClickable(false);
             verCodeRetryButton.setText( getString(R.string.re_acquisition) + millisUntilFinished / 1000 + "s");
         }
+    }
+
+    private void loginIM(){
+
+        IMHelper imHelper = new IMHelper(this);
+        imHelper.Login(new IMHelper.LoginResultListener() {
+            @Override
+            public void onSuccess() {
+                Intent intent = new Intent(RegisterActivity.this, NewHomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onError(String err) {
+                Toast.makeText(RegisterActivity.this, err, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }

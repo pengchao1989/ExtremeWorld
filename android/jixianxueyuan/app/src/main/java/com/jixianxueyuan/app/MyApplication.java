@@ -6,11 +6,13 @@ import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.alibaba.mobileim.YWAPI;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.trade.TradeConfigs;
+import com.alibaba.wxlib.util.SysUtil;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.duanqu.qupai.upload.AuthService;
@@ -69,6 +71,8 @@ public class MyApplication extends MultiDexApplication {
                 //Toast.makeText(MyApplication.this, "初始化成功", Toast.LENGTH_SHORT).show();
 
                 initCloudChannel(MyApplication.this);
+
+                initIM();
             }
 
             @Override
@@ -115,6 +119,16 @@ public class MyApplication extends MultiDexApplication {
         }else{
             Log.i("MyApplication", "CloudPushService is null");
         }
+    }
+
+    private void initIM(){
+        SysUtil.setApplication(this);
+        if(SysUtil.isTCMSServiceProcess(this)){
+            return;
+        }
+        //第一个参数是Application Context
+        //这里的APP_KEY即应用创建时申请的APP_KEY
+        YWAPI.init(this, "23213193");
     }
 
     private void initQuPai(){

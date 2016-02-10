@@ -16,6 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
@@ -297,6 +299,13 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         startActivity(intent);
 
     }
+
+    @OnClick(R.id.message) void onMessageClick(){
+        YWIMKit mIMKit = YWAPI.getIMKitInstance();
+        Intent intent = mIMKit.getConversationActivityIntent();
+        startActivity(intent);
+    }
+
     /**
      * This adapter provides three types of fragments as an example.
      * {@linkplain #createItem(int)} should be modified if you use this example for your app.

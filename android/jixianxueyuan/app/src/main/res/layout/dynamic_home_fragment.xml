@@ -52,19 +52,38 @@
             android:background="@android:color/transparent" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/sliding_tabs"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="8dp"
-        android:background="@android:color/transparent"
-        android:src="@mipmap/ic_option"/>
+        android:layout_marginTop="8dp">
+
+        <ImageView
+            android:id="@+id/sliding_tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/ic_option"/>
+
+        <ImageView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_message_white_24dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/fab"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_gravity="left|top" />
+        android:layout_gravity="right|top" />
 
 </FrameLayout>

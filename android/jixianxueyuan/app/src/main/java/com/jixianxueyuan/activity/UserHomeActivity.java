@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,6 +38,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import me.nereo.multi_image_selector.bean.Image;
 
@@ -51,6 +55,7 @@ public class UserHomeActivity extends BaseActivity {
     private ImageView avatarImageView;
     private ImageView coverImageView;
     private TextView nameTextView;
+    private Button sendMessageButton;
 
 
     private TopicListOfUserAdapter adapter;
@@ -90,6 +95,7 @@ public class UserHomeActivity extends BaseActivity {
         avatarImageView = (ImageView) headView.findViewById(R.id.user_home_head_avatar);
         coverImageView = (ImageView) headView.findViewById(R.id.user_home_head_cover);
         nameTextView = (TextView) headView.findViewById(R.id.user_home_head_name);
+        sendMessageButton = (Button) headView.findViewById(R.id.user_home_head_send_msg);
 
         Bundle bundle = this.getIntent().getExtras();
         if(bundle.containsKey(INTENT_USER_MIN)){
@@ -110,6 +116,18 @@ public class UserHomeActivity extends BaseActivity {
         ImageLoader.getInstance().displayImage(avatarUrl, avatarImageView);
 
         showCover();
+
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(userDTO != null){
+                    YWIMKit mIMKit = YWAPI.getIMKitInstance();
+                    String target = userDTO.getLoginName();
+                    Intent intent = mIMKit.getChattingActivityIntent(target);
+                    startActivity(intent);
+                }
+            }
+        });
 
         listView.addHeaderView(headView);
     }
@@ -203,7 +221,6 @@ public class UserHomeActivity extends BaseActivity {
             intent.putExtra("topic", topicDTO);
             startActivity(intent);
         }
-
     }
 
 }
