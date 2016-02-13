@@ -20,6 +20,7 @@ public class Reply extends IdEntity
 	private Date createTime;
 	private int floor;
 	private int subReplyCount;
+	private int agreeCount;
 	
 	private List<SubReply> subReplys = new ArrayList<SubReply>();
 	
@@ -61,6 +62,14 @@ public class Reply extends IdEntity
 
 	public void setSubReplyCount(int subReplyCount) {
 		this.subReplyCount = subReplyCount;
+	}
+
+	public int getAgreeCount() {
+		return agreeCount;
+	}
+
+	public void setAgreeCount(int agreeCount) {
+		this.agreeCount = agreeCount;
 	}
 
 	@OneToMany

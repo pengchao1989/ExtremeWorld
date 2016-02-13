@@ -42,13 +42,17 @@ public class ReplyRestController
 			@RequestParam(value = "topicId") Long topicId,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
-			@RequestParam(value = "sortType", defaultValue = "auto") String sortType)
-	{
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
 		
-		Page<Reply> replyPage = replyService.getAll(topicId, pageNumber, pageSize);
-		
+		Page<Reply> replyPage = replyService.getAll(topicId, pageNumber, pageSize);	
 		MyPage<ReplyDTO, Reply> myReplyPage = new MyPage<ReplyDTO, Reply>(ReplyDTO.class, replyPage);
-		
+		return MyResponse.ok(myReplyPage,true);
+	}
+	
+	@RequestMapping(value = "/hot", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public MyResponse getHot(@RequestParam(value = "topicId") Long topicId){
+		Page<Reply> replyPage = replyService.getHot(topicId);
+		MyPage<ReplyDTO, Reply> myReplyPage = new MyPage<ReplyDTO, Reply>(ReplyDTO.class, replyPage);
 		return MyResponse.ok(myReplyPage,true);
 	}
 	

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,6 +63,12 @@ public class ReplyService
 	{
 		PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize);
 		return replyDao.findByTopicId(topicId,pageRequest);
+	}
+	
+	public Page<Reply> getHot(Long topicId){
+		Sort sort = new Sort(Direction.DESC, "agreeCount");
+		PageRequest pageRequest = new PageRequest(0, 4, sort);
+		return replyDao.findByTopicId(topicId, pageRequest);
 	}
 	
 	public void saveReply(Reply reply) {
