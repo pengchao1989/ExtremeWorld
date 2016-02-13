@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -9,13 +10,14 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_head_avatar"
             android:layout_width="@dimen/avatar_width"
             android:layout_height="@dimen/avatar_height"
-            />
+            tools:src="@mipmap/avatar_def"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -28,13 +30,15 @@
                 android:id="@+id/user_head_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/ListPrimaryText"
+                tools:text="name"
+                style="@style/ListSecondaryTextSmall"
                 />
 
             <TextView
                 android:id="@+id/user_head_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                tools:text="15 min ago"
                 style="@style/timeAgoText"
                 />
 

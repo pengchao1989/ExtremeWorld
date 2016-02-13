@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/ListItemLayout"
     >
 
@@ -11,7 +12,9 @@
         android:id="@+id/topic_detail_list_item_reply_content"
         android:layout_marginTop="@dimen/list_content_margin_head"
         emojicon:emojiconSize="28sp"
-        style="@style/ListSecondaryText"
+        android:layout_marginLeft="@dimen/avatar_alignment"
+        style="@style/ListPrimaryTextSmall"
+        tools:text="content"
         />
 
     <LinearLayout
@@ -19,7 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="@dimen/list_content_margin_head"
-        android:layout_marginLeft="16dp">
+        android:layout_marginLeft="@dimen/avatar_alignment">
 
         <com.yumfee.emoji.EmojiconTextView
             android:id="@+id/topic_detail_list_item_sub_reply_content_1"
@@ -48,9 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:textColor="@color/blue"
-            android:text="@string/load_sub_reply"
-
-            />
+            android:text="@string/load_sub_reply"/>
 
     </LinearLayout>
 

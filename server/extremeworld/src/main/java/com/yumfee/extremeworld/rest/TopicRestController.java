@@ -84,9 +84,6 @@ public class TopicRestController
 			break;
 		}
 		
-		Long userId = getCurrentUserId();
-		System.out.println("userId=" + userId);
-		
 		MyPage<TopicDTO, Topic> topicPage = new MyPage<TopicDTO, Topic>(TopicDTO.class, topicPageSource);
 		
 		return MyResponse.ok(topicPage,true);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,7 +12,7 @@
         android:id="@+id/topic_detail_head_view_video_layout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:visibility="visible"
+        android:visibility="gone"
         >
 
         <ImageView
@@ -71,8 +72,9 @@
             android:id="@+id/topic_detail_content_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             style="@style/ListSecondaryText"
+            tools:text="content"
             />
 
         <LinearLayout

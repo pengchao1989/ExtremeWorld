@@ -18,9 +18,10 @@
     <dimen name="bottom_input_widget_heigh">60dp</dimen>
     <dimen name="button_min_width">140dp</dimen>
 
-    <dimen name="avatar_width">42dp</dimen>
-    <dimen name="avatar_height">42dp</dimen>
+    <dimen name="avatar_width">40dp</dimen>
+    <dimen name="avatar_height">40dp</dimen>
     <dimen name="large_avatar_size">160dp</dimen>
+    <dimen name="avatar_alignment">45dp</dimen>
 
     <dimen name="list_content_margin_head">4dp</dimen>
 
