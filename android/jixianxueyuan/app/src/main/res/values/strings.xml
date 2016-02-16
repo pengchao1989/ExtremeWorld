@@ -22,6 +22,7 @@
     <string name="welcome">welcome</string>
     <string name="register">register</string>
     <string name="login">login</string>
+    <string name="logging">logging</string>
     <string name="phone_login">phone login</string>
     <string name="qq_login">QQ Login</string>
     <string name="weixin_login">weixin Login</string>

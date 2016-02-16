@@ -1,6 +1,7 @@
 package com.jixianxueyuan;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -53,6 +54,7 @@ import com.umeng.analytics.MobclickAgent;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 
 
 public class MainActivity extends Activity {
@@ -68,10 +70,12 @@ public class MainActivity extends Activity {
     Tencent tencent;
 
     //String openId = null;
-    QQOpenInfo qqOpenInfo = null;
+    private QQOpenInfo qqOpenInfo = null;
 
 
-    boolean isTestRegister = false;
+    private boolean isTestRegister = false;
+
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,12 +164,12 @@ public class MainActivity extends Activity {
     }
 
     private void showVideo(){
-        DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
+/*        DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
         android.widget.RelativeLayout.LayoutParams params = (android.widget.RelativeLayout.LayoutParams) videoView.getLayoutParams();
         params.width =  metrics.widthPixels;
         params.height = metrics.heightPixels;
         params.leftMargin = 0;
-        videoView.setLayoutParams(params);
+        videoView.setLayoutParams(params);*/
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -283,6 +287,8 @@ public class MainActivity extends Activity {
     }
 
     private void requestQQOpenId(){
+
+        showProgress();
 
         tencent = Tencent.createInstance("101228787", this.getApplicationContext());
         if (!tencent.isSessionValid()) {
@@ -404,5 +410,13 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void showProgress(){
+        if(progressDialog == null){
+            progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+            progressDialog.setTitle(getString(R.string.loading));
+        }
+        progressDialog.show();
     }
 }

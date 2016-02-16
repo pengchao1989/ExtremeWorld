@@ -7,7 +7,7 @@
     <VideoView
         android:id="@+id/main_video_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,16 +61,30 @@
                 android:padding="@dimen/list_item_vertical_padding"
                 android:clickable="true"
                 android:gravity="center"
-                android:background="@drawable/trans_button_background">
+                android:background="@drawable/trans_white_button_background">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qq_login"
-                    android:gravity="center"
-                    android:drawableLeft="@drawable/icon_upload_qq_a"
-                    style="@style/SecondText"
-                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+
+                        android:src="@mipmap/qq_icon"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qq_login"
+                        android:gravity="center"
+                        android:paddingLeft="14dp"
+                        style="@style/HighlightText"
+                        />
+                </LinearLayout>
+
 
             </LinearLayout>
 

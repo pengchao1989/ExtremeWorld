@@ -22,6 +22,7 @@
     <string name="welcome">welcome</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
+    <string name="logging">正在登录</string>
     <string name="phone_login">手机登录</string>
     <string name="qq_login">QQ登陆</string>
     <string name="weixin_login">微信登录</string>

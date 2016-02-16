@@ -22,6 +22,7 @@
     <string name="welcome">환영</string>
     <string name="register">등록</string>
     <string name="login">로그인</string>
+    <string name="logging">로그인 중</string>
     <string name="phone_login">핸드폰 번호 등록</string>
     <string name="qq_login">QQ 상륙하다</string>
     <string name="weixin_login">weixin 상륙하다</string>
