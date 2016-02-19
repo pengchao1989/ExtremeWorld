@@ -23,8 +23,8 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 8
-        versionName "1.2.1"
+        versionCode 9
+        versionName "1.2.2"
         multiDexEnabled true
         ndk {
             //设置支持的SO库架构
@@ -73,7 +73,7 @@ android {
                                     HOBBY        : "skateboard",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}"]
-            signingConfig signingConfigs.config_sb
+            signingConfig signingConfigs.config
         }
     }
     buildTypes {
@@ -110,7 +110,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v13:22.2.0'
+    compile 'com.android.support:support-v13:22.0.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
