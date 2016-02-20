@@ -8,34 +8,25 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.alibaba.mobileim.IYWLoginService;
-import com.alibaba.mobileim.YWAPI;
-import com.alibaba.mobileim.YWIMKit;
-import com.alibaba.mobileim.YWLoginParam;
-import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
-import com.jixianxueyuan.activity.RegisterEnterPhoneActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.commons.UpdateManager;
 import com.jixianxueyuan.commons.im.IMHelper;
-import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.MyErrorCode;
-import com.jixianxueyuan.dto.*;
+import com.jixianxueyuan.dto.HandshakeDTO;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.qq.QQOpenInfo;
 import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.dto.request.HandshakeRequestDTO;
@@ -58,6 +49,8 @@ import dmax.dialog.SpotsDialog;
 
 
 public class MainActivity extends Activity {
+
+    private static final String tag = "MainActivity";
 
     @InjectView(R.id.main_video_view)
     VideoView videoView;
@@ -290,7 +283,9 @@ public class MainActivity extends Activity {
 
         showProgress();
 
-        tencent = Tencent.createInstance("101228787", this.getApplicationContext());
+        String qqAppId = String.valueOf(Util.getApplicationMetaInteger(this, "QQ_APP_ID"));
+        MyLog.d(tag, "QQ_APP_ID=" + qqAppId);
+        tencent = Tencent.createInstance(qqAppId, this.getApplicationContext());
         if (!tencent.isSessionValid()) {
             tencent.login(this, "get_user_info,add_t", new IUiListener() {
                 @Override
@@ -307,7 +302,6 @@ public class MainActivity extends Activity {
                         //qq登录成功后进行自家用户登录或注册
                         requestLogin();
                     }
-
                 }
 
                 @Override

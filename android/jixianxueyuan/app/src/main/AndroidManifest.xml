@@ -220,6 +220,9 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="xueyuan"/>
+        <meta-data
+            android:name="QQ_APP_ID"
+            android:value="${QQ_APP_ID}"/>
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>

@@ -109,6 +109,17 @@ public class Util {
         return null;
     }
 
+    static public int getApplicationMetaInteger(Context context , String key){
+
+        try {
+            return context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA).metaData.getInt(key);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
     static public boolean isOurServerImage(String url){
         if(url == null){
             return false;

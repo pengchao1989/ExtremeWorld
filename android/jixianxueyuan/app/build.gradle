@@ -50,14 +50,17 @@ android {
             manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan",
                                     HOBBY        : "all",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
-                                    UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}"]
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
+                                    QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}"]
+
         }
         parkour {
             applicationId = "com.jixianxueyuan.parkour"
             manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.parkour",
                                     HOBBY        : "parkour",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
-                                    UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}"]
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
+                                    QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}"]
             signingConfig signingConfigs.config
         }
         bmx {
@@ -65,7 +68,8 @@ android {
             manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.bmx",
                                     HOBBY        : "bmx",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
-                                    UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}"]
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}",
+                                    QQ_APP_ID    : "${project.QQ_APP_ID_BMX}"]
             signingConfig signingConfigs.config
         }
         skateboard {
@@ -73,13 +77,14 @@ android {
             manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.skateboard",
                                     HOBBY        : "skateboard",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
-                                    UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}"]
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}",
+                                    QQ_APP_ID    : "${project.QQ_APP_ID_SKATEBOARD}"]
             signingConfig signingConfigs.config
         }
     }
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
         }
 
