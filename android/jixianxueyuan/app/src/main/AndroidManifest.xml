@@ -81,6 +81,7 @@
             android:name=".activity.NewHomeActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
+            android:theme="@style/AppThemeMain"
             >
         </activity>
         <activity android:name=".activity.FlexibleSpaceWithImageWithViewPagerTabActivity"/>
