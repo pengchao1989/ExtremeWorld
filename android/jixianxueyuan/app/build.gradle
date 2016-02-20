@@ -58,6 +58,7 @@ android {
                                     HOBBY        : "parkour",
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}"]
+            signingConfig signingConfigs.config
         }
         bmx {
             applicationId = "com.jixianxueyuan.bmx"
