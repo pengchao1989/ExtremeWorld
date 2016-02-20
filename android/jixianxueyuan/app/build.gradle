@@ -52,7 +52,6 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}"]
-
         }
         parkour {
             applicationId = "com.jixianxueyuan.parkour"
@@ -61,7 +60,6 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}"]
-            signingConfig signingConfigs.config
         }
         bmx {
             applicationId = "com.jixianxueyuan.bmx"
@@ -70,7 +68,6 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_BMX}"]
-            signingConfig signingConfigs.config
         }
         skateboard {
             applicationId = "com.jixianxueyuan.skateboard"
@@ -79,18 +76,20 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_SKATEBOARD}"]
-            signingConfig signingConfigs.config
+
         }
     }
     buildTypes {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+            signingConfig signingConfigs.config
         }
 
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+            signingConfig signingConfigs.config
         }
     }
     //这个是解决lint报错的代码
