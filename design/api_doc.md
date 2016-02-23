@@ -126,7 +126,8 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	请求方式：GET
 	入参：type、taxonomyId、page
 	参考示例：http://115.28.8.25/api/secure/v1/skateboard/topic?page=1（请求该hobby下所有topic）
-						http://115.28.8.25/api/secure/v1/skateboard/topic?type=discuss&taxonomyId=2&page=1
+			http://115.28.8.25/api/secure/v1/skateboard/topic?type=discuss&taxonomyId=2&page=1
+			http://115.28.8.25/api/secure/v1/skateboard/topic??type=course&magicType=sb&courseId=1859&sortType=agree (请求教学id为1859下的动态列表，magicType相当于是个tag的意思，这里是取采集的nikesb中的视频)
 	说明：该接口为获取主题列表。支持客户端定义pageSize，参数值为page.size,默认pageSize为15;
 	type的取值为预定义的值、taxonomyId通过握手接口获得。若不填这两个参数则获取该hobby下所有数据
 
@@ -293,3 +294,24 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	示例:http://115.28.8.25/api/secure/v1/skateboard/sponsorship
 	说明:创建一条赞助
 	参数示例：{"sum":0.01,"message":"不用找了","user":{"id":1},"hobby":{"id":1}}
+	
+----------
+	接口名称:course_taxonomy
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/course_taxonomy
+	请求方式:GET
+	入参:无
+	示例:http://115.28.8.25/api/secure/v1/skateboard/course_taxonomy
+	说明:获取一个hobby的教学列表，例如在skateboard中就是几百个动作，分了类的有结构
+
+----------
+	接口名称:course
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/course/{id}
+	请求方式:GET
+	入参:courseId
+	示例:http://115.28.8.25/api/secure/v1/skateboard/course/1859
+	说明:获取一个教学详情，比如name、描述、创建者等信息
+	
+	
+	
+	
+	
