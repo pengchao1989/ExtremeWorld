@@ -312,6 +312,20 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	说明:获取一个教学详情，比如name、描述、创建者等信息
 	
 	
+----------
+	接口名称:collection
+	URL地址:http://115.28.8.25/api/secure/v1/collection
+	请求方式:GET
+	入参:page
+	示例:http://115.28.8.25/api/secure/v1/collection?page=1
+	说明:获取一个用户的收藏列表
 	
+----------
+	接口名称:collection
+	URL地址:http://115.28.8.25/api/secure/v1/collection/{topicId}
+	请求方式:POST
+	入参:topicId
+	示例:http://115.28.8.25/api/secure/v1/collection/1824
+	说明:添加一个收藏
 	
 	

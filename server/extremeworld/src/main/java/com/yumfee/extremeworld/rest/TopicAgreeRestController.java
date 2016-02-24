@@ -37,7 +37,6 @@ public class TopicAgreeRestController
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON)
 	public MyResponse agree(
-			@PathVariable String hobby,
 			@PathVariable("id") Long id,
 			@RequestParam(value = "userId", defaultValue = "1") Long userId)
 	{
