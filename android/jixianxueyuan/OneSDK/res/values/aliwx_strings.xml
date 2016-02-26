@@ -95,6 +95,8 @@
     <string name="aliwx_sync_failed">同步失败</string>
     <string name="aliwx_more">更多</string>
     <string name="aliwx_save">保存</string>
+    <string name="aliwx_save_image">保存图片</string>
+    <string name="aliwx_image_ls_indicator">%1$d/%2$d</string>
     <string name="aliwx_forward">转发</string>
     <string name="aliwx_more_function">更多功能</string>
 
@@ -164,9 +166,27 @@
 
     <string name="aliwx_goto_chat_list_bottom">回到底部</string>
     <string name="aliwx_goto_chat_list_bottom_with_unread_msg">%1$s条新消息</string>
-
+    <string name="aliwx_goto_chat_list_bottom_with_unread_msg_m">99+条新消息</string>
+    <string name="aliwx_first_new_msg_notify">以下是新消息</string>
     <string name="aliwx_start">确定%1$s</string>
 
     <string name="aliwx_no_microphone_permission_alert_title">[录音权限]可能被禁止</string>
     <string name="aliwx_no_microphone_permission_alert_message">您好，应用的[录音权限]可能被禁止，请重新开启本应用的[录音权限]以发送[语音消息]~</string>
+
+    <string name="aliwx_send_original">原图</string>
+    <string name="aliwx_download_original">下载原图</string>
+    <string name="aliwx_download_original_with_size">下载原图(%1$s)</string>
+    <string name="aliwx_download_original_success">下载完成</string>
+    <string name="aliwx_download_original_fail">下载失败</string>
+
+    <string name="aliwx_search_friend_hint">搜索账号</string>
+    <string name="aliwx_search_friend_not_found">该用户不存在</string>
+    <string name="aliwx_search_friend_not_found_message">无法找到该用户，请检查输入的帐号是否正确</string>
+    <string name="aliwx_search_friend_processing">正在为您查找</string>
+    <string name="aliwx_add_friend_processing">正在申请添加好友</string>
+    <string name="aliwx_send_msg">发送消息</string>
+    <string name="aliwx_add_friend">加为好友</string>
+    <string name="aliwx_remark_name">昵 称</string>
+    <string name="aliwx_profile_account">账 号 </string>
+
 </resources>

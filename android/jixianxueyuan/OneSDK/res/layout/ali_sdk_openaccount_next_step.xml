@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/ali_sdk_openaccount_text_next_step"
+        android:textColor="@color/ali_sdk_openaccount_button_text_color_selector"
+        android:textSize="18sp" />
+
+</merge>

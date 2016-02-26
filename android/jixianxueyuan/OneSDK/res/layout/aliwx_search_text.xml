@@ -5,6 +5,7 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/aliwx_search_head_layout"
         android:layout_width="fill_parent"
         android:layout_height="47dip"
         android:background="@color/aliwx_common_bg_color"

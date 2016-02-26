@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Button
+        android:id="@+id/left_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:clickable="false"
+        android:minWidth="50dp"
+        android:textColor="#cccccc"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:background="@null"
+        android:singleLine="true"
+        android:textColor="@color/ali_sdk_openaccount_text_input"
+        android:textColorHint="@color/ali_sdk_openaccount_text_hint"
+        android:textCursorDrawable="@null"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:minWidth="50dp"
+        android:text="@string/ali_sdk_openaccount_icon_clear"
+        android:textSize="20sp" />
+
+</merge>

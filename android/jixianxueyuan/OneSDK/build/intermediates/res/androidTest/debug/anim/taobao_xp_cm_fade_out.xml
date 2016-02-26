@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/decelerate_interpolator" >
+
+    <alpha
+        android:duration="300"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0" />
+
+</set><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/anim/taobao_xp_cm_fade_out.xml --><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/build/intermediates/bundles/debug/res/anim/taobao_xp_cm_fade_out.xml -->

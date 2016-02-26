@@ -5,11 +5,10 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 19
     buildToolsVersion "22.0.1"
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 8
+        minSdkVersion 14
     }
 
     compileOptions {

@@ -4,17 +4,11 @@ apply plugin: 'bugly'
 
 android {
     signingConfigs {
-        config {
+        release {
             keyAlias "${project.KEY_ALIAS}"
             keyPassword "${project.KEY_PASSWORD}"
             storeFile file('/home/pengchao/github/ExtremeWorld/private/mykeystore.jks')
             storePassword "${project.STORE_PASSWORD}"
-        }
-        config_sb{
-            keyAlias "${project.KEY_ALIAS_SB}"
-            keyPassword "${project.KEY_PASSWORD_SB}"
-            storeFile file('/home/pengchao/github/ExtremeWorld/private/sb_keystore')
-            storePassword "${project.STORE_PASSWORD_SB}"
         }
     }
     compileSdkVersion 22
@@ -83,13 +77,13 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
         }
 
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
         }
     }
     //这个是解决lint报错的代码
@@ -118,6 +112,7 @@ dependencies {
     compile 'com.android.support:support-v13:22.0.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:support-v4:22.0.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.mcxiaoke.volley:library:1.0.17'

@@ -46,6 +46,30 @@
         android:text="@string/aliwx_download_image_failed"
         android:textColor="@color/aliwx_second_grade_color"
         android:textSize="@dimen/aliwx_font_third_grade" />
+    <RelativeLayout
+        android:id="@+id/bottom_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/download_original"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/aliwx_download_original_button"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="下载原图"
+            android:textColor="@drawable/aliwx_btn_text_color"
+            android:textSize="@dimen/aliwx_common_text_size" />
+    </RelativeLayout>
 
     <com.alibaba.mobileim.fundamental.widget.ProgressWheel
         android:id="@+id/image_detail_progress"

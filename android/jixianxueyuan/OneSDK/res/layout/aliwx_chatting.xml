@@ -3,7 +3,7 @@
     android:id="@+id/wx_chat_framelayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/aliwx_common_bg_color" >
+    android:fitsSystemWindows="true">
 
     <ImageView
         android:id="@+id/wx_chat_bg_image"

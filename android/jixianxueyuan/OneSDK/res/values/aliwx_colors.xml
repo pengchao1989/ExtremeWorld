@@ -78,6 +78,25 @@
     <color name="aliwx_third_grade_color">#A9A9A9</color>
     <color name="aliwx_white_btn_text_color">#8E8E8E</color>
     <!--<color name="aliwx_white">#ffffffff</color>-->
-
     <color name="aliwx_wxtribe_title_color">#333333</color>
+
+
+    <!--原图相关色值-->
+    <color name="aliwx_color_blue">#00b4ff</color>
+    <color name="aliwx_color_blue_light">#535A60</color>
+    <color name="aliwx_color_blue_dark">#212c33</color>
+    <color name="aliwx_color_gray_01">#525252</color>
+    <color name="aliwx_color_gray_02">#999999</color>
+    <color name="aliwx_color_gray_03">#CCCCCC</color>
+    <color name="aliwx_color_white">#ffffff</color>
+
+    <color name="aliwx_color_blue_dark_with_alpha">#b2212c33</color>
+
+    <color name="aliwx_setting_line_color">#cccccc</color>
+    <color name="aliwx_setting_grey_bg_nor">#F0F0F0</color>
+
+    <color name="aliwx_default_indicator_page_color">#CCCCCC</color>
+    <color name="aliwx_default_indicator_fill_color">#999999</color>
+    <color name="aliwx_default_indicator_stroke_color">#999999</color>
+
 </resources>

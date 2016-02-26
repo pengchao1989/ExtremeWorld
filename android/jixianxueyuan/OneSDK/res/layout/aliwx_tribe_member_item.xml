@@ -22,6 +22,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/aliwx_friend_item_height"
+        android:paddingTop="5dp"
         android:background="@drawable/aliwx_friend_item_bg" >
 
         <CheckBox
@@ -30,6 +31,7 @@
             android:layout_height="@dimen/aliwx_common_checkbox_size"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="14dip"
             android:button="@drawable/aliwx_common_check_bg"
             android:clickable="false"
             android:visibility="gone"
@@ -43,8 +45,6 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/aliwx_select_box" />
 
-
-
         <TextView
             android:id="@+id/aliwx_select_name"
             style="@style/aliwx_common_first_text_style"
@@ -52,10 +52,17 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/aliwx_head"
             android:layout_alignTop="@id/aliwx_head"
-            android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/aliwx_column_up_unit_margin"
             android:layout_toRightOf="@id/aliwx_head"
             android:ellipsize="middle" />
+
+        <View
+            android:id="@+id/divider_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/aliwx_divider_color"
+            android:layout_alignLeft="@id/aliwx_head"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
 </LinearLayout>

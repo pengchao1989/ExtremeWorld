@@ -18,6 +18,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicListOfUserAdapter;
+import com.jixianxueyuan.app.Mine;
+import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.AppConstant;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.MyPage;
@@ -30,8 +33,6 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
-import com.jixianxueyuan.widget.MyActionBar;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -40,7 +41,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
-import me.nereo.multi_image_selector.bean.Image;
 
 /**
  * Created by pengchao on 5/22/15.
@@ -121,8 +121,12 @@ public class UserHomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(userDTO != null){
-                    YWIMKit mIMKit = YWAPI.getIMKitInstance();
-                    String target = userDTO.getLoginName();
+
+                    Mine mine = MyApplication.getContext().getMine();
+                    String userId = mine.getUserInfo().getLoginName();
+
+                    YWIMKit mIMKit = YWAPI.getIMKitInstance(userId, AppConstant.BAICHUAN_APP_KEY);
+                    final String target = userDTO.getLoginName();;// 消息接收者ID
                     Intent intent = mIMKit.getChattingActivityIntent(target);
                     startActivity(intent);
                 }

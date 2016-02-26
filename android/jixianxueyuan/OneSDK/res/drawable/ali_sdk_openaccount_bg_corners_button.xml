@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="true" android:state_pressed="false"><shape>
+            <solid android:color="@color/ali_sdk_openaccount_button_bg" />
+
+            <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp" android:topLeftRadius="5dp" android:topRightRadius="5dp" />
+        </shape></item>
+    <item android:state_enabled="true" android:state_pressed="true"><shape>
+            <solid android:color="@color/ali_sdk_openaccount_button_bg_click" />
+
+            <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp" android:topLeftRadius="5dp" android:topRightRadius="5dp" />
+        </shape></item>
+    <item android:state_enabled="true" android:state_window_focused="true"><shape>
+            <solid android:color="@color/ali_sdk_openaccount_button_bg" />
+
+            <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp" android:topLeftRadius="5dp" android:topRightRadius="5dp" />
+        </shape></item>
+    <item android:state_enabled="false"><shape android:padding="0dp" android:shape="rectangle">
+            <solid android:color="@color/ali_sdk_openaccount_button_bg_disable" />
+
+            <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp" android:topLeftRadius="5dp" android:topRightRadius="5dp" />
+        </shape></item>
+
+</selector>

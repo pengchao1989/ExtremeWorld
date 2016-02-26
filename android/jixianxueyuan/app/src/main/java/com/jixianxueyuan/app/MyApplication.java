@@ -28,6 +28,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 public class MyApplication extends MultiDexApplication {
 
 	private static MyApplication application;
+    private static Context sContext;
     private RequestQueue mRequestQueue;
 
 
@@ -72,7 +73,7 @@ public class MyApplication extends MultiDexApplication {
 
                 initCloudChannel(MyApplication.this);
 
-                initIM();
+
             }
 
             @Override
@@ -85,6 +86,8 @@ public class MyApplication extends MultiDexApplication {
 
         //init qupai
         initQuPai();
+
+        initIM();
 
 	}
 
@@ -122,6 +125,7 @@ public class MyApplication extends MultiDexApplication {
     }
 
     private void initIM(){
+
         SysUtil.setApplication(this);
         if(SysUtil.isTCMSServiceProcess(this)){
             return;
@@ -130,6 +134,7 @@ public class MyApplication extends MultiDexApplication {
         //这里的APP_KEY即应用创建时申请的APP_KEY
         YWAPI.init(this, "23213193");
     }
+
 
     private void initQuPai(){
         initAuth(getApplicationContext(),Contant.appkey,Contant.appsecret,Contant.space);

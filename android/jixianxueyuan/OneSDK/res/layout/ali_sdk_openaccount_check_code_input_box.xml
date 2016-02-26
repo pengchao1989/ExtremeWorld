@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:inputBox="http://schemas.android.com/apk/res-auto" >
+
+    <com.alibaba.sdk.android.openaccount.ui.widget.InputBoxWithClear
+        android:id="@+id/input_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        inputBox:ali_sdk_openaccount_attrs_hint="@string/ali_sdk_openaccount_text_check_code"
+        inputBox:ali_sdk_openaccount_attrs_inputType="textVisiblePassword"
+        inputBox:ali_sdk_openaccount_attrs_leftIconText="@string/ali_sdk_openaccount_icon_check_code" />
+
+    <include layout="@layout/ali_sdk_openaccount_vertical_frame_edge" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="75dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="4dp"
+        android:background="@null"
+        android:gravity="center"
+        android:scaleType="fitCenter" />
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="center"
+        android:minWidth="50dp"
+        android:text="@string/ali_sdk_openaccount_icon_refresh_check_code"
+        android:textColor="#cccccc"
+        android:textSize="20sp" />
+
+</merge>

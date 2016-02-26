@@ -3,7 +3,6 @@
     android:id="@+id/record_dialog"
     android:layout_width="148dip"
     android:layout_height="148dip"
-    android:layout_centerInParent="true"
     android:background="@drawable/aliwx_record_dialog_bg1"
     android:visibility="gone" >
 

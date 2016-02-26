@@ -15,16 +15,19 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/aliwx_btn_search_bar"
-        >
+        android:background="@drawable/aliwx_btn_search_bar">
 
-        <ImageView
+        <TextView
             android:id="@+id/aliwx_search_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            android:src="@drawable/aliwx_search_icon" />
+            android:text="搜索"
+            android:textSize="@dimen/aliwx_common_text_size"
+            android:drawableLeft="@drawable/aliwx_search_icon"
+            android:textColor="@color/aliwx_color_gray_02"
+            android:drawablePadding="5dp"/>
         <!--
         <TextView
             android:id="@+id/aliwx_friends_search_text"

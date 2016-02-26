@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ali_sdk_openaccount_icon_qq">&#xe601;</string>
+    <string name="ali_sdk_openaccount_icon_weixin">&#xe60f;</string>
+    <string name="ali_sdk_openaccount_icon_taobao">&#xe602;</string>
+    <string name="ali_sdk_openaccount_icon_weibo">&#xe603;</string>
+    <string name="ali_sdk_openaccount_icon_user">&#xe605;</string>
+    <string name="ali_sdk_openaccount_icon_arrow_down">&#xe609;</string>
+    <string name="ali_sdk_openaccount_icon_arrow_up">&#xe60e;</string>
+    <string name="ali_sdk_openaccount_icon_mobile">&#xe608;</string>
+    <string name="ali_sdk_openaccount_icon_back">&#xe604;</string>
+    <string name="ali_sdk_openaccount_icon_sms_code">&#xe60a;</string>
+    <string name="ali_sdk_openaccount_icon_password">&#xe607;</string>
+    <string name="ali_sdk_openaccount_icon_clear">&#xe606;</string>
+    <string name="ali_sdk_openaccount_icon_check_code">&#xe60d;</string>
+    <string name="ali_sdk_openaccount_icon_refresh_check_code">&#xe600;</string>
+    <string name="ali_sdk_openaccount_icon_eye">&#xe60b;</string>
+    <string name="ali_sdk_openaccount_icon_eye_open">&#xe60c;</string>
+    <string name="ali_sdk_openaccount_text_register">注册</string>
+    <string name="ali_sdk_openaccount_text_reset_password">重置密码</string>
+    <string name="ali_sdk_openaccount_text_set_account_info">设置账户信息</string>
+    <string name="ali_sdk_openaccount_text_send_sms_code">发送短信验证码</string>
+    <string name="ali_sdk_openaccount_text_next_step">下一步</string>
+    <string name="ali_sdk_openaccount_text_mobile">手机号码</string>
+    <string name="ali_sdk_openaccount_text_sms_code">短信校验码</string>
+    <string name="ali_sdk_openaccount_text_check_code">验证码</string>
+    <string name="ali_sdk_openaccount_text_count_down">%s秒重发</string>
+    <string name="ali_sdk_openaccount_text_register_password_rule">密码由6&#8211;20位英文、数字、或符号组成</string>
+    <string name="ali_sdk_openaccount_text_reset_password_rule">1、为了您的账号安全，新旧密码必须不同\n2、密码由6&#8211;20位英文、数字、或符号组成</string>
+    <string name="ali_sdk_openaccount_text_login_password">登录密码</string>
+    <string name="ali_sdk_openaccount_text_new_password">新密码</string>
+    <string name="ali_sdk_openaccount_text_free_register">免费注册</string>
+    <string name="ali_sdk_openaccount_text_forget_password">忘记密码?</string>
+    <string name="ali_sdk_openaccount_text_taobao">淘宝</string>
+    <string name="ali_sdk_openaccount_text_weibo">微博</string>
+    <string name="ali_sdk_openaccount_text_weixin">微信</string>
+    <string name="ali_sdk_openaccount_text_qq">QQ</string>
+    <string name="ali_sdk_openaccount_text_other_plateform_login">其他账号登录</string>
+    <string name="ali_sdk_openaccount_text_no_password_login">无密登录</string>
+    <string name="ali_sdk_openaccount_text_login">登录</string>
+    <string name="ali_sdk_openaccount_text_loginId">手机号码/邮箱</string>
+    <string name="ali_sdk_openaccount_text_password">密码</string>
+    <string name="ali_sdk_openaccount_text_checkcode">验证码</string>
+    <string name="ali_sdk_openaccount_text_system_exception">系统繁忙，请稍后再试</string>
+    <string name="ali_sdk_openaccount_text_network_exception">网络状态异常，请检查网络设置</string>
+
+</resources>

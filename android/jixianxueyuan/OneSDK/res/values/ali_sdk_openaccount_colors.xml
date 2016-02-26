@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ali_sdk_openaccount_bg_stroke">#cccccc</color>
+    <color name="ali_sdk_openaccount_bg_list">#f7f7f7</color>
+    <color name="ali_sdk_openaccount_text_dark">#999999</color>
+    <color name="ali_sdk_openaccount_text_input">#333333</color>
+    <color name="ali_sdk_openaccount_text_display">#999999</color>
+    <color name="ali_sdk_openaccount_text_hint">#cccccc</color>
+    <color name="ali_sdk_openaccount_button_bg">#489ff1</color>
+    <color name="ali_sdk_openaccount_button_bg_click">#3d91e3</color>
+    <color name="ali_sdk_openaccount_button_bg_disable">#dddddd</color>
+    <color name="ali_sdk_openaccount_button_text">#ffffff</color>
+    <color name="ali_sdk_openaccount_button_text_disable">#aaaaaa</color>
+    <color name="ali_sdk_openaccount_frame_edge">#cccccc</color>
+</resources>

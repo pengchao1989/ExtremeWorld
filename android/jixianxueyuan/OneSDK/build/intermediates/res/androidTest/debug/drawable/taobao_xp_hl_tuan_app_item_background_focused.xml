@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:shape="rectangle">
+    <solid android:color="#EEEEEE" />
+</shape><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/drawable/taobao_xp_hl_tuan_app_item_background_focused.xml --><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/build/intermediates/bundles/debug/res/drawable/taobao_xp_hl_tuan_app_item_background_focused.xml -->

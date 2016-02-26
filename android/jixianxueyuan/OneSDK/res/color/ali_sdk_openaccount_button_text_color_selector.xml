@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="true" android:color="@color/ali_sdk_openaccount_button_text"/>
+    <item android:state_enabled="false" android:color="@color/ali_sdk_openaccount_button_text_disable"/>
+    <item android:color="@color/ali_sdk_openaccount_button_text_disable"/>
+
+</selector>

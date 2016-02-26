@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="customAttrs">
+        <attr name="ali_sdk_openaccount_attrs_title_bar_bg" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_title_bar_back_text_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_title_bar_text_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_title_bar_title" format="string|reference" />
+        <attr name="ali_sdk_openaccount_attrs_title_bar_visibility">
+            <flag name="visible" value="0" />
+            <flag name="invisible" value="4" />
+            <flag name="gone" value="8" />
+        </attr>
+        <attr name="ali_sdk_openaccount_attrs_main_bg" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_next_step_bg" format="reference" />
+        <attr name="ali_sdk_openaccount_attrs_send_sms_code_color" format="reference" />
+        <attr name="ali_sdk_openaccount_attrs_input_box_clear_btn_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_login_register_text_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_login_reset_password_text_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_login_other_plateform_login_text_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_login_oauth_plateform">
+            <flag name="taobao" value="0x1" />
+            <flag name="weixin" value="0x2" />
+            <flag name="weibo" value="0x4" />
+            <flag name="qq" value="0x8" />
+        </attr>
+        <attr name="ali_sdk_openaccount_attrs_login_oauth_text_text_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_login_oauth_text_color" format="reference|color" />
+        <attr name="ali_sdk_openaccount_attrs_login_oauth_1_bg" format="reference" />
+        <attr name="ali_sdk_openaccount_attrs_login_oauth_2_bg" format="reference" />
+        <attr name="ali_sdk_openaccount_attrs_login_oauth_3_bg" format="reference" />
+        <attr name="ali_sdk_openaccount_attrs_login_oauth_4_bg" format="reference" />
+        <attr name="ali_sdk_openaccount_attrs_fill_password_text" format="reference|string" />
+        <attr name="ali_sdk_openaccount_attrs_fill_password_text_color" format="reference|color" />
+    </declare-styleable>
+
+    <attr name="ali_sdk_openaccount_attrs_hint" format="string|reference" />
+
+    <declare-styleable name="inputBox">
+
+        <!-- 左边图标的文字 -->
+        <attr name="ali_sdk_openaccount_attrs_leftIconText" format="string|reference" />
+        <attr name="ali_sdk_openaccount_attrs_hint" />
+        <attr name="ali_sdk_openaccount_attrs_inputType">
+            <flag name="textNormal" value="0x1" />
+            <flag name="textNumber" value="0x2" />
+            <flag name="textDecimal" value="0x2002" />
+            <flag name="textPassword" value="0x81" />
+            <flag name="textVisiblePassword" value="0x90" />
+            <flag name="textUri" value="0x11" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="inputHistory">
+
+        <!-- 存储key -->
+        <attr name="ali_sdk_openaccount_attrs_storeKey" format="string|reference" />
+        <attr name="ali_sdk_openaccount_attrs_historyViewId" format="reference" />
+        <attr name="ali_sdk_openaccount_attrs_hint" />
+    </declare-styleable>
+
+</resources>

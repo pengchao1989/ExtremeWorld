@@ -97,9 +97,7 @@ public class MainActivity extends Activity {
             if(mine.getUserInfo() != null && mine.getUserInfo().getId() != null){
                 //直接进入Hone页
                 if(mine.getUserInfo().getId() > 0){
-                    Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
-                    startActivity(intent);
-                    finish();
+                    loginIM();
                 }
             }
             else{
@@ -225,7 +223,7 @@ public class MainActivity extends Activity {
 
     private void requestLogin() {
 
-        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + qqOpenInfo.getOpenid();
+        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + /*qqOpenInfo.getOpenid()*/"47CE7BB9D8A18997D2BD0B95D94689CE";
 
         MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
                 new Response.Listener<MyResponse<UserDTO>>() {

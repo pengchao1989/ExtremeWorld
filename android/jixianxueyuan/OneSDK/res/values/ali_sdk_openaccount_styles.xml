@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="OpenAccountDefault" parent="@android:style/Theme.NoTitleBar">
+        <item name="ali_sdk_openaccount_attrs_title_bar_bg">#f8f8f8</item>
+        <item name="ali_sdk_openaccount_attrs_title_bar_text_color">#3d4245</item>
+        <item name="ali_sdk_openaccount_attrs_title_bar_back_text_color">#61666f</item>
+        <item name="ali_sdk_openaccount_attrs_title_bar_visibility">visible</item>
+        <item name="ali_sdk_openaccount_attrs_main_bg">#eeeeee</item>
+        <item name="ali_sdk_openaccount_attrs_next_step_bg">@drawable/ali_sdk_openaccount_bg_corners_button</item>
+        <item name="ali_sdk_openaccount_attrs_input_box_clear_btn_color">#cccccc</item>
+    </style>
+
+    <style name="SendSmsCode" parent="@style/OpenAccountDefault">
+        <item name="ali_sdk_openaccount_attrs_send_sms_code_color">@color/ali_sdk_openaccount_send_sms_code_text_color_selector</item>
+    </style>
+
+    <style name="Login" parent="@style/OpenAccountDefault">
+        <item name="ali_sdk_openaccount_attrs_login_register_text_color">#999999</item>
+        <item name="ali_sdk_openaccount_attrs_login_reset_password_text_color">#999999</item>
+        <item name="ali_sdk_openaccount_attrs_login_other_plateform_login_text_color">#999999</item>
+        <item name="ali_sdk_openaccount_attrs_title_bar_title">@string/ali_sdk_openaccount_text_login</item>
+        <item name="ali_sdk_openaccount_attrs_login_oauth_plateform">taobao|qq|weibo|weixin</item>
+        <item name="ali_sdk_openaccount_attrs_login_oauth_text_text_color">#999999</item>
+        <item name="ali_sdk_openaccount_attrs_login_oauth_text_color">#ffffff</item>
+        <item name="ali_sdk_openaccount_attrs_login_oauth_1_bg">@drawable/ali_sdk_openaccount_bg_oval_taobao</item>
+        <item name="ali_sdk_openaccount_attrs_login_oauth_2_bg">@drawable/ali_sdk_openaccount_bg_oval_weixin</item>
+        <item name="ali_sdk_openaccount_attrs_login_oauth_3_bg">@drawable/ali_sdk_openaccount_bg_oval_weibo</item>
+        <item name="ali_sdk_openaccount_attrs_login_oauth_4_bg">@drawable/ali_sdk_openaccount_bg_oval_qq</item>
+    </style>
+
+    <style name="Register" parent="@style/SendSmsCode">
+        <item name="ali_sdk_openaccount_attrs_title_bar_title">@string/ali_sdk_openaccount_text_register</item>
+    </style>
+
+    <style name="ResetPassword" parent="@style/SendSmsCode">
+        <item name="ali_sdk_openaccount_attrs_title_bar_title">@string/ali_sdk_openaccount_text_reset_password</item>
+    </style>
+
+    <style name="NoPasswordLogin" parent="@style/SendSmsCode">
+        <item name="ali_sdk_openaccount_attrs_title_bar_title">@string/ali_sdk_openaccount_text_no_password_login</item>
+    </style>
+
+    <style name="FillPassword" parent="@style/OpenAccountDefault">
+        <item name="ali_sdk_openaccount_attrs_fill_password_text_color">#999999</item>
+    </style>
+
+    <style name="ResetPasswordFillPassword" parent="@style/FillPassword">
+        <item name="ali_sdk_openaccount_attrs_fill_password_text">@string/ali_sdk_openaccount_text_reset_password_rule</item>
+        <item name="ali_sdk_openaccount_attrs_title_bar_title">@string/ali_sdk_openaccount_text_reset_password</item>
+    </style>
+
+    <style name="RegisterFillPassword" parent="@style/FillPassword">
+        <item name="ali_sdk_openaccount_attrs_fill_password_text">@string/ali_sdk_openaccount_text_register_password_rule</item>
+        <item name="ali_sdk_openaccount_attrs_title_bar_title">@string/ali_sdk_openaccount_text_set_account_info</item>
+    </style>
+
+</resources>
