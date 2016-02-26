@@ -223,7 +223,7 @@ public class MainActivity extends Activity {
 
     private void requestLogin() {
 
-        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + /*qqOpenInfo.getOpenid()*/"47CE7BB9D8A18997D2BD0B95D94689CE";
+        String url = ServerMethod.account_qq_login() + "?qqOpenId=" + qqOpenInfo.getOpenid();
 
         MyRequest<UserDTO> myRequest = new MyRequest<UserDTO>(Request.Method.GET, url, UserDTO.class,
                 new Response.Listener<MyResponse<UserDTO>>() {

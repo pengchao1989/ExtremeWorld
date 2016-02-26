@@ -7,12 +7,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.conversation.EServiceContact;
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.AppConstant;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.Util;
 
@@ -78,6 +83,13 @@ public class SettingActivity extends BaseActivity {
 
     @OnClick(R.id.setting_activity_feedback)void onFeedbackClick(){
 
+        Mine mine = MyApplication.getContext().getMine();
+        String userId = mine.getUserInfo().getLoginName();
+
+        EServiceContact contact = new EServiceContact("jixianxueyuan_s1", 0);
+        YWIMKit mIMKit = YWAPI.getIMKitInstance(userId, AppConstant.BAICHUAN_APP_KEY);
+        Intent intent = mIMKit.getChattingActivityIntent(contact);
+        startActivity(intent);
     }
 
     @OnClick(R.id.setting_activity_clean_cache)void onCleanCacheClick(){
