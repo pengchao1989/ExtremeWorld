@@ -28,6 +28,11 @@ public class UmengEventId {
 
 
     /*mine*/
+    public static final String MINE_REPLY_CLICK = "mine_reply_click";
+    public static final String MINE_COLLECTION_CLICK = "mine_collection_click";
+    public static final String MINE_SETTING_CLICK = "mine_setting_click";
+    public static final String MINE_SPONSORSHIP_CLICK = "mine_sponsorship_click";
+    public static final String MINE_AVATAR_CLICK= "mine_avatar_click";
 
     /*discovery*/
     public static final String DISCOVERY_NEWS_CLICK = "discovery_news_click";

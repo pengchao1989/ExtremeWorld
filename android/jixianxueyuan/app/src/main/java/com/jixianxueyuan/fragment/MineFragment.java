@@ -30,6 +30,7 @@ import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.ProfileAttributeName;
 import com.jixianxueyuan.config.QiniuImageStyle;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
@@ -41,6 +42,7 @@ import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -129,26 +131,31 @@ public class MineFragment extends Fragment {
     }
 
     @OnClick(R.id.mine_fragment_remind_reply) void remindReplyOnClick(){
+        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_REPLY_CLICK);
         Intent intent = new Intent(this.getActivity(), RemindListActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.mine_fragment_collection)void collectionOnClick(){
+        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_COLLECTION_CLICK);
         Intent intent = new Intent(this.getActivity(), CollectionListActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.mine_fragment_setting)void onSettingClick(){
+        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_SETTING_CLICK);
         Intent intent = new Intent(this.getActivity(), SettingActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.mine_avatar_imageview)void onAvatarOnClick(){
+        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_AVATAR_CLICK);
         Intent intent = new Intent(this.getActivity(), ProfileEditActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.mine_fragment_sponsorship)void onSponsorship(){
+        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_SPONSORSHIP_CLICK);
         Intent intent = new Intent(this.getActivity(), SponsorshipActivity.class);
         startActivity(intent);
     }
