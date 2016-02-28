@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.biz.GoodsDTO;
+import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -73,7 +74,14 @@ public class GoodsListAdapter extends BaseAdapter {
         GoodsDTO goodsDTO = goodsDTOList.get(position);
         viewHolder.titleTextView.setText(goodsDTO.getName());
 
-        String imageUrl = goodsDTO.getCover() + "!AndroidGridItem";
+        String imageUrl = "";
+
+        if(Util.isOurServerImage(goodsDTO.getCover())){
+            imageUrl = goodsDTO.getCover() + "!AndroidGridItem";
+        }else{
+            imageUrl = goodsDTO.getCover();
+        }
+
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.displayImage(imageUrl, viewHolder.imageView, ImageLoaderConfig.getImageOption(context));
 
