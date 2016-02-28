@@ -10,21 +10,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.commons.UpdateManager;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
-import com.jixianxueyuan.fragment.TopicListFragment;
 import com.jixianxueyuan.util.ShareUtils;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -72,10 +70,9 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
         setChioceItem(0);
 
-        UpdateManager updateManager = new UpdateManager(this);
-        updateManager.checkUpdateInfo(false);
-
         MobclickAgent.setDebugMode(true);
+
+        UmengUpdateAgent.update(this);
     }
 
     private void initView(){

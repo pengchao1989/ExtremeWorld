@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CollectionListActivity;
 import com.jixianxueyuan.activity.CropBgActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.profile.ProfileEditActivity;
@@ -40,8 +41,6 @@ import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.utils.DiskCacheUtils;
-import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
 
 import java.util.List;
 
@@ -131,6 +130,11 @@ public class MineFragment extends Fragment {
 
     @OnClick(R.id.mine_fragment_remind_reply) void remindReplyOnClick(){
         Intent intent = new Intent(this.getActivity(), RemindListActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.mine_fragment_collection)void collectionOnClick(){
+        Intent intent = new Intent(this.getActivity(), CollectionListActivity.class);
         startActivity(intent);
     }
 

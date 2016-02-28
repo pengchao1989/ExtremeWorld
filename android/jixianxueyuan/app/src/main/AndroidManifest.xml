@@ -110,6 +110,7 @@
         <activity android:name=".activity.GoodsListActivity"/>
         <activity android:name=".activity.SiteListActivity"/>
         <activity android:name=".activity.SponsorshipActivity"/>
+        <activity android:name=".activity.CollectionListActivity"/>
         <activity android:name=".activity.WebActivity"/>
         <activity
             android:configChanges="orientation|screenSize"
@@ -284,8 +285,19 @@
             </intent-filter>
         </receiver>
 
-        <!-- Required  . Enable it you can get statistics data with channel
-        -->
+        <!-- Required  . Enable it you can get statistics data with channel-->
+
+        <!--umeng update-->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <!--umeng update-->
+
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="developer-default" />

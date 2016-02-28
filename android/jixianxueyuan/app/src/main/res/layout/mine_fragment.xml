@@ -86,14 +86,43 @@
 
         </RelativeLayout>
 
+
+
         <View style="@style/HorizontalDividerView" />
+
+        <RelativeLayout
+            android:id="@+id/mine_fragment_collection"
+            style="@style/ImageItemLayout">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/mine_star" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/collection" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
 
 
         <View style="@style/HorizontalDividerView" />
 
         <RelativeLayout
             android:id="@+id/mine_fragment_setting"
-            android:layout_marginTop="20dp"
             style="@style/ImageItemLayout"
             >
 
@@ -125,7 +154,6 @@
 
         <RelativeLayout
             android:id="@+id/mine_fragment_sponsorship"
-            android:layout_marginTop="20dp"
             style="@style/ImageItemLayout"
             >
 
@@ -184,9 +212,6 @@
             <ImageView style="@style/ImageItemRightIcon" />
 
         </RelativeLayout>
-
-        <View style="@style/HorizontalDividerView" />
-
 
     </LinearLayout>
 
