@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.AgreeResultDTO;
+import com.jixianxueyuan.dto.CollectionDTO;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.MyPage;
@@ -325,6 +327,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             }
         });
 
+        headViewHolder.collectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitCollection();
+            }
+        });
+
     }
 
     private void initVideo()
@@ -552,8 +561,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private boolean submitZan()
     {
-        RequestQueue queue = Volley.newRequestQueue(this);
-
         String url = ServerMethod.zan();
 
         ZanRequest zanRequest = new ZanRequest();
@@ -575,8 +582,27 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             }
         });
 
-        queue.add(myRequest);
+        MyApplication.getContext().getRequestQueue().add(myRequest);
         return false;
+    }
+
+    private void submitCollection(){
+        String url = ServerMethod.collection() + "/" + topicDTO.getId();
+        MyRequest<CollectionDTO> myRequest = new MyRequest<CollectionDTO>(Request.Method.POST, url, CollectionDTO.class, null, new Response.Listener<MyResponse<CollectionDTO>>() {
+            @Override
+            public void onResponse(MyResponse<CollectionDTO> response) {
+                if(response.getStatus() == MyResponse.status_ok){
+                    headViewHolder.collectionButton.setVisibility(View.GONE);
+                    headViewHolder.collectionOk.setVisibility(View.VISIBLE);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
 
@@ -602,6 +628,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @InjectView(R.id.topic_detail_head_zan)ImageButton zanButton;
         @InjectView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
         @InjectView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
+        @InjectView(R.id.topic_detail_collection_ok)ImageView collectionOk;
+        @InjectView(R.id.topic_detail_collection_button)ImageButton collectionButton;
         @InjectView(R.id.topic_detail_content_textview)TextView contentTextView;
         @InjectView(R.id.topic_detail_content_container)LinearLayout contentLayout;
 
