@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.ResultCode;
+import com.alibaba.sdk.android.trade.ItemService;
 import com.alibaba.sdk.android.trade.TradeService;
 import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
 import com.alibaba.sdk.android.trade.model.TradeResult;
@@ -242,9 +245,34 @@ public class MarketFragment extends Fragment {
     @OnItemClick(R.id.market_home_activity_gridview) void onShopClick(int position){
 
             MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_SHOP_ITEM_CLICK, shopGridAdapter.getItem(position).getName());
-            Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
+/*            Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
             intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_SHOP);
             intent.putExtra(GoodsListActivity.SOURCE_TYPE_SHOP, shopGridAdapter.getItem(position));
-            startActivity(intent);
+            startActivity(intent);*/
+            ItemService itemService = AlibabaSDK.getService(ItemService.class);
+            itemService.showPage(MarketFragment.this.getActivity(), new TradeProcessCallback() {
+
+                @Override
+                public void onPaySuccess(TradeResult tradeResult) {
+                    Toast.makeText(
+                            MarketFragment.this.getContext(),
+                            "支付成功" + tradeResult.paySuccessOrders + "   "
+                                    + tradeResult.payFailedOrders,
+                            Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onFailure(int code, String msg) {
+                    if (code == ResultCode.QUERY_ORDER_RESULT_EXCEPTION.code) {
+                        Toast.makeText(MarketFragment.this.getContext(), "确认交易订单失败",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MarketFragment.this.getContext(), "交易异常",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, null,shopGridAdapter.getItem(position).getTaobaoUrl());
+
     }
 }

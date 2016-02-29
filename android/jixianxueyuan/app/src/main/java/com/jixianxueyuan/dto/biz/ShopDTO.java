@@ -13,6 +13,7 @@ public class ShopDTO implements Serializable{
 	private String cover;
 	private String createTime;
 	private int weight;
+	private String taobaoUrl;
 	
 	private UserMinDTO user;
 	
@@ -65,6 +66,15 @@ public class ShopDTO implements Serializable{
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
+
+	public String getTaobaoUrl() {
+		return taobaoUrl;
+	}
+
+	public void setTaobaoUrl(String taobaoUrl) {
+		this.taobaoUrl = taobaoUrl;
+	}
+
 	public UserMinDTO getUser() {
 		return user;
 	}

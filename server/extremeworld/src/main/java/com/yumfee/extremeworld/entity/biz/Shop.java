@@ -26,6 +26,7 @@ public class Shop extends IdEntity{
 	private String cover;
 	private Date createTime;
 	private int weight;
+	private String taobaoUrl;
 	
 	
 	private User user;
@@ -73,6 +74,14 @@ public class Shop extends IdEntity{
 	}
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	
+	
+	public String getTaobaoUrl() {
+		return taobaoUrl;
+	}
+	public void setTaobaoUrl(String taobaoUrl) {
+		this.taobaoUrl = taobaoUrl;
 	}
 	@ManyToOne
 	@JoinColumn(name = "user_id")

@@ -13,6 +13,7 @@ public class ShopDTO {
 	private String cover;
 	private Date createTime;
 	private int weight;
+	private String taobaoUrl;
 	
 	private UserMinDTO user;
 	
@@ -64,6 +65,13 @@ public class ShopDTO {
 	}
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	
+	public String getTaobaoUrl() {
+		return taobaoUrl;
+	}
+	public void setTaobaoUrl(String taobaoUrl) {
+		this.taobaoUrl = taobaoUrl;
 	}
 	public UserMinDTO getUser() {
 		return user;
