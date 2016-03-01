@@ -7,6 +7,7 @@ public class CourseTaxonomyDTO implements Serializable
 {
 	private Long id;
 	private String name;
+	private String des;
 	private String createTime;
 
 	private List<CourseMinDTO> courses;
@@ -29,6 +30,14 @@ public class CourseTaxonomyDTO implements Serializable
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public String getDes() {
+		return des;
+	}
+
+	public void setDes(String des) {
+		this.des = des;
 	}
 
 	public String getCreateTime()

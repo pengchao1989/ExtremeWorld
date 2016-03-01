@@ -2,11 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.jixianxueyuan.widget.MyActionBar
         android:layout_width="match_parent"
@@ -14,29 +12,13 @@
         app:my_title="@string/course"
         />
 
-    <me.amiee.nicetab.NiceTabLayout
-        android:id="@+id/course_home_activity_pager_title_strip"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/primary_color"
-        app:ntlDividerPaddingLeft="8dp"
-        app:ntlDividerPaddingRight="8dp"
-        app:ntlIndicatorHeight="2dp"
-        app:ntlOverlayColor="#aa1a237e"
-        app:ntlTabMode="both"
-        app:ntlTextSize="18sp"
-        app:ntlTextStyle="normal"
-        app:ntlUnderlineHeight="1dp"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/course_home_activity_pager"
+    <ListView
+        android:id="@+id/course_home_taxonomy_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--
-        This title strip will display the currently visible page title, as well as the page
-        titles for adjacent pages.
-        -->
-    </android.support.v4.view.ViewPager>
+
+    </ListView>
+
 
 </LinearLayout>

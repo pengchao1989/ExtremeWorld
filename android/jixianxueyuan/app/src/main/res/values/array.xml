@@ -28,4 +28,12 @@
         <item>@mipmap/mine_set</item>
     </string-array>
 
+    <integer-array name="course_taxonomy_color_array">
+        <item>@color/course_taxonomy_1</item>
+        <item>@color/course_taxonomy_2</item>
+        <item>@color/course_taxonomy_3</item>
+        <item>@color/course_taxonomy_4</item>
+        <item>@color/course_taxonomy_5</item>
+    </integer-array>
+
 </resources>

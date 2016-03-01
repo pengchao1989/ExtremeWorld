@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class CourseTaxonomy extends IdEntity
 {
 	private String name;
+	private String des;
 	private Date createTime;
 	
 	private Hobby hobby;
@@ -30,6 +31,14 @@ public class CourseTaxonomy extends IdEntity
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public String getDes() {
+		return des;
+	}
+
+	public void setDes(String des) {
+		this.des = des;
 	}
 
 	public Date getCreateTime()

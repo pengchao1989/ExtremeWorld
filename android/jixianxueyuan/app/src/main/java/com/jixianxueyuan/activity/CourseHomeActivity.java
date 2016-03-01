@@ -1,9 +1,7 @@
 package com.jixianxueyuan.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,55 +9,43 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.CourseTaxonomyListFragmentPageAdapter;
-import com.jixianxueyuan.dto.CourseTaxonomyDTO;
+import com.jixianxueyuan.adapter.CourseTaxonomyListAdapter;
 import com.jixianxueyuan.dto.CourseTaxonomysResponseDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ACache;
 
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import me.amiee.nicetab.NiceTabLayout;
-import me.amiee.nicetab.NiceTabStrip;
+import butterknife.OnItemClick;
 
 /**
- * Created by pengchao on 4/30/15.
+ * Created by pengchao on 3/1/16.
  */
-public class CourseHomeActivity extends BaseActivity{
+public class CourseHomeActivity extends BaseActivity {
 
-    @InjectView(R.id.course_home_activity_pager)ViewPager viewPager;
-    @InjectView(R.id.course_home_activity_pager_title_strip)NiceTabLayout niceTabLayout;
+    @InjectView(R.id.course_home_taxonomy_list_view)ListView listView;
 
-    CourseTaxonomyListFragmentPageAdapter mAdapter;
+    CourseTaxonomyListAdapter adapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.d("CourseHomeActivity", "onCreate");
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.course_home_activity);
 
         ButterKnife.inject(this);
 
-        mAdapter = new CourseTaxonomyListFragmentPageAdapter(getSupportFragmentManager(), this);
-        viewPager.setAdapter(mAdapter);
-
+        adapter = new CourseTaxonomyListAdapter(this);
+        listView.setAdapter(adapter);
 
         initCourseList();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
+    @OnItemClick(R.id.course_home_taxonomy_list_view)void OnItemClicked(int position){
+        CourseListActivity.startActivity(this, adapter.getItem(position));
     }
 
     private void initCourseList(){
@@ -67,12 +53,13 @@ public class CourseHomeActivity extends BaseActivity{
         String url = ServerMethod.courseTaxonomy();
         CourseTaxonomysResponseDTO courseTaxonomysResponseDTO= (CourseTaxonomysResponseDTO) aCache.getAsObject(url);
         if(courseTaxonomysResponseDTO != null){
-            mAdapter.setData(courseTaxonomysResponseDTO.getCourseTaxonomyList());
-            setTabs();
+            adapter.setData(courseTaxonomysResponseDTO.getCourseTaxonomyList());
         }else {
             requestCourseList();
         }
     }
+
+
     private void requestCourseList()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -85,10 +72,7 @@ public class CourseHomeActivity extends BaseActivity{
 
                         if(response.getContent() != null) {
 
-
-                            mAdapter.setData(response.getContent().getCourseTaxonomyList());
-
-                            setTabs();
+                            adapter.setData(response.getContent().getCourseTaxonomyList());
 
                             ACache aCache = ACache.get(CourseHomeActivity.this);
                             aCache.put(url, response.getContent(), ACache.TIME_DAY);
@@ -105,35 +89,4 @@ public class CourseHomeActivity extends BaseActivity{
 
         queue.add(myRequest);
     }
-
-    private void setTabs() {
-        niceTabLayout.setViewPager(viewPager);
-        niceTabLayout.setTabStripColorize(new NiceTabStrip.TabStripColorize() {
-
-            @Override
-            public int getIndicatorColor(int position) {
-                return mAdapter.getTabs().get(position).getIndicatorColor();
-            }
-
-            @Override
-            public int getDividerColor(int position) {
-                return mAdapter.getTabs().get(position).getDividerColor();
-            }
-        });
-        niceTabLayout.setTabColorize(new NiceTabLayout.TabColorize() {
-
-            @Override
-            public int getDefaultTabColor(int position) {
-                return Color.WHITE;
-            }
-
-            @Override
-            public int getSelectedTabColor(int position) {
-                return mAdapter.getTabs().get(position).getIndicatorColor();
-            }
-        });
-
-        niceTabLayout.setTabMode(NiceTabLayout.TabMode.TITLE_ONLY);
-    }
-
 }

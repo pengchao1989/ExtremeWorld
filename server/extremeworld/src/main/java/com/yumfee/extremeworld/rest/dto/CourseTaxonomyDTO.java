@@ -9,6 +9,7 @@ public class CourseTaxonomyDTO
 {
 	private Long id;
 	private String name;
+	private String des;
 	private Date createTime;
 	
 	private List<CourseMinDTO> courses;
@@ -31,6 +32,14 @@ public class CourseTaxonomyDTO
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public String getDes() {
+		return des;
+	}
+
+	public void setDes(String des) {
+		this.des = des;
 	}
 
 	public Date getCreateTime()

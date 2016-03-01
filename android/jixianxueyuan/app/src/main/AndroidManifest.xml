@@ -89,7 +89,9 @@
         <activity android:name=".activity.TopicDetailActivity"/>
         <activity android:name=".activity.MoodDetailActivity"/>
         <activity android:name=".activity.DiscussionDetailActivity"/>
+        <activity android:name=".activity.CourseOldHomeActivity"/>
         <activity android:name=".activity.CourseHomeActivity"/>
+        <activity android:name=".activity.CourseListActivity"/>
         <activity android:name=".activity.CreateTopicActivity"/>
         <activity android:name=".activity.CreateShortVideoActivity"/>
         <activity android:name=".activity.TopicTaxonomyHomeActivity"/>

@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseHomeActivity;
+import com.jixianxueyuan.activity.CourseOldHomeActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.SiteListActivity;
