@@ -1,5 +1,8 @@
 package com.yumfee.extremeworld.web.video;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.TopicType;
+import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
@@ -118,6 +123,7 @@ public class VideoController
 		newVideo.setReplyCount(0);
 		newVideo.setStatus(1);
 		newVideo.setExcerpt(newVideo.getContent());
+		newVideo.setType(TopicType.VIDEO);
 
 		//videoSource在属性的属性中，单独从form参数中提取
 		String videoSource = request.getParameter("videoSource");
@@ -132,6 +138,16 @@ public class VideoController
 		videoDetail.setVideoSource(videoSource);
 		videoDetail.setThumbnail(frontSource);
 		newVideo.setVideoDetail(videoDetail);
+		
+		//hobby
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		List<Hobby> hobbyList= new ArrayList<Hobby>();
+		Hobby hobbyBean = new Hobby();
+		hobbyBean.setId(hobbyId);
+		hobbyList.add(hobbyBean);
+		
+		newVideo.setHobbys(hobbyList);
+		
 		videoService.saveVideo(newVideo);
 		
 		redirectAttributes.addFlashAttribute("message", "发布视频成功");

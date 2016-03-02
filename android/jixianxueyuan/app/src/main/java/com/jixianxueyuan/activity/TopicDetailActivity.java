@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,9 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.android.tedcoder.wkvideoplayer.model.Video;
+import com.android.tedcoder.wkvideoplayer.model.VideoUrl;
 import com.android.tedcoder.wkvideoplayer.view.MediaController;
 import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.android.volley.Request;
@@ -61,7 +60,6 @@ import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.yumfee.emoji.EmojiconTextView;
 
 import java.io.File;
@@ -70,6 +68,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -126,7 +125,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
                     String key = Util.stringToMD5(url);
 
-                    playVideo(DiskCachePath.getDiskCacheDir(TopicDetailActivity.this, "short_video").getPath() + "/"+ key + ".0" );
+                    playLocalVideo(DiskCachePath.getDiskCacheDir(TopicDetailActivity.this, "short_video").getPath() + "/" + key + ".0");
                     break;
                 case HANDLER_DOWNLOAD_UPDATE:
                     headViewHolder.roundProgressBarWidthNumber.setProgress(mProgressNum);
@@ -341,25 +340,26 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         headViewHolder.playButton.setVisibility(View.GONE);
         headViewHolder.videoView.setVideoPlayCallback(mVideoPlayCallback);
 
-        openDiskLruCache();
+        if(topicDTO.getType().equals(TopicType.VIDEO)){
+            playWebVideo(topicDTO.getVideoDetail().getVideoSource());
+        }else {
+            openDiskLruCache();
+            String key = Util.stringToMD5(topicDTO.getVideoDetail().getVideoSource());
+            try {
 
-        String key = Util.stringToMD5(topicDTO.getVideoDetail().getVideoSource());
+                DiskLruCache.Snapshot snapShot = mDiskLruCache.get(key);
 
+                if(snapShot != null) {
+                    playLocalVideo(DiskCachePath.getDiskCacheDir(this, "short_video").getPath() + "/" + key + ".0");
+                }
+                else {
+                    headViewHolder.roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
+                    downloadVideoFile();
+                }
 
-        try {
-
-            DiskLruCache.Snapshot snapShot = mDiskLruCache.get(key);
-
-            if(snapShot != null) {
-                playVideo(DiskCachePath.getDiskCacheDir(this, "short_video").getPath() +"/" + key + ".0" );
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            else {
-                headViewHolder.roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
-                downloadVideoFile();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -642,16 +642,34 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
 
     //video
-    private void playVideo(String path)
+    private void playLocalVideo(String path)
     {
         MyLog.d(tag, "videoPath=" + path);
 
         headViewHolder.coverImageView.setVisibility(View.GONE);
         headViewHolder.videoView.setVisibility(View.VISIBLE);
 
-        Video video = new Video();
-
         headViewHolder.videoView.loadLocalVideo(path);
+        headViewHolder.videoView.requestFocus();
+    }
+
+    private void playWebVideo(String url){
+        headViewHolder.coverImageView.setVisibility(View.GONE);
+        headViewHolder.videoView.setVisibility(View.VISIBLE);
+
+        Video video = new Video();
+        VideoUrl videoUrl1 = new VideoUrl();
+        videoUrl1.setFormatName("auto");
+        videoUrl1.setFormatUrl(url);
+        ArrayList<VideoUrl> arrayList1 = new ArrayList<>();
+        arrayList1.add(videoUrl1);
+        video.setVideoName("");
+        video.setVideoUrl(arrayList1);
+
+        ArrayList<Video> videoArrayList = new ArrayList<>();
+        videoArrayList.add(video);
+
+        headViewHolder.videoView.loadMultipleVideo(videoArrayList);
         headViewHolder.videoView.requestFocus();
     }
 
