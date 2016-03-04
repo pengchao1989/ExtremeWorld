@@ -10,6 +10,13 @@ android {
             storeFile file('/home/pengchao/github/ExtremeWorld/private/mykeystore.jks')
             storePassword "${project.STORE_PASSWORD}"
         }
+
+        release_skate{
+            keyAlias "${project.KEY_ALIAS_SKATE}"
+            keyPassword "${project.KEY_PASSWORD_SKATE}"
+            storeFile file('/home/pengchao/github/ExtremeWorld/private/skate_keystore')
+            storePassword "${project.STORE_PASSWORD_SKATE}"
+        }
     }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -46,6 +53,7 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}"]
+            signingConfig signingConfigs.release
         }
         parkour {
             applicationId = "com.jixianxueyuan.parkour"
@@ -54,6 +62,7 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}"]
+            signingConfig signingConfigs.release
         }
         bmx {
             applicationId = "com.jixianxueyuan.bmx"
@@ -62,6 +71,7 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_BMX}"]
+            signingConfig signingConfigs.release
         }
         skateboard {
             applicationId = "com.jixianxueyuan.skateboard"
@@ -70,20 +80,27 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_SKATEBOARD}"]
-
+            signingConfig signingConfigs.release
+        }
+        skate {
+            applicationId = "com.yumfee.skate"
+            manifestPlaceholders = [APPLICATIONID: "com.yumfee.skate",
+                                    HOBBY        : "skateboard",
+                                    JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
+                                    UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}",
+                                    QQ_APP_ID    : "${project.QQ_APP_ID_SKATE}"]
+            signingConfig  signingConfigs.release_skate
         }
     }
     buildTypes {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-            signingConfig signingConfigs.release
         }
 
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-            signingConfig signingConfigs.release
         }
     }
     //这个是解决lint报错的代码
