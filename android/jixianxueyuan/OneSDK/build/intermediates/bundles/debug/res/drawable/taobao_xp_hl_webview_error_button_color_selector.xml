@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_pressed="true" android:color="@android:color/white"/>
-    <!-- not selected -->
-    <item android:color="#707070"/>
-
-</selector><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/drawable/taobao_xp_hl_webview_error_button_color_selector.xml -->

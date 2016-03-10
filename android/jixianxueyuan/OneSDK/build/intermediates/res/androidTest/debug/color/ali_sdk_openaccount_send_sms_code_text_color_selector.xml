@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_enabled="true" android:color="#3199f4"/>
-    <item android:state_enabled="false" android:color="#aaaaaa"/>
-    <item android:color="#aaaaaa"/>
-
-</selector><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/color/ali_sdk_openaccount_send_sms_code_text_color_selector.xml --><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/build/intermediates/bundles/debug/res/color/ali_sdk_openaccount_send_sms_code_text_color_selector.xml -->

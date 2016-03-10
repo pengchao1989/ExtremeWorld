@@ -298,15 +298,16 @@ public class RegisterActivity extends Activity {
                             mine.setUserInfo(newUserDTO);
                             mine.WriteSerializationToLocal(RegisterActivity.this);
 
+                            progressDialog.setTitle(R.string.logging);
                             //注册成功，登录IM
                             loginIM();
+
 
                         }else if(response.getStatus() == MyResponse.status_error){
                             Error error = response.getError();
                             MyErrorHelper.showErrorToast(RegisterActivity.this, error);
 
                         }
-                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
@@ -513,6 +514,7 @@ public class RegisterActivity extends Activity {
         imHelper.Login(new IMHelper.LoginResultListener() {
             @Override
             public void onSuccess() {
+                progressDialog.dismiss();
                 Intent intent = new Intent(RegisterActivity.this, NewHomeActivity.class);
                 startActivity(intent);
                 finish();
@@ -520,7 +522,11 @@ public class RegisterActivity extends Activity {
 
             @Override
             public void onError(String err) {
+                progressDialog.dismiss();
                 Toast.makeText(RegisterActivity.this, err, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RegisterActivity.this, NewHomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

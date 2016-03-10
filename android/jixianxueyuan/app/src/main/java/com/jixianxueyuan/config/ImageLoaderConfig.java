@@ -56,8 +56,8 @@ public class ImageLoaderConfig {
     public static DisplayImageOptions getHeadOption(Context context){
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.image_loading)
-                .showImageForEmptyUri(R.mipmap.default_head) // resource or drawable
-                .showImageOnFail(R.mipmap.default_head) // resource or drawable
+                .showImageForEmptyUri(R.drawable.default_head) // resource or drawable
+                .showImageOnFail(R.drawable.default_head) // resource or drawable
                 .resetViewBeforeLoading(false)  // default
                 .delayBeforeLoading(1000)
                 .cacheInMemory(true) // default

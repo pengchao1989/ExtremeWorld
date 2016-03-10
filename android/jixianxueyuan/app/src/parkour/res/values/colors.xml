@@ -1,0 +1,41 @@
+<resources>
+
+    <color name="primary_color">#B5131313</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="white_overlay">#66FAFAFA</color>
+    <color name="semi_transparent">#a0000000</color>
+
+    <color name="background">#ffffff</color>
+    <color name="item_background">#ffffff</color>
+    <color name="item_background_pressed">#1e0e332e</color>
+    <color name="divider">#cccccc</color>
+
+    <color name="white">#FFFAFAFA</color>
+    <color name="black">#FF000000</color>
+    <color name="blue">#ff2196f3</color>
+    <color name="blue_deep">#ff1976d2</color>
+    <color name="grey">#ffeeeeee</color>
+    <color name="grey_deep">#ffbdbdbd</color>
+
+    <color name="deep_purple_darken_4">#ff311b92</color>
+    <color name="blue_darken_4">#ff0d47a1</color>
+
+    <color name="primary">#302833</color>
+    <color name="primary_pressed">#ff308cca</color>
+    <color name="ripple">#F06292</color>
+    <color name="accent">#E91E63</color>
+    <color name="accent_pressed">#C2185B</color>
+
+
+    <color name="primary_text">#191919</color>
+    <color name="secondary_text">#666666</color>
+
+
+    <color name="course_taxonomy_1">#3AA869</color>
+    <color name="course_taxonomy_2">#ecc549</color>
+    <color name="course_taxonomy_3">#d8763a</color>
+    <color name="course_taxonomy_4">#7d8e9c</color>
+    <color name="course_taxonomy_5">#53619c</color>
+
+</resources>

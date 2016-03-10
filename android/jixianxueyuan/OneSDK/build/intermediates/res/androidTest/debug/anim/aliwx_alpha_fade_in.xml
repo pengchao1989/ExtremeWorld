@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<set
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <alpha android:duration="@android:integer/config_shortAnimTime" android:fromAlpha="0.0" android:toAlpha="1.0" />
-</set><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/anim/aliwx_alpha_fade_in.xml --><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/build/intermediates/bundles/debug/res/anim/aliwx_alpha_fade_in.xml -->

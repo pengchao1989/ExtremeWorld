@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:shape="rectangle">
-    <solid android:color="#9d9d9d" />
-</shape><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/drawable/taobao_xp_hl_webview_error_button_background_click.xml --><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/build/intermediates/bundles/debug/res/drawable/taobao_xp_hl_webview_error_button_background_click.xml -->

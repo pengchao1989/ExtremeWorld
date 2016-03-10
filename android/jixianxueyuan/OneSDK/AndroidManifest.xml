@@ -49,7 +49,6 @@
         </activity>
         <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" android:windowSoftInputMode="adjustResize">
         </activity>
-        <meta-data android:name="UMENG_APPKEY" android:value="55d767a7e0f55a0e24005390"/>
         <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name="com.alibaba.sdk.android.openaccount.ui.ui.NoPasswordLoginActivity" android:theme="@style/NoPasswordLogin"/>
         <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name="com.alibaba.sdk.android.openaccount.ui.ui.LoginActivity" android:theme="@style/Login"/>
         <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name="com.alibaba.sdk.android.openaccount.ui.ui.RegisterActivity" android:theme="@style/Register"/>

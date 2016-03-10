@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.alibaba.mobileim.fundamental.widget.ProgressWheel
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="31dp"
-    android:layout_height="31dp"
-    android:padding="0dip">
-
-</com.alibaba.mobileim.fundamental.widget.ProgressWheel>
-<!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/layout/aliwx_chatting_detail_download_image_progress.xml --><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/build/intermediates/bundles/debug/res/layout/aliwx_chatting_detail_download_image_progress.xml -->

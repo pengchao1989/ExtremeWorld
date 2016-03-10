@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><set xmlns:android="http://schemas.android.com/apk/res/android">
-	<rotate android:duration="1000" android:fromDegrees="0.0" android:pivotX="50%" android:pivotY="50%" android:repeatCount="infinite" android:repeatMode="restart" android:toDegrees="360.0">
-	</rotate>
-</set><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/res/anim/taobao_xp_cm_progressbar.xml --><!-- From: file:/home/pengchao/github/ExtremeWorld/android/jixianxueyuan/OneSDK/build/intermediates/bundles/debug/res/anim/taobao_xp_cm_progressbar.xml -->
