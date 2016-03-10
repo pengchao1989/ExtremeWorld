@@ -21,7 +21,6 @@ import com.jixianxueyuan.dto.SubReplyDTO;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yumfee.emoji.EmojiconTextView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -208,14 +207,14 @@ public class TopicDetailListAdapter extends BaseAdapter {
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.user_head_right_tip)TextView floorTextView;
-        @InjectView(R.id.topic_detail_list_item_reply_content)EmojiconTextView replyContentTextView;
+        @InjectView(R.id.topic_detail_list_item_reply_content)TextView replyContentTextView;
 
         @InjectView(R.id.topic_detail_list_item_sub_reply_content_1)
-        EmojiconTextView subReplyContent1;
+        TextView subReplyContent1;
         @InjectView(R.id.topic_detail_list_item_sub_reply_content_2)
-        EmojiconTextView subReplyContent2;
+        TextView subReplyContent2;
         @InjectView(R.id.topic_detail_list_item_sub_reply_content_3)
-        EmojiconTextView subReplyContent3;
+        TextView subReplyContent3;
         @InjectView(R.id.topic_detail_list_item_sub_reply_loadmore)
         TextView loadMoreSubReplyTextView;
 

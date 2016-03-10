@@ -14,7 +14,6 @@ import com.jixianxueyuan.dto.RemindDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yumfee.emoji.EmojiconTextView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -103,9 +102,9 @@ public class RemindListAdapter extends BaseAdapter {
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.remind_list_item_content)
-        EmojiconTextView contentTextView;
+        TextView contentTextView;
         @InjectView(R.id.remind_list_item_target_content)
-        EmojiconTextView targetTextView;
+        TextView targetTextView;
 
         public ViewHolder(View itemView){
             ButterKnife.inject(this, itemView);

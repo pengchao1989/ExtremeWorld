@@ -2,7 +2,6 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -79,15 +78,12 @@
                     android:layout_marginTop="5dp"
                     />
 
-                <com.yumfee.emoji.EmojiconTextView
+                <TextView
                     android:id="@+id/topic_list_item_title"
                     android:layout_marginLeft="2dp"
-                    emojicon:emojiconSize="28sp"
                     android:layout_toRightOf="@id/topic_list_item_type"
                     style="@style/ListPrimaryText"
                     />
-
-
 
             </RelativeLayout>
 

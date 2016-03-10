@@ -10,20 +10,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.ReplyWidgetImageListAdapter;
-import com.jixianxueyuan.util.MyLog;
-import com.yumfee.emoji.EmojiconEditText;
-import com.yumfee.emoji.EmojiconGridView;
-import com.yumfee.emoji.EmojiconsPopup;
-import com.yumfee.emoji.emoji.Emojicon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -45,10 +39,9 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
 
     LinearLayout bottomContainer;
     ImageView addButton;
-    ImageView addEmojiButton;
     ImageView addImageButton;
     ImageView submitButton;
-    EmojiconEditText emojiconEditText;
+    EditText EditText;
     ImageView hasDotImageView;
 
     RecyclerView recyclerView;
@@ -86,118 +79,20 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
         actionContainer = (LinearLayout)view.findViewById(R.id.reply_widget_action_container);
 
         addButton = (ImageView) view.findViewById(R.id.reply_widget_add_button);
-        addEmojiButton = (ImageView) view.findViewById(R.id.reply_widget_emoji_button);
         addImageButton = (ImageView) view.findViewById(R.id.reply_add_image_button);
         recyclerView = (RecyclerView) view.findViewById(R.id.reply_widget_image_listview);
 
         submitButton = (ImageView) view.findViewById(R.id.reply_widget_submit_button);
-        emojiconEditText = (EmojiconEditText) view.findViewById(R.id.reply_widget_edittext);
+        EditText = (EditText) view.findViewById(R.id.reply_widget_edittext);
         hasDotImageView = (ImageView) view.findViewById(R.id.reply_widget_has_dot);
         final View rootView = view.findViewById(R.id.reply_widget_root_view);
 
-        // Give the topmost view of your activity layout hierarchy. This will be used to measure soft keyboard height
-        final EmojiconsPopup popup = new EmojiconsPopup(rootView, context);
-
-
-        //Will automatically set size according to the soft keyboard size
-        popup.setSizeForSoftKeyboard();
-
-        //If the emoji popup is dismissed, change addEmojiButton to smiley icon
-        popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-            @Override
-            public void onDismiss() {
-                changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.expression);
-            }
-        });
-
-        //If the text keyboard closes, also dismiss the emoji popup
-        popup.setOnSoftKeyboardOpenCloseListener(new EmojiconsPopup.OnSoftKeyboardOpenCloseListener() {
-
-            @Override
-            public void onKeyboardOpen(int keyBoardHeight) {
-
-            }
-
-            @Override
-            public void onKeyboardClose() {
-                if (popup.isShowing())
-                    popup.dismiss();
-            }
-        });
-
-        //On emoji clicked, add it to edittext
-        popup.setOnEmojiconClickedListener(new EmojiconGridView.OnEmojiconClickedListener() {
-
-            @Override
-            public void onEmojiconClicked(Emojicon emojicon) {
-                if (emojiconEditText == null || emojicon == null) {
-                    return;
-                }
-
-                int start = emojiconEditText.getSelectionStart();
-                int end = emojiconEditText.getSelectionEnd();
-                if (start < 0) {
-                    emojiconEditText.append(emojicon.getEmoji());
-                } else {
-                    emojiconEditText.getText().replace(Math.min(start, end),
-                            Math.max(start, end), emojicon.getEmoji(), 0,
-                            emojicon.getEmoji().length());
-                }
-            }
-        });
-
-        //On backspace clicked, emulate the KEYCODE_DEL key event
-        popup.setOnEmojiconBackspaceClickedListener(new EmojiconsPopup.OnEmojiconBackspaceClickedListener() {
-
-            @Override
-            public void onEmojiconBackspaceClicked(View v) {
-                KeyEvent event = new KeyEvent(
-                        0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
-                emojiconEditText.dispatchKeyEvent(event);
-            }
-        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard(emojiconEditText);
+                hideSoftKeyboard(EditText);
                 switchActionContainer();
-            }
-        });
-
-        // To toggle between text keyboard and emoji keyboard keyboard(Popup)
-        addEmojiButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                bottomContainer.setVisibility(View.GONE);
-
-                //If popup is not showing => emoji keyboard is not visible, we need to show it
-                if (!popup.isShowing()) {
-
-                    //If keyboard is visible, simply show the emoji popup
-                    if (popup.isKeyBoardOpen()) {
-                        popup.showAtBottom();
-                        changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.ic_action_keyboard);
-                    }
-
-                    //else, open the text keyboard first and immediately after that show the emoji popup
-                    else {
-                        emojiconEditText.setFocusableInTouchMode(true);
-                        emojiconEditText.requestFocus();
-                        popup.showAtBottomPending();
-                        final InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputMethodManager.showSoftInput(emojiconEditText, InputMethodManager.SHOW_IMPLICIT);
-                        changeEmojiKeyboardIcon(addEmojiButton, R.mipmap.ic_action_keyboard);
-                    }
-                }
-
-                //If popup is showing, simply dismiss it to show the undelying text keyboard
-                else {
-                    popup.dismiss();
-                }
             }
         });
 
@@ -206,7 +101,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
 
             @Override
             public void onClick(View v) {
-                String newText = emojiconEditText.getText().toString();
+                String newText = EditText.getText().toString();
 
                 if (replyWidgetListener != null) {
                     replyWidgetListener.onCommit(newText);
@@ -214,10 +109,10 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
             }
         });
 
-        emojiconEditText.setOnTouchListener(new View.OnTouchListener() {
+        EditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                boolean isKeyBoardShow = showSoftKeyboard(emojiconEditText);
+                boolean isKeyBoardShow = showSoftKeyboard(EditText);
                 if (isKeyBoardShow) {
                     hideActionContainer();
                 }
@@ -238,30 +133,30 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
     }
 
     public String getText(){
-        return emojiconEditText.getText().toString();
+        return EditText.getText().toString();
     }
 
     public void setText(String text){
-        emojiconEditText.setText(text);
-        emojiconEditText.setSelection(text.length());
+        EditText.setText(text);
+        EditText.setSelection(text.length());
     }
 
     public void setHint(String hint){
-        emojiconEditText.setText("");
-        emojiconEditText.setHint(hint);
+        EditText.setText("");
+        EditText.setHint(hint);
     }
 
     public void resetHint(){
-        emojiconEditText.setText("");
-        emojiconEditText.setHint(R.string.we_speek);
+        EditText.setText("");
+        EditText.setHint(R.string.we_speek);
     }
 
     public void showKeyboard(){
-        showSoftKeyboard(emojiconEditText);
+        showSoftKeyboard(EditText);
     }
 
     public void hideKeyboard(){
-        hideSoftKeyboard(emojiconEditText);
+        hideSoftKeyboard(EditText);
     }
 
     public void setReplyWidgetListener(ReplyWidgetListener replyWidgetListener) {
@@ -344,9 +239,9 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
 
     public void clean()
     {
-        if(emojiconEditText != null)
+        if(EditText != null)
         {
-            emojiconEditText.setText("");
+            EditText.setText("");
         }
     }
 

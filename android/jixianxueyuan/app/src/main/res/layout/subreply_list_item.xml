@@ -5,10 +5,9 @@
     style="@style/SmallListItemLayout"
     >
 
-    <com.yumfee.emoji.EmojiconTextView
+    <TextView
         android:id="@+id/subreply_list_item_content"
         android:layout_marginLeft="@dimen/avatar_alignment"
-        style="@style/ListSecondaryTextSmall"
-        emojicon:emojiconSize="28sp" />
+        style="@style/ListSecondaryTextSmall"/>
 
 </LinearLayout>

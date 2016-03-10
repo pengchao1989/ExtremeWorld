@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/background"
@@ -8,11 +7,10 @@
 
     <include layout="@layout/user_info_head_view"/>
 
-    <com.yumfee.emoji.EmojiconTextView
+    <TextView
         android:id="@+id/reply_detail_content"
         android:layout_marginTop="@dimen/list_content_margin_head"
         android:layout_marginLeft="@dimen/avatar_alignment"
-        emojicon:emojiconSize="28sp"
         style="@style/ListPrimaryTextSmall"
         tools:text="content"/>
 

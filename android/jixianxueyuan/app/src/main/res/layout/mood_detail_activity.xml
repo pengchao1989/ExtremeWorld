@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,14 +21,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         />
-    <com.yumfee.emoji.EmojiconEditText
+    <EditText
         android:id="@+id/emojicon_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/emoji_btn"
-        android:layout_toLeftOf="@id/submit_btn"
-        emojicon:emojiconSize="28sp" />
+        android:layout_toLeftOf="@id/submit_btn"/>
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"

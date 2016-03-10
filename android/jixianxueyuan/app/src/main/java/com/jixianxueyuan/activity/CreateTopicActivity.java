@@ -64,12 +64,10 @@ import com.jixianxueyuan.util.qiniu.VideoUploadResult;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
-import com.yumfee.emoji.EmojiconEditText;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +90,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     @InjectView(R.id.create_topic_taxonomy_spinner)Spinner taxonomySpinner;
     @InjectView(R.id.create_topic_title)EditText titleEditText;
     @InjectView(R.id.create_topic_content_edittext)
-    EmojiconEditText contentEditText;
+    EditText contentEditText;
     @InjectView(R.id.create_topic_video_thumble_layout)
     RelativeLayout videoThumbleLayout;
     @InjectView(R.id.create_topic_image_list_view)

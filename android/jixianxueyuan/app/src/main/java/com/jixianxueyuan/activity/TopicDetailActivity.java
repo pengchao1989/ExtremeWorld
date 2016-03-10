@@ -60,7 +60,6 @@ import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yumfee.emoji.EmojiconTextView;
 
 import java.io.File;
 import java.io.IOException;
@@ -278,9 +277,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 */
 
         //content
-        EmojiconTextView textView = new EmojiconTextView(this);
+        TextView textView = new TextView(this);
         textView.setTextSize(20);
-        textView.setEmojiconSize(48);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
         headViewHolder.contentLayout.addView(textView);
@@ -613,7 +611,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public static class HeadViewHolder
     {
-        @InjectView(R.id.topic_detail_title)EmojiconTextView titleTextView;
+        @InjectView(R.id.topic_detail_title)TextView titleTextView;
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;

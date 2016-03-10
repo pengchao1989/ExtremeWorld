@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     style="@style/ListItemLayout">
 
     <include layout="@layout/user_info_head_view"/>
 
-    <com.yumfee.emoji.EmojiconTextView
+    <TextView
         android:id="@+id/remind_list_item_content"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
-        emojicon:emojiconSize="22sp"
         style="@style/ListPrimaryTextSmall"
         />
 
@@ -23,11 +21,10 @@
         android:background="@color/item_background_pressed"
         >
 
-        <com.yumfee.emoji.EmojiconTextView
+        <TextView
             android:id="@+id/remind_list_item_target_content"
             android:maxLines="2"
             android:ellipsize="end"
-            emojicon:emojiconSize="22sp"
             style="@style/ListSecondaryTextSmall"
             />
 

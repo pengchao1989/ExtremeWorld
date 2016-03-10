@@ -25,7 +25,6 @@ import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
-import com.yumfee.emoji.EmojiconTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -222,7 +221,7 @@ public class CollectionListAdapter extends BaseAdapter{
         @InjectView(R.id.topic_list_item_type)
         ImageView typeImageView;
         @InjectView(R.id.topic_list_item_title)
-        EmojiconTextView titleTextView;
+        TextView titleTextView;
         @InjectView(R.id.topic_list_item_avatar)
         ImageView avatarImageView;
 

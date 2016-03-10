@@ -58,12 +58,11 @@
                     </LinearLayout>
 
 
-                    <com.yumfee.emoji.EmojiconEditText
+                    <EditText
                         android:id="@+id/create_topic_content_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="80dp"
-                        app:emojiconSize="28sp"
                         android:hint="@string/want_speek"
                         />
 

@@ -20,7 +20,6 @@ import com.jixianxueyuan.util.DateTimeFormatter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.yumfee.emoji.EmojiconTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -202,7 +201,7 @@ public class TopicListOfUserAdapter extends BaseAdapter {
         @InjectView(R.id.topic_list_of_user_item_date)
         TextView dateTextView;
         @InjectView(R.id.topic_list_of_user_item_title)
-        EmojiconTextView titleTextView;
+        TextView titleTextView;
         @InjectView(R.id.topic_list_of_user_item_image_1)
         ImageView topicImageView_1;
 

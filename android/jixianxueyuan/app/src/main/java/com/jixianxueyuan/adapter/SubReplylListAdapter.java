@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.SubReplyDTO;
 import com.jixianxueyuan.util.MyLog;
-import com.yumfee.emoji.EmojiconTextView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -113,7 +113,7 @@ public class SubReplylListAdapter extends BaseAdapter {
     public static class ViewHolder{
 
         @InjectView(R.id.subreply_list_item_content)
-        EmojiconTextView contentTextView;
+        TextView contentTextView;
 
 
         public ViewHolder(View itemView){

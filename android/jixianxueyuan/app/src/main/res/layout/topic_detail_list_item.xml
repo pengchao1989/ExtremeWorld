@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ListItemLayout"
     >
 
     <include layout="@layout/user_info_head_view"/>
 
-    <com.yumfee.emoji.EmojiconTextView
+    <TextView
         android:id="@+id/topic_detail_list_item_reply_content"
         android:layout_marginTop="@dimen/list_content_margin_head"
-        emojicon:emojiconSize="28sp"
         android:layout_marginLeft="@dimen/avatar_alignment"
         style="@style/ListPrimaryTextSmall"
         tools:text="content"
@@ -24,25 +22,22 @@
         android:layout_marginTop="@dimen/list_content_margin_head"
         android:layout_marginLeft="@dimen/avatar_alignment">
 
-        <com.yumfee.emoji.EmojiconTextView
+        <TextView
             android:id="@+id/topic_detail_list_item_sub_reply_content_1"
             android:layout_marginTop="@dimen/list_content_margin_head"
-            style="@style/ListSecondaryTextSmall"
-            emojicon:emojiconSize="28sp" />
+            style="@style/ListSecondaryTextSmall"/>
 
 
-        <com.yumfee.emoji.EmojiconTextView
+        <TextView
             android:id="@+id/topic_detail_list_item_sub_reply_content_2"
             android:layout_marginTop="@dimen/list_content_margin_head"
-            style="@style/ListSecondaryTextSmall"
-            emojicon:emojiconSize="28sp" />
+            style="@style/ListSecondaryTextSmall"/>
 
 
-        <com.yumfee.emoji.EmojiconTextView
+        <TextView
             android:id="@+id/topic_detail_list_item_sub_reply_content_3"
             android:layout_marginTop="@dimen/list_content_margin_head"
-            style="@style/ListSecondaryTextSmall"
-            emojicon:emojiconSize="28sp" />
+            style="@style/ListSecondaryTextSmall"/>
 
         <TextView
             android:id="@+id/topic_detail_list_item_sub_reply_loadmore"
