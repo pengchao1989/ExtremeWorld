@@ -105,6 +105,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     boolean interceptFlag = false;
     int mProgressNum = 0;
 
+    ArrayList<String> imageUrlArrayList = new ArrayList<String>();
+
 
     final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
     final int HADLER_DOWNLOAD_VIDEO_FAILED = 0x2;
@@ -285,7 +287,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         textView.setText(topicDTO.getContent());
 
         //image
-        MediaWrapDTO mediaWrapDTO = topicDTO.getMediaWrap();
+        final MediaWrapDTO mediaWrapDTO = topicDTO.getMediaWrap();
         if(mediaWrapDTO != null){
             for(MediaDTO mediaDTO: mediaWrapDTO.getMedias()){
                 ImageView imageviwe = new ImageView(this);
@@ -293,7 +295,14 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 imageviwe.setPadding(0, 8, 0, 8);
                 headViewHolder.contentLayout.addView(imageviwe);
-                ImageLoader.getInstance().displayImage(mediaDTO.getPath() + "!AndroidDetail", imageviwe, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+                ImageLoader.getInstance().displayImage(mediaDTO.getPath() + QiniuImageStyle.DETAIL, imageviwe, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+                imageviwe.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ImageGalleryActivity.startActivity(TopicDetailActivity.this, topicDTO.getTitle(), imageUrlArrayList);
+                    }
+                });
+                imageUrlArrayList.add(mediaDTO.getPath() + QiniuImageStyle.DETAIL);
             }
         }
 
