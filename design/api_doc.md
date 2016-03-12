@@ -329,3 +329,16 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	说明:添加一个收藏
 	
 	
+----------
+	接口名称:profile/update_attribute
+	URL地址:http://115.28.8.25/api/secure/v1/profile/update_attribute
+	请求方式:POST
+	入参:attributeName、attributeValue
+	    attributeName取值：gender、signature、bg、avatar
+	示例:http://115.28.8.25/api/secure/v1/profile/update_attribute
+	参数:更新性别  {"attributeName":"gender","attributeValue":"male"}
+	    更新头像  {"attributeName":"avatar","attributeValue":"http://img.abc.com/123.jpg"}
+	
+	说明:更新用户个人信息的某个属性
+	
+	
