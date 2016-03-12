@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,11 +141,19 @@ public class VideoController
 		newVideo.setVideoDetail(videoDetail);
 		
 		//hobby
-		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		String[] hobbys = request.getParameterValues("h");
+		if(hobbys == null){
+			redirectAttributes.addFlashAttribute("message", "发布失败，至少选择一个hobby");
+			return "redirect:/" + hobby +"/video/";
+		}
 		List<Hobby> hobbyList= new ArrayList<Hobby>();
-		Hobby hobbyBean = new Hobby();
-		hobbyBean.setId(hobbyId);
-		hobbyList.add(hobbyBean);
+		
+		for(String hob: hobbys){
+			Long hobbyId = HobbyPathConfig.getHobbyId(hob);
+			Hobby hobbyBean = new Hobby();
+			hobbyBean.setId(hobbyId);
+			hobbyList.add(hobbyBean);
+		}
 		
 		newVideo.setHobbys(hobbyList);
 		

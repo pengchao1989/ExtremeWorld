@@ -3,10 +3,8 @@ package com.yumfee.extremeworld.rest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.proto.CountryProto;
-import com.yumfee.extremeworld.rest.dto.CountryDTO;
 
 @RestController
 @RequestMapping(value = "/api/secure/v1/country")
