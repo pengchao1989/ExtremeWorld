@@ -16,6 +16,8 @@
     <string name="update">업데이트</string>
     <string name="updating">업데이트 중</string>
     <string name="wait">잠깐만.</string>
+    <string name="wait_location">현재 위치...</string>
+    <string name="location_failed">위치 실패</string>
     <string name="loading">로드...</string>
     <string name="please_enter">입력하십시오</string>
     <string name="action_settings">Settings</string>

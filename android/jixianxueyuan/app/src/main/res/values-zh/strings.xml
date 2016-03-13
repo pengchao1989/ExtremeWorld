@@ -16,6 +16,8 @@
     <string name="update">更新</string>
     <string name="updating">更新中</string>
     <string name="wait">稍等片刻</string>
+    <string name="wait_location">定位中...</string>
+    <string name="location_failed">定位失败</string>
     <string name="loading">拼命加载中...</string>
     <string name="please_enter">请输入</string>
     <string name="action_settings">Settings</string>

@@ -49,7 +49,6 @@ import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
-import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -203,7 +202,7 @@ public class RegisterActivity extends Activity {
     }
 
     private void submit(){
-        progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
         progressDialog.show();
 
         if(isUseUploadAvatar){

@@ -59,7 +59,7 @@ public class ModifyProfileAttrBaseActivity extends BaseActivity {
 
     private void requestUpdateUserAttr(){
 
-        progressDialog = new SpotsDialog(this, R.style.ProgressDialogUpdating);
+        progressDialog = new SpotsDialog(this, R.style.ProgressDialogWait);
         progressDialog.show();
 
         String url = ServerMethod.profile_update_attribute();

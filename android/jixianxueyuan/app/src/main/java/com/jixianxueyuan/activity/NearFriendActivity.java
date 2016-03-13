@@ -1,5 +1,6 @@
 package com.jixianxueyuan.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,10 +10,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -33,6 +32,7 @@ import com.jixianxueyuan.widget.ClickLoadMoreView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by pengchao on 7/3/15.
@@ -47,10 +47,11 @@ public class NearFriendActivity extends BaseActivity  {
 
     @InjectView(R.id.near_friend_listview)ListView listView;
     @InjectView(R.id.near_friend_swiperefresh)SwipeRefreshLayout swipeRefreshLayout;
+    private AlertDialog progressDialog;
+    private ClickLoadMoreView clickLoadMoreView;
 
-    NearFriendListAdapter adapter;
+    private NearFriendListAdapter adapter;
 
-    ClickLoadMoreView clickLoadMoreView;
     int currentPage = 0;
     int totalPage = 0;
 
@@ -114,57 +115,48 @@ public class NearFriendActivity extends BaseActivity  {
 
     }
 
-    private void refresh()
-    {
-        swipeRefreshLayout.setRefreshing(true);
+    private void refresh() {
 
         currentPage = 0;
 
-        if(mLocationClient == null)
-        {
+        if(mLocationClient == null) {
             initLocation();
         }
 
-        if(mLocationClient.isStarted() == false)
-        {
+        if(mLocationClient.isStarted() == false) {
             mLocationClient.start();
         }
     }
 
     private void nextPage()
     {
-        if(currentPage < totalPage )
-        {
+        if(currentPage < totalPage ) {
             requestData();
         }
-        else
-        {
+        else {
             Toast.makeText(this, "没了", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void doHideFootView()
-    {
-        if(totalPage > 1)
-        {
-            if(clickLoadMoreView.isLoading() == true)
-            {
+    private void doHideFootView() {
+
+        if(totalPage > 1) {
+
+            if(clickLoadMoreView.isLoading() == true) {
                 clickLoadMoreView.onFinish();
             }
 
-            if(currentPage >= totalPage)
-            {
+            if(currentPage >= totalPage) {
                 clickLoadMoreView.setOver();
             }
-
         }
-
     }
 
 
     private void requestData()
     {
-        RequestQueue queue = Volley.newRequestQueue(this);
+
+        swipeRefreshLayout.setRefreshing(true);
 
         Long userId = MyApplication.getContext().getMine().getUserInfo().getId();
         String url = ServerMethod.near_friend() + "?userId=" + userId + "&latitude=" + latitude + "&longitude=" + longitude + "&page=" + (currentPage + 1);
@@ -204,16 +196,15 @@ public class NearFriendActivity extends BaseActivity  {
                         swipeRefreshLayout.setRefreshing(false);
                         MyVolleyErrorHelper.showError(NearFriendActivity.this, error);
                     }
-                }
+                });
 
-                );
-
-        queue.add(myPageRequest);
+        MyApplication.getContext().getRequestQueue().add(myPageRequest);
 
     }
 
-    private void initLocation()
-    {
+    private void initLocation() {
+        showLocationProgress();
+
         mLocationClient = new LocationClient(getApplicationContext());// 声明 LocationClient 类
         mLocationClient.registerLocationListener( myListener);// 注册监听函数
         mLocationClient.start();
@@ -237,16 +228,29 @@ public class NearFriendActivity extends BaseActivity  {
 
     }
 
+    private void showLocationProgress(){
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWaitLocation);
+        progressDialog.setTitle(getString(R.string.wait_location));
+        progressDialog.show();
+    }
 
-
-
+    private void hideLocationProgress(){
+        progressDialog.dismiss();
+    }
 
     public class MyLocationListener implements BDLocationListener {
+
+
         @Override
-        public void onReceiveLocation(BDLocation location)
-        {
-            if (location == null)
-            return ;
+        public void onReceiveLocation(BDLocation location) {
+
+            hideLocationProgress();
+
+            if (location == null) {
+                Toast.makeText(NearFriendActivity.this, R.string.location_failed, Toast.LENGTH_LONG).show();
+                return;
+            }
+
             StringBuffer sb = new StringBuffer(256);
             sb.append("time : ");
             sb.append(location.getTime());
@@ -258,19 +262,16 @@ public class NearFriendActivity extends BaseActivity  {
             sb.append(location.getLongitude());
             sb.append("\nradius : ");
             sb.append(location.getRadius());
-            if (location.getLocType() == BDLocation.TypeGpsLocation){
-            sb.append("\nspeed : ");
-            sb.append(location.getSpeed());
-            sb.append("\nsatellite : ");
-            sb.append(location.getSatelliteNumber());
+            if (location.getLocType() == BDLocation.TypeGpsLocation) {
+                sb.append("\nspeed : ");
+                sb.append(location.getSpeed());
+                sb.append("\nsatellite : ");
+                sb.append(location.getSatelliteNumber());
 
-
-
-
-        } else if (location.getLocType() == BDLocation.TypeNetWorkLocation){
-            sb.append("\naddr : ");
-            sb.append(location.getAddrStr());
-        }
+            } else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
+                sb.append("\naddr : ");
+                sb.append(location.getAddrStr());
+            }
 
             mLocationClient.stop();
 
@@ -279,11 +280,16 @@ public class NearFriendActivity extends BaseActivity  {
 
             //请求数据
             requestData();
-            MyLog.d("Location",sb.toString());
+            MyLog.d("Location", sb.toString());
         }
+
         public void onReceivePoi(BDLocation poiLocation) {
-            if (poiLocation == null){
-                return ;
+
+            hideLocationProgress();
+
+            if (poiLocation == null) {
+                Toast.makeText(NearFriendActivity.this, R.string.location_failed, Toast.LENGTH_LONG).show();
+                return;
             }
             StringBuffer sb = new StringBuffer(256);
             sb.append("Poi time : ");
@@ -296,15 +302,14 @@ public class NearFriendActivity extends BaseActivity  {
             sb.append(poiLocation.getLongitude());
             sb.append("\nradius : ");
             sb.append(poiLocation.getRadius());
-            if (poiLocation.getLocType() ==
-                    BDLocation.TypeNetWorkLocation){
+            if (poiLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
                 sb.append("\naddr : ");
                 sb.append(poiLocation.getAddrStr());
             }
-            if(poiLocation.hasPoi()){
+            if (poiLocation.hasPoi()) {
                 sb.append("\nPoi:");
                 sb.append(poiLocation.getPoi());
-            }else{
+            } else {
                 sb.append("noPoi information");
             }
 

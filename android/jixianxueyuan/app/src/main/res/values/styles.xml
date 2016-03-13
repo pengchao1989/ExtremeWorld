@@ -211,12 +211,17 @@
 
 
     //progress dialog
-    <style name="ProgressDialogUpdating" parent="android:Theme.DeviceDefault.Dialog">
+    <style name="ProgressDialogWait" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogTitleText">@string/wait</item>
         <item name="DialogSpotColor">@color/white</item>
         <item name="DialogSpotCount">4</item>
     </style>
+
+    <style name="ProgressDialogWaitLocation" parent="ProgressDialogWait">
+        <item name="DialogTitleText">@string/wait_location</item>
+    </style>
+
 
     <!-- 文本 - 滑动标签标题 -->
     <style name="text_slidingTabTitle">

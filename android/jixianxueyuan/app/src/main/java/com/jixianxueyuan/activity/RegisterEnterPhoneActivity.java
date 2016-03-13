@@ -56,7 +56,7 @@ public class RegisterEnterPhoneActivity extends Activity{
 
     private void requestVerificationCode(){
 
-        progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
         progressDialog.show();
 
 

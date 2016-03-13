@@ -244,7 +244,7 @@ public class MineFragment extends Fragment {
 
     private void uploadUserBg(){
 
-        progressDialog = new SpotsDialog(MineFragment.this.getContext(),R.style.ProgressDialogUpdating);
+        progressDialog = new SpotsDialog(MineFragment.this.getContext(),R.style.ProgressDialogWait);
         progressDialog.show();
 
         if(qiniuSingleImageUpload == null){

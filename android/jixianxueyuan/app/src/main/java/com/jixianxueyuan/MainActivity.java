@@ -406,7 +406,7 @@ public class MainActivity extends Activity {
 
     private void showProgress(){
         if(progressDialog == null){
-            progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+            progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
             progressDialog.setTitle(getString(R.string.loading));
         }
         progressDialog.show();

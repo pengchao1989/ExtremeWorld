@@ -16,6 +16,8 @@
     <string name="update">update</string>
     <string name="updating">updating</string>
     <string name="wait">wait</string>
+    <string name="wait_location">location...</string>
+    <string name="location_failed">location failed</string>
     <string name="loading">loading</string>
     <string name="please_enter">please enter </string>
     <string name="action_settings">Settings</string>

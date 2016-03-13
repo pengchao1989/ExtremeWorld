@@ -3,31 +3,24 @@ package com.jixianxueyuan.activity.profile;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.BaseActivity;
 import com.jixianxueyuan.activity.CropAvatarActivity;
-import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
-import com.jixianxueyuan.commons.Verification;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.ProfileAttributeName;
 import com.jixianxueyuan.config.UploadPrefixName;
-import com.jixianxueyuan.dto.Error;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.request.UserAttributeRequestDTO;
-import com.jixianxueyuan.dto.request.UserUpdateRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
@@ -108,7 +101,7 @@ public class ProfileEditActivity extends BaseActivity {
 
     private void uploadUserAvatar(){
 
-        progressDialog = new SpotsDialog(this,R.style.ProgressDialogUpdating);
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
         progressDialog.show();
 
         if(qiniuSingleImageUpload == null){
