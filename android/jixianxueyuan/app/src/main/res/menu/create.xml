@@ -6,8 +6,8 @@
         android:icon="@mipmap/add_mood"
         />
     <item
-        android:id="@+id/menu_create_discuss"
-        android:title="@string/discuss"
+        android:id="@+id/menu_create_video"
+        android:title="@string/contribute"
         android:icon="@mipmap/add_discuss"
         />
     <item

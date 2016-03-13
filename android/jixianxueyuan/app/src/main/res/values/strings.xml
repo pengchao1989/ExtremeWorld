@@ -32,6 +32,7 @@
     <string name="verification_code">verification code</string>
     <string name="get_verification_code">get verification code</string>
     <string name="re_acquisition">Re acquisition</string>
+    <string name="description">description</string>
 
     <string name="not_more">not more</string>
 
@@ -50,7 +51,14 @@
     <string name="site">site</string>
     <string name="people">near friend</string>
     <string name="store">store</string>
-    
+    <string name="contribute">contribute</string>
+
+    <!--create-->
+    <string name="please_install_file_browser">please install file browser</string>
+    <string name="please_select_mp4_file">please select mp4 file</string>
+    <string name="video_is_empty">please select video</string>
+    <string name="title_is_empty">please write title</string>
+
     <string name="reply_of_me">respond</string>
     <string name="collection">collection</string>
     <string name="agree_of_me">agree</string>
@@ -120,6 +128,7 @@
     <string name="err_phone_registered">phone registered</string>
     <string name="err_verification_code">verification code failed</string>
     <string name="err_password_empty">password not empty</string>
+    <string name="err_video_not_found">video not found</string>
 
     
     //network error

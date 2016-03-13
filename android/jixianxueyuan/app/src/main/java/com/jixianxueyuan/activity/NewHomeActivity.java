@@ -226,20 +226,29 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 new MenuSheetView(NewHomeActivity.this, menuType, "Create...", new MenuSheetView.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Intent intent = new Intent(NewHomeActivity.this, CreateTopicActivity.class);
+
                         switch (item.getItemId()){
                             case R.id.menu_create_mood:
+                                Intent intent = new Intent(NewHomeActivity.this, CreateTopicActivity.class);
                                 intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+                                startActivity(intent);
+                                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.MOOD);
                                 break;
-                            case R.id.menu_create_discuss:
-                                intent.putExtra(TopicType.TYPE, TopicType.DISCUSS);
+                            case R.id.menu_create_video:
+                                Intent intentVideo = new Intent(NewHomeActivity.this, CreateVideoActivity.class);
+                                intentVideo.putExtra(TopicType.TYPE, TopicType.VIDEO);
+                                startActivity(intentVideo);
+                                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.VIDEO);
                                 break;
                             case R.id.menu_create_short_video:
-                                intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
+                                Intent intentSVideo = new Intent(NewHomeActivity.this, CreateTopicActivity.class);
+                                intentSVideo.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
+                                startActivity(intentSVideo);
+                                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.S_VIDEO);
                                 break;
                         }
-                        startActivity(intent);
-                        MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, intent.getStringExtra(TopicType.TYPE));
+
+
 
                         if (bottomSheetLayout.isSheetShowing()) {
                             bottomSheetLayout.dismissSheet();

@@ -94,6 +94,7 @@
         <activity android:name=".activity.CourseListActivity"/>
         <activity android:name=".activity.CreateTopicActivity"/>
         <activity android:name=".activity.CreateShortVideoActivity"/>
+        <activity android:name=".activity.CreateVideoActivity"/>
         <activity android:name=".activity.TopicTaxonomyHomeActivity"/>
         <activity android:name=".activity.CourseDetailActivity"/>
         <activity android:name=".activity.NearFriendActivity"/>

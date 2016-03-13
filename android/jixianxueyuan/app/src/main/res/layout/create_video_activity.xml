@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/create_video_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:my_title="@string/contribute"
+        app:type="submit"
+        app:action_text="@string/submit"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            style="@style/MainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="上传原创视频将会获得赞助商提供的礼品一份\n视频需大于1分钟"/>
+
+            <ImageButton
+                android:id="@+id/create_video_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/btn_video_album_press"
+                android:background="@null"/>
+
+            <FrameLayout
+                android:id="@+id/create_video_video_layout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/create_video_video_cover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <ImageView
+                    android:id="@+id/create_video_video_play_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/biz_video_list_play_icon_big"/>
+
+
+                <com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer
+                    android:id="@+id/videoview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    />
+
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/create_video_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:maxLines="2"
+                android:hint="@string/title"/>
+
+            <EditText
+                android:id="@+id/create_video_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:maxLines="2"
+                android:hint="@string/description"/>
+
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/create_video_upload_progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/semi_transparent"
+            android:visibility="gone"
+            tools:visibility="visible"
+            >
+
+            <ProgressBar
+                android:id="@+id/create_video_upload_progress_view"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true" />
+
+            <TextView
+                android:id="@+id/create_video_upload_progress_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/create_video_upload_progress_view"
+                android:layout_centerHorizontal="true"
+                android:text="正在上传"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

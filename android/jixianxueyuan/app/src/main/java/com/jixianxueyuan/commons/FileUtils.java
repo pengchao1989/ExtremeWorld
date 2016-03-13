@@ -1,7 +1,10 @@
 package com.jixianxueyuan.commons;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
@@ -60,5 +63,18 @@ public class FileUtils {
         String fileName = getStorageDir(context).getPath()+ "/" + File.separator + str + ".mp4";
         return fileName;
     }
+
+    public static String getVideoRealPathFromURI(Context context, Uri contentUri) {
+        String res = null;
+        String[] proj = { MediaStore.Video.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+        if(cursor.moveToFirst()){;
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(column_index);
+        }
+        cursor.close();
+        return res;
+    }
+
 
 }
