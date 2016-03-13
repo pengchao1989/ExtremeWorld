@@ -79,8 +79,7 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
         return taxonomyDTOList.get(position).getName();
     }
 
-    private void analysisTaxonomy()
-    {
+    private void analysisTaxonomy() {
         taxonomyDTOList = myApplication.getAppInfomation().getCurrentHobbyTaxonomyListOfType(topicType);
     }
 

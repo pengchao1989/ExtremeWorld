@@ -1,6 +1,5 @@
 package com.jixianxueyuan.app;
 
-import com.google.gson.Gson;
 import com.jixianxueyuan.dto.HandshakeDTO;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.TaxonomyDTO;
@@ -68,19 +67,24 @@ public class AppInfomation{
         return null;
     }
 
-    public List<TaxonomyDTO> getCurretnHobbyTaxonomyList(){
-        return getCurrentHobbyInfo().getTaxonomys();
+    public List<TaxonomyDTO> getCurrentHobbyTaxonomyList(){
+        HobbyDTO currentHobbyDTO = getCurrentHobbyInfo();
+        if(currentHobbyDTO != null){
+            return getCurrentHobbyInfo().getTaxonomys();
+        }
+        return null;
     }
 
     public List<TaxonomyDTO> getCurrentHobbyTaxonomyListOfType(String type){
-        List<TaxonomyDTO> allTaxonomyList = getCurretnHobbyTaxonomyList();
+        List<TaxonomyDTO> allTaxonomyList = getCurrentHobbyTaxonomyList();
         List<TaxonomyDTO> result = new ArrayList<TaxonomyDTO>();
-        for (TaxonomyDTO taxonomyDTO : allTaxonomyList){
-            if(taxonomyDTO.getType().equals(type)){
-                result.add(taxonomyDTO);
+        if (allTaxonomyList != null){
+            for (TaxonomyDTO taxonomyDTO : allTaxonomyList){
+                if(taxonomyDTO.getType().equals(type)){
+                    result.add(taxonomyDTO);
+                }
             }
         }
-
         return result;
     }
 
