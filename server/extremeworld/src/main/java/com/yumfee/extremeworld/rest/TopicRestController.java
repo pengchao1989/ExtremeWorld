@@ -21,6 +21,7 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.rest.dto.MyPage;
@@ -147,7 +148,7 @@ public class TopicRestController
 		//JSR303
 		BeanValidators.validateWithException(validator,topic);
 		
-		
+		topic.setStatus(TopicStatus.PUBLIC);
 		topicService.saveTopic(topic);
 		
 

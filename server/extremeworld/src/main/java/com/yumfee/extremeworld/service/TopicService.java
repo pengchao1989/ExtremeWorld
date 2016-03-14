@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.mapper.JsonMapper;
 
+import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.entity.Media;
 import com.yumfee.extremeworld.entity.MediaWrap;
 import com.yumfee.extremeworld.entity.Topic;
@@ -146,7 +147,7 @@ public class TopicService
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return topicDao.findByCourseIdAndMagicType(courseId, magicType,pageRequest);
+		return topicDao.findByCourseIdAndMagicTypeAndStatus(courseId, magicType,0, pageRequest);
 	}
 	
 	public Page<Topic> getTopicByfollowings(Long id, int pageNumber, int pageSize,String sortType)
@@ -159,26 +160,26 @@ public class TopicService
 		{
 			followingIds.add(userInfo.getId());
 		}
-		return topicDao.findByUserIdIn(followingIds, pageRequest);
+		return topicDao.findByUserIdInAndStatus(followingIds, TopicStatus.PUBLIC, pageRequest);
 	}
 	
 	public Page<Topic> getTopicByUser(Long userId, int pageNumber, int pageSize,String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return topicDao.findByUserId(userId,pageRequest);
+		return topicDao.findByUserIdAndStatus(userId, TopicStatus.PUBLIC ,pageRequest);
 	}
 	
 	public Page<Topic> getTopicByUserAndMediaWrapNotNull(Long userId , int pageNumber, int pageSize,String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 	
-		return topicDao.findByUserIdAndMediaWrapNotNull(userId, pageRequest);
+		return topicDao.findByUserIdAndStatusAndMediaWrapNotNull(userId, TopicStatus.PUBLIC ,pageRequest);
 	}
 	
 	public Page<Topic> getTopicByType(String type, int pageNumber, int pageSize, String sortType){
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return topicDao.findByType(type, pageRequest);
+		return topicDao.findByTypeAndStatus(type,TopicStatus.PUBLIC,pageRequest);
 	}
 	
 	public Page<Topic> getTopicByHobby(Long hobbyId, int pageNumber, int pageSize,String sortType)
@@ -190,25 +191,25 @@ public class TopicService
 			return topicDao.findAll(pageRequest);
 		}
 		
-		return topicDao.findByHobby(hobbyId,pageRequest);
+		return topicDao.findByHobby(hobbyId, TopicStatus.PUBLIC ,pageRequest);
 	}
 	
 	public Page<Topic> getTopicByHobbyAndType(Long hobbyId, String type, int pageNumber, int pageSize, String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return topicDao.findByHobbyAndType(hobbyId, type, pageRequest);
+		return topicDao.findByHobbyAndType(hobbyId, type, TopicStatus.PUBLIC, pageRequest);
 	}
 	
 	public Page<Topic> getTopicByHobbyAndTypeAndTaxonomy(Long hobbyId, String type, Long taxonomyId, int pageNumber, int pageSize, String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return topicDao.findByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId,pageRequest);
+		return topicDao.findByHobbyAndTypeAndTaxonomy(hobbyId, type, taxonomyId, TopicStatus.PUBLIC ,pageRequest);
 	}
 	
 	public Page<Topic> getFineTopic(Long hobbyId, int pageNumber, int pageSize, String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return topicDao.findByHobbyAndFine(hobbyId,pageRequest);
+		return topicDao.findByHobbyAndFine(hobbyId,TopicStatus.PUBLIC,pageRequest);
 		
 	}
 	
