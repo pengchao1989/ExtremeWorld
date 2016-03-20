@@ -269,14 +269,6 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                         ShareUtils.ShareItem shareItem = null;
 
                         switch (item.getItemId()){
-                            case R.id.menu_share_wechat:
-                                shareItem = new ShareUtils.ShareItem("微信", R.drawable.umeng_socialize_wechat,
-                                        "com.tencent.mm.ui.tools.ShareImgUI", "com.tencent.mm");
-                                break;
-                            case R.id.menu_share_friend_group:
-                                shareItem = new ShareUtils.ShareItem("朋友圈", R.drawable.umeng_socialize_wxcircle,
-                                        "com.tencent.mm.ui.tools.ShareToTimeLineUI", "com.tencent.mm");
-                                break;
                             case R.id.menu_share_qq:
                                 shareItem = new ShareUtils.ShareItem("QQ", R.drawable.umeng_socialize_qq_on,
                                         "com.tencent.mobileqq.activity.JumpActivity","com.tencent.mobileqq");
@@ -284,10 +276,6 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                             case R.id.menu_share_kongjian:
                                 shareItem = new ShareUtils.ShareItem("空间", R.drawable.umeng_socialize_qzone_on,
                                         "com.qzone.ui.operation.QZonePublishMoodActivity","com.qzone");
-                                break;
-                            case R.id.menu_share_weibo:
-                                shareItem = new ShareUtils.ShareItem("微博", R.drawable.umeng_socialize_sina_on,
-                                        "com.sina.weibo.EditActivity", "com.sina.weibo");
                                 break;
                         }
 

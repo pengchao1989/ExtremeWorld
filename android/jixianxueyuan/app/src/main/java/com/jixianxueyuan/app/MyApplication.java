@@ -24,6 +24,7 @@ import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.socialize.PlatformConfig;
 
 public class MyApplication extends MultiDexApplication {
 
@@ -89,6 +90,8 @@ public class MyApplication extends MultiDexApplication {
 
         initIM();
 
+        initUmenScoial();
+
 	}
 
     /**
@@ -137,7 +140,7 @@ public class MyApplication extends MultiDexApplication {
 
 
     private void initQuPai(){
-        initAuth(getApplicationContext(),Contant.appkey,Contant.appsecret,Contant.space);
+        initAuth(getApplicationContext(), Contant.appkey, Contant.appsecret, Contant.space);
     }
 
 
@@ -192,5 +195,11 @@ public class MyApplication extends MultiDexApplication {
 
     private void initBugly(){
         CrashReport.initCrashReport(this, "900018639", false);
+    }
+
+    private void initUmenScoial(){
+        String qqAppId = String.valueOf(Util.getApplicationMetaInteger(this, "QQ_APP_ID"));
+        String qqAppKey = Util.getApplicationMetaString(this, "QQ_APP_KEY");
+        PlatformConfig.setQQZone(qqAppId, qqAppKey);
     }
 }

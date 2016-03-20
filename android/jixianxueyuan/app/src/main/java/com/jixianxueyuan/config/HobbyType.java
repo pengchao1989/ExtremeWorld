@@ -50,4 +50,18 @@ public class HobbyType {
 
         return hobbyId;
     }
+
+    public static String getHobbyLogoUrl(String hobby){
+
+        switch (hobby){
+            case SKATEBOARD:
+                return StaticResourceConfig.IMG_DOMAIN + "logo_skateboard.png";
+            case PARKOUR:
+                return StaticResourceConfig.IMG_DOMAIN + "logo_parkour.png";
+            case BMX:
+                return StaticResourceConfig.IMG_DOMAIN + "logo_bmx.png";
+            default:
+                return StaticResourceConfig.IMG_DOMAIN + "logo_skateboard.png";
+        }
+    }
 }

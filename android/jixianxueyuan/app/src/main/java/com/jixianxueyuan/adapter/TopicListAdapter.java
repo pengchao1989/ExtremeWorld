@@ -189,7 +189,7 @@ public class TopicListAdapter extends BaseAdapter {
                 MediaDTO mediaDto = mediawrap.getMedias().get(0);
 
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_1);
+                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_1);
             }
             if(mediawrap.getMedias().size() > 1)
             {
@@ -197,7 +197,7 @@ public class TopicListAdapter extends BaseAdapter {
                 MediaDTO mediaDto = mediawrap.getMedias().get(1);
 
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_2);
+                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_2);
             }
             if(mediawrap.getMedias().size() > 2)
             {
@@ -205,7 +205,7 @@ public class TopicListAdapter extends BaseAdapter {
                 MediaDTO mediaDto = mediawrap.getMedias().get(2);
 
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_3);
+                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_3);
             }
             if(mediawrap.getMedias().size() > 3)
             {
@@ -213,7 +213,7 @@ public class TopicListAdapter extends BaseAdapter {
                 MediaDTO mediaDto = mediawrap.getMedias().get(3);
 
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_4);
+                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_4);
             }
             if(mediawrap.getMedias().size() > 4)
             {
@@ -221,7 +221,7 @@ public class TopicListAdapter extends BaseAdapter {
                 MediaDTO mediaDto = mediawrap.getMedias().get(4);
 
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + "!AndroidListItem", viewHolder.topicImageView_5);
+                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_5);
             }
         }
 

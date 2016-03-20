@@ -32,6 +32,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <!-- 允许程序接收到广播在系统完成启动 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -119,6 +121,13 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+
+        <!--umeng scoial-->
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:theme="@style/Theme.UMDefault"
+            android:excludeFromRecents="true"/>
+        <!--umeng scoial-->
 
         <!--qq-->
         <activity
@@ -321,6 +330,9 @@
         <meta-data
             android:name="QQ_APP_ID"
             android:value="${QQ_APP_ID}"/>
+        <meta-data
+            android:name="QQ_APP_KEY"
+            android:value="${QQ_APP_KEY}"/>
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>

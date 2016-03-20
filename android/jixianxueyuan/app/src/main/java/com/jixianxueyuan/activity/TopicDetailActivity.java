@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -35,6 +37,7 @@ import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.TopicType;
@@ -48,6 +51,7 @@ import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
 import com.jixianxueyuan.dto.request.ZanRequest;
 import com.jixianxueyuan.http.MyPageRequest;
@@ -64,6 +68,13 @@ import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.editorpage.ShareActivity;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.io.File;
 import java.io.IOException;
@@ -181,10 +192,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             @Override
             public void onClick(View v) {
                 if (topicDTO != null){
-                    ShareUtils.showShareMenuSheet(TopicDetailActivity.this, bottomSheetLayout,
-                            topicDTO.getTitle(), topicDTO.getContent(), "", MenuSheetView.MenuType.GRID);
+                    showShareMenu(topicDTO);
                 }
-
             }
         });
 
@@ -828,4 +837,75 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         intent.putExtra("reply", replyDTO);
         startActivity(intent);
     }
+
+    //share
+
+    private void showShareMenu(final TopicDTO topicDTO){
+
+        String hobby = Util.getApplicationMetaString(this, "HOBBY");
+
+
+        VideoDetailDTO videoDetailDTO = topicDTO.getVideoDetail();
+        String imageUrl = "";
+        if (videoDetailDTO != null){
+            imageUrl = videoDetailDTO.getThumbnail() + QiniuImageStyle.LIST_ITEM;
+        }else {
+            imageUrl = HobbyType.getHobbyLogoUrl(hobby);
+        }
+
+        final UMImage image = new UMImage(TopicDetailActivity.this, imageUrl);
+        final String url = "http://www.jixianxueyuan.com/" + hobby + "/topic/" + topicDTO.getId();
+
+        MenuSheetView menuSheetView =
+                new MenuSheetView(this, MenuSheetView.MenuType.GRID, "分享给好友...", new MenuSheetView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        ShareUtils.ShareItem shareItem = null;
+
+                        switch (item.getItemId()){
+                            case R.id.menu_share_qq:
+                                new ShareAction(TopicDetailActivity.this).setPlatform(SHARE_MEDIA.QQ).setCallback(umShareListener)
+                                        .withText(topicDTO.getTitle())
+                                        .withMedia(image)
+                                        .withTargetUrl(url)
+                                        .share();
+                                break;
+                            case R.id.menu_share_kongjian:
+                                new ShareAction(TopicDetailActivity.this).setPlatform(SHARE_MEDIA.QZONE).setCallback(umShareListener)
+                                        .withTitle(topicDTO.getTitle())
+                                        .withMedia(image)
+                                        .withTargetUrl(url)
+                                        .share();
+
+                                break;
+                        }
+
+
+                        if (bottomSheetLayout.isSheetShowing()) {
+                            bottomSheetLayout.dismissSheet();
+                        }
+                        return true;
+                    }
+                });
+        menuSheetView.inflateMenu(R.menu.share);
+        bottomSheetLayout.showWithSheetView(menuSheetView);
+    }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(TopicDetailActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(TopicDetailActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(TopicDetailActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    };
 }

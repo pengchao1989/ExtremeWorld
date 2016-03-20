@@ -8,4 +8,5 @@ public class QiniuImageStyle {
     public static final String PROFILE_AVATAR = "!AndroidProfileAvatar";
     public static final String DETAIL = "!AndroidDetail";
     public static final String COVER = DETAIL;
+    public static final String LIST_ITEM = "!AndroidListItem";
 }

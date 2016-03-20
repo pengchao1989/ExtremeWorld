@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_share_wechat"
-        android:title="微信"
-        android:icon="@drawable/umeng_socialize_wechat"
-        />
-    <item
-        android:id="@+id/menu_share_friend_group"
-        android:title="朋友圈"
-        android:icon="@drawable/umeng_socialize_wxcircle"
-        />
-    <item
         android:id="@+id/menu_share_qq"
         android:title="QQ"
         android:icon="@drawable/umeng_socialize_qq_on"
@@ -20,11 +10,5 @@
         android:id="@+id/menu_share_kongjian"
         android:title="空间"
         android:icon="@drawable/umeng_socialize_qzone_on"
-        />
-
-    <item
-        android:id="@+id/menu_share_weibo"
-        android:title="微博"
-        android:icon="@drawable/umeng_socialize_sina_on"
         />
 </menu>
