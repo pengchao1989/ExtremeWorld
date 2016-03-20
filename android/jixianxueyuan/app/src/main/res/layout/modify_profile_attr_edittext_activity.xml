@@ -9,7 +9,7 @@
         android:id="@+id/modify_profile_attr_edittext_activity_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:my_title="@string/edit_profile"
+        app:action_title="@string/edit_profile"
         app:type="submit"
         app:action_text="@string/save"
         />

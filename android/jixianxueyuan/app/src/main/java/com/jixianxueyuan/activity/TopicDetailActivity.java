@@ -29,6 +29,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
@@ -54,8 +56,10 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
+import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
@@ -82,6 +86,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
 
+    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
+    @InjectView(R.id.topic_detail_actionbar)MyActionBar actionBar;
     @InjectView(R.id.topic_detail_listview)ListView listView;
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
 
@@ -164,11 +170,23 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         initTopicHeadView();
         initFooterView();
 
+        bottomSheetLayout.setPeekOnDismiss(true);
         adapter = new TopicDetailListAdapter(this);
         listView.setAdapter(adapter);
 
         replyWidget = new ReplyWidget(this, contentLayout);
         replyWidget.setReplyWidgetListener(this);
+
+        actionBar.setActionOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (topicDTO != null){
+                    ShareUtils.showShareMenuSheet(TopicDetailActivity.this, bottomSheetLayout,
+                            topicDTO.getTitle(), topicDTO.getContent(), "", MenuSheetView.MenuType.GRID);
+                }
+
+            }
+        });
 
         if(topicDTO != null){
             refreshHeadView();

@@ -11,7 +11,7 @@
         android:id="@+id/create_video_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:my_title="@string/contribute"
+        app:action_title="@string/contribute"
         app:type="submit"
         app:action_text="@string/submit"/>
 

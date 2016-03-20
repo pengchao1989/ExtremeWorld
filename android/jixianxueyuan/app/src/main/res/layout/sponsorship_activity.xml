@@ -16,7 +16,7 @@
             android:id="@+id/course_detail_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:my_title="@string/sponsorship"
+            app:action_title="@string/sponsorship"
             />
 
         <RelativeLayout

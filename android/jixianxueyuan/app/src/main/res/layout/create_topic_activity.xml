@@ -19,9 +19,8 @@
                 android:id="@+id/create_topic_actionbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:type="submit"
-                app:action_text="@string/submit"
-                />
+                app:type="text"
+                app:action_image="@drawable/actionbar_share_button_background"/>
 
 
             <RelativeLayout

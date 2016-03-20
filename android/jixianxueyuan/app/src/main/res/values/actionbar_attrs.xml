@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="MyActionBar">
-        <attr name="my_title" format="string" />
+        <attr name="action_title" format="string" />
         <attr name="action_text" format="string" />
+        <attr name="action_image" format="reference"/>
         <attr name="type" format="string">
             <enum name="none" value="0"/>
-            <enum name="submit" value="1"/>
+            <enum name="text" value="1"/>
+            <enum name="image" value="2"/>
         </attr>
     </declare-styleable>
 </resources>

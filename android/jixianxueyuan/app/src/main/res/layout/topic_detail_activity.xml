@@ -1,42 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.flipboard.bottomsheet.BottomSheetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:my="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/topic_detail_swipeback_layout"
-    android:orientation="vertical"
+    android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    >
+    android:orientation="vertical">
 
-    <com.jixianxueyuan.widget.MyActionBar
+    <LinearLayout
+        android:id="@+id/topic_detail_swipeback_layout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        my:my_title="@string/topic_detail"
-        />
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        >
 
-    <RelativeLayout
-        android:id="@+id/content_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/topic_detail_listview"
-            android:paddingBottom="@dimen/bottom_input_widget_heigh"
-            style="@style/ListView"
-            />
-
-        <LinearLayout
-            android:id="@+id/reply_widget_layout"
+        <com.jixianxueyuan.widget.MyActionBar
+            android:id="@+id/topic_detail_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true"
+            my:action_title="@string/topic_detail"
+            my:type="image"
+            my:action_image="@drawable/actionbar_share_button_background"
             />
 
+        <RelativeLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+            <ListView
+                android:id="@+id/topic_detail_listview"
+                android:paddingBottom="@dimen/bottom_input_widget_heigh"
+                style="@style/ListView"
+                />
+
+            <LinearLayout
+                android:id="@+id/reply_widget_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                />
 
 
-</LinearLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</com.flipboard.bottomsheet.BottomSheetLayout>
+
+
