@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AbsListView;
 
 import com.android.volley.Request;
@@ -17,6 +19,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.TopicDetailActivity;
+import com.jixianxueyuan.activity.WebActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
@@ -219,6 +222,11 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
             return;
         }
         TopicDTO topicDTO = adapter.getItem(position - 1);
+
+        if (!TextUtils.isEmpty(topicDTO.getUrl())){
+            WebActivity.startActivity(this.getActivity(), topicDTO.getTitle(), topicDTO.getUrl());
+            return;
+        }
 
         Intent intent = null;
         switch (topicDTO.getType()) {

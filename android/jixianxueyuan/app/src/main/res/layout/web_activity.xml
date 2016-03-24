@@ -6,11 +6,12 @@
     >
 
     <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/web_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 
-    <WebView
+    <com.jixianxueyuan.widget.AdvancedWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

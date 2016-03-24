@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         initView();
 
         final Shimmer shimmer = new Shimmer();
-        shimmer.setRepeatCount(0);
+        shimmer.setRepeatCount(2);
         shimmer.start(appNameTextView);
 
 /*        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
@@ -96,6 +96,7 @@ public class MainActivity extends Activity {
             Mine mine = MyApplication.getContext().getMine();
             if(mine.getUserInfo() != null && mine.getUserInfo().getId() != null){
                 //直接进入Hone页
+                showProgress();
                 if(mine.getUserInfo().getId() > 0){
                     loginIM();
                 }
@@ -125,7 +126,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        showVideo();
+        //showVideo();
         MobclickAgent.onResume(this);
     }
 
@@ -135,22 +136,9 @@ public class MainActivity extends Activity {
         MobclickAgent.onPause(this);
     }
 
-    private void initView()
-    {
-        String hobby = Util.getApplicationMetaString(this, "HOBBY");
+    private void initView() {
         String umengKey = Util.getApplicationMetaString(this, "UMENG_APPKEY");
         MyLog.e("MainActivity", "UMENT_KEY=" + umengKey);
-/*        switch (hobby){
-            case HobbyType.SKATEBOARD:
-                appNameTextView.setText(this.getResources().getText(R.string.app_name_skateboard));
-                break;
-            case HobbyType.PARKOUR:
-                appNameTextView.setText(this.getResources().getText(R.string.app_name_packour));
-                break;
-            case HobbyType.BMX:
-                appNameTextView.setText(this.getResources().getText(R.string.app_name_bmx));
-                break;
-        }*/
         appNameTextView.setText(this.getResources().getText(R.string.app_name));
     }
 
@@ -173,7 +161,7 @@ public class MainActivity extends Activity {
 
             }
         });
-        Uri url  = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cover);
+        Uri url  = Uri.parse("android.resource://" + getPackageName() + "/" /*+ R.raw.cover*/);
         videoView.setVideoURI(url);
         videoView.start();
     }

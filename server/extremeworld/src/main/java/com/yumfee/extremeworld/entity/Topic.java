@@ -37,6 +37,7 @@ public class Topic extends IdEntity
 	private String title;
 	private String excerpt;
 	private String content;
+	private String url;
 	private int replyCount;
 	private int allReplyCount;
 	private int viewCount;
@@ -98,6 +99,12 @@ public class Topic extends IdEntity
 	public void setContent(String content)
 	{
 		this.content = content;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public int getReplyCount()
 	{

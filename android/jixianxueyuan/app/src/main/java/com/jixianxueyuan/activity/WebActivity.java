@@ -1,25 +1,40 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.util.StringUtils;
+import com.jixianxueyuan.widget.AdvancedWebView;
+import com.jixianxueyuan.widget.MyActionBar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by pengchao on 9/5/15.
  */
-public class WebActivity extends Activity {
+public class WebActivity extends BaseActivity implements AdvancedWebView.Listener {
 
-    @InjectView(R.id.web_view)WebView webView;
+    public static final String INTENT_TITLE = "INTENT_TITLE";
+    public static final String INTENT_URL = "INTENT_URL";
 
+    @InjectView(R.id.web_actionbar)
+    MyActionBar actionBar;
+    @InjectView(R.id.web_view)AdvancedWebView webView;
+
+    private AlertDialog progressDialog;
+
+    private String title;
     private String url;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +43,59 @@ public class WebActivity extends Activity {
 
         ButterKnife.inject(this);
 
-        Intent intent = getIntent();
-        url = intent.getStringExtra("url");
+        initParams();
+        actionBar.setTitle(title);
+
         if(!StringUtils.isBlank(url)){
             webView.loadUrl(url);
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    // TODO Auto-generated method stub
-                    //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                    view.loadUrl(url);
-                    return true;
-                }
-            });
+            webView.setListener(this, this);
         }
+    }
+
+    private void initParams(){
+        title = getIntent().getStringExtra(INTENT_TITLE);
+        url = getIntent().getStringExtra(INTENT_URL);
+    }
+
+    public static void startActivity(Context contex, String title, String url){
+        Intent intent = new Intent(contex, WebActivity.class);
+        intent.putExtra(INTENT_TITLE, title);
+        intent.putExtra(INTENT_URL, url);
+        contex.startActivity(intent);
+    }
+
+    @Override
+    public void onPageStarted(String url, Bitmap favicon) {
+        showLocationProgress();
+    }
+
+    @Override
+    public void onPageFinished(String url) {
+        hideLocationProgress();
+    }
+
+    @Override
+    public void onPageError(int errorCode, String description, String failingUrl) {
+
+    }
+
+    @Override
+    public void onDownloadRequested(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+
+    }
+
+    @Override
+    public void onExternalPageRequest(String url) {
+
+    }
+
+    private void showLocationProgress(){
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWaitLocation);
+        progressDialog.setTitle(getString(R.string.wait_location));
+        progressDialog.show();
+    }
+
+    private void hideLocationProgress(){
+        progressDialog.dismiss();
     }
 }

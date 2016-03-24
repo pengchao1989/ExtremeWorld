@@ -14,6 +14,7 @@ public class TopicDTO
 	private String magicType;
 	private String title;
 	private String content;
+	private String url;
 	private int replyCount;
 	private int allReplyCount;
 	private int viewCount;
@@ -69,6 +70,12 @@ public class TopicDTO
 	public void setContent(String content)
 	{
 		this.content = content;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public int getReplyCount()
 	{

@@ -17,6 +17,7 @@ public class TopicDTO implements Serializable
     private int agreeCount;
     private String createTime;
     private int status;
+    private String url;
 
     private UserMinDTO user;
 
@@ -120,6 +121,15 @@ public class TopicDTO implements Serializable
     {
         this.status = status;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public VideoDetailDTO getVideoDetail() {
         return videoDetail;
     }
