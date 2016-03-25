@@ -48,6 +48,13 @@ public class TopicTaxonomyListFragmentPageAdapter extends FragmentPagerAdapter i
         initTabs();
     }
 
+    public long getTaxonomyId(int position){
+        if (taxonomyDTOList != null){
+            return taxonomyDTOList.get(position).getId();
+        }
+        return 0;
+    }
+
     @Override
     public Fragment getItem(int position) {
 

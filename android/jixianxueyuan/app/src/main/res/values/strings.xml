@@ -35,6 +35,7 @@
     <string name="get_verification_code">get verification code</string>
     <string name="re_acquisition">Re acquisition</string>
     <string name="description">description</string>
+    <string name="paste_url_here">paste the URL here</string>
 
     <string name="not_more">not more</string>
 
@@ -60,6 +61,7 @@
     <string name="please_select_mp4_file">please select mp4 file</string>
     <string name="video_is_empty">please select video</string>
     <string name="title_is_empty">please write title</string>
+    <string name="url_is_empty">please enter URL</string>
 
     <string name="reply_of_me">respond</string>
     <string name="collection">collection</string>

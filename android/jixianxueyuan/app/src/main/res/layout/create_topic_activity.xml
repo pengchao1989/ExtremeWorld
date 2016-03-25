@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:type="text"
-                app:action_image="@drawable/actionbar_share_button_background"/>
+                app:action_text="@string/submit"/>
 
 
             <RelativeLayout

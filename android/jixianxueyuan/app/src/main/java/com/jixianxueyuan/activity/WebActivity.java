@@ -90,7 +90,7 @@ public class WebActivity extends BaseActivity implements AdvancedWebView.Listene
     }
 
     private void showLocationProgress(){
-        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWaitLocation);
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
         progressDialog.setTitle(getString(R.string.wait_location));
         progressDialog.show();
     }

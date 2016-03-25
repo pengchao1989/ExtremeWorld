@@ -35,6 +35,7 @@
     <string name="get_verification_code">가져오기 인증 코드</string>
     <string name="re_acquisition">다시 가져오기</string>
     <string name="description">설명</string>
+    <string name="paste_url_here">붙다 url 여기까지</string>
 
     <string name="not_more">없다</string>
 
@@ -60,6 +61,7 @@
     <string name="please_select_mp4_file">한 개 주세요 MP4 파일 선택</string>
     <string name="video_is_empty">비디오 파일을 선택하십시오</string>
     <string name="title_is_empty">작성해 주세요 제목</string>
+    <string name="url_is_empty">URL 작성해 주십시오</string>
 
     <string name="reply_of_me">대답, 내</string>
     <string name="collection">수집</string>

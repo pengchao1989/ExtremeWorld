@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         my:action_title="@string/course_detail"
-        my:type="submit"
+        my:type="text"
         my:action_text="@string/edit"
         />
 

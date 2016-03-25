@@ -30,6 +30,8 @@ public class TopicTaxonomyHomeActivity extends BaseActivity {
 
     String topicType;
 
+    private long currentSelectTaxonomyId = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,5 +103,36 @@ public class TopicTaxonomyHomeActivity extends BaseActivity {
 
         niceTabLayout.setTabMode(NiceTabLayout.TabMode.TITLE_ONLY);
 
+
+        niceTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                currentSelectTaxonomyId = pageAdapter.getTaxonomyId(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (topicType) {
+                    case TopicType.NEWS:
+                        CreateNewsActivity.startActivity(TopicTaxonomyHomeActivity.this, currentSelectTaxonomyId);
+                        break;
+                    case TopicType.VIDEO:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 }

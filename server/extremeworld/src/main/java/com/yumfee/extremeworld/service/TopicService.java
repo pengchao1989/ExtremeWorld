@@ -3,6 +3,7 @@ package com.yumfee.extremeworld.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -68,13 +69,15 @@ public class TopicService
 	
 	public void saveTopic(Topic entity){
 		String content = entity.getContent();
-		if(content.length() > 160)
-		{
-			entity.setExcerpt(content.substring(0, 159) + "....");
-		}
-		else
-		{
-			entity.setExcerpt(content);
+		if(!StringUtils.isEmpty(content)){
+			if(content.length() > 160)
+			{
+				entity.setExcerpt(content.substring(0, 159) + "....");
+			}
+			else
+			{
+				entity.setExcerpt(content);
+			}
 		}
 		topicDao.save(entity);
 	}

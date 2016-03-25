@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:maxLines="2"
+                android:maxLines="6"
                 android:hint="@string/description"/>
 
 

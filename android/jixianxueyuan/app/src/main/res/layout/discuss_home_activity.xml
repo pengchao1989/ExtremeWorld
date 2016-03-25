@@ -10,7 +10,9 @@
     <com.jixianxueyuan.widget.MyActionBar
         android:id="@+id/discuss_home_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:action_text="@string/submit"
+        app:type="text"/>
 
     <me.amiee.nicetab.NiceTabLayout
         android:id="@+id/discuss_home_activity_pager_title_strip"

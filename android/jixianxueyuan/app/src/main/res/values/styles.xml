@@ -211,14 +211,18 @@
 
 
     //progress dialog
-    <style name="ProgressDialogWait" parent="android:Theme.DeviceDefault.Dialog">
+    <style name="ProgressDialog" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
-        <item name="DialogTitleText">@string/wait</item>
         <item name="DialogSpotColor">@color/white</item>
         <item name="DialogSpotCount">4</item>
     </style>
 
-    <style name="ProgressDialogWaitLocation" parent="ProgressDialogWait">
+
+    <style name="ProgressDialogWait" parent="ProgressDialog">
+        <item name="DialogTitleText">@string/wait</item>
+    </style>
+
+    <style name="ProgressDialogWaitLocation" parent="ProgressDialog">
         <item name="DialogTitleText">@string/wait_location</item>
     </style>
 

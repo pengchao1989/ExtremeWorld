@@ -3,6 +3,7 @@ package com.yumfee.extremeworld.web.topic;
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -166,24 +167,27 @@ public class TopicController
 	
 	private String replaceImageUrl(String content)
 	{
-		
-		String regexPIC_URL="http://img\\.jixianxueyuan\\.com.*";
-		
-		Document contnetDocument = Jsoup.parseBodyFragment(content);
-		
-		Elements images = contnetDocument.getElementsByTag("img");
-		for(Element img : images)
-		{
-			String src = img.attr("src");
+		if(StringUtils.isNoneEmpty(content)){
+			String regexPIC_URL="http://img\\.jixianxueyuan\\.com.*";
 			
-			if(src.matches(regexPIC_URL) && (!src.contains("!webContentImg")))
+			Document contnetDocument = Jsoup.parseBodyFragment(content);
+			
+			Elements images = contnetDocument.getElementsByTag("img");
+			for(Element img : images)
 			{
-				img.attr("src", src + "!webContentImg");
+				String src = img.attr("src");
+				
+				if(src.matches(regexPIC_URL) && (!src.contains("!webContentImg")))
+				{
+					img.attr("src", src + "!webContentImg");
+				}
+				
 			}
 			
+
+			return contnetDocument.body().html();
 		}
 		
-
-		return contnetDocument.body().html();
+		return "";
 	}
 }

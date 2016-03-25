@@ -35,6 +35,7 @@
     <string name="get_verification_code">获取验证码</string>
     <string name="re_acquisition">重新获取</string>
     <string name="description">描述</string>
+    <string name="paste_url_here">黏贴url到这里</string>
 
     <string name="not_more">没有更多了</string>
 
@@ -60,6 +61,7 @@
     <string name="please_select_mp4_file">请选择一个MP4文件</string>
     <string name="video_is_empty">请选择视频文件</string>
     <string name="title_is_empty">请填写标题</string>
+    <string name="url_is_empty">请填写URL</string>
 
     <string name="reply_of_me">回应我的</string>
     <string name="collection">收藏</string>
