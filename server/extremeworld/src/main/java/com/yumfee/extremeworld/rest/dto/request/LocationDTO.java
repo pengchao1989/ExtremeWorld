@@ -1,17 +1,11 @@
 package com.yumfee.extremeworld.rest.dto.request;
 
-public class PointDTO {
+public class LocationDTO {
 
-	Long id;//用作标识user或site
 	double latitude;
 	double longitude;
+	String address;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public double getLatitude() {
 		return latitude;
 	}
@@ -24,6 +18,11 @@ public class PointDTO {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
 }

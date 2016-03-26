@@ -65,6 +65,12 @@ public class NearFriendActivity extends BaseActivity  {
         refresh();
     }
 
+    @Override
+    protected void onDestroy() {
+        LocationManager.getInstance().stop();
+        super.onDestroy();
+    }
+
     private void initView()
     {
         adapter = new NearFriendListAdapter(this);
@@ -114,10 +120,7 @@ public class NearFriendActivity extends BaseActivity  {
     private void refresh() {
 
         currentPage = 0;
-
         startLocation();
-
-        LocationManager.getInstance().stop();
     }
 
     private void nextPage()
@@ -214,8 +217,7 @@ public class NearFriendActivity extends BaseActivity  {
                 Toast.makeText(NearFriendActivity.this, R.string.location_failed, Toast.LENGTH_LONG).show();
             }
         });
-
-
+        locationManager.start();
     }
 
     private void showLocationProgress(){

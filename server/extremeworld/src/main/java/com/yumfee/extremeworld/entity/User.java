@@ -37,6 +37,9 @@ public class User extends UserBase
 	private String hobbyStamp;
 	private Date   geoModifyTime;
 	private String device;
+	private Double latitude;
+	private Double longitude;
+	private String address;
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
@@ -145,6 +148,24 @@ public class User extends UserBase
 	}
 	public void setDevice(String device) {
 		this.device = device;
+	}
+	public Double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	public Double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	@OneToOne
 	@JoinColumn(name = "country_id")

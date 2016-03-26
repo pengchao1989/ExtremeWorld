@@ -11,8 +11,8 @@ public class ServerMethod {
     static public final int STATUS_NO_CONTENT = 204;
 
     //static final String server_url = "http://dev.jixianxueyuan.com/";
-    static final String server_url = "http://www.jixianxueyuan.com/";
-    //static final String server_url = "http://192.168.1.6:8023/";
+    //static final String server_url = "http://www.jixianxueyuan.com/";
+    static final String server_url = "http://192.168.1.6:8023/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
     static String hobby = "skateboard/";
@@ -55,6 +55,7 @@ public class ServerMethod {
     public static final String sub_reply(){return method_url_secure + "sub_reply";};
     public static final String zan() {return method_url_secure + "topic_agree";}
     public static final String near_friend (){return method_url_secure + hobby + "geo/near_friend";};
+    public static final String publish_location() {return method_url_secure + hobby + "geo/publish_location";}
     public static final String remind() {return method_url_secure + "remind/";};
     public static final String collection() {return method_url_secure + "collection";};
     public static final String biz_market(){return method_url_secure + hobby + "biz/market";};

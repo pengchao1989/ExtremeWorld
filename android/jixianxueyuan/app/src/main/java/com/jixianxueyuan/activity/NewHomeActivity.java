@@ -12,17 +12,25 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.request.LocationDTO;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
+import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.location.LocationManager;
 import com.jixianxueyuan.location.MyLocation;
+import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -305,7 +313,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         bottomSheetLayout.showWithSheetView(menuSheetView);
     }
 
-    private void location(){
+        private void location(){
         new CountDownTimer(3000, 3000){
 
             @Override
@@ -323,6 +331,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                         " lat=" + location.getLatitude() +
                         " lng=" + location.getLongitude());
 
+                        requestPublishLocation(location);
+
                         locationManager.stop();
                     }
 
@@ -334,6 +344,31 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 locationManager.start();
             }
         }.start();
+    }
+
+    private void requestPublishLocation(MyLocation myLocation){
+        if (myLocation != null){
+            String url = ServerMethod.publish_location();
+
+            LocationDTO locationDTO = new LocationDTO();
+            locationDTO.setLatitude(myLocation.getLatitude());
+            locationDTO.setLongitude(myLocation.getLongitude());
+            locationDTO.setAddress(myLocation.getAddress());
+
+            MyRequest<Void> myRequest = new MyRequest<Void>(Request.Method.POST, url, Void.class, locationDTO, new Response.Listener<MyResponse<Void>>() {
+                @Override
+                public void onResponse(MyResponse<Void> response) {
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+
+            MyApplication.getContext().getRequestQueue().add(myRequest);
+        }
     }
 
 }

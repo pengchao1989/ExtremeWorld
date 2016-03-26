@@ -106,6 +106,8 @@ public class LocationManager implements AMapLocationListener{
                     mLocationListener.onSuccess(myLocation);
                 }
 
+                stop();
+
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 MyLog.e("AmapError", "location Error, ErrCode:"

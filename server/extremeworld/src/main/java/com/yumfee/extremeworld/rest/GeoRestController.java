@@ -7,6 +7,8 @@ import java.util.Date;
 
 import javax.validation.Validator;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +26,10 @@ import ch.hsr.geohash.util.VincentyGeodesy;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
-import com.yumfee.extremeworld.rest.dto.UserDTO;
 import com.yumfee.extremeworld.rest.dto.UserGeoDTO;
-import com.yumfee.extremeworld.rest.dto.request.PointDTO;
+import com.yumfee.extremeworld.rest.dto.request.LocationDTO;
 import com.yumfee.extremeworld.service.UserService;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @RestController
 @RequestMapping(value = "/api/secure/v1/{hobby}/geo")
@@ -101,20 +103,33 @@ public class GeoRestController {
 		return MyResponse.ok(userMinePage,true);
 	}
 	
-	@RequestMapping(value = "/update_user_point", method = RequestMethod.POST, consumes = MediaTypes.JSON)
-	public MyResponse updatePoint(@RequestBody PointDTO point)
-	{
-		User user = userService.getUser(point.getId());
+	@RequestMapping(value = "/publish_location", method = RequestMethod.POST, consumes = MediaTypes.JSON)
+	public MyResponse updatePoint(@RequestBody LocationDTO location){
 		
-		WGS84Point center = new WGS84Point(point.getLatitude(), point.getLongitude());
+		User user = userService.getUser(getCurrentUserId());
+		
+		WGS84Point center = new WGS84Point(location.getLatitude(), location.getLongitude());
 
 		String geoHash = GeoHash.geoHashStringWithCharacterPrecision(center.getLatitude(), center.getLongitude(), 12);
 		
+		user.setLatitude(location.getLatitude());
+		user.setLongitude(location.getLongitude());
+		if(StringUtils.isNotEmpty(location.getAddress())){
+			user.setAddress(location.getAddress());
+		}
 		user.setGeoHash(geoHash);
 		user.setGeoModifyTime(new Date());
 		
 		userService.saveUser(user);
 		
 		return MyResponse.ok(null);
+	}
+	
+	/**
+	 * 取出Shiro中的当前用户Id.
+	 */
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
 	}
 }
