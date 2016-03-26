@@ -24,8 +24,8 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 17
-        versionName "1.3.7"
+        versionCode 18
+        versionName "1.3.8"
         multiDexEnabled true
         ndk {
             //设置支持的SO库架构
@@ -47,16 +47,6 @@ android {
         exclude '.readme'
     }
     productFlavors {
-        xueyuan {
-            applicationId = "com.jixianxueyuan"
-            manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan",
-                                    HOBBY        : "all",
-                                    JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
-                                    UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
-                                    QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}",
-                                    QQ_APP_KEY   : "${project.QQ_APP_KEY_PARKOUR}"]
-            signingConfig signingConfigs.release
-        }
         parkour {
             applicationId = "com.jixianxueyuan.parkour"
             manifestPlaceholders = [APPLICATIONID: "com.jixianxueyuan.parkour",
@@ -64,7 +54,8 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_PARKOUR}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_PARKOUR}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_PARKOUR}",
-                                    QQ_APP_KEY   : "${project.QQ_APP_KEY_PARKOUR}"]
+                                    QQ_APP_KEY   : "${project.QQ_APP_KEY_PARKOUR}",
+                                    AMAP_KEY : "${project.AMAP_KEY_PARKOUR}"]
             signingConfig signingConfigs.release
         }
         bmx {
@@ -74,7 +65,8 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_BMX}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_BMX}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_BMX}",
-                                    QQ_APP_KEY   : "${project.QQ_APP_KEY_BMX}"]
+                                    QQ_APP_KEY   : "${project.QQ_APP_KEY_BMX}",
+                                    AMAP_KEY : "${project.AMAP_KEY_BMX}"]
             signingConfig signingConfigs.release
         }
         skateboard {
@@ -84,7 +76,8 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_SKATEBOARD}",
-                                    QQ_APP_KEY   : "${project.QQ_APP_KEY_SKATEBOARD}"]
+                                    QQ_APP_KEY   : "${project.QQ_APP_KEY_SKATEBOARD}",
+                                    AMAP_KEY : "${project.AMAP_KEY_SKATEBOARD}"]
             signingConfig signingConfigs.release
         }
         skate {
@@ -94,7 +87,8 @@ android {
                                     JPUSH_APPKEY : "${project.JPUSH_APPKEY_VALUE_SKATEBOARD}",
                                     UMENG_APPKEY : "${project.UMENG_APPKEY_SKATEBOARD}",
                                     QQ_APP_ID    : "${project.QQ_APP_ID_SKATE}",
-                                    QQ_APP_KEY    : "${project.QQ_APP_KEY_SKATE}"]
+                                    QQ_APP_KEY    : "${project.QQ_APP_KEY_SKATE}",
+                                    AMAP_KEY : "${project.AMAP_KEY_SKATE}"]
             signingConfig  signingConfigs.release_skate
         }
     }
@@ -176,7 +170,7 @@ dependencies {
     compile project(':social_sdk_library_project')
 }
 
-bugly {
+/*bugly {
     appId = '900018639'
     appKey = '6H1BuGJoxCxNEcYx'
-}
+}*/

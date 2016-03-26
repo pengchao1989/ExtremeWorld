@@ -1,8 +1,10 @@
 package com.jixianxueyuan.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,11 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,7 +65,9 @@ import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
+import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.widget.AdvancedWebView;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
@@ -88,11 +94,12 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener {
+public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener, AdvancedWebView.Listener {
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
@@ -103,26 +110,27 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
 
 
-    long topicId = -1;
-    TopicDTO topicDTO;
+    private long topicId = -1;
+    private TopicDTO topicDTO;
 
-    int currentPage = 0;
-    int totalPage = 0;
-    TopicDetailListAdapter adapter;
+    private int currentPage = 0;
+    private int totalPage = 0;
+    private TopicDetailListAdapter adapter;
 
 
-    View headView;
-    HeadViewHolder headViewHolder;
-    ClickLoadMoreView loadMoreButton;
+    private View headView;
+    private HeadViewHolder headViewHolder;
+    private ClickLoadMoreView loadMoreButton;
 
-    ReplyWidget replyWidget;
+    private ReplyWidget replyWidget;
+    private AlertDialog progressDialog;
 
-    DiskLruCache mDiskLruCache;
+    private DiskLruCache mDiskLruCache;
 
-    boolean interceptFlag = false;
-    int mProgressNum = 0;
+    private boolean interceptFlag = false;
+    private int mProgressNum = 0;
 
-    ArrayList<String> imageUrlArrayList = new ArrayList<String>();
+    private ArrayList<String> imageUrlArrayList = new ArrayList<String>();
 
 
     final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
@@ -211,6 +219,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (headViewHolder.webView != null){
+            headViewHolder.webView.destroy();
+        }
     }
 
     @Override
@@ -241,11 +252,41 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     }
 
     private void refreshHeadView(){
+
+        headViewHolder.zanLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //点赞
+                submitZan();
+            }
+        });
+
+        headViewHolder.collectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitCollection();
+            }
+        });
+
+        headViewHolder.zanCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
+
+        //web view
+        if(!StringUtils.isBlank(topicDTO.getUrl())){
+            headViewHolder.webView.setVisibility(View.VISIBLE);
+            headViewHolder.webView.loadUrl(topicDTO.getUrl());
+            headViewHolder.webView.setListener(this, this);
+            headViewHolder.webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+            headViewHolder.mUserHeadLayout.setVisibility(View.GONE);
+            headViewHolder.titleTextView.setVisibility(View.GONE);
+            return;
+        }
+
+
         headViewHolder.titleTextView.setText(topicDTO.getTitle());
         headViewHolder.nameTextView.setText(topicDTO.getUser().getName());
         String timeAgo = DateTimeFormatter.getTimeAgo(this, topicDTO.getCreateTime());
         headViewHolder.timeTextView.setText(timeAgo);
-        headViewHolder.zanCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
+
 
         String avatarUrl = topicDTO.getUser().getAvatar();
         if(Util.isOurServerImage(avatarUrl)){
@@ -351,22 +392,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 });
             }
         }
-
-        headViewHolder.zanLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //点赞
-                submitZan();
-            }
-        });
-
-        headViewHolder.collectionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitCollection();
-            }
-        });
-
     }
 
     private void initVideo()
@@ -639,19 +664,55 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
+    private void showLocationProgress(){
+        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
+        progressDialog.show();
+    }
+
+    private void hideLocationProgress(){
+        progressDialog.dismiss();
+    }
+
 
     @Override
     public void onCommit(String text) {
         submitReply(text);
     }
 
+    @Override
+    public void onPageStarted(String url, Bitmap favicon) {
+        showLocationProgress();
+    }
+
+    @Override
+    public void onPageFinished(String url) {
+        hideLocationProgress();
+    }
+
+    @Override
+    public void onPageError(int errorCode, String description, String failingUrl) {
+
+    }
+
+    @Override
+    public void onDownloadRequested(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+
+    }
+
+    @Override
+    public void onExternalPageRequest(String url) {
+
+    }
+
     public static class HeadViewHolder
     {
+        @InjectView(R.id.user_info_head_layout)RelativeLayout mUserHeadLayout;
         @InjectView(R.id.topic_detail_title)TextView titleTextView;
         @InjectView(R.id.user_head_name)TextView nameTextView;
         @InjectView(R.id.user_head_time)TextView timeTextView;
         @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
         @InjectView(R.id.videoview)SuperVideoPlayer videoView;
+        @InjectView(R.id.web_view)AdvancedWebView webView;
         @InjectView(R.id.topic_detail_head_view_video_cover_image)
         ImageView coverImageView;
         @InjectView(R.id.topic_detail_head_view_video_play_btn)

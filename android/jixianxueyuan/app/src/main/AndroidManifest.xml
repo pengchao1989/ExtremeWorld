@@ -151,7 +151,7 @@
 
         <service android:name="com.jixianxueyuan.util.filedownload.DownloadService" />
 
-        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
+        <service android:name="com.amap.api.location.APSService"></service>
 
         <activity
             android:name="com.alibaba.mobileim.ui.WxChattingActvity"
@@ -318,9 +318,6 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="${JPUSH_APPKEY}" />
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="f997213fb1b98d9a842c199155326d27"/>
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -334,6 +331,8 @@
         <meta-data
             android:name="QQ_APP_KEY"
             android:value="${QQ_APP_KEY}"/>
+        <meta-data android:name="com.amap.api.v2.apikey"
+                   android:value="${AMAP_KEY}"/>
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>

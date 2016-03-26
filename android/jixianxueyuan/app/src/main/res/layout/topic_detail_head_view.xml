@@ -46,12 +46,27 @@
 
     </FrameLayout>
 
+
+
     <LinearLayout
+
         android:orientation="vertical"
         android:paddingTop="4dp"
-        style="@style/ListItemLayout">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <include layout="@layout/user_info_head_view"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+            <include layout="@layout/user_info_head_view"/>
+        </FrameLayout>
+
+        <com.jixianxueyuan.widget.AdvancedWebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/topic_detail_title"
@@ -70,10 +85,11 @@
             android:id="@+id/topic_detail_content_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
             android:textSize="18sp"
             style="@style/ListSecondaryText"
-            tools:text="content"
-            />
+            tools:text="content"/>
 
         <LinearLayout
             android:id="@+id/topic_detail_head_zhan_layout"

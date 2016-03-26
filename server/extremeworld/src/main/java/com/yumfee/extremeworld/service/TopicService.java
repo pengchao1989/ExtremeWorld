@@ -150,7 +150,7 @@ public class TopicService
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return topicDao.findByCourseIdAndMagicTypeAndStatus(courseId, magicType,0, pageRequest);
+		return topicDao.findByCourseIdAndMagicTypeAndStatus(courseId, magicType,TopicStatus.PUBLIC, pageRequest);
 	}
 	
 	public Page<Topic> getTopicByfollowings(Long id, int pageNumber, int pageSize,String sortType)

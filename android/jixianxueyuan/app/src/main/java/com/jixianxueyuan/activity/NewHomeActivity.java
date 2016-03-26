@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,9 @@ import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
+import com.jixianxueyuan.location.LocationManager;
+import com.jixianxueyuan.location.MyLocation;
+import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
@@ -31,6 +35,8 @@ import butterknife.InjectView;
  * Created by pengchao on 10/31/15.
  */
 public class NewHomeActivity extends FragmentActivity implements View.OnClickListener {
+
+    public static final String tag = NewHomeActivity.class.getSimpleName();
 
     @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @InjectView(R.id.tab_new_layout)RelativeLayout newLayout;
@@ -73,6 +79,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         MobclickAgent.setDebugMode(true);
 
         UmengUpdateAgent.update(this);
+
+        location();
     }
 
     private void initView(){
@@ -295,6 +303,37 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 });
         menuSheetView.inflateMenu(R.menu.share);
         bottomSheetLayout.showWithSheetView(menuSheetView);
+    }
+
+    private void location(){
+        new CountDownTimer(3000, 3000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                final LocationManager locationManager = LocationManager.getInstance();
+                locationManager.setLocationListener(new LocationManager.LocationListener() {
+                    @Override
+                    public void onSuccess(MyLocation location) {
+                        MyLog.e(tag, "address=" + location.getAddress() +
+                        " lat=" + location.getLatitude() +
+                        " lng=" + location.getLongitude());
+
+                        locationManager.stop();
+                    }
+
+                    @Override
+                    public void onError(int errCode, String err) {
+
+                    }
+                });
+                locationManager.start();
+            }
+        }.start();
     }
 
 }
