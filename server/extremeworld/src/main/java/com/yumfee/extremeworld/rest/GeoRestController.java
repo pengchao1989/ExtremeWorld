@@ -62,8 +62,10 @@ public class GeoRestController {
 		//更新用户最后的geohash
 		if(pageNumber == 1)
 		{
-			User user = userService.getUser(userId);
+			User user = userService.getUser(getCurrentUserId());
 			user.setGeoHash(geoHashString);
+			user.setLatitude(latitude);
+			user.setLongitude(longitude);
 			user.setGeoModifyTime(new Date());
 			userService.saveUser(user);
 		}
