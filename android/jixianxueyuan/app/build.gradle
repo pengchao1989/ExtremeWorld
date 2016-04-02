@@ -159,6 +159,7 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:1.2.7'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.commit451:PhotoView:1.2.4'
+    compile 'com.bigkoo:convenientbanner:2.0.5'
     compile files('libs/open_sdk_r5043_lite.jar')
     compile files('libs/locSDK_3.3.jar')
     compile files('libs/renderscript-v8.jar')

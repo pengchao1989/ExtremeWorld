@@ -171,6 +171,8 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
         }
     }
 
+
+
     private void initHeaderView(View view){
         if(!hasHead){
             return;

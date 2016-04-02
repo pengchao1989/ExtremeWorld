@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
@@ -27,13 +29,15 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.ImageLoaderConfig;
-import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.UmengEventId;
-import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.widget.NetworkImageHolderView;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -47,19 +51,29 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
     protected static final float MAX_TEXT_SCALE_DELTA = 0.3f;
 
-    @InjectView(R.id.fab) CircleImageView mFab;
+    private List<String> networkImages;
+    private String[] images = {"http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
+            "http://img2.3lian.com/2014/f2/37/d/40.jpg",
+            "http://d.3987.com/sqmy_131219/001.jpg",
+            "http://img2.3lian.com/2014/f2/37/d/39.jpg",
+            "http://www.8kmm.com/UploadFiles/2012/8/201208140920132659.jpg",
+            "http://f.hiphotos.baidu.com/image/h%3D200/sign=1478eb74d5a20cf45990f9df460b4b0c/d058ccbf6c81800a5422e5fdb43533fa838b4779.jpg",
+            "http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg"
+    };
+
+
+
     @InjectView(R.id.sliding_tabs) ImageView mSlidingTabLayout;
-    @InjectView(R.id.image) ImageView headImageView;
+    //@InjectView(R.id.image) ImageView headImageView;
+    @InjectView(R.id.convenientBanner)
+    ConvenientBanner convenientBanner;
     @InjectView(R.id.overlay) View overlayView;
-    @InjectView(R.id.title) TextView titleView;
-    @InjectView(R.id.pager) ViewPager mPager;
+    @InjectView(R.id.pager)
+    ViewPager mPager;
 
     private NavigationAdapter mPagerAdapter;
     private int mFlexibleSpaceHeight;
-    private int mFlexibleSpaceShowFabOffset;
     private int mTabHeight;
-    private int mFabMargin;
-    private boolean mFabIsShown;
 
     private MyApplication application;
     private Mine mine;
@@ -78,8 +92,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dynamic_home_fragment,container,false);
         ButterKnife.inject(this, view);
-
-        titleView.setText(mine.getUserInfo().getSignature());
 
         mPagerAdapter = new NavigationAdapter(this.getChildFragmentManager());
         mPager.setAdapter(mPagerAdapter);
@@ -108,15 +120,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         });
         mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
-        mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
 
-
-        mFabMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-        ViewHelper.setScaleX(mFab, 0);
-        ViewHelper.setScaleY(mFab, 0);
-
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), mFab, ImageLoaderConfig.getAvatarOption(this.getActivity()));
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg() + QiniuImageStyle.COVER, headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
         // Initialize the first Fragment's state when layout is completed.
         ScrollUtils.addOnGlobalLayoutListener(mSlidingTabLayout, new Runnable() {
             @Override
@@ -124,8 +128,32 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 translateTab(0, false);
             }
         });
+        initConvenientBanner();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        convenientBanner.startTurning(5000);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        convenientBanner.stopTurning();
+    }
+
+    private void initConvenientBanner(){
+
+        networkImages= Arrays.asList(images);
+        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+                return new NetworkImageHolderView();
+            }
+        },networkImages);
     }
 
     public void onScrollChanged(int scrollY, Scrollable s) {
@@ -151,8 +179,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             propagateScroll(adjustedScrollY);
         }
 
-        translateFAB(scrollY);
-
     }
 
     private void translateTab(int scrollY, boolean animated) {
@@ -164,22 +190,11 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         float flexibleRange = flexibleSpaceImageHeight - getActionBarSize();
         int minOverlayTransitionY = tabHeight - overlayView.getHeight();
         ViewHelper.setTranslationY(overlayView, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
-        ViewHelper.setTranslationY(headImageView, ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0));
+        ViewHelper.setTranslationY(convenientBanner, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
 
         // Change alpha of overlay
         ViewHelper.setAlpha(overlayView, ScrollUtils.getFloat((float) scrollY / flexibleRange, 0, 1));
 
-        // Scale title text
-        float scale = 1 + ScrollUtils.getFloat((flexibleRange - scrollY - tabHeight) / flexibleRange, 0, MAX_TEXT_SCALE_DELTA);
-        setPivotXToTitle(titleView);
-        ViewHelper.setPivotY(titleView, 0);
-        ViewHelper.setScaleX(titleView, scale);
-        ViewHelper.setScaleY(titleView, scale);
-
-        // Translate title text
-        int maxTitleTranslationY = flexibleSpaceImageHeight - tabHeight - getActionBarSize();
-        int titleTranslationY = maxTitleTranslationY - scrollY;
-        ViewHelper.setTranslationY(titleView, titleTranslationY);
 
 /*        // If tabs are moving, cancel it to start a new animation.
         ViewPropertyAnimator.animate(mSlidingTabLayout).cancel();
@@ -195,33 +210,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             // When Fragments' scroll, translate tabs immediately (without animation).
             ViewHelper.setTranslationY(mSlidingTabLayout, translationY);
         }*/
-    }
-
-    private void translateFAB(int scrollY){
-        // Translate FAB
-        int maxFabTranslationY = mFlexibleSpaceHeight - mFab.getHeight() / 2;
-        float fabTranslationY = ScrollUtils.getFloat(
-                -scrollY + mFlexibleSpaceHeight - mFab.getHeight() / 2,
-                mTabHeight - mFab.getHeight() / 2,
-                maxFabTranslationY);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            // On pre-honeycomb, ViewHelper.setTranslationX/Y does not set margin,
-            // which causes FAB's OnClickListener not working.
-            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFab.getLayoutParams();
-            lp.leftMargin = headImageView.getWidth() - mFabMargin - mFab.getWidth();
-            lp.topMargin = (int) fabTranslationY;
-            mFab.requestLayout();
-        } else {
-            ViewHelper.setTranslationX(mFab, headImageView.getWidth() - mFabMargin - mFab.getWidth());
-            ViewHelper.setTranslationY(mFab, fabTranslationY);
-        }
-
-        // Show/hide FAB
-        if (fabTranslationY < mFlexibleSpaceShowFabOffset) {
-            hideFab();
-        } else {
-            showFab();
-        }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -263,22 +251,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         }
     }
 
-    private void showFab() {
-        if (!mFabIsShown) {
-            ViewPropertyAnimator.animate(mFab).cancel();
-            ViewPropertyAnimator.animate(mFab).scaleX(1).scaleY(1).setDuration(200).start();
-            mFabIsShown = true;
-        }
-    }
-
-    private void hideFab() {
-        if (mFabIsShown) {
-            ViewPropertyAnimator.animate(mFab).cancel();
-            ViewPropertyAnimator.animate(mFab).scaleX(0).scaleY(0).setDuration(200).start();
-            mFabIsShown = false;
-        }
-    }
-
 
     @OnClick(R.id.sliding_tabs) void onSwitch(){
         mIsFine = !mIsFine;
@@ -290,14 +262,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             mSlidingTabLayout.setImageResource(R.mipmap.ic_option_2);
         }
         MobclickAgent.onEvent(DynamicHomeFragment.this.getContext(), UmengEventId.HOME_SWITCH_BUTTON_CLICK);
-    }
-
-    @OnClick(R.id.fab)void onAvatarClick(){
-        MobclickAgent.onEvent(DynamicHomeFragment.this.getContext(), UmengEventId.HOME_MINE_AVATAR_CLICK);
-        Intent intent = new Intent(this.getActivity(), UserHomeActivity.class);
-        intent.putExtra(UserHomeActivity.INTENT_USER, mine.getUserInfo());
-        startActivity(intent);
-
     }
 
     @OnClick(R.id.message) void onMessageClick(){
