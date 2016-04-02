@@ -47,13 +47,11 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     public static final String tag = NewHomeActivity.class.getSimpleName();
 
     @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
-    @InjectView(R.id.tab_new_layout)RelativeLayout newLayout;
     @InjectView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
     @InjectView(R.id.tab_discover_layout)RelativeLayout discoverLayout;
     @InjectView(R.id.tab_mine_layout)RelativeLayout mineLayout;
     @InjectView(R.id.tab_market_layout)RelativeLayout marketLayout;
 
-    @InjectView(R.id.tab_new_image)ImageView newImageView;
     @InjectView(R.id.tab_trends_image)ImageView trendsImageView;
     @InjectView(R.id.tab_discover_image)ImageView discoverImageView;
     @InjectView(R.id.tab_mine_image)ImageView mineImageView;
@@ -98,16 +96,6 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         discoverLayout.setOnClickListener(this);
         mineLayout.setOnClickListener(this);
         marketLayout.setOnClickListener(this);
-
-        newLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-/*                Intent intent = new Intent(NewHomeActivity.this, CreateTopicPreActivity.class);
-                startActivity(intent);*/
-                showMenuSheet(MenuSheetView.MenuType.GRID);
-                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_CREATE_CLICK);
-            }
-        });
     }
 
     @Override
@@ -123,10 +111,6 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
             case R.id.tab_discover_layout:
                 setChioceItem(1);
                 MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_DISCOVERY_CLICK);
-                break;
-
-            case R.id.tab_new_layout:
-
                 break;
 
             case R.id.tab_mine_layout:
@@ -237,44 +221,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         marketTextView.setTextColor(getResources().getColor(R.color.secondary_text));
     }
 
-    private void showMenuSheet(final MenuSheetView.MenuType menuType) {
-        MenuSheetView menuSheetView =
-                new MenuSheetView(NewHomeActivity.this, menuType, "Create...", new MenuSheetView.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
 
-                        switch (item.getItemId()){
-                            case R.id.menu_create_mood:
-                                Intent intent = new Intent(NewHomeActivity.this, CreateTopicActivity.class);
-                                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
-                                startActivity(intent);
-                                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.MOOD);
-                                break;
-                            case R.id.menu_create_video:
-                                Intent intentVideo = new Intent(NewHomeActivity.this, CreateVideoActivity.class);
-                                intentVideo.putExtra(TopicType.TYPE, TopicType.VIDEO);
-                                startActivity(intentVideo);
-                                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.VIDEO);
-                                break;
-                            case R.id.menu_create_short_video:
-                                Intent intentSVideo = new Intent(NewHomeActivity.this, CreateTopicActivity.class);
-                                intentSVideo.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
-                                startActivity(intentSVideo);
-                                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.S_VIDEO);
-                                break;
-                        }
-
-
-
-                        if (bottomSheetLayout.isSheetShowing()) {
-                            bottomSheetLayout.dismissSheet();
-                        }
-                        return true;
-                    }
-                });
-        menuSheetView.inflateMenu(R.menu.create);
-        bottomSheetLayout.showWithSheetView(menuSheetView);
-    }
 
     public void showShareMenuSheet(final MenuSheetView.MenuType menuType) {
         MenuSheetView menuSheetView =

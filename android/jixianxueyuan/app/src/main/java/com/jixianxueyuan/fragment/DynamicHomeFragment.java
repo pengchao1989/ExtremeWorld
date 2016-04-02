@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -20,15 +21,20 @@ import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CreateTopicActivity;
+import com.jixianxueyuan.activity.CreateVideoActivity;
 import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.widget.NetworkImageHolderView;
 import com.nineoldandroids.view.ViewHelper;
@@ -62,7 +68,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     };
 
 
-
+    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @InjectView(R.id.sliding_tabs) ImageView mSlidingTabLayout;
     //@InjectView(R.id.image) ImageView headImageView;
     @InjectView(R.id.convenientBanner)
@@ -153,7 +159,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             public NetworkImageHolderView createHolder() {
                 return new NetworkImageHolderView();
             }
-        },networkImages);
+        }, networkImages);
     }
 
     public void onScrollChanged(int scrollY, Scrollable s) {
@@ -270,6 +276,10 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         startActivity(intent);
     }
 
+    @OnClick(R.id.add_topic) void onAddTopicClick(){
+        showMenuSheet(MenuSheetView.MenuType.GRID);
+        MobclickAgent.onEvent(this.getActivity(), UmengEventId.TAB_CREATE_CLICK);
+    }
     /**
      * This adapter provides three types of fragments as an example.
      * {@linkplain #createItem(int)} should be modified if you use this example for your app.
@@ -324,5 +334,44 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         public CharSequence getPageTitle(int position) {
             return TITLES[position];
         }
+    }
+
+    private void showMenuSheet(final MenuSheetView.MenuType menuType) {
+        MenuSheetView menuSheetView =
+                new MenuSheetView(this.getActivity(), menuType, "Create...", new MenuSheetView.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()){
+                            case R.id.menu_create_mood:
+                                Intent intent = new Intent(DynamicHomeFragment.this.getActivity(), CreateTopicActivity.class);
+                                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+                                startActivity(intent);
+                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.MOOD);
+                                break;
+                            case R.id.menu_create_video:
+                                Intent intentVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateVideoActivity.class);
+                                intentVideo.putExtra(TopicType.TYPE, TopicType.VIDEO);
+                                startActivity(intentVideo);
+                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.VIDEO);
+                                break;
+                            case R.id.menu_create_short_video:
+                                Intent intentSVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateTopicActivity.class);
+                                intentSVideo.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
+                                startActivity(intentSVideo);
+                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.S_VIDEO);
+                                break;
+                        }
+
+
+
+                        if (bottomSheetLayout.isSheetShowing()) {
+                            bottomSheetLayout.dismissSheet();
+                        }
+                        return true;
+                    }
+                });
+        menuSheetView.inflateMenu(R.menu.create);
+        bottomSheetLayout.showWithSheetView(menuSheetView);
     }
 }
