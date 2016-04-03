@@ -7,6 +7,7 @@
     <string name="app_name_skee">skee group</string>
 
     <string name="done">done</string>
+    <string name="ok">ok</string>
     <string name="cancel">cancel</string>
     <string name="back">back</string>
     <string name="err">error</string>

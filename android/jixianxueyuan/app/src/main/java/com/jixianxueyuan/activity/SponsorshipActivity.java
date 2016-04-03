@@ -3,9 +3,12 @@ package com.jixianxueyuan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -13,12 +16,14 @@ import com.android.volley.VolleyError;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
 import com.jixianxueyuan.adapter.SponsorshipListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.pay.PayHelper;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.*;
 import com.jixianxueyuan.dto.Error;
 import com.jixianxueyuan.dto.request.SponsorshipRequestDTO;
@@ -27,6 +32,12 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.GridHolder;
+import com.orhanobut.dialogplus.OnClickListener;
+import com.orhanobut.dialogplus.OnItemClickListener;
+import com.orhanobut.dialogplus.ViewHolder;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 import java.util.UUID;
@@ -218,60 +229,84 @@ public class SponsorshipActivity extends BaseActivity {
         MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
-    private void showMoneySheet(final MenuSheetView.MenuType menuType){
-        MenuSheetView menuSheetView =
-                new MenuSheetView(SponsorshipActivity.this, menuType, getString(R.string.donation), new MenuSheetView.OnMenuItemClickListener() {
+    private void showMoneyGridSheet(){
+        CustomMenuItemAdapter adapter = new CustomMenuItemAdapter(this, R.menu.donation_money);
+        final DialogPlus dialog = DialogPlus.newDialog(this)
+                .setAdapter(adapter)
+                .setOnClickListener(new OnClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        String money = "0.01";
-                        switch (item.getItemId()){
-                            case R.id.menu_donation_1:
-                                money = "0.1";
+                    public void onClick(DialogPlus dialogPlus, View view) {
+                        TextView moneyTextView = (TextView) dialogPlus.getHolderView().findViewById(R.id.sponsorship_bottom_form_money_text);
+                        double money = 0.1;
+                        switch (view.getId()) {
+                            case R.id.sponsorship_bottom_form_money_01:
+                                money = 0.1;
+                                updateMoneyTextView(moneyTextView, money);
                                 break;
-                            case R.id.menu_donation_5:
-                                money = "5.00";
+                            case R.id.sponsorship_bottom_form_money_5:
+                                money = 5;
+                                updateMoneyTextView(moneyTextView, money);
                                 break;
-                            case R.id.menu_donation_20:
-                                money = "20.00";
+                            case R.id.sponsorship_bottom_form_money_20:
+                                money = 20;
+                                updateMoneyTextView(moneyTextView, money);
                                 break;
-                            case R.id.menu_donation_50:
-                                money = "50.00";
+                            case R.id.sponsorship_bottom_form_money_50:
+                                money = 50;
+                                updateMoneyTextView(moneyTextView, money);
                                 break;
-                            case R.id.menu_donation_100:
-                                money = "100.00";
+                            case R.id.sponsorship_bottom_form_money_100:
+                                money = 100;
+                                updateMoneyTextView(moneyTextView, money);
+                                break;
+                            case R.id.sponsorship_bottom_form_cancel:
+                                dialogPlus.dismiss();
+                                break;
+                            case R.id.sponsorship_bottom_form_ok:
+                                TextView messageTextView = (TextView) dialogPlus.getHolderView().findViewById(R.id.sponsorship_bottom_form_message_edit);
+                                String message = messageTextView.getText().toString();
+                                buildSponsorshipRequestDTO(money, message);
+                                createSponsorshipOrder();
+                                dialogPlus.dismiss();
                                 break;
                         }
-
-                        buildSponsorshipRequestDTO(money);
-                        createSponsorshipOrder();
-
-                        if (bottomSheetLayout.isSheetShowing()) {
-                            bottomSheetLayout.dismissSheet();
-                        }
-                        return true;
                     }
+                })
+                .setExpanded(false)  // This will enable the expand feature, (similar to android L share dialog)
+                .setGravity(Gravity.BOTTOM)
+                .setContentHolder(new ViewHolder(R.layout.sponsorship_bottom_form_layout))
+                .create();
+        dialog.show();
 
-                    private void buildSponsorshipRequestDTO(String money) {
-                        if(sponsorshipRequestDTO == null){
-                            sponsorshipRequestDTO = new SponsorshipRequestDTO();
-                        }
-                        sponsorshipRequestDTO.setSum(Double.parseDouble(money));
-                        HobbyDTO hobbyDTO = new HobbyDTO();
-                        Long hobbyId = HobbyType.getHobbyId(MyApplication.getContext().getAppInfomation().getCurrentHobbyStamp());
-                        hobbyDTO.setId(hobbyId);
-                        sponsorshipRequestDTO.setHobby(hobbyDTO);
-                        UserMinDTO userMinDTO = new UserMinDTO();
-                        userMinDTO.setId(MyApplication.getContext().getMine().getUserInfo().getId());
-                        sponsorshipRequestDTO.setUser(userMinDTO);
-                        sponsorshipRequestDTO.setTicket(UUID.randomUUID().toString());
-                    }
-                });
-        menuSheetView.inflateMenu(R.menu.donation_money);
-        bottomSheetLayout.showWithSheetView(menuSheetView);
+        TextView moneyTextView = (TextView) dialog.getHolderView().findViewById(R.id.sponsorship_bottom_form_money_text);
+        updateMoneyTextView(moneyTextView, 0.1);
+
+    }
+
+    private void updateMoneyTextView(TextView textView, double money){
+        String moneyText = getString(R.string.donation) + String.format("%.2f", money) + getString(R.string.money_unit);
+        textView.setText(moneyText);
+    }
+
+    private void buildSponsorshipRequestDTO(double money, String message) {
+        if(sponsorshipRequestDTO == null){
+            sponsorshipRequestDTO = new SponsorshipRequestDTO();
+        }
+        sponsorshipRequestDTO.setSum(money);
+        sponsorshipRequestDTO.setMessage(message);
+        HobbyDTO hobbyDTO = new HobbyDTO();
+        Long hobbyId = HobbyType.getHobbyId(MyApplication.getContext().getAppInfomation().getCurrentHobbyStamp());
+        hobbyDTO.setId(hobbyId);
+        sponsorshipRequestDTO.setHobby(hobbyDTO);
+        UserMinDTO userMinDTO = new UserMinDTO();
+        userMinDTO.setId(MyApplication.getContext().getMine().getUserInfo().getId());
+        sponsorshipRequestDTO.setUser(userMinDTO);
+        sponsorshipRequestDTO.setTicket(UUID.randomUUID().toString());
     }
 
     @OnClick(R.id.sponsorship_activity_donation)void onDonation(){
-        showMoneySheet(MenuSheetView.MenuType.GRID);
+        //showMoneySheet(MenuSheetView.MenuType.GRID);
+        showMoneyGridSheet();
     }
 
 

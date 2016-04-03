@@ -7,6 +7,7 @@
     <string name="app_name_skee">滑雪圈</string>
 
     <string name="done">완성하다</string>
+    <string name="ok">확정</string>
     <string name="cancel">취소</string>
     <string name="back">복귀</string>
     <string name="err">오류</string>
