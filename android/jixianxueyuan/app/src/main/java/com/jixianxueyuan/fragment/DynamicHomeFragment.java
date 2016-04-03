@@ -9,12 +9,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.alibaba.mobileim.YWAPI;
@@ -29,17 +31,17 @@ import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
-import com.jixianxueyuan.activity.UserHomeActivity;
+import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
-import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.widget.NetworkImageHolderView;
 import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.GridHolder;
+import com.orhanobut.dialogplus.OnItemClickListener;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.Arrays;
@@ -48,7 +50,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by pengchao on 11/15/15.
@@ -277,9 +278,48 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     @OnClick(R.id.add_topic) void onAddTopicClick(){
-        showMenuSheet(MenuSheetView.MenuType.GRID);
+        showCreateMenuLayout();
         MobclickAgent.onEvent(this.getActivity(), UmengEventId.TAB_CREATE_CLICK);
     }
+
+    private void showCreateMenuLayout() {
+        CustomMenuItemAdapter adapter = new CustomMenuItemAdapter(this.getActivity(), R.menu.create);
+        final DialogPlus dialog = DialogPlus.newDialog(this.getContext())
+                .setAdapter(adapter)
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
+                        MenuItem menuItem = (MenuItem) item;
+                        switch (menuItem.getItemId()){
+                            case R.id.menu_create_mood:
+                                Intent intent = new Intent(DynamicHomeFragment.this.getActivity(), CreateTopicActivity.class);
+                                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
+                                startActivity(intent);
+                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.MOOD);
+                                break;
+                            case R.id.menu_create_video:
+                                Intent intentVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateVideoActivity.class);
+                                intentVideo.putExtra(TopicType.TYPE, TopicType.VIDEO);
+                                startActivity(intentVideo);
+                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.VIDEO);
+                                break;
+                            case R.id.menu_create_short_video:
+                                Intent intentSVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateTopicActivity.class);
+                                intentSVideo.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
+                                startActivity(intentSVideo);
+                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.S_VIDEO);
+                                break;
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setExpanded(false)  // This will enable the expand feature, (similar to android L share dialog)
+                .setGravity(Gravity.TOP)
+                .setContentHolder(new GridHolder(adapter.getCount()))
+                .create();
+        dialog.show();
+    }
+
     /**
      * This adapter provides three types of fragments as an example.
      * {@linkplain #createItem(int)} should be modified if you use this example for your app.
@@ -334,44 +374,5 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         public CharSequence getPageTitle(int position) {
             return TITLES[position];
         }
-    }
-
-    private void showMenuSheet(final MenuSheetView.MenuType menuType) {
-        MenuSheetView menuSheetView =
-                new MenuSheetView(this.getActivity(), menuType, "Create...", new MenuSheetView.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        switch (item.getItemId()){
-                            case R.id.menu_create_mood:
-                                Intent intent = new Intent(DynamicHomeFragment.this.getActivity(), CreateTopicActivity.class);
-                                intent.putExtra(TopicType.TYPE, TopicType.MOOD);
-                                startActivity(intent);
-                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.MOOD);
-                                break;
-                            case R.id.menu_create_video:
-                                Intent intentVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateVideoActivity.class);
-                                intentVideo.putExtra(TopicType.TYPE, TopicType.VIDEO);
-                                startActivity(intentVideo);
-                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.VIDEO);
-                                break;
-                            case R.id.menu_create_short_video:
-                                Intent intentSVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateTopicActivity.class);
-                                intentSVideo.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
-                                startActivity(intentSVideo);
-                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.S_VIDEO);
-                                break;
-                        }
-
-
-
-                        if (bottomSheetLayout.isSheetShowing()) {
-                            bottomSheetLayout.dismissSheet();
-                        }
-                        return true;
-                    }
-                });
-        menuSheetView.inflateMenu(R.menu.create);
-        bottomSheetLayout.showWithSheetView(menuSheetView);
     }
 }
