@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,42 +13,59 @@
         android:layout_height="@dimen/avatar_height"
         />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginLeft="12dp"
         android:layout_toRightOf="@+id/sponsorship_list_item_avatar">
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/sponsorship_list_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ListPrimaryTextSmall"
+                tools:text="name"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sponsorship_list_item_donation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/donation"
+                    style="@style/ListSecondaryTextSmall"/>
+
+                <TextView
+                    android:id="@+id/sponsorship_list_item_sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/sponsorship_list_item_donation"
+                    android:textColor="@color/red"
+                    style="@style/ListSecondaryTextSmall"
+                    tools:text="100"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
         <TextView
-            android:id="@+id/sponsorship_list_item_name"
-            android:layout_width="wrap_content"
+            android:id="@+id/sponsorship_list_item_message"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ListPrimaryTextSmall"/>
+            android:layout_marginTop="2dp"
+            style="@style/ListSecondaryTextSmall"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sponsorship_list_item_name"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/sponsorship_list_item_donation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/donation"
-                style="@style/ListSecondaryTextSmall"/>
-
-            <TextView
-                android:id="@+id/sponsorship_list_item_sum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/sponsorship_list_item_donation"
-                android:textColor="@color/red"
-                style="@style/ListSecondaryTextSmall"/>
-
-        </LinearLayout>
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

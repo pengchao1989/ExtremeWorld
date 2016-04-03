@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.MenuItem;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -25,6 +26,7 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.widget.AutoLoadMoreView;
 
 import java.util.List;
 import java.util.UUID;
@@ -55,6 +57,10 @@ public class SponsorshipActivity extends BaseActivity {
 
     private SponsorshipRequestDTO sponsorshipRequestDTO;
 
+    private AutoLoadMoreView autoLoadMoreView;
+    private int currentPage = 0;
+    private int totalPage = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +72,61 @@ public class SponsorshipActivity extends BaseActivity {
         adapter = new SponsorshipListAdapter(this);
         listView.setAdapter(adapter);
 
+        initFooterView();
+        registerListener();
+
         refreshData();
     }
 
+    private void initFooterView(){
+        autoLoadMoreView = new AutoLoadMoreView(this);
+        listView.addFooterView(autoLoadMoreView);
+    }
+
+    private void registerListener(){
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    //滚动到底部
+                    if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                        getNextPage();
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+
+
+    }
     private void refreshData(){
+        currentPage = 0;
         requestNewSponsorship();
     }
 
     private void getNextPage(){
+        if (currentPage < totalPage) {
+            requestNewSponsorship();
+        }
+    }
 
+    private void doHideFootView() {
+        if (totalPage > 0 && currentPage >= totalPage) {
+            autoLoadMoreView.setOver();
+        }else {
+            autoLoadMoreView.reset();
+        }
     }
 
     private void requestTopSponsorship(){
@@ -97,7 +149,8 @@ public class SponsorshipActivity extends BaseActivity {
     }
 
     private void requestNewSponsorship(){
-        String url = ServerMethod.sponsorship();
+
+        String url = ServerMethod.sponsorship() + "?page=" + (currentPage + 1);
 
         MyPageRequest<SponsorshipDTO> myPageRequest =
                 new MyPageRequest<SponsorshipDTO>(Request.Method.GET, url, SponsorshipDTO.class, new Response.Listener<MyResponse<MyPage<SponsorshipDTO>>>() {
@@ -105,10 +158,20 @@ public class SponsorshipActivity extends BaseActivity {
                     public void onResponse(MyResponse<MyPage<SponsorshipDTO>> response) {
                         if(response.getStatus() == MyResponse.status_ok){
                             sponsorshipDTOList = response.getContent().getContents();
-                            adapter.setData(sponsorshipDTOList);
+                            if (currentPage == 0){
+                                adapter.setData(sponsorshipDTOList);
+                            }else {
+                                adapter.addData(sponsorshipDTOList);
+                            }
+
+                            totalPage = response.getContent().getTotalPages();
+                            currentPage = response.getContent().getCurPage() + 1;
+                            doHideFootView();
+
                         }else {
                             MyErrorHelper.showErrorToast(SponsorshipActivity.this, response.getError());
                         }
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 }, new Response.ErrorListener() {
                     @Override

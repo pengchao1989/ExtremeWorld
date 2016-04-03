@@ -90,7 +90,7 @@ public class SponsorshipListAdapter extends BaseAdapter {
             }
         }
         viewHolder.sumTextView.setText(String.format("%.2f", sponsorshipDTO.getSum()) + context.getString(R.string.money_unit));
-
+        viewHolder.messageTextView.setText(sponsorshipDTO.getMessage());
 
         return convertView;
     }
@@ -103,6 +103,8 @@ public class SponsorshipListAdapter extends BaseAdapter {
         TextView nameTextView;
         @InjectView(R.id.sponsorship_list_item_sum)
         TextView sumTextView;
+        @InjectView(R.id.sponsorship_list_item_message)
+        TextView messageTextView;
 
 
         public ViewHolder(View itemView){
