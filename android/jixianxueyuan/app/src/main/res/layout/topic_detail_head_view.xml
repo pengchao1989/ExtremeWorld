@@ -17,7 +17,8 @@
         <ImageView
             android:id="@+id/topic_detail_head_view_video_cover_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
 
         <ImageView
             android:id="@+id/topic_detail_head_view_video_play_btn"
@@ -70,7 +71,10 @@
 
         <TextView
             android:id="@+id/topic_detail_title"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
             style="@style/titleText"
+            tools:text="title"
             />
 
         <LinearLayout
@@ -87,7 +91,6 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:textSize="18sp"
             style="@style/ListSecondaryText"
             tools:text="content"/>
 

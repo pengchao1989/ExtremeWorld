@@ -347,12 +347,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 */
 
         //content
-        TextView textView = new TextView(this);
+/*        TextView textView = new TextView(this);
         textView.setTextSize(20);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
         headViewHolder.contentLayout.addView(textView);
-        textView.setText(topicDTO.getContent());
+        textView.setText(topicDTO.getContent());*/
+        headViewHolder.contentTextView.setText(topicDTO.getContent());
 
         //image
         final MediaWrapDTO mediaWrapDTO = topicDTO.getMediaWrap();
