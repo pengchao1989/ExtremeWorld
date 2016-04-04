@@ -23,8 +23,8 @@ public class TopicDTO
 	private int status;
 	private int fine;
 	
-	private boolean agreed;
-	private boolean collected;
+	private boolean isAgreed;
+	private boolean isCollected;
 	
 	private UserMinDTO user;
 	
@@ -130,16 +130,16 @@ public class TopicDTO
 		this.fine = fine;
 	}
 	public boolean isAgreed() {
-		return agreed;
+		return isAgreed;
 	}
 	public void setAgreed(boolean agreed) {
-		this.agreed = agreed;
+		this.isAgreed = agreed;
 	}
 	public boolean isCollected() {
-		return collected;
+		return isCollected;
 	}
 	public void setCollected(boolean collected) {
-		this.collected = collected;
+		this.isCollected = collected;
 	}
 	public VideoDetailDTO getVideoDetail() {
 		return videoDetail;

@@ -1,6 +1,8 @@
 package com.yumfee.extremeworld.rest;
 
 
+import java.util.List;
+
 import javax.validation.Validator;
 
 import org.apache.shiro.SecurityUtils;
@@ -25,6 +27,7 @@ import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Collection;
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
@@ -96,23 +99,38 @@ public class TopicRestController
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse get(@PathVariable("id") Long id)
+	public MyResponse get(@PathVariable("id") Long topicId)
 	{
-		Topic topic = topicService.getTopic(id);
+		Long userId = getCurrentUserId();
+		Topic topic = topicService.getTopic(topicId);
 		if(topic == null)
 		{
-			String message = "话题不存在(id:" + id + ")";
+			String message = "话题不存在(id:" + topicId + ")";
 			logger.warn(message);
 			throw new RestException(HttpStatus.NOT_FOUND, message);
 		}
 		
 		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);
 		
-		Collection collection = collectionService.findByUserIdAndTopicIdAndStatus(getCurrentUserId(), id, TopicStatus.PUBLIC);
+		Collection collection = collectionService.findByUserIdAndTopicIdAndStatus(userId, topicId, TopicStatus.PUBLIC);
 		if(collection != null){
-			topicDto.setAgreed(true);
+			topicDto.setCollected(true);
 		}
 		
+		User currentUser = userService.getUser(userId);
+		
+		List<User> agreeUserList = topic.getAgrees();
+		if(agreeUserList != null && agreeUserList.contains(currentUser)){
+			topicDto.setAgreed(true);
+		}
+/*		if(agreeUserList != null && agreeUserList.size() > 0){
+			for(User user : agreeUserList){
+				if(user.getId() == userId){
+					topicDto.setAgreed(true);
+					break;
+				}
+			}
+		}*/
 
 		return MyResponse.ok(topicDto,true);
 	}

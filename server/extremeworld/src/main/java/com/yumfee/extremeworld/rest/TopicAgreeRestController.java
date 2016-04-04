@@ -2,6 +2,7 @@ package com.yumfee.extremeworld.rest;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.request.AgreeDTO;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @RestController
 @RequestMapping(value = "/api/secure/v1/topic_agree")
@@ -35,14 +37,14 @@ public class TopicAgreeRestController
 	private UserService userService;
 	
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON)
-	public MyResponse agree(
-			@PathVariable("id") Long id,
-			@RequestParam(value = "userId", defaultValue = "1") Long userId)
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = MediaTypes.JSON)
+	public MyResponse agree(@PathVariable("id") Long id)
 	{
 		
 		logger.debug("TopicAgreeRestController get");
 		Topic topic = topicService.getTopic(id);
+		
+		Long userId = getCurrentUserId();
 		
 		User user = userService.getUser(userId);
 		
@@ -92,5 +94,10 @@ public class TopicAgreeRestController
 		
 		
 		return MyResponse.ok(agreeResult,true);
+	}
+	
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
 	}
 }
