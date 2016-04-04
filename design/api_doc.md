@@ -350,3 +350,11 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	说明:更新用户个人信息的某个属性
 	
 	
+----------
+	接口名称:geo/publish_location
+	URL地址:http://115.28.8.25/api/secure/v1/{hobby}/geo/publish_location
+	请求方式:POST
+	入参:{latitude:104.123, longitude:32.123, address:"四川省成都市高新区软件园"}
+	示例:http://115.28.8.25/api/secure/v1/skateboard/geo/publish_location
+	说明:更新地理位置，android目前每次启动应用进入首页后静默上报一次
+	
