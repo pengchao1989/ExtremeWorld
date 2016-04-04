@@ -1,7 +1,5 @@
 package com.yumfee.extremeworld.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,8 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yumfee.extremeworld.entity.Collection;
-import com.yumfee.extremeworld.entity.Topic;
-import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.repository.CollectionDao;
 
 //Spring Bean的标识.
@@ -33,6 +29,11 @@ public class CollectionService {
 	public Collection getCollectionByUserAndTopic(long userId, long topicId){
 		
 		return collectionDao.findByUserIdAndTopicId(userId, topicId);
+	}
+	
+	public Collection findByUserIdAndTopicIdAndStatus(Long userId,
+			Long topicId, int status) {
+		return collectionDao.findByUserIdAndTopicIdAndStatus(userId, topicId, status);
 	}
 	
 	public Collection saveCollection(Collection collection){

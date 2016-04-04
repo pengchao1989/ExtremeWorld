@@ -23,10 +23,12 @@ import org.springside.modules.web.MediaTypes;
 import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
+import com.yumfee.extremeworld.entity.Collection;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
+import com.yumfee.extremeworld.service.CollectionService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
@@ -48,6 +50,9 @@ public class TopicRestController
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CollectionService collectionService;
 	
 	@RequestMapping( method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public  MyResponse list(
@@ -103,6 +108,10 @@ public class TopicRestController
 		
 		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);
 		
+		Collection collection = collectionService.findByUserIdAndTopicIdAndStatus(getCurrentUserId(), id, TopicStatus.PUBLIC);
+		if(collection != null){
+			topicDto.setAgreed(true);
+		}
 		
 
 		return MyResponse.ok(topicDto,true);

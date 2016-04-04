@@ -23,6 +23,9 @@ public class TopicDTO
 	private int status;
 	private int fine;
 	
+	private boolean agreed;
+	private boolean collected;
+	
 	private UserMinDTO user;
 	
 	private VideoDetailDTO videoDetail;
@@ -125,6 +128,18 @@ public class TopicDTO
 	}
 	public void setFine(int fine) {
 		this.fine = fine;
+	}
+	public boolean isAgreed() {
+		return agreed;
+	}
+	public void setAgreed(boolean agreed) {
+		this.agreed = agreed;
+	}
+	public boolean isCollected() {
+		return collected;
+	}
+	public void setCollected(boolean collected) {
+		this.collected = collected;
 	}
 	public VideoDetailDTO getVideoDetail() {
 		return videoDetail;

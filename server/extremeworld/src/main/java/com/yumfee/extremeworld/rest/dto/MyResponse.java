@@ -33,7 +33,7 @@ public class MyResponse {
 	
 	public static MyResponse ok(Object content,boolean isEncryp){
 		MyResponse response = new MyResponse();
-		if(isEncryp){
+		if(false){
 			response.encryp = true;
 			
 			JsonMapper jsonMapper = new JsonMapper();

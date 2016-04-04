@@ -10,4 +10,5 @@ public interface CollectionDao extends PagingAndSortingRepository<Collection, Lo
 	
 	public Page<Collection> findByUserIdAndStatus(Long userId, int status, Pageable pageable);
 	public Collection findByUserIdAndTopicId(Long userId, Long topicId);
+	public Collection findByUserIdAndTopicIdAndStatus(Long userId, Long topicId, int status);
 }
