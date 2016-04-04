@@ -6,6 +6,7 @@ API Document
  - 百川推送分为两种类型：1.通知，2消息。业务上全部使用消息服务
  - 推送的内容为json串，结构为{type:N,content:"json"}  
  - N为前后台约定的业务类型，content为对象的json字符串
+ - 为了实现推送到指定账号，前后台已经约定好，以user信息中的id作bindAccount的参数！
  
  
  **推送提醒**
