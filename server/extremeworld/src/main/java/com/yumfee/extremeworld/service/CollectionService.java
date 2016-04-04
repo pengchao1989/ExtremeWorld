@@ -1,5 +1,7 @@
 package com.yumfee.extremeworld.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,11 +23,16 @@ public class CollectionService {
 
 	private CollectionDao collectionDao;
 	
-	public Page<Collection> getCollectionByUser(long userId, int pageNumber, int pageSize,String sortType){
+	public Page<Collection> getCollectionByUserAndStatus(long userId, int status, int pageNumber, int pageSize,String sortType){
 		
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return collectionDao.findByUserId(userId, pageRequest);
+		return collectionDao.findByUserIdAndStatus(userId, status, pageRequest);
+	}
+	
+	public Collection getCollectionByUserAndTopic(long userId, long topicId){
+		
+		return collectionDao.findByUserIdAndTopicId(userId, topicId);
 	}
 	
 	public Collection saveCollection(Collection collection){

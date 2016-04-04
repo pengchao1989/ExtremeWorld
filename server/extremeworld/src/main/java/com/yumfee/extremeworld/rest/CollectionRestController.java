@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.entity.Collection;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
@@ -47,28 +48,44 @@ public class CollectionRestController {
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
 		
 		long userId = getCurrentUserId();
-		Page<Collection> collectionPage = collectionService.getCollectionByUser(userId, pageNumber, pageSize, sortType);
+		Page<Collection> collectionPage = collectionService.getCollectionByUserAndStatus(userId, TopicStatus.PUBLIC, pageNumber, pageSize, sortType);
 		MyPage<CollectionDTO, Collection> collectionMyPage = new MyPage<CollectionDTO, Collection>(CollectionDTO.class, collectionPage);
 		
-		return MyResponse.ok(collectionMyPage, true);
+		return MyResponse.ok(collectionMyPage, false);
 	}
 	
 	@RequestMapping(value = "/{topicId}", method = RequestMethod.POST, produces = MediaTypes.JSON)
 	public MyResponse collection(
 			@PathVariable("topicId") Long topicId){
 		
-		Topic topic = topicService.getTopic(topicId);
-		User user = userService.getUser(getCurrentUserId());
-		Collection collection = new Collection();
-		collection.setTopic(topic);
-		collection.setUser(user);
+		Collection collection = collectionService.getCollectionByUserAndTopic(getCurrentUserId(), topicId);
 		
-		Collection collectionResult = collectionService.saveCollection(collection);
 		
-		CollectionDTO collectionDTOResult = BeanMapper.map(collectionResult, CollectionDTO.class);
+		if(collection == null){
+			collection = new Collection();
+			Topic topic = topicService.getTopic(topicId);
+			User user = userService.getUser(getCurrentUserId());
+			collection.setTopic(topic);
+			collection.setUser(user);
+			collection.setStatus(TopicStatus.PUBLIC);
+		}else{
+			collection.setStatus(TopicStatus.PUBLIC);
+		}
+		collection = collectionService.saveCollection(collection);
 		
-		return MyResponse.ok(collectionDTOResult, true);
+		return MyResponse.ok(null, false);
 	}
+	
+	@RequestMapping(value = "/{topicId}", method = RequestMethod.DELETE, produces = MediaTypes.JSON)
+	public MyResponse delete(@PathVariable("topicId") Long topicId){
+		Collection collection = collectionService.getCollectionByUserAndTopic(getCurrentUserId(), topicId);
+		if(collection != null){
+			collection.setStatus(TopicStatus.DELETE);
+			collection = collectionService.saveCollection(collection);
+		}
+		return MyResponse.ok(null, false);
+	}
+	
 	
 	/**
 	 * 取出Shiro中的当前用户Id.

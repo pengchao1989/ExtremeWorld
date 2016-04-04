@@ -16,6 +16,7 @@ public class Collection extends IdEntity{
 	private User user;
 	private Topic topic;
 	private Date createTime;
+	private int status;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -40,5 +41,11 @@ public class Collection extends IdEntity{
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

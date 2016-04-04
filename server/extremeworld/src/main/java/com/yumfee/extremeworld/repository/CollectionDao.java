@@ -8,5 +8,6 @@ import com.yumfee.extremeworld.entity.Collection;
 
 public interface CollectionDao extends PagingAndSortingRepository<Collection, Long>{
 	
-	public Page<Collection> findByUserId(Long userId, Pageable pageable);
+	public Page<Collection> findByUserIdAndStatus(Long userId, int status, Pageable pageable);
+	public Collection findByUserIdAndTopicId(Long userId, Long topicId);
 }
