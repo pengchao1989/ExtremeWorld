@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
@@ -18,6 +19,8 @@ import com.jixianxueyuan.dto.RemindDTO;
 import com.jixianxueyuan.push.PushMessage;
 import com.jixianxueyuan.push.PushMessageType;
 import com.jixianxueyuan.util.MyLog;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -58,14 +61,21 @@ public class CustomReceiver  extends MessageReceiver {
             MyLog.d(REC_TAG, "onMessage msg=" + message.getTitle());
             MyLog.d(REC_TAG, "onMessage content=" + message.getContent());
 
-            Gson gson = new Gson();
-            PushMessage pushMessage = gson.fromJson(new String(message.getContent()),PushMessage.class);
-            switch (pushMessage.getType()){
-                case PushMessageType.REMIND:
-                    notifyRemind(context,pushMessage.getContent());
-                    break;
-            }
+            String pushContent = message.getContent();
+            if (!TextUtils.isEmpty(pushContent)){
+/*                Gson gson = new Gson();
+                PushMessage pushMessage = gson.fromJson(pushContent,PushMessage.class);*/
 
+                JSONObject jsonObject = new JSONObject(pushContent);
+                int type = jsonObject.getInt("type");
+                String content = jsonObject.getString("content");
+
+                switch (type){
+                    case PushMessageType.REMIND:
+                        notifyRemind(context,content);
+                        break;
+                }
+            }
         } catch (Exception e) {
             MyLog.d(REC_TAG, e.toString());
         }
