@@ -328,6 +328,14 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	示例:http://115.28.8.25/api/secure/v1/collection/1824
 	说明:添加一个收藏
 	
+----------
+	接口名称:collection
+	URL地址:http://115.28.8.25/api/secure/v1/collection/{topicId}
+	请求方式:DELETE
+	入参:topicId
+	示例:http://115.28.8.25/api/secure/v1/collection/1824
+	说明:删除一个收藏
+	
 	
 ----------
 	接口名称:profile/update_attribute
