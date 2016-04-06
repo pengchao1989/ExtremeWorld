@@ -163,6 +163,14 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	入参: page
 	示例：http://115.28.8.25/api/secure/v1/hobby/topic/user/1?page=1
 	说明：获取某个user的topic列表
+	
+----------
+	接口名称：topic_extra
+	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic/extra/{id}
+	请求方式：GET
+	入参: 无
+	示例：http://115.28.8.25/api/secure/v1/hobby/topic/extra/1821
+	说明：获取某个topic的额外信息(是否收藏过、是否赞过。。。)
 
 ----------
 	接口名称：reply
