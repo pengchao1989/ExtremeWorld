@@ -53,6 +53,7 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.dto.TopicExtraDTO;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
@@ -112,6 +113,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private long topicId = -1;
     private TopicDTO topicDTO;
+    private TopicExtraDTO topicExtraDTO;
 
     private int currentPage = 0;
     private int totalPage = 0;
@@ -199,7 +201,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         actionBar.setActionOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (topicDTO != null){
+                if (topicDTO != null) {
                     showShareMenu(topicDTO);
                 }
             }
@@ -208,12 +210,15 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         if(topicDTO != null){
             refreshHeadView();
             requestReplyList();
+            requestTopicExtra(topicDTO.getId());
         }else if(topicId != -1){
             requestTopicDetail();
+            requestTopicExtra(topicId);
         }else {
             Toast.makeText(this,getString(R.string.err), Toast.LENGTH_SHORT).show();
             finish();
         }
+
     }
 
     @Override
@@ -395,6 +400,18 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         }
     }
 
+    private void updateExtraInfoView(){
+        if (topicExtraDTO != null){
+            if (topicExtraDTO.isAgreed()){
+                headViewHolder.zanButton.setImageResource(R.mipmap.icon_hand_click_1);
+            }
+            if (topicExtraDTO.isCollected()){
+                headViewHolder.collectionButton.setVisibility(View.GONE);
+                headViewHolder.collectionOk.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
     private void initVideo()
     {
         headViewHolder.playButton.setVisibility(View.GONE);
@@ -510,6 +527,26 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             }
         });
 
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
+    private void requestTopicExtra(long topicId){
+        String url = ServerMethod.topic_extra()  + topicId;
+        MyRequest<TopicExtraDTO> myRequest = new MyRequest<TopicExtraDTO>(Request.Method.GET, url, TopicExtraDTO.class,
+                new Response.Listener<MyResponse<TopicExtraDTO>>() {
+                    @Override
+                    public void onResponse(MyResponse<TopicExtraDTO> response) {
+                        if(response.getStatus() == MyResponse.status_ok){
+                            topicExtraDTO = response.getContent();
+                            updateExtraInfoView();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
         MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 

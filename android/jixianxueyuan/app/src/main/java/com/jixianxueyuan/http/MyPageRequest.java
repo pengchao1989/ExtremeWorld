@@ -122,7 +122,6 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
                 byte[] ivBytes = Base64.decode(encryItems[0], Base64.DEFAULT);
                 byte[] encrypBytes =  Base64.decode(encryItems[1], Base64.DEFAULT);
                 byte[] secretKey = Base64.decode(userDTO.getToken(), Base64.DEFAULT);
-                MyLog.e("MyPageRequest", "token=" + new String(secretKey));
                 String contentText = Cryptos.aesDecrypt(encrypBytes, secretKey, ivBytes);
 
                 //unzip

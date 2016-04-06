@@ -18,6 +18,8 @@ public class TopicDTO implements Serializable
     private String createTime;
     private int status;
     private String url;
+    private boolean agreed;
+    private boolean collected;
 
     private UserMinDTO user;
 
@@ -128,6 +130,22 @@ public class TopicDTO implements Serializable
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public boolean isAgreed() {
+        return agreed;
+    }
+
+    public void setAgreed(boolean agreed) {
+        this.agreed = agreed;
+    }
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 
     public VideoDetailDTO getVideoDetail() {

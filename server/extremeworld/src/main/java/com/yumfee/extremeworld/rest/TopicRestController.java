@@ -31,6 +31,7 @@ import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
+import com.yumfee.extremeworld.rest.dto.TopicExtraDTO;
 import com.yumfee.extremeworld.service.CollectionService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
@@ -99,12 +100,11 @@ public class TopicRestController
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse get(@PathVariable("id") Long topicId)
-	{
+	public MyResponse get(@PathVariable("id") Long topicId){
+		
 		Long userId = getCurrentUserId();
 		Topic topic = topicService.getTopic(topicId);
-		if(topic == null)
-		{
+		if(topic == null){
 			String message = "话题不存在(id:" + topicId + ")";
 			logger.warn(message);
 			throw new RestException(HttpStatus.NOT_FOUND, message);
@@ -134,6 +134,36 @@ public class TopicRestController
 
 		return MyResponse.ok(topicDto,true);
 	}
+	@RequestMapping(value = "/extra/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public MyResponse getTopicOfMe(@PathVariable("id") Long topicId){
+		
+		Long userId = getCurrentUserId();
+		Topic topic = topicService.getTopic(topicId);
+		if(topic == null){
+			String message = "话题不存在(id:" + topicId + ")";
+			logger.warn(message);
+			throw new RestException(HttpStatus.NOT_FOUND, message);
+		}
+		
+		
+		TopicExtraDTO topicExtraDTO = new TopicExtraDTO();
+		topicExtraDTO.setId(topicId);
+		
+		Collection collection = collectionService.findByUserIdAndTopicIdAndStatus(userId, topicId, TopicStatus.PUBLIC);
+		if(collection != null){
+			topicExtraDTO.setCollected(true);
+		}
+		
+		User currentUser = userService.getUser(userId);
+		
+		List<User> agreeUserList = topic.getAgrees();
+		if(agreeUserList != null && agreeUserList.contains(currentUser)){
+			topicExtraDTO.setAgreed(true);
+		}
+		
+		return MyResponse.ok(topicExtraDTO,true);
+	}
+	
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public MyResponse getTopicByUser(@PathVariable("id") Long userId,
