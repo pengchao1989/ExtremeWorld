@@ -367,3 +367,28 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	
 	
 	
+	
+----------
+	接口名称:exhibition
+	URL地址:http://115.28.8.25/api/secure/v1/skateboard/exhibition
+	请求方式:GET
+	入参:五
+	示例:http://115.28.8.25/api/secure/v1/skateboard/exhibition
+	说明:获取展板栏列表（就是首页顶部轮播的广告）
+	
+
+----------
+	接口名称:exhibition
+	URL地址:http://115.28.8.25/api/secure/v1/skateboard/exhibition
+	请求方式:POST
+	入参:{
+        "action": "open_topic",
+          "title": "测试",
+         "img": "", “url”
+        "targetId": 2001,
+          "weight":5,
+          "status":1
+        }
+	示例:http://115.28.8.25/api/secure/v1/skateboard/exhibition
+	说明:新增一个展板项，action是个枚举值用于指示该进行的响应；targetId标识目标id，比如topicId，productId等；data为辅助的内容，比如topic的json串（用于迅速展示出话题内容）， url地址等，根据action不同而不同
+	    action取值：“open_topic”(打开一个话题)，“open_url”(打开一个url地址)，“open_product”(打开一个商品，计划中)， “open_taobao_product”(直接打开一个淘宝商品，计划中)
