@@ -212,7 +212,7 @@ public class TopicRestController
 		Topic result = topicService.getTopic(topic.getId());
 		TopicDTO dto = BeanMapper.map(result, TopicDTO.class);
 
-		return MyResponse.ok(dto);
+		return MyResponse.ok(dto, true);
 	}
 	
 

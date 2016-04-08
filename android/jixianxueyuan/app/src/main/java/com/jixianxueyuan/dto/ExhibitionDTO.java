@@ -1,8 +1,5 @@
-package com.yumfee.extremeworld.rest.dto;
+package com.jixianxueyuan.dto;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "exhibition")
 public class ExhibitionDTO {
 	private String action;
 	private String title;
