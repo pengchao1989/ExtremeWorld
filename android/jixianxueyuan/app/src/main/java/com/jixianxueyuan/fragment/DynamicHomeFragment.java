@@ -9,42 +9,53 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
+import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
+import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
+import com.jixianxueyuan.config.ExhibitionAction;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
-import com.jixianxueyuan.widget.NetworkImageHolderView;
+import com.jixianxueyuan.dto.ExhibitionDTO;
+import com.jixianxueyuan.dto.MyPage;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.widget.ExhibitionItemHolderView;
 import com.nineoldandroids.view.ViewHelper;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.GridHolder;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.umeng.analytics.MobclickAgent;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -59,14 +70,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     protected static final float MAX_TEXT_SCALE_DELTA = 0.3f;
 
     private List<String> networkImages;
-    private String[] images = {"http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
-            "http://img2.3lian.com/2014/f2/37/d/40.jpg",
-            "http://d.3987.com/sqmy_131219/001.jpg",
-            "http://img2.3lian.com/2014/f2/37/d/39.jpg",
-            "http://www.8kmm.com/UploadFiles/2012/8/201208140920132659.jpg",
-            "http://f.hiphotos.baidu.com/image/h%3D200/sign=1478eb74d5a20cf45990f9df460b4b0c/d058ccbf6c81800a5422e5fdb43533fa838b4779.jpg",
-            "http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg"
-    };
+    private List<ExhibitionDTO> exhibitionDTOList;
 
 
     @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
@@ -135,7 +139,15 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 translateTab(0, false);
             }
         });
-        initConvenientBanner();
+
+
+        convenientBanner.setOnItemClickListener(new com.bigkoo.convenientbanner.listener.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startExhibitionDetail(position);
+            }
+        });
+        requestExhibitionList();
 
         return view;
     }
@@ -143,24 +155,13 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     @Override
     public void onResume() {
         super.onResume();
-        convenientBanner.startTurning(5000);
+        convenientBanner.startTurning(3500);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         convenientBanner.stopTurning();
-    }
-
-    private void initConvenientBanner(){
-
-        networkImages= Arrays.asList(images);
-        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-            @Override
-            public NetworkImageHolderView createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, networkImages);
     }
 
     public void onScrollChanged(int scrollY, Scrollable s) {
@@ -373,6 +374,69 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         @Override
         public CharSequence getPageTitle(int position) {
             return TITLES[position];
+        }
+    }
+
+    private void requestExhibitionList(){
+
+        String url = ServerMethod.exhibition();
+
+        MyPageRequest<ExhibitionDTO> myPageRequest = new MyPageRequest<ExhibitionDTO>(Request.Method.GET, url, ExhibitionDTO.class,
+                new Response.Listener<MyResponse<MyPage<ExhibitionDTO>>>() {
+                    @Override
+                    public void onResponse(MyResponse<MyPage<ExhibitionDTO>> response) {
+                        if (response.getStatus() == MyResponse.status_ok){
+                            if (response.getContent() != null){
+                                DynamicHomeFragment.this.exhibitionDTOList = response.getContent().getContents();
+                                extractExhibitionImageUrl(DynamicHomeFragment.this.exhibitionDTOList);
+                                updateExhibitionHeadVIew();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myPageRequest);
+    }
+
+    private void extractExhibitionImageUrl(List<ExhibitionDTO> exhibitionDTOList){
+        networkImages = new ArrayList<>();
+        for (ExhibitionDTO exhibitionDTO : exhibitionDTOList){
+            networkImages.add(exhibitionDTO.getImg());
+        }
+    }
+
+    private void updateExhibitionHeadVIew(){
+        convenientBanner.setPages(new CBViewHolderCreator<ExhibitionItemHolderView>() {
+            @Override
+            public ExhibitionItemHolderView createHolder() {
+                return new ExhibitionItemHolderView();
+            }
+        }, exhibitionDTOList)
+                .setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused})
+                //设置指示器的方向
+                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+    }
+
+    private void startExhibitionDetail(int position){
+        if (position < exhibitionDTOList.size()){
+            ExhibitionDTO exhibitionDTO = exhibitionDTOList.get(position);
+            if (ExhibitionAction.OPEN_TOPIC.equals(exhibitionDTO.getAction())){
+                String topicJson = exhibitionDTO.getData();
+                Gson gson = new Gson();
+                if (!TextUtils.isEmpty(topicJson)){
+                    TopicDTO topicDTO = gson.fromJson(topicJson, TopicDTO.class);
+                    Intent intent = new Intent(DynamicHomeFragment.this.getActivity(), TopicDetailActivity.class);
+                    intent.putExtra(TopicDetailActivity.INTENT_TOPIC, topicDTO);
+                    startActivity(intent);
+                }
+            }else {
+                Toast.makeText(DynamicHomeFragment.this.getContext(), R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -122,6 +122,7 @@
     <string name="clean_cache">清除缓存</string>
 
     //client local error
+    <string name="app_version_is_low">客户端版本太低,请升级!</string>
 
     //my global error
     <string name="err_birth">生日错误</string>

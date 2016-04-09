@@ -89,7 +89,6 @@
     <string name="load_sub_reply" formatted="false">load%1$dreply</string>
     <string name="loadmore">load more</string>
 
-
     <string name="edit_profile">edit profile</string>
     <string name="random">random</string>
     <string name="upload">upload</string>
@@ -122,8 +121,8 @@
     <string name="feed_back">feed back</string>
     <string name="clean_cache">clean cache</string>
 
-
     //client local error
+    <string name="app_version_is_low">client version is too low,please update!</string>
 
     //my global error
     <string name="err_birth">birht error</string>

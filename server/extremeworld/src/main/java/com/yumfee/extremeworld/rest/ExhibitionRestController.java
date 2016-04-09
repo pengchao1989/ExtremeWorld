@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Validator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,11 @@ import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.entity.Exhibition;
 import com.yumfee.extremeworld.entity.Hobby;
+import com.yumfee.extremeworld.entity.Media;
+import com.yumfee.extremeworld.entity.MediaWrap;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.VideoDetail;
 import com.yumfee.extremeworld.rest.dto.ExhibitionDTO;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
@@ -58,7 +62,7 @@ public class ExhibitionRestController {
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
 		
 		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
-		Page<Exhibition> exhibitionPage = exhibitionService.getAllByHobby(hobbyId, pageNumber, pageSize, sortType);
+		Page<Exhibition> exhibitionPage = exhibitionService.getAllByHobbyAndStatus(hobbyId, TopicStatus.PUBLIC, pageNumber, pageSize, sortType);
 		
 		MyPage<ExhibitionDTO, Exhibition> exhibitionMyPage = new MyPage<ExhibitionDTO,Exhibition >(ExhibitionDTO.class, exhibitionPage);
 		
@@ -88,6 +92,22 @@ public class ExhibitionRestController {
 				TopicDTO topicDTO = BeanMapper.map(topic, TopicDTO.class);
 				String topicDTOJson = JsonMapper.nonEmptyMapper().toJson(topicDTO);
 				exhibition.setData(topicDTOJson);
+				
+				if(StringUtils.isBlank(exhibition.getImg())){
+					
+					VideoDetail videoDetail = topic.getVideoDetail();
+					if(videoDetail != null){
+						exhibition.setImg(videoDetail.getThumbnail());
+					}else{
+						MediaWrap mediawrap = topic.getMediaWrap();
+						if(mediawrap != null){
+							List<Media> medias = mediawrap.getMedias();
+							if(medias != null && medias.size() > 0){
+								exhibition.setImg(medias.get(0).getPath());
+							}
+						}
+					}
+				}
 			}
 		}
 		

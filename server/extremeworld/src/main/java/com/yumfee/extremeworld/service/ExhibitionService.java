@@ -20,9 +20,9 @@ public class ExhibitionService {
 	@Autowired
 	private ExhibitionDao exhibitionDao;
 	
-	public Page<Exhibition> getAllByHobby(Long hobbyId, int pageNumber, int pageSize,String sortType){
+	public Page<Exhibition> getAllByHobbyAndStatus(Long hobbyId, int status, int pageNumber, int pageSize,String sortType){
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return exhibitionDao.findByHobbyId(hobbyId, pageRequest);
+		return exhibitionDao.findByHobbyIdAndStatus(hobbyId, status, pageRequest);
 	}
 	
 	public Exhibition saveExhibition(Exhibition exhibition){

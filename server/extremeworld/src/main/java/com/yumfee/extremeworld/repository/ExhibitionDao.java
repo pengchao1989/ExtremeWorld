@@ -9,6 +9,6 @@ import com.yumfee.extremeworld.entity.Exhibition;
 
 public interface ExhibitionDao extends PagingAndSortingRepository<Exhibition, Long>{
 
-	@Query("SELECT e FROM Exhibition e LEFT JOIN e.hobbys h WHERE h.id=?")
-	Page<Exhibition> findByHobbyId(Long hobbyId, Pageable pageable);
+	@Query("SELECT e FROM Exhibition e LEFT JOIN e.hobbys h WHERE h.id=? AND status=?")
+	Page<Exhibition> findByHobbyIdAndStatus(Long hobbyId, int status, Pageable pageable);
 }

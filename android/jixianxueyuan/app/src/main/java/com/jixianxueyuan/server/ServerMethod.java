@@ -11,8 +11,8 @@ public class ServerMethod {
     static public final int STATUS_NO_CONTENT = 204;
 
     //static final String server_url = "http://dev.jixianxueyuan.com/";
-    static final String server_url = "http://www.jixianxueyuan.com/";
-    //static final String server_url = "http://192.168.1.6:8023/";
+    //static final String server_url = "http://www.jixianxueyuan.com/";
+    static final String server_url = "http://192.168.1.6:8023/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
     static String hobby = "skateboard/";
@@ -65,4 +65,5 @@ public class ServerMethod {
     public static final String goods_of_shop(){return method_url_secure + hobby + "biz/goods/shop/";};
     public static final String goods_of_category (){return method_url_secure + hobby + "biz/goods/category/";}
     public static final String sponsorship(){return method_url_secure + hobby + "sponsorship";}
+    public static final String exhibition() {return method_url_secure + hobby + "exhibition";}
 }

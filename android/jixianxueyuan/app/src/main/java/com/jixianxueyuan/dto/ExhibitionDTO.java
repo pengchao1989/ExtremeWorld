@@ -1,6 +1,8 @@
 package com.jixianxueyuan.dto;
 
-public class ExhibitionDTO {
+import java.io.Serializable;
+
+public class ExhibitionDTO implements Serializable {
 	private String action;
 	private String title;
 	private String img;

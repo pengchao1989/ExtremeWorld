@@ -121,8 +121,8 @@
     <string name="feed_back">의견이 피드백</string>
     <string name="clean_cache">캐시 비우기</string>
 
-
     //client local error
+    <string name="app_version_is_low">클라이언트 버전 너무 낮게 좀 업그레이드!</string>
 
     //my global error
     <string name="err_birth">생일 오류</string>

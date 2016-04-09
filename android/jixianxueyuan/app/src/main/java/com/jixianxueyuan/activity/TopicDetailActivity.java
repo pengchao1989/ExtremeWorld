@@ -104,6 +104,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
+    public final static String INTENT_TOPIC_ID = "INTENT_TOPIC_ID";
 
     @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @InjectView(R.id.topic_detail_actionbar)MyActionBar actionBar;
@@ -183,7 +184,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
         Bundle bubdle = intent.getExtras();
         if(bubdle.containsKey("topic")){
-            topicDTO = (TopicDTO) bubdle.getSerializable("topic");
+            topicDTO = (TopicDTO) bubdle.getSerializable(INTENT_TOPIC);
         }else if(bubdle.containsKey("topicId")){
             topicId = bubdle.getLong("topicId");
         }
