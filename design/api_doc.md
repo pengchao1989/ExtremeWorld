@@ -391,4 +391,9 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
         }
 	示例:http://115.28.8.25/api/secure/v1/skateboard/exhibition
 	说明:新增一个展板项，action是个枚举值用于指示该进行的响应；targetId标识目标id，比如topicId，productId等；data为辅助的内容，比如topic的json串（用于迅速展示出话题内容）， url地址等，根据action不同而不同
-	    action取值：“open_topic”(打开一个话题)，“open_url”(打开一个url地址)，“open_product”(打开一个商品，计划中)， “open_taobao_product”(直接打开一个淘宝商品，计划中)
+	    action取值：“open_topic”(打开一个话题)，
+	    “open_url”(打开一个url地址)，
+	    “open_product”(打开一个商品，计划中)，
+	    "open_shop"(打开一个商店，计划中) 
+	    “open_taobao_product”(直接打开一个淘宝商品，计划中), 
+	    "open_taobao_shop" (直接打开淘宝商店，计划中)
