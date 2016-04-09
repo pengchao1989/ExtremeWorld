@@ -1,10 +1,11 @@
 package com.jixianxueyuan.dto;
 
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class MyPage<T> {
+public class MyPage<T> implements Serializable{
 
 	private int curPage;
 	private int totalPages;

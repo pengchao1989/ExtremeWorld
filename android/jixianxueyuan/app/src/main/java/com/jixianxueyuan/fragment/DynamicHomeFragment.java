@@ -48,6 +48,8 @@ import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.ACache;
+import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ExhibitionItemHolderView;
 import com.nineoldandroids.view.ViewHelper;
 import com.orhanobut.dialogplus.DialogPlus;
@@ -69,7 +71,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
     protected static final float MAX_TEXT_SCALE_DELTA = 0.3f;
 
-    private List<String> networkImages;
     private List<ExhibitionDTO> exhibitionDTOList;
 
 
@@ -147,7 +148,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 startExhibitionDetail(position);
             }
         });
-        requestExhibitionList();
+        initExhibitionList();
 
         return view;
     }
@@ -377,9 +378,24 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         }
     }
 
+    private void initExhibitionList(){
+        ACache aCache = ACache.get(this.getContext());
+        String url = ServerMethod.exhibition();
+        MyPage<ExhibitionDTO> exhibitionDTOMyPage = (MyPage<ExhibitionDTO>) aCache.getAsObject(url);
+        if (exhibitionDTOMyPage != null){
+            MyLog.e("DynamicHomeFragment", "Load cache success");
+            exhibitionDTOList = exhibitionDTOMyPage.getContents();
+        }
+        if (exhibitionDTOList != null){
+            updateExhibitionHeadVIew();
+        }else {
+            requestExhibitionList();
+        }
+    }
+
     private void requestExhibitionList(){
 
-        String url = ServerMethod.exhibition();
+        final String url = ServerMethod.exhibition();
 
         MyPageRequest<ExhibitionDTO> myPageRequest = new MyPageRequest<ExhibitionDTO>(Request.Method.GET, url, ExhibitionDTO.class,
                 new Response.Listener<MyResponse<MyPage<ExhibitionDTO>>>() {
@@ -388,8 +404,11 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                         if (response.getStatus() == MyResponse.status_ok){
                             if (response.getContent() != null){
                                 DynamicHomeFragment.this.exhibitionDTOList = response.getContent().getContents();
-                                extractExhibitionImageUrl(DynamicHomeFragment.this.exhibitionDTOList);
                                 updateExhibitionHeadVIew();
+
+                                //cache
+                                ACache aCache = ACache.get(DynamicHomeFragment.this.getContext());
+                                aCache.put(url, response.getContent(), ACache.TIME_HOUR);
                             }
                         }
                     }
@@ -401,13 +420,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         });
 
         MyApplication.getContext().getRequestQueue().add(myPageRequest);
-    }
-
-    private void extractExhibitionImageUrl(List<ExhibitionDTO> exhibitionDTOList){
-        networkImages = new ArrayList<>();
-        for (ExhibitionDTO exhibitionDTO : exhibitionDTOList){
-            networkImages.add(exhibitionDTO.getImg());
-        }
     }
 
     private void updateExhibitionHeadVIew(){
