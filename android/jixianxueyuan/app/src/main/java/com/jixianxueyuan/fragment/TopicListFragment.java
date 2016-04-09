@@ -29,6 +29,7 @@ import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.event.HomeRefreshEvent;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
@@ -36,6 +37,8 @@ import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
 import com.nineoldandroids.view.ViewHelper;
 import com.umeng.analytics.MobclickAgent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -260,7 +263,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
 
     private void refreshTopicList() {
         currentPage = 0;
-
+        EventBus.getDefault().post(new HomeRefreshEvent(HomeRefreshEvent.EVENT_START));
         requestTopicList();
     }
 
@@ -320,6 +323,9 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                             List<TopicDTO> topicDTOs = page.getContents();
                             if (currentPage == 0) {
                                 adapter.refresh(topicDTOs);
+                                if (topicDTOs.size() > 0){
+                                    listView.setSelection(0);
+                                }
                             } else {
                                 adapter.addDatas(topicDTOs);
                             }
@@ -335,6 +341,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                             MyErrorHelper.showErrorToast(TopicListFragment.this.getActivity(), response.getError());
                         }
                         isRequesting = false;
+                        EventBus.getDefault().post(new HomeRefreshEvent(HomeRefreshEvent.EVENT_STOP));
                     }
                 },
                 new Response.ErrorListener() {
@@ -343,6 +350,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                         isRequesting = false;
                         swipeRefreshLayout.setRefreshing(false);
                         MyVolleyErrorHelper.showError(TopicListFragment.this.getActivity(), error);
+                        EventBus.getDefault().post(new HomeRefreshEvent(HomeRefreshEvent.EVENT_STOP));
                     }
                 });
 
@@ -388,5 +396,9 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
         if (parentFragment != null) {
             parentFragment.onScrollChanged(scrollY, (ObservableListView) view.findViewById(R.id.scroll));
         }
+    }
+
+    public void doRefresh(){
+        refreshTopicList();
     }
 }

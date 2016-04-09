@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.flipboard.bottomsheet.BottomSheetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -68,7 +69,26 @@
 
         </RelativeLayout>
 
-    </FrameLayout>
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotate_loading"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            app:loading_color="@color/ripple"
+            app:loading_speed="11"
+            app:loading_width="5dp" />
+
+        <ImageButton
+            android:id="@+id/home_fragment_refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="14dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_suggestion_possible_refresh"/>
+
+    </RelativeLayout>
 
 </com.flipboard.bottomsheet.BottomSheetLayout>
 

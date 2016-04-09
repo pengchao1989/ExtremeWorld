@@ -46,6 +46,7 @@ import com.jixianxueyuan.dto.ExhibitionDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
+import com.jixianxueyuan.event.HomeRefreshEvent;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ACache;
@@ -56,8 +57,11 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.GridHolder;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.umeng.analytics.MobclickAgent;
+import com.victor.loading.rotate.RotateLoading;
 
-import java.util.ArrayList;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -82,6 +86,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     @InjectView(R.id.overlay) View overlayView;
     @InjectView(R.id.pager)
     ViewPager mPager;
+    @InjectView(R.id.rotate_loading)RotateLoading rotateLoading;
 
     private NavigationAdapter mPagerAdapter;
     private int mFlexibleSpaceHeight;
@@ -163,6 +168,18 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     public void onPause() {
         super.onPause();
         convenientBanner.stopTurning();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     public void onScrollChanged(int scrollY, Scrollable s) {
@@ -282,6 +299,17 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     @OnClick(R.id.add_topic) void onAddTopicClick(){
         showCreateMenuLayout();
         MobclickAgent.onEvent(this.getActivity(), UmengEventId.TAB_CREATE_CLICK);
+    }
+
+    @OnClick(R.id.home_fragment_refresh_button)void onRefreshClick(){
+        TopicListFragment curTopicListFragment;
+        if (mIsFine){
+            curTopicListFragment = (TopicListFragment) mPagerAdapter.getItemAt(0);
+        }else {
+            curTopicListFragment = (TopicListFragment) mPagerAdapter.getItemAt(1);
+        }
+        curTopicListFragment.doRefresh();
+
     }
 
     private void showCreateMenuLayout() {
@@ -449,6 +477,15 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             }else {
                 Toast.makeText(DynamicHomeFragment.this.getContext(), R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Subscribe
+    public void onMessageEvent(HomeRefreshEvent event){
+        if (event.message.equals(HomeRefreshEvent.EVENT_START)){
+            rotateLoading.start();
+        }else if (event.message.equals(HomeRefreshEvent.EVENT_STOP)){
+            rotateLoading.stop();
         }
     }
 }
