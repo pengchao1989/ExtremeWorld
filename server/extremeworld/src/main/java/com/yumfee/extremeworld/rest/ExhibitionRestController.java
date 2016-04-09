@@ -66,7 +66,7 @@ public class ExhibitionRestController {
 		
 		MyPage<ExhibitionDTO, Exhibition> exhibitionMyPage = new MyPage<ExhibitionDTO,Exhibition >(ExhibitionDTO.class, exhibitionPage);
 		
-		return MyResponse.ok(exhibitionMyPage,false);
+		return MyResponse.ok(exhibitionMyPage,true);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)
@@ -89,6 +89,11 @@ public class ExhibitionRestController {
 		if(ExhibitionAction.OPEN_TOPIC.equals(action)){
 			Topic topic = topicService.getTopic(exhibition.getTargetId());
 			if(topic != null){
+				
+				if(StringUtils.isBlank(exhibition.getTitle())){
+					exhibition.setTitle(topic.getTitle());
+				}
+				
 				TopicDTO topicDTO = BeanMapper.map(topic, TopicDTO.class);
 				String topicDTOJson = JsonMapper.nonEmptyMapper().toJson(topicDTO);
 				exhibition.setData(topicDTOJson);
@@ -122,7 +127,7 @@ public class ExhibitionRestController {
 		
 		ExhibitionDTO exhibitionDTO = BeanMapper.map(exhibition, ExhibitionDTO.class);
 		
-		return MyResponse.ok(exhibitionDTO, false);
+		return MyResponse.ok(exhibitionDTO, true);
 	}
 	
 	/**

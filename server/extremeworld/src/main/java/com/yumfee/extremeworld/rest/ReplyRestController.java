@@ -29,7 +29,7 @@ public class ReplyRestController
 {
 	private static Logger logger = LoggerFactory.getLogger(ReplyRestController.class);
 	
-	private static final String PAGE_SIZE = "5";
+	private static final String PAGE_SIZE = "20";
 	
 	@Autowired
 	private ReplyService replyService;

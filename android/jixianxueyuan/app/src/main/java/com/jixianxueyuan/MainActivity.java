@@ -98,7 +98,9 @@ public class MainActivity extends Activity {
                 //直接进入Hone页
                 showProgress();
                 if(mine.getUserInfo().getId() > 0){
-                    loginIM();
+                    Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
             else{
@@ -232,14 +234,10 @@ public class MainActivity extends Activity {
 
                             requestHandshake();
 
-
-                            //登录IM
-                            loginIM();
-
                             //登录完成，进入HOME页
-                            //Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
-                            //startActivity(intent);
-                            //finish();
+                            Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else if (response.getStatus() == ServerMethod.STATUS_ERROR) {
                             if(response.getError().getErrorCode() == MyErrorCode.NO_USER.getErrorCode()){
                                 MyLog.d("MainActivity", "no user");
@@ -342,24 +340,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         tencent.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void loginIM(){
-
-        IMHelper imHelper = new IMHelper(this);
-        imHelper.Login(new IMHelper.LoginResultListener() {
-            @Override
-            public void onSuccess() {
-                Intent intent = new Intent(MainActivity.this, NewHomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
-            @Override
-            public void onError(String err) {
-                Toast.makeText(MainActivity.this, err, Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     public static String getDeviceInfo(Context context) {

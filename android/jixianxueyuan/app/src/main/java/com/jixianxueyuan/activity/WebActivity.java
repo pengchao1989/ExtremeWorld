@@ -52,6 +52,12 @@ public class WebActivity extends BaseActivity implements AdvancedWebView.Listene
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webView.destroy();
+    }
+
     private void initParams(){
         title = getIntent().getStringExtra(INTENT_TITLE);
         url = getIntent().getStringExtra(INTENT_URL);
