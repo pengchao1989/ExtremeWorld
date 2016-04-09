@@ -19,8 +19,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.sdk.android.trade.TradeService;
+import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
+import com.alibaba.sdk.android.trade.model.TaokeParams;
+import com.alibaba.sdk.android.trade.model.TradeResult;
+import com.alibaba.sdk.android.trade.page.ItemDetailPage;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -35,6 +41,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
+import com.jixianxueyuan.activity.WebActivity;
 import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
@@ -470,11 +477,37 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 Gson gson = new Gson();
                 if (!TextUtils.isEmpty(topicJson)){
                     TopicDTO topicDTO = gson.fromJson(topicJson, TopicDTO.class);
-                    Intent intent = new Intent(DynamicHomeFragment.this.getActivity(), TopicDetailActivity.class);
-                    intent.putExtra(TopicDetailActivity.INTENT_TOPIC, topicDTO);
-                    startActivity(intent);
+                    if (!TextUtils.isEmpty(topicDTO.getUrl())){
+                        WebActivity.startActivity(this.getActivity(), topicDTO.getTitle(), topicDTO.getUrl());
+                    }else {
+                        Intent intent = new Intent(DynamicHomeFragment.this.getActivity(), TopicDetailActivity.class);
+                        intent.putExtra(TopicDetailActivity.INTENT_TOPIC, topicDTO);
+                        startActivity(intent);
+                    }
                 }
-            }else {
+            }else if (ExhibitionAction.OPEN_URL.equals(exhibitionDTO.getAction())){
+                WebActivity.startActivity(this.getActivity(), exhibitionDTO.getTitle(), exhibitionDTO.getData());
+            }
+            else if (ExhibitionAction.OPEN_TAOBAO_PRODUCT.equals(exhibitionDTO.getAction())){
+                TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+                TaokeParams taokeParams = new TaokeParams();
+                taokeParams.pid = "mm_111250070_0_0";
+                ItemDetailPage itemDetailPage = new ItemDetailPage(exhibitionDTO.getData(), null);
+                tradeService.show(itemDetailPage, taokeParams, DynamicHomeFragment.this.getActivity(), null, new TradeProcessCallback() {
+
+                    @Override
+                    public void onFailure(int i, String s) {
+
+                    }
+
+                    @Override
+                    public void onPaySuccess(TradeResult tradeResult) {
+                        Toast.makeText(DynamicHomeFragment.this.getContext(), "成功", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
+            }
+            else {
                 Toast.makeText(DynamicHomeFragment.this.getContext(), R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
             }
         }
