@@ -24,8 +24,8 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 18
-        versionName "1.3.8"
+        versionCode 20
+        versionName "1.4.0"
         multiDexEnabled true
         ndk {
             //设置支持的SO库架构
@@ -174,7 +174,7 @@ dependencies {
     compile project(':social_sdk_library_project')
 }
 
-/*bugly {
+bugly {
     appId = '900018639'
     appKey = '6H1BuGJoxCxNEcYx'
-}*/
+}
