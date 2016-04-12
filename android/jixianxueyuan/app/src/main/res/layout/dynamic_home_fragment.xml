@@ -49,13 +49,24 @@
                 android:background="@android:color/transparent"
                 android:src="@mipmap/ic_option"/>
 
-            <ImageView
-                android:id="@+id/message"
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:padding="8dp"
-                android:src="@drawable/message_button"/>
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp"
+                    android:src="@drawable/message_button"/>
+                <ImageView
+                    android:id="@+id/message_is_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@mipmap/skin_point_new"/>
+            </FrameLayout>
+
 
 
             <ImageView

@@ -1,6 +1,5 @@
 package com.jixianxueyuan.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
@@ -20,7 +19,7 @@ import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.commons.im.IMHelper;
+import com.jixianxueyuan.commons.im.IMManager;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MyResponse;
@@ -332,8 +331,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
             @Override
             public void onFinish() {
-                IMHelper imHelper = new IMHelper(NewHomeActivity.this);
-                imHelper.Login(new IMHelper.LoginResultListener() {
+                IMManager.getInstance().Login(new IMManager.LoginResultListener() {
                     @Override
                     public void onSuccess() {
 

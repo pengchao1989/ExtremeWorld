@@ -21,6 +21,8 @@
     <string name="location_failed">定位失败</string>
     <string name="loading">拼命加载中...</string>
     <string name="please_enter">请输入</string>
+    <string name="optional">可选</string>
+    <string name="required">必须</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">welcome</string>
     <string name="register">注册</string>

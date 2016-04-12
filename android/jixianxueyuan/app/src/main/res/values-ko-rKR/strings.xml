@@ -21,6 +21,8 @@
     <string name="location_failed">위치 실패</string>
     <string name="loading">로드...</string>
     <string name="please_enter">입력하십시오</string>
+    <string name="optional">불필요한</string>
+    <string name="required">필요</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">환영</string>
     <string name="register">등록</string>

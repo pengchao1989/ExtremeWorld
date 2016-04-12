@@ -46,6 +46,7 @@ import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.ScrollReceive;
+import com.jixianxueyuan.commons.im.IMManager;
 import com.jixianxueyuan.config.ExhibitionAction;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
@@ -94,6 +95,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     @InjectView(R.id.pager)
     ViewPager mPager;
     @InjectView(R.id.rotate_loading)RotateLoading rotateLoading;
+    @InjectView(R.id.message_is_new) ImageView messageIsNewImageView;
 
     private NavigationAdapter mPagerAdapter;
     private int mFlexibleSpaceHeight;
@@ -169,6 +171,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     public void onResume() {
         super.onResume();
         convenientBanner.startTurning(3500);
+        updateMessageView();
     }
 
     @Override
@@ -298,8 +301,9 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     @OnClick(R.id.message) void onMessageClick(){
-        YWIMKit mIMKit = YWAPI.getIMKitInstance();
-        Intent intent = mIMKit.getConversationActivityIntent();
+       /* YWIMKit mIMKit = YWAPI.getIMKitInstance();*/
+        YWIMKit ywimKit = IMManager.getInstance().getYwimKit();
+        Intent intent = ywimKit.getConversationActivityIntent();
         startActivity(intent);
     }
 
@@ -510,6 +514,14 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
             else {
                 Toast.makeText(DynamicHomeFragment.this.getContext(), R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private void updateMessageView(){
+        if (IMManager.getInstance().isReceiverNewMessage(this.getContext())){
+            messageIsNewImageView.setVisibility(View.VISIBLE);
+        }else {
+            messageIsNewImageView.setVisibility(View.GONE);
         }
     }
 

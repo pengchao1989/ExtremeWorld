@@ -26,7 +26,7 @@ import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.Verification;
-import com.jixianxueyuan.commons.im.IMHelper;
+import com.jixianxueyuan.commons.im.IMManager;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.AppConfigDTO;
@@ -508,9 +508,7 @@ public class RegisterActivity extends Activity {
     }
 
     private void loginIM(){
-
-        IMHelper imHelper = new IMHelper(this);
-        imHelper.Login(new IMHelper.LoginResultListener() {
+        IMManager.getInstance().Login(new IMManager.LoginResultListener() {
             @Override
             public void onSuccess() {
                 progressDialog.dismiss();
@@ -529,5 +527,4 @@ public class RegisterActivity extends Activity {
             }
         });
     }
-
 }

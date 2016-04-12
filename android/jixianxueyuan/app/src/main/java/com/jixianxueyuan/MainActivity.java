@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.alibaba.sdk.android.AlibabaSDK;
@@ -22,7 +21,6 @@ import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.commons.im.IMHelper;
 import com.jixianxueyuan.config.MyErrorCode;
 import com.jixianxueyuan.dto.HandshakeDTO;
 import com.jixianxueyuan.dto.MyResponse;
