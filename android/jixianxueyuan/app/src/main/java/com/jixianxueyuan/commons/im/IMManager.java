@@ -88,14 +88,21 @@ public class IMManager  {
         if (ywimKit != null){
 
             long cacheLastTime = PreferencesUtils.getLong(context, LAST_MESSAGE_TIME);
-            if (ywimKit.getIMCore().getConversationService().getConversationList().size() > 0){
-                long lastTime = ywimKit.getIMCore().getConversationService().getConversationList().get(0).getLatestTimeInMillisecond();
-                PreferencesUtils.putLong(context, LAST_MESSAGE_TIME, lastTime);
+            if (ywimKit.getIMCore() != null){
+                if (ywimKit.getIMCore().getConversationService() != null){
+                    if (ywimKit.getIMCore().getConversationService().getConversationList() != null){
+                        if (ywimKit.getIMCore().getConversationService().getConversationList().size() > 0){
+                            long lastTime = ywimKit.getIMCore().getConversationService().getConversationList().get(0).getLatestTimeInMillisecond();
+                            PreferencesUtils.putLong(context, LAST_MESSAGE_TIME, lastTime);
 
-                if (cacheLastTime > 0 && (lastTime > cacheLastTime)){
-                    return true;
+                            if (cacheLastTime > 0 && (lastTime > cacheLastTime)){
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
+
         }
         return false;
     }

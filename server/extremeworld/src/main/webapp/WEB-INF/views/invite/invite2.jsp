@@ -28,7 +28,7 @@
 
 				<!-- Site Title, your name, HELLO msg, etc. -->
 				<h1 class="title">滑板圈</h1>
-				<h2 class="subtitle">专业的原创视频与教学分享平台</h2>
+				<h2 class="subtitle">原创视频与专业教学分享平台</h2>
 
 				<!-- Short introductory (optional) -->
 				<h3 class="tagline">
