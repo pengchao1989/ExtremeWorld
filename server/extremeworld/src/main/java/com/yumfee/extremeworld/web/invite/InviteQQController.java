@@ -64,6 +64,9 @@ public class InviteQQController {
 			@CookieValue(value = "inviteHobby", defaultValue = "skateboard") String inviteHobby,
 			Model model)
 	{
+		if("hobby".equals(inviteHobby)){
+			inviteHobby = "skateboard";
+		}
 		System.out.println("download,inviteidCookie=" + inviteidCookie);
 		System.out.println("download,inviteHobby=" + inviteHobby);
 		
@@ -79,14 +82,27 @@ public class InviteQQController {
 		Long hobbyId = HobbyPathConfig.getHobbyId(inviteHobby);
 		AppVersion appVersion = appVersionService.getAppVersion(hobbyId);
 		model.addAttribute("appVersion", appVersion);
+		model.addAttribute("inviteUser", inviteUser);
 		return "/invite/download2";
 	}
+	
+	@RequestMapping(value = "download3", method = RequestMethod.GET)
+	public String download3(@PathVariable String hobby,
+			Model model){
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		AppVersion appVersion = appVersionService.getAppVersion(hobbyId);
+		model.addAttribute("appVersion", appVersion);
+		return "/invite/download3";
+		}
 	
 	/**
 	 * 取出Shiro中的当前用户Id.
 	 */
 	private Long getCurrentUserId() {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		return user.id;
+		if(user != null){
+			return user.id;
+		}
+		return 1L;
 	}
 }

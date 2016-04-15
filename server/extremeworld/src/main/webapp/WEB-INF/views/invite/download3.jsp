@@ -25,13 +25,11 @@
 
 <div class="container">
 
-    <h3 class="tagline text-center whiteText">你已成功被${inviteUser.name}邀请</h3>
-    <br/>
+    <br/><br/><br/><br/><br/>
 
-	<h2 class="tagline text-center whiteText">扫描二维码或点击下载</h2>
+	<h2 class="tagline text-center whiteText">点击下载APK或跳转到iTunes</h2>
 	<div class="row">
 		<div class="col-sm-12 text-center">    
-			<p><img src="${appVersion.apkBarcodeUrl}" /></p>
 			<br>
 			<a  id="btnDownload" class="btn btn-default btn-lg" href="${appVersion.apkUrl}" role="button">点击下载</a>
 		</div>
@@ -49,7 +47,7 @@
 	}
 	
 	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-	    btn.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yumfee.skate';
+		btn.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yumfee.skate';
 	});
 	</script>   
 </body>
