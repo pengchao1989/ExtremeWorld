@@ -197,7 +197,6 @@ public class MineFragment extends Fragment {
                 + mine.getUserInfo().getId();
 
         activity.showShareMenuSheet(MenuSheetView.MenuType.GRID);
-
     }
 
     private void showImageSelectActivity(){

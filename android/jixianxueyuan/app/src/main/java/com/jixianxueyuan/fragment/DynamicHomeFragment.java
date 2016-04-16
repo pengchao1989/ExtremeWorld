@@ -33,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
@@ -59,12 +60,16 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ACache;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.ExhibitionItemHolderView;
 import com.nineoldandroids.view.ViewHelper;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.GridHolder;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.victor.loading.rotate.RotateLoading;
 
 import org.greenrobot.eventbus.EventBus;
@@ -510,6 +515,9 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                                 .show();
                     }
                 });
+            }else if(ExhibitionAction.INVITE_FRIEND.equals(exhibitionDTO.getAction())){
+
+                share();
             }
             else {
                 Toast.makeText(DynamicHomeFragment.this.getContext(), R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
@@ -532,5 +540,29 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         }else if (event.message.equals(HomeRefreshEvent.EVENT_STOP)){
             rotateLoading.stop();
         }
+    }
+
+    public void share(){
+
+        String inviteMessage = mine.getUserInfo().getName()
+                + "邀请你加入"
+                + Util.getApplicationMetaString(DynamicHomeFragment.this.getContext(),"HOBBY");
+
+        String url =
+                 "http://www.jixianxueyuan.com/skateboard/invite2"
+                + "?inviteid="
+                + mine.getUserInfo().getId();
+
+
+        final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]
+                {
+                        SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE
+                        ,SHARE_MEDIA.SINA,
+                        SHARE_MEDIA.DOUBAN
+                };
+        new ShareAction(this.getActivity()).setDisplayList(displaylist)
+                .withText(inviteMessage)
+                .withTargetUrl(url)
+                .open();
     }
 }

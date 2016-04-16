@@ -185,9 +185,8 @@
 
         <RelativeLayout
             android:id="@+id/mine_fragment_share"
-            android:layout_marginTop="20dp"
             style="@style/ImageItemLayout"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
             <LinearLayout
@@ -199,6 +198,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
                     android:src="@mipmap/umeng_socialize_wxcircle" />
 
                 <TextView
@@ -212,6 +212,7 @@
             <ImageView style="@style/ImageItemRightIcon" />
 
         </RelativeLayout>
+        <View style="@style/HorizontalDividerView" />
 
     </LinearLayout>
 

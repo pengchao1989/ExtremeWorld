@@ -35,6 +35,8 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.update.UmengUpdateAgent;
 
 import butterknife.ButterKnife;
@@ -223,7 +225,6 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         marketImageView.setImageResource(R.mipmap.bottombar_shop);
         marketTextView.setTextColor(getResources().getColor(R.color.secondary_text));
     }
-
 
 
     public void showShareMenuSheet(final MenuSheetView.MenuType menuType) {
