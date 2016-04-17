@@ -32,7 +32,6 @@ import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.AppConfigDTO;
 import com.jixianxueyuan.dto.Error;
 import com.jixianxueyuan.dto.HobbyDTO;
-import com.jixianxueyuan.dto.InviteDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
@@ -86,6 +85,7 @@ public class RegisterActivity extends Activity {
     @InjectView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
     @InjectView(R.id.register_invitation_layout)LinearLayout invitationLayout;
     @InjectView(R.id.register_inviting_layout)LinearLayout invitingLayout;
+    @InjectView(R.id.register_invitation_code_layout)LinearLayout invitingCodeLayout;
     @InjectView(R.id.register_invitation_code_edittext)EditText invitationCodeEditText;
     @InjectView(R.id.register_inviting_name)TextView invitingNameTextView;
     @InjectView(R.id.register_invitation_description)TextView invitationDescriptionTextView;
@@ -157,6 +157,7 @@ public class RegisterActivity extends Activity {
                 invitationLayout.setVisibility(View.VISIBLE);
                 nickNameEditText.setText(qqUserInfo.getNickname());
                 downLoadQQAvatar();
+                requestInviter();
             }
         }else if(registerType.equals(REGISTER_TYPE_PHONE)){
             passwordLayout.setVisibility(View.VISIBLE);
@@ -195,7 +196,7 @@ public class RegisterActivity extends Activity {
                 }
             }
         }else if(registerType.equals(REGISTER_TYPE_PHONE)){
-            requestInvite();
+
         }
 
 
@@ -321,20 +322,21 @@ public class RegisterActivity extends Activity {
         queue.add(myRequest);
     }
 
-    private void requestInvite(){
+    private void requestInviter(){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.invite() + "?phone=" + phoneNumber;
+        String url = ServerMethod.get_inviter() + "?loginName=" + qqOpenInfo.getOpenid();
 
-        MyRequest<InviteDTO> myRequest = new MyRequest<InviteDTO>(Request.Method.GET, url, InviteDTO.class,
-                new Response.Listener<MyResponse<InviteDTO>>() {
+        MyRequest<UserMinDTO> myRequest = new MyRequest<UserMinDTO>(Request.Method.GET, url, UserMinDTO.class,
+                new Response.Listener<MyResponse<UserMinDTO>>() {
                     @Override
-                    public void onResponse(MyResponse<InviteDTO> response) {
+                    public void onResponse(MyResponse<UserMinDTO> response) {
                         if(response.getStatus() == MyResponse.status_ok){
 
-                            UserMinDTO invitingUser = response.getContent().getInviteUser();
+                            UserMinDTO invitingUser = response.getContent();
                             if(invitingUser != null){
                                 invitingLayout.setVisibility(View.VISIBLE);
                                 invitingNameTextView.setText(invitingUser.getName());
+                                invitingCodeLayout.setVisibility(View.GONE);
                             }
 
 

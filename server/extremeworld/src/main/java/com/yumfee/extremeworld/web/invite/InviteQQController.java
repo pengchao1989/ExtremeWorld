@@ -93,7 +93,8 @@ public class InviteQQController {
 		AppVersion appVersion = appVersionService.getAppVersion(hobbyId);
 		model.addAttribute("appVersion", appVersion);
 		return "/invite/download3";
-		}
+	}
+	
 	
 	/**
 	 * 取出Shiro中的当前用户Id.

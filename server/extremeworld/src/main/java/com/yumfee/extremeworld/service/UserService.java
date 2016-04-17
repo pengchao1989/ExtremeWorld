@@ -31,6 +31,10 @@ public class UserService {
 		return userDao.findByName(name);
 	}
 	
+	public User findByLoginName(String loginName){
+		return userDao.findByLoginName(loginName);
+	}
+	
 	public List<User> getAll()
 	{
 		return (List<User>) userDao.findAll();

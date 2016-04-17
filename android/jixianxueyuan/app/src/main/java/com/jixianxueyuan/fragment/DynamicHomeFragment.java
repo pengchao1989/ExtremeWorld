@@ -41,6 +41,7 @@ import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
+import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.WebActivity;
 import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
@@ -517,7 +518,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 });
             }else if(ExhibitionAction.INVITE_FRIEND.equals(exhibitionDTO.getAction())){
 
-                share();
+                InviteWebActivity.startActivity(this.getContext(), exhibitionDTO);
             }
             else {
                 Toast.makeText(DynamicHomeFragment.this.getContext(), R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
@@ -540,29 +541,5 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         }else if (event.message.equals(HomeRefreshEvent.EVENT_STOP)){
             rotateLoading.stop();
         }
-    }
-
-    public void share(){
-
-        String inviteMessage = mine.getUserInfo().getName()
-                + "邀请你加入"
-                + Util.getApplicationMetaString(DynamicHomeFragment.this.getContext(),"HOBBY");
-
-        String url =
-                 "http://www.jixianxueyuan.com/skateboard/invite2"
-                + "?inviteid="
-                + mine.getUserInfo().getId();
-
-
-        final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]
-                {
-                        SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE
-                        ,SHARE_MEDIA.SINA,
-                        SHARE_MEDIA.DOUBAN
-                };
-        new ShareAction(this.getActivity()).setDisplayList(displaylist)
-                .withText(inviteMessage)
-                .withTargetUrl(url)
-                .open();
     }
 }

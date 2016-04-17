@@ -70,14 +70,17 @@ public class QQLoginController
 	
 	
 	@RequestMapping(value = "redirect", method = RequestMethod.GET)
-	public String qqLoginRedirect(@CookieValue(value = "inviteid", defaultValue = "1") String inviteidCookie, HttpServletRequest  request ,HttpServletResponse response) throws IOException
+	public String qqLoginRedirect(@CookieValue(value = "inviteid", defaultValue = "1") String inviteidCookie, 
+			@CookieValue(value = "inviteHobby", defaultValue = "skateboard") String inviteHobbyCookie,
+			HttpServletRequest  request ,HttpServletResponse response) throws IOException
 	{
 		System.out.println("/redirect");
-		return qqLoginAfter(inviteidCookie, request,response);
+		return qqLoginAfter(inviteidCookie, inviteHobbyCookie, request,response);
 	}
 	
 	@RequestMapping(value = "redirect",method = RequestMethod.POST)
-	public String qqLoginAfter(String inviteid, HttpServletRequest  request ,HttpServletResponse response) throws IOException
+	public String qqLoginAfter(String inviteid, String inviteHobby,
+			HttpServletRequest  request ,HttpServletResponse response) throws IOException
 	{
 		System.out.println("/qqLoginAfter");
 	
@@ -178,7 +181,7 @@ public class QQLoginController
         
         if(isNewUser)
         {
-        	return "redirect:/hobby/invite2/download";
+        	return "redirect:/" + inviteHobby + "/invite2/download";
         }
         else
         {

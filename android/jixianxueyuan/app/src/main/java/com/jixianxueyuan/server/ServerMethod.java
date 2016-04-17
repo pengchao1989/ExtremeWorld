@@ -33,6 +33,7 @@ public class ServerMethod {
     public static final String verification_code(){return method_url_none + "verification_code";};
     public static final String verification_code_check(){return method_url_none + "verification_code/check";};
     public static final String invite(){return method_url_none + "invite";};
+    public static final String get_inviter(){return method_url_none + "invite/inviter";}
     public static final String account_qq_register() {return method_url_none + hobby + "account/qq_register";};
     public static final String account_phone_register() {return method_url_none + hobby + "account/phone_register";};
     public static final String reference_avatar(){return method_url_none + "reference_avatar";};

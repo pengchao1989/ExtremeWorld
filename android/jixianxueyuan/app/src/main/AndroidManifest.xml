@@ -118,6 +118,7 @@
         <activity android:name=".activity.SponsorshipActivity"/>
         <activity android:name=".activity.CollectionListActivity"/>
         <activity android:name=".activity.WebActivity"/>
+        <activity android:name=".activity.InviteWebActivity"/>
         <activity android:name=".activity.ImageGalleryActivity"/>
         <activity
             android:configChanges="orientation|screenSize"
