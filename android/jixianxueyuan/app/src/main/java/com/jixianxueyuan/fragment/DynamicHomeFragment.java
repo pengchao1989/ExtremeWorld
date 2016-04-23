@@ -518,7 +518,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 });
             }else if(ExhibitionAction.INVITE_FRIEND.equals(exhibitionDTO.getAction())){
 
-                InviteWebActivity.startActivity(this.getContext(), exhibitionDTO);
+                InviteWebActivity.startActivity(this.getContext());
             }
             else {
                 Toast.makeText(DynamicHomeFragment.this.getContext(), R.string.app_version_is_low, Toast.LENGTH_SHORT).show();

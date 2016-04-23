@@ -131,6 +131,15 @@
             android:excludeFromRecents="true"/>
         <!--umeng scoial-->
 
+        <!--weixin-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <!--weixin-->
+
         <!--qq-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -148,11 +157,36 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
+
+        <!--wei bo-->
+        <activity
+            android:name=".WBShareActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+            android:configChanges="keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" >
+        </activity>
+        <service
+            android:name="com.sina.weibo.sdk.net.DownloadService"
+            android:exported="false">
+        </service>
+        <!--wei bo-->
+
+
         <activity android:name="com.alibaba.sdk.android.trade.ui.TradeWebViewActivity"/>
 
         <service android:name="com.jixianxueyuan.util.filedownload.DownloadService" />
 
         <service android:name="com.amap.api.location.APSService"></service>
+
 
         <activity
             android:name="com.alibaba.mobileim.ui.WxChattingActvity"

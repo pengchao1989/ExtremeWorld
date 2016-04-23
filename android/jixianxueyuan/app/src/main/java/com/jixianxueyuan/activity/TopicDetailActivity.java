@@ -80,6 +80,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.editorpage.ShareActivity;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMVideo;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
@@ -962,6 +963,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     public boolean onMenuItemClick(MenuItem item) {
 
                         ShareUtils.ShareItem shareItem = null;
+                        UMVideo video = null;
+                        if (topicDTO.getVideoDetail() != null){
+                            video = new UMVideo(topicDTO.getVideoDetail().getVideoSource());
+                        }
+
 
                         switch (item.getItemId()){
                             case R.id.menu_share_qq:
@@ -969,6 +975,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                                         .withText(topicDTO.getTitle())
                                         .withMedia(image)
                                         .withTargetUrl(url)
+                                        .withMedia(video)
                                         .share();
                                 break;
                             case R.id.menu_share_kongjian:
@@ -976,8 +983,32 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                                         .withTitle(topicDTO.getTitle())
                                         .withMedia(image)
                                         .withTargetUrl(url)
+                                        .withMedia(video)
                                         .share();
 
+                                break;
+                            case R.id.menu_share_weibo:
+                                new ShareAction(TopicDetailActivity.this).setPlatform(SHARE_MEDIA.SINA).setCallback(umShareListener)
+                                        .withText(topicDTO.getTitle())
+                                        .withMedia(image)
+                                        .withTargetUrl(url)
+                                        .share();
+                                break;
+                            case R.id.menu_share_weixin:
+                                new ShareAction(TopicDetailActivity.this).setPlatform(SHARE_MEDIA.WEIXIN).setCallback(umShareListener)
+                                        .withText(topicDTO.getTitle())
+                                        .withMedia(image)
+                                        .withTargetUrl(url)
+                                        .withMedia(video)
+                                        .share();
+                                break;
+                            case R.id.menu_share_weixin_circle:
+                                new ShareAction(TopicDetailActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE).setCallback(umShareListener)
+                                        .withText(topicDTO.getTitle())
+                                        .withMedia(image)
+                                        .withTargetUrl(url)
+                                        .withMedia(video)
+                                        .share();
                                 break;
                         }
 

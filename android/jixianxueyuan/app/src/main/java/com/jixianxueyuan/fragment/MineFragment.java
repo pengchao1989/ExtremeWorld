@@ -19,6 +19,7 @@ import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CollectionListActivity;
 import com.jixianxueyuan.activity.CropBgActivity;
+import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.profile.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
@@ -188,15 +189,7 @@ public class MineFragment extends Fragment {
     }
 
     @OnClick(R.id.mine_fragment_share)void onShareClick(){
-        //TODO 将url进行配置
-        String inviteMessage = mine.getUserInfo().getName()
-                + "邀请你加入"
-                + Util.getApplicationMetaString(MineFragment.this.getContext(),"HOBBY")
-                + "http://www.jixianxueyuan.com/skateboard/invite2"
-                + "?inviteid="
-                + mine.getUserInfo().getId();
-
-        activity.showShareMenuSheet(MenuSheetView.MenuType.GRID);
+        InviteWebActivity.startActivity(this.getContext());
     }
 
     private void showImageSelectActivity(){

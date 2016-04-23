@@ -201,8 +201,7 @@ public class MyApplication extends MultiDexApplication {
         String qqAppId = String.valueOf(Util.getApplicationMetaInteger(this, "QQ_APP_ID"));
         String qqAppKey = Util.getApplicationMetaString(this, "QQ_APP_KEY");
         PlatformConfig.setQQZone(qqAppId, qqAppKey);
-        PlatformConfig.setSinaWeibo("1412474691", "bb88dc18af303f0b63ebd4eb44d94d0f");
-        PlatformConfig.setWeixin("wxc65428e21ae36a8d", "a865641087958349d022f7723a9c2b6d");
-
+        PlatformConfig.setSinaWeibo("492074446", "8109db8a83c52a6df30609a29f2fae21");
+        PlatformConfig.setWeixin("wxdb326de61ab1adb6", "46abb9f519afca7dab08b9c155869f19");
     }
 }

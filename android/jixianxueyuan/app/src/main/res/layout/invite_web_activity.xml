@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<com.flipboard.bottomsheet.BottomSheetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.jixianxueyuan.widget.MyActionBar
-            android:id="@+id/web_actionbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.jixianxueyuan.widget.MyActionBar
+                android:id="@+id/web_actionbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
-        <com.jixianxueyuan.widget.AdvancedWebView
-            android:id="@+id/web_view"
+            <com.jixianxueyuan.widget.AdvancedWebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/invite_web_button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_alignParentBottom="true"
+            android:text="立即邀请"
+            style="@style/BlueButton"/>
 
-    </LinearLayout>
-
-
-
-    <Button
-        android:id="@+id/invite_web_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_alignParentBottom="true"
-        android:text="立即邀请"
-        style="@style/BlueButton"/>
-
-</RelativeLayout>
+    </RelativeLayout>
+</com.flipboard.bottomsheet.BottomSheetLayout>
