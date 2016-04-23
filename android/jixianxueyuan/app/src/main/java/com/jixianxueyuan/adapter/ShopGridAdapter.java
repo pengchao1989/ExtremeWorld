@@ -55,7 +55,10 @@ public class ShopGridAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return shopDTOList.get(position).getId();
+        if (position < shopDTOList.size()){
+            return shopDTOList.get(position).getId();
+        }
+        return -1;
     }
 
     @Override

@@ -12,16 +12,12 @@ import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.config.HobbyType;
-import com.jixianxueyuan.config.QiniuImageStyle;
-import com.jixianxueyuan.dto.ExhibitionDTO;
-import com.jixianxueyuan.dto.TopicDTO;
-import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.AdvancedWebView;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -101,7 +97,7 @@ public class InviteWebActivity extends BaseActivity {
 
         final String inviteMessage = mine.getUserInfo().getName()
                 + "邀请你加入"
-                + Util.getApplicationMetaString(this, "HOBBY");
+                + this.getResources().getText(R.string.app_name);
 
         final String url =
                 "http://www.jixianxueyuan.com/skateboard/invite2"
@@ -131,13 +127,6 @@ public class InviteWebActivity extends BaseActivity {
                                         .share();
 
                                 break;
-                            case R.id.menu_share_weibo:
-                                new ShareAction(InviteWebActivity.this).setPlatform(SHARE_MEDIA.SINA).setCallback(umShareListener)
-                                        .withText(inviteMessage)
-                                        .withMedia(image)
-                                        .withTargetUrl(url)
-                                        .share();
-                                break;
                             case R.id.menu_share_weixin:
                                 new ShareAction(InviteWebActivity.this).setPlatform(SHARE_MEDIA.WEIXIN).setCallback(umShareListener)
                                         .withText(inviteMessage)
@@ -147,6 +136,13 @@ public class InviteWebActivity extends BaseActivity {
                                 break;
                             case R.id.menu_share_weixin_circle:
                                 new ShareAction(InviteWebActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE).setCallback(umShareListener)
+                                        .withText(inviteMessage)
+                                        .withMedia(image)
+                                        .withTargetUrl(url)
+                                        .share();
+                                break;
+                            case R.id.menu_share_weibo:
+                                new ShareAction(InviteWebActivity.this).setPlatform(SHARE_MEDIA.SINA).setCallback(umShareListener)
                                         .withText(inviteMessage)
                                         .withMedia(image)
                                         .withTargetUrl(url)
@@ -185,5 +181,12 @@ public class InviteWebActivity extends BaseActivity {
     public static void startActivity(Context context){
         Intent intent = new Intent(context, InviteWebActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this**/
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -76,6 +76,7 @@ import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.editorpage.ShareActivity;
@@ -235,6 +236,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         replyWidget.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     private void initTopicHeadView()
