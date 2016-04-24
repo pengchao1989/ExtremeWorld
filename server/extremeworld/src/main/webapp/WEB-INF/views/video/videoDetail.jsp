@@ -36,8 +36,6 @@
 					
 				<div id="danmup" >
 				</div>
-			
-			
 			</div>
 		</div>
 	

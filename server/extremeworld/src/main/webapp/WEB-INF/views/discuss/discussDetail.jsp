@@ -36,16 +36,11 @@
 			
 			
 			<c:if test="${type == 'video'}">
-			
 				<c:if test="${topic.videoDetail.videoSource != null}">
-					<div class="row">
-						<div class="col s12 m12 l12" id="danmup">
-					
-						</div>
-					</div>
-
+				<video class="responsive-video" controls>
+				    <source src="${topic.videoDetail.videoSource}" type="video/mp4">
+				  </video>
 				</c:if> 
-		
 			</c:if>
 
 
