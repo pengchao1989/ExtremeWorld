@@ -47,6 +47,11 @@ public class UserService {
 		return userDao.findByGeoHashLike(geoHash, pageRequest);
 	}
 	
+	public Page<User> findByInviterId(Long inviterId, int pageNumber, int pageSize){
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, "id");
+		return userDao.findByInviterIdAndInited(inviterId, true, pageRequest);
+	}
+	
 	public User saveUser(User user)
 	{
 		return userDao.save(user);
@@ -69,7 +74,9 @@ public class UserService {
 		Sort sort = null;
 		if ("auto".equals(sortType)) {
 			sort = new Sort(Direction.ASC, "geoHash");
-		} 
+		}else if("id".equals(sortType)){
+			sort = new Sort(Direction.DESC, "id");
+		}
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}
 	

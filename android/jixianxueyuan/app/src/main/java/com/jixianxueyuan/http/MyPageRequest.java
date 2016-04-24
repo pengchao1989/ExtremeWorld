@@ -245,7 +245,7 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         //return super.getHeaders();
-        if(getOrc iginUrl().contains(URL_SECURE_KEYWORD)){
+        if(getOriginUrl().contains(URL_SECURE_KEYWORD)){
             UserDTO userDTO = MyApplication.getContext().getMine().getUserInfo();
             Map<String,String> headers = new HashMap<String, String>();
             String userName = userDTO.getLoginName();

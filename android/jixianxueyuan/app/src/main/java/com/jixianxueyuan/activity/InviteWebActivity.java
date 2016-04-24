@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.AdvancedWebView;
@@ -30,7 +32,7 @@ import butterknife.OnClick;
 /**
  * Created by pengchao on 4/17/16.
  */
-public class InviteWebActivity extends BaseActivity {
+public class InviteWebActivity extends BaseActivity implements AdvancedWebView.Listener{
 
     public static final String INTENT_EXHIBITION = "INTENT_EXHIBITION";
 
@@ -56,6 +58,18 @@ public class InviteWebActivity extends BaseActivity {
 
         application = (MyApplication) this.getApplicationContext();
         mine = application.getMine();
+
+        String url  = "http://www.jixianxueyuan.com/other/invite_board?userid="
+                + mine.getUserInfo().getId()
+                +"&hobby=" + Util.getApplicationMetaString(this, "HOBBY");
+                ;
+        webView.loadUrl(url);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webView.destroy();
     }
 
     @OnClick(R.id.invite_web_button)void onClick(){
@@ -188,5 +202,30 @@ public class InviteWebActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         /** attention to this below ,must add this**/
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onPageStarted(String url, Bitmap favicon) {
+
+    }
+
+    @Override
+    public void onPageFinished(String url) {
+
+    }
+
+    @Override
+    public void onPageError(int errorCode, String description, String failingUrl) {
+
+    }
+
+    @Override
+    public void onDownloadRequested(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+
+    }
+
+    @Override
+    public void onExternalPageRequest(String url) {
+
     }
 }

@@ -9,9 +9,7 @@ import com.alibaba.mobileim.YWLoginParam;
 import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.util.ACache;
 import com.jixianxueyuan.util.PreferencesUtils;
-import com.renn.rennsdk.param.PutBlogParam;
 
 /**
  * Created by pengchao on 4/12/16.
