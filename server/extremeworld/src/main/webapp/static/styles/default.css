@@ -159,3 +159,9 @@ div.video-container{
 .video_image{
 	height: 180px;
 }
+
+.text_single_line{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

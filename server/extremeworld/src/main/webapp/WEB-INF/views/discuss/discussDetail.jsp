@@ -32,14 +32,14 @@
 
 		<div class="reply_list_head ">
 		
-			<h3>${topic.title}</h3>
+			<h4>${topic.title}</h4>
 			
 			
-				<c:if test="${topic.videoDetail.videoSource != null}">
-				<video class="responsive-video" controls>
-				    <source src="${topic.videoDetail.videoSource}" type="video/mp4">
-				  </video>
-				</c:if> 
+			<c:if test="${topic.videoDetail.videoSource != null}">
+			<video class="responsive-video" controls>
+			    <source src="${topic.videoDetail.videoSource}" type="video/mp4">
+			  </video>
+			</c:if> 
 
 
 			<div class="media">
@@ -60,8 +60,23 @@
 				</div>
 			</div>
 		</div>
-
-
+		
+	   <div class="row">
+		   <c:forEach items="${topic.mediaWrap.medias}" var="media">
+	              <c:choose>
+	                  <c:when test="${media.type == 'img'}">
+	                      <li class="card-thumbnails">
+	                          <a href="${media.path}!webContentImg" data-rel="colorbox">
+	                              <img alt="" src="${media.path}!webContentImg">
+	                          </a>
+	                      </li>
+	                  </c:when>
+	                  <c:when test="media.type == 'video' || media.type == 's_video'">
+	                  </c:when>
+	              </c:choose>
+	          
+	        </c:forEach>
+	   </div>
 
 		<div class="row">
 			<c:forEach items="${replys.content}" var="reply">

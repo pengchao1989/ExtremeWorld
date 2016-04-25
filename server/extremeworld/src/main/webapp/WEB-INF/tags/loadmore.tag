@@ -19,7 +19,7 @@ request.setAttribute("end", end);
 <div >
 
 			<% if (page.hasNext()){%>
-			<a id="load-more" class="waves-effect waves-light btn-large"">加载更多</a>
+			<a id="load-more" class=" waves-light btn-large"">加载更多</a>
 			<%}
 			else{%>
 			<li class="disabled"><a href="#">&gt;</a></li>

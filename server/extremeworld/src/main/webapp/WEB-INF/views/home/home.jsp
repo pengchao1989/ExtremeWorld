@@ -61,7 +61,7 @@
 												<c:choose>
 													<c:when test="${media.type == 'img'}">
 														<li class="card-thumbnails">
-															<a href="${media.path}!webContent" data-rel="colorbox">
+															<a href="${media.path}!webContentImg" data-rel="colorbox">
 																<img alt="" src="${media.path}!topicListThum">
 															</a>
 														</li>
@@ -90,8 +90,6 @@
 				<div id="more-container">
 				
 				</div>
-				
-				<!-- <a id="load-more" class="waves-effect waves-light btn-large">加载更多</a> -->
 			
 			<tags:loadmore page="${topics}" paginationSize="5"/>
 			</div>
@@ -211,7 +209,6 @@
 		        });
 		    return false;
 		    }); */
-		    
 			$('a.zan').click(function(){
 				var topicId = $(this).children("lable").text();
 				var obj=$(this)

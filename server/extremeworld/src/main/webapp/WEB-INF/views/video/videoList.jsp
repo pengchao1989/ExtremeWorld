@@ -36,7 +36,7 @@
 						</div>
 						
 						<div class="card-content">
-							<h6 class=" activator grey-text text-darken-3">${video.title}</h6>
+							<h6 class=" activator grey-text text-darken-3 text_single_line">${video.title}</h6>
 							<p><a href="${ctx}/u/${video.user.id}">${video.user.name}</a></p>
 						</div>
 					</div>
