@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.ali.IMHelper;
 import com.yumfee.extremeworld.config.ImageHistoryType;
 import com.yumfee.extremeworld.config.MyErrorCode;
 import com.yumfee.extremeworld.entity.ImageHistory;
@@ -82,6 +83,8 @@ public class ProfileRestController {
 				imageHistory.setUserId(user.getId());
 				imageHistoryService.save(imageHistory);
 				user.setAvatar(attribute.getAttributeValue());
+				//update im avatar
+				IMHelper.updateIMAccount(user);
 			}
 		}
 

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.ali.IMHelper;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.repository.UserDao;
 

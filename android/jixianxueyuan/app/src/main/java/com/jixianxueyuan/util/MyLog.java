@@ -9,7 +9,7 @@ import com.jixianxueyuan.BuildConfig;
  */
 public class MyLog {
 
-    public static final boolean  DEBUG = /*BuildConfig.DEBUG*/true;
+    public static final boolean  DEBUG = BuildConfig.DEBUG;
 
     public static void v(String tag, String msg)
     {

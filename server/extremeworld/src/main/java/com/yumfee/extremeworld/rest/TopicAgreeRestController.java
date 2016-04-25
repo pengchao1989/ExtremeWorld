@@ -82,7 +82,7 @@ public class TopicAgreeRestController
 			}
 		}
 		
-		topicService.saveHtmlTopic(topic);
+		topicService.saveTopic(topic);
 		
 		
 		
