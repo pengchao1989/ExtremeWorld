@@ -32,7 +32,7 @@ import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 @RequestMapping(value = "{hobby}/course")
 public class CourseController
 {
-	private static final String PAGE_SIZE = "10";
+	private static final String PAGE_SIZE = "16";
 	
 	@Autowired
 	private CourseTaxonomyService courseTaxonomyService;
@@ -74,13 +74,30 @@ public class CourseController
 		
 		Page<Topic> questions = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicQuestion, pageNumber, pageSize, sortType);
 		Page<Topic> explains = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicExplain, pageNumber, pageSize, sortType);
+		Page<Topic> sbs = topicService.getAllTopicByCourseAndMagicType(id, TopicType.magicSB, pageNumber, pageSize, sortType);
 		
 		model.addAttribute("course", course);
+		model.addAttribute("sbs", sbs);
 		model.addAttribute("questions", questions);
 		model.addAttribute("explains", explains);
 		
 		model.addAttribute("hobby", hobby);
 		return "/course/courseDetail";
+	}
+	
+	@RequestMapping(value = "loadmore/{id}", method = RequestMethod.GET)
+	public String loadMore(@PathVariable("id") Long id,
+			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "agreeCount") String sortType,
+			@RequestParam(value = "magicType", defaultValue = "explain") String magicType,
+			Model model, ServletRequest request)
+	{
+		Page<Topic> questions = topicService.getAllTopicByCourseAndMagicType(id, magicType, pageNumber, pageSize, sortType);
+		
+		model.addAttribute("topics", questions);
+		
+		return "/course/topicFragment";
 	}
 	
 	@RequestMapping(value = "loadQuestion/{id}", method = RequestMethod.GET)
@@ -215,7 +232,12 @@ public class CourseController
 		List<Course> revision = courseService.getRevisions(id);
 		
 		model.addAttribute("version", version);
-		model.addAttribute("preversion", revision.get(revision.size()-1));
+		if(revision.size() > 1){
+			model.addAttribute("preversion", revision.get(revision.size() - 1));
+		}else{
+			model.addAttribute("preversion", version);
+		}
+		
 		
 		model.addAttribute("hobby", hobby);
 		return "/course/courseRevision";

@@ -35,13 +35,11 @@
 			<h3>${topic.title}</h3>
 			
 			
-			<c:if test="${type == 'video'}">
 				<c:if test="${topic.videoDetail.videoSource != null}">
 				<video class="responsive-video" controls>
 				    <source src="${topic.videoDetail.videoSource}" type="video/mp4">
 				  </video>
 				</c:if> 
-			</c:if>
 
 
 			<div class="media">

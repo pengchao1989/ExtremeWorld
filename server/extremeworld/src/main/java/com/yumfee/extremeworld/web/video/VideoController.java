@@ -24,10 +24,12 @@ import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Reply;
+import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.Video;
 import com.yumfee.extremeworld.entity.VideoDetail;
 import com.yumfee.extremeworld.service.ReplyService;
+import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.VideoService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -41,6 +43,9 @@ public class VideoController
 
 	@Autowired
 	private VideoService videoService;
+	
+	@Autowired
+	private TopicService topicService;
 	
 	@Autowired
 	private ReplyService replyService;
@@ -82,12 +87,12 @@ public class VideoController
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
 			Model model, ServletRequest request)
 			{
-				Video video = videoService.getVideo(id);
+				Topic topic = topicService.getTopic(id);
 				Page<Reply> replys = replyService.getAll(id,pageNumber, pageSize);
 		
 				Long userId = getCurrentUserId();
 				
-				model.addAttribute("topic", video);
+				model.addAttribute("topic", topic);
 				model.addAttribute("replys", replys);
 				
 				model.addAttribute("userId", userId);
