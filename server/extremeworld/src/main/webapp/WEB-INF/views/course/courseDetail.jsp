@@ -24,7 +24,7 @@
                         <a class="btn btn-success "
                             href="${ctx}/${hobby}/course/update/${course.id}" role="button">编辑</a>
                         <a class="btn btn-success "
-                            href="${ctx}/course/update/${course.id}" role="button">上传教程</a>
+                            href="${ctx}/${hobby}/course/addExplan/${course.id}" role="button">上传教程</a>
 					</div>
 					</shiro:authenticated>
 
@@ -114,7 +114,7 @@
 			
 			<div id="more-explain-container"></div>
 			
-			<a id="load-more-explain" class="waves-effect waves-light btn-large">加载更多</a>
+			<!-- <a id="load-more-explain" class="waves-effect waves-light btn-large">加载更多</a> -->
 		</div>
 
 

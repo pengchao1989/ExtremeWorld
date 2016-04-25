@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Reply;
@@ -127,7 +128,7 @@ public class VideoController
 		user.setId(getCurrentUserId());
 		newVideo.setUser(user);
 		newVideo.setReplyCount(0);
-		newVideo.setStatus(1);
+		newVideo.setStatus(TopicStatus.PUBLIC);
 		newVideo.setExcerpt(newVideo.getContent());
 		newVideo.setType(TopicType.VIDEO);
 

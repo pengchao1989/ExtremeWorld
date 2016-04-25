@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>发布视频</title>
 <link rel="stylesheet" href="${ctx}/static/qiniu/demo/main.css">
 <link rel="stylesheet"
 	href="${ctx}/static/qiniu/demo/js/highlight/highlight.css">

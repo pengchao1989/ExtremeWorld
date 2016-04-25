@@ -1,11 +1,13 @@
 package com.yumfee.extremeworld.web.course;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,15 +19,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Course;
 import com.yumfee.extremeworld.entity.CourseTaxonomy;
+import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.Video;
+import com.yumfee.extremeworld.entity.VideoDetail;
 import com.yumfee.extremeworld.service.CourseService;
 import com.yumfee.extremeworld.service.CourseTaxonomyService;
 import com.yumfee.extremeworld.service.TopicService;
+import com.yumfee.extremeworld.service.VideoService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @Controller
@@ -42,6 +50,9 @@ public class CourseController
 	
 	@Autowired 
 	private TopicService topicService;
+	
+	@Autowired
+	private VideoService videoService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(
@@ -242,6 +253,71 @@ public class CourseController
 		
 		model.addAttribute("hobby", hobby);
 		return "/course/courseRevision";
+	}
+	
+	@RequestMapping(value = "addExplan/{id}", method = RequestMethod.GET)
+	public String addExplanForm(
+			@PathVariable String hobby,
+			@PathVariable("id") Long id,
+			Model model)
+	{
+		model.addAttribute("video", new Video());
+		model.addAttribute("action", "addExplain");
+		model.addAttribute("hobby", hobby);
+		model.addAttribute("course", courseService.getCourse(id));
+		
+		return "/course/addExplainForm";
+	}
+	
+	@RequestMapping(value = "addExplain/{courseId}", method = RequestMethod.POST)
+	public String addExplan(
+			@PathVariable String hobby,
+			@PathVariable("courseId") Long courseId,
+			@Valid Topic newVideo, 
+			ServletRequest request,
+			RedirectAttributes redirectAttributes)
+	{
+		User user = new User();
+		user.setId(getCurrentUserId());
+		newVideo.setUser(user);
+		newVideo.setReplyCount(0);
+		newVideo.setStatus(TopicStatus.PUBLIC);
+		newVideo.setExcerpt(newVideo.getContent());
+		newVideo.setType(TopicType.COURSE);
+		newVideo.setMagicType(TopicType.magicExplain);
+
+		//videoSource在属性的属性中，单独从form参数中提取
+		String videoSource = request.getParameter("videoSource");
+		String frontSource = request.getParameter("frontSource");
+		System.out.println(videoSource);
+		System.out.println(frontSource);
+		
+		if(StringUtils.isNoneBlank(videoSource)){
+			VideoDetail videoDetail = new VideoDetail();
+			videoDetail.setVideoSource(videoSource);
+			videoDetail.setThumbnail(frontSource);
+			newVideo.setVideoDetail(videoDetail);
+		}
+
+
+		//hobby
+		List<Hobby> hobbyList= new ArrayList<Hobby>();
+		Long hobbyId = HobbyPathConfig.getHobbyId(hobby);
+		Hobby hobbyBean = new Hobby();
+		hobbyBean.setId(hobbyId);
+		hobbyList.add(hobbyBean);
+		
+		newVideo.setHobbys(hobbyList);
+		
+		//course info
+		Course course = new Course();
+		course.setId(courseId);
+		newVideo.setCourse(course);
+		
+		topicService.saveTopic(newVideo);
+		
+		redirectAttributes.addFlashAttribute("message", "发布教程成功");
+		return "redirect:/" + hobby +"/course/" + courseId;
 	}
 	
 	/**

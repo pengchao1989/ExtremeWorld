@@ -80,7 +80,6 @@ public class TopicAgreeRestController
 				agreeUsers.add(user);
 				topic.setAgreeCount(topic.getAgreeCount() + 1);
 			}
-			
 		}
 		
 		topicService.saveHtmlTopic(topic);
