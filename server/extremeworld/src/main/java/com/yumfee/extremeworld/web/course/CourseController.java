@@ -216,6 +216,7 @@ public class CourseController
 		//将新内容更新至原始数据库行
 		curCourse.setName(newCourse.getName());
 		curCourse.setContent(newCourse.getContent());
+		curCourse.setSortWeight(newCourse.getSortWeight());
 		curCourse.setModifyTime(new Date());
 		courseService.saveCourse((Course)curCourse);
 		

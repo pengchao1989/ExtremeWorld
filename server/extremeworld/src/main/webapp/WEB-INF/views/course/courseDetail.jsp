@@ -67,7 +67,6 @@
                 <c:if test="${status.count%4==0}">
                     </br>
                 </c:if>
-                    
                 
             </c:forEach>
             
@@ -80,7 +79,7 @@
 
 		<!-- explain fragment -->
 		<div id="explain" class="row s12">
-			<ul class="collection">
+<%-- 			<ul class="collection">
 				<c:forEach items="${explains.content}" var="explain">
 					<li class="collection-item avatar">
 						<a href="${ctx}/u/${explain.user.id}"> <img class="circle" src="${explain.user.avatar}!webAvatarSmall" alt="..."></a>
@@ -90,6 +89,28 @@
 					</li>
 				</c:forEach>
 			</ul>
+			 --%>
+			<c:forEach items="${explains.content}" var="video" varStatus="status">
+                <div class=" col l3 s12">
+                    <div class="card ">
+                        <div class="card-image video_image">
+                            <a href="${ctx}/${hobby}/video/${video.id}" target="_blank">
+                                <img alt="" src="${video.videoDetail.thumbnail}!webVideoListThum">
+                            </a>
+                        </div>
+                        
+                        <div class="card-content">
+                            <span class=" activator grey-text text-darken-3">${video.title}</span>
+                            <p><a href="${ctx}/u/${video.user.id}">${video.user.name}</a></p>
+                        </div>
+                    </div>
+                
+                </div>
+                <c:if test="${status.count%4==0}">
+                    </br>
+                </c:if>
+                
+            </c:forEach>
 			
 			<div id="more-explain-container"></div>
 			

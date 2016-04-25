@@ -16,7 +16,7 @@
 		<a class="btn btn-success " href="${ctx}/${hobby}/course/create" role="button">新增教学</a>
 		
 		<c:forEach items="${courseTaxonomyList}" var="courseTaxonomy">
-			<h1>${courseTaxonomy.name}</h1>
+			<h1>${courseTaxonomy.name}/${courseTaxonomy.des}</h1>
 			
 			<div class="list-group">
 			

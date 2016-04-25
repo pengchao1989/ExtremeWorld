@@ -41,6 +41,13 @@
 			    </div>
 			  </div>
 			  
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">排序</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="sortWeight"  name="sortWeight" placeholder="排序" value="${course.sortWeight}">
+                </div>
+              </div>
+			  
 				<div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">内容</label>
 			    <div class="col-sm-10">

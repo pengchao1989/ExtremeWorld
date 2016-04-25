@@ -23,6 +23,7 @@ public class Course extends IdEntity
 	private Date createTime;
 	private Date modifyTime;
 	private Long pid;
+	private int sortWeight;
 	
 	private CourseTaxonomy courseTaxonomy;
 	
@@ -93,6 +94,15 @@ public class Course extends IdEntity
 	public void setPid(Long pid)
 	{
 		this.pid = pid;
+	}
+
+	
+	public int getSortWeight() {
+		return sortWeight;
+	}
+
+	public void setSortWeight(int sortWeight) {
+		this.sortWeight = sortWeight;
 	}
 
 	@ManyToOne
