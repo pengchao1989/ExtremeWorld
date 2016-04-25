@@ -72,7 +72,7 @@
             
             <div id="more-sb-container"></div>
             
-                <a id="load-more-sb" class="waves-effect waves-light btn-large">加载更多</a>
+               <!--  <a id="load-more-sb" class="waves-effect waves-light btn-large">加载更多</a> -->
 
             
         </div>
