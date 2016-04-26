@@ -421,7 +421,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         headViewHolder.playButton.setVisibility(View.GONE);
         headViewHolder.videoView.setVideoPlayCallback(mVideoPlayCallback);
 
-        if(topicDTO.getType().equals(TopicType.VIDEO)){
+        if(!topicDTO.getType().equals(TopicType.S_VIDEO)){
             playWebVideo(topicDTO.getVideoDetail().getVideoSource());
         }else {
             openDiskLruCache();

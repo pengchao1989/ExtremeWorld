@@ -142,10 +142,12 @@ public class TopicListAdapter extends BaseAdapter {
                     break;
 
                 case TopicType.VIDEO:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_video);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.S_VIDEO:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_video);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
@@ -157,6 +159,7 @@ public class TopicListAdapter extends BaseAdapter {
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
                 case TopicType.COURSE:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_teach);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
             }
