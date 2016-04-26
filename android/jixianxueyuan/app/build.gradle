@@ -24,8 +24,8 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 20
-        versionName "1.4.0"
+        versionCode 21
+        versionName "1.4.1"
         multiDexEnabled true
         ndk {
             //设置支持的SO库架构
@@ -96,7 +96,6 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-            signingConfig  signingConfigs.release_skate
         }
 
         release {
