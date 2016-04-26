@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +30,7 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
+import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 
 import java.util.List;
@@ -51,10 +53,13 @@ public class CourseDetailActivity extends BaseActivity {
     ListView listView;
 
     TopicListAdapter adapter;
+    private int currentPage = 0;
+    private int totalPage = 0;
 
     View headView;
     View footerView;
     HeadViewHolder headViewHolder;
+    private ClickLoadMoreView loadMoreButton;
 
     private CourseMinDTO courseMinDTO;
     private CourseDto courseDto;
@@ -114,21 +119,47 @@ public class CourseDetailActivity extends BaseActivity {
 
     }
 
-    private void initFooterView() {
-        footerView = LayoutInflater.from(this).inflate(R.layout.list_footer_button, null);
-        Button button = (Button) footerView.findViewById(R.id.list_footer_button);
-        button.setText("上传教学");
-        button.setOnClickListener(new View.OnClickListener() {
+    private void initFooterView()
+    {
+
+        loadMoreButton = new ClickLoadMoreView(this);
+        loadMoreButton.setVisibility(View.GONE);
+        loadMoreButton.setClickLoadMoreViewListener(new ClickLoadMoreView.ClickLoadMoreViewListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CourseDetailActivity.this, CreateTopicActivity.class);
-                intent.putExtra(TopicType.TYPE, TopicType.COURSE);
-                intent.putExtra("courseId", courseDto.getId());
-                intent.putExtra("courseType", "explain");
-                startActivity(intent);
+            public void runLoad() {
+                getNextPage();
             }
         });
-        listView.addFooterView(footerView);
+        listView.addFooterView(loadMoreButton);
+    }
+
+    private void getNextPage()
+    {
+        if(currentPage < totalPage)
+        {
+            requestTopicList();
+        }
+        else
+        {
+            Toast.makeText(this, R.string.not_more, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void doHideFootView()
+    {
+        if(totalPage > 1)
+        {
+            if(loadMoreButton.isLoading() == true)
+            {
+                loadMoreButton.onFinish();
+            }
+
+            if(currentPage >= totalPage)
+            {
+                loadMoreButton.setOver();
+            }
+        }
     }
 
     private void requestCourseDetail() {
@@ -150,7 +181,7 @@ public class CourseDetailActivity extends BaseActivity {
                         headViewHolder.modifyTimeTextView.setText("于" + courseDto.getModifyTime() + "编辑");
 
                         //请求用户示例教程
-                        requestTopicList();
+                        requestExplainList();
 
                     }
                 },
@@ -164,11 +195,11 @@ public class CourseDetailActivity extends BaseActivity {
         queue.add(myRequest);
     }
 
-    private void requestTopicList() {
+    private void requestExplainList() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = ServerMethod.topic() + "?type=course&magicType=sb&courseId=" + courseMinDTO.getId() + "&sortType=agree";
+        String url = ServerMethod.topic() + "?type=course&magicType=explain&courseId=" + courseMinDTO.getId() + "&sortType=agree";
 
         MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest<TopicDTO>(Request.Method.GET, url, TopicDTO.class,
                 new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {
@@ -179,6 +210,44 @@ public class CourseDetailActivity extends BaseActivity {
                         if (response.getStatus() == MyResponse.status_ok) {
                             MyPage<TopicDTO> myPage = response.getContent();
                             adapter.addDatas(myPage.getContents());
+                            requestTopicList();
+                        } else {
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                    }
+                }
+        );
+
+        queue.add(myPageRequest);
+    }
+
+    private void requestTopicList() {
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String url = ServerMethod.topic() + "?type=course&magicType=sb&courseId=" + courseMinDTO.getId() + "&sortType=agree&page=" + (currentPage + 1);
+
+        MyPageRequest<TopicDTO> myPageRequest = new MyPageRequest<TopicDTO>(Request.Method.GET, url, TopicDTO.class,
+                new Response.Listener<MyResponse<MyPage<TopicDTO>>>() {
+
+                    @Override
+                    public void onResponse(MyResponse<MyPage<TopicDTO>> response) {
+
+                        if (response.getStatus() == MyResponse.status_ok) {
+                            MyPage<TopicDTO> myPage = response.getContent();
+                            adapter.addDatas(myPage.getContents());
+
+                            totalPage = response.getContent().getTotalPages();
+                            currentPage++;
+
+                            doHideFootView();
                         } else {
 
                         }
