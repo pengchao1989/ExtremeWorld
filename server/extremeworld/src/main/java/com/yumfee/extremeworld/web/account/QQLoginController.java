@@ -44,7 +44,7 @@ public class QQLoginController
 	
 	private com.yumfee.extremeworld.entity.User myUser = null;
 	
-	private boolean isNewUser = true;
+	private boolean isNewUser = false;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public void qqLogin(@CookieValue(value = "inviteid", defaultValue = "1") String inviteidCookie,
@@ -165,6 +165,7 @@ public class QQLoginController
                 //下面几行语句执行后进入ShiroDbRealm doGetAuthenticationInfo函数，校验合法性
                 Subject subject = SecurityUtils.getSubject();
                 UsernamePasswordToken token = new UsernamePasswordToken(openID,openID);
+                token.setRememberMe(true);
                 subject.login(token);
                 
                 out.println("欢迎你，代号为 " + openID + " 的用户!");
@@ -185,7 +186,7 @@ public class QQLoginController
         }
         else
         {
-        	return "redirect:/topic";
+        	return "redirect:/all";
         }
         
 	}

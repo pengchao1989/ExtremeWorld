@@ -966,8 +966,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
                         ShareUtils.ShareItem shareItem = null;
                         UMVideo video = null;
-                        if (topicDTO.getVideoDetail() != null){
-                            video = new UMVideo(topicDTO.getVideoDetail().getVideoSource());
+                        if (topicDTO.getVideoDetail() != null && !TextUtils.isEmpty(topicDTO.getVideoDetail().getVideoSource())){
+                            video = new UMVideo(url);
+                            video.setThumb(new UMImage(TopicDetailActivity.this,topicDTO.getVideoDetail().getThumbnail()));
                         }
 
 
@@ -998,7 +999,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                                 break;
                             case R.id.menu_share_weixin:
                                 new ShareAction(TopicDetailActivity.this).setPlatform(SHARE_MEDIA.WEIXIN).setCallback(umShareListener)
-                                        .withText(topicDTO.getTitle())
+                                        .withTitle(topicDTO.getTitle())
                                         .withMedia(image)
                                         .withTargetUrl(url)
                                         .withMedia(video)
@@ -1006,7 +1007,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                                 break;
                             case R.id.menu_share_weixin_circle:
                                 new ShareAction(TopicDetailActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE).setCallback(umShareListener)
-                                        .withText(topicDTO.getTitle())
+                                        .withTitle(topicDTO.getTitle())
                                         .withMedia(image)
                                         .withTargetUrl(url)
                                         .withMedia(video)

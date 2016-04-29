@@ -47,7 +47,7 @@
 			</div> -->
 
 			<p>
-				<input type="checkbox" class="filled-in" id="filled-in-box" name="rememberMe" /> 
+				<input type="checkbox" class="filled-in" id="rememberMe" name="rememberMe" /> 
 				<label for="filled-in-box">记住我</label>
 			</p>
 			
@@ -55,10 +55,10 @@
 			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
 
 			<br/>
-			 <a class="btn btn-lg btn-primary btn-block" href="${ctx}/register">注册</a>
+			 <%-- <a class="btn btn-lg btn-primary btn-block" href="${ctx}/register">注册</a> --%>
 			 
 			 <a href="${ctx}/qqlogin"><img alt="" src="${ctx}/static/images/qq_login_icon.jpg"></a>
-			 <a href="${ctx}/qqlogin"><img alt="" src="${ctx}/static/images/icon48_wx_button.png"></a>
+			 <%-- <a href="${ctx}/qqlogin"><img alt="" src="${ctx}/static/images/icon48_wx_button.png"></a> --%>
 			
 	</form>
 	

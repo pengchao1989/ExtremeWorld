@@ -56,6 +56,12 @@ public class BitmapUtils {
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
+    public static byte[] bitmap2Bytes(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
 
     //保存bitmap至SD卡缓存
     public static String saveBitmapToFile(Context context, Bitmap bitmap){
