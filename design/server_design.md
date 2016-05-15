@@ -88,3 +88,7 @@
 
 ### 系统架构
 ![skate_group_design](http://download.jixianxueyuan.com/skate_group_design.jpg)
+
+
+### Restful API 示例
+获取应用配置信息 无加密 http://www.jixianxueyuan.com/api/v1/handshake
