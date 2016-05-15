@@ -50,7 +50,7 @@ public class UserService {
 	
 	public Page<User> findByInviterId(Long inviterId, int pageNumber, int pageSize){
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, "id");
-		return userDao.findByInviterIdAndInited(inviterId, true, pageRequest);
+		return userDao.findByInviterId(inviterId, pageRequest);
 	}
 	
 	public User saveUser(User user)

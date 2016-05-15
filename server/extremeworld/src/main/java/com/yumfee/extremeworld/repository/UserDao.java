@@ -17,4 +17,5 @@ public interface UserDao extends PagingAndSortingRepository<User, Long>
 	
 	Page<User> findByGeoHashLike(String geoHash, Pageable pageable);
 	Page<User> findByInviterIdAndInited(Long inviterId, boolean inited, Pageable pageable);
+	Page<User> findByInviterId(Long inviterId, Pageable pageable);
 }

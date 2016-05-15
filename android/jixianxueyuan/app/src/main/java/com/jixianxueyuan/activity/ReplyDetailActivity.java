@@ -3,6 +3,7 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -237,8 +238,9 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
 
     @Override
     public void onCommit(String text) {
-
-        submitSubReply(text);
+        if (!TextUtils.isEmpty(text)){
+            submitSubReply(text);
+        }
     }
 
     @OnItemClick(R.id.reply_detail_listview)void onSubReplyClick(int position){

@@ -44,7 +44,10 @@
 	    <c:forEach items="${inviteUserList}" var="user">
 		    <li class="collection-item avatar">
 		    <img class="circle" src="${user.avatar}!webAvatarSmall" alt="...">
-		    <p>${user.name}</p>
+		    <p>${user.name}
+		    <c:if test="${user.inited == false}">
+		      [未激活]
+		    </c:if></p>
 		    <p><fmt:formatDate value="${user.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
 		    </li>
 	    </c:forEach>

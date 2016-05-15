@@ -503,7 +503,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private boolean isLastPage()
     {
-        if(currentPage == totalPage)
+        if(currentPage >= totalPage)
         {
             return true;
         }
@@ -718,7 +718,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     @Override
     public void onCommit(String text) {
-        submitReply(text);
+        if (!TextUtils.isEmpty(text)){
+            submitReply(text);
+        }
     }
 
     @Override
