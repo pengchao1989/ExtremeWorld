@@ -141,7 +141,7 @@ public class QQLoginController
                 	myUser = new com.yumfee.extremeworld.entity.User();
                 	myUser.setQqOpenId(openID);
                 	myUser.setLoginName(openID);
-                	myUser.setName(userInfoBean.getNickname()+"[NotActivated]");
+                	myUser.setName(userInfoBean.getNickname());
                 	myUser.setPlainPassword(openID);
                 	myUser.setAvatar(referenceAvatarService.getRandom().getUrl());
 

@@ -102,6 +102,9 @@ public class AccountService {
 			entryptPassword(user);
 		}
 		userDao.save(user);
+		
+		//同步IM账号
+		IMHelper.updateIMAccount(user);
 	}
 
 	public void deleteUser(Long id) 
