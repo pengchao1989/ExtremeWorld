@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yumfee.extremeworld.entity.Country;
 import com.yumfee.extremeworld.entity.UserBase;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.service.account.AccountService;
@@ -38,8 +39,15 @@ public class RegisterController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String register(@Valid User user, RedirectAttributes redirectAttributes) {
+		
+		//TODO 关闭web注册功能，避免机器人注册
+		
+/*    	Country country = new Country();
+    	country.setId("CN");
+    	user.setCountry(country);
+    	
 		accountService.registerUser(user);
-		redirectAttributes.addFlashAttribute("username", user.getLoginName());
+		redirectAttributes.addFlashAttribute("username", user.getLoginName());*/
 		return "redirect:/login";
 	}
 
