@@ -119,6 +119,7 @@ public class AccountRestController {
 		user.setPhone(phone);
 		user.setPlainPassword(password);
 		user.setHobbyStamp(hobby);
+		user.setInited(true);
 		
 		String birth = user.getBirth();
 		if(birth.length() == 4 )

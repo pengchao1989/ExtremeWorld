@@ -39,8 +39,8 @@ public class VerificationCodeRestController {
 		double radome = Math.random()*9000+1000;
 		String verCode = String.valueOf(new Double(radome).intValue());
 		
-		//boolean isSuccess = requestVerificationCode(phone, verCode);
-		boolean isSuccess = true;
+		boolean isSuccess = requestVerificationCode(phone, verCode);
+		//boolean isSuccess = true;
 		if(isSuccess){
 			VerificationCode verificationCode = new VerificationCode();
 			verificationCode.setChecked(0);
