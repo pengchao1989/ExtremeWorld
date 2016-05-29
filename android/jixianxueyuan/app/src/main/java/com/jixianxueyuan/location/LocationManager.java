@@ -1,17 +1,25 @@
 package com.jixianxueyuan.location;
 
+import android.content.Context;
+
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.PreferencesUtils;
 
 
 /**
  * Created by pengchao on 3/26/16.
  */
 public class LocationManager implements AMapLocationListener{
+
+    private static final String PREFERENCES_LOCATION_LATITUDE = "PREFERENCES_LOCATION_LATITUDE";
+    private static final String PREFERENCES_LOCATION_LONGITUDE = "PREFERENCES_LOCATION_LONGITUDE";
+    private static final String PREFERENCES_LOCATION_ADDRESS = "PREFERENCES_LOCATION_ADDRESS";
+
     private volatile static LocationManager instance;
 
     public static LocationManager getInstance(){
@@ -105,6 +113,7 @@ public class LocationManager implements AMapLocationListener{
                 if (mLocationListener != null){
                     mLocationListener.onSuccess(myLocation);
                 }
+                updateLastLocation(myLocation);
 
                 stop();
 
@@ -118,5 +127,20 @@ public class LocationManager implements AMapLocationListener{
                 }
             }
         }
+    }
+
+    private static void updateLastLocation(MyLocation myLocation){
+
+        PreferencesUtils.putFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LATITUDE, (float) myLocation.getLatitude());
+        PreferencesUtils.putFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LONGITUDE, (float) myLocation.getLongitude());
+        PreferencesUtils.putString(MyApplication.getContext(), PREFERENCES_LOCATION_ADDRESS, myLocation.getAddress());
+    }
+
+    public static MyLocation getLastLocation(){
+        MyLocation myLocation = new MyLocation();
+        myLocation.setLatitude(PreferencesUtils.getFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LATITUDE));
+        myLocation.setLongitude(PreferencesUtils.getFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LONGITUDE));
+        myLocation.setAddress(PreferencesUtils.getString(MyApplication.getContext(), PREFERENCES_LOCATION_ADDRESS));
+        return myLocation;
     }
 }

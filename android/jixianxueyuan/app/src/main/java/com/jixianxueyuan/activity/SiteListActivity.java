@@ -1,7 +1,9 @@
 package com.jixianxueyuan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -50,6 +52,13 @@ public class SiteListActivity extends BaseActivity {
     private void initView(){
 
         actionBar.setTitle(getString(R.string.site));
+        actionBar.setActionOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SiteListActivity.this, SiteCreateActivity.class);
+                startActivity(intent);
+            }
+        });
 
         adapter = new SiteListAdapter(this);
         listView.setAdapter(adapter);

@@ -115,6 +115,8 @@
         <activity android:name=".activity.MarketHomeActivity"/>
         <activity android:name=".activity.GoodsListActivity"/>
         <activity android:name=".activity.SiteListActivity"/>
+        <activity android:name=".activity.SiteCreateActivity"/>
+        <activity android:name=".activity.AddressPicketActivity"/>
         <activity android:name=".activity.SponsorshipActivity"/>
         <activity android:name=".activity.CollectionListActivity"/>
         <activity android:name=".activity.WebActivity"/>

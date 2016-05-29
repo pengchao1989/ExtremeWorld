@@ -39,6 +39,11 @@
     <string name="re_acquisition">다시 가져오기</string>
     <string name="description">설명</string>
     <string name="paste_url_here">붙다 url 여기까지</string>
+    <string name="name">이름</string>
+    <string name="address">주소</string>
+    <string name="longitude">경도</string>
+    <string name="latitude">위도</string>
+    <string name="select_address">주소 선택</string>
 
     <string name="not_more">없다</string>
 
@@ -107,6 +112,10 @@
     <string name="select_avatar">선택 아바타</string>
     <string name="region">지역</string>
     <string name="signature">서명</string>
+
+    <!--site-->
+    <string name="marking_site">태그 운동장</string>
+    <string name="site_create_tips">우리 기록하다 옆에 지형, 사람들이 더 쉽게 발견 친구</string>
 
     <!--store-->
     <string name="shopping_cart">장바구니</string>

@@ -208,6 +208,33 @@
         <item name="android:layout_marginLeft">5dp</item>
     </style>
 
+    <!--表单-->
+    <style name="FormItemLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+    <style name="FormDesText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="FormValueEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@null</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="FormValueEditTextRequired" parent="FormValueEditText">
+        <item name="android:hint">@string/required</item>
+    </style>
+    <!--表单-->
 
 
     //progress dialog

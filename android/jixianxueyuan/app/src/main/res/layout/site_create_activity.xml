@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/create_topic_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:action_title="@string/marking_site"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        style="@style/MainContainer">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:text="@string/site_create_tips"/>
+
+        <LinearLayout
+            android:id="@+id/site_create_name_layout"
+            android:layout_marginTop="14dp"
+            style="@style/FormItemLayout">
+
+            <TextView
+                android:text="@string/name"
+                style="@style/FormDesText"/>
+
+            <EditText
+                android:id="@+id/site_create_name_edit_text"
+                style="@style/FormValueEditTextRequired"/>
+        </LinearLayout>
+
+        <View
+            style="@style/HorizontalDividerView"/>
+
+        <LinearLayout
+            android:id="@+id/site_create_address_layout"
+            style="@style/FormItemLayout">
+
+            <TextView
+                android:text="@string/address"
+                style="@style/FormDesText"/>
+
+            <TextView
+                android:id="@+id/site_create_address_text"
+                style="@style/FormValueEditTextRequired"/>
+        </LinearLayout>
+
+        <View
+            style="@style/HorizontalDividerView"/>
+
+        <LinearLayout
+            android:id="@+id/site_create_longitude_layout"
+            style="@style/FormItemLayout">
+
+            <TextView
+                android:text="@string/longitude"
+                style="@style/FormDesText"/>
+
+            <TextView
+                android:id="@+id/site_create_longitude_text"
+                style="@style/FormValueEditTextRequired"/>
+        </LinearLayout>
+
+        <View
+            style="@style/HorizontalDividerView"/>
+
+        <LinearLayout
+            android:id="@+id/site_create_latitude_layout"
+            style="@style/FormItemLayout">
+
+            <TextView
+                android:text="@string/latitude"
+                style="@style/FormDesText"/>
+
+            <TextView
+                android:id="@+id/site_create_latitude_text"
+                style="@style/FormValueEditTextRequired"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/site_create_submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            style="@style/TransparentButton"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

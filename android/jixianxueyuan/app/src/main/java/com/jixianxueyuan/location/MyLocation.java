@@ -1,9 +1,11 @@
 package com.jixianxueyuan.location;
 
+import java.io.Serializable;
+
 /**
  * Created by pengchao on 3/26/16.
  */
-public class MyLocation {
+public class MyLocation implements Serializable{
 
     private double latitude;
     private double longitude;

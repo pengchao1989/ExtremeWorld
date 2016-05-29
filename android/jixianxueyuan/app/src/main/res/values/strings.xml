@@ -39,6 +39,11 @@
     <string name="re_acquisition">Re acquisition</string>
     <string name="description">description</string>
     <string name="paste_url_here">paste the URL here</string>
+    <string name="name">name</string>
+    <string name="address">address</string>
+    <string name="longitude">longitude</string>
+    <string name="latitude">latitude</string>
+    <string name="select_address">select address</string>
 
     <string name="not_more">not more</string>
 
@@ -107,6 +112,10 @@
     <string name="select_avatar">select avatar</string>
     <string name="region">Region</string>
     <string name="signature">Signature</string>
+
+    <!--site-->
+    <string name="marking_site">marking site</string>
+    <string name="site_create_tips">Let us record the next terrain, so that we can find everyone</string>
 
     <!--store-->
     <string name="shopping_cart">shopping cart</string>

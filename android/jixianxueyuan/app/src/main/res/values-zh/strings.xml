@@ -39,6 +39,11 @@
     <string name="re_acquisition">重新获取</string>
     <string name="description">描述</string>
     <string name="paste_url_here">黏贴url到这里</string>
+    <string name="name">名称</string>
+    <string name="address">地址</string>
+    <string name="longitude">经度</string>
+    <string name="latitude">纬度</string>
+    <string name="select_address">选择地址</string>
 
     <string name="not_more">没有更多了</string>
 
@@ -107,6 +112,10 @@
     <string name="select_avatar">设置头像</string>
     <string name="region">地区</string>
     <string name="signature">签名</string>
+
+    <!--site-->
+    <string name="marking_site">标记场地</string>
+    <string name="site_create_tips">让我们记录下身边地形，让大家能找到大家</string>
 
     <!--store-->
     <string name="shopping_cart">购物车</string>
