@@ -41,18 +41,36 @@
         <View
             style="@style/HorizontalDividerView"/>
 
-        <LinearLayout
-            android:id="@+id/site_create_address_layout"
-            style="@style/FormItemLayout">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:text="@string/address"
-                style="@style/FormDesText"/>
+            <LinearLayout
+                android:id="@+id/site_create_address_layout"
+                android:layout_marginRight="10dp"
+                style="@style/FormItemLayout">
 
-            <TextView
-                android:id="@+id/site_create_address_text"
-                style="@style/FormValueEditTextRequired"/>
-        </LinearLayout>
+                <TextView
+                    android:text="@string/address"
+                    style="@style/FormDesText"/>
+
+                <TextView
+                    android:id="@+id/site_create_address_text"
+                    android:hint="@string/please_select"
+                    style="@style/FormValueEditText"/>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/next"/>
+
+        </RelativeLayout>
+
 
         <View
             style="@style/HorizontalDividerView"/>

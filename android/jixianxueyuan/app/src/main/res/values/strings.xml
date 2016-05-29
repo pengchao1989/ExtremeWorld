@@ -21,6 +21,7 @@
     <string name="location_failed">location failed</string>
     <string name="loading">loading</string>
     <string name="please_enter">please enter </string>
+    <string name="please_select">select</string>
     <string name="optional">optional</string>
     <string name="required">required</string>
     <string name="action_settings">Settings</string>
