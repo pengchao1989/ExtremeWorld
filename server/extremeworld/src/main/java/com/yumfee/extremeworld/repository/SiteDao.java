@@ -9,6 +9,6 @@ import com.yumfee.extremeworld.entity.Site;
 
 public interface SiteDao extends PagingAndSortingRepository<Site, Long>
 {
-	@Query("SELECT s FROM Site s LEFT JOIN s.hobbys h WHERE h.id=?")
+	@Query("SELECT s FROM Site s LEFT JOIN s.hobbys h WHERE h.id=? AND isDelete = 0")
 	Page<Site> findByHobbyId(Long hobbyId, Pageable pageable);
 }

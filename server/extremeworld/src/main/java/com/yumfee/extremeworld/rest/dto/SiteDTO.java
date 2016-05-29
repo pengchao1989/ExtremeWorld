@@ -1,6 +1,7 @@
 package com.yumfee.extremeworld.rest.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class SiteDTO
 {
@@ -13,6 +14,8 @@ public class SiteDTO
 	private String longitude;
 	private String latitude;
 	private Date createTime;
+	
+	private List<HobbyMinDTO> hobbys;
 	
 	public long getId() {
 		return id;
@@ -84,6 +87,11 @@ public class SiteDTO
 	{
 		this.createTime = createTime;
 	}
-	
+	public List<HobbyMinDTO> getHobbys() {
+		return hobbys;
+	}
+	public void setHobbys(List<HobbyMinDTO> hobbys) {
+		this.hobbys = hobbys;
+	}
 	
 }

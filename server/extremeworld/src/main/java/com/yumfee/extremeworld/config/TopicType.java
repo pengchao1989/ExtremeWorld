@@ -10,6 +10,7 @@ public class TopicType {
 	public static final String ACTIVITY = "activity";
 	public static final String NEWS = "news";
 	public static final String COURSE = "course";
+	public static final String SITE = "site";
 	
 	
 	public static final String magicExplain = "explain";

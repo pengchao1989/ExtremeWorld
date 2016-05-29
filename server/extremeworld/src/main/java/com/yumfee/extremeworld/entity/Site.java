@@ -26,7 +26,8 @@ public class Site extends IdEntity
 	private String latitude;
 	private Date createTime;
 	
-	private CityGroup cityGroup;
+	private User user;
+	
 	private List<User> users;
 	private List<Hobby> hobbys;
 	
@@ -96,15 +97,13 @@ public class Site extends IdEntity
 		this.createTime = createTime;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="city_group_id")
-	public CityGroup getCityGroup()
-	{
-		return cityGroup;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	public User getUser() {
+		return user;
 	}
-	public void setCityGroup(CityGroup cityGroup)
-	{
-		this.cityGroup = cityGroup;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	//关系被维护端
@@ -117,8 +116,7 @@ public class Site extends IdEntity
 	{
 		this.users = users;
 	}
-	
-	@JsonIgnore
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tb_site_hobby",
 	joinColumns = { @JoinColumn(name = "site_id", referencedColumnName = "id" ) },

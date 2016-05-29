@@ -17,7 +17,6 @@ public class CityGroup extends IdEntity
 	private String frontImg;
 	private City city;
 	
-	private List<Site> sites;
 	
 	
 	public String getName()
@@ -56,17 +55,5 @@ public class CityGroup extends IdEntity
 	{
 		this.city = city;
 	}
-	
-	@OneToMany(mappedBy = "cityGroup")
-	public List<Site> getSites()
-	{
-		return sites;
-	}
-	public void setSites(List<Site> sites)
-	{
-		this.sites = sites;
-	}
-	
-	
 	
 }
