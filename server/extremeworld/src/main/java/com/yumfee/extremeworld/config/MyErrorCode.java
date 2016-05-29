@@ -12,6 +12,7 @@ public enum MyErrorCode {
 	PHONE_FAILED(10008,"phone failed"),
 	VERIFICATION_CODE_ERROR(10009,"verification code failed"),
 	NO_USER(10010, "user not found"),
+	PASSWORD_FAILED(10011,"password failed"),
 	UNKNOW_ERROR(1001,"unknow error");
 	
 	private int errorCode;

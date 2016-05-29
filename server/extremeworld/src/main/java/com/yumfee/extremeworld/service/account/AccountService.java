@@ -117,6 +117,19 @@ public class AccountService {
 		taskDao.deleteByUserId(id);
 
 	}
+	
+	public boolean checkPassword(User user,String plainPassword){
+		byte[] salt = Encodes.decodeHex(user.getSalt());
+		
+		byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
+		String password = Encodes.encodeHex(hashPassword);
+		if(user.getPassword().equals(password)){
+			return true;
+		}
+		
+		
+		return false;
+	}
 
 	/**
 	 * 判断是否超级管理员.

@@ -18,6 +18,8 @@ import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.entity.VerificationCode;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.UserDTO;
+import com.yumfee.extremeworld.rest.dto.request.AgreeDTO;
+import com.yumfee.extremeworld.rest.dto.request.LoginDTO;
 import com.yumfee.extremeworld.service.InviteService;
 import com.yumfee.extremeworld.service.VerificationCodeService;
 import com.yumfee.extremeworld.service.account.AccountService;
@@ -37,7 +39,7 @@ public class AccountRestController {
 	
 	
 	@RequestMapping(value = "/qq_login", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse login(
+	public MyResponse qq_login(
 			@PathVariable String hobby,
 			@RequestParam(value = "qqOpenId", defaultValue = "0") String qqOpenId
 			)
@@ -48,6 +50,47 @@ public class AccountRestController {
 		{
 			UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
 			return MyResponse.ok(userDTO);
+		}
+		
+		return MyResponse.err(MyErrorCode.NO_USER);
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public MyResponse login(
+			@PathVariable String hobby,
+			@RequestParam(value = "loginName", defaultValue = "") String loginName,
+			@RequestParam(value = "password", defaultValue = "") String password
+			)
+	{
+		
+		User user = accountService.findUserByLoginName(loginName);
+		if(user != null)
+		{
+			if(accountService.checkPassword(user, password)){
+				UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+				return MyResponse.ok(userDTO);
+			}else{
+				return MyResponse.err(MyErrorCode.PASSWORD_FAILED);
+			}
+		}
+		
+		return MyResponse.err(MyErrorCode.NO_USER);
+	}
+	
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST,consumes = MediaTypes.JSON)
+	public MyResponse login(@PathVariable String hobby,
+			@RequestBody LoginDTO loginDTO,
+			UriComponentsBuilder uriBuilder){
+		User user = accountService.findUserByLoginName(loginDTO.getLoginName());
+		if(user != null)
+		{
+			if(accountService.checkPassword(user, loginDTO.getPassword())){
+				UserDTO userDTO = BeanMapper.map(user, UserDTO.class);
+				return MyResponse.ok(userDTO);
+			}else{
+				return MyResponse.err(MyErrorCode.PASSWORD_FAILED);
+			}
 		}
 		
 		return MyResponse.err(MyErrorCode.NO_USER);
