@@ -22,6 +22,9 @@
     <string name="loading">로드...</string>
     <string name="please_enter">입력하십시오</string>
     <string name="please_select">선택하십시오</string>
+    <string name="please_select_picture">그림을 선택하십시오.</string>
+    <string name="please_select_address">주소 선택</string>
+    <string name="please_select_hobby">선택하십시오. 운동</string>
     <string name="optional">불필요한</string>
     <string name="required">필요</string>
     <string name="action_settings">Settings</string>
@@ -117,6 +120,9 @@
     <!--site-->
     <string name="marking_site">태그 운동장</string>
     <string name="site_create_tips">우리 기록하다 옆에 지형, 사람들이 더 쉽게 발견 친구</string>
+    <string name="lat_lng_empty">미정 성공을 얻다 경위도</string>
+    <string name="site_des_empty">작성해 주세요 설명</string>
+    <string name="site_name_empty">좀 이름을 써 넣다</string>
 
     <!--store-->
     <string name="shopping_cart">장바구니</string>

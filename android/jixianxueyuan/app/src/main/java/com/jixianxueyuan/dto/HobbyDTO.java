@@ -5,6 +5,8 @@ import java.util.List;
 
 public class HobbyDTO implements Serializable {
 
+    public static final int ALL_HOBBY_ID = 0;
+
     private Long id;
     private String eName;
     private String name;

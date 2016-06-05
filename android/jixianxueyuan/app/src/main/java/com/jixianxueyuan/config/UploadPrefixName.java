@@ -7,7 +7,8 @@ public enum UploadPrefixName {
 
     AVATAR("avatar_"),
     VIDEO("video_"),
-    COVER("cover_");
+    COVER("cover_"),
+    SITE("site_");
 
     private String prefixName;
 

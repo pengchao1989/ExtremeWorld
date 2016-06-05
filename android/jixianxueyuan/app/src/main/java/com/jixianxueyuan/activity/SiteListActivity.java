@@ -27,6 +27,8 @@ import butterknife.InjectView;
  */
 public class SiteListActivity extends BaseActivity {
 
+    private static final int REQUEST_CODE_NEW = 1;
+
     @InjectView(R.id.site_list_activity_actionbar)MyActionBar actionBar;
     @InjectView(R.id.site_listview)
     ListView listView;
@@ -46,7 +48,17 @@ public class SiteListActivity extends BaseActivity {
 
         initView();
 
-        refreshTopicList();
+        refreshSiteList();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == BaseActivity.RESULT_OK){
+            if (requestCode == REQUEST_CODE_NEW){
+                refreshSiteList();
+            }
+        }
     }
 
     private void initView(){
@@ -56,7 +68,7 @@ public class SiteListActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SiteListActivity.this, SiteCreateActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE_NEW);
             }
         });
 
@@ -66,13 +78,13 @@ public class SiteListActivity extends BaseActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshTopicList();
+                refreshSiteList();
             }
         });
 
     }
 
-    private void refreshTopicList()
+    private void refreshSiteList()
     {
         currentPage = 0;
 

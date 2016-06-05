@@ -37,7 +37,7 @@ import butterknife.OnClick;
 /**
  * Created by pengchao on 5/29/16.
  */
-public class AddressPicketActivity extends BaseActivity implements LocationSource, AMapLocationListener,
+public class AddressPicketActivity extends Activity implements LocationSource, AMapLocationListener,
         GeocodeSearch.OnGeocodeSearchListener{
 
     @InjectView(R.id.map)MapView mapView;

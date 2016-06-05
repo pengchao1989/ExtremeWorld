@@ -2,6 +2,7 @@ package com.jixianxueyuan.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class SiteDTO implements Serializable
 {
@@ -14,6 +15,7 @@ public class SiteDTO implements Serializable
 	private String longitude;
 	private String latitude;
 	private String createTime;
+	private List<HobbyMinDTO> hobbys;
 
 	public long getId() {
 		return id;
@@ -87,6 +89,12 @@ public class SiteDTO implements Serializable
 	{
 		this.createTime = createTime;
 	}
-	
-	
+
+    public List<HobbyMinDTO> getHobbys() {
+        return hobbys;
+    }
+
+    public void setHobbys(List<HobbyMinDTO> hobbys) {
+        this.hobbys = hobbys;
+    }
 }
