@@ -178,5 +178,5 @@ dependencies {
 bugly {
     appId = '900018639'
     appKey = '6H1BuGJoxCxNEcYx'
-    upload = true
+    upload = false
 }
