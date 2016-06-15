@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -74,16 +72,15 @@ import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.editorpage.ShareActivity;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
-import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.io.File;
 import java.io.IOException;
@@ -262,20 +259,31 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private void refreshHeadView(){
 
-        headViewHolder.zanLayout.setOnClickListener(new View.OnClickListener() {
+        headViewHolder.collectionButton.setOnLikeListener(new OnLikeListener() {
             @Override
-            public void onClick(View v) {
-                //点赞
-                submitZan();
+            public void liked(LikeButton likeButton) {
+                submitCollection();
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+
             }
         });
 
-        headViewHolder.collectionButton.setOnClickListener(new View.OnClickListener() {
+        headViewHolder.zanButton.setOnLikeListener(new OnLikeListener() {
             @Override
-            public void onClick(View v) {
-                submitCollection();
+            public void liked(LikeButton likeButton) {
+                //点赞
+                submitZan();
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+
             }
         });
+
 
         headViewHolder.zanCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
@@ -407,11 +415,12 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     private void updateExtraInfoView(){
         if (topicExtraDTO != null){
             if (topicExtraDTO.isAgreed()){
-                headViewHolder.zanButton.setImageResource(R.mipmap.icon_hand_click_1);
+                headViewHolder.zanButton.setLiked(true);
+                headViewHolder.zanButton.setEnabled(false);
             }
             if (topicExtraDTO.isCollected()){
-                headViewHolder.collectionButton.setVisibility(View.GONE);
-                headViewHolder.collectionOk.setVisibility(View.VISIBLE);
+                headViewHolder.collectionButton.setLiked(true);
+                headViewHolder.collectionButton.setEnabled(false);
             }
         }
     }
@@ -672,8 +681,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         MyRequest<AgreeResultDTO> myRequest = new MyRequest(Request.Method.POST, url, AgreeResultDTO.class,zanRequest, new Response.Listener<MyResponse<AgreeResultDTO>>() {
             @Override
             public void onResponse(MyResponse<AgreeResultDTO> response) {
-
-                headViewHolder.zanButton.setImageResource(R.mipmap.icon_hand_click_1);
+                headViewHolder.zanButton.setEnabled(false);
                 headViewHolder.zanCountTextView.setText(String.valueOf(response.getContent().getCount()));
             }
         },new Response.ErrorListener() {
@@ -693,8 +701,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             @Override
             public void onResponse(MyResponse<CollectionDTO> response) {
                 if(response.getStatus() == MyResponse.status_ok){
-                    headViewHolder.collectionButton.setVisibility(View.GONE);
-                    headViewHolder.collectionOk.setVisibility(View.VISIBLE);
+                    headViewHolder.collectionButton.setEnabled(false);
                 }
             }
         }, new Response.ErrorListener() {
@@ -764,13 +771,12 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @InjectView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;
         @InjectView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
-        @InjectView(R.id.topic_detail_head_zan)ImageButton zanButton;
+        @InjectView(R.id.topic_detail_head_zan)LikeButton zanButton;
         @InjectView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
         @InjectView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
-        @InjectView(R.id.topic_detail_collection_ok)ImageView collectionOk;
-        @InjectView(R.id.topic_detail_collection_button)ImageButton collectionButton;
         @InjectView(R.id.topic_detail_content_textview)TextView contentTextView;
         @InjectView(R.id.topic_detail_content_container)LinearLayout contentLayout;
+        @InjectView(R.id.topic_detail_collection_button)LikeButton collectionButton;
 
 
         public HeadViewHolder(View headView)

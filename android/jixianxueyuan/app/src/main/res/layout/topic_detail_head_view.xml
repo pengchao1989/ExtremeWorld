@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -101,55 +102,48 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:padding="4dp"
-            android:gravity="bottom"
+            android:gravity="center"
             android:clickable="true"
+            android:orientation="horizontal"
             >
 
             <TextView
                 android:id="@+id/topic_detail_head_zan_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="bottom"
                 style="@style/timeAgoText"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="bottom"
                 android:text="赞"
                 style="@style/timeAgoText"
                 />
 
-            <ImageButton
+
+            <com.like.LikeButton
+                app:icon_type="thumb"
+                app:icon_size="18dp"
                 android:id="@+id/topic_detail_head_zan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:src="@mipmap/icon_hand_normal_1"
-                android:background="@null"
-                />
+                android:layout_gravity="center_horizontal"
+                app:anim_scale_factor="1.5"/>
 
 
         </LinearLayout>
 
-        <FrameLayout
+        <com.like.LikeButton
+            app:icon_type="star"
+            app:icon_size="32dp"
+            android:id="@+id/topic_detail_collection_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <ImageButton
-                android:id="@+id/topic_detail_collection_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_star"/>
-
-            <ImageView
-                android:id="@+id/topic_detail_collection_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/star"
-                android:visibility="gone"/>
-
-        </FrameLayout>
+            android:layout_gravity="center_horizontal"
+            app:anim_scale_factor="1.5"/>
 
 
     </LinearLayout>

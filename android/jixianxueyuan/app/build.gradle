@@ -18,12 +18,12 @@ android {
             storePassword "${project.STORE_PASSWORD_SKATE}"
         }
     }
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
     defaultConfig {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 23
         versionName "1.4.3"
         multiDexEnabled true
@@ -127,10 +127,11 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v13:22.0.0'
-    compile 'com.android.support:recyclerview-v7:22.2.0'
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.android.support:support-v13:23.0.0'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:support-v4:23.0.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jakewharton:butterknife:6.1.0'
@@ -164,6 +165,7 @@ dependencies {
     compile 'com.orhanobut:dialogplus:1.11@aar'
     compile 'com.victor:lib:1.0.4'
     compile 'com.google.zxing:core:3.2.0'
+    compile 'com.github.jd-alexander:LikeButton:0.2.0'
     compile files('libs/open_sdk_r5043_lite.jar')
     compile files('libs/locSDK_3.3.jar')
     compile files('libs/renderscript-v8.jar')
