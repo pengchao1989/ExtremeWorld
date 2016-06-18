@@ -111,6 +111,7 @@
                 android:id="@+id/topic_detail_head_zan_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:gravity="bottom"
                 style="@style/timeAgoText"
                 />
@@ -118,7 +119,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
+                android:layout_marginTop="2dp"
                 android:text="赞"
                 style="@style/timeAgoText"
                 />

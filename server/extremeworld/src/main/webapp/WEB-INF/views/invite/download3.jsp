@@ -41,7 +41,7 @@
 	var btn = document.getElementById('btnDownload');
 	var isIOS = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
 	if(isIOS) {
-	    btn.href = 'https://itunes.apple.com/cn/app/posterlabs-stylish-collage/id875654777?ls=1&mt=8';
+	    btn.href = 'https://itunes.apple.com/cn/app/posterlabs-stylish-collage/id1105467596?ls=1&mt=8';
 	}else {
 	    btn.href = '${appVersion.apkUrl}';
 	}

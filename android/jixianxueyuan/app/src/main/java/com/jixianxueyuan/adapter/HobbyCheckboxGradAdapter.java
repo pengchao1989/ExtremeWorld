@@ -65,7 +65,7 @@ public class HobbyCheckboxGradAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.hobby_checkbox_grad_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.hobby_checkbox_grad_item, null, false);
         }
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.hobby_checkbox_item);
 
