@@ -47,6 +47,8 @@ public class Topic extends IdEntity
 	private int status;
 	private int fine;
 	private String ip;
+	private double score;
+	private int scoreCount;
 	
 	private VideoDetail videoDetail;
 
@@ -173,7 +175,19 @@ public class Topic extends IdEntity
 	{
 		this.ip = ip;
 	}
-	
+	public double getScore() {
+		return score;
+	}
+	public void setScore(double score) {
+		this.score = score;
+	}
+	public int getScoreCount() {
+		return scoreCount;
+	}
+	public void setScoreCount(int scoreCount) {
+		this.scoreCount = scoreCount;
+	}
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "video_detail_id")
 	public VideoDetail getVideoDetail()
@@ -194,7 +208,6 @@ public class Topic extends IdEntity
 	public void setMediaWrap(MediaWrap mediaWrap) {
 		this.mediaWrap = mediaWrap;
 	}
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "taxonomy_id")

@@ -1,37 +1,42 @@
 package com.yumfee.extremeworld.entity;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-//user的某项技能的评分
 @Entity
-@Table(name = "tb_score")
-public class Score extends IdEntity{
-
+@Table(name = "tb_topic_score")
+public class TopicScore extends IdEntity{
 	private double score;
+	private Date createTime;
 	
-	private Credit credit;
+	private Topic topic;
 	private User user;
 	
-	
+
 	public double getScore() {
 		return score;
 	}
 	public void setScore(double score) {
 		this.score = score;
 	}
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "score_id")
-	public Credit getCredit() {
-		return credit;
+	public Date getCreateTime() {
+		return createTime;
 	}
-	public void setCredit(Credit credit) {
-		this.credit = credit;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "topic_id")
+	public Topic getTopic() {
+		return topic;
+	}
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 	
 	@ManyToOne

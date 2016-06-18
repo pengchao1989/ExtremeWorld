@@ -3,14 +3,15 @@ package com.yumfee.extremeworld.config;
 public class TopicType {
 	
 	public static final String ALL = "all";
-	public static final String MOOD = "mood";
-	public static final String DISCUSS = "discuss";
-	public static final String VIDEO = "video";
-	public static final String S_VIDEO = "s_video";
-	public static final String ACTIVITY = "activity";
-	public static final String NEWS = "news";
-	public static final String COURSE = "course";
-	public static final String SITE = "site";
+	public static final String MOOD = "mood";		//心情
+	public static final String DISCUSS = "discuss";	//讨论
+	public static final String VIDEO = "video";		//视频
+	public static final String S_VIDEO = "s_video";	//短视频
+	public static final String ACTIVITY = "activity";//活动
+	public static final String NEWS = "news";		//新闻
+	public static final String COURSE = "course";	//教学
+	public static final String SITE = "site";		//场地信息
+	public static final String ACHV = "achv";		//成就 Achievement
 	
 	
 	public static final String magicExplain = "explain";
