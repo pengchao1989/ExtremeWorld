@@ -19,7 +19,7 @@ android {
         }
     }
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
     defaultConfig {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
@@ -127,11 +127,11 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v13:23.0.0'
-    compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:design:23.2.0'
-    compile 'com.android.support:support-v4:23.0.0'
+    compile 'com.android.support:support-v13:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jakewharton:butterknife:6.1.0'
@@ -157,9 +157,9 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.dagger:dagger:2.0.1'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
-    compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.android.support:support-annotations:23.4.0'
     compile 'com.tencent.bugly:crashreport:2.1.1'
-    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'com.orhanobut:dialogplus:1.11@aar'
