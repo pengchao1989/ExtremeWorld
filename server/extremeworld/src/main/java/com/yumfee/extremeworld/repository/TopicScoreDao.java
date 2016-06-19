@@ -11,4 +11,7 @@ public interface TopicScoreDao extends PagingAndSortingRepository<TopicScore, Lo
 	
 	@Query("SELECT AVG(ts.score) FROM TopicScore ts WHERE ts.topic.id=?")
 	public double getTopicAvgScore(Long topicId);
+	
+	@Query("SELECT COUNT(ts.id) FROM TopicScore ts WHERE ts.topic.id=?")
+	public int getTopicScoreCount(Long topicId);
 }

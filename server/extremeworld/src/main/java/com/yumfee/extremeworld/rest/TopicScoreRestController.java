@@ -84,7 +84,7 @@ public class TopicScoreRestController {
 		//求平均分、统计次数
 		double avgScore = topicScoreService.getTopicAvgScore(topicScoreRequestDTO.getTopicId());
 		topic.setScore(avgScore);
-		topic.setScoreCount(topic.getScoreCount() + 1);
+		topic.setScoreCount(topicScoreService.getTopicScoreCount(topicScoreRequestDTO.getTopicId()));
 		topicService.saveTopic(topic);
 		
 		

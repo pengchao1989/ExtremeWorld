@@ -33,6 +33,10 @@ public class TopicScoreService {
 	public double getTopicAvgScore(Long topicId){
 		return topicScoreDao.getTopicAvgScore(topicId);
 	}
+	
+	public int getTopicScoreCount(Long topicId){
+		return topicScoreDao.getTopicScoreCount(topicId);
+	}
 
 	@Autowired
 	public void setTopicScoreDao(TopicScoreDao topicScoreDao) {
