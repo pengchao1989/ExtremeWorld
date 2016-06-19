@@ -25,6 +25,7 @@ import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicScoreDTO;
 import com.yumfee.extremeworld.rest.dto.request.TopicScoreRequestDTO;
 import com.yumfee.extremeworld.service.TopicScoreService;
+import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @RestController
@@ -37,6 +38,9 @@ public class TopicScoreRestController {
 	
 	@Autowired
 	private TopicScoreService topicScoreService;
+	
+	@Autowired
+	private TopicService topicService;
 	
 	@Autowired
 	private Validator validator;
@@ -57,20 +61,32 @@ public class TopicScoreRestController {
 		//JSR303
 		BeanValidators.validateWithException(validator,topicScoreRequestDTO);
 		
-		TopicScore topicScore = new TopicScore();
-		topicScore.setScore(topicScoreRequestDTO.getScore());
 		Long userId = getCurrentUserId();
 		User user = new User();
 		user.setId(userId);
-		topicScore.setId(userId);
-		Topic topic = new Topic();
+		
+		//判定唯一性
+		TopicScore topicScore = topicScoreService.findByTopicIdAndUserId(topicScoreRequestDTO.getTopicId(), userId);
+		if(topicScore == null){
+			topicScore = new TopicScore();
+		}
+		
+		topicScore.setScore(topicScoreRequestDTO.getScore() <= 10.0  ? topicScoreRequestDTO.getScore() : 10.0);
+		topicScore.setUser(user);
+		
+		Topic topic = topicService.getTopic(topicScoreRequestDTO.getTopicId());
 		topic.setId(topicScoreRequestDTO.getTopicId());
 		topicScore.setTopic(topic);
 		
-		//TODO  判定唯一性
-		
 		
 		topicScoreService.save(topicScore);
+		
+		//求平均分、统计次数
+		double avgScore = topicScoreService.getTopicAvgScore(topicScoreRequestDTO.getTopicId());
+		topic.setScore(avgScore);
+		topic.setScoreCount(topic.getScoreCount() + 1);
+		topicService.saveTopic(topic);
+		
 		
 		TopicScoreDTO topicScoreDTO = BeanMapper.map(topicScore, TopicScoreDTO.class);
 		return MyResponse.ok(topicScoreDTO, false);
