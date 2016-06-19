@@ -15,6 +15,9 @@ public class TopicType {
     public static final String ACTIVITY = "activity";
     public static final String NEWS = "news";
     public static final String COURSE = "course";
+    public static final String SITE = "site";//场地信息
+    public static final String ACHV = "achv";//成就 Achievement
+    public static final String CHALLENGE = "challenge";//挑战
 
     public static final String TOPIC_TAXONOMY_ID = "topicTaxonomyId";
     public static final String TOPIC_TAXONOMY_NAME = "topicTaxonomyName";

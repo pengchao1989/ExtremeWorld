@@ -27,10 +27,12 @@
             android:gravity="center_horizontal">
 
             <TextView
+                android:id="@+id/create_video_guide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="上传原创视频将会获得赞助商提供的礼品一份\n视频需大于1分钟"/>
+                android:padding="10dp"
+                android:text="分享原创视频，如个人视频、活动视频、及相关的原创视频"/>
 
             <ImageButton
                 android:id="@+id/create_video_select"
@@ -74,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="20dp"
+                android:singleLine="true"
                 android:maxLines="2"
                 android:hint="@string/title"/>
 

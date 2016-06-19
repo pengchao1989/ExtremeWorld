@@ -48,6 +48,7 @@
     <string name="longitude">经度</string>
     <string name="latitude">纬度</string>
     <string name="select_address">选择地址</string>
+    <string name="challenge">挑战</string>
 
     <string name="not_more">没有更多了</string>
 
@@ -66,7 +67,7 @@
     <string name="site">场地</string>
     <string name="people">附近的人</string>
     <string name="store">商城</string>
-    <string name="contribute">有奖投稿</string>
+    <string name="contribute">投稿</string>
     
     <!--create-->
     <string name="please_install_file_browser">请安装文件浏览器</string>
@@ -74,6 +75,7 @@
     <string name="video_is_empty">请选择视频文件</string>
     <string name="title_is_empty">请填写标题</string>
     <string name="url_is_empty">请填写URL</string>
+    <string name="please_upload_your_xx_video">请上传你的%1$s视频</string>
 
     <string name="reply_of_me">回应我的</string>
     <string name="collection">收藏</string>

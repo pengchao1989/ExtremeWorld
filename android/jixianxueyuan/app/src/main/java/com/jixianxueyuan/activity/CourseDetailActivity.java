@@ -35,6 +35,8 @@ import com.jixianxueyuan.widget.MyActionBar;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -111,6 +113,16 @@ public class CourseDetailActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CourseDetailActivity.this, UserHomeActivity.class);
                 intent.putExtra("userMinDTO", courseDto.getUser());
+                startActivity(intent);
+            }
+        });
+
+        headViewHolder.challengeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CourseDetailActivity.this, CreateVideoActivity.class);
+                intent.putExtra(TopicType.TYPE, TopicType.CHALLENGE);
+                intent.putExtra(CreateVideoActivity.INTENT_COURSE_MIN_DTO, courseMinDTO);
                 startActivity(intent);
             }
         });
@@ -275,6 +287,8 @@ public class CourseDetailActivity extends BaseActivity {
         TextView userNameTextView;
         @InjectView(R.id.course_detail_head_modify_time)
         TextView modifyTimeTextView;
+        @InjectView(R.id.course_detail_head_challenge)
+        Button challengeButton;
 
         public HeadViewHolder(View headView) {
             ButterKnife.inject(this, headView);

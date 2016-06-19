@@ -48,6 +48,7 @@
     <string name="longitude">longitude</string>
     <string name="latitude">latitude</string>
     <string name="select_address">select address</string>
+    <string name="challenge">challenge</string>
 
     <string name="not_more">not more</string>
 
@@ -74,6 +75,7 @@
     <string name="video_is_empty">please select video</string>
     <string name="title_is_empty">please write title</string>
     <string name="url_is_empty">please enter URL</string>
+    <string name="please_upload_your_xx_video">please upload your %1$s video</string>
 
     <string name="reply_of_me">respond</string>
     <string name="collection">collection</string>

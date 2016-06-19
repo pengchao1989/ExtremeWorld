@@ -145,6 +145,8 @@
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:textSize">20sp</item>
         <item name="android:height">30dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
     </style>
 
     <style name="TransparentButtonSmall" parent="Widget.AppCompat.Button">

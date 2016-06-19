@@ -1,6 +1,7 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -32,6 +33,7 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.FileUtils;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
@@ -54,6 +56,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -64,9 +68,13 @@ import butterknife.OnClick;
  */
 public class CreateVideoActivity extends BaseActivity {
 
+    public static final String INTENT_COURSE_MIN_DTO = "INTENT_COURSE_MIN_DTO";
+
     private static final String tag = "CreateVideoActivity";
     private static final int FILE_SELECT_CODE = 0x1;
 
+    @InjectView(R.id.create_video_guide)
+    TextView guideTextView;
     @InjectView(R.id.create_video_actionbar)
     MyActionBar myActionBar;
     @InjectView(R.id.create_video_title)
@@ -89,6 +97,9 @@ public class CreateVideoActivity extends BaseActivity {
     ImageView videoPlayButton;
     @InjectView(R.id.videoview)
     SuperVideoPlayer videoView;
+
+    private String topicType;
+    private CourseMinDTO courseMinDTO;
 
 
     private String localVideoPath;
@@ -116,7 +127,17 @@ public class CreateVideoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_video_activity);
+        getIntentParams();
         ButterKnife.inject(this);
+
+        if (TopicType.CHALLENGE.equals(topicType)){
+            if (courseMinDTO != null){
+                String guideString = String.format(getString(R.string.please_upload_your_xx_video), courseMinDTO.getName());
+                guideTextView.setText(guideString);
+            }
+            myActionBar.setTitle(getString(R.string.challenge));
+
+        }
 
         myActionBar.setActionOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +148,13 @@ public class CreateVideoActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void getIntentParams(){
+        topicType = getIntent().getStringExtra(TopicType.TYPE);
+        if (TopicType.CHALLENGE.equals(topicType)){
+            courseMinDTO = (CourseMinDTO) getIntent().getSerializableExtra(INTENT_COURSE_MIN_DTO);
+        }
     }
 
     @OnClick(R.id.create_video_select)void onSelectButtonClick(){
@@ -237,7 +265,10 @@ public class CreateVideoActivity extends BaseActivity {
         topicDTO.setTitle(titleEditText.getText().toString());
         topicDTO.setContent(descriptionEditText.getText().toString());
 
-        topicDTO.setType(TopicType.VIDEO);
+        topicDTO.setType(topicType);
+        if (TopicType.CHALLENGE.equals(topicType)){
+            topicDTO.setCourse(courseMinDTO);
+        }
 
         //video
         if(videoDetailDTO != null){
@@ -330,5 +361,4 @@ public class CreateVideoActivity extends BaseActivity {
         handler.sendMessage(msg);
 
     }
-
 }
