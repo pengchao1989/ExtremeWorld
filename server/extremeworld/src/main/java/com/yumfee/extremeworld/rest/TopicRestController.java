@@ -26,6 +26,7 @@ import com.yumfee.extremeworld.config.HobbyPathConfig;
 import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Collection;
+import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
@@ -204,6 +205,17 @@ public class TopicRestController
 	{
 		//JSR303
 		BeanValidators.validateWithException(validator,topic);
+		
+		//fix ios hobby
+		List<Hobby> hobbyList = topic.getHobbys();
+		if(hobbyList != null && hobbyList.size() == 1){
+			if(hobbyList.get(0).getId() == 3L){
+				Hobby skateboardHobby = new Hobby();
+				skateboardHobby.setId(1L);
+				hobbyList.add(skateboardHobby);
+				topic.setHobbys(hobbyList);
+			}
+		}
 		
 		topic.setStatus(TopicStatus.PUBLIC);
 		topicService.saveTopic(topic);
