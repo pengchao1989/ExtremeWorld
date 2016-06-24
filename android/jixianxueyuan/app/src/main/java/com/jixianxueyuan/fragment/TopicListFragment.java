@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AbsListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -250,6 +251,12 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
                 break;
+            case TopicType.CHALLENGE:
+                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+                intent.putExtra(TopicType.TYPE, TopicType.CHALLENGE);
+                break;
+            default:
+                Toast.makeText(this.getContext(),R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
 
         }
 

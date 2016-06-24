@@ -138,16 +138,65 @@
         </LinearLayout>
 
         <com.like.LikeButton
-            app:icon_type="star"
-            app:icon_size="32dp"
+            app:icon_type="heart"
+            app:icon_size="28dp"
             android:id="@+id/topic_detail_collection_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:anim_scale_factor="1.5"/>
 
-
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/rating_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/block_height"
+            android:background="@color/divider"/>
+
+        <RelativeLayout
+            style="@style/HeadBlockLayout">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    style="?android:attr/ratingBarStyleSmall"/>
+
+                <TextView
+                    android:id="@+id/rating_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/red"
+                    tools:text="7.8"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/rating_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                tools:text="100"
+                style="@style/SecondText"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View style="@style/HorizontalDividerView"/>
 
 </LinearLayout>

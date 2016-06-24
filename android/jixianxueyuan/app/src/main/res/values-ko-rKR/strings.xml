@@ -100,6 +100,7 @@
     <string name="reply_success">답장 성공</string>
     <string name="add_topic_success">발표 테마 성공</string>
     <string name="load_sub_reply" formatted="false">더 많은 %1$d가지 기록 보기</string>
+    <string name="count_score" formatted="false">%1$d 점수를 매기다</string>
     <string name="loadmore">보다</string>
 
     <string name="edit_profile">편집 자료</string>

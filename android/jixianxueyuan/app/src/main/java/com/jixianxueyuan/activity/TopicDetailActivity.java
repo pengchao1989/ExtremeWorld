@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,6 +91,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -286,6 +289,19 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
 
         headViewHolder.zanCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
+
+        //score
+        if (TopicType.CHALLENGE.equals(topicDTO.getType())){
+            actionBar.setTitle(getString(R.string.challenge));
+            headViewHolder.ratingLayout.setVisibility(View.VISIBLE);
+            topicDTO.setScore(3.3);
+            headViewHolder.ratingBar.setRating((float) topicDTO.getScore());
+            headViewHolder.ratingValue.setText(String.format("%.1f", topicDTO.getScore()));
+            String ratingCountText = getString(R.string.count_score);
+            ratingCountText = String.format(ratingCountText, topicDTO.getScoreCount());
+            headViewHolder.ratingCount.setText(ratingCountText);
+        }
+
 
         //web view
         if(!StringUtils.isBlank(topicDTO.getUrl())){
@@ -777,6 +793,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @InjectView(R.id.topic_detail_content_textview)TextView contentTextView;
         @InjectView(R.id.topic_detail_content_container)LinearLayout contentLayout;
         @InjectView(R.id.topic_detail_collection_button)LikeButton collectionButton;
+        @InjectView(R.id.rating_layout)LinearLayout ratingLayout;
+        @InjectView(R.id.ratingBar)RatingBar ratingBar;
+        @InjectView(R.id.rating_value)TextView ratingValue;
+        @InjectView(R.id.rating_count)TextView ratingCount;
 
 
         public HeadViewHolder(View headView)

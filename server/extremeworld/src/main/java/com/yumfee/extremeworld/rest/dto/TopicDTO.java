@@ -19,9 +19,12 @@ public class TopicDTO
 	private int allReplyCount;
 	private int viewCount;
 	private int agreeCount;
+	private double score;
+	private int scoreCount;
 	private Date createTime;
 	private int status;
 	private int fine;
+
 	
 	private boolean isAgreed;
 	private boolean isCollected;
@@ -105,6 +108,18 @@ public class TopicDTO
 	}
 	public void setAgreeCount(int agreeCount) {
 		this.agreeCount = agreeCount;
+	}
+	public double getScore() {
+		return score;
+	}
+	public void setScore(double score) {
+		this.score = score;
+	}
+	public int getScoreCount() {
+		return scoreCount;
+	}
+	public void setScoreCount(int scoreCount) {
+		this.scoreCount = scoreCount;
 	}
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getCreateTime()

@@ -15,6 +15,8 @@ public class TopicDTO implements Serializable
     private int allReplyCount;
     private int viewCount;
     private int agreeCount;
+    private double score;
+    private int scoreCount;
     private String createTime;
     private int status;
     private String url;
@@ -105,6 +107,22 @@ public class TopicDTO implements Serializable
 
     public void setAgreeCount(int agreeCount) {
         this.agreeCount = agreeCount;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public int getScoreCount() {
+        return scoreCount;
+    }
+
+    public void setScoreCount(int scoreCount) {
+        this.scoreCount = scoreCount;
     }
 
     public String getCreateTime()

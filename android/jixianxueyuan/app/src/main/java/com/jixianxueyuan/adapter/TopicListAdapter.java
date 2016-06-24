@@ -162,6 +162,10 @@ public class TopicListAdapter extends BaseAdapter {
                     viewHolder.typeImageView.setImageResource(R.mipmap.ic_teach);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
+                case TopicType.CHALLENGE:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_challenge);
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    break;
             }
         }
 

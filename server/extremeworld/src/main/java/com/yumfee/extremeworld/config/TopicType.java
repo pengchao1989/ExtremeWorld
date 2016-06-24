@@ -44,6 +44,8 @@ public class TopicType {
 			return NEWS;
 		case 8:
 			return COURSE;
+		case 9:
+			return CHALLENGE;
 		
 		default:
 				
