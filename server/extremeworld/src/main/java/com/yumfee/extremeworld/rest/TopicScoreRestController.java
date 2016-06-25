@@ -27,12 +27,14 @@ import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.TopicScore;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.entity.UserScore;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicScoreDTO;
 import com.yumfee.extremeworld.rest.dto.request.TopicScoreRequestDTO;
 import com.yumfee.extremeworld.service.TopicScoreService;
 import com.yumfee.extremeworld.service.TopicService;
+import com.yumfee.extremeworld.service.UserScoreService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @RestController
@@ -48,6 +50,9 @@ public class TopicScoreRestController {
 	
 	@Autowired
 	private TopicService topicService;
+	
+	@Autowired
+	private UserScoreService userScoreService;
 	
 	@Autowired
 	private Validator validator;
@@ -94,11 +99,14 @@ public class TopicScoreRestController {
 		topic.setScoreCount(topicScoreService.getTopicScoreCount(topicScoreRequestDTO.getTopicId()));
 		topicService.saveTopic(topic);
 		
+		
 		//更新个人总分
-		if(topic != null && topic.getHobbys().size() == 1){
+		if( topic != null && topic.getHobbys().size() == 1){
+			
+			Long topicUserId = topic.getUser().getId();
 			Hobby hobby = topic.getHobbys().get(0);
 			
-			List<Topic> allChallengeTopicList = topicService.getAllUserChallenge(topic.getUser().getId(), hobby.getId());
+			List<Topic> allChallengeTopicList = topicService.getAllUserChallenge(topicUserId, hobby.getId());
 			if(allChallengeTopicList != null){
 				
 				//记录分数最大值
@@ -128,10 +136,16 @@ public class TopicScoreRestController {
 				System.out.println("TotalScore=" + totalScore);
 				
 				//更新总分
-				
+				UserScore userScore = userScoreService.findByUserIdAndHobbyId(topicUserId, hobby.getId());
+				if(userScore == null){
+					userScore = new UserScore();
+					userScore.setHobby(hobby);
+					userScore.setUser(topic.getUser());
+				}
+				userScore.setScore(totalScore);
+				userScoreService.save(userScore);
 			}
 		}
-		
 		
 		
 		
