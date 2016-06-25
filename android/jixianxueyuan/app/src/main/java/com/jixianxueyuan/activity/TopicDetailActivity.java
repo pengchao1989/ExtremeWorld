@@ -294,12 +294,12 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         if (TopicType.CHALLENGE.equals(topicDTO.getType())){
             actionBar.setTitle(getString(R.string.challenge));
             headViewHolder.ratingLayout.setVisibility(View.VISIBLE);
-            topicDTO.setScore(3.3);
-            headViewHolder.ratingBar.setRating((float) topicDTO.getScore());
+            headViewHolder.ratingBar.setRating((float) topicDTO.getScore() / 2.0f);
             headViewHolder.ratingValue.setText(String.format("%.1f", topicDTO.getScore()));
             String ratingCountText = getString(R.string.count_score);
             ratingCountText = String.format(ratingCountText, topicDTO.getScoreCount());
             headViewHolder.ratingCount.setText(ratingCountText);
+            headViewHolder.ratingLayout.setOnClickListener(null);
         }
 
 
