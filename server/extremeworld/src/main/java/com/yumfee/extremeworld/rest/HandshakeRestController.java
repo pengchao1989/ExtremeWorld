@@ -2,6 +2,7 @@ package com.yumfee.extremeworld.rest;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,14 @@ public class HandshakeRestController {
 	@RequestMapping(method = RequestMethod.POST,consumes = MediaTypes.JSON_UTF_8)
 	MyResponse post(@RequestBody HandshakeRequestDTO handshakeRequest)
 	{
-		if(handshakeRequest != null && handshakeRequest.getUserId() != null){
+		if(handshakeRequest != null ){
 			User user = userService.getUser(handshakeRequest.getUserId());
 			if(user != null){
 				user.setHobbyStamp(handshakeRequest.getHobbyStamp());
+				if(!StringUtils.isEmpty(handshakeRequest.getDevice())){
+					user.setDevice(handshakeRequest.getDevice());
+				}
+				
 				userService.saveUser(user);
 			}
 		}

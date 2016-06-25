@@ -7,7 +7,6 @@ public class HandshakeRequestDTO {
 	private Long userId;
     private String hobbyStamp;
     private String device;
-
     
     
     public Long getUserId() {
