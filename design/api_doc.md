@@ -44,6 +44,7 @@ API Document
  - 活动 activity 6
  - 新闻 news 7
  - 教学 course 8
+ - 挑战 challenge 9
 
 
 ----------
@@ -152,6 +153,8 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 > 
 > 复杂情况：json
 > content={"videoDetail":{"thumbnail":"http://video.jixianxueyuan.com/d19efad8-cbbf-4f95-a772-e44ff8bae64a","videoSource":"http://video.jixianxueyuan.com/video_2015-11-29-Frt0nRxr"},"user":{"id":15},"content":"帮伟哥提数据","hobbys":[{"id":3}],"type":"s_video","mediaWrap":{"medias":[{"path":"http://img.jixianxueyuan.com/img_2015-11-29-2VWlqTQ6","type":"img"},{"path":"http://img.jixianxueyuan.com/img_2015-11-29-sGjpoV3X","type":"img"}]},"title":"帮伟哥提数据","status":0,"replyCount":0,"imageCount":0,"allReplyCount":0,"agreeCount":0,"viewCount":0}
+>
+>发布挑战：同发布普通视频，区别是type为challenge、再增加course参数"course":{"id":123}
 
 	
 
@@ -372,7 +375,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	接口名称:exhibition
 	URL地址:http://115.28.8.25/api/secure/v1/skateboard/exhibition
 	请求方式:GET
-	入参:五
+	入参:无
 	示例:http://115.28.8.25/api/secure/v1/skateboard/exhibition
 	说明:获取展板栏列表（就是首页顶部轮播的广告）
 	
@@ -397,3 +400,24 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	    "open_shop"(打开一个商店，计划中) 
 	    “open_taobao_product”(直接打开一个淘宝商品，计划中), 
 	    "open_taobao_shop" (直接打开淘宝商店，计划中)
+	    
+	    
+	    
+----------
+	接口名称:topic_score
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/topic_score
+	请求方式:POST
+	入参:五
+	说明:给一个挑战打分（0-10）
+	示例：{"topicId":"27547","score":9}
+	
+	
+----------
+	接口名称:ranking_list
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/ranking_list
+	请求方式:GET
+	入参:五
+	说明:获取一个hobby下的排行榜
+	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/ranking_list
+	
+	

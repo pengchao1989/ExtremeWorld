@@ -10,9 +10,10 @@ public class TopicType {
 	public static final String ACTIVITY = "activity";//活动
 	public static final String NEWS = "news";		//新闻
 	public static final String COURSE = "course";	//教学
+	public static final String CHALLENGE = "challenge";//挑战
 	public static final String SITE = "site";		//场地信息
 	public static final String ACHV = "achv";		//成就 Achievement
-	public static final String CHALLENGE = "challenge";//挑战
+	
 	
 	
 	public static final String magicExplain = "explain";
