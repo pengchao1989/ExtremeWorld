@@ -1,5 +1,9 @@
 package com.yumfee.extremeworld.rest;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+
 import javax.validation.Validator;
 
 import org.apache.shiro.SecurityUtils;
@@ -17,6 +21,9 @@ import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.entity.Course;
+import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.TopicScore;
 import com.yumfee.extremeworld.entity.User;
@@ -86,6 +93,46 @@ public class TopicScoreRestController {
 		topic.setScore(avgScore);
 		topic.setScoreCount(topicScoreService.getTopicScoreCount(topicScoreRequestDTO.getTopicId()));
 		topicService.saveTopic(topic);
+		
+		//更新个人总分
+		if(topic != null && topic.getHobbys().size() == 1){
+			Hobby hobby = topic.getHobbys().get(0);
+			
+			List<Topic> allChallengeTopicList = topicService.getAllUserChallenge(topic.getUser().getId(), hobby.getId());
+			if(allChallengeTopicList != null){
+				
+				//记录分数最大值
+				HashMap<Long, Double> courseScoreHashMap = new HashMap<Long, Double>();
+				for(Topic t : allChallengeTopicList){
+					Course course = t.getCourse();
+					if(course != null){
+						double tempScore = 0.0;
+						if(courseScoreHashMap.containsKey(course.getId())){
+							tempScore = courseScoreHashMap.get(course.getId());
+							if(tempScore < t.getScore()){
+								courseScoreHashMap.put(course.getId(), t.getScore());
+							}
+						}else{
+							courseScoreHashMap.put(course.getId(), t.getScore());
+						}
+					}
+					
+				}
+				
+				//累加
+				Double totalScore = 0.0;
+				for (Entry<Long, Double> entry : courseScoreHashMap.entrySet()) {
+					totalScore += entry.getValue();
+				}
+				logger.debug("TotalScore=" + totalScore);
+				System.out.println("TotalScore=" + totalScore);
+				
+				//更新总分
+				
+			}
+		}
+		
+		
 		
 		
 		TopicScoreDTO topicScoreDTO = BeanMapper.map(topicScore, TopicScoreDTO.class);

@@ -2,6 +2,7 @@ package com.yumfee.extremeworld.push;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -54,30 +55,33 @@ public class PushManage {
 	}
 
 	public void pushMessage(User listenerUser, int type, Object content) {
-		AppKey clientConfig = clientConfigManage
-				.getCilentConfig(listenerUser.getHobbyStamp());
-		String appkey = clientConfig.getBaichuanAppKey();
-		String secret = clientConfig.getBaichuanAppSecret();
-		String url = "http://gw.api.taobao.com/router/rest";
-
-		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-
-		CloudpushMessageAndroidRequest req = new CloudpushMessageAndroidRequest();
-		req.setTarget("account");
-		req.setTargetValue(String.valueOf(listenerUser.getId()));
 		
-		
-		String contentJson = buildContent(type,content);
-		req.setBody(contentJson);
+		if(StringUtils.isNoneEmpty(listenerUser.getDevice()) && "android".equals(listenerUser.getDevice())){
+			AppKey clientConfig = clientConfigManage
+					.getCilentConfig(listenerUser.getHobbyStamp());
+			String appkey = clientConfig.getBaichuanAppKey();
+			String secret = clientConfig.getBaichuanAppSecret();
+			String url = "http://gw.api.taobao.com/router/rest";
 
-		try {
-			CloudpushMessageAndroidResponse response = client.execute(req);
-			System.out.println(response.getBody());
-			if (response.isSuccess()) {
-				System.out.println("push message is success!");
+			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+
+			CloudpushMessageAndroidRequest req = new CloudpushMessageAndroidRequest();
+			req.setTarget("account");
+			req.setTargetValue(String.valueOf(listenerUser.getId()));
+			
+			
+			String contentJson = buildContent(type,content);
+			req.setBody(contentJson);
+
+			try {
+				CloudpushMessageAndroidResponse response = client.execute(req);
+				System.out.println(response.getBody());
+				if (response.isSuccess()) {
+					System.out.println("push message is success!");
+				}
+			} catch (Exception e) {
+				System.out.println("push message is error!");
 			}
-		} catch (Exception e) {
-			System.out.println("push message is error!");
 		}
 	}
 

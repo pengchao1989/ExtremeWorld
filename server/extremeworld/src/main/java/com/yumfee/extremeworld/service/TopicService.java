@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.mapper.JsonMapper;
 
 import com.yumfee.extremeworld.config.TopicStatus;
+import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Media;
 import com.yumfee.extremeworld.entity.MediaWrap;
 import com.yumfee.extremeworld.entity.Topic;
@@ -214,6 +215,10 @@ public class TopicService
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		return topicDao.findByHobbyAndFine(hobbyId,TopicStatus.PUBLIC,pageRequest);
 		
+	}
+	
+	public List<Topic> getAllUserChallenge(Long userId, Long hobbyId){
+		return topicDao.findByUserIdAndHobbyIdAndTypeAndStatus(userId, hobbyId, TopicType.CHALLENGE, TopicStatus.PUBLIC);
 	}
 	
 	/**

@@ -1,6 +1,7 @@
 package com.yumfee.extremeworld.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ public interface TopicDao extends PagingAndSortingRepository<Topic, Long>
 	
 	public Page<Topic> findByTypeAndStatus(String type, int status, Pageable pageable);
 	
+	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE t.user.id=? AND h.id=? AND type=? AND status=?")
+	public List<Topic> findByUserIdAndHobbyIdAndTypeAndStatus(Long userId, Long hobbyId,String type, int status);
 	
 	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE h.id=? AND t.status=?")
 	public Page<Topic> findByHobby(Long hobbyId, int status, Pageable pageable);
@@ -34,5 +37,10 @@ public interface TopicDao extends PagingAndSortingRepository<Topic, Long>
 	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE h.id=? AND status=? AND t.fine=1")
 	public Page<Topic> findByHobbyAndFine(Long hobbyId, int status, Pageable pageable);
 	
+	
+	
+	//求总分(总分=每个course最高的那个得分 累加)
+/*	@Query("SELECT t FROM Topic t LEFT JOIN t.hobbys h WHERE h.id=? AND t.user.id=? AND type=? AND status=? ORDER BY t.score DESC")
+	public Double getUserTypeSumScore(Long hobbyId,  Long userId, String type, int status);*/
 	
 }
