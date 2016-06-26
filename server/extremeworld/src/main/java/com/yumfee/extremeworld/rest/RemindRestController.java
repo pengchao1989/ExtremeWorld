@@ -23,7 +23,7 @@ public class RemindRestController {
 
 	private static Logger logger = LoggerFactory.getLogger(RemindRestController.class);
 	
-	private static final String PAGE_SIZE = "5";
+	private static final String PAGE_SIZE = "15";
 	
 	@Autowired
 	RemindService remindService;
