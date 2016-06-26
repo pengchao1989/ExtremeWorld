@@ -120,10 +120,8 @@ public class CollectionListAdapter extends BaseAdapter{
                     break;
 
                 case TopicType.VIDEO:
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
-                    break;
-
                 case TopicType.S_VIDEO:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_video);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
@@ -135,6 +133,11 @@ public class CollectionListAdapter extends BaseAdapter{
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
                 case TopicType.COURSE:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_teach);
+                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    break;
+                case TopicType.CHALLENGE:
+                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_challenge);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
             }
