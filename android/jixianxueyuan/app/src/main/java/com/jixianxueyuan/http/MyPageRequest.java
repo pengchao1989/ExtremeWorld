@@ -7,6 +7,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
@@ -14,12 +15,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.MalformedJsonException;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.http.VolleyError.JsonParserError;
 import com.jixianxueyuan.util.Cryptos;
 import com.jixianxueyuan.util.MyLog;
 
@@ -192,15 +197,15 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
                 resultResponse.getContent().setContents(listItems);
                 return Response.success(resultResponse, HttpHeaderParser.parseCacheHeaders(response));
             }
-
-
-
         }
         catch (UnsupportedEncodingException e)
         {
             e.printStackTrace();
+        }catch (JsonParseException e){
+            e.printStackTrace();
         }
-        return null;
+
+        return Response.error(new JsonParserError());
     }
 
     @Override

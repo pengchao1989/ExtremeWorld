@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.http.VolleyError.JsonParserError;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,9 @@ public class MyVolleyErrorHelper {
         }
         else if(error instanceof NoConnectionError){
             return context.getResources().getString(R.string.connection_err);
+        }else if (error instanceof JsonParserError){
+            //TODO 统计上报错误
+            return "后台数据有误，若要处理请联系管理员/或者意见反馈中沟通";
         }
         return context.getResources().getString(R.string.err);
     }

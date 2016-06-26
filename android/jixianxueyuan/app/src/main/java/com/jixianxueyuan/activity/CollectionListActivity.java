@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,8 +24,10 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.widget.AutoLoadMoreView;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.umeng.analytics.MobclickAgent;
@@ -51,7 +54,7 @@ public class CollectionListActivity extends BaseActivity {
     private MyApplication myApplication;
     private Mine mine;
 
-    private ClickLoadMoreView clickLoadMoreView;
+    private AutoLoadMoreView autoLoadMoreView;
 
     int currentPage = 0;
     int totalPage = 0;
@@ -67,6 +70,22 @@ public class CollectionListActivity extends BaseActivity {
 
         adapter = new CollectionListAdapter(this);
         listView.setAdapter(adapter);
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    //滚动到底部
+                    if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                        getNextPage();
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
 
         swipeRefreshLayout.setColorSchemeResources(R.color.primary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -83,33 +102,17 @@ public class CollectionListActivity extends BaseActivity {
     }
 
     private void initFootView(){
-        clickLoadMoreView = new ClickLoadMoreView(this);
-        clickLoadMoreView.setVisibility(View.GONE);
-        clickLoadMoreView.setClickLoadMoreViewListener(new ClickLoadMoreView.ClickLoadMoreViewListener() {
-            @Override
-            public void runLoad() {
-                getNextPage();
-            }
-        });
-        listView.addFooterView(clickLoadMoreView);
+        autoLoadMoreView = new AutoLoadMoreView(this);
+        listView.addFooterView(autoLoadMoreView);
     }
 
     private void doHideFootView()
     {
-        if(totalPage > 1)
-        {
-            if(clickLoadMoreView.isLoading() == true)
-            {
-                clickLoadMoreView.onFinish();
-            }
-
-            if(currentPage >= totalPage)
-            {
-                clickLoadMoreView.setOver();
-            }
-
+        if (totalPage > 0 && currentPage >= totalPage) {
+            autoLoadMoreView.setOver();
+        }else {
+            autoLoadMoreView.reset();
         }
-
     }
 
     private void refreshCollectionList()
@@ -158,7 +161,7 @@ public class CollectionListActivity extends BaseActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                MyVolleyErrorHelper.showError(CollectionListActivity.this, error);
             }
         });
 
