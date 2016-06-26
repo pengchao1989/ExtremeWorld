@@ -28,12 +28,14 @@ import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Collection;
 import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.Topic;
+import com.yumfee.extremeworld.entity.TopicScore;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.MyPage;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.rest.dto.TopicExtraDTO;
 import com.yumfee.extremeworld.service.CollectionService;
+import com.yumfee.extremeworld.service.TopicScoreService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
@@ -58,6 +60,9 @@ public class TopicRestController
 	
 	@Autowired
 	private CollectionService collectionService;
+	
+	@Autowired
+	private TopicScoreService topicScoreService;
 	
 	@RequestMapping( method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public  MyResponse list(
@@ -160,6 +165,14 @@ public class TopicRestController
 		List<User> agreeUserList = topic.getAgrees();
 		if(agreeUserList != null && agreeUserList.contains(currentUser)){
 			topicExtraDTO.setAgreed(true);
+		}
+		
+		//topic mark score 
+		TopicScore topicScore = topicScoreService.findByTopicIdAndUserId(topicId, userId);
+		if(topicScore != null){
+			topicExtraDTO.setMyMarkScore(topicScore.getScore());
+		}else{
+			topicExtraDTO.setMyMarkScore(0);
 		}
 		
 		return MyResponse.ok(topicExtraDTO,true);

@@ -94,9 +94,10 @@ public class TopicScoreRestController {
 		topicScoreService.save(topicScore);
 		
 		//求平均分、统计次数
-		double avgScore = topicScoreService.getTopicAvgScore(topicScoreRequestDTO.getTopicId());
-		topic.setScore(avgScore);
-		topic.setScoreCount(topicScoreService.getTopicScoreCount(topicScoreRequestDTO.getTopicId()));
+		double totalAvgScore = topicScoreService.getTopicAvgScore(topicScoreRequestDTO.getTopicId());
+		int topicTotalScoreCount = topicScoreService.getTopicScoreCount(topicScoreRequestDTO.getTopicId());
+		topic.setScore(totalAvgScore);
+		topic.setScoreCount(topicTotalScoreCount);
 		topicService.saveTopic(topic);
 		
 		
@@ -147,9 +148,9 @@ public class TopicScoreRestController {
 			}
 		}
 		
-		
-		
 		TopicScoreDTO topicScoreDTO = BeanMapper.map(topicScore, TopicScoreDTO.class);
+		topicScoreDTO.setTopicAvgScore(totalAvgScore);
+		topicScoreDTO.setTopicTotalScoreCount(topicTotalScoreCount);
 		return MyResponse.ok(topicScoreDTO, false);
 		
 	}

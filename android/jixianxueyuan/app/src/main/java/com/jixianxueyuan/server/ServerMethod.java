@@ -67,4 +67,5 @@ public class ServerMethod {
     public static final String goods_of_category (){return method_url_secure + hobby + "biz/goods/category/";}
     public static final String sponsorship(){return method_url_secure + hobby + "sponsorship";}
     public static final String exhibition() {return method_url_secure + hobby + "exhibition";}
+    public static final String topic_score() {return method_url_secure + hobby + "topic_score";}
 }

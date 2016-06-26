@@ -1,4 +1,4 @@
-package com.yumfee.extremeworld.rest.dto;
+package com.jixianxueyuan.dto;
 
 public class TopicScoreDTO {
 	private long id;

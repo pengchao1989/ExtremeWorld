@@ -94,6 +94,7 @@
     <string name="send">보내기</string>
     <string name="title">제목</string>
     <string name="submit">게시</string>
+    <string name="submit_2">게시</string>
     <string name="edit">편집</string>
     <string name="expression">표정</string>
     <string name="image">그림</string>

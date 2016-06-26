@@ -2,11 +2,13 @@ package com.yumfee.extremeworld.rest.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Topic")
+@XmlRootElement(name = "TopicExtra")
 public class TopicExtraDTO {
 	private Long id;
 	private boolean isAgreed;
 	private boolean isCollected;
+	private double myMarkScore;
+	
 	
 	public Long getId() {
 		return id;
@@ -26,4 +28,11 @@ public class TopicExtraDTO {
 	public void setCollected(boolean isCollected) {
 		this.isCollected = isCollected;
 	}
+	public double getMyMarkScore() {
+		return myMarkScore;
+	}
+	public void setMyMarkScore(double myMarkScore) {
+		this.myMarkScore = myMarkScore;
+	}
+	
 }

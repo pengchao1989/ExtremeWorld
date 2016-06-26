@@ -54,10 +54,12 @@ import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.TopicExtraDTO;
+import com.jixianxueyuan.dto.TopicScoreDTO;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
+import com.jixianxueyuan.dto.request.TopicScoreRequestDTO;
 import com.jixianxueyuan.dto.request.ZanRequest;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
@@ -135,6 +137,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private boolean interceptFlag = false;
     private int mProgressNum = 0;
+
+    private float mCurrentMyRating = 0.0f;
 
     private ArrayList<String> imageUrlArrayList = new ArrayList<String>();
 
@@ -305,9 +309,18 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                     if (fromUser){
+                        mCurrentMyRating = rating*2;
                         headViewHolder.mySubmitRatingText.setVisibility(View.GONE);
                         headViewHolder.mySubmitRatingButton.setVisibility(View.VISIBLE);
+                        headViewHolder.myRatingText.setText(String.format("%.1f", mCurrentMyRating));
                     }
+                }
+            });
+
+            headViewHolder.mySubmitRatingButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    submitMyTopicScore(mCurrentMyRating);
                 }
             });
         }
@@ -739,6 +752,35 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
+    private void submitMyTopicScore(double score){
+
+        TopicScoreRequestDTO topicScoreRequestDTO = new TopicScoreRequestDTO();
+        topicScoreRequestDTO.setTopicId(topicDTO.getId());
+        topicScoreRequestDTO.setScore(score);
+
+        String url = ServerMethod.topic_score();
+        MyRequest<TopicScoreDTO> myRequest = new MyRequest<TopicScoreDTO>(Request.Method.POST, url, TopicScoreDTO.class, topicScoreRequestDTO, new Response.Listener<MyResponse<TopicScoreDTO>>() {
+            @Override
+            public void onResponse(MyResponse<TopicScoreDTO> response) {
+                if (headViewHolder != null){
+                    headViewHolder.myRatingLayout.setVisibility(View.GONE);
+                    headViewHolder.ratingBar.setRating((float) (response.getContent().getTopicAvgScore() / 2.0f));
+                    headViewHolder.ratingValue.setText(String.format("%.1f", response.getContent().getTopicAvgScore()));
+                    String ratingCountText = getString(R.string.count_score);
+                    ratingCountText = String.format(ratingCountText, response.getContent().getTopicTotalScoreCount());
+                    headViewHolder.ratingCount.setText(ratingCountText);
+                    Toast.makeText(TopicDetailActivity.this, R.string.success, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
     private void showLocationProgress(){
         progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
         progressDialog.show();
@@ -811,6 +853,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @InjectView(R.id.my_ratingBar)RatingBar myRatingBar;
         @InjectView(R.id.my_submit_rating_text)TextView mySubmitRatingText;
         @InjectView(R.id.my_submit_rating_button)Button mySubmitRatingButton;
+        @InjectView(R.id.my_rating_score_text)TextView myRatingText;
 
 
         public HeadViewHolder(View headView)

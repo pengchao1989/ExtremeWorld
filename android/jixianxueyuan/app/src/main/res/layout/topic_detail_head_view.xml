@@ -164,33 +164,53 @@
             android:id="@+id/my_rating_layout"
             style="@style/HeadBlockLayout">
 
-            <RatingBar
-                android:id="@+id/my_ratingBar"
+            <LinearLayout
+                android:id="@+id/my_rating_second_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_centerHorizontal="true"
-                android:numStars="5"
-                android:max="10" />
+                android:gravity="center_vertical">
+
+                <RatingBar
+                    android:id="@+id/my_ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:max="10" />
+
+                <TextView
+                    android:id="@+id/my_rating_score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:textSize="22sp"/>
+
+            </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/my_submit_rating_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/my_ratingBar"
+                android:layout_below="@+id/my_rating_second_layout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="请打分"
+                android:visibility="visible"
                 style="@style/SecondText"/>
 
             <Button
                 android:id="@+id/my_submit_rating_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/my_ratingBar"
+                android:layout_below="@+id/my_rating_second_layout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="@string/submit"
+                android:text="@string/submit_2"
                 android:visibility="gone"
+                style="@style/TransparentButtonSmall"
                 />
 
         </RelativeLayout>
