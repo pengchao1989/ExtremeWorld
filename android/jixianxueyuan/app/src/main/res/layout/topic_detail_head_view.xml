@@ -161,6 +161,43 @@
             android:background="@color/divider"/>
 
         <RelativeLayout
+            android:id="@+id/my_rating_layout"
+            style="@style/HeadBlockLayout">
+
+            <RatingBar
+                android:id="@+id/my_ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:numStars="5"
+                android:max="10" />
+
+            <TextView
+                android:id="@+id/my_submit_rating_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/my_ratingBar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="请打分"
+                style="@style/SecondText"/>
+
+            <Button
+                android:id="@+id/my_submit_rating_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/my_ratingBar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/submit"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
+        <View style="@style/HorizontalDividerView"/>
+
+        <RelativeLayout
             style="@style/HeadBlockLayout">
 
             <LinearLayout
@@ -197,6 +234,7 @@
                 style="@style/SecondText"/>
 
         </RelativeLayout>
+
     </LinearLayout>
 
     <View style="@style/HorizontalDividerView"/>

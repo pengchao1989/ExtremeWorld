@@ -188,6 +188,10 @@ public class CollectionListActivity extends BaseActivity {
                 intent = new Intent(this, TopicDetailActivity.class);
                 intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
                 break;
+            case TopicType.CHALLENGE:
+                intent = new Intent(this, TopicDetailActivity.class);
+                intent.putExtra(TopicType.TYPE, TopicType.CHALLENGE);
+                break;
             default:
                 Toast.makeText(this,R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
                 break;

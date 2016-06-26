@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -300,6 +301,15 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             ratingCountText = String.format(ratingCountText, topicDTO.getScoreCount());
             headViewHolder.ratingCount.setText(ratingCountText);
             headViewHolder.ratingLayout.setOnClickListener(null);
+            headViewHolder.myRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    if (fromUser){
+                        headViewHolder.mySubmitRatingText.setVisibility(View.GONE);
+                        headViewHolder.mySubmitRatingButton.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
         }
 
 
@@ -797,6 +807,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @InjectView(R.id.ratingBar)RatingBar ratingBar;
         @InjectView(R.id.rating_value)TextView ratingValue;
         @InjectView(R.id.rating_count)TextView ratingCount;
+        @InjectView(R.id.my_rating_layout)RelativeLayout myRatingLayout;
+        @InjectView(R.id.my_ratingBar)RatingBar myRatingBar;
+        @InjectView(R.id.my_submit_rating_text)TextView mySubmitRatingText;
+        @InjectView(R.id.my_submit_rating_button)Button mySubmitRatingButton;
 
 
         public HeadViewHolder(View headView)
@@ -963,6 +977,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     }
 
     @OnItemClick(R.id.topic_detail_listview)void onReplyItemClicked(int position){
+        if (position == 0){
+            return;
+        }
         Intent intent = new Intent(TopicDetailActivity.this, ReplyDetailActivity.class);
         ReplyDTO replyDTO = (ReplyDTO) adapter.getItem(position -1);
         intent.putExtra("reply", replyDTO);
