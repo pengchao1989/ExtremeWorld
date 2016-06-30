@@ -23,8 +23,8 @@ import com.jixianxueyuan.server.ServerMethod;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -33,7 +33,7 @@ public class VideoListFragment extends Fragment{
 
     public static final String TAG = VideoListFragment.class.getSimpleName();
 
-    @InjectView(R.id.video_list_fragment_listview)
+    @BindView(R.id.video_list_fragment_listview)
     ListView listView;
 
     VideoListAdapter adapter;
@@ -57,7 +57,7 @@ public class VideoListFragment extends Fragment{
 
         View view = inflater.inflate(R.layout.video_list_fragment, container, false);
 
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         listView.setAdapter(adapter);
 

@@ -43,8 +43,8 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -52,7 +52,7 @@ import butterknife.OnItemClick;
  */
 public class MarketFragment extends Fragment {
 
-    @InjectView(R.id.market_home_activity_gridview)GridViewWithHeaderAndFooter gridView;
+    @BindView(R.id.market_home_activity_gridview)GridViewWithHeaderAndFooter gridView;
 
     private CategoryGridAdapter categoryGridAdapter;
     private ShopGridAdapter shopGridAdapter;
@@ -73,7 +73,7 @@ public class MarketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.market_home_activity, container, false);
 
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         initHeadView();
 

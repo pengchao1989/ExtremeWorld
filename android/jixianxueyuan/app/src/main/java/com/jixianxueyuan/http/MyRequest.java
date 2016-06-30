@@ -1,11 +1,9 @@
 package com.jixianxueyuan.http;
 
 import android.util.Base64;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -18,19 +16,12 @@ import com.google.gson.reflect.TypeToken;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
-import com.jixianxueyuan.util.AesCbcWithIntegrity;
 import com.jixianxueyuan.util.Cryptos;
 import com.jixianxueyuan.util.MyLog;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.GZIPInputStream;
 
 /**
  * Created by pengchao on 5/31/15.

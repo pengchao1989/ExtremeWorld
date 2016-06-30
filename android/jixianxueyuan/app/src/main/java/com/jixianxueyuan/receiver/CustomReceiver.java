@@ -7,16 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.alibaba.sdk.android.push.CloudPushService;
-import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.MessageReceiver;
 import com.alibaba.sdk.android.push.notification.CPushMessage;
 import com.google.gson.Gson;
-import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.dto.RemindDTO;
-import com.jixianxueyuan.push.PushMessage;
 import com.jixianxueyuan.push.PushMessageType;
 import com.jixianxueyuan.util.MyLog;
 

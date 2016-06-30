@@ -1,11 +1,9 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
@@ -24,8 +22,8 @@ import com.jixianxueyuan.util.Util;
 import java.io.File;
 import java.io.IOException;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -33,7 +31,7 @@ import butterknife.OnClick;
  */
 public class SettingActivity extends BaseActivity {
 
-    @InjectView(R.id.setting_activity_cache_size)TextView cacheSizeTextView;
+    @BindView(R.id.setting_activity_cache_size)TextView cacheSizeTextView;
 
     DiskLruCache diskLruCache = null;
 
@@ -41,7 +39,7 @@ public class SettingActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         File cacheDir = DiskCachePath.getDiskCacheDir(this, "short_video");
 

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -75,11 +75,11 @@ public class VideoListAdapter extends BaseAdapter {
 
     static class ViewHolder{
 
-        @InjectView(R.id.video_list_item_title)
+        @BindView(R.id.video_list_item_title)
         TextView titleTextView;
 
         public ViewHolder(View view){
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
     }
 }

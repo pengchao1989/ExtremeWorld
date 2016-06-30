@@ -37,9 +37,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
@@ -50,8 +49,8 @@ public class UserHomeActivity extends BaseActivity {
     public static final String INTENT_USER_MIN = "INTENT_USER_MIN";
     public static final String INTENT_USER = "INTENT_USER";
 
-    //@InjectView(R.id.user_home_actionbar)MyActionBar actionBar;
-    @InjectView(R.id.user_home_listview)ListView listView;
+    //@BindView(R.id.user_home_actionbar)MyActionBar actionBar;
+    @BindView(R.id.user_home_listview)ListView listView;
     private ImageView avatarImageView;
     private ImageView coverImageView;
     private TextView nameTextView;
@@ -75,7 +74,7 @@ public class UserHomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_home_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initHeadView();
 

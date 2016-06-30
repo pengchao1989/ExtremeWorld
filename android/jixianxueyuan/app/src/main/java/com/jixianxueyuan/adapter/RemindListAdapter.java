@@ -18,8 +18,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 8/9/15.
@@ -98,16 +98,16 @@ public class RemindListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-        @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
-        @InjectView(R.id.user_head_name)TextView nameTextView;
-        @InjectView(R.id.user_head_time)TextView timeTextView;
-        @InjectView(R.id.remind_list_item_content)
+        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.user_head_name)TextView nameTextView;
+        @BindView(R.id.user_head_time)TextView timeTextView;
+        @BindView(R.id.remind_list_item_content)
         TextView contentTextView;
-        @InjectView(R.id.remind_list_item_target_content)
+        @BindView(R.id.remind_list_item_target_content)
         TextView targetTextView;
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

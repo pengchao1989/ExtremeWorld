@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
@@ -31,8 +30,8 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.event.HomeRefreshEvent;
-import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.http.MyPageRequest;
+import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
@@ -43,8 +42,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -57,11 +56,11 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
     public static final String INTENT_IS_FINE = "INTENT_IS_FINE";
     public static final String INTENT_HAS_HEAD = "INTENT_HAS_HEAD";
 
-    @InjectView(R.id.scroll)
+    @BindView(R.id.scroll)
     ObservableListView listView;
-    @InjectView(R.id.top_list_swiperefresh)
+    @BindView(R.id.top_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
-    @InjectView(R.id.list_background)
+    @BindView(R.id.list_background)
     View mListBackgroundView;
 
 
@@ -96,7 +95,7 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
 
         View view = inflater.inflate(R.layout.topic_list_fragment, container, false);
 
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         Bundle bundle = getArguments();
         if (bundle.containsKey(TopicType.TYPE)) {

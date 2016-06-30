@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 10/30/15.
@@ -81,12 +81,12 @@ public class SiteListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder{
-        @InjectView(R.id.site_list_item_front_imageview)ImageView frontImageView;
-        @InjectView(R.id.site_list_item_name_textview)TextView nameTextView;
-        @InjectView(R.id.site_list_item_address_textview)TextView addressTextView;
+        @BindView(R.id.site_list_item_front_imageview)ImageView frontImageView;
+        @BindView(R.id.site_list_item_name_textview)TextView nameTextView;
+        @BindView(R.id.site_list_item_address_textview)TextView addressTextView;
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

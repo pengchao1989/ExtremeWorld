@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 4/20/15.
@@ -80,12 +80,12 @@ public class DiscoveryListAdapter extends BaseAdapter {
 
     static class ViewHolder{
 
-        @InjectView(R.id.discovery_list_item_name)TextView nameTextView;
-        @InjectView(R.id.discovery_list_item_image)ImageView imageView;
+        @BindView(R.id.discovery_list_item_name)TextView nameTextView;
+        @BindView(R.id.discovery_list_item_image)ImageView imageView;
 
         public ViewHolder(View itemView)
         {
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

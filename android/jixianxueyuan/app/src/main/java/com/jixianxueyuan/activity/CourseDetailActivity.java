@@ -1,6 +1,5 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.CourseDetailListAdapter;
-import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.adapter.TopicListAdapter;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.CourseDto;
@@ -29,17 +26,11 @@ import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
@@ -49,9 +40,9 @@ public class CourseDetailActivity extends BaseActivity {
 
     private static final String INTENT_COURSE_MIN_DTO = "INTENT_COURSE_MIN_DTO";
 
-    @InjectView(R.id.course_detail_actionbar)
+    @BindView(R.id.course_detail_actionbar)
     MyActionBar myActionBar;
-    @InjectView(R.id.course_detail_listview)
+    @BindView(R.id.course_detail_listview)
     ListView listView;
 
     TopicListAdapter adapter;
@@ -71,7 +62,7 @@ public class CourseDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.course_detail_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         getBundle();
 
@@ -279,19 +270,19 @@ public class CourseDetailActivity extends BaseActivity {
 
 
     public class HeadViewHolder {
-        @InjectView(R.id.course_detail_head_title)
+        @BindView(R.id.course_detail_head_title)
         TextView titleTextView;
-        @InjectView(R.id.course_detail_head_content)
+        @BindView(R.id.course_detail_head_content)
         TextView contentTextView;
-        @InjectView(R.id.course_detail_head_user_name)
+        @BindView(R.id.course_detail_head_user_name)
         TextView userNameTextView;
-        @InjectView(R.id.course_detail_head_modify_time)
+        @BindView(R.id.course_detail_head_modify_time)
         TextView modifyTimeTextView;
-        @InjectView(R.id.course_detail_head_challenge)
+        @BindView(R.id.course_detail_head_challenge)
         Button challengeButton;
 
         public HeadViewHolder(View headView) {
-            ButterKnife.inject(this, headView);
+            ButterKnife.bind(this, headView);
         }
     }
 

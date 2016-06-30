@@ -15,13 +15,12 @@ import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 11/8/15.
@@ -106,25 +105,25 @@ public class NewsListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-        @InjectView(R.id.news_list_item_title)
+        @BindView(R.id.news_list_item_title)
         TextView titleTextView;
 
-        @InjectView(R.id.news_list_item_content)
+        @BindView(R.id.news_list_item_content)
         TextView contentTextView;
 
-        @InjectView(R.id.news_list_item_agree_textview)
+        @BindView(R.id.news_list_item_agree_textview)
         TextView viewCountTextView;
 
-        @InjectView(R.id.news_list_item_reply_textview)
+        @BindView(R.id.news_list_item_reply_textview)
         TextView replyCountTextView;
 
-        @InjectView(R.id.news_list_item_front_image)
+        @BindView(R.id.news_list_item_front_image)
         ImageView frontImageView;
 
 
         public ViewHolder(View itemView){
 
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

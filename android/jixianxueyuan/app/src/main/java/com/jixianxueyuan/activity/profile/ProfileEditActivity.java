@@ -32,7 +32,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -53,11 +53,11 @@ public class ProfileEditActivity extends BaseActivity {
     public static final String GENDER_MALE = "male";
     public static final String GENDER_FEMALE = "female";
 
-    @InjectView(R.id.profile_edit_actionbar)MyActionBar myActionBar;
-    @InjectView(R.id.profile_edit_avatar)ImageView avatarImageView;
-    @InjectView(R.id.profile_edit_nickname)TextView nickNameEditText;
-    @InjectView(R.id.profile_edit_gender)TextView genderTextView;
-    @InjectView(R.id.profile_edit_signature)TextView signatureTextView;
+    @BindView(R.id.profile_edit_actionbar)MyActionBar myActionBar;
+    @BindView(R.id.profile_edit_avatar)ImageView avatarImageView;
+    @BindView(R.id.profile_edit_nickname)TextView nickNameEditText;
+    @BindView(R.id.profile_edit_gender)TextView genderTextView;
+    @BindView(R.id.profile_edit_signature)TextView signatureTextView;
 
     private AlertDialog progressDialog;
 
@@ -74,7 +74,7 @@ public class ProfileEditActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_edit_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         userDTO = MyApplication.getContext().getMine().getUserInfo();
 

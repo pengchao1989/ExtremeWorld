@@ -9,15 +9,15 @@ import com.isseiaoki.simplecropview.CropImageView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.util.BitmapUtils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
  * Created by pengchao on 12/22/15.
  */
 public class CropBgActivity extends Activity {
-    @InjectView(R.id.cropImageView)CropImageView cropImageView;
+    @BindView(R.id.cropImageView)CropImageView cropImageView;
 
     private String imagePath;
 
@@ -25,7 +25,7 @@ public class CropBgActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crop_bg_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         imagePath = intent.getStringExtra("imagePath");

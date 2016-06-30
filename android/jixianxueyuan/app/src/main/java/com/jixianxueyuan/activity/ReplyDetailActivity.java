@@ -1,6 +1,5 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -39,10 +38,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
-import me.nereo.multi_image_selector.bean.Image;
 
 /**
  * Created by pengchao on 8/22/15.
@@ -50,9 +48,9 @@ import me.nereo.multi_image_selector.bean.Image;
 public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetListener {
 
 
-    @InjectView(R.id.reply_detail_actionbar)MyActionBar myActionBar;
-    @InjectView(R.id.reply_detail_listview)ListView listView;
-    @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
+    @BindView(R.id.reply_detail_actionbar)MyActionBar myActionBar;
+    @BindView(R.id.reply_detail_listview)ListView listView;
+    @BindView(R.id.reply_widget_layout)LinearLayout contentLayout;
     ReplyWidget replyWidget;
 
     HeadViewHolder headViewHolder;
@@ -70,7 +68,7 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reply_detail_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         getIntentData();
 
@@ -280,13 +278,13 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public static class HeadViewHolder{
 
-        @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
-        @InjectView(R.id.user_head_name)TextView nameTextView;
-        @InjectView(R.id.user_head_time)TextView timeTextView;
-        @InjectView(R.id.reply_detail_content)TextView contentTextView;
+        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.user_head_name)TextView nameTextView;
+        @BindView(R.id.user_head_time)TextView timeTextView;
+        @BindView(R.id.reply_detail_content)TextView contentTextView;
 
         public HeadViewHolder(View itemView){
-            ButterKnife.inject(this,itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 

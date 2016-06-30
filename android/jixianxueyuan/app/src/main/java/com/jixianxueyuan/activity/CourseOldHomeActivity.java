@@ -18,8 +18,8 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ACache;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import me.amiee.nicetab.NiceTabLayout;
 import me.amiee.nicetab.NiceTabStrip;
 
@@ -28,8 +28,8 @@ import me.amiee.nicetab.NiceTabStrip;
  */
 public class CourseOldHomeActivity extends BaseActivity{
 
-    @InjectView(R.id.course_home_activity_pager)ViewPager viewPager;
-    @InjectView(R.id.course_home_activity_pager_title_strip)NiceTabLayout niceTabLayout;
+    @BindView(R.id.course_home_activity_pager)ViewPager viewPager;
+    @BindView(R.id.course_home_activity_pager_title_strip)NiceTabLayout niceTabLayout;
 
     CourseTaxonomyListFragmentPageAdapter mAdapter;
 
@@ -40,7 +40,7 @@ public class CourseOldHomeActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_old_home_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mAdapter = new CourseTaxonomyListFragmentPageAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(mAdapter);

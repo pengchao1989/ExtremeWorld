@@ -1,6 +1,5 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
@@ -30,8 +29,8 @@ import com.qiniu.android.storage.UploadOptions;
 
 import org.json.JSONObject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -39,9 +38,9 @@ import butterknife.OnClick;
  */
 public class CreateShortVideoActivity extends BaseActivity {
 
-    @InjectView(R.id.create_short_video_submit)Button submitButton;
-    @InjectView(R.id.create_short_video_thumb)ImageView thumbImageView;
-    @InjectView(R.id.create_short_video_progress)
+    @BindView(R.id.create_short_video_submit)Button submitButton;
+    @BindView(R.id.create_short_video_thumb)ImageView thumbImageView;
+    @BindView(R.id.create_short_video_progress)
     RoundProgressBarWidthNumber roundProgressBarWidthNumber;
 
     String path = null;
@@ -53,7 +52,7 @@ public class CreateShortVideoActivity extends BaseActivity {
 
         setContentView(R.layout.create_short_video_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         path = getIntent().getStringExtra("path");
 

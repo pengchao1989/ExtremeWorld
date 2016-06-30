@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 10/17/15.
@@ -141,11 +141,11 @@ public class CategoryGridAdapter extends BaseAdapter{
     }
 
     static class ViewHolder{
-        @InjectView(R.id.category_grid_item_name)TextView nameTextView;
-        @InjectView(R.id.category_grid_item_icon) ImageView iconImageView;
+        @BindView(R.id.category_grid_item_name)TextView nameTextView;
+        @BindView(R.id.category_grid_item_icon) ImageView iconImageView;
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

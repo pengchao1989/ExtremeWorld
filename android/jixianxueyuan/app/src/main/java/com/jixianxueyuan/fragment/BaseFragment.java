@@ -4,12 +4,8 @@ import android.app.Activity;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.jixianxueyuan.R;
-
-import java.util.ArrayList;
 
 /**
  * Created by pengchao on 11/15/15.

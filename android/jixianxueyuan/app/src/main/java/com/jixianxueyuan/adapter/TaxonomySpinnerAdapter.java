@@ -15,8 +15,8 @@ import com.jixianxueyuan.dto.TaxonomyDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 8/23/15.
@@ -83,10 +83,10 @@ public class TaxonomySpinnerAdapter extends BaseAdapter{
 
     public static class ViewHolder{
 
-        @InjectView(R.id.taxonomy_spinner_item_name)TextView nameTextView;
+        @BindView(R.id.taxonomy_spinner_item_name)TextView nameTextView;
         public ViewHolder(View itemView)
         {
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

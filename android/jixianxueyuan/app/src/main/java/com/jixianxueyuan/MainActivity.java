@@ -40,8 +40,8 @@ import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.umeng.analytics.MobclickAgent;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
 
@@ -50,12 +50,12 @@ public class MainActivity extends Activity {
 
     private static final String tag = "MainActivity";
 
-    @InjectView(R.id.main_video_view)
+    @BindView(R.id.main_video_view)
     VideoView videoView;
-    @InjectView(R.id.activity_qq_login)
+    @BindView(R.id.activity_qq_login)
     LinearLayout qqLoginButton;
 
-    @InjectView(R.id.activity_main_appname)
+    @BindView(R.id.activity_main_appname)
     ShimmerTextView appNameTextView;
 
     Tencent tencent;
@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initView();
 

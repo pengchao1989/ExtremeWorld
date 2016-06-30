@@ -16,11 +16,8 @@ import com.google.zxing.WriterException;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.util.BitmapUtils;
 import com.jixianxueyuan.util.BuildQRCode;
-import com.jixianxueyuan.util.DiskCachePath;
-import com.jixianxueyuan.util.QRCodeUtil;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.AdvancedWebView;
@@ -38,12 +35,11 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMVideo;
 
 import java.util.UUID;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -55,11 +51,11 @@ public class InviteWebActivity extends BaseActivity implements AdvancedWebView.L
 
 
 
-    @InjectView(R.id.web_actionbar)
+    @BindView(R.id.web_actionbar)
     MyActionBar actionBar;
-    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
-    @InjectView(R.id.web_view)AdvancedWebView webView;
-    @InjectView(R.id.invite_web_button)
+    @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
+    @BindView(R.id.web_view)AdvancedWebView webView;
+    @BindView(R.id.invite_web_button)
     Button inviteButton;
 
     private MyApplication application;
@@ -69,7 +65,7 @@ public class InviteWebActivity extends BaseActivity implements AdvancedWebView.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.invite_web_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         actionBar.setTitle("邀请好友");
 

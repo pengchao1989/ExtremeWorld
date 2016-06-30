@@ -1,10 +1,8 @@
 package com.jixianxueyuan.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -14,7 +12,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
 import com.jixianxueyuan.adapter.SponsorshipListAdapter;
@@ -22,10 +19,12 @@ import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.commons.pay.PayHelper;
 import com.jixianxueyuan.config.HobbyType;
-import com.jixianxueyuan.config.TopicType;
-import com.jixianxueyuan.config.UmengEventId;
-import com.jixianxueyuan.dto.*;
-import com.jixianxueyuan.dto.Error;
+import com.jixianxueyuan.dto.HobbyDTO;
+import com.jixianxueyuan.dto.MyPage;
+import com.jixianxueyuan.dto.MyResponse;
+import com.jixianxueyuan.dto.SponsorshipDTO;
+import com.jixianxueyuan.dto.SponsorshipTradeDTO;
+import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.request.SponsorshipRequestDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
@@ -33,17 +32,14 @@ import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
 import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.GridHolder;
 import com.orhanobut.dialogplus.OnClickListener;
-import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 import java.util.UUID;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -53,11 +49,11 @@ public class SponsorshipActivity extends BaseActivity {
 
     public static final String TAG = SponsorshipActivity.class.getSimpleName();
 
-    @InjectView(R.id.bottom_sheet)
+    @BindView(R.id.bottom_sheet)
     BottomSheetLayout bottomSheetLayout;
-    @InjectView(R.id.sponsorship_list_swipe_refresh)
+    @BindView(R.id.sponsorship_list_swipe_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
-    @InjectView(R.id.sponsorship_activity_list_view)
+    @BindView(R.id.sponsorship_activity_list_view)
     ListView listView;
 
     private SponsorshipListAdapter adapter;
@@ -76,7 +72,7 @@ public class SponsorshipActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sponsorship_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         bottomSheetLayout.setPeekOnDismiss(true);
 

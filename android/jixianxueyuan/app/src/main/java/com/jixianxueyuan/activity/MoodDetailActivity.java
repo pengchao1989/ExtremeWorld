@@ -1,9 +1,6 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;

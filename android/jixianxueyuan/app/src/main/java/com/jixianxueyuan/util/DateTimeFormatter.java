@@ -5,7 +5,6 @@ import android.content.res.Resources;
 
 import com.jixianxueyuan.R;
 
-import java.security.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -38,10 +38,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
-import dmax.dialog.SpotsDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
@@ -53,37 +52,37 @@ public class SiteCreateActivity extends BaseActivity{
     public static final int REQUEST_IMAGE_CODE = 2;
     public static final int CROP_IMAGE_CODE = 3;
 
-    @InjectView(R.id.site_create_front_image)
+    @BindView(R.id.site_create_front_image)
     ImageView frontImageView;
-    @InjectView(R.id.site_create_select_front_image)
+    @BindView(R.id.site_create_select_front_image)
     ImageView selectFrontImageVIew;
-    @InjectView(R.id.site_create_name_layout)
+    @BindView(R.id.site_create_name_layout)
     LinearLayout nameLayout;
-    @InjectView(R.id.site_create_address_layout)
+    @BindView(R.id.site_create_address_layout)
     LinearLayout addressLayout;
-    @InjectView(R.id.site_create_longitude_layout)
+    @BindView(R.id.site_create_longitude_layout)
     LinearLayout longitudeLayout;
-    @InjectView(R.id.site_create_latitude_layout)
+    @BindView(R.id.site_create_latitude_layout)
     LinearLayout latitudeLinearLayout;
-    @InjectView(R.id.site_create_name_edit_text)
+    @BindView(R.id.site_create_name_edit_text)
     EditText nameEditText;
-    @InjectView(R.id.site_create_address_text)
+    @BindView(R.id.site_create_address_text)
     TextView addressEditText;
-    @InjectView(R.id.site_create_longitude_text)
+    @BindView(R.id.site_create_longitude_text)
     TextView longitudeEditText;
-    @InjectView(R.id.site_create_latitude_text)
+    @BindView(R.id.site_create_latitude_text)
     TextView latitudeEditText;
-    @InjectView(R.id.site_create_des_edit)
+    @BindView(R.id.site_create_des_edit)
     EditText desEditText;
-    @InjectView(R.id.site_create_hobby_select_gridview)
+    @BindView(R.id.site_create_hobby_select_gridview)
     GridView gridView;
 
     //progress
-    @InjectView(R.id.create_site_upload_progress_layout)
+    @BindView(R.id.create_site_upload_progress_layout)
     RelativeLayout progressLayout;
-    @InjectView(R.id.create_site_upload_progress_view)
+    @BindView(R.id.create_site_upload_progress_view)
     ProgressBar uploadProgress;
-    @InjectView(R.id.create_site_upload_progress_textview)
+    @BindView(R.id.create_site_upload_progress_textview)
     TextView progressTextView;
 
     private HobbyCheckboxGradAdapter hobbyCheckboxGradAdapter;
@@ -117,7 +116,7 @@ public class SiteCreateActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.site_create_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         hobbyCheckboxGradAdapter = new HobbyCheckboxGradAdapter(this);
         gridView.setAdapter(hobbyCheckboxGradAdapter);

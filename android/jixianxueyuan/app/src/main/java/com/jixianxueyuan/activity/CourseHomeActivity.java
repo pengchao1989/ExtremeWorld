@@ -16,9 +16,8 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ACache;
 
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -26,7 +25,7 @@ import butterknife.OnItemClick;
  */
 public class CourseHomeActivity extends BaseActivity {
 
-    @InjectView(R.id.course_home_taxonomy_list_view)ListView listView;
+    @BindView(R.id.course_home_taxonomy_list_view)ListView listView;
 
     CourseTaxonomyListAdapter adapter;
 
@@ -36,7 +35,7 @@ public class CourseHomeActivity extends BaseActivity {
 
         setContentView(R.layout.course_home_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         adapter = new CourseTaxonomyListAdapter(this);
         listView.setAdapter(adapter);

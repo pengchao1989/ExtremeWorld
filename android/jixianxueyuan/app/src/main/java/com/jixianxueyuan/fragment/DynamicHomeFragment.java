@@ -19,9 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.trade.TradeService;
 import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
 import com.alibaba.sdk.android.trade.model.TaokeParams;
@@ -33,7 +32,6 @@ import com.android.volley.VolleyError;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
@@ -61,16 +59,12 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ACache;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.widget.ExhibitionItemHolderView;
 import com.nineoldandroids.view.ViewHelper;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.GridHolder;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.victor.loading.rotate.RotateLoading;
 
 import org.greenrobot.eventbus.EventBus;
@@ -78,8 +72,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -92,16 +86,16 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     private List<ExhibitionDTO> exhibitionDTOList;
 
 
-    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
-    @InjectView(R.id.sliding_tabs) ImageView mSlidingTabLayout;
-    //@InjectView(R.id.image) ImageView headImageView;
-    @InjectView(R.id.convenientBanner)
+    @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
+    @BindView(R.id.sliding_tabs) ImageView mSlidingTabLayout;
+    //@BindView(R.id.image) ImageView headImageView;
+    @BindView(R.id.convenientBanner)
     ConvenientBanner convenientBanner;
-    @InjectView(R.id.overlay) View overlayView;
-    @InjectView(R.id.pager)
+    @BindView(R.id.overlay) View overlayView;
+    @BindView(R.id.pager)
     ViewPager mPager;
-    @InjectView(R.id.rotate_loading)RotateLoading rotateLoading;
-    @InjectView(R.id.message_is_new) ImageView messageIsNewImageView;
+    @BindView(R.id.rotate_loading)RotateLoading rotateLoading;
+    @BindView(R.id.message_is_new) ImageView messageIsNewImageView;
 
     private NavigationAdapter mPagerAdapter;
     private int mFlexibleSpaceHeight;
@@ -123,7 +117,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dynamic_home_fragment,container,false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         mPagerAdapter = new NavigationAdapter(this.getChildFragmentManager());
         mPager.setAdapter(mPagerAdapter);

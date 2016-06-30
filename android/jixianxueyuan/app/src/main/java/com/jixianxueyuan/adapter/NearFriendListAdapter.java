@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 7/3/15.
@@ -109,16 +109,16 @@ public class NearFriendListAdapter extends BaseAdapter {
 
     public static class ViewHolder
     {
-        @InjectView(R.id.near_friend_list_item_avatar)ImageView avatarImageView;
-        @InjectView(R.id.near_friend_list_item_name)TextView nameTextView;
-        @InjectView(R.id.near_friend_list_item_distance)TextView distanceTextView;
-        @InjectView(R.id.near_friend_list_item_gender)ImageView genderImageView;
-        @InjectView(R.id.near_friend_list_item_time)TextView timeAgoTextView;
-        @InjectView(R.id.near_friend_list_item_signature)TextView signatureTextView;
+        @BindView(R.id.near_friend_list_item_avatar)ImageView avatarImageView;
+        @BindView(R.id.near_friend_list_item_name)TextView nameTextView;
+        @BindView(R.id.near_friend_list_item_distance)TextView distanceTextView;
+        @BindView(R.id.near_friend_list_item_gender)ImageView genderImageView;
+        @BindView(R.id.near_friend_list_item_time)TextView timeAgoTextView;
+        @BindView(R.id.near_friend_list_item_signature)TextView signatureTextView;
 
         public ViewHolder(View itemView)
         {
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

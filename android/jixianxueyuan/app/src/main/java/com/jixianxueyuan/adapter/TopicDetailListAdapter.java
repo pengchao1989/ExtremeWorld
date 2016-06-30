@@ -26,7 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 5/23/15.
@@ -203,24 +203,24 @@ public class TopicDetailListAdapter extends BaseAdapter {
 
     public static class ViewHolder
     {
-        @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
-        @InjectView(R.id.user_head_name)TextView nameTextView;
-        @InjectView(R.id.user_head_time)TextView timeTextView;
-        @InjectView(R.id.user_head_right_tip)TextView floorTextView;
-        @InjectView(R.id.topic_detail_list_item_reply_content)TextView replyContentTextView;
+        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.user_head_name)TextView nameTextView;
+        @BindView(R.id.user_head_time)TextView timeTextView;
+        @BindView(R.id.user_head_right_tip)TextView floorTextView;
+        @BindView(R.id.topic_detail_list_item_reply_content)TextView replyContentTextView;
 
-        @InjectView(R.id.topic_detail_list_item_sub_reply_content_1)
+        @BindView(R.id.topic_detail_list_item_sub_reply_content_1)
         TextView subReplyContent1;
-        @InjectView(R.id.topic_detail_list_item_sub_reply_content_2)
+        @BindView(R.id.topic_detail_list_item_sub_reply_content_2)
         TextView subReplyContent2;
-        @InjectView(R.id.topic_detail_list_item_sub_reply_content_3)
+        @BindView(R.id.topic_detail_list_item_sub_reply_content_3)
         TextView subReplyContent3;
-        @InjectView(R.id.topic_detail_list_item_sub_reply_loadmore)
+        @BindView(R.id.topic_detail_list_item_sub_reply_loadmore)
         TextView loadMoreSubReplyTextView;
 
         public ViewHolder(View itemView)
         {
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

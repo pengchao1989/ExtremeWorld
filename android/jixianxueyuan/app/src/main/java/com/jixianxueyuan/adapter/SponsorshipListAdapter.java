@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -97,18 +97,18 @@ public class SponsorshipListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-        @InjectView(R.id.sponsorship_list_item_avatar)
+        @BindView(R.id.sponsorship_list_item_avatar)
         CircleImageView avatarImageView;
-        @InjectView(R.id.sponsorship_list_item_name)
+        @BindView(R.id.sponsorship_list_item_name)
         TextView nameTextView;
-        @InjectView(R.id.sponsorship_list_item_sum)
+        @BindView(R.id.sponsorship_list_item_sum)
         TextView sumTextView;
-        @InjectView(R.id.sponsorship_list_item_message)
+        @BindView(R.id.sponsorship_list_item_message)
         TextView messageTextView;
 
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

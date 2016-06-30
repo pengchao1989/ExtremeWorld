@@ -1,18 +1,12 @@
 package com.jixianxueyuan.util;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.flipboard.bottomsheet.commons.MenuSheetView;
-import com.jixianxueyuan.R;
 
 import java.io.File;
 import java.util.List;

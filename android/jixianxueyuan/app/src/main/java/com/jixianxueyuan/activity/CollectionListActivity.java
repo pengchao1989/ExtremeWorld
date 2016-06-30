@@ -3,7 +3,6 @@ package com.jixianxueyuan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,7 +17,6 @@ import com.jixianxueyuan.adapter.CollectionListAdapter;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.TopicType;
-import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.CollectionDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
@@ -28,14 +26,12 @@ import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
-import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -43,11 +39,11 @@ import butterknife.OnItemClick;
  */
 public class CollectionListActivity extends BaseActivity {
 
-    @InjectView(R.id.collection_list_actionbar)
+    @BindView(R.id.collection_list_actionbar)
     MyActionBar actionBar;
-    @InjectView(R.id.collection_list_swiperefresh)
+    @BindView(R.id.collection_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
-    @InjectView(R.id.collection_list_listview)
+    @BindView(R.id.collection_list_listview)
     ListView listView;
 
 
@@ -66,7 +62,7 @@ public class CollectionListActivity extends BaseActivity {
 
         setContentView(R.layout.collection_list_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         adapter = new CollectionListAdapter(this);
         listView.setAdapter(adapter);

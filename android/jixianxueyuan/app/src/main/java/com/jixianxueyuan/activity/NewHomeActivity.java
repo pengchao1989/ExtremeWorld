@@ -35,12 +35,10 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.update.UmengUpdateAgent;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 10/31/15.
@@ -49,21 +47,21 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
     public static final String tag = NewHomeActivity.class.getSimpleName();
 
-    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
-    @InjectView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
-    @InjectView(R.id.tab_discover_layout)RelativeLayout discoverLayout;
-    @InjectView(R.id.tab_mine_layout)RelativeLayout mineLayout;
-    @InjectView(R.id.tab_market_layout)RelativeLayout marketLayout;
+    @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
+    @BindView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
+    @BindView(R.id.tab_discover_layout)RelativeLayout discoverLayout;
+    @BindView(R.id.tab_mine_layout)RelativeLayout mineLayout;
+    @BindView(R.id.tab_market_layout)RelativeLayout marketLayout;
 
-    @InjectView(R.id.tab_trends_image)ImageView trendsImageView;
-    @InjectView(R.id.tab_discover_image)ImageView discoverImageView;
-    @InjectView(R.id.tab_mine_image)ImageView mineImageView;
-    @InjectView(R.id.tab_market_image)ImageView marketImageView;
+    @BindView(R.id.tab_trends_image)ImageView trendsImageView;
+    @BindView(R.id.tab_discover_image)ImageView discoverImageView;
+    @BindView(R.id.tab_mine_image)ImageView mineImageView;
+    @BindView(R.id.tab_market_image)ImageView marketImageView;
 
-    @InjectView(R.id.tab_trends_text)TextView trendsTextView;
-    @InjectView(R.id.tab_discover_text)TextView discoverTextView;
-    @InjectView(R.id.tab_mine_text)TextView mineTextView;
-    @InjectView(R.id.tab_market_text)TextView marketTextView;
+    @BindView(R.id.tab_trends_text)TextView trendsTextView;
+    @BindView(R.id.tab_discover_text)TextView discoverTextView;
+    @BindView(R.id.tab_mine_text)TextView mineTextView;
+    @BindView(R.id.tab_market_text)TextView marketTextView;
 
     private FragmentManager fragmentManager;
     private DynamicHomeFragment topicListFragment;
@@ -77,7 +75,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_home_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         fragmentManager = getSupportFragmentManager();
 

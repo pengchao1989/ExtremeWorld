@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 
 /**
@@ -68,18 +68,18 @@ public class TopicListRecyclerAdapter extends RecyclerView.Adapter<TopicListRecy
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        @InjectView(R.id.topic_list_item_title)
+        @BindView(R.id.topic_list_item_title)
         TextView titleTextView;
 
-        @InjectView(R.id.topic_list_item_name)
+        @BindView(R.id.topic_list_item_name)
         TextView nameTextView;
 
-        @InjectView(R.id.topic_list_item_time)
+        @BindView(R.id.topic_list_item_time)
         TextView timeTextView;
 
         public ViewHolder(View itemView){
             super(itemView);
-            ButterKnife.inject(this,itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

@@ -31,8 +31,8 @@ import com.jixianxueyuan.util.MyLog;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -41,9 +41,9 @@ import butterknife.OnItemClick;
 public class NewsListFragment extends Fragment {
     public static String tag = NewsListFragment.class.getSimpleName();
 
-    @InjectView(R.id.news_list_fragment_listview)
+    @BindView(R.id.news_list_fragment_listview)
     ListView listView;
-    @InjectView(R.id.news_list_swiperefresh)
+    @BindView(R.id.news_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -66,7 +66,7 @@ public class NewsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.news_list_fragment, container, false);
 
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         Bundle bundle = getArguments();
         if(bundle.containsKey(TopicType.TOPIC_TAXONOMY_ID))

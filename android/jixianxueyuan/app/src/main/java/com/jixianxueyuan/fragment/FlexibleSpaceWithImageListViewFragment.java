@@ -27,7 +27,6 @@ import android.widget.ArrayAdapter;
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.FlexibleSpaceWithImageWithViewPagerTabActivity;
 import com.jixianxueyuan.commons.ScrollReceive;
 import com.jixianxueyuan.util.MyLog;
 import com.nineoldandroids.view.ViewHelper;

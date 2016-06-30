@@ -1,6 +1,5 @@
 package com.jixianxueyuan.adapter;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 
 /**
@@ -77,15 +76,15 @@ public class CourseTaxonomyListAdapter extends BaseAdapter{
     }
 
     static class ViewHolder{
-        @InjectView(R.id.course_taxonomy_list_item_container)
+        @BindView(R.id.course_taxonomy_list_item_container)
         LinearLayout containerLayout;
-        @InjectView(R.id.course_taxonomy_list_item_name)
+        @BindView(R.id.course_taxonomy_list_item_name)
         TextView nameTextView;
-        @InjectView(R.id.course_taxonomy_list_item_des)
+        @BindView(R.id.course_taxonomy_list_item_des)
         TextView desTextView;
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

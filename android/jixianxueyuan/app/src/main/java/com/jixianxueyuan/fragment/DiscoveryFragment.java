@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseHomeActivity;
-import com.jixianxueyuan.activity.CourseOldHomeActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.SiteListActivity;
@@ -26,8 +25,8 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 4/20/15.
@@ -36,7 +35,7 @@ public class DiscoveryFragment extends Fragment {
 
     public static final String tag = DiscoveryFragment.class.getSimpleName();
 
-    @InjectView(R.id.discovery_fragment_listview)ListView listView;
+    @BindView(R.id.discovery_fragment_listview)ListView listView;
 
     DiscoveryListAdapter adapter;
 
@@ -52,7 +51,7 @@ public class DiscoveryFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.discovery_fragment, container, false);
 
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         listView.setAdapter(adapter);
 

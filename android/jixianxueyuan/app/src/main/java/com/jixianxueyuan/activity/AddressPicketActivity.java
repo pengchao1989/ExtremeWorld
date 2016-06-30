@@ -19,19 +19,17 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.geocoder.GeocodeQuery;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.location.LocationManager;
 import com.jixianxueyuan.location.MyLocation;
 import com.jixianxueyuan.util.MyLog;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -40,12 +38,12 @@ import butterknife.OnClick;
 public class AddressPicketActivity extends Activity implements LocationSource, AMapLocationListener,
         GeocodeSearch.OnGeocodeSearchListener{
 
-    @InjectView(R.id.map)MapView mapView;
-    @InjectView(R.id.address_picket_marker_image)
+    @BindView(R.id.map)MapView mapView;
+    @BindView(R.id.address_picket_marker_image)
     ImageView markerImage;
-    @InjectView(R.id.address_picket_add_text_view)
+    @BindView(R.id.address_picket_add_text_view)
     TextView addressTextView;
-    @InjectView(R.id.address_picket_complete_button)
+    @BindView(R.id.address_picket_complete_button)
     Button completeButton;
 
     AMap aMap;
@@ -57,7 +55,7 @@ public class AddressPicketActivity extends Activity implements LocationSource, A
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.address_picket_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mapView.onCreate(savedInstanceState);
         initMap();

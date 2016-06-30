@@ -6,15 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.HackyViewPager;
@@ -23,7 +17,10 @@ import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import uk.co.senab.photoview.PhotoView;
 
 /**
  * Created by pengchao on 3/12/16.
@@ -37,18 +34,18 @@ public class ImageGalleryActivity extends BaseActivity {
     private String title;
     private ArrayList<String> imageUrlList;
 
-    @InjectView(R.id.image_gallery_actionbar)
+    @BindView(R.id.image_gallery_actionbar)
     MyActionBar actionBar;
-    @InjectView(R.id.view_pager)
+    @BindView(R.id.view_pager)
     HackyViewPager mViewPager;
-    @InjectView(R.id.pager_index)
+    @BindView(R.id.pager_index)
     TextView pageIndexTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_gallery_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         imageUrlList = getIntent().getStringArrayListExtra(INTENT_IMAGE_URL_LIST);
         title = getIntent().getStringExtra(INTENT_TITLE);

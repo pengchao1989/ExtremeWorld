@@ -19,8 +19,8 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.MyActionBar;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 10/30/15.
@@ -29,10 +29,10 @@ public class SiteListActivity extends BaseActivity {
 
     private static final int REQUEST_CODE_NEW = 1;
 
-    @InjectView(R.id.site_list_activity_actionbar)MyActionBar actionBar;
-    @InjectView(R.id.site_listview)
+    @BindView(R.id.site_list_activity_actionbar)MyActionBar actionBar;
+    @BindView(R.id.site_listview)
     ListView listView;
-    @InjectView(R.id.site_list_swiperefresh)
+    @BindView(R.id.site_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
     private SiteListAdapter adapter;
@@ -44,7 +44,7 @@ public class SiteListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.site_list_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initView();
 

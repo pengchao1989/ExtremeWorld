@@ -12,8 +12,8 @@ import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.MyActionBar;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import me.amiee.nicetab.NiceTabLayout;
 import me.amiee.nicetab.NiceTabStrip;
 
@@ -22,9 +22,9 @@ import me.amiee.nicetab.NiceTabStrip;
  */
 public class TopicTaxonomyHomeActivity extends BaseActivity {
 
-    @InjectView(R.id.discuss_home_actionbar)MyActionBar myActionBar;
-    @InjectView(R.id.discuss_home_activity_pager)ViewPager viewPager;
-    @InjectView(R.id.discuss_home_activity_pager_title_strip)NiceTabLayout niceTabLayout;
+    @BindView(R.id.discuss_home_actionbar)MyActionBar myActionBar;
+    @BindView(R.id.discuss_home_activity_pager)ViewPager viewPager;
+    @BindView(R.id.discuss_home_activity_pager_title_strip)NiceTabLayout niceTabLayout;
 
     TopicTaxonomyListFragmentPageAdapter pageAdapter;
 
@@ -38,7 +38,7 @@ public class TopicTaxonomyHomeActivity extends BaseActivity {
 
         setContentView(R.layout.discuss_home_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         Intent intent = this.getIntent();
         if(intent.hasExtra(TopicType.TYPE))

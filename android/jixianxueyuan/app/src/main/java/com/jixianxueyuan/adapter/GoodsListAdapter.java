@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 10/18/15.
@@ -90,11 +90,11 @@ public class GoodsListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder{
-        @InjectView(R.id.goods_list_item_image)ImageView imageView;
-        @InjectView(R.id.goods_list_item_title)TextView titleTextView;
+        @BindView(R.id.goods_list_item_image)ImageView imageView;
+        @BindView(R.id.goods_list_item_title)TextView titleTextView;
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

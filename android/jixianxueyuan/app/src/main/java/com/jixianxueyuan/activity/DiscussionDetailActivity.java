@@ -1,22 +1,21 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.jixianxueyuan.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 4/25/15.
  */
 public class DiscussionDetailActivity extends BaseActivity{
 
-    @InjectView(R.id.discussion_detail_title)TextView titleTextView;
-    @InjectView(R.id.discussion_detail_content)TextView contentTextView;
+    @BindView(R.id.discussion_detail_title)TextView titleTextView;
+    @BindView(R.id.discussion_detail_content)TextView contentTextView;
 
     String title;
     String content;
@@ -27,7 +26,7 @@ public class DiscussionDetailActivity extends BaseActivity{
 
         setContentView(R.layout.discussion_detail_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         Intent intent = this.getIntent();
 

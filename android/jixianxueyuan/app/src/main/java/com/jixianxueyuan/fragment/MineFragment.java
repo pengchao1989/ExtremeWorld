@@ -15,16 +15,15 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CollectionListActivity;
 import com.jixianxueyuan.activity.CropBgActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
-import com.jixianxueyuan.activity.profile.ProfileEditActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
+import com.jixianxueyuan.activity.profile.ProfileEditActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
@@ -39,7 +38,6 @@ import com.jixianxueyuan.dto.request.UserAttributeRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -47,8 +45,8 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import dmax.dialog.SpotsDialog;
@@ -65,11 +63,11 @@ public class MineFragment extends Fragment {
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
 
-    @InjectView(R.id.mine_fragment_head_image_view)
+    @BindView(R.id.mine_fragment_head_image_view)
     ImageView headImageView;
-    @InjectView(R.id.mine_avatar_imageview)
+    @BindView(R.id.mine_avatar_imageview)
     ImageView avatarImageView;
-    @InjectView(R.id.mine_fragment_signature)
+    @BindView(R.id.mine_fragment_signature)
     TextView signatureTextView;
 
     private NewHomeActivity activity;
@@ -101,7 +99,7 @@ public class MineFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.mine_fragment, container, false);
 
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView, ImageLoaderConfig.getAvatarOption(this.getActivity()));
         ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg() + QiniuImageStyle.COVER, headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));

@@ -1,13 +1,10 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.trade.ItemService;
 import com.alibaba.sdk.android.trade.TradeService;
 import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
 import com.alibaba.sdk.android.trade.model.TaokeParams;
@@ -29,8 +26,8 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.GridViewWithHeaderAndFooter;
 import com.jixianxueyuan.widget.MyActionBar;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -43,8 +40,8 @@ public class GoodsListActivity extends BaseActivity {
     public static final String SOURCE_TYPE_CATEGORY = "SOURCE_TYPE_CATEGORY";
     public static final String SOURCE_TYPE_SHOP = "SOURCE_TYPE_SHOP";
 
-    @InjectView(R.id.goods_list_activity_actionbar)MyActionBar actionBar;
-    @InjectView(R.id.goods_list_activity_gridview)GridViewWithHeaderAndFooter gridView;
+    @BindView(R.id.goods_list_activity_actionbar)MyActionBar actionBar;
+    @BindView(R.id.goods_list_activity_gridview)GridViewWithHeaderAndFooter gridView;
 
     private String sourceType;
     private ShopDTO shopDTO;
@@ -56,7 +53,7 @@ public class GoodsListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.goods_list_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         intentData();
         initView();

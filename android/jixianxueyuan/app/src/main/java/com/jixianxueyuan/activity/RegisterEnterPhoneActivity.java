@@ -20,8 +20,8 @@ import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.StringUtils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
 
@@ -30,7 +30,7 @@ import dmax.dialog.SpotsDialog;
  */
 public class RegisterEnterPhoneActivity extends Activity{
 
-    @InjectView(R.id.register_enter_phone_number)EditText phoneNumberEditText;
+    @BindView(R.id.register_enter_phone_number)EditText phoneNumberEditText;
     private String phoneNumber;
 
     private AlertDialog progressDialog;
@@ -40,7 +40,7 @@ public class RegisterEnterPhoneActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_enter_phone_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     private boolean checkPhoneNumber(String phoneNumber){

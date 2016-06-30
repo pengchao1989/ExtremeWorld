@@ -28,8 +28,8 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -41,8 +41,8 @@ public class NearFriendActivity extends BaseActivity  {
     double latitude;
     double longitude;
 
-    @InjectView(R.id.near_friend_listview)ListView listView;
-    @InjectView(R.id.near_friend_swiperefresh)SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.near_friend_listview)ListView listView;
+    @BindView(R.id.near_friend_swiperefresh)SwipeRefreshLayout swipeRefreshLayout;
     private AlertDialog progressDialog;
     private ClickLoadMoreView clickLoadMoreView;
 
@@ -57,7 +57,7 @@ public class NearFriendActivity extends BaseActivity  {
 
         setContentView(R.layout.near_friend_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initView();
 

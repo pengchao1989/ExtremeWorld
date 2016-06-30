@@ -1,7 +1,5 @@
 package com.jixianxueyuan.commons.pay;
 
-import com.jixianxueyuan.commons.pay.Base64;
-
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;

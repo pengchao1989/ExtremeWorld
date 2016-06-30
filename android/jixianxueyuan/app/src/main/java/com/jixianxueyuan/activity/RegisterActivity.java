@@ -59,8 +59,8 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -78,22 +78,22 @@ public class RegisterActivity extends Activity {
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
 
-    @InjectView(R.id.register_avatar)ImageView avatarImageView;
-    @InjectView(R.id.register_avatar_select)Button selectButton;
-    @InjectView(R.id.register_nick_name)EditText nickNameEditText;
-    @InjectView(R.id.register_birth)EditText birthEditText;
-    @InjectView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
-    @InjectView(R.id.register_invitation_layout)LinearLayout invitationLayout;
-    @InjectView(R.id.register_inviting_layout)LinearLayout invitingLayout;
-    @InjectView(R.id.register_invitation_code_layout)LinearLayout invitingCodeLayout;
-    @InjectView(R.id.register_invitation_code_edittext)EditText invitationCodeEditText;
-    @InjectView(R.id.register_inviting_name)TextView invitingNameTextView;
-    @InjectView(R.id.register_invitation_description)TextView invitationDescriptionTextView;
-    @InjectView(R.id.register_verification_code_layout)LinearLayout verCodeLayout;
-    @InjectView(R.id.register_verification_code_edittext)EditText verCodeEditText;
-    @InjectView(R.id.register_verification_code_retry_button) TextView verCodeRetryButton;
-    @InjectView(R.id.register_password_layout)LinearLayout passwordLayout;
-    @InjectView(R.id.register_password_edittext)EditText passwordEditText;
+    @BindView(R.id.register_avatar)ImageView avatarImageView;
+    @BindView(R.id.register_avatar_select)Button selectButton;
+    @BindView(R.id.register_nick_name)EditText nickNameEditText;
+    @BindView(R.id.register_birth)EditText birthEditText;
+    @BindView(R.id.register_gender_radiogroup)RadioGroup genderRadiogroup;
+    @BindView(R.id.register_invitation_layout)LinearLayout invitationLayout;
+    @BindView(R.id.register_inviting_layout)LinearLayout invitingLayout;
+    @BindView(R.id.register_invitation_code_layout)LinearLayout invitingCodeLayout;
+    @BindView(R.id.register_invitation_code_edittext)EditText invitationCodeEditText;
+    @BindView(R.id.register_inviting_name)TextView invitingNameTextView;
+    @BindView(R.id.register_invitation_description)TextView invitationDescriptionTextView;
+    @BindView(R.id.register_verification_code_layout)LinearLayout verCodeLayout;
+    @BindView(R.id.register_verification_code_edittext)EditText verCodeEditText;
+    @BindView(R.id.register_verification_code_retry_button) TextView verCodeRetryButton;
+    @BindView(R.id.register_password_layout)LinearLayout passwordLayout;
+    @BindView(R.id.register_password_edittext)EditText passwordEditText;
 
 
     private AlertDialog progressDialog;
@@ -130,7 +130,7 @@ public class RegisterActivity extends Activity {
         userRequestParam = new UserRegisterRequest();
         userRequestParam.setGender("male");
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         imageLoader = ImageLoader.getInstance();
 

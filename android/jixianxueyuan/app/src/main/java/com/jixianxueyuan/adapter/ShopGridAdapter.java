@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 10/17/15.
@@ -84,12 +84,12 @@ public class ShopGridAdapter extends BaseAdapter {
     }
 
     static class ViewHolder{
-        @InjectView(R.id.shop_gird_item_icon)ImageView iconImageView;
-        @InjectView(R.id.shop_gird_item_name)TextView nameTextView;
-        @InjectView(R.id.shop_gird_item_signature)TextView signatureTextView;
+        @BindView(R.id.shop_gird_item_icon)ImageView iconImageView;
+        @BindView(R.id.shop_gird_item_name)TextView nameTextView;
+        @BindView(R.id.shop_gird_item_signature)TextView signatureTextView;
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this,itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

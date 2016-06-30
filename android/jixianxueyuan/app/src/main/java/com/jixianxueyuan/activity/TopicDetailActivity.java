@@ -95,10 +95,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 import dmax.dialog.SpotsDialog;
 
@@ -111,10 +109,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     public final static String INTENT_TOPIC = "topic";
     public final static String INTENT_TOPIC_ID = "INTENT_TOPIC_ID";
 
-    @InjectView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
-    @InjectView(R.id.topic_detail_actionbar)MyActionBar actionBar;
-    @InjectView(R.id.topic_detail_listview)ListView listView;
-    @InjectView(R.id.reply_widget_layout)LinearLayout contentLayout;
+    @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
+    @BindView(R.id.topic_detail_actionbar)MyActionBar actionBar;
+    @BindView(R.id.topic_detail_listview)ListView listView;
+    @BindView(R.id.reply_widget_layout)LinearLayout contentLayout;
 
 
     private long topicId = -1;
@@ -185,7 +183,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
         setContentView(R.layout.topic_detail_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         Intent intent = this.getIntent();
 
@@ -825,40 +823,40 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public static class HeadViewHolder
     {
-        @InjectView(R.id.user_info_head_layout)RelativeLayout mUserHeadLayout;
-        @InjectView(R.id.topic_detail_title)TextView titleTextView;
-        @InjectView(R.id.user_head_name)TextView nameTextView;
-        @InjectView(R.id.user_head_time)TextView timeTextView;
-        @InjectView(R.id.user_head_avatar)ImageView avatarImageView;
-        @InjectView(R.id.videoview)SuperVideoPlayer videoView;
-        @InjectView(R.id.web_view)AdvancedWebView webView;
-        @InjectView(R.id.topic_detail_head_view_video_cover_image)
+        @BindView(R.id.user_info_head_layout)RelativeLayout mUserHeadLayout;
+        @BindView(R.id.topic_detail_title)TextView titleTextView;
+        @BindView(R.id.user_head_name)TextView nameTextView;
+        @BindView(R.id.user_head_time)TextView timeTextView;
+        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.videoview)SuperVideoPlayer videoView;
+        @BindView(R.id.web_view)AdvancedWebView webView;
+        @BindView(R.id.topic_detail_head_view_video_cover_image)
         ImageView coverImageView;
-        @InjectView(R.id.topic_detail_head_view_video_play_btn)
+        @BindView(R.id.topic_detail_head_view_video_play_btn)
         ImageView playButton;
-        @InjectView(R.id.short_video_detail_progress)
+        @BindView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;
-        @InjectView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
-        @InjectView(R.id.topic_detail_head_zan)LikeButton zanButton;
-        @InjectView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
-        @InjectView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
-        @InjectView(R.id.topic_detail_content_textview)TextView contentTextView;
-        @InjectView(R.id.topic_detail_content_container)LinearLayout contentLayout;
-        @InjectView(R.id.topic_detail_collection_button)LikeButton collectionButton;
-        @InjectView(R.id.rating_layout)LinearLayout ratingLayout;
-        @InjectView(R.id.ratingBar)RatingBar ratingBar;
-        @InjectView(R.id.rating_value)TextView ratingValue;
-        @InjectView(R.id.rating_count)TextView ratingCount;
-        @InjectView(R.id.my_rating_layout)RelativeLayout myRatingLayout;
-        @InjectView(R.id.my_ratingBar)RatingBar myRatingBar;
-        @InjectView(R.id.my_submit_rating_text)TextView mySubmitRatingText;
-        @InjectView(R.id.my_submit_rating_button)Button mySubmitRatingButton;
-        @InjectView(R.id.my_rating_score_text)TextView myRatingText;
+        @BindView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
+        @BindView(R.id.topic_detail_head_zan)LikeButton zanButton;
+        @BindView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
+        @BindView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
+        @BindView(R.id.topic_detail_content_textview)TextView contentTextView;
+        @BindView(R.id.topic_detail_content_container)LinearLayout contentLayout;
+        @BindView(R.id.topic_detail_collection_button)LikeButton collectionButton;
+        @BindView(R.id.rating_layout)LinearLayout ratingLayout;
+        @BindView(R.id.ratingBar)RatingBar ratingBar;
+        @BindView(R.id.rating_value)TextView ratingValue;
+        @BindView(R.id.rating_count)TextView ratingCount;
+        @BindView(R.id.my_rating_layout)RelativeLayout myRatingLayout;
+        @BindView(R.id.my_ratingBar)RatingBar myRatingBar;
+        @BindView(R.id.my_submit_rating_text)TextView mySubmitRatingText;
+        @BindView(R.id.my_submit_rating_button)Button mySubmitRatingButton;
+        @BindView(R.id.my_rating_score_text)TextView myRatingText;
 
 
         public HeadViewHolder(View headView)
         {
-            ButterKnife.inject(this, headView);
+            ButterKnife.bind(this, headView);
         }
     }
 

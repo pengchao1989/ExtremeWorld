@@ -2,8 +2,6 @@ package com.jixianxueyuan.util.filedownload;
 
 import android.content.Context;
 
-import com.jixianxueyuan.R;
-
 public class Resources
 {
 	public static String getLibraryName(Context pContext)

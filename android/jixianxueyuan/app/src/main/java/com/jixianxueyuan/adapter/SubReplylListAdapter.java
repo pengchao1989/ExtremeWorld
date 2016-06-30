@@ -5,7 +5,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 8/26/15.
@@ -112,12 +111,12 @@ public class SubReplylListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-        @InjectView(R.id.subreply_list_item_content)
+        @BindView(R.id.subreply_list_item_content)
         TextView contentTextView;
 
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this,itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

@@ -3,7 +3,6 @@ package com.jixianxueyuan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,13 +25,12 @@ import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.AutoLoadMoreView;
-import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -43,11 +41,11 @@ public class RemindListActivity extends BaseActivity {
     MyApplication myApplication;
     Mine mine;
 
-    @InjectView(R.id.remind_list_actionbar)
+    @BindView(R.id.remind_list_actionbar)
     MyActionBar actionBar;
-    @InjectView(R.id.remind_list_swiperefresh)
+    @BindView(R.id.remind_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
-    @InjectView(R.id.remind_list_listview)
+    @BindView(R.id.remind_list_listview)
     ListView listView;
     private AutoLoadMoreView autoLoadMoreView;
 
@@ -62,7 +60,7 @@ public class RemindListActivity extends BaseActivity {
 
         setContentView(R.layout.remind_list_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         myApplication = (MyApplication) this.getApplication();
         mine = myApplication.getMine();

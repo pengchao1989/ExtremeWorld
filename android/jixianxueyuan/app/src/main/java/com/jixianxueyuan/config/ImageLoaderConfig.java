@@ -4,11 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.jixianxueyuan.R;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 /**
  * Created by pengchao on 9/3/15.

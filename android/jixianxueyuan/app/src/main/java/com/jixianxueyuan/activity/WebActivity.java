@@ -1,21 +1,18 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.widget.AdvancedWebView;
 import com.jixianxueyuan.widget.MyActionBar;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -26,9 +23,9 @@ public class WebActivity extends BaseActivity implements AdvancedWebView.Listene
     public static final String INTENT_TITLE = "INTENT_TITLE";
     public static final String INTENT_URL = "INTENT_URL";
 
-    @InjectView(R.id.web_actionbar)
+    @BindView(R.id.web_actionbar)
     MyActionBar actionBar;
-    @InjectView(R.id.web_view)AdvancedWebView webView;
+    @BindView(R.id.web_view)AdvancedWebView webView;
 
     private AlertDialog progressDialog;
 
@@ -41,7 +38,7 @@ public class WebActivity extends BaseActivity implements AdvancedWebView.Listene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initParams();
         actionBar.setTitle(title);

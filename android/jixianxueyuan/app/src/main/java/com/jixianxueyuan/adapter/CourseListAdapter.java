@@ -10,12 +10,11 @@ import android.widget.TextView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.dto.CourseMinDTO;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -74,11 +73,11 @@ public class CourseListAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder{
-        @InjectView(R.id.course_list_item_name)
+        @BindView(R.id.course_list_item_name)
         TextView nameTextView;
 
         public ViewHolder(View itemView){
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

@@ -1,18 +1,14 @@
 package com.jixianxueyuan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.CategoryGridAdapter;
 import com.jixianxueyuan.adapter.ShopGridAdapter;
@@ -25,14 +21,13 @@ import com.jixianxueyuan.dto.biz.ShopDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.GridViewWithHeaderAndFooter;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -43,7 +38,7 @@ public class MarketHomeActivity extends BaseActivity {
     public static final String tag = MarketHomeActivity.class.getSimpleName();
 
 
-    @InjectView(R.id.market_home_activity_gridview)GridViewWithHeaderAndFooter gridView;
+    @BindView(R.id.market_home_activity_gridview)GridViewWithHeaderAndFooter gridView;
 
     private CategoryGridAdapter categoryGridAdapter;
     private ShopGridAdapter shopGridAdapter;
@@ -53,7 +48,7 @@ public class MarketHomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.market_home_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initHeadView();
 

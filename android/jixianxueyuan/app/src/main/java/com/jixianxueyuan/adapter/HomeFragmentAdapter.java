@@ -9,11 +9,9 @@ import android.util.Log;
 
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.TopicType;
-import com.jixianxueyuan.fragment.CourseListFragment;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.fragment.TopicListFragment;
-import com.jixianxueyuan.fragment.VideoListFragment;
 
 /**
  * Created by pengchao on 2015/4/12.

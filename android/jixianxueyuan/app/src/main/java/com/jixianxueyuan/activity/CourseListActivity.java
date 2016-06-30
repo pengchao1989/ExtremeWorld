@@ -11,8 +11,8 @@ import com.jixianxueyuan.adapter.CourseListAdapter;
 import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.CourseTaxonomyDTO;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -24,7 +24,7 @@ public class CourseListActivity extends BaseActivity{
     public static final String TAG = CourseListActivity.class.getSimpleName();
     public static final String INTENT_COURSE_LIST = "INTENT_COURSE_LIST";
 
-    @InjectView(R.id.course_list_fragment_listview)
+    @BindView(R.id.course_list_fragment_listview)
     ListView listView;
 
     private CourseListAdapter adapter;
@@ -37,7 +37,7 @@ public class CourseListActivity extends BaseActivity{
 
         setContentView(R.layout.course_list_fragment);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
 
         Bundle bundle = this.getIntent().getExtras();

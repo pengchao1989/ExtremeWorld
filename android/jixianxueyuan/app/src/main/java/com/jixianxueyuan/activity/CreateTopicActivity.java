@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -36,11 +35,10 @@ import com.jixianxueyuan.adapter.TaxonomySpinnerAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.Contant;
 import com.jixianxueyuan.commons.FileUtils;
-import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.MediaType;
+import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.config.TopicType;
-import com.jixianxueyuan.config.VideoRecordConfig;
 import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.MediaDTO;
@@ -53,8 +51,6 @@ import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
-import com.jixianxueyuan.config.StaticResourceConfig;
-import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
@@ -71,8 +67,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
@@ -85,24 +81,24 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int REQUEST_VIDEO_CODE = 2;
 
-    @InjectView(R.id.create_topic_actionbar)MyActionBar myActionBar;
-    @InjectView(R.id.create_topic_title_layout)LinearLayout mTaxonomySpinnerLayout;
-    @InjectView(R.id.create_topic_taxonomy_spinner)Spinner taxonomySpinner;
-    @InjectView(R.id.create_topic_title)EditText titleEditText;
-    @InjectView(R.id.create_topic_content_edittext)
+    @BindView(R.id.create_topic_actionbar)MyActionBar myActionBar;
+    @BindView(R.id.create_topic_title_layout)LinearLayout mTaxonomySpinnerLayout;
+    @BindView(R.id.create_topic_taxonomy_spinner)Spinner taxonomySpinner;
+    @BindView(R.id.create_topic_title)EditText titleEditText;
+    @BindView(R.id.create_topic_content_edittext)
     EditText contentEditText;
-    @InjectView(R.id.create_topic_video_thumble_layout)
+    @BindView(R.id.create_topic_video_thumble_layout)
     RelativeLayout videoThumbleLayout;
-    @InjectView(R.id.create_topic_image_list_view)
+    @BindView(R.id.create_topic_image_list_view)
     RecyclerView recyclerView;
-    @InjectView(R.id.create_topic_video_thumble_imageview)
+    @BindView(R.id.create_topic_video_thumble_imageview)
     ImageView videoThumbleImage;
 
-    @InjectView(R.id.create_topic_upload_progress_layout)
+    @BindView(R.id.create_topic_upload_progress_layout)
     RelativeLayout progressLayout;
-    @InjectView(R.id.create_topic_upload_progress_view)
+    @BindView(R.id.create_topic_upload_progress_view)
     ProgressBar uploadProgress;
-    @InjectView(R.id.create_topic_upload_progress_textview)
+    @BindView(R.id.create_topic_upload_progress_textview)
     TextView progressTextView;
 
 
@@ -160,7 +156,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
         super.onCreate(savedInstanceStated);
         setContentView(R.layout.create_topic_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         myActionBar.setActionOnClickListener(new View.OnClickListener() {
             @Override

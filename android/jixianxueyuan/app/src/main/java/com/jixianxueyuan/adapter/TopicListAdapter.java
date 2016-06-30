@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 
 /**
@@ -248,50 +248,50 @@ public class TopicListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-        @InjectView(R.id.topic_list_item_type)
+        @BindView(R.id.topic_list_item_type)
         ImageView typeImageView;
-        @InjectView(R.id.topic_list_item_title)
+        @BindView(R.id.topic_list_item_title)
         TextView titleTextView;
-        @InjectView(R.id.topic_list_item_avatar)
+        @BindView(R.id.topic_list_item_avatar)
         ImageView avatarImageView;
 
-        @InjectView(R.id.topic_list_item_name)
+        @BindView(R.id.topic_list_item_name)
         TextView nameTextView;
 
-        @InjectView(R.id.topic_list_item_time)
+        @BindView(R.id.topic_list_item_time)
         TextView timeTextView;
 
-        @InjectView(R.id.topic_list_item_view_count)
+        @BindView(R.id.topic_list_item_view_count)
         TextView viewCountTextView;
 
-        @InjectView(R.id.topic_list_item_agree_count)
+        @BindView(R.id.topic_list_item_agree_count)
         TextView agreeCountTextView;
 
-        @InjectView(R.id.topic_list_item_image_1)
+        @BindView(R.id.topic_list_item_image_1)
         ImageView topicImageView_1;
 
-        @InjectView(R.id.topic_list_item_image_2)
+        @BindView(R.id.topic_list_item_image_2)
         ImageView topicImageView_2;
 
-        @InjectView(R.id.topic_list_item_image_3)
+        @BindView(R.id.topic_list_item_image_3)
         ImageView topicImageView_3;
 
-        @InjectView(R.id.topic_list_item_image_4)
+        @BindView(R.id.topic_list_item_image_4)
         ImageView topicImageView_4;
 
-        @InjectView(R.id.topic_list_item_image_5)
+        @BindView(R.id.topic_list_item_image_5)
         ImageView topicImageView_5;
 
-        @InjectView(R.id.topic_list_item_video_front_layout)
+        @BindView(R.id.topic_list_item_video_front_layout)
         RelativeLayout videoFrontLayout;
 
-        @InjectView(R.id.topic_list_item_video_front_image)
+        @BindView(R.id.topic_list_item_video_front_image)
         ImageView videoFrontImageView;
 
 
         public ViewHolder(View itemView){
 
-            ButterKnife.inject(this,itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

@@ -28,19 +28,19 @@ import com.jixianxueyuan.widget.MyActionBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by pengchao on 3/24/16.
  */
 public class CreateNewsActivity extends BaseActivity {
 
-    @InjectView(R.id.create_news_actionbar)
+    @BindView(R.id.create_news_actionbar)
     MyActionBar myActionBar;
-    @InjectView(R.id.create_news_title)
+    @BindView(R.id.create_news_title)
     EditText titleEditText;
-    @InjectView(R.id.create_news_url)
+    @BindView(R.id.create_news_url)
     EditText urlEditText;
 
 
@@ -55,7 +55,7 @@ public class CreateNewsActivity extends BaseActivity {
 
         getIntentParams();
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         myActionBar.setActionOnClickListener(new View.OnClickListener() {
             @Override

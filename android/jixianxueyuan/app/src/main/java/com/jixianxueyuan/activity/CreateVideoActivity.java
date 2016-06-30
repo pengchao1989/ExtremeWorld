@@ -1,7 +1,6 @@
 package com.jixianxueyuan.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -23,11 +22,8 @@ import android.widget.Toast;
 import com.android.tedcoder.wkvideoplayer.view.MediaController;
 import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
-import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.FileUtils;
@@ -43,23 +39,18 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.BitmapUtils;
-import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuVideoUpload;
 import com.jixianxueyuan.util.qiniu.QiniuVideoUploadListener;
 import com.jixianxueyuan.util.qiniu.VideoUploadResult;
 import com.jixianxueyuan.widget.MyActionBar;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -73,29 +64,29 @@ public class CreateVideoActivity extends BaseActivity {
     private static final String tag = "CreateVideoActivity";
     private static final int FILE_SELECT_CODE = 0x1;
 
-    @InjectView(R.id.create_video_guide)
+    @BindView(R.id.create_video_guide)
     TextView guideTextView;
-    @InjectView(R.id.create_video_actionbar)
+    @BindView(R.id.create_video_actionbar)
     MyActionBar myActionBar;
-    @InjectView(R.id.create_video_title)
+    @BindView(R.id.create_video_title)
     EditText titleEditText;
-    @InjectView(R.id.create_video_description)
+    @BindView(R.id.create_video_description)
     EditText descriptionEditText;
-    @InjectView(R.id.create_video_select)
+    @BindView(R.id.create_video_select)
     ImageButton selectButton;
-    @InjectView(R.id.create_video_upload_progress_layout)
+    @BindView(R.id.create_video_upload_progress_layout)
     RelativeLayout progressLayout;
-    @InjectView(R.id.create_video_upload_progress_view)
+    @BindView(R.id.create_video_upload_progress_view)
     ProgressBar uploadProgress;
-    @InjectView(R.id.create_video_upload_progress_textview)
+    @BindView(R.id.create_video_upload_progress_textview)
     TextView progressTextView;
-    @InjectView(R.id.create_video_video_layout)
+    @BindView(R.id.create_video_video_layout)
     FrameLayout videoLayout;
-    @InjectView(R.id.create_video_video_cover_image)
+    @BindView(R.id.create_video_video_cover_image)
     ImageView videoCoverImageView;
-    @InjectView(R.id.create_video_video_play_btn)
+    @BindView(R.id.create_video_video_play_btn)
     ImageView videoPlayButton;
-    @InjectView(R.id.videoview)
+    @BindView(R.id.videoview)
     SuperVideoPlayer videoView;
 
     private String topicType;
@@ -128,7 +119,7 @@ public class CreateVideoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_video_activity);
         getIntentParams();
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if (TopicType.CHALLENGE.equals(topicType)){
             if (courseMinDTO != null){

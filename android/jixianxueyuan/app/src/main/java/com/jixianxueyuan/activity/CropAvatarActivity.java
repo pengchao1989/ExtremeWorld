@@ -3,16 +3,14 @@ package com.jixianxueyuan.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.isseiaoki.simplecropview.CropImageView;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.util.ACache;
 import com.jixianxueyuan.util.BitmapUtils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
@@ -20,7 +18,7 @@ import butterknife.OnClick;
  */
 public class CropAvatarActivity extends Activity{
 
-    @InjectView(R.id.cropImageView)CropImageView cropImageView;
+    @BindView(R.id.cropImageView)CropImageView cropImageView;
 
     private String imagePath;
 
@@ -28,7 +26,7 @@ public class CropAvatarActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crop_avatar_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         imagePath = intent.getStringExtra("imagePath");

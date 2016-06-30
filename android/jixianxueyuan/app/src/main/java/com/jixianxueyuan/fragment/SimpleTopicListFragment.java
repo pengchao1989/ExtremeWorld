@@ -32,8 +32,8 @@ import com.jixianxueyuan.widget.AutoLoadMoreView;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 
 /**
@@ -45,9 +45,9 @@ public class SimpleTopicListFragment extends Fragment {
     public static final String INTENT_IS_FIRST = "INTENT_IS_FIRST";
     public static final String INTENT_IS_FINE = "INTENT_IS_FINE";
 
-    @InjectView(R.id.simple_top_list_swipe_refresh)
+    @BindView(R.id.simple_top_list_swipe_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
-    @InjectView(R.id.simple_topic_list_view)
+    @BindView(R.id.simple_topic_list_view)
     ListView listView;
 
     /*以下两个参数用于定义topic范围，从arg传递过来*/
@@ -79,7 +79,7 @@ public class SimpleTopicListFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.simple_topic_list_fragment, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.primary);
 

@@ -13,8 +13,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.nereo.multi_image_selector.bean.Image;
-
 /**
  * Created by pengchao on 8/22/15.
  */

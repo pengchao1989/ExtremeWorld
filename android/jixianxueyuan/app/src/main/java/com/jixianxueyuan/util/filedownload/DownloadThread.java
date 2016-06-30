@@ -1,12 +1,12 @@
 package com.jixianxueyuan.util.filedownload;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import android.util.Log;
 
 public class DownloadThread extends Thread {
     private static final String TAG = "DownloadThread";

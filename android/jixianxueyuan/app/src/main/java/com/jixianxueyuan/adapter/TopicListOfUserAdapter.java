@@ -1,7 +1,6 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by pengchao on 7/21/15.
@@ -196,35 +195,35 @@ public class TopicListOfUserAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder{
-        @InjectView(R.id.topic_list_of_user_item_type_image)
+        @BindView(R.id.topic_list_of_user_item_type_image)
         ImageView typeImageView;
-        @InjectView(R.id.topic_list_of_user_item_date)
+        @BindView(R.id.topic_list_of_user_item_date)
         TextView dateTextView;
-        @InjectView(R.id.topic_list_of_user_item_title)
+        @BindView(R.id.topic_list_of_user_item_title)
         TextView titleTextView;
-        @InjectView(R.id.topic_list_of_user_item_image_1)
+        @BindView(R.id.topic_list_of_user_item_image_1)
         ImageView topicImageView_1;
 
-        @InjectView(R.id.topic_list_of_user_item_image_2)
+        @BindView(R.id.topic_list_of_user_item_image_2)
         ImageView topicImageView_2;
 
-        @InjectView(R.id.topic_list_of_user_item_image_3)
+        @BindView(R.id.topic_list_of_user_item_image_3)
         ImageView topicImageView_3;
 
-        @InjectView(R.id.topic_list_of_user_item_image_4)
+        @BindView(R.id.topic_list_of_user_item_image_4)
         ImageView topicImageView_4;
 
-        @InjectView(R.id.topic_list_of_user_item_image_5)
+        @BindView(R.id.topic_list_of_user_item_image_5)
         ImageView topicImageView_5;
 
-        @InjectView(R.id.topic_list_of_user_item_video_front_layout)
+        @BindView(R.id.topic_list_of_user_item_video_front_layout)
         RelativeLayout videoFrontLayout;
 
-        @InjectView(R.id.topic_list_of_user_item_video_front_image)
+        @BindView(R.id.topic_list_of_user_item_video_front_image)
         ImageView videoFrontImageView;
 
         public ViewHolder(View view){
-            ButterKnife.inject(this,view);
+            ButterKnife.bind(this,view);
         }
     }
 }

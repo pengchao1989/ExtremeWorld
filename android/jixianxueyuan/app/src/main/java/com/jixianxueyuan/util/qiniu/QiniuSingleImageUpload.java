@@ -1,7 +1,6 @@
 package com.jixianxueyuan.util.qiniu;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;

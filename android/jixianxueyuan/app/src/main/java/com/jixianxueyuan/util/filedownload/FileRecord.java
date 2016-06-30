@@ -1,13 +1,12 @@
 package com.jixianxueyuan.util.filedownload;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class FileRecord {
