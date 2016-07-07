@@ -104,7 +104,7 @@ public class CollectionListActivity extends BaseActivity {
 
     private void doHideFootView()
     {
-        if (totalPage > 0 && currentPage >= totalPage) {
+        if ((totalPage > 0 && currentPage >= totalPage) || totalPage == 0) {
             autoLoadMoreView.setOver();
         }else {
             autoLoadMoreView.reset();

@@ -13,13 +13,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.RemindListAdapter;
-import com.jixianxueyuan.app.Mine;
-import com.jixianxueyuan.app.MyApplication;
-import com.jixianxueyuan.config.RemindType;
+import com.jixianxueyuan.adapter.RankingListAdapter;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
-import com.jixianxueyuan.dto.RemindDTO;
+import com.jixianxueyuan.dto.UserScoreDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
@@ -34,22 +31,20 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
 /**
- * Created by pengchao on 8/9/15.
+ * Created by pengchao on 7/7/16.
  */
-public class RemindListActivity extends BaseActivity {
-
-    MyApplication myApplication;
-    Mine mine;
+public class RankingListActivity extends BaseActivity {
 
     @BindView(R.id.remind_list_actionbar)
-    MyActionBar actionBar;
-    @BindView(R.id.remind_list_swiperefresh)
-    SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.remind_list_listview)
-    ListView listView;
+    MyActionBar remindListActionbar;
+    @BindView(R.id.listview)
+    ListView listview;
+    @BindView(R.id.swipere_fresh_layout)
+    SwipeRefreshLayout swipereFreshLayout;
+
     private AutoLoadMoreView autoLoadMoreView;
 
-    RemindListAdapter adapter;
+    private RankingListAdapter rankingListAdapter;
 
     int currentPage = 0;
     int totalPage = 0;
@@ -57,28 +52,13 @@ public class RemindListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.remind_list_activity);
-
+        setContentView(R.layout.ranking_list_activity);
         ButterKnife.bind(this);
 
-        myApplication = (MyApplication) this.getApplication();
-        mine = myApplication.getMine();
+        rankingListAdapter = new RankingListAdapter(this);
+        listview.setAdapter(rankingListAdapter);
 
-        initFootView();
-        swipeRefreshLayout.setColorSchemeResources(R.color.primary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                refreshTopicList();
-            }
-        });
-
-        adapter = new RemindListAdapter(this);
-        listView.setAdapter(adapter);
-
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+        listview.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
@@ -95,59 +75,69 @@ public class RemindListActivity extends BaseActivity {
             }
         });
 
-        refreshTopicList();
+        initFootView();
+        swipereFreshLayout.setColorSchemeResources(R.color.primary);
+        swipereFreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                refreshRankingList();
+            }
+        });
+
+
+        refreshRankingList();
     }
 
     private void initFootView(){
         autoLoadMoreView = new AutoLoadMoreView(this);
-        listView.addFooterView(autoLoadMoreView);
+        listview.addFooterView(autoLoadMoreView);
     }
 
     private void doHideFootView()
     {
-        if ((totalPage > 0 && currentPage >= totalPage) || totalPage == 0 ) {
+        if ((totalPage > 0 && currentPage >= totalPage) || totalPage == 0) {
             autoLoadMoreView.setOver();
         }else {
             autoLoadMoreView.reset();
         }
     }
 
-    private void refreshTopicList()
+    private void refreshRankingList()
     {
         currentPage = 0;
 
-        requestRemindReplyList();
+        requestRanklingList();
     }
 
     private void getNextPage(){
         if(currentPage < totalPage ){
-            requestRemindReplyList();
+            requestRanklingList();
         }else {
             Toast.makeText(this, R.string.not_more, Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    private void requestRemindReplyList(){
+    private void requestRanklingList(){
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = ServerMethod.remind() + mine.getUserInfo().getId() + "?page=" + (currentPage + 1);
+        String url = ServerMethod.ranking_list() + "?page=" + (currentPage + 1);
         MyLog.d("RemindListActivity", "request url=" + url);
 
-        MyPageRequest<RemindDTO> myPageRequest = new MyPageRequest<RemindDTO>(Request.Method.GET, url, RemindDTO.class,
-                new Response.Listener<MyResponse<MyPage<RemindDTO>>>() {
+        MyPageRequest<UserScoreDTO> myPageRequest = new MyPageRequest<UserScoreDTO>(Request.Method.GET, url, UserScoreDTO.class,
+                new Response.Listener<MyResponse<MyPage<UserScoreDTO>>>() {
                     @Override
-                    public void onResponse(MyResponse<MyPage<RemindDTO>> response) {
+                    public void onResponse(MyResponse<MyPage<UserScoreDTO>> response) {
 
                         if(response.getStatus() == MyResponse.status_ok){
 
                             MyLog.d("RemindListActivity","onResponse");
                             MyPage myPage = response.getContent();
-                            List<RemindDTO> remindDTOList = myPage.getContents();
+                            List<UserScoreDTO> userScoreList = myPage.getContents();
                             if(currentPage == 0){
-                                adapter.refreshData(remindDTOList);
+                                rankingListAdapter.setData(userScoreList);
                             }else {
-                                adapter.addData(remindDTOList);
+                                rankingListAdapter.addData(userScoreList);
                             }
 
 
@@ -155,43 +145,25 @@ public class RemindListActivity extends BaseActivity {
                             currentPage = myPage.getCurPage() + 1;
 
                             doHideFootView();
-                            swipeRefreshLayout.setRefreshing(false);
+                            swipereFreshLayout.setRefreshing(false);
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                MyVolleyErrorHelper.showError(RemindListActivity.this, error);
+                MyVolleyErrorHelper.showError(RankingListActivity.this, error);
             }
         });
 
         queue.add(myPageRequest);
     }
 
-    @OnItemClick(R.id.remind_list_listview) void onItemClick(int position){
-
-        RemindDTO remindDTO = adapter.getItem(position);
-        int targetType = remindDTO.getTargetType();
-
-        Intent intent = null;
-        switch (targetType){
-
-            case RemindType.TARGET_TYPE_TOPIC:
-                intent = new Intent(RemindListActivity.this, TopicDetailActivity.class);
-                intent.putExtra("topicId", remindDTO.getTargetId());
-                break;
-            case RemindType.TARGET_TYPE_REPLY:
-            case RemindType.TARGET_TYPE_SUB_REPLY:
-                intent = new Intent(RemindListActivity.this, ReplyDetailActivity.class);
-                intent.putExtra("replyId", remindDTO.getTargetId());
-                break;
-            default:
-                break;
-        }
-
-        if(intent != null){
+    @OnItemClick(R.id.listview)void onItemClick(int position){
+        UserScoreDTO userScoreDTO = rankingListAdapter.getItem(position);
+        if (userScoreDTO != null){
+            Intent intent = new Intent(RankingListActivity.this, UserHomeActivity.class);
+            intent.putExtra(UserHomeActivity.INTENT_USER_MIN, userScoreDTO.getUser());
             startActivity(intent);
         }
     }
-
 }

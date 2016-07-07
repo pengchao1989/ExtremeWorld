@@ -41,5 +41,6 @@ public class UmengEventId {
     public static final String DISCOVERY_COURSE_CLICK = "discovery_course_click";
     public static final String DISCOVERY_SITE_CLICK = "discovery_site_click";
     public static final String DISCOVERY_NEAR_FRIEND_CLICK = "discovery_near_friend_click";
+    public static final String DISCOVERY_RANKING_LIST_CLICK = "discovery_ranking_list_click";
 
 }

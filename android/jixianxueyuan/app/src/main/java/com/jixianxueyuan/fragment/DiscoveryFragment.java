@@ -15,6 +15,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CourseHomeActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
+import com.jixianxueyuan.activity.RankingListActivity;
 import com.jixianxueyuan.activity.SiteListActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryListAdapter;
@@ -110,6 +111,10 @@ public class DiscoveryFragment extends Fragment {
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
                     case 5:
+                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_RANKING_LIST_CLICK);
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), RankingListActivity.class);
+                        break;
+                    case 6:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NewHomeActivity.class);
                         //intent = new Intent(DiscoveryFragment.this.getActivity(), MarketHomeActivity.class);
                         break;
