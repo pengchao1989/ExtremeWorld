@@ -24,6 +24,8 @@ import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.request.LocationDTO;
+import com.jixianxueyuan.fragment.CourseHomeFragment;
+import com.jixianxueyuan.fragment.CourseListFragment;
 import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
@@ -49,22 +51,26 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
     @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @BindView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
+    @BindView(R.id.tab_course_layout)RelativeLayout courseLayout;
     @BindView(R.id.tab_discover_layout)RelativeLayout discoverLayout;
     @BindView(R.id.tab_mine_layout)RelativeLayout mineLayout;
     @BindView(R.id.tab_market_layout)RelativeLayout marketLayout;
 
     @BindView(R.id.tab_trends_image)ImageView trendsImageView;
+    @BindView(R.id.tab_course_image)ImageView courseImageVIew;
     @BindView(R.id.tab_discover_image)ImageView discoverImageView;
     @BindView(R.id.tab_mine_image)ImageView mineImageView;
     @BindView(R.id.tab_market_image)ImageView marketImageView;
 
     @BindView(R.id.tab_trends_text)TextView trendsTextView;
+    @BindView(R.id.tab_course_text)TextView courseTextView;
     @BindView(R.id.tab_discover_text)TextView discoverTextView;
     @BindView(R.id.tab_mine_text)TextView mineTextView;
     @BindView(R.id.tab_market_text)TextView marketTextView;
 
     private FragmentManager fragmentManager;
     private DynamicHomeFragment topicListFragment;
+    private CourseHomeFragment courseHomeFragment;
     private DiscoveryFragment discoveryFragment;
     private MineFragment mineFragment;
     private MarketFragment marketFragment;
@@ -96,6 +102,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         bottomSheetLayout.setPeekOnDismiss(true);
 
         trendsLayout.setOnClickListener(this);
+        courseLayout.setOnClickListener(this);
         discoverLayout.setOnClickListener(this);
         mineLayout.setOnClickListener(this);
         marketLayout.setOnClickListener(this);
@@ -111,18 +118,21 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 startActivity(intent);*/
                 break;
 
-            case R.id.tab_discover_layout:
+            case R.id.tab_course_layout:
                 setChioceItem(1);
+                break;
+            case R.id.tab_discover_layout:
+                setChioceItem(2);
                 MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_DISCOVERY_CLICK);
                 break;
 
             case R.id.tab_mine_layout:
-                setChioceItem(3);
+                setChioceItem(4);
                 MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_MINE_CLICK);
                 break;
 
             case R.id.tab_market_layout:
-                setChioceItem(4);
+                setChioceItem(5);
                 MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_STORE_CLICK);
                 break;
         }
@@ -152,6 +162,18 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 break;
 
             case 1:
+                courseImageVIew.setImageResource(R.mipmap.ic_school_black_18dp);
+                discoverTextView.setTextColor(getResources().getColor(R.color.primary));
+                if (courseHomeFragment == null) {
+                    // 如果fg1为空，则创建一个并添加到界面上
+                    courseHomeFragment = new CourseHomeFragment();
+                    transaction.add(R.id.content, courseHomeFragment);
+                } else {
+                    // 如果MessageFragment不为空，则直接将它显示出来
+                    transaction.show(courseHomeFragment);
+                }
+                break;
+            case 2:
                 discoverImageView.setImageResource(R.mipmap.bottombar_find2);
                 discoverTextView.setTextColor(getResources().getColor(R.color.primary));
                 if (discoveryFragment == null) {
@@ -163,10 +185,10 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                     transaction.show(discoveryFragment);
                 }
                 break;
-            case 2:
+            case 3:
                 break;
 
-            case 3:
+            case 4:
                 mineImageView.setImageResource(R.mipmap.bottombar_mine_2);
                 mineTextView.setTextColor(getResources().getColor(R.color.primary));
                 if (mineFragment == null) {
@@ -178,7 +200,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                     transaction.show(mineFragment);
                 }
                 break;
-            case 4:
+            case 5:
                 marketImageView.setImageResource(R.mipmap.bottombar_shop2);
                 marketTextView.setTextColor(getResources().getColor(R.color.primary));
                 if(marketFragment == null){
@@ -198,6 +220,9 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         if (topicListFragment != null) {
             transaction.hide(topicListFragment);
         }
+        if (courseHomeFragment != null){
+            transaction.hide(courseHomeFragment);
+        }
         if (discoveryFragment != null) {
             transaction.hide(discoveryFragment);
         }
@@ -213,6 +238,9 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     {
         trendsImageView.setImageResource(R.mipmap.bottombar_message);
         trendsTextView.setTextColor(getResources().getColor(R.color.secondary_text));
+
+        courseImageVIew.setImageResource(R.mipmap.ic_school_grey600_18dp);
+        courseTextView.setTextColor(getResources().getColor(R.color.secondary_text));
 
         discoverImageView.setImageResource(R.mipmap.bottombar_find);
         discoverTextView.setTextColor(getResources().getColor(R.color.secondary_text));

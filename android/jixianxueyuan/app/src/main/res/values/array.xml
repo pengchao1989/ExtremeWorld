@@ -4,7 +4,6 @@
     <string-array name="discovery_names">
         <item>@string/news</item>
         <item>@string/video</item>
-        <item>@string/course</item>
         <item>@string/site</item>
         <item>@string/people</item>
         <item>@string/ranking_list</item>
@@ -13,7 +12,6 @@
     <string-array name="discovery_images">
         <item>@mipmap/find_news</item>
         <item>@mipmap/find_video</item>
-        <item>@mipmap/find_teach</item>
         <item>@mipmap/find_place</item>
         <item>@mipmap/find_near</item>
         <item>@mipmap/icon_ranking_no1</item>

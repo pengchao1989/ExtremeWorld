@@ -92,29 +92,20 @@ public class DiscoveryFragment extends Fragment {
                         intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
                         intent.putExtra(TopicType.TYPE, TopicType.VIDEO);
                         break;
+
                     case 2:
-                        MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_COURSE_CLICK);
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), CourseHomeActivity.class);
-                        break;
-
-/*                    case 4:
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), TopicTaxonomyHomeActivity.class);
-                        intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
-                        break;*/
-
-                    case 3:
                         MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_SITE_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), SiteListActivity.class);
                         break;
-                    case 4:
+                    case 3:
                         MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_NEAR_FRIEND_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NearFriendActivity.class);
                         break;
-                    case 5:
+                    case 4:
                         MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_RANKING_LIST_CLICK);
                         intent = new Intent(DiscoveryFragment.this.getActivity(), RankingListActivity.class);
                         break;
-                    case 6:
+                    case 5:
                         intent = new Intent(DiscoveryFragment.this.getActivity(), NewHomeActivity.class);
                         //intent = new Intent(DiscoveryFragment.this.getActivity(), MarketHomeActivity.class);
                         break;
