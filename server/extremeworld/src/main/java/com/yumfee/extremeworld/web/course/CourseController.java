@@ -161,12 +161,12 @@ public class CourseController
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(
 			@PathVariable String hobby,
-			@Valid Course newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
+			@Valid @ModelAttribute Course newCourse, RedirectAttributes redirectAttributes,ServletRequest request)
 	{
 		System.out.println("create");
-		System.out.println("courseCatalogueId" + request.getParameter("courseCatalogueId"));
+		System.out.println("courseCatalogueId" + request.getParameter("courseTaxonomyId"));
 
-		Long courseCatalogueId = Long.valueOf(request.getParameter("courseCatalogueId"));
+		Long courseTaxonomyId = Long.valueOf(request.getParameter("courseTaxonomyId"));
 		
 		User user = new User();
 		user.setId(getCurrentUserId());
@@ -175,7 +175,7 @@ public class CourseController
 		newCourse.setType("course");
 		
 		CourseTaxonomy courseTaxonomy = new CourseTaxonomy();
-		courseTaxonomy.setId(courseCatalogueId);
+		courseTaxonomy.setId(courseTaxonomyId);
 		
 		newCourse.setCourseTaxonomy(courseTaxonomy);
 		

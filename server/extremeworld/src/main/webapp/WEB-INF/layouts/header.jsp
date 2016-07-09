@@ -12,7 +12,7 @@
 </ul>
 			
 <div class="navbar-fixed">
-	<nav class="cyan">
+	<nav class="grey darken-3">
 	<div class="nav-wrapper">
 
 		<div class="" id="bs-example-navbar-collapse-1">

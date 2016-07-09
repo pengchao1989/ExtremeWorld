@@ -14,7 +14,7 @@
 
 </footer> -->
 
-	<footer class="page-footer cyan">
+	<footer class="page-footer grey darken-3">
 		<div class="container">
 			<div class="row">
 				<div class="col l4 s12">

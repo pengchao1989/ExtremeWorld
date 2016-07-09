@@ -6,6 +6,7 @@ package com.jixianxueyuan.config;
 public class UmengEventId {
     /*home tab*/
     public static final String TAB_DISCOVERY_CLICK = "tab_discovery_click";
+    public static final String TAB_COURSE_CLICK = "tab_course_click";
     public static final String TAB_MINE_CLICK = "tab_mine_click";
     public static final String TAB_STORE_CLICK = "tab_store_click";
     public static final String TAB_CREATE_CLICK = "tab_create_click";

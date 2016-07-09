@@ -119,6 +119,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 break;
 
             case R.id.tab_course_layout:
+                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_COURSE_CLICK);
                 setChioceItem(1);
                 break;
             case R.id.tab_discover_layout:

@@ -95,21 +95,6 @@
 			</div>
 	
 				
-			
-			<div class="col hide-on-small-only l2 m3">
-				<div class="toc-wrapper pin-top" style="top: 0px;">
-			        <div style="height: 1px;">
-			          <ul class="section table-of-contents">
-			            <li><a href="#grid-container" class="active">Container</a></li>
-			            <li><a href="#grid-intro" class="">Introduction</a></li>
-			            <li><a href="#grid-offsets" class="">Offsets</a></li>
-			            <li><a href="#grid-layouts" class="">Creating Layouts</a></li>
-			            <li><a href="#grid-responsive" class="">Responsive Layouts</a></li>
-			          </ul>
-			        </div>
-			      </div>
-           
-			</div>
 		</div>
 
 		
