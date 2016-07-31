@@ -50,6 +50,7 @@
     <string name="latitude">위도</string>
     <string name="select_address">주소 선택</string>
     <string name="challenge">도전</string>
+    <string name="score">점수</string>
 
     <string name="not_more">없다</string>
 

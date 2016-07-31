@@ -50,6 +50,7 @@
     <string name="latitude">纬度</string>
     <string name="select_address">选择地址</string>
     <string name="challenge">挑战</string>
+    <string name="score">分数</string>
 
     <string name="not_more">没有更多了</string>
 

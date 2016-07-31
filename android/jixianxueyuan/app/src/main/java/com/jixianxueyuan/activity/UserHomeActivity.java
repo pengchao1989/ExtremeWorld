@@ -182,6 +182,7 @@ public class UserHomeActivity extends BaseActivity {
         if (regionText.length() == 0){
             regionTextView.setVisibility(View.GONE);
         }else {
+            regionTextView.setVisibility(View.VISIBLE);
             regionTextView.setText(regionStringBuffer.toString());
         }
 

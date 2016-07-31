@@ -52,7 +52,10 @@ public class RankingListAdapter extends BaseAdapter {
 
     @Override
     public UserScoreDTO getItem(int position) {
-        return userScoreDTOList.get(position);
+        if (position < userScoreDTOList.size()){
+            return userScoreDTOList.get(position);
+        }
+        return null;
     }
 
     @Override
@@ -101,7 +104,8 @@ public class RankingListAdapter extends BaseAdapter {
             }
             ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.userAvatarImageView);
 
-            viewHolder.scoreTextTextView.setText(String.valueOf(userScoreDTO.getScore()));
+            String scoreText = context.getString(R.string.score) + String.format("%.2f", userScoreDTO.getScore());
+            viewHolder.scoreTextTextView.setText(scoreText);
             viewHolder.userNameTextView.setText(userScoreDTO.getUser().getName());
         }
 

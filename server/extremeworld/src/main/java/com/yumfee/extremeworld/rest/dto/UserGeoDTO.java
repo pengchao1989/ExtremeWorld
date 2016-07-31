@@ -23,8 +23,6 @@ public class UserGeoDTO {
 	private Date geoModifyTime;
 	private double distance;
 	
-	private CountryDTO country;
-	
 	private List<UserInterestDTO> interests;
 	
 	public Long getId()
@@ -122,12 +120,6 @@ public class UserGeoDTO {
 	}
 	public void setGeoModifyTime(Date geoModifyTime) {
 		this.geoModifyTime = geoModifyTime;
-	}
-	public CountryDTO getCountry() {
-		return country;
-	}
-	public void setCountry(CountryDTO country) {
-		this.country = country;
 	}
 	public List<UserInterestDTO> getInterests()
 	{
