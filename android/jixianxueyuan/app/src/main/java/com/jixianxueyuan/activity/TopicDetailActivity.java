@@ -347,6 +347,12 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
         ImageLoader.getInstance().displayImage(avatarUrl, headViewHolder.avatarImageView);
+        headViewHolder.avatarImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserHomeActivity.startActivity(TopicDetailActivity.this, topicDTO.getUser());
+            }
+        });
 
 
         //参考链接
@@ -458,6 +464,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             if (topicExtraDTO.isCollected()){
                 headViewHolder.collectionButton.setLiked(true);
                 headViewHolder.collectionButton.setEnabled(false);
+            }
+            if (topicExtraDTO.getMyMarkScore() > 0){
+                headViewHolder.myRatingLayout.setVisibility(View.GONE);
+            }else {
+                headViewHolder.myRatingLayout.setVisibility(View.VISIBLE);
             }
         }
     }

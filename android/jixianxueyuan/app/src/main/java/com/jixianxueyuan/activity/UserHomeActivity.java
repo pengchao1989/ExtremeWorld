@@ -1,5 +1,6 @@
 package com.jixianxueyuan.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -269,6 +270,12 @@ public class UserHomeActivity extends BaseActivity {
             intent.putExtra("topic", topicDTO);
             startActivity(intent);
         }
+    }
+
+    public static void startActivity(Context context, UserMinDTO userMinDTO){
+        Intent intent = new Intent(context, UserHomeActivity.class);
+        intent.putExtra(INTENT_USER_MIN, userMinDTO);
+        context.startActivity(intent);
     }
 
 }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.ReplyDTO;
@@ -92,7 +93,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
 
 
 
-        ReplyDTO replyDTO = replyDTOs.get(position);
+        final ReplyDTO replyDTO = replyDTOs.get(position);
 
         viewHolder.nameTextView.setText(replyDTO.getUser().getName());
         viewHolder.timeTextView.setText(replyDTO.getCreateTime());
@@ -104,6 +105,13 @@ public class TopicDetailListAdapter extends BaseAdapter {
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
         ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
+        viewHolder.avatarImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserHomeActivity.startActivity(context, replyDTO.getUser());
+            }
+        });
+
 
         //sub reply
         showSubReply(viewHolder, replyDTO);

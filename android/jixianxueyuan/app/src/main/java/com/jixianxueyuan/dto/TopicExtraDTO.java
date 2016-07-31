@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class TopicExtraDTO implements Serializable {
     private boolean agreed;
     private boolean collected;
+    private double myMarkScore;
 
     public boolean isAgreed() {
         return agreed;
@@ -19,6 +20,10 @@ public class TopicExtraDTO implements Serializable {
 
     public boolean isCollected() {
         return collected;
+    }
+
+    public double getMyMarkScore() {
+        return myMarkScore;
     }
 
     public void setCollected(boolean collected) {
