@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">极限学院</string>
-    <string name="app_name_skateboard">滑板圈</string>
+    <string name="app_name">skateboard group</string>
+    <string name="app_name_skateboard">skateboard group</string>
     <string name="app_name_packour">跑酷圈</string>
     <string name="app_name_bmx">BMX圈</string>
     <string name="app_name_roller_skating">轮滑圈</string>

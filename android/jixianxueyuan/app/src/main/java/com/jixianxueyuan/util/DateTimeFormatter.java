@@ -103,4 +103,26 @@ public class DateTimeFormatter {
 
 
     }
+
+    public static int getAge(String birth){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdf.parse(birth);
+
+            int beforeSeconds = (int) (date.getTime() / 1000);
+            int nowSeconds = (int) (Calendar.getInstance().getTimeInMillis() / 1000);
+            int timeDifference = nowSeconds - beforeSeconds;
+
+            if (timeDifference < YEARS) {
+                return 0;
+            } else {
+                return timeDifference / YEARS;
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

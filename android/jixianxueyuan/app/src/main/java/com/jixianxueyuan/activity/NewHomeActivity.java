@@ -332,6 +332,10 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
             locationDTO.setLatitude(myLocation.getLatitude());
             locationDTO.setLongitude(myLocation.getLongitude());
             locationDTO.setAddress(myLocation.getAddress());
+            locationDTO.setCountry(myLocation.getCountry());
+            locationDTO.setProvince(myLocation.getProvince());
+            locationDTO.setCity(myLocation.getCity());
+            locationDTO.setDistrict(myLocation.getDistrict());
 
             MyRequest<Void> myRequest = new MyRequest<Void>(Request.Method.POST, url, Void.class, locationDTO, new Response.Listener<MyResponse<Void>>() {
                 @Override

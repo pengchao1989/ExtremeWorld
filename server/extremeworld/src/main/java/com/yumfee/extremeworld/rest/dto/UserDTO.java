@@ -25,9 +25,11 @@ public class UserDTO
 	private String geoHash;
 	private Date geoModifyTime;
 	private double distance;
+    private String country;
+    private String province;
+    private String city;
+    private String district;
 	private String token;
-	
-	private CountryDTO country;
 	
 	private List<UserInterestDTO> interests;
 	
@@ -133,11 +135,29 @@ public class UserDTO
 	public void setGeoModifyTime(Date geoModifyTime) {
 		this.geoModifyTime = geoModifyTime;
 	}
-	public CountryDTO getCountry() {
+	public String getCountry() {
 		return country;
 	}
-	public void setCountry(CountryDTO country) {
+	public void setCountry(String country) {
 		this.country = country;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 	public List<UserInterestDTO> getInterests()
 	{

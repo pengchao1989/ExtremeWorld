@@ -118,6 +118,10 @@ public class GeoRestController {
 		user.setLongitude(location.getLongitude());
 		if(StringUtils.isNotEmpty(location.getAddress())){
 			user.setAddress(location.getAddress());
+			user.setCountry(location.getCountry());
+			user.setProvince(location.getProvince());
+			user.setCity(location.getCity());
+			user.setDistrict(location.getDistrict());
 		}
 		user.setGeoHash(geoHash);
 		user.setGeoModifyTime(new Date());

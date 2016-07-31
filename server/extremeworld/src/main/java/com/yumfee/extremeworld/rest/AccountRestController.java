@@ -118,10 +118,6 @@ public class AccountRestController {
 				user.setBirth("1995-01-01");
 			}
 			
-	    	Country country = new Country();
-	    	country.setId("CN");
-	    	
-	    	user.setCountry(country);
 	    	
 	    	User sameNameUser = accountService.findUserByName(user.getName());
 	    	if(sameNameUser != null){
@@ -139,7 +135,6 @@ public class AccountRestController {
 	    		registedUser.setAvatar(user.getAvatar());
 	    		registedUser.setName(user.getName());
 	    		registedUser.setBirth(user.getBirth());
-	    		registedUser.setCountry(user.getCountry());
 	    		registedUser.setInited(true);
 	    		
 	    		accountService.updateUser(registedUser);
@@ -172,12 +167,6 @@ public class AccountRestController {
 		}else{
 			user.setBirth("1995-01-01");
 		}
-		
-		
-    	Country country = new Country();
-    	country.setId("CN");
-    	
-    	user.setCountry(country);
     	
     	User sameNameUser = accountService.findUserByName(user.getName());
     	if(sameNameUser != null){

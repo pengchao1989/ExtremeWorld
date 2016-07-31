@@ -51,6 +51,30 @@
         tools:text="扳手扳死你"/>
 
     <TextView
+        android:id="@+id/user_home_head_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:textSize="14sp"
+        android:textColor="@color/grey_deep"
+        android:layout_gravity="center_horizontal"
+        tools:text="Id:123456 | Age:20"/>
+
+    <TextView
+        android:id="@+id/user_home_head_region"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:textSize="14sp"
+        android:textColor="@color/grey_deep"
+        android:layout_gravity="center_horizontal"
+        tools:text="China SiChuan ChengDu"/>
+
+    <TextView
         android:id="@+id/user_home_head_signature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

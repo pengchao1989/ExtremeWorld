@@ -17,6 +17,10 @@ public class LocationManager implements AMapLocationListener{
     private static final String PREFERENCES_LOCATION_LATITUDE = "PREFERENCES_LOCATION_LATITUDE";
     private static final String PREFERENCES_LOCATION_LONGITUDE = "PREFERENCES_LOCATION_LONGITUDE";
     private static final String PREFERENCES_LOCATION_ADDRESS = "PREFERENCES_LOCATION_ADDRESS";
+    private static final String PREFERENCES_LOCATION_COUNTRY = "PREFERENCES_LOCATION_COUNTRY";
+    private static final String PREFERENCES_LOCATION_PROVINCE = "PREFERENCES_LOCATION_PROVINCE";
+    private static final String PREFERENCES_LOCATION_CITY = "PREFERENCES_LOCATION_CITY";
+    private static final String PREFERENCES_LOCATION_DISTRICT = "PREFERENCES_LOCATION_DISTRICT";
 
     private volatile static LocationManager instance;
 
@@ -108,6 +112,10 @@ public class LocationManager implements AMapLocationListener{
                 myLocation.setLatitude(amapLocation.getLatitude());
                 myLocation.setLongitude(amapLocation.getLongitude());
                 myLocation.setAddress(amapLocation.getAddress());
+                myLocation.setCountry(amapLocation.getCountry());
+                myLocation.setProvince(amapLocation.getProvince());
+                myLocation.setCity(amapLocation.getCity());
+                myLocation.setDistrict(amapLocation.getDistrict());
                 if (mLocationListener != null){
                     mLocationListener.onSuccess(myLocation);
                 }
@@ -132,6 +140,10 @@ public class LocationManager implements AMapLocationListener{
         PreferencesUtils.putFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LATITUDE, (float) myLocation.getLatitude());
         PreferencesUtils.putFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LONGITUDE, (float) myLocation.getLongitude());
         PreferencesUtils.putString(MyApplication.getContext(), PREFERENCES_LOCATION_ADDRESS, myLocation.getAddress());
+        PreferencesUtils.putString(MyApplication.getContext(), PREFERENCES_LOCATION_COUNTRY, myLocation.getCountry());
+        PreferencesUtils.putString(MyApplication.getContext(), PREFERENCES_LOCATION_PROVINCE, myLocation.getProvince());
+        PreferencesUtils.putString(MyApplication.getContext(), PREFERENCES_LOCATION_CITY, myLocation.getCity());
+        PreferencesUtils.putString(MyApplication.getContext(), PREFERENCES_LOCATION_DISTRICT, myLocation.getDistrict());
     }
 
     public static MyLocation getLastLocation(){
@@ -139,6 +151,10 @@ public class LocationManager implements AMapLocationListener{
         myLocation.setLatitude(PreferencesUtils.getFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LATITUDE));
         myLocation.setLongitude(PreferencesUtils.getFloat(MyApplication.getContext(), PREFERENCES_LOCATION_LONGITUDE));
         myLocation.setAddress(PreferencesUtils.getString(MyApplication.getContext(), PREFERENCES_LOCATION_ADDRESS));
+        myLocation.setCountry(PreferencesUtils.getString(MyApplication.getContext(), PREFERENCES_LOCATION_COUNTRY));
+        myLocation.setProvince(PreferencesUtils.getString(MyApplication.getContext(), PREFERENCES_LOCATION_PROVINCE));
+        myLocation.setCity(PreferencesUtils.getString(MyApplication.getContext(), PREFERENCES_LOCATION_CITY));
+        myLocation.setDistrict(PreferencesUtils.getString(MyApplication.getContext(), PREFERENCES_LOCATION_DISTRICT));
         return myLocation;
     }
 }

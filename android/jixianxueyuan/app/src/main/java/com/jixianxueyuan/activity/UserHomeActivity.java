@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -31,10 +32,14 @@ import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,6 +59,9 @@ public class UserHomeActivity extends BaseActivity {
     private ImageView avatarImageView;
     private ImageView coverImageView;
     private TextView nameTextView;
+    private TextView idTextView;
+    private TextView regionTextView;
+    private TextView signatureTextView;
     private Button sendMessageButton;
 
 
@@ -63,7 +71,7 @@ public class UserHomeActivity extends BaseActivity {
     private UserDTO userDTO;
 
     private ClickLoadMoreView clickLoadMoreView;
-    private TextView signatureTextView;
+
 
 
     int currentPage = 0;
@@ -94,6 +102,8 @@ public class UserHomeActivity extends BaseActivity {
         avatarImageView = (ImageView) headView.findViewById(R.id.user_home_head_avatar);
         coverImageView = (ImageView) headView.findViewById(R.id.user_home_head_cover);
         nameTextView = (TextView) headView.findViewById(R.id.user_home_head_name);
+        idTextView = (TextView) headView.findViewById(R.id.user_home_head_id);
+        regionTextView = (TextView)headView.findViewById(R.id.user_home_head_region);
         sendMessageButton = (Button) headView.findViewById(R.id.user_home_head_send_msg);
 
         Bundle bundle = this.getIntent().getExtras();
@@ -143,10 +153,45 @@ public class UserHomeActivity extends BaseActivity {
     }
 
     private void setUserDetailView(){
-        signatureTextView.setText(userDTO.getSignature());
         nameTextView.setText(userDTO.getName());
-        showCover();
 
+        StringBuffer idBuffer = new StringBuffer();
+        idBuffer.append("Id:" + userDTO.getId());
+
+        if (!TextUtils.isEmpty(userDTO.getBirth())){
+            int age = DateTimeFormatter.getAge(userDTO.getBirth());
+            idBuffer.append(" | Age:" + age);
+        }
+        idTextView.setText(idBuffer.toString());
+
+        StringBuffer regionStringBuffer = new StringBuffer();
+        if (!TextUtils.isEmpty(userDTO.getCountry())){
+            regionStringBuffer.append(userDTO.getCountry());
+        }
+        if (!TextUtils.isEmpty(userDTO.getProvince())){
+            String cityText = userDTO.getProvince().replace("省","");
+            cityText = cityText.replace("自治区", "");
+            regionStringBuffer.append("  " + cityText);
+        }
+        if (!TextUtils.isEmpty(userDTO.getCity())){
+            String cityText = userDTO.getCity().replace("市","");
+            regionStringBuffer.append("  " + cityText);
+        }
+        String regionText = regionStringBuffer.toString();
+        if (regionText.length() == 0){
+            regionTextView.setVisibility(View.GONE);
+        }else {
+            regionTextView.setText(regionStringBuffer.toString());
+        }
+
+
+        StringBuffer signatureStringBuffer = new StringBuffer();
+        if (!TextUtils.isEmpty(userDTO.getSignature())){
+            signatureStringBuffer.append(userDTO.getSignature());
+        }
+        signatureTextView.setText(signatureStringBuffer.toString());
+
+        showCover();
     }
 
     private void requestUserInfo(){

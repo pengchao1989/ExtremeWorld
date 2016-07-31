@@ -144,11 +144,6 @@ public class QQLoginController
                 	myUser.setName(userInfoBean.getNickname());
                 	myUser.setPlainPassword(openID);
                 	myUser.setAvatar(referenceAvatarService.getRandom().getUrl());
-
-                	
-                	Country country = new Country();
-                	country.setId("CN");
-                	myUser.setCountry(country);
                 	
                 	com.yumfee.extremeworld.entity.User inviter = new com.yumfee.extremeworld.entity.User();
                 	inviter.setId(Long.parseLong(inviteid));
