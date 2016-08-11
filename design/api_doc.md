@@ -421,3 +421,18 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/ranking_list
 	
 	
+----------
+	接口名称:geo/publish_location
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/geo/publish_location
+	请求方式:POST
+	入参:    {latitude : 0.0,
+    longitude : 0.0,
+    address : "四川省成都市高新区软件园E区"
+    country : "中国";
+    province ： ”四川“;
+    city ： ”成都“;
+    district ： ”高新区“}
+	说明:上报地理位置，一般开启应用上报一次
+
+	
+	
