@@ -163,6 +163,13 @@ public class VideoController
 		
 		newVideo.setHobbys(hobbyList);
 		
+		//fine
+		String fine = request.getParameter("fine");
+		if( !StringUtils.isEmpty(fine) && fine.equals("1")){
+			newVideo.setFine(1);
+		}
+		
+		
 		videoService.saveVideo(newVideo);
 		
 		redirectAttributes.addFlashAttribute("message", "发布视频成功");

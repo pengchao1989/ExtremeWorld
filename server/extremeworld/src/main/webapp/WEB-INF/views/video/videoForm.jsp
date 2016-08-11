@@ -55,6 +55,16 @@
 		              </p>
 				</div>
 			</div>
+			
+			<div class="form-group">
+			             <label class="col-sm-2 control-label">其它</label>
+                <div class="col-sm-10">
+			     <p>
+				     <input type="checkbox" class="s1 filled-in form-control" id="fine" name="fine" value="1"/>
+				     <label for="fine">加精</label>
+		          </p>
+		          </div>
+			</div>
 
 
 			<div class="form-group">
