@@ -73,7 +73,7 @@
         android:textColor="@color/grey_deep"
         android:layout_gravity="center_horizontal"
         tools:text="China SiChuan ChengDu"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <TextView
         android:id="@+id/user_home_head_signature"
