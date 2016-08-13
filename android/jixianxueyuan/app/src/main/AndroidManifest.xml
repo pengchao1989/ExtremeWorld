@@ -121,13 +121,39 @@
         <activity android:name=".activity.AddressPicketActivity"/>
         <activity android:name=".activity.SponsorshipActivity"/>
         <activity android:name=".activity.CollectionListActivity"/>
-        <activity android:name=".activity.WebActivity"/>
-        <activity android:name=".activity.InviteWebActivity"/>
+        <activity
+            android:name=".activity.WebActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name=".activity.InviteWebActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".activity.ImageGalleryActivity"/>
         <activity android:name=".activity.RankingListActivity"/>
         <activity
             android:configChanges="orientation|screenSize"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+        <activity
+
+            android:name="com.tencent.smtt.sdk.VideoActivity"
+
+            android:configChanges="orientation|screenSize|keyboardHidden"
+
+            android:exported="false"
+
+            android:launchMode="singleTask"
+
+            android:alwaysRetainTaskState="true">
+
+            <intent-filter>
+
+                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+
+        </activity>
 
         <!--umeng scoial-->
         <activity
@@ -373,6 +399,9 @@
             android:value="${QQ_APP_KEY}"/>
         <meta-data android:name="com.amap.api.v2.apikey"
                    android:value="${AMAP_KEY}"/>
+        <meta-data
+            android:name="QBSDKAppKey"
+            android:value="pBOXHsNNor9Q/K2xjpVchE8c" />
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>

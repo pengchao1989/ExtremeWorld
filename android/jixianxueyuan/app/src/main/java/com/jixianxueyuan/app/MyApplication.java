@@ -24,6 +24,7 @@ import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.smtt.sdk.TbsDownloader;
 import com.umeng.socialize.PlatformConfig;
 
 public class MyApplication extends MultiDexApplication {
@@ -91,6 +92,8 @@ public class MyApplication extends MultiDexApplication {
         initIM();
 
         initUmenScoial();
+
+        TbsDownloader.needDownload(getApplicationContext(), false);
 
 	}
 
