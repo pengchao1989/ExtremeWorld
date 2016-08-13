@@ -30,6 +30,8 @@ import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -45,7 +47,7 @@ import butterknife.OnClick;
 /**
  * Created by pengchao on 4/17/16.
  */
-public class InviteWebActivity extends BaseActivity implements AdvancedWebView.Listener, IWXAPIEventHandler{
+public class InviteWebActivity extends BaseActivity implements IWXAPIEventHandler{
 
     public static final String INTENT_EXHIBITION = "INTENT_EXHIBITION";
 
@@ -54,7 +56,7 @@ public class InviteWebActivity extends BaseActivity implements AdvancedWebView.L
     @BindView(R.id.web_actionbar)
     MyActionBar actionBar;
     @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
-    @BindView(R.id.web_view)AdvancedWebView webView;
+    @BindView(R.id.web_view)WebView webView;
     @BindView(R.id.invite_web_button)
     Button inviteButton;
 
@@ -67,6 +69,8 @@ public class InviteWebActivity extends BaseActivity implements AdvancedWebView.L
         setContentView(R.layout.invite_web_activity);
         ButterKnife.bind(this);
 
+        initWebViewSetting();
+
         actionBar.setTitle("邀请好友");
 
         application = (MyApplication) this.getApplicationContext();
@@ -78,6 +82,31 @@ public class InviteWebActivity extends BaseActivity implements AdvancedWebView.L
                 ;
         webView.loadUrl(url);
     }
+
+    private void initWebViewSetting(){
+        WebSettings webSetting = webView.getSettings();
+        webSetting.setAllowFileAccess(true);
+        webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        webSetting.setSupportZoom(true);
+        webSetting.setBuiltInZoomControls(true);
+        webSetting.setUseWideViewPort(true);
+        webSetting.setSupportMultipleWindows(false);
+        webSetting.setLoadWithOverviewMode(true);
+        webSetting.setAppCacheEnabled(true);
+        webSetting.setDatabaseEnabled(true);
+        webSetting.setDomStorageEnabled(true);
+        webSetting.setJavaScriptEnabled(true);
+        webSetting.setGeolocationEnabled(true);
+        webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
+        webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
+        webSetting.setDatabasePath(this.getDir("databases", 0).getPath());
+        webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0)
+                .getPath());
+        // webSetting.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);
+        webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
+        webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -245,31 +274,6 @@ public class InviteWebActivity extends BaseActivity implements AdvancedWebView.L
         super.onActivityResult(requestCode, resultCode, data);
         /** attention to this below ,must add this**/
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onPageStarted(String url, Bitmap favicon) {
-
-    }
-
-    @Override
-    public void onPageFinished(String url) {
-
-    }
-
-    @Override
-    public void onPageError(int errorCode, String description, String failingUrl) {
-
-    }
-
-    @Override
-    public void onDownloadRequested(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
-
-    }
-
-    @Override
-    public void onExternalPageRequest(String url) {
-
     }
 
     @Override
