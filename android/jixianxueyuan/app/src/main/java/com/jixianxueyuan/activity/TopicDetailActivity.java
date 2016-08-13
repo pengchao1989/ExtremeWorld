@@ -1051,7 +1051,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private void showShareMenu(final TopicDTO topicDTO){
 
-        String hobby = Util.getApplicationMetaString(this, "HOBBY");
+        final String hobby = Util.getApplicationMetaString(this, "HOBBY");
 
 
         VideoDetailDTO videoDetailDTO = topicDTO.getVideoDetail();
@@ -1063,12 +1063,18 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         }
 
         final UMImage image = new UMImage(TopicDetailActivity.this, imageUrl);
-        final String url = "http://www.jixianxueyuan.com/" + hobby + "/topic/" + topicDTO.getId();
+
+
 
         MenuSheetView menuSheetView =
                 new MenuSheetView(this, MenuSheetView.MenuType.GRID, "分享给好友...", new MenuSheetView.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+
+                        String url = "http://www.jixianxueyuan.com/" + hobby + "/topic/" + topicDTO.getId();
+                        if (!TextUtils.isEmpty(topicDTO.getUrl())){
+                            url = topicDTO.getUrl();
+                        }
 
                         ShareUtils.ShareItem shareItem = null;
                         UMVideo video = null;
