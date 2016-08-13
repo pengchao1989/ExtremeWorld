@@ -64,7 +64,7 @@
             <include layout="@layout/user_info_head_view"/>
         </FrameLayout>
 
-        <com.jixianxueyuan.widget.AdvancedWebView
+        <com.tencent.smtt.sdk.WebView
             android:id="@+id/web_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -3,7 +3,6 @@ package com.jixianxueyuan.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 
@@ -45,7 +44,7 @@ public class WebActivity extends BaseActivity {
         ButterKnife.bind(this);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
 
-        initWebViewSettng();
+        initWebViewSetting();
 
         initParams();
         actionBar.setTitle(title);
@@ -69,7 +68,7 @@ public class WebActivity extends BaseActivity {
         url = getIntent().getStringExtra(INTENT_URL);
     }
 
-    private void initWebViewSettng(){
+    private void initWebViewSetting(){
         WebSettings webSetting = webView.getSettings();
         webSetting.setAllowFileAccess(true);
         webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);

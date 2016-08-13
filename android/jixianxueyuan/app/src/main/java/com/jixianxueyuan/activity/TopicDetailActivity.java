@@ -79,6 +79,8 @@ import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.tencent.smtt.sdk.CookieSyncManager;
+import com.tencent.smtt.sdk.WebView;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -103,7 +105,7 @@ import dmax.dialog.SpotsDialog;
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener, AdvancedWebView.Listener {
+public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
@@ -327,9 +329,17 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         //web view
         if(!StringUtils.isBlank(topicDTO.getUrl())){
             headViewHolder.webView.setVisibility(View.VISIBLE);
-            headViewHolder.webView.loadUrl(topicDTO.getUrl());
-            headViewHolder.webView.setListener(this, this);
-            headViewHolder.webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+
+            initWebViewSetting(headViewHolder.webView);
+
+            if(!StringUtils.isBlank(topicDTO.getUrl())){
+                headViewHolder.webView.loadUrl(topicDTO.getUrl());
+                CookieSyncManager.createInstance(this);
+                CookieSyncManager.getInstance().sync();
+            }else {
+                Toast.makeText(this, "url is null", Toast.LENGTH_LONG).show();
+            }
+
             headViewHolder.mUserHeadLayout.setVisibility(View.GONE);
             headViewHolder.titleTextView.setVisibility(View.GONE);
             return;
@@ -453,6 +463,30 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 });
             }
         }
+    }
+
+    private void initWebViewSetting(WebView webView){
+        com.tencent.smtt.sdk.WebSettings webSetting = webView.getSettings();
+        webSetting.setAllowFileAccess(true);
+        webSetting.setLayoutAlgorithm(com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        webSetting.setSupportZoom(true);
+        webSetting.setBuiltInZoomControls(true);
+        webSetting.setUseWideViewPort(true);
+        webSetting.setSupportMultipleWindows(false);
+        webSetting.setLoadWithOverviewMode(true);
+        webSetting.setAppCacheEnabled(true);
+        webSetting.setDatabaseEnabled(true);
+        webSetting.setDomStorageEnabled(true);
+        webSetting.setJavaScriptEnabled(true);
+        webSetting.setGeolocationEnabled(true);
+        webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
+        webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
+        webSetting.setDatabasePath(this.getDir("databases", 0).getPath());
+        webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0)
+                .getPath());
+        // webSetting.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);
+        webSetting.setPluginState(com.tencent.smtt.sdk.WebSettings.PluginState.ON_DEMAND);
+        webSetting.setRenderPriority(com.tencent.smtt.sdk.WebSettings.RenderPriority.HIGH);
     }
 
     private void updateExtraInfoView(){
@@ -807,31 +841,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         }
     }
 
-    @Override
-    public void onPageStarted(String url, Bitmap favicon) {
-        showLocationProgress();
-    }
-
-    @Override
-    public void onPageFinished(String url) {
-        hideLocationProgress();
-    }
-
-    @Override
-    public void onPageError(int errorCode, String description, String failingUrl) {
-
-    }
-
-    @Override
-    public void onDownloadRequested(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
-
-    }
-
-    @Override
-    public void onExternalPageRequest(String url) {
-
-    }
-
     public static class HeadViewHolder
     {
         @BindView(R.id.user_info_head_layout)RelativeLayout mUserHeadLayout;
@@ -840,7 +849,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.user_head_avatar)ImageView avatarImageView;
         @BindView(R.id.videoview)SuperVideoPlayer videoView;
-        @BindView(R.id.web_view)AdvancedWebView webView;
+        @BindView(R.id.web_view)WebView webView;
         @BindView(R.id.topic_detail_head_view_video_cover_image)
         ImageView coverImageView;
         @BindView(R.id.topic_detail_head_view_video_play_btn)

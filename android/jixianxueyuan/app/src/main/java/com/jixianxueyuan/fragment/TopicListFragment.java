@@ -228,11 +228,6 @@ public class TopicListFragment extends FlexibleSpaceWithImageBaseFragment<Observ
         }
         TopicDTO topicDTO = adapter.getItem(position - 1);
 
-        if (!TextUtils.isEmpty(topicDTO.getUrl())){
-            WebActivity.startActivity(this.getActivity(), topicDTO.getTitle(), topicDTO.getUrl());
-            return;
-        }
-
         Intent intent = null;
         switch (topicDTO.getType()) {
             case TopicType.MOOD:
