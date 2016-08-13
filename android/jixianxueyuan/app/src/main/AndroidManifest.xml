@@ -93,7 +93,8 @@
         <activity android:name=".activity.TopicDetailActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/alex_theme_swipe_activity"/>
         <activity android:name=".activity.MoodDetailActivity"/>
         <activity android:name=".activity.DiscussionDetailActivity"/>
         <activity android:name=".activity.CourseOldHomeActivity"/>
