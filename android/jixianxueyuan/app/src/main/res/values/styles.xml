@@ -14,19 +14,6 @@
         <item name="android:windowIsTranslucent">false</item>
     </style>
 
-    <!--android.intent.action.MAIN  入口 Activity 不可以引入这个 属性-->
-    <style name="alex_theme_swipe_activity" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:activityOpenEnterAnimation">@anim/alex_swipe_back_slide_right_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/alex_swipe_back_slide_left_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/alex_swipe_back_slide_left_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/alex_swipe_back_slide_right_out</item>
-    </style>
-
     <style name="HomeTabItemText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

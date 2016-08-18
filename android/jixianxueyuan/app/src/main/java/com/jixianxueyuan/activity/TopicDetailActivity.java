@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -78,7 +77,6 @@ import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
-import com.jixianxueyuan.widget.alex.swipebacklayout.SwipeBackLayout;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -118,8 +116,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     @BindView(R.id.topic_detail_actionbar)MyActionBar actionBar;
     @BindView(R.id.topic_detail_listview)ListView listView;
     @BindView(R.id.reply_widget_layout)LinearLayout contentLayout;
-
-    private SwipeBackLayout swipeBackLayout;
 
 
     private long topicId = -1;
@@ -200,8 +196,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         }else if(bubdle.containsKey("topicId")){
             topicId = bubdle.getLong("topicId");
         }
-
-        swipeBackLayout = new SwipeBackLayout(this);
 
         initTopicHeadView();
         initFooterView();

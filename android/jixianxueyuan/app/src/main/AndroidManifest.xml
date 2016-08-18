@@ -92,8 +92,7 @@
         <activity android:name=".activity.CreateTopicPreActivity"/>
         <activity android:name=".activity.TopicDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/alex_theme_swipe_activity"/>
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".activity.MoodDetailActivity"/>
         <activity android:name=".activity.DiscussionDetailActivity"/>
         <activity android:name=".activity.CourseOldHomeActivity"/>
