@@ -18,6 +18,7 @@ public class CourseTaxonomy extends IdEntity
 	private String name;
 	private String des;
 	private Date createTime;
+	private String background;
 	
 	private Hobby hobby;
 
@@ -49,6 +50,13 @@ public class CourseTaxonomy extends IdEntity
 	public void setCreateTime(Date createTime)
 	{
 		this.createTime = createTime;
+	}
+	public String getBackground() {
+		return background;
+	}
+
+	public void setBackground(String background) {
+		this.background = background;
 	}
 
 	@ManyToOne()
