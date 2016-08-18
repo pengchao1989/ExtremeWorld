@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -28,6 +30,8 @@ import android.widget.Toast;
 
 import com.android.tedcoder.wkvideoplayer.model.Video;
 import com.android.tedcoder.wkvideoplayer.model.VideoUrl;
+import com.android.tedcoder.wkvideoplayer.view.MediaController;
+import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -68,6 +72,7 @@ import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.widget.AdvancedWebView;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
@@ -99,13 +104,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import dmax.dialog.SpotsDialog;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends AppCompatActivity implements ReplyWidgetListener{
+public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
@@ -234,31 +237,11 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        JCVideoPlayer.releaseAllVideos();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (headViewHolder.webView != null){
             headViewHolder.webView.destroy();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (JCVideoPlayer.backPress()) {
-            return;
-        }
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        swipeBackLayout.attachActivity(this);
     }
 
     @Override
@@ -476,12 +459,15 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
             if(topicDTO.getVideoDetail().getVideoSource() != null)
             {
                 headViewHolder.videoLayout.setVisibility(View.VISIBLE);
-                headViewHolder.videoView.setVisibility(View.VISIBLE);
-                headViewHolder.videoView.setUp(topicDTO.getVideoDetail().getVideoSource()
-                        , JCVideoPlayerStandard.SCREEN_LAYOUT_LIST, topicDTO.getTitle());
-                headViewHolder.videoView.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                ImageLoader.getInstance().displayImage(topicDTO.getVideoDetail().getThumbnail() + "!detail", headViewHolder.videoView.thumbImageView, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+                ImageLoader.getInstance().displayImage(topicDTO.getVideoDetail().getThumbnail() + "!detail", headViewHolder.coverImageView, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
 
+
+                headViewHolder.playButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initVideo();
+                    }
+                });
             }
         }
     }
@@ -530,6 +516,9 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
 
     private void initVideo()
     {
+        headViewHolder.playButton.setVisibility(View.GONE);
+        headViewHolder.videoView.setVideoPlayCallback(mVideoPlayCallback);
+
         if(!topicDTO.getType().equals(TopicType.S_VIDEO)){
             playWebVideo(topicDTO.getVideoDetail().getVideoSource());
         }else {
@@ -552,6 +541,33 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
             }
         }
     }
+
+    private SuperVideoPlayer.VideoPlayCallbackImpl mVideoPlayCallback = new SuperVideoPlayer.VideoPlayCallbackImpl() {
+        @Override
+        public void onCloseVideo() {
+            headViewHolder.videoView.close();
+            headViewHolder.playButton.setVisibility(View.VISIBLE);
+            headViewHolder.coverImageView.setVisibility(View.VISIBLE);
+            headViewHolder.videoView.setVisibility(View.GONE);
+            resetPageToPortrait();
+        }
+
+        @Override
+        public void onSwitchPageType() {
+            if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                headViewHolder.videoView.setPageType(MediaController.PageType.SHRINK);
+            } else {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                headViewHolder.videoView.setPageType(MediaController.PageType.EXPAND);
+            }
+        }
+
+        @Override
+        public void onPlayFinish() {
+
+        }
+    };
 
     private void doHideFootView()
     {
@@ -839,8 +855,12 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.user_head_avatar)ImageView avatarImageView;
-        @BindView(R.id.videoview)JCVideoPlayerStandard videoView;
+        @BindView(R.id.videoview)SuperVideoPlayer videoView;
         @BindView(R.id.web_view)WebView webView;
+        @BindView(R.id.topic_detail_head_view_video_cover_image)
+        ImageView coverImageView;
+        @BindView(R.id.topic_detail_head_view_video_play_btn)
+        ImageView playButton;
         @BindView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;
         @BindView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
@@ -873,12 +893,15 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
     {
         MyLog.d(tag, "videoPath=" + path);
 
+        headViewHolder.coverImageView.setVisibility(View.GONE);
         headViewHolder.videoView.setVisibility(View.VISIBLE);
 
+        headViewHolder.videoView.loadLocalVideo(path);
         headViewHolder.videoView.requestFocus();
     }
 
     private void playWebVideo(String url){
+        headViewHolder.coverImageView.setVisibility(View.GONE);
         headViewHolder.videoView.setVisibility(View.VISIBLE);
 
         Video video = new Video();
@@ -893,6 +916,7 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
         ArrayList<Video> videoArrayList = new ArrayList<>();
         videoArrayList.add(video);
 
+        headViewHolder.videoView.loadMultipleVideo(videoArrayList);
         headViewHolder.videoView.requestFocus();
     }
 
@@ -902,6 +926,7 @@ public class TopicDetailActivity extends AppCompatActivity implements ReplyWidge
     private void resetPageToPortrait() {
         if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            headViewHolder.videoView.setPageType(MediaController.PageType.SHRINK);
         }
     }
 

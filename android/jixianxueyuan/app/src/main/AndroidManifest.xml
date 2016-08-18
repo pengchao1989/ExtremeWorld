@@ -91,7 +91,6 @@
         <activity android:name=".activity.FlexibleSpaceWithImageWithViewPagerTabActivity"/>
         <activity android:name=".activity.CreateTopicPreActivity"/>
         <activity android:name=".activity.TopicDetailActivity"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/alex_theme_swipe_activity"/>

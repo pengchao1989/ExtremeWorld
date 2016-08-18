@@ -15,7 +15,21 @@
         android:visibility="gone"
         >
 
-        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        <ImageView
+            android:id="@+id/topic_detail_head_view_video_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/topic_detail_head_view_video_play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/biz_video_list_play_icon_big"/>
+
+
+        <com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer
             android:id="@+id/videoview"
             android:layout_width="match_parent"
             android:layout_height="200dp"
