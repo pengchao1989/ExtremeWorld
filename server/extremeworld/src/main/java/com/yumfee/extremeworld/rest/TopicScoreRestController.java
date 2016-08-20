@@ -59,11 +59,12 @@ public class TopicScoreRestController {
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public MyResponse list(@PathVariable String hobby,
+			@RequestParam(value = "topicId", defaultValue = "1") Long topicId,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
 		
-		Page<TopicScore> pageTopicScore = topicScoreService.getAll(pageNumber, pageSize, sortType);
+		Page<TopicScore> pageTopicScore = topicScoreService.findAllByTopicId(topicId,pageNumber, pageSize, sortType);
 		MyPage<TopicScoreDTO, TopicScore> myPageTopicScore = new MyPage<TopicScoreDTO, TopicScore>(TopicScoreDTO.class, pageTopicScore);
 		return MyResponse.ok(myPageTopicScore, false);
 	}

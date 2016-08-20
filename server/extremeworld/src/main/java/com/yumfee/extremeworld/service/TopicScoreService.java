@@ -25,9 +25,9 @@ public class TopicScoreService {
 		topicScoreDao.save(topicScore);
 	}
 	
-	public Page<TopicScore> getAll(int pageNumber, int pageSize,String sortType){
+	public Page<TopicScore> findAllByTopicId(Long topicId,int pageNumber, int pageSize,String sortType){
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		return topicScoreDao.findAll(pageRequest);
+		return topicScoreDao.findByTopicId(topicId, pageRequest);
 	}
 	
 	public double getTopicAvgScore(Long topicId){
