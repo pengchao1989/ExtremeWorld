@@ -285,6 +285,7 @@ public class CourseController
 		newVideo.setExcerpt(newVideo.getContent());
 		newVideo.setType(TopicType.COURSE);
 		newVideo.setMagicType(TopicType.magicExplain);
+		newVideo.setFine(1);
 
 		//videoSource在属性的属性中，单独从form参数中提取
 		String videoSource = request.getParameter("videoSource");
