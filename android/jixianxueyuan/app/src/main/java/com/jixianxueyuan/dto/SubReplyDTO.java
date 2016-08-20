@@ -8,7 +8,7 @@ public class SubReplyDTO implements Serializable
 	private String content;
 	private String createTime;
 
-	private SubReplyDTO preSubReply;
+	private SubReplyDTO target;
 	private UserMinDTO user;
 
 	
@@ -42,12 +42,12 @@ public class SubReplyDTO implements Serializable
 		this.createTime = createTime;
 	}
 
-	public SubReplyDTO getPreSubReply() {
-		return preSubReply;
+	public SubReplyDTO getTarget() {
+		return target;
 	}
 
-	public void setPreSubReply(SubReplyDTO preSubReply) {
-		this.preSubReply = preSubReply;
+	public void setTarget(SubReplyDTO target) {
+		this.target = target;
 	}
 
 	public UserMinDTO getUser()

@@ -1,5 +1,8 @@
 package com.yumfee.extremeworld.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Validator;
 
 import org.slf4j.Logger;
@@ -26,7 +29,7 @@ import com.yumfee.extremeworld.service.SubReplyService;
 public class SubReplyRestController {
 	private static Logger logger = LoggerFactory.getLogger(SubReplyRestController.class);
 	
-	private static final String PAGE_SIZE = "5";
+	private static final String PAGE_SIZE = "50";
 	
 	@Autowired
 	SubReplyService subReplyService;
@@ -42,8 +45,21 @@ public class SubReplyRestController {
 		
 		Page<SubReply> subReplyPage = subReplyService.getAll(replyId,pageNumber, pageSize);
 		
-		MyPage<SubReplyDTO,SubReply> mySubReplyPage = new MyPage<SubReplyDTO,SubReply>(SubReplyDTO.class, subReplyPage);
+		MyPage<SubReplyDTO,SubReply> mySubReplyPage = new MyPage();
+		mySubReplyPage.setTotalPages(subReplyPage.getTotalPages());
+		mySubReplyPage.setTotalElements(subReplyPage.getTotalElements());
+		mySubReplyPage.setCurPage(subReplyPage.getNumber());
 		
+		List<SubReplyDTO> subReplyDTOList = new ArrayList<SubReplyDTO>();
+		for(SubReply subReply : subReplyPage.getContent()){
+			SubReplyDTO subReplyDTO = BeanMapper.map(subReply, SubReplyDTO.class);
+			if(subReply.getPreSubReply() != null){
+				SubReplyDTO targetSubReplyDTO = BeanMapper.map(subReply.getPreSubReply(), SubReplyDTO.class);
+				subReplyDTO.setTarget(targetSubReplyDTO);
+			}
+			subReplyDTOList.add(subReplyDTO);
+		}
+		mySubReplyPage.setContents(subReplyDTOList);
 		
 		return MyResponse.ok(mySubReplyPage,true);
 	}

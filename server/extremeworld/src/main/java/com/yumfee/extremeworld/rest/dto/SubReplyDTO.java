@@ -10,7 +10,7 @@ public class SubReplyDTO
 	private String content;
 	private Date createTime;
 	
-	private SubReplyDTO preSubReply;
+	private SubReplyDTO target;
 	private UserMinDTO user;
 
 	
@@ -45,12 +45,12 @@ public class SubReplyDTO
 		this.createTime = createTime;
 	}
 
-	public SubReplyDTO getPreSubReply() {
-		return preSubReply;
+	public SubReplyDTO getTarget() {
+		return target;
 	}
 
-	public void setPreSubReply(SubReplyDTO preSubReply) {
-		this.preSubReply = preSubReply;
+	public void setTarget(SubReplyDTO target) {
+		this.target = target;
 	}
 
 	public UserMinDTO getUser()

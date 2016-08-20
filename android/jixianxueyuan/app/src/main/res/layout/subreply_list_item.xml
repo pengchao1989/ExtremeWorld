@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/subreply_list_item_content"
-        android:layout_marginLeft="@dimen/avatar_alignment"
         style="@style/ListSecondaryTextSmall"/>
 
 </LinearLayout>

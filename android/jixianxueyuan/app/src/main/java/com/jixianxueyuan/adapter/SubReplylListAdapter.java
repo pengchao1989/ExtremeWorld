@@ -1,10 +1,13 @@
 package com.jixianxueyuan.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -84,11 +87,30 @@ public class SubReplylListAdapter extends BaseAdapter {
 
         SubReplyDTO subReplyDTO = subReplyDTOList.get(position);
         String name = subReplyDTO.getUser().getName();
+        String targetName = "";
+        if (subReplyDTO.getTarget() != null){
+            if (subReplyDTO.getTarget().getUser() != null){
+                targetName = subReplyDTO.getTarget().getUser().getName();
+            }
+        }
+
+        SpannableString ss;
         String content = subReplyDTO.getContent();
-        SpannableString ss=new SpannableString(name+":"+content);
+        if (TextUtils.isEmpty(targetName)){
+            ss=new SpannableString(name+":"+content);
+            ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.blue)), 0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }else {
+            final String to = " to ";
+            ss=new SpannableString(name+ to + targetName +":"+content);
+            ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.blue)), 0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(Color.GRAY), name.length(), name.length() + to.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.blue)), name.length() + to.length() , name.length() + to.length() + targetName.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+
 
         //ss.setSpan(new ForegroundColorSpan(Color.BLUE), 0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new ClickableSpan(){
+        /*ss.setSpan(new ClickableSpan(){
 
             @Override
             public void updateDrawState(TextPaint ds) {
@@ -102,7 +124,10 @@ public class SubReplylListAdapter extends BaseAdapter {
                 Toast.makeText(context, "click", Toast.LENGTH_LONG).show();
                 MyLog.d("TopicDetailListAdapter", "onCLick");
             }
-        },0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        },0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);*/
+
+
+
         viewHolder.contentTextView.setText(ss);
 
 
