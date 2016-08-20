@@ -71,7 +71,7 @@ public class GeoRestController {
 		}
 
 		
-		Page<User> userPage = userService.findByGeoHash(geoHashString.substring(0, 2) + "%",pageNumber, pageSize, sortType);//geoHash前几个字符
+		Page<User> userPage = userService.findByGeoHash(geoHashString.substring(0, 3) + "%",pageNumber, pageSize, sortType);//geoHash前几个字符
 		
 		
 		MyPage<UserGeoDTO, User> userMinePage = new MyPage<UserGeoDTO, User>(UserGeoDTO.class,userPage );

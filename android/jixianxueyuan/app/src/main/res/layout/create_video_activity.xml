@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/activity_root_layout">
 
     <com.jixianxueyuan.widget.MyActionBar
         android:id="@+id/create_video_actionbar"

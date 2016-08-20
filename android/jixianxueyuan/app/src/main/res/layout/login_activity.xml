@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
-    android:background="@color/primary">
+    android:background="@color/primary"
+    style="@style/activity_root_layout">
 
     <EditText
         android:id="@+id/user_name"

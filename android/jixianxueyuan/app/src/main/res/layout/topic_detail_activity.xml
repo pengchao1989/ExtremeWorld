@@ -5,7 +5,8 @@
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    style="@style/activity_root_layout">
 
     <LinearLayout
         android:id="@+id/topic_detail_swipeback_layout"
