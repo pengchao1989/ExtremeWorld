@@ -65,6 +65,7 @@ public class TopicService
 		
 		
 		topic = topicDao.findOne(id);
+		topic.setViewCount(topic.getViewCount() + 1);
 		return topic;
 	}
 	
