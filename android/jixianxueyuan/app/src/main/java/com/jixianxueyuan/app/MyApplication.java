@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.duanqu.qupai.upload.AuthService;
 import com.duanqu.qupai.upload.QupaiAuthListener;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.jixianxueyuan.commons.Contant;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
@@ -64,6 +65,8 @@ public class MyApplication extends MultiDexApplication {
 
         //初始化imageLoader
         initImageLoader();
+
+        Fresco.initialize(this);
 
         TradeConfigs.defaultTaokePid="mm_111250070_0_0";
         //AlibabaSDK.turnOnDebug();

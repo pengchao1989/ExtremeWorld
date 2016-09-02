@@ -2,6 +2,8 @@ package com.jixianxueyuan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.ImageLoaderConfig;
@@ -21,6 +24,7 @@ import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.util.DateTimeFormatter;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -118,8 +122,17 @@ public class TopicListAdapter extends BaseAdapter {
         if(Util.isOurServerImage(avatarUrl)){
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(avatarUrl, viewHolder.avatarImageView , ImageLoaderConfig.getAvatarOption(context));
+
+        //ImageLoader imageLoader = ImageLoader.getInstance();x
+        //imageLoader.displayImage(avatarUrl, viewHolder.avatarImageView , ImageLoaderConfig.getAvatarOption(context));
+        if (!TextUtils.isEmpty(avatarUrl)){
+            Uri uri = Uri.parse(avatarUrl);
+            viewHolder.avatarImageView.setImageURI(uri);
+        }else {
+            Uri uri = Uri.EMPTY;
+            viewHolder.avatarImageView.setImageURI(uri);
+        }
+
 
         MediaWrapDTO mediawrap = topicDTO.getMediaWrap();
 
@@ -129,25 +142,26 @@ public class TopicListAdapter extends BaseAdapter {
 
         if(topicDTO.getType() != null && topicDTO.getType().length() > 0)
         {
+            Uri uri = Uri.parse("res://" + R.drawable.ic_launcher);
             switch (topicDTO.getType())
             {
                 case TopicType.MOOD:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_mood);
+                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_mood);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.DISCUSS:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_discuss);
+                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_discuss);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.VIDEO:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_video);
+                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_video);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
                 case TopicType.S_VIDEO:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_video);
+                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_video);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
 
@@ -155,18 +169,19 @@ public class TopicListAdapter extends BaseAdapter {
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
                 case TopicType.NEWS:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_news);
+                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_news);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
                 case TopicType.COURSE:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_teach);
+                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_teach);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
                 case TopicType.CHALLENGE:
-                    viewHolder.typeImageView.setImageResource(R.mipmap.ic_challenge);
+                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_challenge);
                     viewHolder.titleTextView.setText(topicDTO.getTitle());
                     break;
             }
+
         }
 
 
@@ -174,7 +189,13 @@ public class TopicListAdapter extends BaseAdapter {
         if(videoDetailDTO != null)
         {
             viewHolder.videoFrontLayout.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(videoDetailDTO.getThumbnail() + "!AndroidListItem", viewHolder.videoFrontImageView);
+            if (!TextUtils.isEmpty(videoDetailDTO.getThumbnail())){
+                Uri uri = Uri.parse(videoDetailDTO.getThumbnail() + QiniuImageStyle.LIST_ITEM);
+                if (uri == null){
+                    uri = Uri.EMPTY;
+                }
+                viewHolder.videoFrontImageView.setImageURI(uri);
+            }
         }
         else
         {
@@ -192,43 +213,40 @@ public class TopicListAdapter extends BaseAdapter {
         {
             if(mediawrap.getMedias().size() > 0)
             {
-                viewHolder.topicImageView_1.setVisibility(View.VISIBLE);
-                MediaDTO mediaDto = mediawrap.getMedias().get(0);
 
+                MediaDTO mediaDto = mediawrap.getMedias().get(0);
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_1);
+                viewHolder.topicImageView_1.setVisibility(View.VISIBLE);
+                viewHolder.topicImageView_1.setImageURI(ImageUriParseUtil.parse(url + QiniuImageStyle.LIST_ITEM));
             }
             if(mediawrap.getMedias().size() > 1)
             {
-                viewHolder.topicImageView_2.setVisibility(View.VISIBLE);
-                MediaDTO mediaDto = mediawrap.getMedias().get(1);
 
+                MediaDTO mediaDto = mediawrap.getMedias().get(1);
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_2);
+                viewHolder.topicImageView_2.setVisibility(View.VISIBLE);
+                viewHolder.topicImageView_2.setImageURI(ImageUriParseUtil.parse(url + QiniuImageStyle.LIST_ITEM));
             }
             if(mediawrap.getMedias().size() > 2)
             {
-                viewHolder.topicImageView_3.setVisibility(View.VISIBLE);
                 MediaDTO mediaDto = mediawrap.getMedias().get(2);
-
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_3);
+                viewHolder.topicImageView_3.setVisibility(View.VISIBLE);
+                viewHolder.topicImageView_3.setImageURI(ImageUriParseUtil.parse(url + QiniuImageStyle.LIST_ITEM));
             }
             if(mediawrap.getMedias().size() > 3)
             {
-                viewHolder.topicImageView_4.setVisibility(View.VISIBLE);
                 MediaDTO mediaDto = mediawrap.getMedias().get(3);
-
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_4);
+                viewHolder.topicImageView_4.setVisibility(View.VISIBLE);
+                viewHolder.topicImageView_4.setImageURI(ImageUriParseUtil.parse(url + QiniuImageStyle.LIST_ITEM));
             }
             if(mediawrap.getMedias().size() > 4)
             {
-                viewHolder.topicImageView_5.setVisibility(View.VISIBLE);
                 MediaDTO mediaDto = mediawrap.getMedias().get(4);
-
                 String url =  mediaDto.getPath();
-                ImageLoader.getInstance().displayImage(url + QiniuImageStyle.LIST_ITEM, viewHolder.topicImageView_5);
+                viewHolder.topicImageView_5.setVisibility(View.VISIBLE);
+                viewHolder.topicImageView_5.setImageURI(ImageUriParseUtil.parse(url + QiniuImageStyle.LIST_ITEM));
             }
         }
 
@@ -249,11 +267,11 @@ public class TopicListAdapter extends BaseAdapter {
     public static class ViewHolder{
 
         @BindView(R.id.topic_list_item_type)
-        ImageView typeImageView;
+        SimpleDraweeView typeImageView;
         @BindView(R.id.topic_list_item_title)
         TextView titleTextView;
         @BindView(R.id.topic_list_item_avatar)
-        ImageView avatarImageView;
+        SimpleDraweeView avatarImageView;
 
         @BindView(R.id.topic_list_item_name)
         TextView nameTextView;
@@ -268,25 +286,25 @@ public class TopicListAdapter extends BaseAdapter {
         TextView agreeCountTextView;
 
         @BindView(R.id.topic_list_item_image_1)
-        ImageView topicImageView_1;
+        SimpleDraweeView topicImageView_1;
 
         @BindView(R.id.topic_list_item_image_2)
-        ImageView topicImageView_2;
+        SimpleDraweeView topicImageView_2;
 
         @BindView(R.id.topic_list_item_image_3)
-        ImageView topicImageView_3;
+        SimpleDraweeView topicImageView_3;
 
         @BindView(R.id.topic_list_item_image_4)
-        ImageView topicImageView_4;
+        SimpleDraweeView topicImageView_4;
 
         @BindView(R.id.topic_list_item_image_5)
-        ImageView topicImageView_5;
+        SimpleDraweeView topicImageView_5;
 
         @BindView(R.id.topic_list_item_video_front_layout)
         RelativeLayout videoFrontLayout;
 
         @BindView(R.id.topic_list_item_video_front_image)
-        ImageView videoFrontImageView;
+        SimpleDraweeView videoFrontImageView;
 
 
         public ViewHolder(View itemView){

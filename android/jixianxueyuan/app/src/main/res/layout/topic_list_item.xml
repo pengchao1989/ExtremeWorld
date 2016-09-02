@@ -2,6 +2,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -27,10 +28,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_avatar"
                     android:layout_width="@dimen/avatar_width"
-                    android:layout_height="@dimen/avatar_height" />
+                    android:layout_height="@dimen/avatar_height"
+                    fresco:roundAsCircle="true"
+                    fresco:placeholderImage="@mipmap/photo"/>
             </FrameLayout>
 
 
@@ -71,7 +74,7 @@
                 android:orientation="horizontal"
                 >
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,54 +108,46 @@
                     android:visibility="gone"
                     >
                     
-                    <ImageView
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/topic_list_item_video_front_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/list_thumbnail_width"
+                        android:layout_height="@dimen/list_thumbnail_width"
                         android:layout_centerInParent="true"
+                        fresco:overlayImage="@mipmap/ic_play_share_to_wechat_circle"
                         />
-                    
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/ic_play_share_to_wechat_circle"
-                        />
-
-
                 </RelativeLayout>
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_image_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/list_thumbnail_width"
+                    android:layout_height="@dimen/list_thumbnail_width"
                     android:padding="2dp"
                     />
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_image_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/list_thumbnail_width"
+                    android:layout_height="@dimen/list_thumbnail_width"
                     android:padding="2dp"
                     />
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_image_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/list_thumbnail_width"
+                    android:layout_height="@dimen/list_thumbnail_width"
                     android:padding="2dp"
                     />
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_image_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/list_thumbnail_width"
+                    android:layout_height="@dimen/list_thumbnail_width"
                     android:padding="2dp"
                     />
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_image_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/list_thumbnail_width"
+                    android:layout_height="@dimen/list_thumbnail_width"
                     android:padding="2dp"
                     />
 

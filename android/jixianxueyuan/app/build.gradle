@@ -165,6 +165,7 @@ dependencies {
     compile 'com.victor:lib:1.0.4'
     compile 'com.google.zxing:core:3.2.0'
     compile 'com.github.jd-alexander:LikeButton:0.2.0'
+    compile 'com.facebook.fresco:fresco:0.12.0'
     compile files('libs/open_sdk_r5043_lite.jar')
     compile files('libs/locSDK_3.3.jar')
     compile files('libs/renderscript-v8.jar')
