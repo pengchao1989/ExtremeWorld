@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.SubReplylListAdapter;
 import com.jixianxueyuan.app.MyApplication;
@@ -30,6 +31,7 @@ import com.jixianxueyuan.dto.request.SubReplyRequest;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
@@ -119,8 +121,7 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
     private void refreshHeadView(){
         myActionBar.setTitle(replyDTO.getFloor() + getString(R.string.floor));
 
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(replyDTO.getUser().getAvatar() + QiniuImageStyle.LIST_AVATAR, headViewHolder.avatarImageView);
+        headViewHolder.avatarImageView.setImageURI(ImageUriParseUtil.parse(replyDTO.getUser().getAvatar() + QiniuImageStyle.LIST_AVATAR));
         headViewHolder.nameTextView.setText(replyDTO.getUser().getName());
         headViewHolder.timeTextView.setText(replyDTO.getCreateTime());
         headViewHolder.contentTextView.setText(replyDTO.getContent());
@@ -278,7 +279,7 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public static class HeadViewHolder{
 
-        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.user_head_avatar)SimpleDraweeView avatarImageView;
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.reply_detail_content)TextView contentTextView;

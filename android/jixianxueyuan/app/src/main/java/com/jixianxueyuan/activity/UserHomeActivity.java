@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicListOfUserAdapter;
 import com.jixianxueyuan.app.Mine;
@@ -34,6 +35,7 @@ import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -57,8 +59,8 @@ public class UserHomeActivity extends BaseActivity {
 
     //@BindView(R.id.user_home_actionbar)MyActionBar actionBar;
     @BindView(R.id.user_home_listview)ListView listView;
-    private ImageView avatarImageView;
-    private ImageView coverImageView;
+    private SimpleDraweeView avatarImageView;
+    private SimpleDraweeView coverImageView;
     private TextView nameTextView;
     private TextView idTextView;
     private TextView regionTextView;
@@ -100,8 +102,8 @@ public class UserHomeActivity extends BaseActivity {
     private void initHeadView(){
         View headView = LayoutInflater.from(this).inflate(R.layout.user_home_head_view, null);
         signatureTextView = (TextView) headView.findViewById(R.id.user_home_head_signature);
-        avatarImageView = (ImageView) headView.findViewById(R.id.user_home_head_avatar);
-        coverImageView = (ImageView) headView.findViewById(R.id.user_home_head_cover);
+        avatarImageView = (SimpleDraweeView) headView.findViewById(R.id.user_home_head_avatar);
+        coverImageView = (SimpleDraweeView) headView.findViewById(R.id.user_home_head_cover);
         nameTextView = (TextView) headView.findViewById(R.id.user_home_head_name);
         idTextView = (TextView) headView.findViewById(R.id.user_home_head_id);
         regionTextView = (TextView)headView.findViewById(R.id.user_home_head_region);
@@ -123,7 +125,7 @@ public class UserHomeActivity extends BaseActivity {
         String avatarUrl = userMinDTO != null?userMinDTO.getAvatar() + QiniuImageStyle.PROFILE_AVATAR
                 :userDTO.getAvatar() + "!AndroidProfileAvatar";
         MyLog.d("UserHomeActivity", "avatar=" + avatarUrl);
-        ImageLoader.getInstance().displayImage(avatarUrl, avatarImageView);
+        avatarImageView.setImageURI(ImageUriParseUtil.parse(avatarUrl));
 
         showCover();
 
@@ -149,7 +151,7 @@ public class UserHomeActivity extends BaseActivity {
     private void showCover() {
         if(userDTO != null){
             String coverUrl = userDTO.getBg() + QiniuImageStyle.COVER;
-            ImageLoader.getInstance().displayImage(coverUrl, coverImageView, ImageLoaderConfig.getHeadOption(this));
+            coverImageView.setImageURI(ImageUriParseUtil.parse(coverUrl));
         }
     }
 

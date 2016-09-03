@@ -8,12 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.util.DateTimeFormatter;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.Util;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +88,7 @@ public class NearFriendListAdapter extends BaseAdapter {
         if(Util.isOurServerImage(avatarUrl)){
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
-
-        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
+        viewHolder.avatarImageView.setImageURI(ImageUriParseUtil.parse(avatarUrl));
         viewHolder.nameTextView.setText(userDTO.getName());
         viewHolder.distanceTextView.setText(Util.meterToString(userDTO.getDistance()));
         String timeAgo = DateTimeFormatter.getTimeAgo(context, userDTO.getGeoModifyTime());
@@ -109,7 +109,7 @@ public class NearFriendListAdapter extends BaseAdapter {
 
     public static class ViewHolder
     {
-        @BindView(R.id.near_friend_list_item_avatar)ImageView avatarImageView;
+        @BindView(R.id.near_friend_list_item_avatar)SimpleDraweeView avatarImageView;
         @BindView(R.id.near_friend_list_item_name)TextView nameTextView;
         @BindView(R.id.near_friend_list_item_distance)TextView distanceTextView;
         @BindView(R.id.near_friend_list_item_gender)ImageView genderImageView;

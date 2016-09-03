@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,11 +8,12 @@
     android:paddingBottom="@dimen/list_item_vertical_padding"
     android:background="@drawable/list_item_background">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/goods_list_item_image"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:scaleType="centerCrop"/>
+        fresco:actualImageScaleType="centerCrop"
+        fresco:placeholderImage="@mipmap/photo"/>
 
     <TextView
         android:id="@+id/goods_list_item_title"

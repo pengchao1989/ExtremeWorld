@@ -5,15 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.RemindDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.Util;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -86,7 +86,7 @@ public class RemindListAdapter extends BaseAdapter {
         if(Util.isOurServerImage(avatarUrl)){
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
-        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView);
+        viewHolder.avatarImageView.setImageURI(ImageUriParseUtil.parse(avatarUrl));
         viewHolder.nameTextView.setText(speaker.getName());
 
         viewHolder.timeTextView.setText(remindDTO.getCreateTime());
@@ -98,7 +98,7 @@ public class RemindListAdapter extends BaseAdapter {
 
     public static class ViewHolder{
 
-        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.user_head_avatar)SimpleDraweeView avatarImageView;
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.remind_list_item_content)

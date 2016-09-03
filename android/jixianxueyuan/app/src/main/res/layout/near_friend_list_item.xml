@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,10 +13,12 @@
     >
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/near_friend_list_item_avatar"
         android:layout_width="@dimen/avatar_width"
-        android:layout_height="@dimen/avatar_height" />
+        android:layout_height="@dimen/avatar_height"
+        fresco:roundAsCircle="true"
+        fresco:placeholderImage="@mipmap/photo"/>
 
     <LinearLayout
         android:layout_width="match_parent"

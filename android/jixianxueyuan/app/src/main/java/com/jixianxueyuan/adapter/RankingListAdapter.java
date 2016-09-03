@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.UserScoreDTO;
@@ -102,7 +103,7 @@ public class RankingListAdapter extends BaseAdapter {
             if(Util.isOurServerImage(avatarUrl)){
                 avatarUrl += QiniuImageStyle.LIST_AVATAR;
             }
-            ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.userAvatarImageView);
+            viewHolder.userAvatarImageView.setImageURI(avatarUrl);
 
             String scoreText = context.getString(R.string.score) + String.format("%.2f", userScoreDTO.getScore());
             viewHolder.scoreTextTextView.setText(scoreText);
@@ -115,7 +116,7 @@ public class RankingListAdapter extends BaseAdapter {
 
     class ViewHolder {
         @BindView(R.id.user_avatar_image_view)
-        CircleImageView userAvatarImageView;
+        SimpleDraweeView userAvatarImageView;
         @BindView(R.id.user_name_text_view)
         TextView userNameTextView;
         @BindView(R.id.score_text_text_view)

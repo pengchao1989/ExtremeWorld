@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CollectionListActivity;
 import com.jixianxueyuan.activity.CropBgActivity;
@@ -38,6 +39,7 @@ import com.jixianxueyuan.dto.request.UserAttributeRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -64,9 +66,9 @@ public class MineFragment extends Fragment {
     public static final int CROP_IMAGE_CODE = 2;
 
     @BindView(R.id.mine_fragment_head_image_view)
-    ImageView headImageView;
+    SimpleDraweeView headImageView;
     @BindView(R.id.mine_avatar_imageview)
-    ImageView avatarImageView;
+    SimpleDraweeView avatarImageView;
     @BindView(R.id.mine_fragment_signature)
     TextView signatureTextView;
 
@@ -101,8 +103,8 @@ public class MineFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getAvatar(), avatarImageView, ImageLoaderConfig.getAvatarOption(this.getActivity()));
-        ImageLoader.getInstance().displayImage(mine.getUserInfo().getBg() + QiniuImageStyle.COVER, headImageView, ImageLoaderConfig.getHeadOption(this.getActivity()));
+        avatarImageView.setImageURI(ImageUriParseUtil.parse(mine.getUserInfo().getAvatar()));
+        headImageView.setImageURI(ImageUriParseUtil.parse(mine.getUserInfo().getBg()));
 
         signatureTextView.setText(mine.getUserInfo().getSignature());
 

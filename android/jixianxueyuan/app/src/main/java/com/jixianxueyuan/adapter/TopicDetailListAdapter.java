@@ -13,12 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.SubReplyDTO;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -104,7 +106,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
         if(Util.isOurServerImage(avatarUrl)){
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
-        ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
+        viewHolder.avatarImageView.setImageURI(ImageUriParseUtil.parse(avatarUrl));
         viewHolder.avatarImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,7 +213,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
 
     public static class ViewHolder
     {
-        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.user_head_avatar)SimpleDraweeView avatarImageView;
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.user_head_right_tip)TextView floorTextView;

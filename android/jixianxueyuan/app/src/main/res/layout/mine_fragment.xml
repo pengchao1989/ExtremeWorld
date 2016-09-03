@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,11 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="148dp">
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/mine_fragment_head_image_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:layout_height="148dp"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:placeholderImage="@drawable/default_head"
+                />
 
             <TextView
                 android:id="@+id/mine_fragment_signature"
@@ -41,10 +44,12 @@
             android:padding="3dp"
             android:background="@mipmap/bg_flost_im_avatar">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/mine_avatar_imageview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                fresco:roundAsCircle="true"
+                fresco:placeholderImage="@mipmap/photo"
                 />
 
         </FrameLayout>

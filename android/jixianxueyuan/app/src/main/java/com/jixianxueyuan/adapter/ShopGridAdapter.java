@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.biz.ShopDTO;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.LinkedList;
@@ -77,14 +79,13 @@ public class ShopGridAdapter extends BaseAdapter {
         viewHolder.nameTextView.setText(shopDTO.getName());
         viewHolder.signatureTextView.setText(shopDTO.getSignature());
         String imageUrl = shopDTO.getCover() + "!AndroidGridItem";
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(imageUrl, viewHolder.iconImageView, ImageLoaderConfig.getImageOption(context));
+        viewHolder.iconImageView.setImageURI(ImageUriParseUtil.parse(imageUrl));
 
         return convertView;
     }
 
     static class ViewHolder{
-        @BindView(R.id.shop_gird_item_icon)ImageView iconImageView;
+        @BindView(R.id.shop_gird_item_icon)SimpleDraweeView iconImageView;
         @BindView(R.id.shop_gird_item_name)TextView nameTextView;
         @BindView(R.id.shop_gird_item_signature)TextView signatureTextView;
 

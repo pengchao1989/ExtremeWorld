@@ -45,6 +45,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
+import me.wangyuwei.particleview.ParticleView;
 
 
 public class MainActivity extends Activity {
@@ -57,7 +58,7 @@ public class MainActivity extends Activity {
     LinearLayout qqLoginButton;
 
     @BindView(R.id.activity_main_appname)
-    ShimmerTextView appNameTextView;
+    ParticleView appNameTextView;
 
     Tencent tencent;
 
@@ -77,10 +78,6 @@ public class MainActivity extends Activity {
         ButterKnife.bind(this);
 
         initView();
-
-        final Shimmer shimmer = new Shimmer();
-        shimmer.setRepeatCount(2);
-        shimmer.start(appNameTextView);
 
 /*        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);*/
@@ -140,7 +137,7 @@ public class MainActivity extends Activity {
     private void initView() {
         String umengKey = Util.getApplicationMetaString(this, "UMENG_APPKEY");
         MyLog.e("MainActivity", "UMENT_KEY=" + umengKey);
-        appNameTextView.setText(this.getResources().getText(R.string.app_name));
+        appNameTextView.startAnim();
     }
 
     private void showVideo(){

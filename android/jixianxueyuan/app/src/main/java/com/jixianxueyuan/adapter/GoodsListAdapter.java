@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.biz.GoodsDTO;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -81,16 +83,13 @@ public class GoodsListAdapter extends BaseAdapter {
         }else{
             imageUrl = goodsDTO.getCover();
         }
-
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(imageUrl, viewHolder.imageView, ImageLoaderConfig.getImageOption(context));
-
+        viewHolder.imageView.setImageURI(ImageUriParseUtil.parse(imageUrl));
 
         return convertView;
     }
 
     static class ViewHolder{
-        @BindView(R.id.goods_list_item_image)ImageView imageView;
+        @BindView(R.id.goods_list_item_image)SimpleDraweeView imageView;
         @BindView(R.id.goods_list_item_title)TextView titleTextView;
 
         public ViewHolder(View itemView){

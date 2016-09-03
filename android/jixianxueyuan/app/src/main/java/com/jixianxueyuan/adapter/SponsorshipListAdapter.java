@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.dto.SponsorshipDTO;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by pengchao on 12/3/15.
@@ -84,7 +83,7 @@ public class SponsorshipListAdapter extends BaseAdapter {
         if(sponsorshipDTO!= null){
             if(sponsorshipDTO.getUser() != null){
                 String avatarUrl = sponsorshipDTO.getUser().getAvatar() + QiniuImageStyle.LIST_AVATAR;
-                ImageLoader.getInstance().displayImage(avatarUrl, viewHolder.avatarImageView, ImageLoaderConfig.getAvatarOption(context));
+                viewHolder.avatarImageView.setImageURI(ImageUriParseUtil.parse(avatarUrl));
 
                 viewHolder.nameTextView.setText(sponsorshipDTO.getUser().getName());
             }
@@ -98,7 +97,7 @@ public class SponsorshipListAdapter extends BaseAdapter {
     public static class ViewHolder{
 
         @BindView(R.id.sponsorship_list_item_avatar)
-        CircleImageView avatarImageView;
+        SimpleDraweeView avatarImageView;
         @BindView(R.id.sponsorship_list_item_name)
         TextView nameTextView;
         @BindView(R.id.sponsorship_list_item_sum)

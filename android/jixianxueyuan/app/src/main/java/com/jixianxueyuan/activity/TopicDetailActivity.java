@@ -36,6 +36,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jakewharton.disklrucache.DiskLruCache;
@@ -67,6 +68,7 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.StringUtils;
@@ -357,7 +359,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         if(Util.isOurServerImage(avatarUrl)){
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
-        ImageLoader.getInstance().displayImage(avatarUrl, headViewHolder.avatarImageView);
+        headViewHolder.avatarImageView.setImageURI(ImageUriParseUtil.parse(avatarUrl));
         headViewHolder.avatarImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -453,7 +455,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             if(topicDTO.getVideoDetail().getVideoSource() != null)
             {
                 headViewHolder.videoLayout.setVisibility(View.VISIBLE);
-                ImageLoader.getInstance().displayImage(topicDTO.getVideoDetail().getThumbnail() + "!detail", headViewHolder.coverImageView, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+                //ImageLoader.getInstance().displayImage(topicDTO.getVideoDetail().getThumbnail() + "!detail", headViewHolder.coverImageView, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+                headViewHolder.coverImageView.setImageURI(ImageUriParseUtil.parse(topicDTO.getVideoDetail().getThumbnail() + "!detail"));
 
 
                 headViewHolder.playButton.setOnClickListener(new View.OnClickListener() {
@@ -848,11 +851,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @BindView(R.id.topic_detail_title)TextView titleTextView;
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
-        @BindView(R.id.user_head_avatar)ImageView avatarImageView;
+        @BindView(R.id.user_head_avatar)SimpleDraweeView avatarImageView;
         @BindView(R.id.videoview)SuperVideoPlayer videoView;
         @BindView(R.id.web_view)WebView webView;
         @BindView(R.id.topic_detail_head_view_video_cover_image)
-        ImageView coverImageView;
+        SimpleDraweeView coverImageView;
         @BindView(R.id.topic_detail_head_view_video_play_btn)
         ImageView playButton;
         @BindView(R.id.short_video_detail_progress)
