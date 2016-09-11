@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/convenientBanner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flexible_space_image_height"
+        app:canLoop="true"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/simple_top_list_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/simple_topic_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/ListView"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

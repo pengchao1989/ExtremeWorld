@@ -30,6 +30,7 @@ import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
+import com.jixianxueyuan.fragment.NewHomeFragment;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.location.LocationManager;
 import com.jixianxueyuan.location.MyLocation;
@@ -69,7 +70,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     @BindView(R.id.tab_market_text)TextView marketTextView;
 
     private FragmentManager fragmentManager;
-    private DynamicHomeFragment topicListFragment;
+    private NewHomeFragment topicListFragment;
     private CourseHomeFragment courseHomeFragment;
     private DiscoveryFragment discoveryFragment;
     private MineFragment mineFragment;
@@ -151,9 +152,9 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 trendsTextView.setTextColor(getResources().getColor(R.color.primary));
                 if (topicListFragment == null) {
                     // 如果fg1为空，则创建一个并添加到界面上
-                    topicListFragment = new DynamicHomeFragment();
+                    topicListFragment = new NewHomeFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("topicType", TopicType.ALL);
+                    bundle.putString(TopicType.TYPE, TopicType.ALL);
                     topicListFragment.setArguments(bundle);
                     transaction.add(R.id.content, topicListFragment);
                 } else {
