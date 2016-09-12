@@ -118,18 +118,14 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_COURSE_CLICK);
                 setChioceItem(1);
                 break;
-            case R.id.tab_discover_layout:
-                setChioceItem(2);
-                MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_DISCOVERY_CLICK);
-                break;
 
             case R.id.tab_mine_layout:
-                setChioceItem(4);
+                setChioceItem(2);
                 MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_MINE_CLICK);
                 break;
 
             case R.id.tab_market_layout:
-                setChioceItem(5);
+                setChioceItem(3);
                 MobclickAgent.onEvent(NewHomeActivity.this, UmengEventId.TAB_STORE_CLICK);
                 break;
         }
@@ -169,10 +165,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                     transaction.show(courseHomeFragment);
                 }
                 break;
-            case 2:
-                break;
 
-            case 3:
+            case 2:
                 mineImageView.setImageResource(R.mipmap.bottombar_mine_2);
                 mineTextView.setTextColor(getResources().getColor(R.color.primary));
                 if (mineFragment == null) {
@@ -184,7 +178,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                     transaction.show(mineFragment);
                 }
                 break;
-            case 4:
+            case 3:
                 marketImageView.setImageResource(R.mipmap.bottombar_shop2);
                 marketTextView.setTextColor(getResources().getColor(R.color.primary));
                 if(marketFragment == null){
