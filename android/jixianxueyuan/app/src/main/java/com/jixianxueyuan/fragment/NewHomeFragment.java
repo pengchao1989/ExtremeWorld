@@ -27,6 +27,10 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.InviteWebActivity;
+import com.jixianxueyuan.activity.NearFriendActivity;
+import com.jixianxueyuan.activity.RankingListActivity;
+import com.jixianxueyuan.activity.SiteListActivity;
+import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.WebActivity;
 import com.jixianxueyuan.adapter.TopicListAdapter;
@@ -65,8 +69,8 @@ public class NewHomeFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.simple_topic_list_view)
     ListView listView;
-    @BindView(R.id.convenientBanner)
-    ConvenientBanner convenientBanner;
+
+    ConvenientBanner mConvenientBanner;
 
     private List<ExhibitionDTO> exhibitionDTOList;
 
@@ -80,8 +84,6 @@ public class NewHomeFragment extends Fragment {
     private boolean isFine = false;
 
     TopicListAdapter adapter;
-    boolean isInitData = false;
-    boolean isInitView = false;
     boolean isRequesting = false;
     boolean isRefreshData = false;
 
@@ -101,13 +103,13 @@ public class NewHomeFragment extends Fragment {
         swipeRefreshLayout.setColorSchemeResources(R.color.primary);
 
         initBundle();
+        initHeaderView();
         initFooterView();
         listView.setAdapter(adapter);
 
         initListener();
         initExhibitionList();
 
-        isInitView = true;
         return view;
     }
 
@@ -149,6 +151,51 @@ public class NewHomeFragment extends Fragment {
 
             }
         });
+
+        mConvenientBanner.setOnItemClickListener(new com.bigkoo.convenientbanner.listener.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startExhibitionDetail(position);
+            }
+        });
+    }
+
+    private void initHeaderView(){
+        View headerView = LayoutInflater.from(this.getActivity()).inflate(R.layout.new_home_header, null);
+        mConvenientBanner = (ConvenientBanner) headerView.findViewById(R.id.convenientBanner);
+        listView.addHeaderView(headerView);
+
+        headerView.findViewById(R.id.home_header_rank_list).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewHomeFragment.this.getContext(), RankingListActivity.class);
+                NewHomeFragment.this.getActivity().startActivity(intent);
+            }
+        });
+
+        headerView.findViewById(R.id.home_header_near_friend).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewHomeFragment.this.getContext(), NearFriendActivity.class);
+                NewHomeFragment.this.getActivity().startActivity(intent);
+            }
+        });
+
+        headerView.findViewById(R.id.home_header_site).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewHomeFragment.this.getContext(), SiteListActivity.class);
+                NewHomeFragment.this.getActivity().startActivity(intent);
+            }
+        });
+
+        headerView.findViewById(R.id.home_header_sponsorship).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewHomeFragment.this.getContext(), SponsorshipActivity.class);
+                NewHomeFragment.this.getActivity().startActivity(intent);
+            }
+        });
     }
 
     private void initFooterView(){
@@ -163,23 +210,17 @@ public class NewHomeFragment extends Fragment {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-        if(isVisibleToUser && isInitView){
-            if(!isInitData){
-                isInitData = true;
-                MyLog.d(tag, "setUserVisibleHint");
-                refreshTopicList();
-            }
-        }
+        refreshTopicList();
     }
 
     @OnItemClick(R.id.simple_topic_list_view)
     void onItemClicked(int position) {
 
-        if (position >= adapter.getCount()) {
+        if (position >= adapter.getCount() || position == 0) {
             return;
         }
 
-        TopicDTO topicDTO = adapter.getItem(position);
+        TopicDTO topicDTO = adapter.getItem(position - 1);
 
         Intent intent = null;
         switch (topicDTO.getType()) {
@@ -346,7 +387,7 @@ public class NewHomeFragment extends Fragment {
     }
 
     private void updateExhibitionHeadVIew(){
-        convenientBanner.setPages(new CBViewHolderCreator<ExhibitionItemHolderView>() {
+        mConvenientBanner.setPages(new CBViewHolderCreator<ExhibitionItemHolderView>() {
             @Override
             public ExhibitionItemHolderView createHolder() {
                 return new ExhibitionItemHolderView();

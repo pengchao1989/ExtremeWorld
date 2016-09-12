@@ -2,15 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-                android:layout_height="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.bigkoo.convenientbanner.ConvenientBanner
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/convenientBanner"
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/profile_edit_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/flexible_space_image_height"
-        app:canLoop="true"/>
+        android:layout_height="wrap_content"/>
+
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/simple_top_list_swipe_refresh"
