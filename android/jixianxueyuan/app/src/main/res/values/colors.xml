@@ -40,9 +40,11 @@
     <color name="course_taxonomy_5">#53619c</color>
 
 
-
-
-
+    <color name="topic_type_mood">#FF9933</color>
+    <color name="topic_type_news">#9999FF</color>
+    <color name="topic_type_video">#99CC00</color>
+    <color name="topic_type_challenge">#FF0033</color>
+    <color name="topic_type_course">#CC3366</color>
 
 
 

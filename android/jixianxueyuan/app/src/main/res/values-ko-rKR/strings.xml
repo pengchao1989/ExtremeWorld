@@ -49,7 +49,6 @@
     <string name="longitude">경도</string>
     <string name="latitude">위도</string>
     <string name="select_address">주소 선택</string>
-    <string name="challenge">도전</string>
     <string name="score">점수</string>
 
     <string name="not_more">없다</string>
@@ -66,6 +65,7 @@
     <string name="video">비디오</string>
     <string name="activity">활동</string>
     <string name="course">교육</string>
+    <string name="challenge">도전</string>
     <string name="site">장소</string>
     <string name="people">동네 사람들</string>
     <string name="store">상점</string>

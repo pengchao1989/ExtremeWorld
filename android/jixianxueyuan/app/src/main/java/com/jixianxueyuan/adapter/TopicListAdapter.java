@@ -3,6 +3,7 @@ package com.jixianxueyuan.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.ImageUriParseUtil;
+import com.jixianxueyuan.util.ScreenUtils;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -36,6 +38,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import cn.nekocode.badge.BadgeDrawable;
 
 
 /**
@@ -142,43 +145,35 @@ public class TopicListAdapter extends BaseAdapter {
 
         if(topicDTO.getType() != null && topicDTO.getType().length() > 0)
         {
-            Uri uri = Uri.parse("res://" + R.drawable.ic_launcher);
             switch (topicDTO.getType())
             {
                 case TopicType.MOOD:
-                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_mood);
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_mood), context.getString(R.string.mood), topicDTO);
                     break;
 
                 case TopicType.DISCUSS:
-                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_discuss);
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_mood), context.getString(R.string.discuss), topicDTO);
                     break;
 
                 case TopicType.VIDEO:
-                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_video);
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_video), context.getString(R.string.video), topicDTO);
                     break;
 
                 case TopicType.S_VIDEO:
-                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_video);
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_video), context.getString(R.string.s_video), topicDTO);
                     break;
 
                 case TopicType.ACTIVITY:
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_mood), context.getString(R.string.activity), topicDTO);
                     break;
                 case TopicType.NEWS:
-                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_news);
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_news), context.getString(R.string.news), topicDTO);
                     break;
                 case TopicType.COURSE:
-                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_teach);
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_course), context.getString(R.string.course), topicDTO);
                     break;
                 case TopicType.CHALLENGE:
-                    viewHolder.typeImageView.setImageURI("res://mipmap/" + R.mipmap.ic_challenge);
-                    viewHolder.titleTextView.setText(topicDTO.getTitle());
+                    showTitle(viewHolder, context.getResources().getColor(R.color.topic_type_challenge), context.getString(R.string.challenge), topicDTO);
                     break;
             }
 
@@ -263,11 +258,25 @@ public class TopicListAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private void showTitle(ViewHolder viewHolder, int badgeColor, String badgeString, TopicDTO topicDTO) {
+        BadgeDrawable drawable2 =
+                new BadgeDrawable.Builder()
+                        .type(BadgeDrawable.TYPE_ONLY_ONE_TEXT)
+                        .badgeColor(badgeColor)
+                        .text1(badgeString)
+                        .textSize(ScreenUtils.sp2px(context,13.8f))
+                        .build();
+        SpannableString spannableString =
+                new SpannableString(TextUtils.concat(
+                        drawable2.toSpannable(),
+                        " ", topicDTO.getTitle()
+                        ));
+        viewHolder.titleTextView.setText(spannableString);
+    }
+
 
     public static class ViewHolder{
 
-        @BindView(R.id.topic_list_item_type)
-        SimpleDraweeView typeImageView;
         @BindView(R.id.topic_list_item_title)
         TextView titleTextView;
         @BindView(R.id.topic_list_item_avatar)

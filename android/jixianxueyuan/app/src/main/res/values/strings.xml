@@ -49,7 +49,6 @@
     <string name="longitude">longitude</string>
     <string name="latitude">latitude</string>
     <string name="select_address">select address</string>
-    <string name="challenge">challenge</string>
     <string name="score">score</string>
 
     <string name="not_more">not more</string>
@@ -66,6 +65,7 @@
     <string name="video">video</string>
     <string name="activity">activity</string>
     <string name="course">course</string>
+    <string name="challenge">challenge</string>
     <string name="site">site</string>
     <string name="people">near friend</string>
     <string name="ranking_list">ranking list</string>
