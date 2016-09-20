@@ -2,9 +2,12 @@ package com.jixianxueyuan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -259,7 +262,7 @@ public class TopicListAdapter extends BaseAdapter {
     }
 
     private void showTitle(ViewHolder viewHolder, int badgeColor, String badgeString, TopicDTO topicDTO) {
-        BadgeDrawable drawable2 =
+/*       BadgeDrawable drawable2 =
                 new BadgeDrawable.Builder()
                         .type(BadgeDrawable.TYPE_ONLY_ONE_TEXT)
                         .badgeColor(badgeColor)
@@ -270,7 +273,20 @@ public class TopicListAdapter extends BaseAdapter {
                 new SpannableString(TextUtils.concat(
                         drawable2.toSpannable(),
                         " ", topicDTO.getTitle()
-                        ));
+                        ));*/
+
+        SpannableString ss;
+        badgeString = "[" + badgeString + "]";
+        ss=new SpannableString(badgeString + topicDTO.getTitle());
+        ss.setSpan(new ForegroundColorSpan(badgeColor), 0, badgeString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        SpannableString spannableString =
+                new SpannableString(TextUtils.concat(
+                        ss,
+                        " ", topicDTO.getTitle()
+                ));
+
+
         viewHolder.titleTextView.setText(spannableString);
     }
 
