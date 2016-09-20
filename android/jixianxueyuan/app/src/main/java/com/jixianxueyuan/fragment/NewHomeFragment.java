@@ -109,6 +109,7 @@ public class NewHomeFragment extends Fragment {
 
         initListener();
         initExhibitionList();
+        refreshTopicList();
 
         return view;
     }
@@ -210,7 +211,7 @@ public class NewHomeFragment extends Fragment {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-        refreshTopicList();
+
     }
 
     @OnItemClick(R.id.simple_topic_list_view)

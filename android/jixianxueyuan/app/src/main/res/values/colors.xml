@@ -1,6 +1,6 @@
 <resources>
 
-    <color name="primary_color">#302833</color>
+    <color name="primary_color">#862240</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="white_overlay">#66FAFAFA</color>
@@ -21,7 +21,7 @@
     <color name="deep_purple_darken_4">#ff311b92</color>
     <color name="blue_darken_4">#ff0d47a1</color>
 
-    <color name="primary">#302833</color>
+    <color name="primary">#862240</color>
     <color name="primary_pressed">#ff308cca</color>
     <color name="ripple">#F06292</color>
     <color name="accent">#E91E63</color>
