@@ -25,6 +25,7 @@ import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsDownloader;
 import com.umeng.socialize.PlatformConfig;
 
@@ -89,16 +90,14 @@ public class MyApplication extends MultiDexApplication {
 
         });
 
-        //init qupai
-        initQuPai();
-
         initIM();
 
         initUmenScoial();
 
-        TbsDownloader.needDownload(getApplicationContext(), false);
+        initX5();
 
 	}
+
 
     /**
      * 初始化云推送通道
@@ -209,5 +208,20 @@ public class MyApplication extends MultiDexApplication {
         PlatformConfig.setQQZone(qqAppId, qqAppKey);
         PlatformConfig.setSinaWeibo("492074446", "8109db8a83c52a6df30609a29f2fae21");
         PlatformConfig.setWeixin("wxdb326de61ab1adb6", "46abb9f519afca7dab08b9c155869f19");
+    }
+
+    private void initX5() {
+        TbsDownloader.needDownload(getApplicationContext(), false);
+        QbSdk.initX5Environment(this, QbSdk.WebviewInitType.FIRSTUSE_AND_PRELOAD, new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+
+            }
+        });
     }
 }
