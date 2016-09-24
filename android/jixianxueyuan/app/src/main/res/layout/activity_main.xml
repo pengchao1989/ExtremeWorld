@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-                xmlns:pv="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -21,23 +21,23 @@
         android:paddingRight="20dp"
         android:background="@color/primary">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
             >
 
-            <me.wangyuwei.particleview.ParticleView
+            <com.romainpiel.shimmer.ShimmerTextView
                 android:id="@+id/activity_main_appname"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                pv:pv_background_color="#2E2E2E"
-                pv:pv_host_text="Skateboard"
-                pv:pv_particle_text="Group"
-                pv:pv_particle_text_size="16sp"
-                pv:pv_text_color="#FFF" />
+                android:text="极限学院"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="50sp"
+                app:reflectionColor="@color/white_overlay"
+                />
 
 
             <TextView
@@ -45,13 +45,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
                 android:textSize="20sp"
                 android:text="原创视频与教学汇聚地"/>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
 
