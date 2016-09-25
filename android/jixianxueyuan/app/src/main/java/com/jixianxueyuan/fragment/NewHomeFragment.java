@@ -240,6 +240,10 @@ public class NewHomeFragment extends Fragment {
                 intent = new Intent(this.getActivity(), TopicDetailActivity.class);
                 intent.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
                 break;
+            case TopicType.CHALLENGE:
+                intent = new Intent(this.getActivity(), TopicDetailActivity.class);
+                intent.putExtra(TopicType.TYPE, TopicType.CHALLENGE);
+                break;
             default:
                 Toast.makeText(this.getContext(),R.string.app_version_is_low, Toast.LENGTH_SHORT).show();
 
