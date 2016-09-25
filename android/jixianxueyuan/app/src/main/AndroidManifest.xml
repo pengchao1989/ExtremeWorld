@@ -374,16 +374,16 @@
 
         <!-- Required  . Enable it you can get statistics data with channel-->
 
-        <!--umeng update-->
-        <service
-            android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" >
-        </service>
-        <activity
-            android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <!--umeng update-->
+        <!--xiaomi update-->
+        <receiver android:name="com.xiaomi.market.sdk.DownloadCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <!--xiaomi update-->
+
+
 
         <meta-data
             android:name="JPUSH_CHANNEL"
