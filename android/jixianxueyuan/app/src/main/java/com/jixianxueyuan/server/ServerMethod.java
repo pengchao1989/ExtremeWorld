@@ -1,6 +1,8 @@
 package com.jixianxueyuan.server;
 
 
+import com.jixianxueyuan.BuildConfig;
+
 /**
  * Created by pengchao on 2015/4/12.
  */
@@ -10,8 +12,8 @@ public class ServerMethod {
     static public final int STATUS_ERROR = -1;
     static public final int STATUS_NO_CONTENT = 204;
 
-    //static final String server_url = "http://dev.jixianxueyuan.com/";
-    static final String server_url = "http://www.jixianxueyuan.com/";
+    static final String test_server_url = "http://dev.jixianxueyuan.com/";
+    static final String production_server_url = "http://www.jixianxueyuan.com/";
     //static final String server_url = "http://192.168.1.2:8023/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
@@ -21,12 +23,21 @@ public class ServerMethod {
         hobby = h + "/";
     }
 
-    static final String method_url_secure = server_url + api_version_secure;
-    static final String method_url_none = server_url + api_version_anon;
+    static final String method_url_secure = getHost() + api_version_secure;
 
-    public static final String videoUploadToken = server_url + api_version_anon + "uptoken/video";
-    public static final String imgUploadToken = server_url + api_version_anon + "uptoken/picture";
-    public static final String imageModifyToken = server_url + api_version_anon + "uptoken/picture_modify";
+    static final String getHost(){
+        if (BuildConfig.DEBUG){
+            return test_server_url;
+        }else {
+            return production_server_url;
+        }
+    }
+
+    static final String method_url_none = getHost() + api_version_anon;
+
+    public static final String videoUploadToken = getHost() + api_version_anon + "uptoken/video";
+    public static final String imgUploadToken = getHost() + api_version_anon + "uptoken/picture";
+    public static final String imageModifyToken = getHost() + api_version_anon + "uptoken/picture_modify";
 
     public static final String handshake(){return method_url_none + "handshake";};
     public static final String account_qq_login() { return method_url_none + hobby + "account/qq_login";};
