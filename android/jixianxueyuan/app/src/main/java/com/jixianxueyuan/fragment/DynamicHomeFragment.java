@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,10 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
+import com.jixianxueyuan.activity.NearFriendActivity;
+import com.jixianxueyuan.activity.RankingListActivity;
+import com.jixianxueyuan.activity.SiteListActivity;
+import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.WebActivity;
 import com.jixianxueyuan.adapter.CustomMenuItemAdapter;
@@ -89,6 +94,8 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @BindView(R.id.sliding_tabs) ImageView mSlidingTabLayout;
     //@BindView(R.id.image) ImageView headImageView;
+    @BindView(R.id.flexible_layout)
+    LinearLayout flexibleLayout;
     @BindView(R.id.convenientBanner)
     ConvenientBanner convenientBanner;
     @BindView(R.id.overlay) View overlayView;
@@ -104,7 +111,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     private MyApplication application;
     private Mine mine;
 
-    private boolean mIsFine = false;
+    private boolean mIsFine = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,6 +128,8 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
         mPagerAdapter = new NavigationAdapter(this.getChildFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        mPager.setCurrentItem(1);
+        mSlidingTabLayout.setImageResource(R.mipmap.ic_option_2);
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -144,7 +153,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
             }
         });
-        mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+        mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_layout_height);
         mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
 
         // Initialize the first Fragment's state when layout is completed.
@@ -218,7 +227,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     private void translateTab(int scrollY, boolean animated) {
-        int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+        int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_layout_height);
         int tabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
 
 
@@ -226,7 +235,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
         float flexibleRange = flexibleSpaceImageHeight - getActionBarSize();
         int minOverlayTransitionY = tabHeight - overlayView.getHeight();
         ViewHelper.setTranslationY(overlayView, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
-        ViewHelper.setTranslationY(convenientBanner, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
+        ViewHelper.setTranslationY(flexibleLayout, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
 
         // Change alpha of overlay
         ViewHelper.setAlpha(overlayView, ScrollUtils.getFloat((float) scrollY / flexibleRange, 0, 1));
@@ -323,6 +332,26 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
 
     }
 
+    @OnClick(R.id.home_header_rank_list)void onRankClick(){
+        Intent intent = new Intent(DynamicHomeFragment.this.getContext(), RankingListActivity.class);
+        DynamicHomeFragment.this.getActivity().startActivity(intent);
+    }
+
+    @OnClick(R.id.home_header_near_friend)void onNearFriendClick(){
+        Intent intent = new Intent(DynamicHomeFragment.this.getContext(), NearFriendActivity.class);
+        DynamicHomeFragment.this.getActivity().startActivity(intent);
+    }
+
+    @OnClick(R.id.home_header_site)void onSiteClick(){
+        Intent intent = new Intent(DynamicHomeFragment.this.getContext(), SiteListActivity.class);
+        DynamicHomeFragment.this.getActivity().startActivity(intent);
+    }
+
+    @OnClick(R.id.home_header_sponsorship)void onSponsorshipClick(){
+        Intent intent = new Intent(DynamicHomeFragment.this.getContext(), SponsorshipActivity.class);
+        DynamicHomeFragment.this.getActivity().startActivity(intent);
+    }
+
     private void showCreateMenuLayout() {
         CustomMenuItemAdapter adapter = new CustomMenuItemAdapter(this.getActivity(), R.menu.create);
         final DialogPlus dialog = DialogPlus.newDialog(this.getContext())
@@ -388,12 +417,13 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 case 0: {
                     f = new TopicListFragment();
                     args.putBoolean(TopicListFragment.INTENT_IS_FINE, true);
-                    args.putBoolean(TopicListFragment.INTENT_IS_FIRST, true);
+                    args.putBoolean(TopicListFragment.INTENT_IS_FIRST, false);
                     break;
                 }
                 case 1: {
                     f = new TopicListFragment();
                     args.putBoolean(TopicListFragment.INTENT_IS_FINE, false);
+                    args.putBoolean(TopicListFragment.INTENT_IS_FIRST, true);
                     break;
                 }
                 default: {

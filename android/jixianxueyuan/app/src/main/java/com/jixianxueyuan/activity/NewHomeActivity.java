@@ -68,7 +68,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     @BindView(R.id.tab_market_text)TextView marketTextView;
 
     private FragmentManager fragmentManager;
-    private NewHomeFragment topicListFragment;
+    private DynamicHomeFragment topicListFragment;
     private CourseHomeFragment courseHomeFragment;
     private MineFragment mineFragment;
     private MarketFragment marketFragment;
@@ -144,7 +144,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                 trendsTextView.setTextColor(getResources().getColor(R.color.primary));
                 if (topicListFragment == null) {
                     // 如果fg1为空，则创建一个并添加到界面上
-                    topicListFragment = new NewHomeFragment();
+                    topicListFragment = new DynamicHomeFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString(TopicType.TYPE, TopicType.ALL);
                     topicListFragment.setArguments(bundle);

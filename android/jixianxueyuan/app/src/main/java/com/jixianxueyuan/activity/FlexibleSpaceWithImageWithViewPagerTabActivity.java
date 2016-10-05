@@ -74,7 +74,7 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
         mPagerAdapter = new NavigationAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
-        mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+        mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_layout_height);
         mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
 
         TextView titleView = (TextView) findViewById(R.id.title);
@@ -129,7 +129,7 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
     }
 
     private void translateTab(int scrollY, boolean animated) {
-        int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+        int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_layout_height);
         int tabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
         View imageView = findViewById(R.id.image);
         View overlayView = findViewById(R.id.overlay);

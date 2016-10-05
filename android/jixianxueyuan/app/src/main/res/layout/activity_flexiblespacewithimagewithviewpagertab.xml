@@ -21,7 +21,7 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/flexible_space_image_height"
+        android:layout_height="@dimen/flexible_space_layout_height"
         android:scaleType="centerCrop"/>
 
     <FrameLayout
@@ -38,7 +38,7 @@
     <View
         android:id="@+id/overlay"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/flexible_space_image_height"
+        android:layout_height="@dimen/flexible_space_layout_height"
         android:background="@color/primary_color" />
 
     <LinearLayout
@@ -62,7 +62,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/flexible_space_image_height"
+            android:layout_height="@dimen/flexible_space_layout_height"
             android:background="@android:color/transparent" />
     </LinearLayout>
 

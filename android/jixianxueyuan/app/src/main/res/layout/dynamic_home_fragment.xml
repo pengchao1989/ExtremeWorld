@@ -23,17 +23,150 @@
                 android:layout_height="match_parent" />
         </FrameLayout>
 
-        <com.bigkoo.convenientbanner.ConvenientBanner
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/convenientBanner"
+        <LinearLayout
+            android:id="@+id/flexible_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/flexible_space_image_height"
-            app:canLoop="true"/>
+            android:layout_height="@dimen/flexible_space_layout_height"
+            android:orientation="vertical">
+
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/convenientBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flexible_space_image_height"
+                app:canLoop="true"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/flexible_space_item_line_height"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/home_header_rank_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/ImageItemLayout">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/icon_ranking_no1"/>
+
+                        <TextView
+                            style="@style/ListPrimaryText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/ranking_list" />
+
+
+                    </LinearLayout>
+
+                    <View style="@style/VerticalDividerView"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/home_header_near_friend"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/ImageItemLayout">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/find_near"/>
+
+                        <TextView
+                            style="@style/ListPrimaryText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/people" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/HorizontalDividerView"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/flexible_space_item_line_height"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/home_header_site"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/ImageItemLayout">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/find_place"/>
+                        <TextView
+                            style="@style/ListPrimaryText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/site" />
+
+                    </LinearLayout>
+
+                    <View style="@style/VerticalDividerView"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/home_header_sponsorship"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/ImageItemLayout">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/icon_mygift_gift"/>
+                        <TextView
+                            style="@style/ListPrimaryText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/sponsorship" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+
+
 
         <View
             android:id="@+id/overlay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/flexible_space_image_height"
+            android:layout_height="@dimen/flexible_space_layout_height"
             android:background="@color/primary_color"/>
 
         <RelativeLayout

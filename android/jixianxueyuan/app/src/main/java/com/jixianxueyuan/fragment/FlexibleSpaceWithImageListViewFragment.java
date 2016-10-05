@@ -42,7 +42,7 @@ public class FlexibleSpaceWithImageListViewFragment extends FlexibleSpaceWithIma
         final ObservableListView listView = (ObservableListView) view.findViewById(R.id.scroll);
         // Set padding view for ListView. This is the flexible space.
         View paddingView = new View(getActivity());
-        final int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+        final int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_layout_height);
         AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
                 flexibleSpaceImageHeight);
         paddingView.setLayoutParams(lp);
@@ -110,7 +110,7 @@ public class FlexibleSpaceWithImageListViewFragment extends FlexibleSpaceWithIma
 
     @Override
     protected void updateFlexibleSpace(int scrollY, View view) {
-        int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
+        int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_layout_height);
 
         View listBackgroundView = view.findViewById(R.id.list_background);
 
