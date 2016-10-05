@@ -40,6 +40,7 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ImageUriParseUtil;
+import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -104,7 +105,12 @@ public class MineFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         avatarImageView.setImageURI(ImageUriParseUtil.parse(mine.getUserInfo().getAvatar()));
-        headImageView.setImageURI(ImageUriParseUtil.parse(mine.getUserInfo().getBg()));
+        if (!StringUtils.isEmpty(mine.getUserInfo().getBg())){
+            headImageView.setImageURI(ImageUriParseUtil.parse(mine.getUserInfo().getBg()));
+        }else {
+            headImageView.setImageURI(ImageUriParseUtil.parse("http://7u2nc3.com1.z0.glb.clouddn.com/default_head.jpg" + QiniuImageStyle.COVER));
+        }
+
 
         signatureTextView.setText(mine.getUserInfo().getSignature());
 
@@ -155,13 +161,7 @@ public class MineFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.mine_fragment_sponsorship)void onSponsorship(){
-        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_SPONSORSHIP_CLICK);
-        Intent intent = new Intent(this.getActivity(), SponsorshipActivity.class);
-        startActivity(intent);
-    }
-
-    @OnLongClick(R.id.mine_fragment_head_image_view)boolean onHeadLongClick(){
+    @OnClick(R.id.mine_fragment_head_image_view)void onHeadClick(){
 /*        new SweetAlertDialog(this.getContext())
                 .setTitleText("更新封面")
                 .setContentText("YES！")
@@ -184,8 +184,6 @@ public class MineFragment extends Fragment {
             }
         });
         mMaterialDialog.show();
-
-        return true;
     }
 
     @OnClick(R.id.mine_fragment_share)void onShareClick(){

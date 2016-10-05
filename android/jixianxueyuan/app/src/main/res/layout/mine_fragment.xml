@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,8 +20,9 @@
                 android:id="@+id/mine_fragment_head_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="148dp"
-                fresco:actualImageScaleType="centerCrop"
-                fresco:placeholderImage="@drawable/default_head"
+                fresco:actualImageScaleType="focusCrop"
+                tools:src="@drawable/default_head"
+                android:background="@color/white"
                 />
 
             <TextView
@@ -155,38 +157,6 @@
         </RelativeLayout>
 
         <View style="@style/HorizontalDividerView" />
-
-
-        <RelativeLayout
-            android:id="@+id/mine_fragment_sponsorship"
-            style="@style/ImageItemLayout"
-            >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_mygift_gift" />
-
-                <TextView
-                    style="@style/ListPrimaryText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/sponsorship" />
-            </LinearLayout>
-
-            <ImageView style="@style/ImageItemRightIcon" />
-
-        </RelativeLayout>
-
-        <View style="@style/HorizontalDividerView" />
-
 
         <RelativeLayout
             android:id="@+id/mine_fragment_share"

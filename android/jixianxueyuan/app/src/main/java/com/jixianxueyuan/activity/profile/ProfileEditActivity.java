@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.BaseActivity;
 import com.jixianxueyuan.activity.CropAvatarActivity;
@@ -24,6 +25,7 @@ import com.jixianxueyuan.dto.request.UserAttributeRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.jixianxueyuan.widget.MyActionBar;
@@ -54,7 +56,7 @@ public class ProfileEditActivity extends BaseActivity {
     public static final String GENDER_FEMALE = "female";
 
     @BindView(R.id.profile_edit_actionbar)MyActionBar myActionBar;
-    @BindView(R.id.profile_edit_avatar)ImageView avatarImageView;
+    @BindView(R.id.profile_edit_avatar)SimpleDraweeView avatarImageView;
     @BindView(R.id.profile_edit_nickname)TextView nickNameEditText;
     @BindView(R.id.profile_edit_gender)TextView genderTextView;
     @BindView(R.id.profile_edit_signature)TextView signatureTextView;
@@ -65,7 +67,6 @@ public class ProfileEditActivity extends BaseActivity {
     private UserDTO userDTO;
     private String localAvatarPath;
 
-    private ImageLoader imageLoader;
 
     private QiniuSingleImageUpload qiniuSingleImageUpload;
 
@@ -83,9 +84,9 @@ public class ProfileEditActivity extends BaseActivity {
     }
 
     private void initView(){
-        imageLoader = ImageLoader.getInstance();
+        myActionBar.setTitle(getString(R.string.edit_profile));
         String avatarUrl = userDTO.getAvatar() + "!AndroidProfileAvatar";
-        imageLoader.displayImage(avatarUrl, avatarImageView, ImageLoaderConfig.getAvatarOption(this));
+        avatarImageView.setImageURI(ImageUriParseUtil.parse(avatarUrl));
 
         nickNameEditText.setText(userDTO.getName());
         signatureTextView.setText(userDTO.getSignature());
@@ -146,8 +147,8 @@ public class ProfileEditActivity extends BaseActivity {
                             MyApplication.getContext().getMine().WriteSerializationToLocal(ProfileEditActivity.this);
 
                             //显示图片
-                            ImageLoader imageLoader = ImageLoader.getInstance();
-                            imageLoader.displayImage("file://" + localAvatarPath, avatarImageView, ImageLoaderConfig.getAvatarOption(ProfileEditActivity.this));
+                            avatarImageView.setImageURI(ImageUriParseUtil.parse("file://" + localAvatarPath));
+
 
                             Toast.makeText(ProfileEditActivity.this, R.string.success, Toast.LENGTH_SHORT).show();
                         }else {
