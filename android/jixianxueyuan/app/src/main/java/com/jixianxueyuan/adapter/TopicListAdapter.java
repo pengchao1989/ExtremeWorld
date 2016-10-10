@@ -129,8 +129,6 @@ public class TopicListAdapter extends BaseAdapter {
             avatarUrl += QiniuImageStyle.LIST_AVATAR;
         }
 
-        //ImageLoader imageLoader = ImageLoader.getInstance();x
-        //imageLoader.displayImage(avatarUrl, viewHolder.avatarImageView , ImageLoaderConfig.getAvatarOption(context));
         if (!TextUtils.isEmpty(avatarUrl)){
             Uri uri = Uri.parse(avatarUrl);
             viewHolder.avatarImageView.setImageURI(uri);
