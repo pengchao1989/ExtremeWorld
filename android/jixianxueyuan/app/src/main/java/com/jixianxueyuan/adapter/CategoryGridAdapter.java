@@ -9,10 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.biz.CategoryDTO;
 import com.jixianxueyuan.util.ACache;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -99,37 +101,9 @@ public class CategoryGridAdapter extends BaseAdapter{
 
             final CategoryDTO categoryDTO = categoryDTOList.get(position);
             viewHolder.nameTextView.setText(categoryDTO.getName());
-            final ACache mCache = ACache.get(context);
-            Bitmap bitmap = mCache.getAsBitmap(categoryDTO.getIcon());
-            if(bitmap != null){
-                viewHolder.iconImageView.setImageBitmap(bitmap);
-            }else {
-                ImageLoader imageLoader = ImageLoader.getInstance();
-                final ViewHolder finalViewHolder = viewHolder;
-                imageLoader.loadImage(categoryDTO.getIcon(), ImageLoaderConfig.getImageOption(context), new ImageLoadingListener() {
-                    @Override
-                    public void onLoadingStarted(String imageUri, View view) {
 
-                    }
-
-                    @Override
-                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                    }
-
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        finalViewHolder.iconImageView.setImageBitmap(loadedImage);
-                        mCache.put(categoryDTO.getIcon(), loadedImage, ACache.TIME_DAY * 7);
-                    }
-
-                    @Override
-                    public void onLoadingCancelled(String imageUri, View view) {
-
-                    }
-                });
-            }
-
+            String imageUrl = categoryDTO.getIcon();
+            viewHolder.iconImageView.setImageURI(ImageUriParseUtil.parse(imageUrl));
 
         }else if(getItemViewType(position) == VIEW_TYPE_ORDER){
             convertView = LayoutInflater.from(context).inflate(R.layout.category_grid_item_used,null);
@@ -142,7 +116,8 @@ public class CategoryGridAdapter extends BaseAdapter{
 
     static class ViewHolder{
         @BindView(R.id.category_grid_item_name)TextView nameTextView;
-        @BindView(R.id.category_grid_item_icon) ImageView iconImageView;
+        @BindView(R.id.category_grid_item_icon)
+        SimpleDraweeView iconImageView;
 
         public ViewHolder(View itemView){
             ButterKnife.bind(this, itemView);

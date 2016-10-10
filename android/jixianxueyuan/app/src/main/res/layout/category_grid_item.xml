@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,12 +10,13 @@
     android:gravity="center"
     style="@style/ListItemLayout">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/category_grid_item_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:maxWidth="80dp"
-        android:maxHeight="80dp"/>
+        android:maxHeight="80dp"
+        fresco:placeholderImage="@mipmap/photo"/>
 
     <TextView
         android:id="@+id/category_grid_item_name"
