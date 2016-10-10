@@ -435,4 +435,18 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	说明:上报地理位置，一般开启应用上报一次
 
 	
-	
+----------
+	接口名称:site
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/site
+	请求方式:POST
+	入参:    {  name:"name",description:"description", "type":1,frontImg:"imageUrl",
+		    latitude : 0.0,
+		    longitude : 0.0,
+		    address : "四川省成都市高新区软件园E区","hobbys":[{"id":3}]}
+	说明：创建一个site ， type目前取值1
+----------
+	接口名称:site
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/site
+	请求方式:GET
+	入参：page
+	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/site?page=1
