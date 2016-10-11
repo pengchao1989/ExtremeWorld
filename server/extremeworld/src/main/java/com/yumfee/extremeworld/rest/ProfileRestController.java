@@ -63,7 +63,13 @@ public class ProfileRestController {
 		String fieldName = attribute.getAttributeName();
 		if(fieldName != null){
 			if(fieldName.equals("nickName")){
-				
+				User sameNameUser = userService.findUserByName(fieldName);
+				if(sameNameUser != null && sameNameUser.getId() != user.getId()){
+					return MyResponse.err(MyErrorCode.NAME_REPEAT);
+				}
+				user.setName(attribute.getAttributeValue());
+				//update im avatar
+				IMHelper.updateIMAccount(user);
 			}else if(fieldName.equals("gender")){
 				user.setGender(attribute.getAttributeValue());
 				

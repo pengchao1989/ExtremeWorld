@@ -45,6 +45,7 @@
         >
 
         <RelativeLayout
+            android:id="@+id/profile_edit_nickname_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/list_horizontal_padding"

@@ -49,6 +49,7 @@ public class ProfileEditActivity extends BaseActivity {
 
     private static final int REQUEST_CODE_GENDER = 0x1001;
     private static final int REQUEST_CODE_SIGNATURE = 0x1002;
+    private static final int REQUEST_CODE_NICKNAME = 0x1003;
 
 
 
@@ -199,8 +200,15 @@ public class ProfileEditActivity extends BaseActivity {
                     userDTO.setSignature("");
                 }
                 break;
+            case REQUEST_CODE_NICKNAME:
+                if (requestCode == RESULT_OK){
+                    userDTO.setName(nickNameEditText.getText().toString());
+                }
+                break;
         }
     }
+
+
 
     @OnClick(R.id.profile_edit_avatar)void onAvatarClick(){
         Intent intent = new Intent(this, MultiImageSelectorActivity.class);
@@ -212,6 +220,15 @@ public class ProfileEditActivity extends BaseActivity {
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
 
         startActivityForResult(intent, REQUEST_IMAGE_CODE);
+    }
+
+    @OnClick(R.id.profile_edit_nickname_layout)void onNicknameClick(){
+        Intent intent = new Intent(this, ModifyProfileAttrEditTextActivity.class);
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_TITLE, getString(R.string.nickname));
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_HINT, getString(R.string.please_enter));
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_KEY, ProfileAttributeName.NICKNAME);
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_VALUE, userDTO.getName());
+        startActivityForResult(intent, REQUEST_CODE_NICKNAME);
     }
 
     @OnClick(R.id.profile_edit_gender_layout)void onGenderClick(){

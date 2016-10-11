@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.dto.SiteDTO;
+import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -74,14 +76,13 @@ public class SiteListAdapter extends BaseAdapter {
         viewHolder.addressTextView.setText(siteDTO.getAddress());
 
         String imageUrl = siteDTO.getFrontImg() + "!AndroidListItemLarge";
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(imageUrl, viewHolder.frontImageView, ImageLoaderConfig.getImageOption(context));
+        viewHolder.frontImageView.setImageURI(ImageUriParseUtil.parse(imageUrl));
 
         return convertView;
     }
 
     static class ViewHolder{
-        @BindView(R.id.site_list_item_front_imageview)ImageView frontImageView;
+        @BindView(R.id.site_list_item_front_imageview)SimpleDraweeView frontImageView;
         @BindView(R.id.site_list_item_name_textview)TextView nameTextView;
         @BindView(R.id.site_list_item_address_textview)TextView addressTextView;
 
