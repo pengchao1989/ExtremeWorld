@@ -13,7 +13,7 @@
         android:weightSum="5">
 
         <LinearLayout
-            android:id="@+id/sponsorship_bottom_form_money_01"
+            android:id="@+id/sponsorship_bottom_form_money_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.1元"/>
+                android:text="1元"/>
 
         </LinearLayout>
 

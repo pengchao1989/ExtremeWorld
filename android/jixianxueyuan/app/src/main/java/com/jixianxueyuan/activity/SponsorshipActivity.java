@@ -236,8 +236,8 @@ public class SponsorshipActivity extends BaseActivity {
                     public void onClick(DialogPlus dialogPlus, View view) {
                         TextView moneyTextView = (TextView) dialogPlus.getHolderView().findViewById(R.id.sponsorship_bottom_form_money_text);
                         switch (view.getId()) {
-                            case R.id.sponsorship_bottom_form_money_01:
-                                money = 0.1;
+                            case R.id.sponsorship_bottom_form_money_1:
+                                money = 1;
                                 updateMoneyTextView(moneyTextView, money);
                                 break;
                             case R.id.sponsorship_bottom_form_money_5:
