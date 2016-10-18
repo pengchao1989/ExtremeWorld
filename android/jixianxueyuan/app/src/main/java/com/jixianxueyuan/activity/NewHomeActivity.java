@@ -38,8 +38,6 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.update.UmengUpdateAgent;
-import com.xiaomi.market.sdk.XiaomiUpdateAgent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -88,8 +86,6 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         setChioceItem(0);
 
         MobclickAgent.setDebugMode(true);
-
-        XiaomiUpdateAgent.update(this);
 
         location();
 

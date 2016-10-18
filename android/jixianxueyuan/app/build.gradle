@@ -127,11 +127,11 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v13:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:support-v13:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.jakewharton:butterknife:8.1.0'
@@ -155,7 +155,7 @@ dependencies {
     compile 'com.google.dagger:dagger:2.0.1'
     compile 'com.google.code.findbugs:jsr305:3.0.0'
     compile 'com.android.support:support-annotations:23.4.0'
-    compile 'com.tencent.bugly:crashreport:2.1.1'
+    compile 'com.tencent.bugly:crashreport_upgrade:1.1.6'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.bigkoo:convenientbanner:2.0.5'

@@ -24,7 +24,7 @@ import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.bugly.Bugly;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsDownloader;
 import com.umeng.socialize.PlatformConfig;
@@ -199,7 +199,7 @@ public class MyApplication extends MultiDexApplication {
     }
 
     private void initBugly(){
-        CrashReport.initCrashReport(this, "900018639", false);
+        Bugly.init(getApplicationContext(), "900018639", false);
     }
 
     private void initUmenScoial(){
