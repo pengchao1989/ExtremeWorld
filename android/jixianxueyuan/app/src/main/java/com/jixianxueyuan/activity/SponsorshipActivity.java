@@ -56,6 +56,8 @@ public class SponsorshipActivity extends BaseActivity {
     @BindView(R.id.sponsorship_activity_list_view)
     ListView listView;
 
+    double money = 0.1;
+
     private SponsorshipListAdapter adapter;
 
     private List<SponsorshipDTO> sponsorshipDTOList;
@@ -233,7 +235,6 @@ public class SponsorshipActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogPlus dialogPlus, View view) {
                         TextView moneyTextView = (TextView) dialogPlus.getHolderView().findViewById(R.id.sponsorship_bottom_form_money_text);
-                        double money = 0.1;
                         switch (view.getId()) {
                             case R.id.sponsorship_bottom_form_money_01:
                                 money = 0.1;
