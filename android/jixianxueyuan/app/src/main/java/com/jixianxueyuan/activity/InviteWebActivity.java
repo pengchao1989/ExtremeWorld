@@ -20,7 +20,6 @@ import com.jixianxueyuan.util.BitmapUtils;
 import com.jixianxueyuan.util.BuildQRCode;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.Util;
-import com.jixianxueyuan.widget.AdvancedWebView;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;

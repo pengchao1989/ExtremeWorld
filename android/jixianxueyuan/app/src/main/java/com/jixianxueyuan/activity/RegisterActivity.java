@@ -21,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
@@ -78,7 +79,7 @@ public class RegisterActivity extends Activity {
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
 
-    @BindView(R.id.register_avatar)ImageView avatarImageView;
+    @BindView(R.id.register_avatar)SimpleDraweeView avatarImageView;
     @BindView(R.id.register_avatar_select)Button selectButton;
     @BindView(R.id.register_nick_name)EditText nickNameEditText;
     @BindView(R.id.register_birth)EditText birthEditText;
