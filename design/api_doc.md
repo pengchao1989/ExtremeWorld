@@ -94,8 +94,8 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	接口名称：handshake
 	URL地址：http://http://115.28.8.25/api/v1/handshake
 	请求方式：GET、POST
-	入参：    Long userId; String hobbyStamp;String device;
-	说明：握手接口GET和POST都能获取到同样的结果。目前android调用的为POST接口。POST会有3个参数上传，分别是userId（没有的话传-1），hobbyStamp兴趣戳，这个戳从app包信息里取，device设备名称（iphone6s，samsung s6）
+	入参：    Long userId; String hobbyStamp;String device;String plateForm;String systemVersion;String versionCode;String versionName;
+	说明：握手接口GET和POST都能获取到同样的结果。目前android调用的为POST接口。hobbyStamp兴趣戳，这个戳从app包信息里取，device设备名称（iphone6s，samsung s6）plateForm平台名称（ios,android,web）
 
 
 ----------
