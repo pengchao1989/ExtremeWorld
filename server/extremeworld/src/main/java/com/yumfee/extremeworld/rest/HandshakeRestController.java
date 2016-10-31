@@ -3,6 +3,7 @@ package com.yumfee.extremeworld.rest;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.request.HandshakeRequestDTO;
 import com.yumfee.extremeworld.service.BaseInfoService;
 import com.yumfee.extremeworld.service.UserService;
+import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 @RestController
 @RequestMapping(value = "/api/v1/handshake")
@@ -50,11 +52,25 @@ public class HandshakeRestController {
 	MyResponse post(@RequestBody HandshakeRequestDTO handshakeRequest)
 	{
 		if(handshakeRequest != null ){
-			User user = userService.getUser(handshakeRequest.getUserId());
+			User user = userService.getUser(getCurrentUserId());
 			if(user != null){
-				user.setHobbyStamp(handshakeRequest.getHobbyStamp());
-				if(!StringUtils.isEmpty(handshakeRequest.getDevice())){
+				if (StringUtils.isNotEmpty(handshakeRequest.getHobbyStamp())) {
+					user.setHobbyStamp(handshakeRequest.getHobbyStamp());
+				}
+				if(StringUtils.isNotEmpty(handshakeRequest.getDevice())){
 					user.setDevice(handshakeRequest.getDevice());
+				}
+				if (StringUtils.isNotEmpty(handshakeRequest.getPlateForm())) {
+					user.setPlateForm(handshakeRequest.getPlateForm());
+				}
+				if (StringUtils.isNotEmpty(handshakeRequest.getSystemVersion())) {
+					user.setSystemVersion(handshakeRequest.getSystemVersion());
+				}
+				if (StringUtils.isNotEmpty(handshakeRequest.getVersionCode())) {
+					user.setVersionCode(handshakeRequest.getVersionCode());
+				}
+				if (StringUtils.isNotEmpty(handshakeRequest.getVersionName())) {
+					user.setVersionName(handshakeRequest.getVersionName());
 				}
 				
 				userService.saveUser(user);
@@ -71,5 +87,13 @@ public class HandshakeRestController {
 		HandshakeDTO handshakeDTO = new HandshakeDTO();
 		handshakeDTO.setHobbys(hobbyDTOs);
 		return MyResponse.ok(handshakeDTO);
+	}
+	
+	/**
+	 * 取出Shiro中的当前用户Id.
+	 */
+	private Long getCurrentUserId() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.id;
 	}
 }

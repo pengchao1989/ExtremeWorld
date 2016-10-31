@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @XmlRootElement(name = "UserGeo")
 public class UserGeoDTO {
@@ -22,6 +23,8 @@ public class UserGeoDTO {
 	private String geoHash;
 	private Date geoModifyTime;
 	private double distance;
+	private double latitude;
+	private double longitude;
 	
 	private List<UserInterestDTO> interests;
 	
@@ -113,6 +116,20 @@ public class UserGeoDTO {
 	}
 	public void setDistance(double distance) {
 		this.distance = distance;
+	}
+	@JsonIgnore
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	@JsonIgnore
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getGeoModifyTime() {

@@ -41,11 +41,21 @@ public class UserService {
 		return (List<User>) userDao.findAll();
 	}
 	
-	public Page<User> findByGeoHash(String geoHash,  int pageNumber, int pageSize,String sortType)
+	public Page<User> findByGeoHash(
+			String center,
+			String north,
+			String east,
+			String south,
+			String west,
+			String northwest,
+			String northeast,
+			String southwest,
+			String southeast,  int pageNumber, int pageSize,String sortType)
 	{
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		
-		return userDao.findByGeoHashLike(geoHash, pageRequest);
+		return userDao.findByGeoHashLikeOrGeoHashLikeOrGeoHashLikeOrGeoHashLikeOrGeoHashLikeOrGeoHashLikeOrGeoHashLikeOrGeoHashLikeOrGeoHashLike
+				(center,north,east,south, west, northwest, northeast, southwest, southeast, pageRequest);
 	}
 	
 	public Page<User> findByInviterId(Long inviterId, int pageNumber, int pageSize){
@@ -77,6 +87,8 @@ public class UserService {
 			sort = new Sort(Direction.ASC, "geoHash");
 		}else if("id".equals(sortType)){
 			sort = new Sort(Direction.DESC, "id");
+		}else{
+			sort = new Sort(Direction.ASC, "geoHash");
 		}
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}

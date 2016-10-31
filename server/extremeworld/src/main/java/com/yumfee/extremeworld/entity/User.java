@@ -44,6 +44,10 @@ public class User extends UserBase
     private String province;
     private String city;
     private String district;
+    private String plateForm;
+    private String systemVersion;
+    private String versionCode;
+    private String versionName;
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
@@ -193,6 +197,31 @@ public class User extends UserBase
 	}
 	public void setDistrict(String district) {
 		this.district = district;
+	}
+	
+	public String getPlateForm() {
+		return plateForm;
+	}
+	public void setPlateForm(String plateForm) {
+		this.plateForm = plateForm;
+	}
+	public String getSystemVersion() {
+		return systemVersion;
+	}
+	public void setSystemVersion(String systemVersion) {
+		this.systemVersion = systemVersion;
+	}
+	public String getVersionCode() {
+		return versionCode;
+	}
+	public void setVersionCode(String versionCode) {
+		this.versionCode = versionCode;
+	}
+	public String getVersionName() {
+		return versionName;
+	}
+	public void setVersionName(String versionName) {
+		this.versionName = versionName;
 	}
 	/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	public List<Topic> getTopics() {

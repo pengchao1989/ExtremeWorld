@@ -35,7 +35,7 @@ import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 @RequestMapping(value = "/api/secure/v1/{hobby}/geo")
 public class GeoRestController {
 	
-	private static final String PAGE_SIZE = "50";
+	private static final String PAGE_SIZE = "100";
 	
 	@Autowired
 	private Validator validator;
@@ -59,6 +59,20 @@ public class GeoRestController {
 		
 		System.out.println("latitude=" + center.getLatitude() + "longitude" + center.getLongitude() + "  geoHash=" + geoHashString);
 		
+		
+		//构建geohash块
+		GeoHash centerGeoHash = GeoHash.withCharacterPrecision(latitude, longitude, 12);	//中心
+		
+		GeoHash northGeoHash = centerGeoHash.getNorthernNeighbour();				//北
+		GeoHash eastGeoHash = centerGeoHash.getEasternNeighbour();					//东
+		GeoHash southGeoHash = centerGeoHash.getSouthernNeighbour();				//南
+		GeoHash westGeoHash = centerGeoHash.getWesternNeighbour();					//西
+		
+		GeoHash northwestGeoHash = westGeoHash.getNorthernNeighbour();				//西北
+		GeoHash northeastGeoHash = eastGeoHash.getNorthernNeighbour();				//东北
+		GeoHash southwestGeoHash = westGeoHash.getSouthernNeighbour();				//西南
+		GeoHash southeastGeoHash = eastGeoHash.getSouthernNeighbour();				//东南
+		
 		//更新用户最后的geohash
 		if(pageNumber == 1)
 		{
@@ -70,24 +84,44 @@ public class GeoRestController {
 			userService.saveUser(user);
 		}
 
+		final int GEO_SEARCH_LENGTH = 3;
+		String centerGeoHashCode = centerGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String northGeoHashCode = northGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String eastGeoHashCode = eastGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String southGeoHashCode = southGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String westGeoHashCode = westGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String northwestGeoHashCode = northwestGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String northeastGeoHashCode = northeastGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String southwestGeoHashCode = southwestGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
+		String southeastGeoHashCode = southeastGeoHash.toBase32().substring(0, GEO_SEARCH_LENGTH) + "%";
 		
-		Page<User> userPage = userService.findByGeoHash(geoHashString.substring(0, 3) + "%",pageNumber, pageSize, sortType);//geoHash前几个字符
+		Page<User> userPage = userService.findByGeoHash(
+				centerGeoHashCode,
+				northGeoHashCode,
+				eastGeoHashCode, 
+				southGeoHashCode,
+				westGeoHashCode,
+				northwestGeoHashCode,
+				northeastGeoHashCode,
+				southwestGeoHashCode,
+				southeastGeoHashCode,
+				pageNumber,
+				pageSize, sortType);//geoHash前几个字符
 		
 		
 		MyPage<UserGeoDTO, User> userMinePage = new MyPage<UserGeoDTO, User>(UserGeoDTO.class,userPage );
 		
+		WGS84Point centerPoint = new WGS84Point(latitude, longitude);
 		for(UserGeoDTO userItem : userMinePage.getContents())
 		{
-			GeoHash nearGeoHash  = GeoHash.fromGeohashString(userItem.getGeoHash());
+			//GeoHash nearGeoHash  = GeoHash.fromGeohashString(userItem.getGeoHash());
 			
-			WGS84Point nearPoint = nearGeoHash.getPoint();
-			WGS84Point centerPoint = new WGS84Point(latitude, longitude);
+			WGS84Point nearPoint = new WGS84Point(userItem.getLatitude(), userItem.getLongitude());
 			
-			
-			double distence = VincentyGeodesy.distanceInMeters(centerPoint, nearPoint);
+			double distence = LantitudeLongitudeDist(userItem.getLongitude(), userItem.getLatitude(),longitude, latitude);
 			userItem.setDistance(distence);
 			
-			System.out.println("userId=" + userItem.getId() +  "distence=" + distence);
+			System.out.println("geoHash=" + userItem.getGeoHash() +  " userId=" + userItem.getId() +  "distence=" + distence);
 		}
 		
 		//排序
@@ -138,4 +172,45 @@ public class GeoRestController {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		return user.id;
 	}
+	
+	private static final  double EARTH_RADIUS = 6378137;
+	
+	private static double rad(double d)  
+    {  
+       return d * Math.PI / 180.0;  
+    }  
+	
+	public static double LantitudeLongitudeDist(double lon1, double lat1,double lon2, double lat2) {  
+        double radLat1 = rad(lat1);  
+        double radLat2 = rad(lat2);  
+  
+        double radLon1 = rad(lon1);  
+        double radLon2 = rad(lon2);  
+  
+        if (radLat1 < 0)  
+            radLat1 = Math.PI / 2 + Math.abs(radLat1);// south  
+        if (radLat1 > 0)  
+            radLat1 = Math.PI / 2 - Math.abs(radLat1);// north  
+        if (radLon1 < 0)  
+            radLon1 = Math.PI * 2 - Math.abs(radLon1);// west  
+        if (radLat2 < 0)  
+            radLat2 = Math.PI / 2 + Math.abs(radLat2);// south  
+        if (radLat2 > 0)  
+            radLat2 = Math.PI / 2 - Math.abs(radLat2);// north  
+        if (radLon2 < 0)  
+            radLon2 = Math.PI * 2 - Math.abs(radLon2);// west  
+        double x1 = EARTH_RADIUS * Math.cos(radLon1) * Math.sin(radLat1);  
+        double y1 = EARTH_RADIUS * Math.sin(radLon1) * Math.sin(radLat1);  
+        double z1 = EARTH_RADIUS * Math.cos(radLat1);  
+  
+        double x2 = EARTH_RADIUS * Math.cos(radLon2) * Math.sin(radLat2);  
+        double y2 = EARTH_RADIUS * Math.sin(radLon2) * Math.sin(radLat2);  
+        double z2 = EARTH_RADIUS * Math.cos(radLat2);  
+  
+        double d = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)+ (z1 - z2) * (z1 - z2));  
+        //余弦定理求夹角  
+        double theta = Math.acos((EARTH_RADIUS * EARTH_RADIUS + EARTH_RADIUS * EARTH_RADIUS - d * d) / (2 * EARTH_RADIUS * EARTH_RADIUS));  
+        double dist = theta * EARTH_RADIUS;  
+        return dist;  
+    }
 }
