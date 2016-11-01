@@ -31,6 +31,7 @@ import com.jixianxueyuan.dto.qq.QQUserInfo;
 import com.jixianxueyuan.dto.request.HandshakeRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.DeviceUtils;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.romainpiel.shimmer.Shimmer;
@@ -189,7 +190,13 @@ public class MainActivity extends Activity {
             userId = userDTO.getId();
         }
         handshakeRequestDTO.setHobbyStamp(hobbyStamp);
-        handshakeRequestDTO.setDevice("android");
+        handshakeRequestDTO.setPlateForm("android");
+        handshakeRequestDTO.setDevice(DeviceUtils.getDeviceModel());
+        handshakeRequestDTO.setVersionCode(String.valueOf(DeviceUtils.getVersionCode(MainActivity.this)));
+        handshakeRequestDTO.setVersionName(DeviceUtils.getVersionName(MainActivity.this));
+        handshakeRequestDTO.setSystemVersion(DeviceUtils.getDeviceSystemVersion());
+
+
         handshakeRequestDTO.setUserId(userId);
 
 

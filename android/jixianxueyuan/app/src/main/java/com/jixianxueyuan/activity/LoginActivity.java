@@ -12,6 +12,7 @@ import com.alibaba.sdk.android.push.CloudPushService;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
@@ -23,6 +24,7 @@ import com.jixianxueyuan.dto.request.HandshakeRequestDTO;
 import com.jixianxueyuan.dto.request.LoginRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.DeviceUtils;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
 import com.umeng.analytics.MobclickAgent;
@@ -115,7 +117,11 @@ public class LoginActivity extends BaseActivity {
             userId = userDTO.getId();
         }
         handshakeRequestDTO.setHobbyStamp(hobbyStamp);
-        handshakeRequestDTO.setDevice("android");
+        handshakeRequestDTO.setPlateForm("android");
+        handshakeRequestDTO.setDevice(DeviceUtils.getDeviceModel());
+        handshakeRequestDTO.setVersionCode(String.valueOf(DeviceUtils.getVersionCode(LoginActivity.this)));
+        handshakeRequestDTO.setVersionName(DeviceUtils.getVersionName(LoginActivity.this));
+        handshakeRequestDTO.setSystemVersion(DeviceUtils.getDeviceSystemVersion());
         handshakeRequestDTO.setUserId(userId);
 
 

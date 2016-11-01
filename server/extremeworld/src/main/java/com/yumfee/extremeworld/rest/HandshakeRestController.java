@@ -52,7 +52,7 @@ public class HandshakeRestController {
 	MyResponse post(@RequestBody HandshakeRequestDTO handshakeRequest)
 	{
 		if(handshakeRequest != null ){
-			User user = userService.getUser(getCurrentUserId());
+			User user = userService.getUser(handshakeRequest.getUserId());
 			if(user != null){
 				if (StringUtils.isNotEmpty(handshakeRequest.getHobbyStamp())) {
 					user.setHobbyStamp(handshakeRequest.getHobbyStamp());
