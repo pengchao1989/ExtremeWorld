@@ -89,6 +89,8 @@ public class TopicRestController
 		case TopicType.NEWS:
 		case TopicType.VIDEO:
 		case TopicType.S_VIDEO:
+		case TopicType.MOOD:
+		case TopicType.CHALLENGE:
 			if(0 == taxonomyId){
 				topicPageSource = topicService.getTopicByHobbyAndType(hobbyId, type, pageNumber, pageSize, sortType);
 			}else{
@@ -96,7 +98,12 @@ public class TopicRestController
 			}
 			break;
 		case TopicType.COURSE:
-			topicPageSource = topicService.getAllTopicByCourseAndMagicType(courseId, magicType, pageNumber, pageSize, sortType);
+			if(courseId != 0){
+				topicPageSource = topicService.getAllTopicByCourseAndMagicType(courseId, magicType, pageNumber, pageSize, sortType);
+			}else {
+				topicPageSource = topicService.getTopicByHobbyAndType(hobbyId, type, pageNumber, pageSize, sortType);
+			}
+			
 			break;
 		}
 		

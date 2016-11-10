@@ -63,7 +63,7 @@ public class ProfileRestController {
 		String fieldName = attribute.getAttributeName();
 		if(fieldName != null){
 			if(fieldName.equals("nickName")){
-				User sameNameUser = userService.findUserByName(fieldName);
+				User sameNameUser = userService.findUserByName(attribute.getAttributeValue());
 				if(sameNameUser != null){
 					return MyResponse.err(MyErrorCode.NAME_REPEAT);
 				}
