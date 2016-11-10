@@ -38,6 +38,7 @@ import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -240,6 +241,11 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
         if (!TextUtils.isEmpty(text)){
             submitSubReply(text);
         }
+    }
+
+    @Override
+    public void onImageChange(List<String> imagePath) {
+        
     }
 
     @OnItemClick(R.id.reply_detail_listview)void onSubReplyClick(int position){

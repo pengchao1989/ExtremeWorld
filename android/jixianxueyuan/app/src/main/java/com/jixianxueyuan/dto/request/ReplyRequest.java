@@ -1,5 +1,6 @@
 package com.jixianxueyuan.dto.request;
 
+import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 
@@ -13,6 +14,7 @@ public class ReplyRequest implements Serializable {
     private String content;
     private UserMinDTO user;
     private TopicDTO topic;
+    private MediaWrapDTO mediaWrap;
 
     public String getContent() {
         return content;
@@ -36,5 +38,13 @@ public class ReplyRequest implements Serializable {
 
     public void setTopic(TopicDTO topic) {
         this.topic = topic;
+    }
+
+    public MediaWrapDTO getMediaWrap() {
+        return mediaWrap;
+    }
+
+    public void setMediaWrap(MediaWrapDTO mediaWrap) {
+        this.mediaWrap = mediaWrap;
     }
 }

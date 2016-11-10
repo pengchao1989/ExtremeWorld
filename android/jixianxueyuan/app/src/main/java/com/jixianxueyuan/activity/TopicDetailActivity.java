@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,7 +43,9 @@ import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.ImageLoaderConfig;
+import com.jixianxueyuan.config.MediaType;
 import com.jixianxueyuan.config.QiniuImageStyle;
+import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.AgreeResultDTO;
 import com.jixianxueyuan.dto.CollectionDTO;
@@ -70,6 +73,8 @@ import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
+import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
+import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
@@ -94,7 +99,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -114,6 +122,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     @BindView(R.id.topic_detail_actionbar)MyActionBar actionBar;
     @BindView(R.id.topic_detail_listview)ListView listView;
     @BindView(R.id.reply_widget_layout)LinearLayout contentLayout;
+
+    @BindView(R.id.create_topic_upload_progress_layout)
+    RelativeLayout progressLayout;
+    @BindView(R.id.create_topic_upload_progress_view)
+    ProgressBar uploadProgress;
+    @BindView(R.id.create_topic_upload_progress_textview)
+    TextView progressTextView;
 
 
     private long topicId = -1;
@@ -141,12 +156,20 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private ArrayList<String> imageUrlArrayList = new ArrayList<String>();
 
+    private List<String> localImagePathList = null;
+    private LinkedHashMap<String,String> serverImagePathMap = null;
+    private boolean isUploadedImage = false;
+    boolean isUploadedVideo = false;
+
+    private String mReplyString = "";
+
 
     final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
     final int HADLER_DOWNLOAD_VIDEO_FAILED = 0x2;
     final int HANDLER_DOWNLOAD_UPDATE = 0x3;
     final int HANDLER_INIT_CONTENT_SPANNED_SUCCESS = 0x4;
     final int HANDLER_INIT_CONTENT_SPANNED_FAILED = 0x5;
+    public static final int HANDLER_UPDATE_PROGRESS = 0x7;
     Handler handler = new Handler()
     {
         @Override
@@ -173,6 +196,14 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     break;
 
                 case HANDLER_INIT_CONTENT_SPANNED_FAILED:
+                    break;
+                case HANDLER_UPDATE_PROGRESS:
+                    Bundle progressData = msg.getData();
+                    if (progressData.getInt("type") == 1){
+                        progressTextView.setText("正在上传第" + progressData.getInt("index") + "张图片  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
+                    }else if (progressData.getInt("type") == 2){
+                        progressTextView.setText("正在上传视频  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
+                    }
                     break;
             }
         }
@@ -682,6 +713,16 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private void submitReply(String replyContent)
     {
+
+        showProgress();
+        //隐藏键盘
+        View view = getWindow().peekDecorView();
+        if (view != null) {
+            InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = ServerMethod.reply();
 
@@ -711,13 +752,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                             replyWidget.clean();
                             Toast.makeText(TopicDetailActivity.this, R.string.reply_success,Toast.LENGTH_LONG).show();
 
-                            //隐藏键盘
-                            View view = getWindow().peekDecorView();
-                            if (view != null) {
-                                InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                                inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                            }
-
+                            hideProgress();
 
                             //更新reply到UI
 
@@ -729,6 +764,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         MyLog.d(tag, "onErrorResponse" + error.toString());
+                        hideProgress();
                     }
                 });
 
@@ -747,6 +783,25 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         TopicDTO topic = new TopicDTO();
         topic.setId(topicDTO.getId());
         replyDTO.setTopic(topic);
+
+        //image
+        MediaWrapDTO mediaWrapDTO = new MediaWrapDTO();
+        List<MediaDTO> mediaDTOList = new ArrayList<MediaDTO>();
+        if(serverImagePathMap != null){
+            Iterator iter = serverImagePathMap.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
+
+                String key = (String) entry.getKey();
+                String url = StaticResourceConfig.IMG_DOMAIN + (String) entry.getValue();
+                MediaDTO mediaDTO = new MediaDTO();
+                mediaDTO.setType(MediaType.IMAGE);
+                mediaDTO.setPath(url);
+                mediaDTOList.add(mediaDTO);
+            }
+            mediaWrapDTO.setMedias(mediaDTOList);
+            replyDTO.setMediaWrap(mediaWrapDTO);
+        }
 
         return replyDTO;
     }
@@ -824,21 +879,95 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
-    private void showLocationProgress(){
-        progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
+    private void uploadImage()
+    {
+        showUploadProgressView();
+
+        QiniuMultiImageUpload qiNiuPictureUpload = new QiniuMultiImageUpload(this);
+        qiNiuPictureUpload.upload(localImagePathList, new QiniuMultiImageUploadListener() {
+
+            @Override
+            public void onUploading(int index, String key, double percent) {
+                updateProgressView(1, index, percent);
+            }
+
+            @Override
+            public void onUploadFailed() {
+                hideUploadProgressView();
+            }
+
+            @Override
+            public void onUploadComplete(LinkedHashMap<String, String> result) {
+                hideUploadProgressView();
+                serverImagePathMap = result;
+                if (serverImagePathMap != null) {
+                    isUploadedImage = true;
+
+                    submitReply(mReplyString);
+
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onUploadCancelled() {
+                hideUploadProgressView();
+            }
+        });
+    }
+
+
+    private void showProgress(){
+        if (progressDialog == null){
+            progressDialog = new SpotsDialog(this,R.style.ProgressDialogWait);
+        }
         progressDialog.show();
     }
 
-    private void hideLocationProgress(){
+    private void hideProgress(){
         progressDialog.dismiss();
+    }
+
+    private void showUploadProgressView(){
+        progressLayout.setVisibility(View.VISIBLE);
+
+    }
+
+    private void hideUploadProgressView(){
+        progressLayout.setVisibility(View.GONE);
+    }
+
+    private void updateProgressView(int type, int index, double percent){
+
+        Message msg = new Message();
+        msg.what = HANDLER_UPDATE_PROGRESS;
+        Bundle progressData = new Bundle();
+        progressData.putInt("type", type);
+        progressData.putInt("index", index+1);
+        progressData.putDouble("percent", percent);
+        msg.setData(progressData);
+        handler.sendMessage(msg);
+
     }
 
 
     @Override
     public void onCommit(String text) {
-        if (!TextUtils.isEmpty(text)){
-            submitReply(text);
+        if (!TextUtils.isEmpty(text) || (localImagePathList != null && localImagePathList.size() > 0)){
+            mReplyString = text;
+            if (localImagePathList != null && localImagePathList.size() > 0){
+                uploadImage();
+            }else {
+                submitReply(text);
+            }
         }
+    }
+
+    @Override
+    public void onImageChange(List<String> imagePath) {
+        localImagePathList = imagePath;
     }
 
     public static class HeadViewHolder

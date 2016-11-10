@@ -63,7 +63,11 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
                     if(null != imageListAdapter){
                         imageListAdapter.setImagePathList(path);
                         modifyHasDotView();
+                        if (replyWidgetListener != null){
+                            replyWidgetListener.onImageChange(imageListAdapter.getImagePathList());
+                        }
                     }
+
                 }
                 break;
         }
@@ -247,6 +251,9 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
     public void onDelete(int size) {
         if(size == 0){
             modifyHasDotView();
+        }
+        if (replyWidgetListener != null){
+            replyWidgetListener.onImageChange(imageListAdapter.getImagePathList());
         }
     }
 }

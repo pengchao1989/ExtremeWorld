@@ -277,7 +277,7 @@ public class TopicListAdapter extends BaseAdapter {
         badgeString = "[" + badgeString + "]";
         ss=new SpannableString(badgeString + topicDTO.getTitle());
         ss.setSpan(new ForegroundColorSpan(badgeColor), 0, badgeString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        
+
         viewHolder.titleTextView.setText(ss);
     }
 
