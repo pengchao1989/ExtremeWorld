@@ -14,6 +14,7 @@ public class ReplyDTO
 	private int floor;
 	private int subReplyCount;
 	private UserMinDTO user;
+	private MediaWrapDTO  mediaWrap;
 	private List<SubReplyDTO> subReplys;
 	
 	public Long getId()
@@ -61,6 +62,12 @@ public class ReplyDTO
 	public void setUser(UserMinDTO user)
 	{
 		this.user = user;
+	}
+	public MediaWrapDTO getMediaWrap() {
+		return mediaWrap;
+	}
+	public void setMediaWrap(MediaWrapDTO mediaWrap) {
+		this.mediaWrap = mediaWrap;
 	}
 	public List<SubReplyDTO> getSubReplys()
 	{

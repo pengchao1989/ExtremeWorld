@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,6 +28,7 @@ public class Reply extends IdEntity
 	
 	private User user;
 	private Topic topic;
+	private MediaWrap mediaWrap;
 	
 	public String getContent()
 	{
@@ -108,7 +111,12 @@ public class Reply extends IdEntity
 		this.topic = topic;
 	}
 	
-	
-	
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "mediawrap_id")
+	public MediaWrap getMediaWrap() {
+		return mediaWrap;
+	}
+	public void setMediaWrap(MediaWrap mediaWrap) {
+		this.mediaWrap = mediaWrap;
+	}
 }

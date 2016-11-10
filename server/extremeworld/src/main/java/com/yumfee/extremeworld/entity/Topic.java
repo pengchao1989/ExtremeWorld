@@ -208,7 +208,7 @@ public class Topic extends IdEntity
 	public void setMediaWrap(MediaWrap mediaWrap) {
 		this.mediaWrap = mediaWrap;
 	}
-	
+
 	@ManyToOne
 	@JoinColumn(name = "taxonomy_id")
 	public Taxonomy getTaxonomy() {
