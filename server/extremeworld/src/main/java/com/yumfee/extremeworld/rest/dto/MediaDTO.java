@@ -9,6 +9,8 @@ public class MediaDTO {
 	private String path;
 	private String des;
 	private String type;
+	private int width;
+	private int height;
 	
 
 	public Long getId() {
@@ -36,6 +38,16 @@ public class MediaDTO {
 		this.type = type;
 	}
 	
-	
-	
+	public int getWidth() {
+		return width;
+	}
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
 }

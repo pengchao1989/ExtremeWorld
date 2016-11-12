@@ -12,6 +12,8 @@ public class Media extends IdEntity{
 	private String path;
 	private String des;
 	private String type;//img video music
+	private int width;
+	private int height;
 	
 	//private MediaWrap mediaWrap;
 	
@@ -44,6 +46,18 @@ public class Media extends IdEntity{
 		this.mediaWrap = mediaWrap;
 	}*/
 	
+	public int getHeight() {
+		return height;
+	}
+	public int getWidth() {
+		return width;
+	}
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
 	public MediaDTO buildMediaDTO() {
 		return MediaDTO.newBuilder()
 				.setId(this.id)
