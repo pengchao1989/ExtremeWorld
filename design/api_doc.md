@@ -152,7 +152,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 > 简单情况：{"user":{"id":15},"content":"测试","hobbys":[{"id":3}],"type":"discuss","title":"测sigh","taxonomy":{"id":11}}
 > 
 > 复杂情况：json
-> content={"videoDetail":{"thumbnail":"http://video.jixianxueyuan.com/d19efad8-cbbf-4f95-a772-e44ff8bae64a","videoSource":"http://video.jixianxueyuan.com/video_2015-11-29-Frt0nRxr"},"user":{"id":15},"content":"帮伟哥提数据","hobbys":[{"id":3}],"type":"s_video","mediaWrap":{"medias":[{"path":"http://img.jixianxueyuan.com/img_2015-11-29-2VWlqTQ6","type":"img"},{"path":"http://img.jixianxueyuan.com/img_2015-11-29-sGjpoV3X","type":"img"}]},"title":"帮伟哥提数据","status":0,"replyCount":0,"imageCount":0,"allReplyCount":0,"agreeCount":0,"viewCount":0}
+> content={"videoDetail":{"thumbnail":"http://video.jixianxueyuan.com/d19efad8-cbbf-4f95-a772-e44ff8bae64a","videoSource":"http://video.jixianxueyuan.com/video_2015-11-29-Frt0nRxr"},"user":{"id":15},"content":"帮伟哥提数据","hobbys":[{"id":3}],"type":"s_video","mediaWrap":{"medias":[{"path":"http://img.jixianxueyuan.com/img_2015-11-29-2VWlqTQ6","type":"img","width":200,"height":200},{"path":"http://img.jixianxueyuan.com/img_2015-11-29-sGjpoV3X","type":"img"}]},"title":"帮伟哥提数据","status":0,"replyCount":0,"imageCount":0,"allReplyCount":0,"agreeCount":0,"viewCount":0}
 >
 >发布挑战：同发布普通视频，区别是type为challenge、再增加course参数"course":{"id":123}
 
@@ -173,7 +173,7 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	请求方式：GET
 	入参: 无
 	示例：http://115.28.8.25/api/secure/v1/hobby/topic/extra/1821
-	说明：获取某个topic的额外信息(是否收藏过、是否赞过。。。)
+	说明：获取某个topic的额外信息(是否收藏过、是否赞过、评分。。。)
 
 ----------
 	接口名称：reply
