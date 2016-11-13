@@ -46,7 +46,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/list_item_vertical_padding"
                 android:text="@string/donation"
-                style="@style/TransparentButtonSmall"/>
+                style="@style/BlueButton"/>
 
         </RelativeLayout>
 

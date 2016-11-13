@@ -59,7 +59,7 @@ public class SponsorshipActivity extends BaseActivity {
     @BindView(R.id.sponsorship_activity_list_view)
     ListView listView;
 
-    double money = 0.1;
+    double money = 1;
 
     private SponsorshipListAdapter adapter;
 
@@ -281,13 +281,13 @@ public class SponsorshipActivity extends BaseActivity {
                     }
                 })
                 .setExpanded(false)  // This will enable the expand feature, (similar to android L share dialog)
-                .setGravity(Gravity.BOTTOM)
+                .setGravity(Gravity.CENTER)
                 .setContentHolder(new ViewHolder(R.layout.sponsorship_bottom_form_layout))
                 .create();
         dialog.show();
 
         TextView moneyTextView = (TextView) dialog.getHolderView().findViewById(R.id.sponsorship_bottom_form_money_text);
-        updateMoneyTextView(moneyTextView, 0.1);
+        updateMoneyTextView(moneyTextView, money);
 
     }
 

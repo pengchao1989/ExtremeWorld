@@ -126,7 +126,9 @@
         <activity android:name=".activity.SiteListActivity"/>
         <activity android:name=".activity.SiteCreateActivity"/>
         <activity android:name=".activity.AddressPicketActivity"/>
-        <activity android:name=".activity.SponsorshipActivity"/>
+        <activity android:name=".activity.SponsorshipActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".activity.CollectionListActivity"/>
         <activity
             android:name=".activity.WebActivity"

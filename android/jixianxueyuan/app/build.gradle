@@ -23,8 +23,8 @@ android {
     defaultConfig {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 29
+        targetSdkVersion 24
+        versionCode 30
         versionName "1.5.6"
         multiDexEnabled true
         ndk {
