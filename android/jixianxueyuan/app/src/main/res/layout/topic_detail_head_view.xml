@@ -57,12 +57,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/activity_horizontal_margin">
+
             <include layout="@layout/user_info_head_view"/>
-        </FrameLayout>
+
+            <TextView
+                android:id="@+id/topic_detail_head_course_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+        </RelativeLayout>
 
         <com.tencent.smtt.sdk.WebView
             android:id="@+id/web_view"

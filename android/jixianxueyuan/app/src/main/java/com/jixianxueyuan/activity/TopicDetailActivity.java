@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -63,6 +64,7 @@ import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
 import com.jixianxueyuan.dto.request.TopicScoreRequestDTO;
 import com.jixianxueyuan.dto.request.ZanRequest;
+import com.jixianxueyuan.fragment.CourseListFragment;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
@@ -70,6 +72,7 @@ import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.ScreenUtils;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
@@ -107,6 +110,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
+import cn.nekocode.badge.BadgeDrawable;
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -351,6 +355,28 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 @Override
                 public void onClick(View v) {
                     submitMyTopicScore(mCurrentMyRating);
+                }
+            });
+        }
+
+        //course label
+        if (topicDTO.getCourse() != null){
+            final BadgeDrawable drawable =
+                    new BadgeDrawable.Builder()
+                            .type(BadgeDrawable.TYPE_WITH_TWO_TEXT_COMPLEMENTARY)
+                            .badgeColor(0xffCC9933)
+                            .text1("动作")
+                            .text2(topicDTO.getCourse().getName())
+                            .build();
+            SpannableString spannableString =
+                    new SpannableString(TextUtils.concat(
+                            drawable.toSpannable()
+                    ));
+            headViewHolder.scoreNameTextView.setText(spannableString);
+            headViewHolder.scoreNameTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CourseDetailActivity.startActivity(TopicDetailActivity.this, topicDTO.getCourse());
                 }
             });
         }
@@ -986,6 +1012,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @BindView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;
         @BindView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
+        @BindView(R.id.topic_detail_head_course_name)TextView scoreNameTextView;
         @BindView(R.id.topic_detail_head_zan)LikeButton zanButton;
         @BindView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
         @BindView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
