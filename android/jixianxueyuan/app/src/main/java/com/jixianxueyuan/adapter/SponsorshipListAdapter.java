@@ -59,7 +59,7 @@ public class SponsorshipListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public SponsorshipDTO getItem(int position) {
         return sponsorshipDTOList.get(position);
     }
 

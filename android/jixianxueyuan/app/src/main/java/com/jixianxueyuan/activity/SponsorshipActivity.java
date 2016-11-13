@@ -1,5 +1,6 @@
 package com.jixianxueyuan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
@@ -24,6 +25,7 @@ import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.SponsorshipDTO;
 import com.jixianxueyuan.dto.SponsorshipTradeDTO;
+import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.request.SponsorshipRequestDTO;
 import com.jixianxueyuan.http.MyPageRequest;
@@ -41,6 +43,7 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 /**
  * Created by pengchao on 12/3/15.
@@ -90,6 +93,14 @@ public class SponsorshipActivity extends BaseActivity {
     private void initFooterView(){
         autoLoadMoreView = new AutoLoadMoreView(this);
         listView.addFooterView(autoLoadMoreView);
+    }
+
+    @OnItemClick(R.id.sponsorship_activity_list_view)void onItemClick(int position){
+        SponsorshipDTO sponsorshipDTO = adapter.getItem(position);
+
+        Intent intent = new Intent(SponsorshipActivity.this, UserHomeActivity.class);
+        intent.putExtra(UserHomeActivity.INTENT_USER_MIN, sponsorshipDTO.getUser());
+        startActivity(intent);
     }
 
     private void registerListener(){
