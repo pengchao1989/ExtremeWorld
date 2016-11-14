@@ -36,7 +36,7 @@ import com.yumfee.extremeworld.service.TradeService;
 @RestController
 @RequestMapping(value = "/api/secure/v1/{hobby}/sponsorship")
 public class SponsorshipRestController {
-	private static final String PAGE_SIZE = "30";
+	private static final String PAGE_SIZE = "100";
 	
 	@Autowired
 	SponsorshipService sponsorshipService;

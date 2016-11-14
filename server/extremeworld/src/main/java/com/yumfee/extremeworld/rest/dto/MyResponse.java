@@ -32,7 +32,6 @@ public class MyResponse {
 	}
 	
 	public static MyResponse ok(Object content,boolean isEncryp){
-		isEncryp = false;
 		MyResponse response = new MyResponse();
 		if(isEncryp){
 			response.encryp = true;
