@@ -1,2 +1,2 @@
-include ':app', ':emoji', ':multi-image-selector', ':qupaisdk', ':daogenerator', ':wkvideoplayer', ':Minisdk-release', ':OneSDK', ':social_sdk_library_project'
+include ':app', ':emoji', ':multi-image-selector', ':qupaisdk', ':daogenerator', ':wkvideoplayer', ':Minisdk-release', ':OneSDK', ':social_sdk_library_project', ':lib-bither-compress'
 include ':leCloudSDK_Release'
