@@ -176,6 +176,7 @@ dependencies {
     compile project(':social_sdk_library_project')
 
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    compile project(path: ':lib-bither-compress')
 }
 
 bugly {

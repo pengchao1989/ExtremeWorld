@@ -68,8 +68,8 @@ public class NativeUtil {
      */
     public static int getRatioSize(int bitWidth, int bitHeight) {
         // 图片最大分辨率
-        int imageHeight = 1920;
-        int imageWidth = 1080;
+        int imageHeight = 1280;
+        int imageWidth = 720;
         // 缩放比
         int ratio = 1;
         // 缩放比,由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可

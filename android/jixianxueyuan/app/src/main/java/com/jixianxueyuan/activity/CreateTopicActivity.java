@@ -2,6 +2,7 @@ package com.jixianxueyuan.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,6 +52,8 @@ import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.BitmapUtils;
+import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
@@ -61,6 +64,9 @@ import com.jixianxueyuan.widget.MyActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 
+import net.bither.util.NativeUtil;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -146,6 +152,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                     progressTextView.setText("正在上传视频  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
                     break;
                 case 3:
+                    progressTextView.setText("正在压缩图片第  " + progressData.getInt("index") + "张图片")  ;
                     break;
             }
         }
@@ -310,6 +317,10 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
     private void uploadImage()
     {
+
+        //压缩图片
+        localImagePathList = compressImage(localImagePathList);
+
         QiniuMultiImageUpload qiNiuPictureUpload = new QiniuMultiImageUpload(this);
         qiNiuPictureUpload.upload(localImagePathList, new QiniuMultiImageUploadListener() {
 
@@ -344,6 +355,20 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
             }
         });
+    }
+
+    private List<String> compressImage(List<String> filePathList){
+        List<String> compressImageFilePath = new ArrayList<String>();
+        int index = 0;
+        for (String filePath : filePathList){
+            updateProgressView(3, index, 0.0);
+            File saveFile = new File(DiskCachePath.getDiskCacheDir(CreateTopicActivity.this, "compressCache"), "compress_" + System.currentTimeMillis() + ".jpg");
+            Bitmap bitmap = BitmapUtils.getBitmap(filePath);
+            NativeUtil.compressBitmap(bitmap, saveFile.getAbsolutePath());
+            compressImageFilePath.add(saveFile.getAbsolutePath());
+            index++;
+        }
+        return compressImageFilePath;
     }
 
     private void submitContent()

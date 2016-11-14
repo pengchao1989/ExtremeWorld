@@ -17,6 +17,10 @@ import java.io.IOException;
  */
 public class BitmapUtils {
 
+    public static Bitmap getBitmap(String filePath){
+        return BitmapFactory.decodeFile(filePath);
+    }
+
     // 根据路径获得图片并压缩，返回bitmap用于显示
     public static Bitmap getSmallBitmap(String filePath) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
