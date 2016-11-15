@@ -35,6 +35,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.drawable.ProgressBarDrawable;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
@@ -43,6 +46,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
+import com.jixianxueyuan.config.ImageConfig;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.MediaType;
 import com.jixianxueyuan.config.QiniuImageStyle;
@@ -485,12 +489,29 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         final MediaWrapDTO mediaWrapDTO = topicDTO.getMediaWrap();
         if(mediaWrapDTO != null){
             for(MediaDTO mediaDTO: mediaWrapDTO.getMedias()){
-                ImageView imageviwe = new ImageView(this);
-                imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                GenericDraweeHierarchyBuilder builder =
+                        new GenericDraweeHierarchyBuilder(getResources());
+                GenericDraweeHierarchy hierarchy = builder
+                        .setFadeDuration(300)
+                        .setPlaceholderImage(R.mipmap.photo)
+                        .build();
+
+                SimpleDraweeView imageviwe = new SimpleDraweeView(this);
+                imageviwe.setHierarchy(hierarchy);
+                if (mediaDTO.getWidth() <= 0 || mediaDTO.getHeight() <= 0){
+                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT,ImageConfig.DETAIL_IMAGE_DEFAULT_HEIGHT));
+                }else {
+                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(mediaDTO.getWidth(), mediaDTO.getHeight()));
+                }
+
                 imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 imageviwe.setPadding(0, 8, 0, 8);
+
                 headViewHolder.contentLayout.addView(imageviwe);
-                ImageLoader.getInstance().displayImage(mediaDTO.getPath() + QiniuImageStyle.DETAIL, imageviwe, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
+
+                imageviwe.setImageURI(ImageUriParseUtil.parse(mediaDTO.getPath() + QiniuImageStyle.DETAIL));
+
                 imageviwe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
