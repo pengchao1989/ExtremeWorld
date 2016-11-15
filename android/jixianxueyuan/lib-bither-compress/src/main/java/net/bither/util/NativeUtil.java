@@ -25,12 +25,17 @@ public class NativeUtil {
      * @param filePath 要保存的指定目录
      * @Description: 通过JNI图片压缩把Bitmap保存到指定目录
      */
-    public static void compressBitmap(Bitmap image, String filePath) {
+    public static CompressResult compressBitmap(Bitmap image, String filePath) {
+        CompressResult compressResult = new CompressResult();
+
         // 最大图片大小 1000KB
         int maxSize = 1000;
         // 获取尺寸压缩倍数
         int ratio = NativeUtil.getRatioSize(image.getWidth(), image.getHeight());
         // 压缩Bitmap到对应尺寸
+        compressResult.width = image.getWidth() / ratio;
+        compressResult.height = image.getHeight() / ratio;
+        compressResult.filePath = filePath;
         Bitmap result = Bitmap.createBitmap(image.getWidth() / ratio, image.getHeight() / ratio, Config.ARGB_8888);
         Canvas canvas = new Canvas(result);
         Rect rect = new Rect(0, 0, image.getWidth() / ratio, image.getHeight() / ratio);
@@ -56,6 +61,7 @@ public class NativeUtil {
             result.recycle();
             result = null;
         }
+        return compressResult;
     }
 
     /**
@@ -120,5 +126,11 @@ public class NativeUtil {
     static {
         System.loadLibrary("jpegbither");
         System.loadLibrary("bitherjni");
+    }
+
+    public static class CompressResult{
+        public int width;
+        public int height;
+        public String filePath;
     }
 }

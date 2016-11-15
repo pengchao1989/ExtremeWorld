@@ -118,6 +118,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
 
     List<String> localImagePathList = null;
+    LinkedHashMap<String,NativeUtil.CompressResult> localPathOfCompressInfoMap = null;
     LinkedHashMap<String,String> serverImagePathMap = null;
 
     List<String> localVideoPathList = null;
@@ -358,14 +359,16 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     }
 
     private List<String> compressImage(List<String> filePathList){
+        localPathOfCompressInfoMap = new LinkedHashMap<String, NativeUtil.CompressResult>();
         List<String> compressImageFilePath = new ArrayList<String>();
         int index = 0;
         for (String filePath : filePathList){
             updateProgressView(3, index, 0.0);
             File saveFile = new File(DiskCachePath.getDiskCacheDir(CreateTopicActivity.this, "compressCache"), "compress_" + System.currentTimeMillis() + ".jpg");
             Bitmap bitmap = BitmapUtils.getBitmap(filePath);
-            NativeUtil.compressBitmap(bitmap, saveFile.getAbsolutePath());
+            NativeUtil.CompressResult compressResult = NativeUtil.compressBitmap(bitmap, saveFile.getAbsolutePath());
             compressImageFilePath.add(saveFile.getAbsolutePath());
+            localPathOfCompressInfoMap.put(saveFile.getAbsolutePath(), compressResult);
             index++;
         }
         return compressImageFilePath;
@@ -472,6 +475,14 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                 MediaDTO mediaDTO = new MediaDTO();
                 mediaDTO.setType(MediaType.IMAGE);
                 mediaDTO.setPath(url);
+
+                //size
+                NativeUtil.CompressResult compressResult = localPathOfCompressInfoMap.get(key);
+                if (compressResult != null){
+                    mediaDTO.setWidth(compressResult.width);
+                    mediaDTO.setHeight(compressResult.height);
+                }
+
                 mediaDTOList.add(mediaDTO);
             }
             mediaWrapDTO.setMedias(mediaDTOList);
