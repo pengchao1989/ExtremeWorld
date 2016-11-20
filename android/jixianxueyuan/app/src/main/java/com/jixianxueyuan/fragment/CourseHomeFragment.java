@@ -15,8 +15,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.BaseActivity;
+import com.jixianxueyuan.activity.CourseDetailActivity;
 import com.jixianxueyuan.activity.CourseListActivity;
+import com.jixianxueyuan.adapter.CourseListAdapter;
 import com.jixianxueyuan.adapter.CourseTaxonomyListAdapter;
+import com.jixianxueyuan.dto.CourseMinDTO;
 import com.jixianxueyuan.dto.CourseTaxonomysResponseDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.http.MyRequest;
@@ -32,14 +35,15 @@ import butterknife.OnItemClick;
  */
 public class CourseHomeFragment extends Fragment {
 
-    @BindView(R.id.course_home_taxonomy_list_view)ListView listView;
+    @BindView(R.id.course_home_taxonomy_list_view)ListView taxonomyListView;
+    @BindView(R.id.course_home_course_list_view)ListView courseListView;
 
-    CourseTaxonomyListAdapter adapter;
+    CourseTaxonomyListAdapter taxonomyListAdapter;
+    CourseListAdapter courseListAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -48,8 +52,12 @@ public class CourseHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.course_home_activity, container, false);
         ButterKnife.bind(this, view);
 
-        adapter = new CourseTaxonomyListAdapter(this.getContext());
-        listView.setAdapter(adapter);
+        taxonomyListAdapter = new CourseTaxonomyListAdapter(this.getContext());
+        taxonomyListView.setAdapter(taxonomyListAdapter);
+
+        courseListAdapter = new CourseListAdapter(this.getActivity());
+        courseListView.setAdapter(courseListAdapter);
+
 
         initCourseList();
 
@@ -57,7 +65,14 @@ public class CourseHomeFragment extends Fragment {
     }
 
     @OnItemClick(R.id.course_home_taxonomy_list_view)void OnItemClicked(int position){
-        CourseListActivity.startActivity(this.getContext(), adapter.getItem(position));
+        //CourseListActivity.startActivity(this.getContext(), taxonomyListAdapter.getItem(position));
+        courseListAdapter.setDatas(taxonomyListAdapter.getItem(position).getCourses());
+        taxonomyListAdapter.setCurrentSelected(position);
+    }
+
+    @OnItemClick(R.id.course_home_course_list_view)void onCourseItemClick(int position){
+        CourseMinDTO courseMinDTO = courseListAdapter.getItem(position);
+        CourseDetailActivity.startActivity(this.getContext(), courseMinDTO);
     }
 
     private void initCourseList(){
@@ -65,9 +80,13 @@ public class CourseHomeFragment extends Fragment {
         String url = ServerMethod.courseTaxonomy();
         CourseTaxonomysResponseDTO courseTaxonomysResponseDTO= (CourseTaxonomysResponseDTO) aCache.getAsObject(url);
         if(courseTaxonomysResponseDTO != null){
-            adapter.setData(courseTaxonomysResponseDTO.getCourseTaxonomyList());
+            taxonomyListAdapter.setData(courseTaxonomysResponseDTO.getCourseTaxonomyList());
         }else {
             requestCourseList();
+        }
+
+        if (taxonomyListAdapter.getCount() > 0){
+            courseListAdapter.addDatas(taxonomyListAdapter.getItem(0).getCourses());
         }
     }
 
@@ -84,7 +103,11 @@ public class CourseHomeFragment extends Fragment {
 
                         if(response.getContent() != null) {
 
-                            adapter.setData(response.getContent().getCourseTaxonomyList());
+                            taxonomyListAdapter.setData(response.getContent().getCourseTaxonomyList());
+
+                            if (taxonomyListAdapter.getCount() > 0){
+                                courseListAdapter.addDatas(taxonomyListAdapter.getItem(0).getCourses());
+                            }
 
                             ACache aCache = ACache.get(CourseHomeFragment.this.getContext());
                             aCache.put(url, response.getContent(), ACache.TIME_DAY);

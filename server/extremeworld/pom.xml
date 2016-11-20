@@ -427,6 +427,17 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1438276914491-20150812.jar</systemPath>
         </dependency>
+
+	<dependency>
+		<groupId>com.rabbitmq</groupId>
+		<artifactId>amqp-client</artifactId>
+		<version>3.5.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.amqp</groupId>
+		<artifactId>spring-rabbit</artifactId>
+		<version>1.4.5.RELEASE</version>
+	</dependency>
         
         
 	</dependencies>

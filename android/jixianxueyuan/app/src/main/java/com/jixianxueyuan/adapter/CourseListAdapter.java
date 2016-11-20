@@ -42,6 +42,12 @@ public class CourseListAdapter extends BaseAdapter {
 
     }
 
+    public void setDatas(List<CourseMinDTO> courseTaxonomyDTOs){
+        courseDTOList.clear();
+        courseDTOList.addAll(courseTaxonomyDTOs);
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return courseDTOList.size();

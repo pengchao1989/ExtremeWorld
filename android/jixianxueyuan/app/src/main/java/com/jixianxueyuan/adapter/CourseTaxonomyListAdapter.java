@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class CourseTaxonomyListAdapter extends BaseAdapter{
 
     private Context context;
     private List<CourseTaxonomyDTO> courseTaxonomyDTOList;
+    private int currentSelect = 0;
 
     public CourseTaxonomyListAdapter(Context context){
         this.context = context;
@@ -38,6 +40,11 @@ public class CourseTaxonomyListAdapter extends BaseAdapter{
         }
         courseTaxonomyDTOList.clear();
         courseTaxonomyDTOList.addAll(courseTaxonomyDTOs);
+        this.notifyDataSetChanged();
+    }
+
+    public void setCurrentSelected(int position){
+        this.currentSelect = position;
         this.notifyDataSetChanged();
     }
 
@@ -72,6 +79,11 @@ public class CourseTaxonomyListAdapter extends BaseAdapter{
         viewHolder.containerLayout.setBackgroundColor(courseTaxonomyColors[position%(courseTaxonomyColors.length)]);
         viewHolder.nameTextView.setText(courseTaxonomyDTOList.get(position).getName());
         viewHolder.desTextView.setText(courseTaxonomyDTOList.get(position).getDes());
+        if (currentSelect == position){
+            viewHolder.selectedView.setBackgroundColor(courseTaxonomyColors[position%(courseTaxonomyColors.length)]);
+        }else {
+            viewHolder.selectedView.setBackgroundColor(context.getResources().getColor(R.color.transparent));
+        }
         return convertView;
     }
 
@@ -82,6 +94,8 @@ public class CourseTaxonomyListAdapter extends BaseAdapter{
         TextView nameTextView;
         @BindView(R.id.course_taxonomy_list_item_des)
         TextView desTextView;
+        @BindView(R.id.course_taxonomy_list_item_selected)
+        FrameLayout selectedView;
 
         public ViewHolder(View itemView){
             ButterKnife.bind(this, itemView);

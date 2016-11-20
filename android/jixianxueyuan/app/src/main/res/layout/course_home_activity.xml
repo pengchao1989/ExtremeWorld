@@ -13,13 +13,40 @@
         app:action_title="@string/course"
         />
 
-    <ListView
-        android:id="@+id/course_home_taxonomy_list_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/course_home_taxonomy_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/ListViewNoDivider"/>
+
+        </LinearLayout>
 
 
-    </ListView>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <ListView
+                android:id="@+id/course_home_course_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>
