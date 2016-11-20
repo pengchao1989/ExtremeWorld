@@ -451,3 +451,19 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	请求方式:GET
 	入参：page
 	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/site?page=1
+
+----------
+	接口名称:point/points
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/point/points
+	请求方式:GET
+	入参：
+	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/point/points
+	返回：积分值（int）
+
+----------
+	接口名称:point/history
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/point/history
+	请求方式:GET
+	入参：
+	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/point/history
+	返回：积分值（int）
