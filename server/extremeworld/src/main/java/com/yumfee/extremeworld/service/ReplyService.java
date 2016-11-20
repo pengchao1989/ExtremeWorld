@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.extremeworld.config.PointType;
 import com.yumfee.extremeworld.config.RemindType;
 import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
@@ -42,6 +43,9 @@ public class ReplyService
 	
 	@Autowired
 	private PushManage pushManage;
+	
+	@Autowired
+	PointService pointService;
 
 	public Reply getReply(long id)
 	{
@@ -104,6 +108,14 @@ public class ReplyService
 			// 在此处理推送
 			pushManage.pushMessage(topic.getUser(), PushMessageType.REMIND, remind);
 			
+		}
+		
+		
+		//每日回复主题积分
+		if (reply.getUser() != null) {
+			if (reply.getUser().getId() > 0) {
+				pointService.addPoint(PointType.REPLY, reply.getUser().getId());
+			}
 		}
 
 	}

@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
 /*        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);*/
 
-        if(MyApplication.getContext().getAppInfomation().isNeedUpdate()){
+        if(/*MyApplication.getContext().getAppInfomation().isNeedUpdate()*/true){
             requestHandshake();
         }
 

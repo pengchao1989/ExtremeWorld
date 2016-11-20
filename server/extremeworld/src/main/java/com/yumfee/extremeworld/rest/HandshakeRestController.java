@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
+import com.yumfee.extremeworld.config.PointType;
 import com.yumfee.extremeworld.entity.Hobby;
 import com.yumfee.extremeworld.entity.User;
 import com.yumfee.extremeworld.rest.dto.HandshakeDTO;
@@ -21,6 +22,7 @@ import com.yumfee.extremeworld.rest.dto.HobbyDTO;
 import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.request.HandshakeRequestDTO;
 import com.yumfee.extremeworld.service.BaseInfoService;
+import com.yumfee.extremeworld.service.PointService;
 import com.yumfee.extremeworld.service.UserService;
 import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
@@ -35,6 +37,9 @@ public class HandshakeRestController {
 	
 	@Autowired
 	BaseInfoService baseInfoService;
+	
+	@Autowired
+	PointService PointService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	MyResponse get(){
@@ -73,12 +78,14 @@ public class HandshakeRestController {
 					user.setVersionName(handshakeRequest.getVersionName());
 				}
 				
+				//每日登陆积分
+				PointService.addPoint(PointType.LOGIN, handshakeRequest.getUserId());
+				
 				userService.saveUser(user);
 			}
 		}
 		System.out.println("userId=" + handshakeRequest.getUserId());
 		System.out.println("hobbyStamp=" + handshakeRequest.getHobbyStamp() );
-		
 		
 		List<Hobby> hobbys = baseInfoService.getBaseInfo();
 		

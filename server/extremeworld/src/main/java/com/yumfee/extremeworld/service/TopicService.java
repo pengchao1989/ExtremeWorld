@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.mapper.JsonMapper;
 
+import com.yumfee.extremeworld.config.PointType;
 import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Media;
@@ -46,6 +47,8 @@ public class TopicService
 	@Autowired
 	private UserDao userInfoDao;
 	
+	@Autowired
+	PointService pointService;
 	
 	public Topic getTopic(Long id)
 	{
@@ -82,6 +85,13 @@ public class TopicService
 			}
 		}
 		topicDao.save(entity);
+		
+		//每日发主题积分
+		if (entity.getUser() != null) {
+			if (entity.getUser().getId() > 0) {
+				pointService.addPoint(PointType.TOPIC, entity.getUser().getId());
+			}
+		}
 	}
 	
 	public void saveHtmlTopic(Topic entity)
@@ -138,6 +148,14 @@ public class TopicService
 		
 		topicDao.save(entity);
 		//MyJedisExecutor.set("topic:"+entity.getId(), entity);
+		
+		//每日发主题积分
+		if (entity.getUser() != null) {
+			if (entity.getUser().getId() > 0) {
+				pointService.addPoint(PointType.TOPIC, entity.getUser().getId());
+			}
+		}
+
 		
 	}
 	

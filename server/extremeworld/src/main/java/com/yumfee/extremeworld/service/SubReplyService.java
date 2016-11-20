@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yumfee.extremeworld.config.PointType;
 import com.yumfee.extremeworld.config.RemindType;
 import com.yumfee.extremeworld.entity.Remind;
 import com.yumfee.extremeworld.entity.Reply;
@@ -43,6 +44,9 @@ public class SubReplyService {
 	
 	@Autowired
 	private PushManage pushManage;
+	
+	@Autowired
+	PointService pointService;
 	
 	public SubReply getSubReply(long id){
 		return subReplyDao.findOne(id);
@@ -118,6 +122,13 @@ public class SubReplyService {
 						remindDao.save(remind);
 						//push
 						pushManage.pushMessage(reply.getUser(), PushMessageType.REMIND, remind);
+			}
+		}
+		
+		//每日回复主题积分
+		if (reply.getUser() != null) {
+			if (reply.getUser().getId() > 0) {
+				pointService.addPoint(PointType.REPLY, reply.getUser().getId());
 			}
 		}
 

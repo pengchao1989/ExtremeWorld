@@ -30,6 +30,7 @@ public class UserDTO
     private String city;
     private String district;
 	private String token;
+	private int point;
 	
 	private List<UserInterestDTO> interests;
 	
@@ -172,6 +173,12 @@ public class UserDTO
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
 	}
 	
 }

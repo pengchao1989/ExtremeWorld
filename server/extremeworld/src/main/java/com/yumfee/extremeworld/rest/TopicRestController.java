@@ -23,6 +23,7 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.PointType;
 import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Collection;
@@ -35,6 +36,7 @@ import com.yumfee.extremeworld.rest.dto.MyResponse;
 import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.rest.dto.TopicExtraDTO;
 import com.yumfee.extremeworld.service.CollectionService;
+import com.yumfee.extremeworld.service.PointService;
 import com.yumfee.extremeworld.service.TopicScoreService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
@@ -63,7 +65,7 @@ public class TopicRestController
 	
 	@Autowired
 	private TopicScoreService topicScoreService;
-	
+
 	@RequestMapping( method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public  MyResponse list(
 			@PathVariable String hobby,
@@ -225,6 +227,8 @@ public class TopicRestController
 	{
 		//JSR303
 		BeanValidators.validateWithException(validator,topic);
+		
+		Long userId = getCurrentUserId();
 		
 		//fix ios hobby
 		List<Hobby> hobbyList = topic.getHobbys();
