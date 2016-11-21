@@ -466,4 +466,12 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	请求方式:GET
 	入参：
 	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/point/history
-	返回：积分值（int）
+	返回：积分记录
+
+----------
+	接口名称:point/duiba_auto_login
+	URL地址:http://www.jixianxueyuan.com/api/secure/v1/skateboard/point/duiba_auto_login
+	请求方式:GET
+	入参：
+	示例：http://www.jixianxueyuan.com/api/secure/v1/skateboard/point/duiba_auto_login
+	返回：返回兑吧免登url（就是不用输入用户名密码，直接用这个url登陆进兑吧的H5，详细见兑吧集成文档）
