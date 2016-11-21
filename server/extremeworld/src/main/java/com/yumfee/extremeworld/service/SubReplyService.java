@@ -126,9 +126,9 @@ public class SubReplyService {
 		}
 		
 		//每日回复主题积分
-		if (reply.getUser() != null) {
-			if (reply.getUser().getId() > 0) {
-				pointService.addPoint(PointType.REPLY, reply.getUser().getId());
+		if (subReply.getUser() != null) {
+			if (subReply.getUser().getId() > 0) {
+				pointService.addPoint(PointType.REPLY, subReply.getUser().getId());
 			}
 		}
 

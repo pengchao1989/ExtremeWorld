@@ -65,6 +65,9 @@ public class TopicRestController
 	
 	@Autowired
 	private TopicScoreService topicScoreService;
+	
+	@Autowired
+	PointService pointService;
 
 	@RequestMapping( method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public  MyResponse list(
@@ -244,6 +247,8 @@ public class TopicRestController
 		topic.setStatus(TopicStatus.PUBLIC);
 		topicService.saveTopic(topic);
 		
+		//每日发主题积分
+		pointService.addPoint(PointType.TOPIC, userId);
 
 		Topic result = topicService.getTopic(topic.getId());
 		TopicDTO dto = BeanMapper.map(result, TopicDTO.class);

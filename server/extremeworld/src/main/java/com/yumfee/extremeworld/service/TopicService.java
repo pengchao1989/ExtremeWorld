@@ -47,9 +47,6 @@ public class TopicService
 	@Autowired
 	private UserDao userInfoDao;
 	
-	@Autowired
-	PointService pointService;
-	
 	public Topic getTopic(Long id)
 	{
 		Topic topic = null;
@@ -85,13 +82,6 @@ public class TopicService
 			}
 		}
 		topicDao.save(entity);
-		
-		//每日发主题积分
-		if (entity.getUser() != null) {
-			if (entity.getUser().getId() > 0) {
-				pointService.addPoint(PointType.TOPIC, entity.getUser().getId());
-			}
-		}
 	}
 	
 	public void saveHtmlTopic(Topic entity)
@@ -148,15 +138,6 @@ public class TopicService
 		
 		topicDao.save(entity);
 		//MyJedisExecutor.set("topic:"+entity.getId(), entity);
-		
-		//每日发主题积分
-		if (entity.getUser() != null) {
-			if (entity.getUser().getId() > 0) {
-				pointService.addPoint(PointType.TOPIC, entity.getUser().getId());
-			}
-		}
-
-		
 	}
 	
 	public Page<Topic> getAllTopic(int pageNumber, int pageSize,
