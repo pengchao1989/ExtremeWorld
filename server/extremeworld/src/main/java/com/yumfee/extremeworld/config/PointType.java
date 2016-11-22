@@ -2,9 +2,9 @@ package com.yumfee.extremeworld.config;
 
 public enum PointType {
 
-	LOGIN("login", 10),
-	TOPIC("topic", 20),
-	REPLY("reply", 5);
+	LOGIN("login", 5),
+	TOPIC("topic", 10),
+	REPLY("reply", 2);
 	
 	private String type;
 	private int count;

@@ -1,32 +1,21 @@
 package com.yumfee.extremeworld.rest;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.ClientConfigManage;
 import com.yumfee.extremeworld.entity.AppKey;
-import com.yumfee.extremeworld.entity.Point;
 import com.yumfee.extremeworld.entity.User;
-import com.yumfee.extremeworld.rest.dto.MyPage;
-import com.yumfee.extremeworld.rest.dto.MyResponse;
-import com.yumfee.extremeworld.rest.dto.PointDTO;
 import com.yumfee.extremeworld.service.PointService;
 import com.yumfee.extremeworld.service.UserService;
-import com.yumfee.extremeworld.service.account.ShiroDbRealm.ShiroUser;
 
 import cn.com.duiba.credits.sdk.CreditConsumeParams;
 import cn.com.duiba.credits.sdk.CreditConsumeResult;
@@ -34,11 +23,9 @@ import cn.com.duiba.credits.sdk.CreditNotifyParams;
 import cn.com.duiba.credits.sdk.CreditTool;
 
 @RestController
-@RequestMapping(value = "/api/secure/v1/{hobby}/point")
-public class PointRestController {
-	
-	private static final String PAGE_SIZE = "20";
-	
+@RequestMapping(value = "/api/v1/{hobby}/duiba")
+public class DuibaRestController {
+
 	@Autowired
 	PointService pointServer;
 	
@@ -48,31 +35,7 @@ public class PointRestController {
 	@Autowired
 	private ClientConfigManage clientConfigManage;
 	
-	@RequestMapping(value="duiba_auto_login", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse getAutoLoginUrl(@PathVariable String hobby,
-			@RequestParam(value = "redirect", defaultValue = "") String redirect){
-		
-		AppKey clientConfig = clientConfigManage
-				.getCilentConfig(hobby);
-		
-		CreditTool tool=new CreditTool(clientConfig.getDuibaAppKey(), clientConfig.getDuibaAppSecret());
-		
-		long userId = getCurrentUserId();
-		User user = userService.getUser(userId);
-		
-		Map params=new HashMap();
-		params.put("uid",String.valueOf(user.getId()));
-		params.put("credits",String.valueOf(user.getPoint()));
-		if(StringUtils.isEmpty(redirect)){
-		    //redirect是目标页面地址，默认积分商城首页是：http://www.duiba.com.cn/chome/index
-		    //此处请设置成一个外部传进来的参数，方便运营灵活配置
-		    params.put("redirect",redirect);
-		}
-		String url=tool.buildUrlWithSign("http://www.duiba.com.cn/autoLogin/autologin?",params);
-		return MyResponse.ok(url);
-	}
-	
-	@RequestMapping(value="duiba_deduction_points", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	@RequestMapping(value="deduction_points", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public String deductionPoints(@PathVariable String hobby,
 			HttpServletRequest request){
 		
@@ -106,7 +69,7 @@ public class PointRestController {
 		}
 	}
 	
-	@RequestMapping(value="duiba_receive_result", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	@RequestMapping(value="receive_result", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public String receiveDuiBaResult(@PathVariable String hobby,HttpServletRequest request){
 		AppKey clientConfig = clientConfigManage
 				.getCilentConfig(hobby);
@@ -132,33 +95,4 @@ public class PointRestController {
 		
 		return "ok";
 	}
-	
-	@RequestMapping(value="points", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse getUserPoint(){
-		long userId = getCurrentUserId();
-		int points = pointServer.getUserTotalPoint(userId);
-		return MyResponse.ok(points, true);
-	}
-	
-	@RequestMapping(value="history", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public MyResponse getHistory(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
-			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
-			@RequestParam(value = "sortType", defaultValue = "auto") String sortType){
-		
-		long userId = getCurrentUserId();
-		Page<Point> pointPage = pointServer.getAll(userId, pageNumber, pageSize, sortType);
-		
-		MyPage<PointDTO, Point> myPointPage = new MyPage<PointDTO, Point>(PointDTO.class, pointPage);
-		
-		return MyResponse.ok(myPointPage,true);
-	}
-	
-	/**
-	 * 取出Shiro中的当前用户Id.
-	 */
-	private Long getCurrentUserId() {
-		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		return user.id;
-	}
-
 }

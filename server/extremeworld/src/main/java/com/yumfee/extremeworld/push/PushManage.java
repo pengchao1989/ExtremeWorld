@@ -20,6 +20,7 @@ import com.taobao.api.response.CloudpushNoticeAndroidResponse;
 import com.yumfee.extremeworld.config.ClientConfigManage;
 import com.yumfee.extremeworld.entity.AppKey;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.rest.dto.PointDTO;
 import com.yumfee.extremeworld.rest.dto.RemindDTO;
 
 //Spring Bean的标识.
@@ -56,7 +57,7 @@ public class PushManage {
 
 	public void pushMessage(User listenerUser, int type, Object content) {
 		
-		if(StringUtils.isNoneEmpty(listenerUser.getDevice()) && "android".equals(listenerUser.getDevice())){
+		if(StringUtils.isNoneEmpty(listenerUser.getPlateForm()) && "android".equals(listenerUser.getPlateForm())){
 			AppKey clientConfig = clientConfigManage
 					.getCilentConfig(listenerUser.getHobbyStamp());
 			String appkey = clientConfig.getBaichuanAppKey();
@@ -96,6 +97,10 @@ public class PushManage {
 			case PushMessageType.REMIND:
 				RemindDTO remindDTO = BeanMapper.map(content, RemindDTO.class);
 				contentJson = mapper.writeValueAsString(remindDTO);
+				break;
+			case PushMessageType.POINT:
+				PointDTO pointDTO = BeanMapper.map(content, PointDTO.class);
+				contentJson = mapper.writeValueAsString(pointDTO);
 				break;
 			}
 			PushMessage pussMessage = new PushMessage();

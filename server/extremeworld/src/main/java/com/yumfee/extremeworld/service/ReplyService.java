@@ -102,12 +102,9 @@ public class ReplyService
 			remind.setSpeaker(speaker);
 			
 			remindDao.save(remind);
-			
-			
 
 			// 在此处理推送
 			pushManage.pushMessage(topic.getUser(), PushMessageType.REMIND, remind);
-			
 		}
 		
 		

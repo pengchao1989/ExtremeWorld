@@ -301,5 +301,36 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="ToastLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/bg_custom_dialog</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">@dimen/toast_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/toast_padding_vertical</item>
+        <item name="android:paddingLeft">@dimen/toast_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/toast_padding_horizontal</item>
+    </style>
 
+    <style name="ToastTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ToastContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ffce26</item>
+    </style>
+
+    <style name="ToastTips">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

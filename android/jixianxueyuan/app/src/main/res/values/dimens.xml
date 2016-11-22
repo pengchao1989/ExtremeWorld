@@ -31,4 +31,8 @@
     <dimen name="list_content_margin_head">4dp</dimen>
 
 
+    <!--toast-->
+    <dimen name="toast_padding_vertical">12dp</dimen>
+    <dimen name="toast_padding_horizontal">24dp</dimen>
+
 </resources>

@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yumfee.extremeworld.config.PointType;
 import com.yumfee.extremeworld.entity.Point;
 import com.yumfee.extremeworld.entity.User;
+import com.yumfee.extremeworld.push.PushManage;
+import com.yumfee.extremeworld.push.PushMessageType;
 import com.yumfee.extremeworld.repository.PointDao;
 import com.yumfee.extremeworld.repository.UserDao;
 import com.yumfee.extremeworld.util.DateUtils;
@@ -30,11 +32,14 @@ public class PointService {
 	
 	@Autowired UserDao userDao;
 	
+	@Autowired
+	private PushManage pushManage;
+	
 	public Point getPoint(long id){
 		return pointDao.findOne(id);
 	}
 	
-	public int getUserTotalPoint(long userId){
+	public long getUserTotalPoint(long userId){
 		User user = userDao.findById(userId);
 		if (user != null) {
 			return user.getPoint();
@@ -55,7 +60,7 @@ public class PointService {
 				if (todayLoginPointList == null || todayLoginPointList.size() < 1) {
 					point.setType(PointType.LOGIN.getType());
 					point.setCount(PointType.LOGIN.getCount());
-					point.setDes("每日登录积分 +" + String.valueOf(PointType.LOGIN.getCount()) );
+					point.setDes("每日登录  +" + String.valueOf(PointType.LOGIN.getCount()) + "积分");
 				}else {
 					return 0;
 				}
@@ -65,7 +70,7 @@ public class PointService {
 				if (todayTopicPointList == null || todayTopicPointList.size() < 3) {
 					point.setType(PointType.TOPIC.getType());
 					point.setCount(PointType.TOPIC.getCount());
-					point.setDes("发布主题 +" + String.valueOf(PointType.TOPIC.getCount()) );
+					point.setDes("发布主题 +" + String.valueOf(PointType.TOPIC.getCount()) + "积分");
 				}else {
 					return 0;
 				}
@@ -75,7 +80,7 @@ public class PointService {
 				if (todayReplyPointList == null || todayReplyPointList.size() < 5) {
 					point.setType(PointType.REPLY.getType());
 					point.setCount(PointType.REPLY.getCount());
-					point.setDes("回复主题 +" + String.valueOf(PointType.REPLY.getCount()));
+					point.setDes("回复主题 +" + String.valueOf(PointType.REPLY.getCount())  + "积分");
 				}else {
 					return 0;
 				}
@@ -87,6 +92,8 @@ public class PointService {
 			save(point);
 			user.setPoint(user.getPoint() + point.getCount());
 			userDao.save(user);
+			
+			pushManage.pushMessage(user, PushMessageType.POINT, point);
 			return point.getCount();
 		}
 		

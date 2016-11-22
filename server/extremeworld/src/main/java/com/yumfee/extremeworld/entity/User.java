@@ -48,7 +48,7 @@ public class User extends UserBase
     private String systemVersion;
     private String versionCode;
     private String versionName;
-    private int point;
+    private long point;
 	
 	//private List<Topic> topics = new ArrayList<Topic>();
 	
@@ -224,10 +224,10 @@ public class User extends UserBase
 	public void setVersionName(String versionName) {
 		this.versionName = versionName;
 	}
-	public int getPoint() {
+	public long getPoint() {
 		return point;
 	}
-	public void setPoint(int point) {
+	public void setPoint(long point) {
 		this.point = point;
 	}
 	/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")

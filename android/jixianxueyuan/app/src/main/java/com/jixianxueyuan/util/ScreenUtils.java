@@ -1,6 +1,8 @@
 package com.jixianxueyuan.util;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 /**
  * Created by pengchao on 16-9-17.
@@ -47,5 +49,24 @@ public class ScreenUtils {
     public static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
+    }
+
+    public static  int[] getScreenSize(Context context) {
+        final WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(dm);
+        int[] size = new int[2];
+        size[0] = dm.widthPixels;
+        size[1] = dm.heightPixels;
+        return size;
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }

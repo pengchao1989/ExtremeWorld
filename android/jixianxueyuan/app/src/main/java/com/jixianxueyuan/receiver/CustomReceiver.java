@@ -12,9 +12,12 @@ import com.alibaba.sdk.android.push.notification.CPushMessage;
 import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.RemindListActivity;
+import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.dto.PointDTO;
 import com.jixianxueyuan.dto.RemindDTO;
 import com.jixianxueyuan.push.PushMessageType;
 import com.jixianxueyuan.util.MyLog;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import org.json.JSONObject;
 
@@ -70,6 +73,9 @@ public class CustomReceiver  extends MessageReceiver {
                     case PushMessageType.REMIND:
                         notifyRemind(context,content);
                         break;
+                    case PushMessageType.POINT:
+                        notifyPoint(context,content);
+                        break;
                 }
             }
         } catch (Exception e) {
@@ -120,6 +126,13 @@ public class CustomReceiver  extends MessageReceiver {
 
         //用mNotificationManager的notify方法通知用户生成标题栏消息通知
         mNotificationManager.notify(1, notification);
+    }
+
+    private void notifyPoint(Context context,String pointJson){
+        Gson gson = new Gson();
+        PointDTO pointDTO = gson.fromJson(pointJson, PointDTO.class);
+        TastyToast.makeText(MyApplication.getContext(), pointDTO.getDes(), TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+
     }
 
 }
