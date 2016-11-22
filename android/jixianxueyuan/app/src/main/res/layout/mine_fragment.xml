@@ -189,6 +189,45 @@
         </RelativeLayout>
         <View style="@style/HorizontalDividerView" />
 
+        <RelativeLayout
+            android:id="@+id/mine_fragment_point"
+            style="@style/ImageItemLayout"
+            android:visibility="visible"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/icon_mygift_gift" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/point_store" />
+                <TextView
+                    android:id="@+id/mine_fragment_point_count"
+                    style="@style/ListPrimaryTextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/title_background_color"
+                    tools:text="(20积分)" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+        <View style="@style/HorizontalDividerView" />
+
     </LinearLayout>
 
 

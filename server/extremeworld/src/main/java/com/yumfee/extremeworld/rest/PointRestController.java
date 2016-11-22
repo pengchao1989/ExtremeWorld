@@ -136,7 +136,7 @@ public class PointRestController {
 	@RequestMapping(value="points", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public MyResponse getUserPoint(){
 		long userId = getCurrentUserId();
-		int points = pointServer.getUserTotalPoint(userId);
+		long points = pointServer.getUserTotalPoint(userId);
 		return MyResponse.ok(points, true);
 	}
 	

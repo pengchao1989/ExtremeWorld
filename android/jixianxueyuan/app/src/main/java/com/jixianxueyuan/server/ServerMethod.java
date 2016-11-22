@@ -81,4 +81,6 @@ public class ServerMethod {
     public static final String exhibition() {return method_url_secure + hobby + "exhibition";}
     public static final String topic_score() {return method_url_secure + hobby + "topic_score";}
     public static final String ranking_list() {return method_url_secure + hobby + "ranking_list"; }
+    public static final String point_duiba_auto_login(){return method_url_secure + hobby + "point/duiba_auto_login";}
+    public static final String point_count(){return method_url_secure + hobby + "point/points";}
 }

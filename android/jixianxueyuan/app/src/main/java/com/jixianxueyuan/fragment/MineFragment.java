@@ -5,9 +5,11 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +20,14 @@ import com.android.volley.VolleyError;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.CollectionListActivity;
+import com.jixianxueyuan.activity.CreditActivity;
 import com.jixianxueyuan.activity.CropBgActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
+import com.jixianxueyuan.activity.WebActivity;
 import com.jixianxueyuan.activity.profile.ProfileEditActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
@@ -72,6 +76,8 @@ public class MineFragment extends Fragment {
     SimpleDraweeView avatarImageView;
     @BindView(R.id.mine_fragment_signature)
     TextView signatureTextView;
+    @BindView(R.id.mine_fragment_point_count)
+    TextView pointCountTextView;
 
     private NewHomeActivity activity;
 
@@ -122,6 +128,7 @@ public class MineFragment extends Fragment {
     public void onResume()
     {
         super.onResume();
+        requestPointCount();
     }
 
 
@@ -190,6 +197,11 @@ public class MineFragment extends Fragment {
         InviteWebActivity.startActivity(this.getContext());
     }
 
+    @OnClick(R.id.mine_fragment_point)void onPointClick(){
+        requestDuibaAutoLoginUrl();
+    }
+
+
     private void showImageSelectActivity(){
         Intent intent = new Intent(MineFragment.this.getActivity(), MultiImageSelectorActivity.class);
         // whether show camera
@@ -200,6 +212,7 @@ public class MineFragment extends Fragment {
 
         startActivityForResult(intent, REQUEST_IMAGE_CODE);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -232,10 +245,78 @@ public class MineFragment extends Fragment {
         }
     }
 
+    private void startCreditActivity(String auto_login_url){
+        Intent intent = new Intent();
+        intent.setClass(MineFragment.this.getContext(), CreditActivity.class);
+        intent.putExtra("navColor", "#862240");    //配置导航条的背景颜色，请用#ffffff长格式。
+        intent.putExtra("titleColor", "#ffffff");    //配置导航条标题的颜色，请用#ffffff长格式。
+        intent.putExtra("url", auto_login_url);    //配置自动登陆地址，每次需服务端动态生成。
+        startActivity(intent);
+
+        CreditActivity.creditsListener = new CreditActivity.CreditsListener() {
+            /**
+             * 当点击分享按钮被点击
+             * @param shareUrl 分享的地址
+             * @param shareThumbnail 分享的缩略图
+             * @param shareTitle 分享的标题
+             * @param shareSubtitle 分享的副标题
+             */
+            public void onShareClick(WebView webView, String shareUrl, String shareThumbnail, String shareTitle, String shareSubtitle) {
+                //当分享按钮被点击时，会调用此处代码。在这里处理分享的业务逻辑。
+                new AlertDialog.Builder(webView.getContext())
+                        .setTitle("分享信息")
+                        .setItems(new String[] {"标题："+shareTitle,"副标题："+shareSubtitle,"缩略图地址："+shareThumbnail,"链接："+shareUrl}, null)
+                        .setNegativeButton("确定", null)
+                        .show();
+            }
+
+            /**
+             * 当点击登录
+             * @param webView 用于登录成功后返回到当前的webview并刷新。
+             * @param currentUrl 当前页面的url
+             */
+            public void onLoginClick(WebView webView, String currentUrl) {
+                //当未登录的用户点击去登录时，会调用此处代码。
+                //为了用户登录后能回到之前未登录前的页面。
+                //当用户登录成功后，需要重新动态生成一次自动登录url，需包含redirect参数，将currentUrl放入redirect参数。
+                new AlertDialog.Builder(webView.getContext())
+                        .setTitle("跳转登录")
+                        .setMessage("跳转到登录页面？")
+                        .setPositiveButton("是", null)
+                        .setNegativeButton("否", null)
+                        .show();
+            }
+
+            /**
+             * 当点击“复制”按钮时，触发该方法，回调获取到券码code
+             * @param webView webview对象。
+             * @param code 复制的券码
+             */
+            public void onCopyCode(WebView webView, String code) {
+                //当未登录的用户点击去登录时，会调用此处代码。
+                new AlertDialog.Builder(webView.getContext())
+                        .setTitle("复制券码")
+                        .setMessage("已复制，券码为："+code)
+                        .setPositiveButton("是", null)
+                        .setNegativeButton("否", null)
+                        .show();
+            }
+
+            /**
+             * 积分商城返回首页刷新积分时，触发该方法。
+             */
+            public void onLocalRefresh(WebView mWebView, String credits) {
+                //String credits为积分商城返回的最新积分，不保证准确。
+                //触发更新本地积分，这里建议用ajax向自己服务器请求积分值，比较准确。
+                pointCountTextView.setText("(" + credits + "积分)");
+            }
+        };
+    }
+
+
     private void uploadUserBg(){
 
-        progressDialog = new SpotsDialog(MineFragment.this.getContext(),R.style.ProgressDialogWait);
-        progressDialog.show();
+        showProgress();
 
         if(qiniuSingleImageUpload == null){
             qiniuSingleImageUpload = new QiniuSingleImageUpload(MineFragment.this.getContext());
@@ -248,14 +329,14 @@ public class MineFragment extends Fragment {
 
             @Override
             public void onUploadComplete(String url) {
-                progressDialog.dismiss();
+                hideProgress();
                 //更新后台信息
                 requestUpdateUserBackground(url);
             }
 
             @Override
             public void onError(String error) {
-                progressDialog.dismiss();
+                hideProgress();
                 Toast.makeText(MineFragment.this.getContext(), R.string.err, Toast.LENGTH_SHORT).show();
             }
         });
@@ -273,7 +354,7 @@ public class MineFragment extends Fragment {
                 new Response.Listener<MyResponse<UserDTO>>() {
                     @Override
                     public void onResponse(MyResponse<UserDTO> response) {
-                        progressDialog.dismiss();
+                        hideProgress();
                         if(response.getStatus() == MyResponse.status_ok){
                             MyApplication.getContext().getMine().setUserInfo(response.getContent());
                             MyApplication.getContext().getMine().WriteSerializationToLocal(MineFragment.this.getContext());
@@ -290,7 +371,7 @@ public class MineFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+                hideProgress();
                 MyVolleyErrorHelper.showError(MineFragment.this.getContext(), error);
             }
         });
@@ -298,4 +379,52 @@ public class MineFragment extends Fragment {
         MyApplication.getContext().getRequestQueue().add(myRequest);
     }
 
+    private void requestDuibaAutoLoginUrl(){
+        String url = ServerMethod.point_duiba_auto_login();
+        MyRequest<String> myRequest = new MyRequest<String>(Request.Method.GET, url, String.class, null, new Response.Listener<MyResponse<String>>() {
+            @Override
+            public void onResponse(MyResponse<String> response) {
+                if (!TextUtils.isEmpty(response.getContent())){
+                    startCreditActivity(response.getContent());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
+    private void requestPointCount(){
+        String url = ServerMethod.point_count();
+        MyRequest<Integer> myRequest = new MyRequest<Integer>(Request.Method.GET, url, Integer.class, null, new Response.Listener<MyResponse<Integer>>() {
+            @Override
+            public void onResponse(MyResponse<Integer> response) {
+                pointCountTextView.setText( "(" + String.valueOf(response.getContent()) + "积分)");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
+    private void showProgress(){
+        if (progressDialog == null){
+            progressDialog = new SpotsDialog(MineFragment.this.getContext(),R.style.ProgressDialogWait);
+        }
+        progressDialog.show();
+    }
+
+    private void hideProgress(){
+        if (progressDialog != null){
+            progressDialog.hide();
+        }
+    }
 }
