@@ -15,6 +15,11 @@ API Document
  - content的值参见api_doc中的remind接口，就是一个remind对象的json串
  - 后台测试例子{type:1, content:{ "type": 1,"sourceId": 0,"content": "我好像全程在问，正脸呢","targetContent": "滑板女神 高孝周","targetType": 1, "targetId": 27622,"createTime": "2016-04-04 19:48:05", "speaker": {"id": 334,"name": "武陵","avatar": null,"gender": "male"}, "listener": {"id": 1,"name": "扳手扳死你","avatar": "http://img.jixianxueyuan.com/xxxx.jpg","gender": "male"}}}
  
+  **推送积分**
+  
+ -type=2
+ -content 为point对象
+ -示例 {"type":2,"content":"{\"count\":5,\"des\":\"每日登录 +5积分\",\"createTime\":null,\"id\":1106}"}
    
   **推送主题（待开发）**
  
