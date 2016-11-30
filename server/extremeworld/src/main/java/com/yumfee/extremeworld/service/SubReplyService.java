@@ -95,6 +95,8 @@ public class SubReplyService {
 				remindDao.save(remind);
 				//push
 				pushManage.pushMessage(reply.getUser(), PushMessageType.REMIND, remind);
+				String notifyTitle = remind.getSpeaker().getName() + "回复了你";
+				pushManage.pushNoticeForIos(topic.getUser(), notifyTitle, null);
 			}
 			
 		} else{
@@ -114,14 +116,14 @@ public class SubReplyService {
 				
 				remindDao.save(preRemind);
 				//push
-				pushManage.pushMessage(preSubReply.getUser(), PushMessageType.REMIND, preRemind);
+				pushManage.pushMessageForAndroid(preSubReply.getUser(), PushMessageType.REMIND, preRemind);
 			}
 			
 			if((reply.getUser().getId() != preSubReply.getUser().getId())
 					&&(reply.getUser().getId() != subReply.getUser().getId())){
 						remindDao.save(remind);
 						//push
-						pushManage.pushMessage(reply.getUser(), PushMessageType.REMIND, remind);
+						pushManage.pushMessageForAndroid(reply.getUser(), PushMessageType.REMIND, remind);
 			}
 		}
 		

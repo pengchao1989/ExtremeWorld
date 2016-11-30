@@ -14,9 +14,15 @@ import org.springside.modules.mapper.BeanMapper;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.CloudpushMessageAndroidRequest;
+import com.taobao.api.request.CloudpushMessageIosRequest;
 import com.taobao.api.request.CloudpushNoticeAndroidRequest;
+import com.taobao.api.request.CloudpushNoticeIosRequest;
+import com.taobao.api.request.CloudpushPushRequest;
 import com.taobao.api.response.CloudpushMessageAndroidResponse;
+import com.taobao.api.response.CloudpushMessageIosResponse;
 import com.taobao.api.response.CloudpushNoticeAndroidResponse;
+import com.taobao.api.response.CloudpushNoticeIosResponse;
+import com.taobao.api.response.CloudpushPushResponse;
 import com.yumfee.extremeworld.config.ClientConfigManage;
 import com.yumfee.extremeworld.entity.AppKey;
 import com.yumfee.extremeworld.entity.User;
@@ -32,7 +38,7 @@ public class PushManage {
 	@Autowired
 	private ClientConfigManage clientConfigManage;
 
-	public void pushNotice(User listenerUser, String title, String content) {
+	public void pushNoticeForAndroid(User listenerUser, String title, String content) {
 		AppKey clientConfig = clientConfigManage
 				.getCilentConfig(listenerUser.getHobbyStamp());
 		String appkey = clientConfig.getBaichuanAppKey();
@@ -54,8 +60,44 @@ public class PushManage {
 			System.out.println("push notice is error!");
 		}
 	}
+	
+	public void pushNoticeForIos(User listenerUser, String title, String content){
+		
+		if (StringUtils.isNoneEmpty(listenerUser.getPlateForm()) && "iOS".equals(listenerUser.getPlateForm())) {
+			AppKey clientConfig = clientConfigManage.getCilentConfig(listenerUser.getHobbyStamp());
+			String appkey = clientConfig.getBaichuanAppKey();
+			String secret = clientConfig.getBaichuanAppSecret();
+			String url = "http://gw.api.taobao.com/router/rest";
+			
+			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+			
+			CloudpushNoticeIosRequest req=new CloudpushNoticeIosRequest();
+	        req.setSummary(title);
+	        req.setTarget("account");
+	        req.setTargetValue(String.valueOf(listenerUser.getId()));
+	        req.setEnv("product");
+	        req.setExt("{\"badge\":1,\"sound\":\"xxxx\"}");
+	        try {
+	            CloudpushNoticeIosResponse response = client.execute(req);
+	            if(response.isSuccess()){
+	                System.out.println("push ios notice is success!");
+	            }
+	        }
+	        catch (Exception e){
+	            System.out.println("push ios notice is error!");
+	        }
+		}
+	}
+	
+	public void pushMessage (User listenerUser, int type, Object content) {
+		if(StringUtils.isNoneEmpty(listenerUser.getPlateForm()) && "android".equals(listenerUser.getPlateForm())){
+			pushMessageForAndroid(listenerUser, type, content);
+		}else if (StringUtils.isNoneEmpty(listenerUser.getPlateForm()) && "iOS".equals(listenerUser.getPlateForm())) {
+			pushMessageForIos(listenerUser, type, content);
+		}
+	}
 
-	public void pushMessage(User listenerUser, int type, Object content) {
+	public void pushMessageForAndroid(User listenerUser, int type, Object content) {
 		
 		if(StringUtils.isNoneEmpty(listenerUser.getPlateForm()) && "android".equals(listenerUser.getPlateForm())){
 			AppKey clientConfig = clientConfigManage
@@ -78,13 +120,44 @@ public class PushManage {
 				CloudpushMessageAndroidResponse response = client.execute(req);
 				System.out.println(response.getBody());
 				if (response.isSuccess()) {
-					System.out.println("push message is success!");
+					System.out.println("push android message is success!");
 				}
 			} catch (Exception e) {
-				System.out.println("push message is error!");
+				System.out.println("push android message is error!");
 			}
 		}
 	}
+	
+	public void pushMessageForIos(User listenerUser, int type, Object content){
+		AppKey clientConfig = clientConfigManage.getCilentConfig(listenerUser.getHobbyStamp());
+		String appkey = clientConfig.getBaichuanAppKey();
+		String secret = clientConfig.getBaichuanAppSecret();
+		String url="http://gw.api.taobao.com/router/rest";
+		
+		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+		
+        CloudpushMessageIosRequest req = new CloudpushMessageIosRequest();
+        req.setTarget("account");
+        req.setTargetValue(String.valueOf(listenerUser.getId()));
+        
+        String contentJson = buildContent(type,content);
+		req.setBody(contentJson);
+
+		
+        try {
+             CloudpushMessageIosResponse response = client.execute(req);
+             System.out.println(response.getBody());
+             if(response.isSuccess()){
+                 System.out.println("push ios message is success!");
+             }
+         }
+         catch (Exception e){
+             System.out.println("push ios message is error!");
+         }
+
+	}
+	
+	
 
 	private String buildContent(int type,Object content) {
 		

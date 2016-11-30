@@ -105,6 +105,8 @@ public class ReplyService
 
 			// 在此处理推送
 			pushManage.pushMessage(topic.getUser(), PushMessageType.REMIND, remind);
+			String notifyTitle = remind.getSpeaker().getName() + "回复了你";
+			pushManage.pushNoticeForIos(topic.getUser(), notifyTitle, null);
 		}
 		
 		
