@@ -23,7 +23,7 @@ android {
     defaultConfig {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 31
         versionName "1.5.7"
         multiDexEnabled true
