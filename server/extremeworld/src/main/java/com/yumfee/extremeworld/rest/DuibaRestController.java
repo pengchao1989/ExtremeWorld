@@ -56,6 +56,8 @@ public class DuibaRestController {
 		    
 		    User user = userService.getUser(Long.parseLong(uid));
 		    user.setPoint(user.getPoint() - credits);
+		    
+		    userService.saveUser(user);
 
 		    String bizId=UUID.randomUUID().toString();//返回开发者系统中的业务订单id
 		    CreditConsumeResult result=new CreditConsumeResult(true);

@@ -24,8 +24,8 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 31
-        versionName "1.5.7"
+        versionCode 32
+        versionName "1.5.8"
         multiDexEnabled true
         ndk {
             //设置支持的SO库架构

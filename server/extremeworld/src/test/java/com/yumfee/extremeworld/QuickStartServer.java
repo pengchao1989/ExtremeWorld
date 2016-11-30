@@ -5,9 +5,12 @@
  *******************************************************************************/
 package com.yumfee.extremeworld;
 
+import org.apache.commons.httpclient.util.DateUtil;
 import org.eclipse.jetty.server.Server;
 import org.springside.modules.test.jetty.JettyFactory;
 import org.springside.modules.test.spring.Profiles;
+
+import com.yumfee.extremeworld.util.DateUtils;
 
 /**
  * 使用Jetty运行调试Web应用, 在Console输入回车快速重新加载应用.
@@ -24,6 +27,8 @@ public class QuickStartServer {
 	public static void main(String[] args) throws Exception {
 		// 设定Spring的profile
 		Profiles.setProfileAsSystemProperty(Profiles.DEVELOPMENT);
+		
+		System.out.println(DateUtils.getTodayBeginDate().toString());
 
 		// 启动Jetty
 		Server server = JettyFactory.createServerInSource(PORT, CONTEXT);
