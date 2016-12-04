@@ -141,6 +141,14 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 	参考示例：http://115.28.8.25/api/secure/v1/hobby/topic/151
 	补充：该接口获取主题详情。
 
+----------
+	接口名称：topic/getByReplyId
+	URL地址：http://115.28.8.25/api/secure/v1/hobby/topic/getByReplyId/{id}
+	请求方式：GET
+	入参：
+	参考示例：http://115.28.8.25/api/secure/v1/skateboard/topic/getByReplyId/333
+	补充：通过replyId获取主题详情
+
 
 ----------
 	接口名称：topic
@@ -155,8 +163,6 @@ https://github.com/pengchao1989/ExtremeWorld/tree/master/server/extremeworld/src
 > content={"videoDetail":{"thumbnail":"http://video.jixianxueyuan.com/d19efad8-cbbf-4f95-a772-e44ff8bae64a","videoSource":"http://video.jixianxueyuan.com/video_2015-11-29-Frt0nRxr"},"user":{"id":15},"content":"帮伟哥提数据","hobbys":[{"id":3}],"type":"s_video","mediaWrap":{"medias":[{"path":"http://img.jixianxueyuan.com/img_2015-11-29-2VWlqTQ6","type":"img","width":200,"height":200},{"path":"http://img.jixianxueyuan.com/img_2015-11-29-sGjpoV3X","type":"img"}]},"title":"帮伟哥提数据","status":0,"replyCount":0,"imageCount":0,"allReplyCount":0,"agreeCount":0,"viewCount":0}
 >
 >发布挑战：同发布普通视频，区别是type为challenge、再增加course参数"course":{"id":123}
-
-	
 
 
 ----------
