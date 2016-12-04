@@ -5,6 +5,6 @@ package com.jixianxueyuan.config;
  */
 
 public class ImageConfig {
-    public static final int DETAIL_IMAGE_DEFAULT_WIDHT = 400;
-    public static final int DETAIL_IMAGE_DEFAULT_HEIGHT = 400;
+    public static final int DETAIL_IMAGE_DEFAULT_WIDHT = 500;
+    public static final int DETAIL_IMAGE_DEFAULT_HEIGHT = 500;
 }

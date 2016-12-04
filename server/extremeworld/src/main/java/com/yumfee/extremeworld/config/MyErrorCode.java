@@ -13,6 +13,8 @@ public enum MyErrorCode {
 	VERIFICATION_CODE_ERROR(10009,"verification code failed"),
 	NO_USER(10010, "user not found"),
 	PASSWORD_FAILED(10011,"password failed"),
+	NO_REPLY(10012, "no reply"),
+	NO_TOPIC(10013, "no topic"),
 	UNKNOW_ERROR(1001,"unknow error");
 	
 	private int errorCode;

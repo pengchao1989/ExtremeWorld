@@ -23,11 +23,13 @@ import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.MediaTypes;
 
 import com.yumfee.extremeworld.config.HobbyPathConfig;
+import com.yumfee.extremeworld.config.MyErrorCode;
 import com.yumfee.extremeworld.config.PointType;
 import com.yumfee.extremeworld.config.TopicStatus;
 import com.yumfee.extremeworld.config.TopicType;
 import com.yumfee.extremeworld.entity.Collection;
 import com.yumfee.extremeworld.entity.Hobby;
+import com.yumfee.extremeworld.entity.Reply;
 import com.yumfee.extremeworld.entity.Topic;
 import com.yumfee.extremeworld.entity.TopicScore;
 import com.yumfee.extremeworld.entity.User;
@@ -37,6 +39,7 @@ import com.yumfee.extremeworld.rest.dto.TopicDTO;
 import com.yumfee.extremeworld.rest.dto.TopicExtraDTO;
 import com.yumfee.extremeworld.service.CollectionService;
 import com.yumfee.extremeworld.service.PointService;
+import com.yumfee.extremeworld.service.ReplyService;
 import com.yumfee.extremeworld.service.TopicScoreService;
 import com.yumfee.extremeworld.service.TopicService;
 import com.yumfee.extremeworld.service.UserService;
@@ -68,6 +71,9 @@ public class TopicRestController
 	
 	@Autowired
 	PointService pointService;
+	
+	@Autowired
+	private ReplyService replyService;
 
 	@RequestMapping( method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public  MyResponse list(
@@ -141,17 +147,46 @@ public class TopicRestController
 		if(agreeUserList != null && agreeUserList.contains(currentUser)){
 			topicDto.setAgreed(true);
 		}
-/*		if(agreeUserList != null && agreeUserList.size() > 0){
-			for(User user : agreeUserList){
-				if(user.getId() == userId){
-					topicDto.setAgreed(true);
-					break;
-				}
-			}
-		}*/
-
 		return MyResponse.ok(topicDto,true);
 	}
+	
+	
+	@RequestMapping(value = "/getByReplyId/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	public MyResponse getTopicByReplyId(@PathVariable("id") Long replyId){
+		
+		Reply reply = replyService.getReply(replyId);
+		
+		if (reply == null) {
+			return MyResponse.err(MyErrorCode.NO_REPLY);
+		}
+		
+		long topicId = reply.getTopic().getId();
+		
+		Long userId = getCurrentUserId();
+		Topic topic = topicService.getTopic(topicId);
+		if(topic == null){
+			return MyResponse.err(MyErrorCode.NO_TOPIC);
+		}
+		
+		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);
+		
+		Collection collection = collectionService.findByUserIdAndTopicIdAndStatus(userId, topicId, TopicStatus.PUBLIC);
+		if(collection != null){
+			topicDto.setCollected(true);
+		}
+		
+		User currentUser = userService.getUser(userId);
+		
+		List<User> agreeUserList = topic.getAgrees();
+		if(agreeUserList != null && agreeUserList.contains(currentUser)){
+			topicDto.setAgreed(true);
+		}
+		return MyResponse.ok(topicDto,false);
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/extra/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public MyResponse getTopicOfMe(@PathVariable("id") Long topicId){
 		

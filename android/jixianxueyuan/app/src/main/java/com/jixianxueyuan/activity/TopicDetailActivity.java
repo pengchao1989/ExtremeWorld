@@ -501,8 +501,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 imageviwe.setHierarchy(hierarchy);
                 if (mediaDTO.getWidth() <= 0 || mediaDTO.getHeight() <= 0){
                     imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT,ImageConfig.DETAIL_IMAGE_DEFAULT_HEIGHT));
-                }else {
+                }else if(mediaDTO.getWidth() < ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT){
                     imageviwe.setLayoutParams(new ViewGroup.LayoutParams(mediaDTO.getWidth(), mediaDTO.getHeight()));
+                }
+                else {
+                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT,ImageConfig.DETAIL_IMAGE_DEFAULT_HEIGHT));
                 }
 
                 imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
