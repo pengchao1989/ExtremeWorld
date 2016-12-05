@@ -181,7 +181,7 @@ public class TopicRestController
 		if(agreeUserList != null && agreeUserList.contains(currentUser)){
 			topicDto.setAgreed(true);
 		}
-		return MyResponse.ok(topicDto,false);
+		return MyResponse.ok(topicDto,true);
 	}
 	
 	
@@ -291,6 +291,12 @@ public class TopicRestController
 		return MyResponse.ok(dto, true);
 	}
 	
+	@RequestMapping(value="update", method = RequestMethod.POST, consumes = MediaTypes.JSON)
+	public MyResponse updateStatus(@RequestBody Topic topic, UriComponentsBuilder uriBuilder){
+		
+		
+		return MyResponse.ok(null, true);
+	}
 
 	/**
 	 * 取出Shiro中的当前用户Id.

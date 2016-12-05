@@ -70,6 +70,7 @@ public class PushManage {
 			String url = "http://gw.api.taobao.com/router/rest";
 			
 			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+
 			
 			CloudpushNoticeIosRequest req=new CloudpushNoticeIosRequest();
 	        req.setSummary(title);
@@ -93,7 +94,8 @@ public class PushManage {
 		if(StringUtils.isNoneEmpty(listenerUser.getPlateForm()) && "android".equals(listenerUser.getPlateForm())){
 			pushMessageForAndroid(listenerUser, type, content);
 		}else if (StringUtils.isNoneEmpty(listenerUser.getPlateForm()) && "iOS".equals(listenerUser.getPlateForm())) {
-			pushMessageForIos(listenerUser, type, content);
+			//pushMessageForIos(listenerUser, type, content);
+			pushAdvanced(listenerUser, type, content);
 		}
 	}
 
@@ -157,6 +159,54 @@ public class PushManage {
 
 	}
 	
+	
+	
+	private void pushAdvanced(User listenerUser,int type,Object content) {
+		
+		AppKey clientConfig = clientConfigManage.getCilentConfig(listenerUser.getHobbyStamp());
+		String appkey = clientConfig.getBaichuanAppKey();
+		String secret = clientConfig.getBaichuanAppSecret();
+		String url="http://gw.api.taobao.com/router/rest";
+		
+		
+		String contentJson = buildContent(type,content);
+		
+		TaobaoClient client=new DefaultTaobaoClient(url, appkey, secret);
+        CloudpushPushRequest req=new CloudpushPushRequest();
+        req.setTarget("account");
+        req.setTargetValue(String.valueOf(listenerUser.getId()));
+/*        req.setAndroidActivity("/store/...");
+        req.setAndroidExtParameters("{k:v}");
+        req.setAndroidMusic("default");
+        req.setAndroidOpenType("1");
+        req.setAndroidOpenUrl("http://www.taobao.com");*/
+        req.setAntiHarassDuration(13L);
+        req.setAntiHarassStartTime(1L);
+        req.setBatchNumber("0001");
+        req.setBody(contentJson);
+        req.setDeviceType(3L);
+        req.setIosBadge("1");
+        req.setIosExtParameters("{k:v}");
+        req.setIosMusic("default");
+        req.setRemind(false);
+        req.setStoreOffline(true);
+        
+        
+        req.setSummery("来自滑板圈的消息");
+        req.setTimeout(72L);
+        req.setTitle("来自滑板圈的消息");
+        
+        
+        try {
+            CloudpushPushResponse response = client.execute(req);
+            if(response.isSuccess()){
+                System.out.println("push message is success!");
+            }
+        }
+        catch (Exception e){
+            System.out.println("push message is error!");
+        }
+	}
 	
 
 	private String buildContent(int type,Object content) {
