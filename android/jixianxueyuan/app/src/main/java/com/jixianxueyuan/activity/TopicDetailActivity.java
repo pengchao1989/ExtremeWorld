@@ -125,7 +125,19 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @BindView(R.id.topic_detail_actionbar)MyActionBar actionBar;
     @BindView(R.id.topic_detail_listview)ListView listView;
-    @BindView(R.id.reply_widget_layout)LinearLayout contentLayout;
+    @BindView(R.id.reply_widget_layout)LinearLayout replyWidgetLayout;
+    @BindView(R.id.content_container)RelativeLayout contentLayout;
+
+    //vidoe
+    @BindView(R.id.video_cover_image)ImageView coverImageView;
+    @BindView(R.id.video_play_btn)ImageView playButton;
+    @BindView(R.id.videoview)BVideoView videoView;
+    @BindView(R.id.controller_holder)RelativeLayout controllerHolder;
+    @BindView(R.id.media_controller_bar)SimpleMediaController mVVCtl;
+    @BindView(R.id.video_layout)RelativeLayout videoLayout;
+    @BindView(R.id.short_video_detail_progress)
+    RoundProgressBarWidthNumber roundProgressBarWidthNumber;
+
 
     @BindView(R.id.create_topic_upload_progress_layout)
     RelativeLayout progressLayout;
@@ -198,7 +210,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             switch (msg.what) {
                 case HADLER_DOWNLOAD_VIDEO_SUCCESS:
 
-                    headViewHolder.roundProgressBarWidthNumber.setVisibility(View.GONE);
+                    roundProgressBarWidthNumber.setVisibility(View.GONE);
 
                     String url = topicDTO.getVideoDetail().getVideoSource()/*"http://7u2nc3.com1.z0.glb.clouddn.com/short_videofm11QHWk09-1CaKh6JpN-A__.mp4"*/;
 
@@ -207,7 +219,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     playLocalVideo(DiskCachePath.getDiskCacheDir(TopicDetailActivity.this, "short_video").getPath() + "/" + key + ".0");
                     break;
                 case HANDLER_DOWNLOAD_UPDATE:
-                    headViewHolder.roundProgressBarWidthNumber.setProgress(mProgressNum);
+                    roundProgressBarWidthNumber.setProgress(mProgressNum);
                     break;
 
                 case HANDLER_INIT_CONTENT_SPANNED_SUCCESS:
@@ -256,7 +268,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         adapter = new TopicDetailListAdapter(this);
         listView.setAdapter(adapter);
 
-        replyWidget = new ReplyWidget(this, contentLayout);
+        replyWidget = new ReplyWidget(this, replyWidgetLayout);
         replyWidget.setReplyWidgetListener(this);
 
         actionBar.setActionOnClickListener(new View.OnClickListener() {
@@ -289,13 +301,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         /**
          * 在停止播放前 你可以先记录当前播放的位置,以便以后可以续播
          */
-        if (headViewHolder.videoView != null){
-            if (headViewHolder.videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-                mLastPos = (int) headViewHolder.videoView.getCurrentPosition();
+        if (videoView != null){
+            if (videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+                mLastPos = (int) videoView.getCurrentPosition();
                 // when scree lock,paus is good select than stop
                 // don't stop pause
                 // mVV.stopPlayback();
-                headViewHolder.videoView.pause();
+                videoView.pause();
             }
         }
 
@@ -306,9 +318,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         super.onResume();
         MyLog.v(tag, "onResume");
 
-        if (headViewHolder.videoView != null){
-            if (!headViewHolder.videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-                headViewHolder.videoView.resume();
+        if (videoView != null){
+            if (!videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+                videoView.resume();
             }
         }
     }
@@ -318,11 +330,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         super.onStop();
         MyLog.v(tag, "onStop");
         // 在停止播放前 你可以先记录当前播放的位置,以便以后可以续播
-        if (headViewHolder.videoView != null &&headViewHolder.videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-            mLastPos = (int) headViewHolder.videoView.getCurrentPosition();
+        if (videoView != null &&videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+            mLastPos = (int) videoView.getCurrentPosition();
             // don't stop pause
             // mVV.stopPlayback();
-            headViewHolder.videoView.pause();
+            videoView.pause();
         }
     }
 
@@ -334,10 +346,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         }
 
         //video
-        if (headViewHolder.videoView != null){
+        if (videoView != null){
             if ((mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-                mLastPos = (int) headViewHolder.videoView.getCurrentPosition();
-                headViewHolder.videoView.stopPlayback();
+                mLastPos = (int) videoView.getCurrentPosition();
+                videoView.stopPlayback();
             }
         }
 
@@ -526,7 +538,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 imageviwe.setPadding(0,4,0,4);
 
-                headViewHolder.contentLayout.addView(imageviwe);
+                headViewHolder.replyWidgetLayout.addView(imageviwe);
 
                 ImageLoader.getInstance().displayImage(contentFragmentList.get(n).mText + "!AndroidDetail", imageviwe);
             }
@@ -537,7 +549,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 textView.setEmojiconSize(48);
                 textView.setMovementMethod(LinkMovementMethod.getInstance());
 
-                headViewHolder.contentLayout.addView(textView);
+                headViewHolder.replyWidgetLayout.addView(textView);
                 String temp = contentFragmentList.get(n).mText ;
                 textView.setText(Html.fromHtml(temp));
             }
@@ -550,7 +562,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         textView.setTextSize(20);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        headViewHolder.contentLayout.addView(textView);
+        headViewHolder.replyWidgetLayout.addView(textView);
         textView.setText(topicDTO.getContent());*/
         headViewHolder.contentTextView.setText(topicDTO.getContent());
 
@@ -600,19 +612,19 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         {
             if(topicDTO.getVideoDetail().getVideoSource() != null)
             {
-                headViewHolder.videoLayout.setVisibility(View.VISIBLE);
+                videoLayout.setVisibility(View.VISIBLE);
                 //ImageLoader.getInstance().displayImage(topicDTO.getVideoDetail().getThumbnail() + "!detail", headViewHolder.coverImageView, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
-                headViewHolder.coverImageView.setImageURI(ImageUriParseUtil.parse(topicDTO.getVideoDetail().getThumbnail() + "!detail"));
+                coverImageView.setImageURI(ImageUriParseUtil.parse(topicDTO.getVideoDetail().getThumbnail() + "!detail"));
 
 
-                headViewHolder.playButton.setOnClickListener(new View.OnClickListener() {
+                playButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         initVideo();
                     }
                 });
 
-                headViewHolder.videoLayout.setOnClickListener(new View.OnClickListener() {
+                videoLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         onClickEmptyArea(v);
@@ -668,13 +680,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     {
         String ak = "";
         BVideoView.setAK(ak);
-        headViewHolder.playButton.setVisibility(View.GONE);
+        playButton.setVisibility(View.GONE);
 
-        headViewHolder.mVVCtl.setMediaPlayerControl(headViewHolder.videoView);
-        headViewHolder.videoView.setDecodeMode(BVideoView.DECODE_SW); //可选择软解模式或硬解模式
+        mVVCtl.setMediaPlayerControl(videoView);
+        videoView.setDecodeMode(BVideoView.DECODE_SW); //可选择软解模式或硬解模式
 
-        headViewHolder.videoView.setOnPreparedListener(this);
-        headViewHolder.videoView.setOnCompletionListener(this);
+        videoView.setOnPreparedListener(this);
+        videoView.setOnCompletionListener(this);
 
 
 
@@ -691,7 +703,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     playLocalVideo(DiskCachePath.getDiskCacheDir(this, "short_video").getPath() + "/" + key + ".0");
                 }
                 else {
-                    headViewHolder.roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
+                    roundProgressBarWidthNumber.setVisibility(View.VISIBLE);
                     downloadVideoFile();
                 }
 
@@ -701,7 +713,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         }
 
         //全屏处理
-        headViewHolder.mVVCtl.setOnScreenBtnClickCallBack(new SimpleMediaController.OnScreenBtnClickCallBack() {
+        mVVCtl.setOnScreenBtnClickCallBack(new SimpleMediaController.OnScreenBtnClickCallBack() {
 
             @Override
             public void onSwitch(boolean isFullScreen) {
@@ -709,17 +721,19 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     actionBar.setVisibility(View.GONE);
                     contentLayout.setVisibility(View.GONE);
-                    headViewHolder.infoLayout.setVisibility(View.GONE);
-                    //ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    //headViewHolder.videoLayout.setLayoutParams(layoutParams);
+                    ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
+                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    videoLayout.setLayoutParams(layoutParams);
                 }else {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                     actionBar.setVisibility(View.VISIBLE);
                     contentLayout.setVisibility(View.VISIBLE);
-                    headViewHolder.infoLayout.setVisibility(View.VISIBLE);
-                    //int height = ScreenUtils.dpToPxInt(TopicDetailActivity.this, 200);
-                    //ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
-                    //headViewHolder.videoLayout.setLayoutParams(layoutParams);
+                    int height = ScreenUtils.dpToPxInt(TopicDetailActivity.this, 200);
+                    ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
+                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    layoutParams.height = height;
+                    videoLayout.setLayoutParams(layoutParams);
                 }
                 FullScreenUtils.toggleHideyBar(TopicDetailActivity.this);
             }
@@ -1105,23 +1119,12 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public static class HeadViewHolder
     {
-        @BindView(R.id.topic_detail_head_info_layout)LinearLayout infoLayout;
         @BindView(R.id.user_info_head_layout)RelativeLayout mUserHeadLayout;
         @BindView(R.id.topic_detail_title)TextView titleTextView;
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.user_head_avatar)SimpleDraweeView avatarImageView;
-        @BindView(R.id.videoview)BVideoView videoView;
-        @BindView(R.id.controller_holder)RelativeLayout controllerHolder;
-        @BindView(R.id.media_controller_bar)SimpleMediaController mVVCtl;
         @BindView(R.id.web_view)WebView webView;
-        @BindView(R.id.topic_detail_head_view_video_cover_image)
-        SimpleDraweeView coverImageView;
-        @BindView(R.id.topic_detail_head_view_video_play_btn)
-        ImageView playButton;
-        @BindView(R.id.short_video_detail_progress)
-        RoundProgressBarWidthNumber roundProgressBarWidthNumber;
-        @BindView(R.id.topic_detail_head_view_video_layout)RelativeLayout videoLayout;
         @BindView(R.id.topic_detail_head_course_name)TextView scoreNameTextView;
         @BindView(R.id.topic_detail_head_zan)LikeButton zanButton;
         @BindView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
@@ -1152,27 +1155,27 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     {
         MyLog.d(tag, "videoPath=" + path);
 
-        headViewHolder.coverImageView.setVisibility(View.GONE);
-        headViewHolder.videoView.setVisibility(View.VISIBLE);
+        coverImageView.setVisibility(View.GONE);
+        videoView.setVisibility(View.VISIBLE);
 
-        headViewHolder.videoView.setVideoPath(path);
-        headViewHolder.videoView.showCacheInfo(true);
-        headViewHolder.videoView.start();
+        videoView.setVideoPath(path);
+        videoView.showCacheInfo(true);
+        videoView.start();
     }
 
     private void playWebVideo(String url){
-        headViewHolder.coverImageView.setVisibility(View.GONE);
-        headViewHolder.videoView.setVisibility(View.VISIBLE);
+        coverImageView.setVisibility(View.GONE);
+        videoView.setVisibility(View.VISIBLE);
 
-        headViewHolder.videoView.setVideoPath(url);
-        headViewHolder.videoView.showCacheInfo(true);
-        headViewHolder.videoView.start();
+        videoView.setVideoPath(url);
+        videoView.showCacheInfo(true);
+        videoView.start();
     }
 
     private void changeStatus(PlayerStatus status) {
         mPlayerStatus = status;
-        if (headViewHolder.mVVCtl != null) {
-            headViewHolder.mVVCtl.changeStatus(status);
+        if (mVVCtl != null) {
+            mVVCtl.changeStatus(status);
         }
     }
 
@@ -1194,11 +1197,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             barTimer.cancel();
             barTimer = null;
         }
-        if (this.headViewHolder.mVVCtl != null) {
-            if (headViewHolder.mVVCtl.getVisibility() == View.VISIBLE) {
-                headViewHolder.mVVCtl.hide();
+        if (this.mVVCtl != null) {
+            if (mVVCtl.getVisibility() == View.VISIBLE) {
+                mVVCtl.hide();
             } else {
-                headViewHolder.mVVCtl.show();
+                mVVCtl.show();
                 hideOuterAfterFiveSeconds();
             }
         }
@@ -1214,12 +1217,12 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
             @Override
             public void run() {
-                if (headViewHolder.mVVCtl != null) {
-                    headViewHolder.mVVCtl.getMainThreadHandler().post(new Runnable() {
+                if (mVVCtl != null) {
+                    mVVCtl.getMainThreadHandler().post(new Runnable() {
 
                         @Override
                         public void run() {
-                            headViewHolder.mVVCtl.hide();
+                            mVVCtl.hide();
                         }
 
                     });

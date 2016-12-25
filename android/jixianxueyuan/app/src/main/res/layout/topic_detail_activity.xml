@@ -13,8 +13,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
-        >
+        android:background="@color/background">
 
         <com.jixianxueyuan.widget.MyActionBar
             android:id="@+id/topic_detail_actionbar"
@@ -24,6 +23,57 @@
             my:type="image"
             my:action_image="@drawable/actionbar_share_button_background"
             />
+
+        <RelativeLayout
+            android:id="@+id/video_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="gone">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/video_cover_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/video_play_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/biz_video_list_play_icon_big"/>
+
+
+            <com.baidu.cyberplayer.core.BVideoView
+                android:id="@+id/videoview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <com.jixianxueyuan.widget.RoundProgressBarWidthNumber
+                android:id="@+id/short_video_detail_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/controller_holder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.jixianxueyuan.player.bar.SimpleMediaController
+                    android:id="@+id/media_controller_bar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
 
         <RelativeLayout
             android:id="@+id/content_container"

@@ -7,63 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@color/background">
 
-    <RelativeLayout
-        android:id="@+id/topic_detail_head_view_video_layout"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:visibility="gone"
-        >
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/topic_detail_head_view_video_cover_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
-
-        <ImageView
-            android:id="@+id/topic_detail_head_view_video_play_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/biz_video_list_play_icon_big"/>
-
-
-        <com.baidu.cyberplayer.core.BVideoView
-            android:id="@+id/videoview"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
-
-        <com.jixianxueyuan.widget.RoundProgressBarWidthNumber
-            android:id="@+id/short_video_detail_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
-
-        <RelativeLayout
-            android:id="@+id/controller_holder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.jixianxueyuan.player.bar.SimpleMediaController
-                android:id="@+id/media_controller_bar"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:visibility="gone"/>
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-
-
-
-    <LinearLayout
-        android:id="@+id/topic_detail_head_info_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <LinearLayout
 
@@ -285,7 +229,5 @@
         </LinearLayout>
 
         <View style="@style/HorizontalDividerView"/>
-
-    </LinearLayout>
 
 </LinearLayout>
