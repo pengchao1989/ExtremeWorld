@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -37,7 +38,7 @@ public class SimpleMediaController extends RelativeLayout
     private boolean isPrepared = false;
 
     private ImageButton playButton;
-    private ImageButton switchScreenButton;
+    private ImageView switchScreenButton;
     private TextView positionView;
     private SeekBar seekBar;
     private TextView durationView;
@@ -103,7 +104,7 @@ public class SimpleMediaController extends RelativeLayout
             }
 
         });
-        switchScreenButton = (ImageButton) layout.findViewById(R.id.btn_switch_screen);
+        switchScreenButton = (ImageView) layout.findViewById(R.id.btn_switch_screen);
         switchScreenButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

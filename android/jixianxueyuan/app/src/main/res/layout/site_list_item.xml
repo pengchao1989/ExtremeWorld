@@ -3,7 +3,8 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_frs_list">
 
     <TextView
         android:id="@+id/site_list_item_name_textview"

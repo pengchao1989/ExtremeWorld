@@ -192,6 +192,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
      */
     private int mLastPos = 0;
     private Timer barTimer;
+    private boolean isInitVideoSetting = false;
 
 
 
@@ -586,7 +587,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     imageviwe.setLayoutParams(new ViewGroup.LayoutParams(mediaDTO.getWidth(), mediaDTO.getHeight()));
                 }
                 else {
-                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT,ImageConfig.DETAIL_IMAGE_DEFAULT_HEIGHT));
+                    int width = ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT;
+                    int height = (int) (((float)ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT / mediaDTO.getWidth()) * mediaDTO.getHeight());
+                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(width,height));
                 }
 
                 imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -620,7 +623,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 playButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        initVideo();
+                        playVideo();
                     }
                 });
 
@@ -676,18 +679,46 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         }
     }
 
-    private void initVideo()
+    private void playVideo()
     {
-        String ak = "";
-        BVideoView.setAK(ak);
-        playButton.setVisibility(View.GONE);
+        if (!isInitVideoSetting){
+            String ak = "67956bc112cd44db81c74d32a7f6f1a7";
+            BVideoView.setAK(ak);
 
-        mVVCtl.setMediaPlayerControl(videoView);
-        videoView.setDecodeMode(BVideoView.DECODE_SW); //可选择软解模式或硬解模式
+            mVVCtl.setMediaPlayerControl(videoView);
+            videoView.setDecodeMode(BVideoView.DECODE_SW); //可选择软解模式或硬解模式
 
-        videoView.setOnPreparedListener(this);
-        videoView.setOnCompletionListener(this);
+            videoView.setOnPreparedListener(this);
+            videoView.setOnCompletionListener(this);
 
+            //全屏处理
+            mVVCtl.setOnScreenBtnClickCallBack(new SimpleMediaController.OnScreenBtnClickCallBack() {
+
+                @Override
+                public void onSwitch(boolean isFullScreen) {
+                    if (isFullScreen){
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        actionBar.setVisibility(View.GONE);
+                        contentLayout.setVisibility(View.GONE);
+                        ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
+                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                        videoLayout.setLayoutParams(layoutParams);
+                    }else {
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                        actionBar.setVisibility(View.VISIBLE);
+                        contentLayout.setVisibility(View.VISIBLE);
+                        int height = ScreenUtils.dpToPxInt(TopicDetailActivity.this, 200);
+                        ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
+                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        layoutParams.height = height;
+                        videoLayout.setLayoutParams(layoutParams);
+                    }
+                    FullScreenUtils.toggleHideyBar(TopicDetailActivity.this);
+                }
+            });
+            isInitVideoSetting = true;
+        }
 
 
         if(!topicDTO.getType().equals(TopicType.S_VIDEO)){
@@ -711,33 +742,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 e.printStackTrace();
             }
         }
-
-        //全屏处理
-        mVVCtl.setOnScreenBtnClickCallBack(new SimpleMediaController.OnScreenBtnClickCallBack() {
-
-            @Override
-            public void onSwitch(boolean isFullScreen) {
-                if (isFullScreen){
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    actionBar.setVisibility(View.GONE);
-                    contentLayout.setVisibility(View.GONE);
-                    ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
-                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                    videoLayout.setLayoutParams(layoutParams);
-                }else {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    actionBar.setVisibility(View.VISIBLE);
-                    contentLayout.setVisibility(View.VISIBLE);
-                    int height = ScreenUtils.dpToPxInt(TopicDetailActivity.this, 200);
-                    ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
-                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    layoutParams.height = height;
-                    videoLayout.setLayoutParams(layoutParams);
-                }
-                FullScreenUtils.toggleHideyBar(TopicDetailActivity.this);
-            }
-        });
     }
 
     private void doHideFootView()
@@ -1155,6 +1159,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     {
         MyLog.d(tag, "videoPath=" + path);
 
+        playButton.setVisibility(View.GONE);
         coverImageView.setVisibility(View.GONE);
         videoView.setVisibility(View.VISIBLE);
 
@@ -1164,12 +1169,20 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     }
 
     private void playWebVideo(String url){
-        coverImageView.setVisibility(View.GONE);
-        videoView.setVisibility(View.VISIBLE);
 
-        videoView.setVideoPath(url);
-        videoView.showCacheInfo(true);
-        videoView.start();
+
+        if (!TextUtils.isEmpty(url)){
+            playButton.setVisibility(View.GONE);
+            coverImageView.setVisibility(View.GONE);
+            videoView.setVisibility(View.VISIBLE);
+
+            videoView.setVideoPath(url);
+            videoView.showCacheInfo(true);
+            videoView.start();
+        }else {
+            Toast.makeText(this, R.string.video_is_empty, Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void changeStatus(PlayerStatus status) {
@@ -1182,6 +1195,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     @Override
     public void onCompletion() {
         MyLog.v(tag, "onCompletion");
+        //coverImageView.setVisibility(View.VISIBLE);
+        //playButton.setVisibility(View.VISIBLE);
         changeStatus(PlayerStatus.PLAYER_COMPLETED);
     }
 

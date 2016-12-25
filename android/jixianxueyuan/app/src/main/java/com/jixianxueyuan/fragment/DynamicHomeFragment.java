@@ -368,16 +368,11 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                                 MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.MOOD);
                                 break;
                             case R.id.menu_create_video:
+                            case R.id.menu_create_short_video:
                                 Intent intentVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateVideoActivity.class);
                                 intentVideo.putExtra(TopicType.TYPE, TopicType.VIDEO);
                                 startActivity(intentVideo);
                                 MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.VIDEO);
-                                break;
-                            case R.id.menu_create_short_video:
-                                Intent intentSVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateTopicActivity.class);
-                                intentSVideo.putExtra(TopicType.TYPE, TopicType.S_VIDEO);
-                                startActivity(intentSVideo);
-                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.S_VIDEO);
                                 break;
                         }
                         dialog.dismiss();

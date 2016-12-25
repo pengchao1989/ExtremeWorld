@@ -23,7 +23,10 @@
 
         <ListView
             android:id="@+id/site_listview"
-            style="@style/ListView"/>
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:dividerHeight="6dp"
+            style="@style/ListViewNoDivider"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

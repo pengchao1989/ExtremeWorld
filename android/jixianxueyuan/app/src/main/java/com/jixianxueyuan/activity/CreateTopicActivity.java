@@ -139,6 +139,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
     boolean isUploadedImage = false;
     boolean isUploadedVideo = false;
+    boolean isUploading = false;
 
     public static final int HANDLER_UPDATE_PROGRESS = 0x1;
     Handler handler = new Handler(){
@@ -170,7 +171,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
             @Override
             public void onClick(View v) {
 
-                submitControling();
+                submitControlling();
             }
         });
 
@@ -254,8 +255,14 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     }
 
     //提交数据流程控制函数
-    private void submitControling()
+    private void submitControlling()
     {
+
+        if (isUploading){
+            return;
+        }
+
+        isUploading = true;
 
         showUploadProgressView();
 
@@ -353,7 +360,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
             @Override
             public void onUploadCancelled() {
-
+                isUploading = false;
             }
         });
     }
@@ -401,6 +408,7 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
                         hideUploadProgressView();
                         MyLog.d(tag, "onErrorResponse" + error.toString());
                         MyVolleyErrorHelper.showError(CreateTopicActivity.this, error);
+                        isUploading = false;
                     }
                 });
 

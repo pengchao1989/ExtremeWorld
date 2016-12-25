@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -64,17 +65,41 @@ public class FileUtils {
         return fileName;
     }
 
-    public static String getVideoRealPathFromURI(Context context, Uri contentUri) {
-        String res = null;
+    public static String getVideoRealPathFromURI(Context context, Uri uri) {
+/*        String res = null;
         String[] proj = { MediaStore.Video.Media.DATA};
         Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
-        if(cursor.moveToFirst()){;
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
+        if (cursor != null){
+            if(cursor.moveToFirst()){;
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                res = cursor.getString(column_index);
+            }
+            cursor.close();
+            return res;
         }
-        cursor.close();
-        return res;
+        return "";*/
+
+        String string =uri.toString();
+        File file;
+        String a[]=new String[2];
+        //判断文件是否在sd卡中
+        if (string.indexOf(String.valueOf(Environment.getExternalStorageDirectory()))!=-1){
+            //对Uri进行切割
+            a = string.split(String.valueOf(Environment.getExternalStorageDirectory()));
+            //获取到file
+            file = new File(Environment.getExternalStorageDirectory(),a[1]);
+
+        }else if(string.indexOf(String.valueOf(Environment.getDataDirectory()))!=-1){ //判断文件是否在手机内存中
+            //对Uri进行切割
+            a =string.split(String.valueOf(Environment.getDataDirectory()));
+            //获取到file
+            file = new File(Environment.getDataDirectory(),a[1]);
+        }else{
+            //出现其他没有考虑到的情况
+            Toast.makeText(context,"文件路径解析失败！",Toast.LENGTH_SHORT).show();
+            return "";
+        }
+        return file.getAbsolutePath();
+
     }
-
-
 }

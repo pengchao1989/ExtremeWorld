@@ -19,8 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.tedcoder.wkvideoplayer.view.MediaController;
-import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -86,8 +84,6 @@ public class CreateVideoActivity extends BaseActivity {
     ImageView videoCoverImageView;
     @BindView(R.id.create_video_video_play_btn)
     ImageView videoPlayButton;
-    @BindView(R.id.videoview)
-    SuperVideoPlayer videoView;
 
     private String topicType;
     private CourseMinDTO courseMinDTO;
@@ -152,13 +148,9 @@ public class CreateVideoActivity extends BaseActivity {
         showFileChooser();
     }
 
-    @OnClick(R.id.create_video_video_play_btn)void onPlayButtonClick() {
-        playVideo();
-    }
-
     private void showFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
+        intent.setType("video/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             startActivityForResult(Intent.createChooser(intent, getString(R.string.please_select_mp4_file)),
@@ -192,41 +184,6 @@ public class CreateVideoActivity extends BaseActivity {
         Bitmap bitmap = BitmapUtils.getVideoThumbnail(localVideoPath);
         videoCoverImageView.setImageBitmap(bitmap);
     }
-
-    private void playVideo() {
-        videoPlayButton.setVisibility(View.GONE);
-        videoCoverImageView.setVisibility(View.GONE);
-        videoView.setVideoPlayCallback(mVideoPlayCallback);
-        MyLog.d(tag, "videoPath=" + localVideoPath);
-
-        videoView.setVisibility(View.VISIBLE);
-
-        videoView.loadLocalVideo(localVideoPath);
-        videoView.requestFocus();
-    }
-
-    private SuperVideoPlayer.VideoPlayCallbackImpl mVideoPlayCallback = new SuperVideoPlayer.VideoPlayCallbackImpl() {
-        @Override
-        public void onCloseVideo() {
-
-        }
-
-        @Override
-        public void onSwitchPageType() {
-            if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                videoView.setPageType(MediaController.PageType.SHRINK);
-            } else {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                videoView.setPageType(MediaController.PageType.EXPAND);
-            }
-        }
-
-        @Override
-        public void onPlayFinish() {
-
-        }
-    };
 
     private boolean checkParams(){
         if(TextUtils.isEmpty(localVideoPath)){
