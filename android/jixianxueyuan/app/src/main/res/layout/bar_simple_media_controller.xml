@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#5a606060">
+
+    <ImageButton
+        android:id="@+id/btn_play"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/toggle_btn_play"
+        android:textOff=""
+        android:textOn="" />
+
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/btn_play"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="00:00"
+        android:textColor="#ffffffff"
+        android:textSize="10dp" />
+
+
+
+    <ImageButton
+        android:id="@+id/btn_switch_screen"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_to_fullscreen"
+        android:textOff=""
+        android:textOn="" />
+
+    <TextView
+        android:id="@+id/tv_duration"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@id/btn_switch_screen"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="00:00"
+        android:textColor="#ffffffff"
+        android:textSize="10dp" />
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/tv_duration"
+        android:layout_toRightOf="@id/tv_position"
+        android:maxHeight="3dp"
+        android:minHeight="3dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:progressDrawable="@drawable/seekbar_holo_light"
+        android:thumb="@drawable/seekbar_ratio" />
+</RelativeLayout>

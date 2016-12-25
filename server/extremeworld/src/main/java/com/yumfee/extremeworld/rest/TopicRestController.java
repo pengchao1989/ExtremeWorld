@@ -129,9 +129,7 @@ public class TopicRestController
 		Long userId = getCurrentUserId();
 		Topic topic = topicService.getTopic(topicId);
 		if(topic == null){
-			String message = "话题不存在(id:" + topicId + ")";
-			logger.warn(message);
-			throw new RestException(HttpStatus.NOT_FOUND, message);
+			return MyResponse.err(MyErrorCode.NO_TOPIC);
 		}
 		
 		TopicDTO topicDto = BeanMapper.map(topic, TopicDTO.class);

@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -26,16 +25,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.tedcoder.wkvideoplayer.model.Video;
-import com.android.tedcoder.wkvideoplayer.model.VideoUrl;
-import com.android.tedcoder.wkvideoplayer.view.MediaController;
-import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
+import com.baidu.cyberplayer.core.BVideoView;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -47,7 +42,6 @@ import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.ImageConfig;
-import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.MediaType;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.StaticResourceConfig;
@@ -68,12 +62,13 @@ import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
 import com.jixianxueyuan.dto.request.TopicScoreRequestDTO;
 import com.jixianxueyuan.dto.request.ZanRequest;
-import com.jixianxueyuan.fragment.CourseListFragment;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
+import com.jixianxueyuan.player.bar.SimpleMediaController;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
+import com.jixianxueyuan.util.FullScreenUtils;
 import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ScreenUtils;
@@ -89,7 +84,6 @@ import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.smtt.sdk.CookieSyncManager;
 import com.tencent.smtt.sdk.WebView;
 import com.umeng.socialize.ShareAction;
@@ -110,6 +104,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -120,7 +116,7 @@ import dmax.dialog.SpotsDialog;
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener{
+public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener,BVideoView.OnPreparedListener, BVideoView.OnCompletionListener{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
@@ -172,12 +168,29 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     private String mReplyString = "";
 
 
+    /**
+     * 播放状态
+     */
+    public enum PlayerStatus {
+        PLAYER_IDLE, PLAYER_PREPARING, PLAYER_PREPARED, PLAYER_COMPLETED
+    }
+    private PlayerStatus mPlayerStatus = PlayerStatus.PLAYER_IDLE;
+    /**
+     * 记录播放位置
+     */
+    private int mLastPos = 0;
+    private Timer barTimer;
+
+
+
+
     final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
     final int HADLER_DOWNLOAD_VIDEO_FAILED = 0x2;
     final int HANDLER_DOWNLOAD_UPDATE = 0x3;
     final int HANDLER_INIT_CONTENT_SPANNED_SUCCESS = 0x4;
     final int HANDLER_INIT_CONTENT_SPANNED_FAILED = 0x5;
     public static final int HANDLER_UPDATE_PROGRESS = 0x7;
+    public static final int HANDLER_PLAY_VIDEO = 0x8;
     Handler handler = new Handler()
     {
         @Override
@@ -212,6 +225,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     }else if (progressData.getInt("type") == 2){
                         progressTextView.setText("正在上传视频  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
                     }
+                    break;
+                case HANDLER_PLAY_VIDEO:
                     break;
             }
         }
@@ -268,11 +283,65 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        MyLog.v(tag, "onPause");
+        /**
+         * 在停止播放前 你可以先记录当前播放的位置,以便以后可以续播
+         */
+        if (headViewHolder.videoView != null){
+            if (headViewHolder.videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+                mLastPos = (int) headViewHolder.videoView.getCurrentPosition();
+                // when scree lock,paus is good select than stop
+                // don't stop pause
+                // mVV.stopPlayback();
+                headViewHolder.videoView.pause();
+            }
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyLog.v(tag, "onResume");
+
+        if (headViewHolder.videoView != null){
+            if (!headViewHolder.videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+                headViewHolder.videoView.resume();
+            }
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MyLog.v(tag, "onStop");
+        // 在停止播放前 你可以先记录当前播放的位置,以便以后可以续播
+        if (headViewHolder.videoView != null &&headViewHolder.videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+            mLastPos = (int) headViewHolder.videoView.getCurrentPosition();
+            // don't stop pause
+            // mVV.stopPlayback();
+            headViewHolder.videoView.pause();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (headViewHolder.webView != null){
             headViewHolder.webView.destroy();
         }
+
+        //video
+        if (headViewHolder.videoView != null){
+            if ((mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+                mLastPos = (int) headViewHolder.videoView.getCurrentPosition();
+                headViewHolder.videoView.stopPlayback();
+            }
+        }
+
+        MyLog.v(tag, "onDestroy");
     }
 
     @Override
@@ -542,6 +611,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                         initVideo();
                     }
                 });
+
+                headViewHolder.videoLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickEmptyArea(v);
+                    }
+                });
             }
         }
     }
@@ -590,8 +666,17 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private void initVideo()
     {
+        String ak = "";
+        BVideoView.setAK(ak);
         headViewHolder.playButton.setVisibility(View.GONE);
-        headViewHolder.videoView.setVideoPlayCallback(mVideoPlayCallback);
+
+        headViewHolder.mVVCtl.setMediaPlayerControl(headViewHolder.videoView);
+        headViewHolder.videoView.setDecodeMode(BVideoView.DECODE_SW); //可选择软解模式或硬解模式
+
+        headViewHolder.videoView.setOnPreparedListener(this);
+        headViewHolder.videoView.setOnCompletionListener(this);
+
+
 
         if(!topicDTO.getType().equals(TopicType.S_VIDEO)){
             playWebVideo(topicDTO.getVideoDetail().getVideoSource());
@@ -614,34 +699,32 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 e.printStackTrace();
             }
         }
-    }
 
-    private SuperVideoPlayer.VideoPlayCallbackImpl mVideoPlayCallback = new SuperVideoPlayer.VideoPlayCallbackImpl() {
-        @Override
-        public void onCloseVideo() {
-            headViewHolder.videoView.close();
-            headViewHolder.playButton.setVisibility(View.VISIBLE);
-            headViewHolder.coverImageView.setVisibility(View.VISIBLE);
-            headViewHolder.videoView.setVisibility(View.GONE);
-            resetPageToPortrait();
-        }
+        //全屏处理
+        headViewHolder.mVVCtl.setOnScreenBtnClickCallBack(new SimpleMediaController.OnScreenBtnClickCallBack() {
 
-        @Override
-        public void onSwitchPageType() {
-            if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                headViewHolder.videoView.setPageType(MediaController.PageType.SHRINK);
-            } else {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                headViewHolder.videoView.setPageType(MediaController.PageType.EXPAND);
+            @Override
+            public void onSwitch(boolean isFullScreen) {
+                if (isFullScreen){
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    actionBar.setVisibility(View.GONE);
+                    contentLayout.setVisibility(View.GONE);
+                    headViewHolder.infoLayout.setVisibility(View.GONE);
+                    //ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    //headViewHolder.videoLayout.setLayoutParams(layoutParams);
+                }else {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    actionBar.setVisibility(View.VISIBLE);
+                    contentLayout.setVisibility(View.VISIBLE);
+                    headViewHolder.infoLayout.setVisibility(View.VISIBLE);
+                    //int height = ScreenUtils.dpToPxInt(TopicDetailActivity.this, 200);
+                    //ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                    //headViewHolder.videoLayout.setLayoutParams(layoutParams);
+                }
+                FullScreenUtils.toggleHideyBar(TopicDetailActivity.this);
             }
-        }
-
-        @Override
-        public void onPlayFinish() {
-
-        }
-    };
+        });
+    }
 
     private void doHideFootView()
     {
@@ -1022,12 +1105,15 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public static class HeadViewHolder
     {
+        @BindView(R.id.topic_detail_head_info_layout)LinearLayout infoLayout;
         @BindView(R.id.user_info_head_layout)RelativeLayout mUserHeadLayout;
         @BindView(R.id.topic_detail_title)TextView titleTextView;
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.user_head_avatar)SimpleDraweeView avatarImageView;
-        @BindView(R.id.videoview)SuperVideoPlayer videoView;
+        @BindView(R.id.videoview)BVideoView videoView;
+        @BindView(R.id.controller_holder)RelativeLayout controllerHolder;
+        @BindView(R.id.media_controller_bar)SimpleMediaController mVVCtl;
         @BindView(R.id.web_view)WebView webView;
         @BindView(R.id.topic_detail_head_view_video_cover_image)
         SimpleDraweeView coverImageView;
@@ -1035,7 +1121,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         ImageView playButton;
         @BindView(R.id.short_video_detail_progress)
         RoundProgressBarWidthNumber roundProgressBarWidthNumber;
-        @BindView(R.id.topic_detail_head_view_video_layout)FrameLayout videoLayout;
+        @BindView(R.id.topic_detail_head_view_video_layout)RelativeLayout videoLayout;
         @BindView(R.id.topic_detail_head_course_name)TextView scoreNameTextView;
         @BindView(R.id.topic_detail_head_zan)LikeButton zanButton;
         @BindView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
@@ -1069,38 +1155,79 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         headViewHolder.coverImageView.setVisibility(View.GONE);
         headViewHolder.videoView.setVisibility(View.VISIBLE);
 
-        headViewHolder.videoView.loadLocalVideo(path);
-        headViewHolder.videoView.requestFocus();
+        headViewHolder.videoView.setVideoPath(path);
+        headViewHolder.videoView.showCacheInfo(true);
+        headViewHolder.videoView.start();
     }
 
     private void playWebVideo(String url){
         headViewHolder.coverImageView.setVisibility(View.GONE);
         headViewHolder.videoView.setVisibility(View.VISIBLE);
 
-        Video video = new Video();
-        VideoUrl videoUrl1 = new VideoUrl();
-        videoUrl1.setFormatName("auto");
-        videoUrl1.setFormatUrl(url);
-        ArrayList<VideoUrl> arrayList1 = new ArrayList<>();
-        arrayList1.add(videoUrl1);
-        video.setVideoName("");
-        video.setVideoUrl(arrayList1);
-
-        ArrayList<Video> videoArrayList = new ArrayList<>();
-        videoArrayList.add(video);
-
-        headViewHolder.videoView.loadMultipleVideo(videoArrayList);
-        headViewHolder.videoView.requestFocus();
+        headViewHolder.videoView.setVideoPath(url);
+        headViewHolder.videoView.showCacheInfo(true);
+        headViewHolder.videoView.start();
     }
 
-    /***
-     * 恢复屏幕至竖屏
-     */
-    private void resetPageToPortrait() {
-        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            headViewHolder.videoView.setPageType(MediaController.PageType.SHRINK);
+    private void changeStatus(PlayerStatus status) {
+        mPlayerStatus = status;
+        if (headViewHolder.mVVCtl != null) {
+            headViewHolder.mVVCtl.changeStatus(status);
         }
+    }
+
+    @Override
+    public void onCompletion() {
+        MyLog.v(tag, "onCompletion");
+        changeStatus(PlayerStatus.PLAYER_COMPLETED);
+    }
+
+    @Override
+    public void onPrepared() {
+        MyLog.v(tag, "onPrepared");
+        hideOuterAfterFiveSeconds();
+        changeStatus(PlayerStatus.PLAYER_PREPARED);
+    }
+
+    public void onClickEmptyArea(View v) {
+        if (barTimer != null) {
+            barTimer.cancel();
+            barTimer = null;
+        }
+        if (this.headViewHolder.mVVCtl != null) {
+            if (headViewHolder.mVVCtl.getVisibility() == View.VISIBLE) {
+                headViewHolder.mVVCtl.hide();
+            } else {
+                headViewHolder.mVVCtl.show();
+                hideOuterAfterFiveSeconds();
+            }
+        }
+    }
+
+    private void hideOuterAfterFiveSeconds() {
+        if (barTimer != null) {
+            barTimer.cancel();
+            barTimer = null;
+        }
+        barTimer = new Timer();
+        barTimer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                if (headViewHolder.mVVCtl != null) {
+                    headViewHolder.mVVCtl.getMainThreadHandler().post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            headViewHolder.mVVCtl.hide();
+                        }
+
+                    });
+                }
+            }
+
+        }, 5 * 1000);
+
     }
 
 
