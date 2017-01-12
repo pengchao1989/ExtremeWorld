@@ -3,7 +3,6 @@ package com.jixianxueyuan.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,7 +29,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.baidu.cyberplayer.core.BVideoView;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -64,14 +62,11 @@ import com.jixianxueyuan.dto.request.TopicScoreRequestDTO;
 import com.jixianxueyuan.dto.request.ZanRequest;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
-import com.jixianxueyuan.player.bar.SimpleMediaController;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
-import com.jixianxueyuan.util.FullScreenUtils;
 import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.MyLog;
-import com.jixianxueyuan.util.ScreenUtils;
 import com.jixianxueyuan.util.ShareUtils;
 import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.Util;
@@ -84,6 +79,7 @@ import com.jixianxueyuan.widget.ReplyWidgetListener;
 import com.jixianxueyuan.widget.RoundProgressBarWidthNumber;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
+import com.pili.pldroid.player.widget.PLVideoView;
 import com.tencent.smtt.sdk.CookieSyncManager;
 import com.tencent.smtt.sdk.WebView;
 import com.umeng.socialize.ShareAction;
@@ -116,7 +112,7 @@ import dmax.dialog.SpotsDialog;
 /**
  * Created by pengchao on 5/22/15.
  */
-public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener,BVideoView.OnPreparedListener, BVideoView.OnCompletionListener{
+public class TopicDetailActivity extends BaseActivity implements ReplyWidgetListener{
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
@@ -131,9 +127,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     //vidoe
     @BindView(R.id.video_cover_image)ImageView coverImageView;
     @BindView(R.id.video_play_btn)ImageView playButton;
-    @BindView(R.id.videoview)BVideoView videoView;
-    @BindView(R.id.controller_holder)RelativeLayout controllerHolder;
-    @BindView(R.id.media_controller_bar)SimpleMediaController mVVCtl;
+    @BindView(R.id.videoview)PLVideoView videoView;
     @BindView(R.id.video_layout)RelativeLayout videoLayout;
     @BindView(R.id.short_video_detail_progress)
     RoundProgressBarWidthNumber roundProgressBarWidthNumber;
@@ -192,8 +186,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
      */
     private int mLastPos = 0;
     private Timer barTimer;
-    private boolean isInitVideoSetting = false;
-
 
 
 
@@ -321,7 +313,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
         if (videoView != null){
             if (!videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-                videoView.resume();
+                //TODO resume
             }
         }
     }
@@ -616,7 +608,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             if(topicDTO.getVideoDetail().getVideoSource() != null)
             {
                 videoLayout.setVisibility(View.VISIBLE);
-                //ImageLoader.getInstance().displayImage(topicDTO.getVideoDetail().getThumbnail() + "!detail", headViewHolder.coverImageView, ImageLoaderConfig.getImageOption(TopicDetailActivity.this));
                 coverImageView.setImageURI(ImageUriParseUtil.parse(topicDTO.getVideoDetail().getThumbnail() + "!detail"));
 
 
@@ -630,7 +621,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 videoLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onClickEmptyArea(v);
+
                     }
                 });
             }
@@ -681,46 +672,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private void playVideo()
     {
-        if (!isInitVideoSetting){
-            String ak = "67956bc112cd44db81c74d32a7f6f1a7";
-            BVideoView.setAK(ak);
-
-            mVVCtl.setMediaPlayerControl(videoView);
-            videoView.setDecodeMode(BVideoView.DECODE_SW); //可选择软解模式或硬解模式
-
-            videoView.setOnPreparedListener(this);
-            videoView.setOnCompletionListener(this);
-
-            //全屏处理
-            mVVCtl.setOnScreenBtnClickCallBack(new SimpleMediaController.OnScreenBtnClickCallBack() {
-
-                @Override
-                public void onSwitch(boolean isFullScreen) {
-                    if (isFullScreen){
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                        actionBar.setVisibility(View.GONE);
-                        contentLayout.setVisibility(View.GONE);
-                        ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
-                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                        videoLayout.setLayoutParams(layoutParams);
-                    }else {
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                        actionBar.setVisibility(View.VISIBLE);
-                        contentLayout.setVisibility(View.VISIBLE);
-                        int height = ScreenUtils.dpToPxInt(TopicDetailActivity.this, 200);
-                        ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
-                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                        layoutParams.height = height;
-                        videoLayout.setLayoutParams(layoutParams);
-                    }
-                    FullScreenUtils.toggleHideyBar(TopicDetailActivity.this);
-                }
-            });
-            isInitVideoSetting = true;
-        }
-
-
         if(!topicDTO.getType().equals(TopicType.S_VIDEO)){
             playWebVideo(topicDTO.getVideoDetail().getVideoSource());
         }else {
@@ -1164,7 +1115,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         videoView.setVisibility(View.VISIBLE);
 
         videoView.setVideoPath(path);
-        videoView.showCacheInfo(true);
         videoView.start();
     }
 
@@ -1177,74 +1127,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             videoView.setVisibility(View.VISIBLE);
 
             videoView.setVideoPath(url);
-            videoView.showCacheInfo(true);
             videoView.start();
         }else {
             Toast.makeText(this, R.string.video_is_empty, Toast.LENGTH_LONG).show();
         }
-
-    }
-
-    private void changeStatus(PlayerStatus status) {
-        mPlayerStatus = status;
-        if (mVVCtl != null) {
-            mVVCtl.changeStatus(status);
-        }
-    }
-
-    @Override
-    public void onCompletion() {
-        MyLog.v(tag, "onCompletion");
-        //coverImageView.setVisibility(View.VISIBLE);
-        //playButton.setVisibility(View.VISIBLE);
-        changeStatus(PlayerStatus.PLAYER_COMPLETED);
-    }
-
-    @Override
-    public void onPrepared() {
-        MyLog.v(tag, "onPrepared");
-        hideOuterAfterFiveSeconds();
-        changeStatus(PlayerStatus.PLAYER_PREPARED);
-    }
-
-    public void onClickEmptyArea(View v) {
-        if (barTimer != null) {
-            barTimer.cancel();
-            barTimer = null;
-        }
-        if (this.mVVCtl != null) {
-            if (mVVCtl.getVisibility() == View.VISIBLE) {
-                mVVCtl.hide();
-            } else {
-                mVVCtl.show();
-                hideOuterAfterFiveSeconds();
-            }
-        }
-    }
-
-    private void hideOuterAfterFiveSeconds() {
-        if (barTimer != null) {
-            barTimer.cancel();
-            barTimer = null;
-        }
-        barTimer = new Timer();
-        barTimer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                if (mVVCtl != null) {
-                    mVVCtl.getMainThreadHandler().post(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            mVVCtl.hide();
-                        }
-
-                    });
-                }
-            }
-
-        }, 5 * 1000);
 
     }
 

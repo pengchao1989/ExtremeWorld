@@ -166,6 +166,8 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.12.0'
     compile 'com.github.nekocode:Badge:1.6.1'
     compile 'com.sdsmdg.tastytoast:tastytoast:0.1.0'
+    compile 'com.qiniu:happy-dns:0.2.+'
+    compile 'com.qiniu.pili:pili-android-qos:0.8.+'
     compile files('libs/open_sdk_r5043_lite.jar')
     compile files('libs/locSDK_3.3.jar')
     compile files('libs/renderscript-v8.jar')
