@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:type="image"
-        app:action_image="@mipmap/icon_pop_add_1"
+        app:action_image="@mipmap/ic_add_white"
         />
 
     <android.support.v4.widget.SwipeRefreshLayout

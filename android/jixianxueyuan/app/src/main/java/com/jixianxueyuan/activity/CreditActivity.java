@@ -294,7 +294,7 @@ public class CreditActivity extends Activity {
 	protected void initView() {
 		mLinearLayout = new LinearLayout(this);
 		int dp20 = dip2px(this,20);
-		mLinearLayout.setPadding(0, dp20, 0, 0);
+		mLinearLayout.setPadding(0, 0, 0, 0);
 		mLinearLayout.setBackgroundColor(Color.GRAY);
 		mLinearLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		mLinearLayout.setOrientation(LinearLayout.VERTICAL);

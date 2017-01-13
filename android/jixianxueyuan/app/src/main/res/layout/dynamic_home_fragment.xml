@@ -196,7 +196,7 @@
                     android:id="@+id/message_is_new"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="center"
                     android:src="@mipmap/skin_point_new"/>
             </FrameLayout>
 
@@ -209,7 +209,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:padding="10dp"
-                android:src="@mipmap/icon_pop_add_1"/>
+                android:src="@mipmap/ic_add_white"/>
 
         </RelativeLayout>
 

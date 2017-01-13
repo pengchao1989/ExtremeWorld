@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/splash_image"
-        android:background="@color/white"
+        android:background="@color/primary_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitCenter" />

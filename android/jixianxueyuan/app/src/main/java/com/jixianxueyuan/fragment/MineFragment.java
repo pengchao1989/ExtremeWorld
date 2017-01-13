@@ -248,7 +248,7 @@ public class MineFragment extends Fragment {
     private void startCreditActivity(String auto_login_url){
         Intent intent = new Intent();
         intent.setClass(MineFragment.this.getContext(), CreditActivity.class);
-        intent.putExtra("navColor", "#862240");    //配置导航条的背景颜色，请用#ffffff长格式。
+        intent.putExtra("navColor", "#E24542");    //配置导航条的背景颜色，请用#ffffff长格式。
         intent.putExtra("titleColor", "#ffffff");    //配置导航条标题的颜色，请用#ffffff长格式。
         intent.putExtra("url", auto_login_url);    //配置自动登陆地址，每次需服务端动态生成。
         startActivity(intent);
