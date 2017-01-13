@@ -29,6 +29,9 @@ public class MyVolleyErrorHelper {
 
     public static String getMessage(Object error, Context context) {
         if (error instanceof TimeoutError) {
+            if (context == null){
+                return "time out";
+            }
             return context.getResources().getString(R.string.time_out);
         }
         else if (isServerProblem(error)) {
