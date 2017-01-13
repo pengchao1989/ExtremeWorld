@@ -73,6 +73,7 @@ import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
+import com.jixianxueyuan.widget.MediaController;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
 import com.jixianxueyuan.widget.ReplyWidgetListener;
@@ -131,6 +132,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     @BindView(R.id.video_layout)RelativeLayout videoLayout;
     @BindView(R.id.short_video_detail_progress)
     RoundProgressBarWidthNumber roundProgressBarWidthNumber;
+    @BindView(R.id.video_cache)
+    ProgressBar mVideoCacheProgressView;
 
 
     @BindView(R.id.create_topic_upload_progress_layout)
@@ -174,19 +177,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     private String mReplyString = "";
 
 
-    /**
-     * 播放状态
-     */
-    public enum PlayerStatus {
-        PLAYER_IDLE, PLAYER_PREPARING, PLAYER_PREPARED, PLAYER_COMPLETED
-    }
-    private PlayerStatus mPlayerStatus = PlayerStatus.PLAYER_IDLE;
-    /**
-     * 记录播放位置
-     */
-    private int mLastPos = 0;
-    private Timer barTimer;
-
+    //video
+    private MediaController mMediaController;
 
 
     final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
@@ -295,13 +287,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
          * 在停止播放前 你可以先记录当前播放的位置,以便以后可以续播
          */
         if (videoView != null){
-            if (videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-                mLastPos = (int) videoView.getCurrentPosition();
-                // when scree lock,paus is good select than stop
-                // don't stop pause
-                // mVV.stopPlayback();
-                videoView.pause();
-            }
+            //TODO pause video
+            videoView.pause();
         }
 
     }
@@ -312,8 +299,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         MyLog.v(tag, "onResume");
 
         if (videoView != null){
-            if (!videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
+            if (!videoView.isPlaying()) {
                 //TODO resume
+                videoView.start();
             }
         }
     }
@@ -322,12 +310,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     protected void onStop() {
         super.onStop();
         MyLog.v(tag, "onStop");
-        // 在停止播放前 你可以先记录当前播放的位置,以便以后可以续播
-        if (videoView != null &&videoView.isPlaying() && (mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-            mLastPos = (int) videoView.getCurrentPosition();
-            // don't stop pause
-            // mVV.stopPlayback();
-            videoView.pause();
+        //TODO 在停止播放前 你可以先记录当前播放的位置,以便以后可以续播
+        if (videoView != null &&videoView.isPlaying() ) {
+
         }
     }
 
@@ -338,12 +323,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             headViewHolder.webView.destroy();
         }
 
-        //video
+        //TODO stop
         if (videoView != null){
-            if ((mPlayerStatus != PlayerStatus.PLAYER_IDLE)) {
-                mLastPos = (int) videoView.getCurrentPosition();
-                videoView.stopPlayback();
-            }
+            videoView.stopPlayback();
         }
 
         MyLog.v(tag, "onDestroy");
@@ -609,6 +591,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             {
                 videoLayout.setVisibility(View.VISIBLE);
                 coverImageView.setImageURI(ImageUriParseUtil.parse(topicDTO.getVideoDetail().getThumbnail() + "!detail"));
+                videoView.setCoverView(coverImageView);
+
+                // You can also use a custom `MediaController` widget
+                mMediaController = new MediaController(this, false, false);
+                videoView.setMediaController(mMediaController);
+
+                videoView.setBufferingIndicator(mVideoCacheProgressView);
 
 
                 playButton.setOnClickListener(new View.OnClickListener() {
