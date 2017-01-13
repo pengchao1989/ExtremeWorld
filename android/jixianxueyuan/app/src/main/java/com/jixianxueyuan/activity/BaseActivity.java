@@ -2,6 +2,8 @@ package com.jixianxueyuan.activity;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 
 import com.jixianxueyuan.R;
@@ -13,7 +15,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 /**
  * Created by pengchao on 10/24/15.
  */
-public class BaseActivity extends SwipeBackActivity {
+public class BaseActivity extends AppCompatActivity {
 
     private SwipeBackLayout mSwipeBackLayout;
 
@@ -22,10 +24,11 @@ public class BaseActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
 
 
-        mSwipeBackLayout = getSwipeBackLayout();
-        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+        //mSwipeBackLayout = getSwipeBackLayout();
+        //mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
 
-        overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
+
+        //overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
     }
 
     protected int getActionBarSize() {

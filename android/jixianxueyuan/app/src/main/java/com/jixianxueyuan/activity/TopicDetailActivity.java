@@ -598,6 +598,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 videoView.setMediaController(mMediaController);
 
                 videoView.setBufferingIndicator(mVideoCacheProgressView);
+                mVideoCacheProgressView.setVisibility(View.VISIBLE);
 
 
                 playButton.setOnClickListener(new View.OnClickListener() {

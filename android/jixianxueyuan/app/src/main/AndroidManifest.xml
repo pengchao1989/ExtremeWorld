@@ -66,7 +66,7 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@drawable/icon"
-        android:theme="@style/ImageTranslucentTheme"
+        android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
         <activity android:name=".activity.SplashActivity"
@@ -89,7 +89,6 @@
             android:name=".activity.NewHomeActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/ImageTranslucentTheme"
             >
         </activity>
         <activity android:name=".activity.LoginActivity"/>
@@ -377,16 +376,6 @@
             </intent-filter>
         </receiver>
 
-        <!-- Required  . Enable it you can get statistics data with channel-->
-
-        <!--xiaomi update-->
-        <receiver android:name="com.xiaomi.market.sdk.DownloadCompleteReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-            </intent-filter>
-        </receiver>
-
-        <!--xiaomi update-->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:theme="@android:style/Theme.Translucent" />

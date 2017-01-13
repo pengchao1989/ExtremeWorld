@@ -22,7 +22,7 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "com.jixianxueyuan"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 34
         versionName "1.6.0"
