@@ -111,7 +111,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     private MyApplication application;
     private Mine mine;
 
-    private boolean mIsFine = true;
+    private boolean mIsFine = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
