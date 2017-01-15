@@ -225,7 +225,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
 
         // max select image amount
-        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 4);
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 1);
 
         // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
@@ -241,9 +241,14 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
 
     public void clean()
     {
-        if(EditText != null)
-        {
+        if(EditText != null) {
             EditText.setText("");
+        }
+        if (imageListAdapter != null){
+            imageListAdapter.clean();
+        }
+        if (hasDotImageView != null){
+            hasDotImageView.setVisibility(View.GONE);
         }
     }
 

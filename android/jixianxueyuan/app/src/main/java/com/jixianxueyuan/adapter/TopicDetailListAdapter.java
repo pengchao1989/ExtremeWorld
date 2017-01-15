@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        viewHolder.replyContentTextView.setVisibility(View.VISIBLE);
 
 
         final ReplyDTO replyDTO = replyDTOs.get(position);
@@ -123,6 +125,9 @@ public class TopicDetailListAdapter extends BaseAdapter {
             if (mediaDTOList != null && mediaDTOList.size() > 0){
                 MediaDTO mediaDTO = mediaDTOList.get(0);
                 if (MediaDTO.TYPE_IMAGE.equals(mediaDTO.getType())){
+                    if (TextUtils.isEmpty(replyDTO.getContent())){
+                        viewHolder.replyContentTextView.setVisibility(View.GONE);
+                    }
                     viewHolder.imageView.setVisibility(View.VISIBLE);
                     viewHolder.imageView.setImageURI(ImageUriParseUtil.parse(mediaDTO.getPath() + QiniuImageStyle.LIST_ITEM));
                 }
