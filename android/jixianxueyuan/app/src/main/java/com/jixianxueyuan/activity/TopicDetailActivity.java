@@ -3,6 +3,7 @@ package com.jixianxueyuan.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -63,6 +64,7 @@ import com.jixianxueyuan.dto.request.ZanRequest;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.BitmapUtils;
 import com.jixianxueyuan.util.DateTimeFormatter;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.ImageUriParseUtil;
@@ -89,6 +91,8 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
+
+import net.bither.util.NativeUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -170,6 +174,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     private ArrayList<String> imageUrlArrayList = new ArrayList<String>();
 
     private List<String> localImagePathList = null;
+    LinkedHashMap<String,NativeUtil.CompressResult> localPathOfCompressInfoMap = null;
     private LinkedHashMap<String,String> serverImagePathMap = null;
     private boolean isUploadedImage = false;
     boolean isUploadedVideo = false;
@@ -221,6 +226,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                         progressTextView.setText("正在上传第" + progressData.getInt("index") + "张图片  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
                     }else if (progressData.getInt("type") == 2){
                         progressTextView.setText("正在上传视频  " + String.format("%.1f",progressData.getDouble("percent") * 100) + "%")  ;
+                    }else if (progressData.getInt("type") == 3){
+                        progressTextView.setText("正在压缩图片第  " + progressData.getInt("index") + "张图片")  ;
                     }
                     break;
                 case HANDLER_PLAY_VIDEO:
@@ -891,6 +898,14 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 MediaDTO mediaDTO = new MediaDTO();
                 mediaDTO.setType(MediaType.IMAGE);
                 mediaDTO.setPath(url);
+
+                //size
+                NativeUtil.CompressResult compressResult = localPathOfCompressInfoMap.get(key);
+                if (compressResult != null){
+                    mediaDTO.setWidth(compressResult.width);
+                    mediaDTO.setHeight(compressResult.height);
+                }
+
                 mediaDTOList.add(mediaDTO);
             }
             mediaWrapDTO.setMedias(mediaDTOList);
@@ -977,6 +992,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     {
         showUploadProgressView();
 
+        //压缩图片
+        localImagePathList = compressImage(localImagePathList);
+
+
         QiniuMultiImageUpload qiNiuPictureUpload = new QiniuMultiImageUpload(this);
         qiNiuPictureUpload.upload(localImagePathList, new QiniuMultiImageUploadListener() {
 
@@ -1012,6 +1031,21 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         });
     }
 
+    private List<String> compressImage(List<String> filePathList){
+        localPathOfCompressInfoMap = new LinkedHashMap<String, NativeUtil.CompressResult>();
+        List<String> compressImageFilePath = new ArrayList<String>();
+        int index = 0;
+        for (String filePath : filePathList){
+            updateProgressView(3, index, 0.0);
+            File saveFile = new File(DiskCachePath.getDiskCacheDir(TopicDetailActivity.this, "compressCache"), "compress_" + System.currentTimeMillis() + ".jpg");
+            Bitmap bitmap = BitmapUtils.getBitmap(filePath);
+            NativeUtil.CompressResult compressResult = NativeUtil.compressBitmap(bitmap, saveFile.getAbsolutePath());
+            compressImageFilePath.add(saveFile.getAbsolutePath());
+            localPathOfCompressInfoMap.put(saveFile.getAbsolutePath(), compressResult);
+            index++;
+        }
+        return compressImageFilePath;
+    }
 
     private void showProgress(){
         if (progressDialog == null){
