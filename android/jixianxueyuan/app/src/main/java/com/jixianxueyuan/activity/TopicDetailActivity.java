@@ -551,6 +551,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 GenericDraweeHierarchy hierarchy = builder
                         .setFadeDuration(300)
                         .setPlaceholderImage(R.mipmap.photo)
+                        .setBackground(getResources().getDrawable(R.drawable.photo_frame))
                         .build();
 
                 SimpleDraweeView imageviwe = new SimpleDraweeView(this);

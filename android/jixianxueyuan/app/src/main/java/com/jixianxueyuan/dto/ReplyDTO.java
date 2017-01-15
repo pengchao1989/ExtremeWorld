@@ -11,6 +11,7 @@ public class ReplyDTO implements Serializable
 	private int floor;
     private int subReplyCount;
 	private UserMinDTO user;
+	private MediaWrapDTO  mediaWrap;
 	private List<SubReplyDTO> subReplys;
 	
 	public Long getId()
@@ -57,6 +58,15 @@ public class ReplyDTO implements Serializable
 	{
 		this.user = user;
 	}
+
+	public MediaWrapDTO getMediaWrap() {
+		return mediaWrap;
+	}
+
+	public void setMediaWrap(MediaWrapDTO mediaWrap) {
+		this.mediaWrap = mediaWrap;
+	}
+
 	public List<SubReplyDTO> getSubReplys()
 	{
 		return subReplys;

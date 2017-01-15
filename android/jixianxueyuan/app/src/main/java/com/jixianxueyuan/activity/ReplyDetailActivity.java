@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -16,11 +17,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.SubReplylListAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.config.ImageConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
+import com.jixianxueyuan.dto.MediaDTO;
+import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.ReplyDTO;
@@ -126,6 +132,40 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
         headViewHolder.nameTextView.setText(replyDTO.getUser().getName());
         headViewHolder.timeTextView.setText(replyDTO.getCreateTime());
         headViewHolder.contentTextView.setText(replyDTO.getContent());
+
+        //image
+        MediaWrapDTO mediaWrapDTO = replyDTO.getMediaWrap();
+        if (mediaWrapDTO != null && mediaWrapDTO.getMedias().size() > 0){
+            MediaDTO mediaDTO = mediaWrapDTO.getMedias().get(0);
+            if (MediaDTO.TYPE_IMAGE.equals(mediaDTO.getType())){
+                GenericDraweeHierarchyBuilder builder =
+                        new GenericDraweeHierarchyBuilder(getResources());
+                GenericDraweeHierarchy hierarchy = builder
+                        .setFadeDuration(300)
+                        .setPlaceholderImage(R.mipmap.photo)
+                        .setBackground(getResources().getDrawable(R.drawable.photo_frame))
+                        .build();
+
+                SimpleDraweeView imageviwe = new SimpleDraweeView(this);
+                imageviwe.setHierarchy(hierarchy);
+
+                if (mediaDTO.getWidth() <= 0 || mediaDTO.getHeight() <= 0){
+                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT,ImageConfig.DETAIL_IMAGE_DEFAULT_HEIGHT));
+                }else if(mediaDTO.getWidth() < ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT){
+                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(mediaDTO.getWidth(), mediaDTO.getHeight()));
+                }
+                else {
+                    int width = ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT;
+                    int height = (int) (((float)ImageConfig.DETAIL_IMAGE_DEFAULT_WIDHT / mediaDTO.getWidth()) * mediaDTO.getHeight());
+                    imageviwe.setLayoutParams(new ViewGroup.LayoutParams(width,height));
+                }
+
+                imageviwe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
+                headViewHolder.mediaContainer.addView(imageviwe);
+                imageviwe.setImageURI(ImageUriParseUtil.parse(mediaDTO.getPath() + QiniuImageStyle.DETAIL));
+            }
+        }
     }
 
     private void requestReplyDetail(){
@@ -289,6 +329,7 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
         @BindView(R.id.user_head_name)TextView nameTextView;
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.reply_detail_content)TextView contentTextView;
+        @BindView(R.id.media_container)LinearLayout mediaContainer;
 
         public HeadViewHolder(View itemView){
             ButterKnife.bind(this,itemView);

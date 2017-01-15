@@ -14,4 +14,15 @@
         style="@style/ListPrimaryTextSmall"
         tools:text="content"/>
 
+    <LinearLayout
+        android:id="@+id/media_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/avatar_alignment"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
 </LinearLayout>

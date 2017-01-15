@@ -18,6 +18,8 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
+import com.jixianxueyuan.dto.MediaDTO;
+import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.ReplyDTO;
 import com.jixianxueyuan.dto.SubReplyDTO;
 import com.jixianxueyuan.util.ImageUriParseUtil;
@@ -113,6 +115,23 @@ public class TopicDetailListAdapter extends BaseAdapter {
                 UserHomeActivity.startActivity(context, replyDTO.getUser());
             }
         });
+
+        //reply image
+        MediaWrapDTO mediaWrapDTO = replyDTO.getMediaWrap();
+        if (mediaWrapDTO != null){
+            List<MediaDTO> mediaDTOList = mediaWrapDTO.getMedias();
+            if (mediaDTOList != null && mediaDTOList.size() > 0){
+                MediaDTO mediaDTO = mediaDTOList.get(0);
+                if (MediaDTO.TYPE_IMAGE.equals(mediaDTO.getType())){
+                    viewHolder.imageView.setVisibility(View.VISIBLE);
+                    viewHolder.imageView.setImageURI(ImageUriParseUtil.parse(mediaDTO.getPath() + QiniuImageStyle.LIST_ITEM));
+                }
+            }else {
+                viewHolder.imageView.setVisibility(View.GONE);
+            }
+        }else {
+            viewHolder.imageView.setVisibility(View.GONE);
+        }
 
 
         //sub reply
@@ -218,6 +237,7 @@ public class TopicDetailListAdapter extends BaseAdapter {
         @BindView(R.id.user_head_time)TextView timeTextView;
         @BindView(R.id.user_head_right_tip)TextView floorTextView;
         @BindView(R.id.topic_detail_list_item_reply_content)TextView replyContentTextView;
+        @BindView(R.id.image_view)SimpleDraweeView imageView;
 
         @BindView(R.id.topic_detail_list_item_sub_reply_content_1)
         TextView subReplyContent1;

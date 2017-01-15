@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class MediaDTO implements Serializable {
 
+    public static final String TYPE_IMAGE = "img";
+
     private Long id;
     private String path;
     private String des;
