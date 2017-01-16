@@ -20,13 +20,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.baichuan.android.trade.AlibcTrade;
+import com.alibaba.baichuan.android.trade.callback.AlibcTradeCallback;
+import com.alibaba.baichuan.android.trade.constants.AlibcConstants;
+import com.alibaba.baichuan.android.trade.model.AlibcShowParams;
+import com.alibaba.baichuan.android.trade.model.AlibcTaokeParams;
+import com.alibaba.baichuan.android.trade.model.OpenType;
+import com.alibaba.baichuan.android.trade.model.TradeResult;
+import com.alibaba.baichuan.android.trade.page.AlibcDetailPage;
 import com.alibaba.mobileim.YWIMKit;
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.trade.TradeService;
-import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
-import com.alibaba.sdk.android.trade.model.TaokeParams;
-import com.alibaba.sdk.android.trade.model.TradeResult;
-import com.alibaba.sdk.android.trade.page.ItemDetailPage;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -75,7 +77,9 @@ import com.victor.loading.rotate.RotateLoading;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -310,7 +314,6 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     @OnClick(R.id.message) void onMessageClick(){
-       /* YWIMKit mIMKit = YWAPI.getIMKitInstance();*/
         YWIMKit ywimKit = IMManager.getInstance().getYwimKit();
         Intent intent = ywimKit.getConversationActivityIntent();
         startActivity(intent);
@@ -518,23 +521,30 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                 WebActivity.startActivity(this.getActivity(), exhibitionDTO.getTitle(), exhibitionDTO.getData());
             }
             else if (ExhibitionAction.OPEN_TAOBAO_PRODUCT.equals(exhibitionDTO.getAction())){
-                TradeService tradeService = AlibabaSDK.getService(TradeService.class);
-                TaokeParams taokeParams = new TaokeParams();
-                taokeParams.pid = "mm_111250070_0_0";
-                ItemDetailPage itemDetailPage = new ItemDetailPage(exhibitionDTO.getData(), null);
-                tradeService.show(itemDetailPage, taokeParams, DynamicHomeFragment.this.getActivity(), null, new TradeProcessCallback() {
+
+                AlibcDetailPage alibcDetailPage = new AlibcDetailPage(exhibitionDTO.getData());
+                AlibcShowParams alibcShowParams = new AlibcShowParams(OpenType.H5, false);
+                AlibcTaokeParams alibcTaokeParams = new AlibcTaokeParams("mm_111250070_0_0", "mm_111250070_0_0", null);
+                Map<String, String> exParams = new HashMap<>();
+                exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
+                exParams.put("skate group", "滑板圈");//自定义参数部分，可任意增删改
+
+
+                AlibcTrade.show(getActivity(), alibcDetailPage, alibcShowParams, alibcTaokeParams, exParams, new AlibcTradeCallback() {
 
                     @Override
-                    public void onFailure(int i, String s) {
-
-                    }
-
-                    @Override
-                    public void onPaySuccess(TradeResult tradeResult) {
+                    public void onTradeSuccess(TradeResult tradeResult) {
+                        //打开电商组件，用户操作中成功信息回调。tradeResult：成功信息（结果类型：加购，支付；支付结果）
                         Toast.makeText(DynamicHomeFragment.this.getContext(), "成功", Toast.LENGTH_SHORT)
                                 .show();
                     }
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+                        //打开电商组件，用户操作中错误信息回调。code：错误码；msg：错误信息
+                    }
                 });
+
             }else if(ExhibitionAction.INVITE_FRIEND.equals(exhibitionDTO.getAction())){
 
                 InviteWebActivity.startActivity(this.getContext());
@@ -546,6 +556,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     private void updateMessageView(){
+
         if (IMManager.getInstance().isReceiverNewMessage(this.getContext())){
             messageIsNewImageView.setVisibility(View.VISIBLE);
         }else {

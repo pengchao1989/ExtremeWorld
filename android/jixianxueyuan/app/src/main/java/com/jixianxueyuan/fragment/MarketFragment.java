@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,17 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.ResultCode;
-import com.alibaba.sdk.android.trade.ItemService;
-import com.alibaba.sdk.android.trade.TradeService;
-import com.alibaba.sdk.android.trade.callback.TradeProcessCallback;
-import com.alibaba.sdk.android.trade.model.TradeResult;
-import com.alibaba.sdk.android.trade.page.MyCartsPage;
-import com.alibaba.sdk.android.trade.page.MyOrdersPage;
+import com.alibaba.baichuan.android.trade.AlibcTrade;
+import com.alibaba.baichuan.android.trade.callback.AlibcTradeCallback;
+import com.alibaba.baichuan.android.trade.constants.AlibcConstants;
+import com.alibaba.baichuan.android.trade.model.AlibcShowParams;
+import com.alibaba.baichuan.android.trade.model.AlibcTaokeParams;
+import com.alibaba.baichuan.android.trade.model.OpenType;
+import com.alibaba.baichuan.android.trade.model.TradeResult;
+import com.alibaba.baichuan.android.trade.page.AlibcBasePage;
+import com.alibaba.baichuan.android.trade.page.AlibcMyCartsPage;
+import com.alibaba.baichuan.android.trade.page.AlibcMyOrdersPage;
+import com.alibaba.baichuan.android.trade.page.AlibcShopPage;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -41,7 +45,9 @@ import com.jixianxueyuan.widget.GridViewWithHeaderAndFooter;
 import com.jixianxueyuan.widget.NoScorllBarGridView;
 import com.umeng.analytics.MobclickAgent;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +69,10 @@ public class MarketFragment extends Fragment {
     private int currentPage = 0;
     private int totalPage = 0;
 
+    private int orderType = 0;//订单页面参数，仅在H5方式下有效
+    private AlibcShowParams alibcShowParams;//页面打开方式，默认，H5，Native
+    private Map<String, String> exParams;//yhhpass参数
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +93,17 @@ public class MarketFragment extends Fragment {
 
         requestCategoryList();
 
+        initAliTrade();
+
         return view;
+    }
+
+    private void initAliTrade(){
+        alibcShowParams = new AlibcShowParams(OpenType.Auto, false);
+
+        exParams = new HashMap<>();
+        exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
+        exParams.put("skate group", "滑板圈");//自定义参数部分，可任意增删改
     }
 
     private void initHeadView() {
@@ -112,22 +132,20 @@ public class MarketFragment extends Fragment {
         headerView.findViewById(R.id.market_home_shopping_cart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TradeService tradeService = AlibabaSDK.getService(TradeService.class);
-                MyCartsPage myCartsPage = new MyCartsPage();
-                tradeService.show(myCartsPage, null, MarketFragment.this.getActivity(), null, new TradeProcessCallback() {
 
+                AlibcBasePage alibcBasePage = new AlibcMyOrdersPage(orderType, false);
+                AlibcTrade.show(getActivity(), alibcBasePage, alibcShowParams, null, exParams, new AlibcTradeCallback() {
                     @Override
-                    public void onFailure(int code, String msg) {
-
+                    public void onTradeSuccess(TradeResult tradeResult) {
 
                     }
 
                     @Override
-                    public void onPaySuccess(TradeResult tradeResult) {
-
+                    public void onFailure(int i, String s) {
 
                     }
                 });
+
                 MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_SHOPPING_CART_CLICK);
             }
         });
@@ -135,20 +153,19 @@ public class MarketFragment extends Fragment {
         headerView.findViewById(R.id.market_home_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TradeService tradeService = AlibabaSDK.getService(TradeService.class);
-                MyOrdersPage myOrdersPage = new MyOrdersPage(0, false);
-                tradeService.show(myOrdersPage, null, MarketFragment.this.getActivity(), null, new TradeProcessCallback() {
-
+                AlibcBasePage alibcBasePage = new AlibcMyCartsPage();
+                AlibcTrade.show(getActivity(), alibcBasePage, alibcShowParams, null, exParams, new AlibcTradeCallback() {
                     @Override
-                    public void onFailure(int code, String msg) {
+                    public void onTradeSuccess(TradeResult tradeResult) {
 
                     }
 
                     @Override
-                    public void onPaySuccess(TradeResult tradeResult) {
+                    public void onFailure(int i, String s) {
 
                     }
                 });
+
                 MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_ORDER_CLICK);
             }
         });
@@ -249,30 +266,27 @@ public class MarketFragment extends Fragment {
             intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_SHOP);
             intent.putExtra(GoodsListActivity.SOURCE_TYPE_SHOP, shopGridAdapter.getItem(position));
             startActivity(intent);*/
-            ItemService itemService = AlibabaSDK.getService(ItemService.class);
-            itemService.showPage(MarketFragment.this.getActivity(), new TradeProcessCallback() {
 
-                @Override
-                public void onPaySuccess(TradeResult tradeResult) {
-                    Toast.makeText(
-                            MarketFragment.this.getContext(),
-                            "支付成功" + tradeResult.paySuccessOrders + "   "
-                                    + tradeResult.payFailedOrders,
-                            Toast.LENGTH_SHORT).show();
+        String shopId = shopGridAdapter.getItem(position).getTaobaoUrl();
+        AlibcBasePage alibcBasePage;
 
-                }
+        if (!TextUtils.isEmpty(shopId) ){
+            alibcBasePage = new AlibcShopPage(shopId);
+        } else {
+            alibcBasePage = new AlibcShopPage(shopId.trim());
+        }
+        AlibcTaokeParams alibcTaokeParams = new AlibcTaokeParams("mm_111250070_0_0", "mm_111250070_0_0", null);
+        AlibcTrade.show(getActivity(), alibcBasePage, alibcShowParams, alibcTaokeParams, exParams, new AlibcTradeCallback() {
+            @Override
+            public void onTradeSuccess(TradeResult tradeResult) {
 
-                @Override
-                public void onFailure(int code, String msg) {
-                    if (code == ResultCode.QUERY_ORDER_RESULT_EXCEPTION.code) {
-                        Toast.makeText(MarketFragment.this.getContext(), "确认交易订单失败",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(MarketFragment.this.getContext(), "交易异常",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }, null,shopGridAdapter.getItem(position).getTaobaoUrl());
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
 
     }
 }

@@ -331,6 +331,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
             @Override
             public void onFinish() {
+
                 IMManager.getInstance().Login(new IMManager.LoginResultListener() {
                     @Override
                     public void onSuccess() {

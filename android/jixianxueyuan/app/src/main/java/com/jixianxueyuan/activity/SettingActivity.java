@@ -8,8 +8,9 @@ import android.widget.Toast;
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.conversation.EServiceContact;
-import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.MainActivity;
 import com.jixianxueyuan.R;
@@ -67,8 +68,18 @@ public class SettingActivity extends BaseActivity {
 
     @OnClick(R.id.setting_activity_logout)void onLogoutClick(){
         MyApplication.getContext().getMine().loginOut(this);
-        CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
-        cloudPushService.unbindAccount();
+        CloudPushService cloudPushService = PushServiceFactory.getCloudPushService();
+        cloudPushService.unbindAccount(new CommonCallback() {
+            @Override
+            public void onSuccess(String s) {
+
+            }
+
+            @Override
+            public void onFailed(String s, String s1) {
+
+            }
+        });
         Intent intent = new Intent(SettingActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

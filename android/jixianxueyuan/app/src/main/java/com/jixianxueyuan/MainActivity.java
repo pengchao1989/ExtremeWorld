@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.VideoView;
-
-import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -237,8 +237,18 @@ public class MainActivity extends Activity {
                             mine.setUserInfo(response.getContent());
                             mine.WriteSerializationToLocal(MainActivity.this);
 
-                            CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
-                            cloudPushService.bindAccount(String.valueOf(mine.getUserInfo().getId()));
+                            CloudPushService cloudPushService = PushServiceFactory.getCloudPushService();
+                            cloudPushService.bindAccount(String.valueOf(mine.getUserInfo().getId()), new CommonCallback() {
+                                @Override
+                                public void onSuccess(String s) {
+
+                                }
+
+                                @Override
+                                public void onFailed(String s, String s1) {
+
+                                }
+                            });
 
                             MobclickAgent.onProfileSignIn(String.valueOf(mine.getUserInfo().getId()));
 

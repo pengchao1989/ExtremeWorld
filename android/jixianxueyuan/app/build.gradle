@@ -24,8 +24,8 @@ android {
         applicationId "com.jixianxueyuan"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 35
-        versionName "1.6.1"
+        versionCode 36
+        versionName "1.6.2"
         multiDexEnabled true
         ndk {
             //设置支持的SO库架构
@@ -127,6 +127,8 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name:'IMCore-2.0.2', ext:'aar')
+    compile(name:'IMKit-2.0.2', ext: 'aar')
     compile 'com.android.support:support-v13:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
@@ -173,9 +175,41 @@ dependencies {
     compile files('libs/renderscript-v8.jar')
     // optional
     compile project(':multi-image-selector')
-    compile project(':OneSDK')
     compile project(':Minisdk-release')
     compile project(':social_sdk_library_project')
+
+    //baichuan IM
+/*    compile 'com.alibaba.mobileim:IMCore:2.0.1@aar'
+    compile 'com.alibaba.mobileim:IMKit:2.0.1@aar'*/
+
+
+    //安全基础
+    compile 'com.taobao.android:securityguardaar3:5.1.81@aar'
+
+
+    //fastjson
+    compile 'com.alibaba:fastjson:1.2.9'
+
+    //支付
+    compile 'com.alibaba.alipay:alipaySingle:20160825@jar'
+
+    //登陆
+    compile 'com.ali.auth.sdk:alibabauth_core:1.1.4@jar'
+    compile 'com.ali.auth.sdk:alibabauth_ui:1.1.4@aar'
+    compile 'com.ali.auth.sdk:alibabauth_ext:1.1.4@jar'
+
+    //Mtop网关
+    compile 'com.taobao.android:mtopsdk_allinone_open:1.2.2.4@jar'
+
+    //applink
+    compile 'com.taobao.android:alibc_applink:2.0.0.9@jar'
+
+    //UT
+    compile 'com.taobao.android:utdid4all:1.1.5.3_proguard@jar'
+    compile 'com.alibaba.mtl:app-monitor-sdk:2.5.1.3_for_bc_proguard@jar'
+
+    //电商SDK
+    compile 'com.alibaba.sdk.android:alibc_trade_sdk:3.1.1.11@aar'
 
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
     compile project(path: ':lib-bither-compress')
@@ -184,5 +218,5 @@ dependencies {
 bugly {
     appId = '900018639'
     appKey = '6H1BuGJoxCxNEcYx'
-    upload = false
+    upload = true
 }

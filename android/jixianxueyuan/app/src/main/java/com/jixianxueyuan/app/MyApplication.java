@@ -6,12 +6,12 @@ import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
+import com.alibaba.baichuan.android.trade.callback.AlibcTradeInitCallback;
 import com.alibaba.mobileim.YWAPI;
-import com.alibaba.sdk.android.AlibabaSDK;
-import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
-import com.alibaba.sdk.android.trade.TradeConfigs;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.alibaba.wxlib.util.SysUtil;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -69,26 +69,9 @@ public class MyApplication extends MultiDexApplication {
 
         Fresco.initialize(this);
 
-        TradeConfigs.defaultTaokePid="mm_111250070_0_0";
-        //AlibabaSDK.turnOnDebug();
-        AlibabaSDK.asyncInit(this, new InitResultCallback() {
+        //TradeConfigs.defaultTaokePid="mm_111250070_0_0";
 
-            @Override
-            public void onSuccess() {
-                //Toast.makeText(MyApplication.this, "初始化成功", Toast.LENGTH_SHORT).show();
-
-                initCloudChannel(MyApplication.this);
-
-
-            }
-
-            @Override
-            public void onFailure(int code, String message) {
-                Toast.makeText(MyApplication.this, "初始化异常", Toast.LENGTH_SHORT)
-                        .show();
-            }
-
-        });
+        initAlibcTrade();
 
         initIM();
 
@@ -104,32 +87,51 @@ public class MyApplication extends MultiDexApplication {
      * @param applicationContext
      */
     private void initCloudChannel(Context applicationContext) {
-        final CloudPushService cloudPushService = AlibabaSDK.getService(CloudPushService.class);
-        if(cloudPushService != null) {
 
+        PushServiceFactory.init(applicationContext);
+        final CloudPushService pushService = PushServiceFactory.getCloudPushService();
+        pushService.register(applicationContext, new CommonCallback() {
+            @Override
+            public void onSuccess(String response) {
+                if(getMine().getUserInfo().getId() != null){
+                    long userId = getMine().getUserInfo().getId();
+                    pushService.bindAccount(String.valueOf(userId), new CommonCallback() {
+                        @Override
+                        public void onSuccess(String s) {
 
-
-            cloudPushService.register(applicationContext,  new CommonCallback() {
-
-                @Override
-                public void onSuccess() {
-                    Log.d("MyApplication", "init cloudchannel success");
-                    if(getMine().getUserInfo() != null){
-                        if(getMine().getUserInfo().getId() != null){
-                            long userId = getMine().getUserInfo().getId();
-                            cloudPushService.bindAccount(String.valueOf(userId));
                         }
-                    }
-                }
 
-                @Override
-                public void onFailed(String errorCode, String errorMessage) {
-                    Log.d("MyApplication", "init cloudchannel fail" + "err:" + errorCode + " - message:"+ errorMessage);
+                        @Override
+                        public void onFailed(String s, String s1) {
+
+                        }
+                    });
                 }
-            });
-        }else{
-            Log.i("MyApplication", "CloudPushService is null");
-        }
+                Log.d("MyApplication", "init cloudchannel success");
+            }
+            @Override
+            public void onFailed(String errorCode, String errorMessage) {
+                Log.d("MyApplication", "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
+            }
+        });
+    }
+
+    private void initAlibcTrade(){
+        AlibcTradeSDK.asyncInit(this, new AlibcTradeInitCallback() {
+            @Override
+            public void onSuccess() {
+                //初始化成功，设置相关的全局配置参数
+
+                initCloudChannel(MyApplication.this);
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                //初始化失败，可以根据code和msg判断失败原因，详情参见错误说明
+                Toast.makeText(MyApplication.this, "初始化异常" + msg, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
     }
 
     private void initIM(){
@@ -139,8 +141,10 @@ public class MyApplication extends MultiDexApplication {
             return;
         }
         //第一个参数是Application Context
-        //这里的APP_KEY即应用创建时申请的APP_KEY
-        YWAPI.init(this, "23213193");
+        //这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
+        if(SysUtil.isMainProcess()){
+            YWAPI.init(this, "23213193");
+        }
     }
 
 
