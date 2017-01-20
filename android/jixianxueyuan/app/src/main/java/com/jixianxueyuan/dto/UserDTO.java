@@ -22,6 +22,10 @@ public class UserDTO implements Serializable {
     private String city;
     private String district;
     private String token;
+    private long point;
+    private String device;
+    private String versionName;
+
 
     private UserDTO inviter;
 
@@ -186,6 +190,30 @@ public class UserDTO implements Serializable {
 
     public void setInviter(UserDTO inviter) {
         this.inviter = inviter;
+    }
+
+    public long getPoint() {
+        return point;
+    }
+
+    public void setPoint(long point) {
+        this.point = point;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getVersionName() {
+        return versionName;
+    }
+
+    public void setVersionName(String versionName) {
+        this.versionName = versionName;
     }
 
     /*    @Override

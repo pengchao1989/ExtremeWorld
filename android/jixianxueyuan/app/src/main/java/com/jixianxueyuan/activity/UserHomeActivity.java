@@ -2,6 +2,8 @@ package com.jixianxueyuan.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.mobileim.YWAPI;
@@ -17,8 +20,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.TopicListOfUserAdapter;
 import com.jixianxueyuan.app.Mine;
@@ -61,10 +68,12 @@ public class UserHomeActivity extends BaseActivity {
     @BindView(R.id.user_home_listview)ListView listView;
     private SimpleDraweeView avatarImageView;
     private SimpleDraweeView coverImageView;
+    private RelativeLayout coverContainer;
     private TextView nameTextView;
     private TextView idTextView;
     private TextView regionTextView;
     private TextView signatureTextView;
+    private TextView deviceTextView;
     private Button sendMessageButton;
 
 
@@ -102,8 +111,10 @@ public class UserHomeActivity extends BaseActivity {
     private void initHeadView(){
         View headView = LayoutInflater.from(this).inflate(R.layout.user_home_head_view, null);
         signatureTextView = (TextView) headView.findViewById(R.id.user_home_head_signature);
+        deviceTextView = (TextView) headView.findViewById(R.id.user_home_head_device);
         avatarImageView = (SimpleDraweeView) headView.findViewById(R.id.user_home_head_avatar);
         coverImageView = (SimpleDraweeView) headView.findViewById(R.id.user_home_head_cover);
+        coverContainer = (RelativeLayout) headView.findViewById(R.id.cover_container);
         nameTextView = (TextView) headView.findViewById(R.id.user_home_head_name);
         idTextView = (TextView) headView.findViewById(R.id.user_home_head_id);
         regionTextView = (TextView)headView.findViewById(R.id.user_home_head_region);
@@ -150,8 +161,39 @@ public class UserHomeActivity extends BaseActivity {
 
     private void showCover() {
         if(userDTO != null){
-            String coverUrl = userDTO.getBg() + QiniuImageStyle.COVER;
-            coverImageView.setImageURI(ImageUriParseUtil.parse(coverUrl));
+
+            if (!TextUtils.isEmpty(userDTO.getBg())){
+                String coverUrl = userDTO.getBg() + QiniuImageStyle.COVER;
+                coverImageView.setImageURI(ImageUriParseUtil.parse(coverUrl));
+            }else {
+                if (!TextUtils.isEmpty(userDTO.getAvatar())){
+
+                    String avgColorUrl = userDTO.getAvatar() + "?imageAve";
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, avgColorUrl, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Gson gson = new Gson();
+                            ImageAvg imageAvg = gson.fromJson(response, ImageAvg.class);
+                            if (imageAvg != null){
+                                try {
+                                    String colorString = imageAvg.RGB.replace("0x", "#");
+                                    coverImageView.setBackgroundColor(Color.parseColor(colorString));
+                                }catch (NumberFormatException e){
+
+                                }
+
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+                    MyApplication.getContext().getRequestQueue().add(stringRequest);
+                }
+            }
+
         }
     }
 
@@ -189,11 +231,22 @@ public class UserHomeActivity extends BaseActivity {
         }
 
 
-        StringBuffer signatureStringBuffer = new StringBuffer();
         if (!TextUtils.isEmpty(userDTO.getSignature())){
-            signatureStringBuffer.append(userDTO.getSignature());
+            signatureTextView.setVisibility(View.VISIBLE);
+            signatureTextView.setText(userDTO.getSignature());
         }
-        signatureTextView.setText(signatureStringBuffer.toString());
+
+        StringBuilder deviceStringBuilder = new StringBuilder();
+        deviceStringBuilder.append(userDTO.getDevice());
+        deviceStringBuilder.append(" | ");
+        deviceStringBuilder.append(userDTO.getVersionName());
+        if (deviceStringBuilder.length() > 3){
+            deviceTextView.setVisibility(View.VISIBLE);
+            deviceTextView.setText(deviceStringBuilder.toString());
+        }
+
+
+
 
         showCover();
     }
@@ -279,6 +332,10 @@ public class UserHomeActivity extends BaseActivity {
         Intent intent = new Intent(context, UserHomeActivity.class);
         intent.putExtra(INTENT_USER_MIN, userMinDTO);
         context.startActivity(intent);
+    }
+
+    private static class ImageAvg{
+        public String RGB;
     }
 
 }

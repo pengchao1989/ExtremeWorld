@@ -12,6 +12,7 @@
         android:layout_height="190dp">
 
         <RelativeLayout
+            android:id="@+id/cover_container"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="@color/grey">
@@ -79,6 +80,8 @@
         tools:text="China SiChuan ChengDu"
         android:visibility="visible"/>
 
+
+
     <TextView
         android:id="@+id/user_home_head_signature"
         android:layout_width="wrap_content"
@@ -88,15 +91,30 @@
         android:paddingRight="36dp"
         android:textSize="14sp"
         android:textColor="@color/grey_deep"
+        android:visibility="gone"
         android:layout_gravity="center_horizontal"
         tools:text="种个南瓜像地球，架在五岳山上头。\n把它扔进太平洋，地球又多一个洲。"/>
 
+
+    <TextView
+        android:id="@+id/user_home_head_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:textSize="14sp"
+        android:textColor="@color/grey_deep"
+        android:layout_gravity="center_horizontal"
+        tools:text="iphone 5s | v2.6.2"/>
+
     <Button
         android:id="@+id/user_home_head_send_msg"
-        android:text="Message"
+        android:text="@string/send_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="@dimen/button_min_width"
         android:layout_gravity="center_horizontal"
+        android:drawableLeft="@mipmap/ic_mail_white"
         style="@style/BlueButton"/>
 </LinearLayout>

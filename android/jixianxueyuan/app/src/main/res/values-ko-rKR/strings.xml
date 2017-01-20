@@ -96,6 +96,7 @@
     <string name="we_speek">나도 말</string>
     <string name="want_speek">하고 싶은 말이 좀?</string>
     <string name="send">보내기</string>
+    <string name="send_message">문자 메시지</string>
     <string name="title">제목</string>
     <string name="submit">게시</string>
     <string name="submit_2">게시</string>
