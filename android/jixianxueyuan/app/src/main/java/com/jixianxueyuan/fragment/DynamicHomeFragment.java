@@ -40,6 +40,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.google.gson.Gson;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CreateNewsActivity;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
@@ -371,12 +372,18 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
                                 MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.MOOD);
                                 break;
                             case R.id.menu_create_video:
-                            case R.id.menu_create_short_video:
                                 Intent intentVideo = new Intent(DynamicHomeFragment.this.getActivity(), CreateVideoActivity.class);
                                 intentVideo.putExtra(TopicType.TYPE, TopicType.VIDEO);
                                 startActivity(intentVideo);
                                 MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.VIDEO);
                                 break;
+
+                            case R.id.menu_create_news:
+                                Intent intentNews = new Intent(DynamicHomeFragment.this.getActivity(), CreateNewsActivity.class);
+                                startActivity(intentNews);
+                                MobclickAgent.onEvent(DynamicHomeFragment.this.getActivity(), UmengEventId.HOME_CREATE_ITEM_CLICK, TopicType.NEWS);
+                                break;
+
                         }
                         dialog.dismiss();
                     }

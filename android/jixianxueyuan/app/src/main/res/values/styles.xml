@@ -45,6 +45,7 @@
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="android:background">@color/background</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="HorizontalDividerView">

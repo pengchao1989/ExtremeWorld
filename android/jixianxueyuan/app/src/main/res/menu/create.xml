@@ -7,12 +7,12 @@
         />
     <item
         android:id="@+id/menu_create_video"
-        android:title="@string/contribute"
-        android:icon="@mipmap/add_discuss"
-        />
-    <item
-        android:id="@+id/menu_create_short_video"
         android:title="@string/video"
         android:icon="@mipmap/add_video"
+        />
+    <item
+        android:id="@+id/menu_create_news"
+        android:title="@string/news"
+        android:icon="@mipmap/add_discuss"
         />
 </menu>
