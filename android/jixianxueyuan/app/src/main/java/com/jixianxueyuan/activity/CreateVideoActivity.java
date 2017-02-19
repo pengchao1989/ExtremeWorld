@@ -1,13 +1,18 @@
 package com.jixianxueyuan.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -33,11 +38,13 @@ import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
+import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.BitmapUtils;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuVideoUpload;
 import com.jixianxueyuan.util.qiniu.QiniuVideoUploadListener;
 import com.jixianxueyuan.util.qiniu.VideoUploadResult;
@@ -50,6 +57,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * Created by pengchao on 3/13/16.
@@ -61,6 +69,7 @@ public class CreateVideoActivity extends BaseActivity {
 
     private static final String tag = "CreateVideoActivity";
     private static final int FILE_SELECT_CODE = 0x1;
+    private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE = 0x101;
 
     @BindView(R.id.create_video_guide)
     TextView guideTextView;
@@ -145,7 +154,61 @@ public class CreateVideoActivity extends BaseActivity {
     }
 
     @OnClick(R.id.create_video_select)void onSelectButtonClick(){
-        showFileChooser();
+        //检查权限
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)  != PackageManager.PERMISSION_GRANTED) {
+
+
+            //申请权限
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+            }else {
+
+            }
+                ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE);
+
+        }else{
+            showFileChooser();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    showFileChooser();
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    final MaterialDialog mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setTitle("缺少用户授权？");
+                    mMaterialDialog.setMessage("当前没有读写存储设备的权限，请到设置-应用-滑板圈-权限管理中开启");
+                    mMaterialDialog.setPositiveButton("设置", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mMaterialDialog.dismiss();
+                            Util.getAppDetailSettingIntent(CreateVideoActivity.this);
+
+                        }
+                    });
+                    mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mMaterialDialog.dismiss();
+                        }
+                    });
+                    mMaterialDialog.show();
+                }
+                return;
+            }
+        }
     }
 
     private void showFileChooser() {

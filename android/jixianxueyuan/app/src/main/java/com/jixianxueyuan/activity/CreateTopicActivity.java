@@ -1,12 +1,17 @@
 package com.jixianxueyuan.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -55,6 +60,7 @@ import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.BitmapUtils;
 import com.jixianxueyuan.util.DiskCachePath;
 import com.jixianxueyuan.util.MyLog;
+import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
 import com.jixianxueyuan.util.qiniu.QiniuVideoUpload;
@@ -75,6 +81,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.drakeet.materialdialog.MaterialDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
@@ -84,8 +91,9 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
     public static final String tag = CreateTopicActivity.class.getSimpleName();
 
-    public static final int REQUEST_IMAGE_CODE = 1;
-    public static final int REQUEST_VIDEO_CODE = 2;
+    private static final int REQUEST_IMAGE_CODE = 1;
+    private static final int REQUEST_VIDEO_CODE = 2;
+    private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE = 0x101;
 
     @BindView(R.id.create_topic_actionbar)MyActionBar myActionBar;
     @BindView(R.id.create_topic_title_layout)LinearLayout mTaxonomySpinnerLayout;
@@ -675,8 +683,59 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
 
     @Override
     public void onAdd() {
-        addImage();
+        //检查权限
+        //检查权限
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)  != PackageManager.PERMISSION_GRANTED) {
+            //申请权限
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE);
+
+        }else{
+            addImage();
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                    addImage();
+
+                } else {
+
+                    boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0]);
+                    if (isTip){
+
+                    }else {
+                        //用户已经彻底禁止弹出权限请求
+                        final MaterialDialog mMaterialDialog = new MaterialDialog(this);
+                        mMaterialDialog.setTitle("缺少用户授权？");
+                        mMaterialDialog.setMessage("当前没有读写存储设备的权限，请到设置-应用-滑板圈-权限管理中开启");
+                        mMaterialDialog.setPositiveButton("设置", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                                Util.getAppDetailSettingIntent(CreateTopicActivity.this);
+
+                            }
+                        });
+                        mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+                        mMaterialDialog.show();
+                    }
+
+
+                }
+                return;
+            }
+        }
+    }
 }

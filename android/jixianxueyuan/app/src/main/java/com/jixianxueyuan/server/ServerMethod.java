@@ -12,8 +12,8 @@ public class ServerMethod {
     static public final int STATUS_ERROR = -1;
     static public final int STATUS_NO_CONTENT = 204;
 
-    static final String test_server_url = "https://app.jixianxueyuan.com/";
-    static final String production_server_url = "https://app.jixianxueyuan.com/";
+    static final String test_server_url = "http://www.jixianxueyuan.com/";
+    static final String production_server_url = "http://www.jixianxueyuan.com/";
     //static final String server_url = "http://192.168.1.2:8023/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
