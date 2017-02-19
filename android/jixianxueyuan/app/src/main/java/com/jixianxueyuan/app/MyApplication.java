@@ -73,7 +73,7 @@ public class MyApplication extends MultiDexApplication {
 
         initAlibcTrade();
 
-        initIM();
+        //initIM();
 
         initUmenScoial();
 

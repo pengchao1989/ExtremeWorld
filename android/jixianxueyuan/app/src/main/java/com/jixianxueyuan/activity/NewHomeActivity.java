@@ -1,10 +1,16 @@
 package com.jixianxueyuan.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.wxlib.util.SysUtil;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,22 +33,21 @@ import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.request.LocationDTO;
 import com.jixianxueyuan.fragment.CourseHomeFragment;
-import com.jixianxueyuan.fragment.CourseListFragment;
-import com.jixianxueyuan.fragment.DiscoveryFragment;
 import com.jixianxueyuan.fragment.DynamicHomeFragment;
 import com.jixianxueyuan.fragment.MarketFragment;
 import com.jixianxueyuan.fragment.MineFragment;
-import com.jixianxueyuan.fragment.NewHomeFragment;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.location.LocationManager;
 import com.jixianxueyuan.location.MyLocation;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
+import com.jixianxueyuan.util.Util;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * Created by pengchao on 10/31/15.
@@ -48,6 +55,8 @@ import butterknife.ButterKnife;
 public class NewHomeActivity extends FragmentActivity implements View.OnClickListener {
 
     public static final String tag = NewHomeActivity.class.getSimpleName();
+
+    private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE_CODE = 0x101;
 
     @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @BindView(R.id.tab_dynamic_layout)RelativeLayout trendsLayout;
@@ -71,6 +80,8 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     private MineFragment mineFragment;
     private MarketFragment marketFragment;
 
+    private boolean mIsInitIm = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +100,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
 
         location();
 
-        loginIM();
+        beginInitIM();
     }
 
     private void initView(){
@@ -259,7 +270,7 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         bottomSheetLayout.showWithSheetView(menuSheetView);
     }
 
-        private void location(){
+    private void location(){
         new CountDownTimer(3000, 3000){
 
             @Override
@@ -321,6 +332,35 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         }
     }
 
+    private void beginInitIM(){
+
+        //检查IM可能会用到的READ_PHONE_STATE权限
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE)  != PackageManager.PERMISSION_GRANTED) {
+            //申请权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, PERMISSIONS_REQUEST_READ_PHONE_STATE_CODE);
+
+        }else{
+            initIM();
+        }
+    }
+
+
+
+    private void initIM(){
+        SysUtil.setApplication(MyApplication.getContext());
+        if(SysUtil.isTCMSServiceProcess(MyApplication.getContext())){
+            return;
+        }
+        //第一个参数是Application Context
+        //这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
+        if(SysUtil.isMainProcess()){
+            YWAPI.init(MyApplication.getContext(), "23213193");
+            mIsInitIm = true;
+            loginIM();
+        }
+    }
+
     private void loginIM(){
 
         new CountDownTimer(5000, 5000){
@@ -347,5 +387,59 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         }.start();
 
 
+    }
+
+    public boolean isInitIm(){
+        return mIsInitIm;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_PHONE_STATE_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    initIM();
+
+                } else {
+
+                    boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0]);
+                    if (isTip){
+
+                    }else {
+                        //用户已经彻底禁止弹出权限请求
+                        final MaterialDialog mMaterialDialog = new MaterialDialog(this);
+                        mMaterialDialog.setTitle("缺少用户授权？");
+                        mMaterialDialog.setMessage("当前没有‘获取手机信息’的权限，请到设置-应用-滑板圈-权限管理中开启");
+                        mMaterialDialog.setPositiveButton("设置", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                                Util.getAppDetailSettingIntent(NewHomeActivity.this);
+                            }
+                        });
+                        mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+                        mMaterialDialog.show();
+                    }
+
+
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mIsInitIm == false){
+            beginInitIM();
+        }
     }
 }

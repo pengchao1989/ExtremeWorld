@@ -45,6 +45,7 @@ import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
+import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RankingListActivity;
 import com.jixianxueyuan.activity.SiteListActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
@@ -315,9 +316,13 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     @OnClick(R.id.message) void onMessageClick(){
-        YWIMKit ywimKit = IMManager.getInstance().getYwimKit();
-        Intent intent = ywimKit.getConversationActivityIntent();
-        startActivity(intent);
+        if (isInitIm()){
+            YWIMKit ywimKit = IMManager.getInstance().getYwimKit();
+            Intent intent = ywimKit.getConversationActivityIntent();
+            startActivity(intent);
+        }else {
+            Toast.makeText(this.getActivity(), "因权限不够暂时无法打开IM，请到系统设置中开启一些权限",Toast.LENGTH_LONG).show();
+        }
     }
 
     @OnClick(R.id.add_topic) void onAddTopicClick(){
@@ -563,12 +568,19 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     private void updateMessageView(){
-
-        if (IMManager.getInstance().isReceiverNewMessage(this.getContext())){
-            messageIsNewImageView.setVisibility(View.VISIBLE);
-        }else {
-            messageIsNewImageView.setVisibility(View.GONE);
+        if (isInitIm()){
+            if (IMManager.getInstance().isReceiverNewMessage(this.getContext())){
+                messageIsNewImageView.setVisibility(View.VISIBLE);
+            }else {
+                messageIsNewImageView.setVisibility(View.GONE);
+            }
         }
+
+    }
+
+    private boolean isInitIm(){
+        NewHomeActivity newHomeActivity = (NewHomeActivity) getActivity();
+        return newHomeActivity.isInitIm();
     }
 
     @Subscribe

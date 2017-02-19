@@ -684,7 +684,6 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
     @Override
     public void onAdd() {
         //检查权限
-        //检查权限
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)  != PackageManager.PERMISSION_GRANTED) {
             //申请权限
