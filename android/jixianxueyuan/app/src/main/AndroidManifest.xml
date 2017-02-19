@@ -421,7 +421,7 @@
             android:value="pBOXHsNNor9Q/K2xjpVchE8c" />
 
         <meta-data android:name="com.alibaba.app.appkey" android:value="23256040"/> <!-- 请填写你自己的- appKey -->
-        <meta-data android:name="com.alibaba.app.appsecret" android:value="16b60f3f2bfdaf50923bec6eff63a566"/> <!-- 请填写你自己的appSecret -->
+        <meta-data android:name="com.alibaba.app.appsecret" android:value="b7ecc9e178f90315dd7b5aced8a1d789"/> <!-- 请填写你自己的appSecret -->
 
 
         <meta-data  android:name="HOBBY" android:value="${HOBBY}"/>
