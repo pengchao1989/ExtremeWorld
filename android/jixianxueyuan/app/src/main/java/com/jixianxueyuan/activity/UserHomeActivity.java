@@ -47,6 +47,7 @@ import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -334,7 +335,7 @@ public class UserHomeActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    private static class ImageAvg{
+    private static class ImageAvg implements Serializable {
         public String RGB;
     }
 
