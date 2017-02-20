@@ -69,7 +69,12 @@ public class CollectionListAdapter extends BaseAdapter{
 
     @Override
     public CollectionDTO getItem(int position) {
-        return collectionDTOList.get(position);
+        if (position < collectionDTOList.size()){
+            return collectionDTOList.get(position);
+        }else {
+            return null;
+        }
+
     }
 
     @Override

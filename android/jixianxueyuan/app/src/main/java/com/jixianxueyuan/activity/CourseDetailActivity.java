@@ -103,7 +103,7 @@ public class CourseDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CourseDetailActivity.this, UserHomeActivity.class);
-                intent.putExtra("userMinDTO", courseDto.getUser());
+                intent.putExtra(UserHomeActivity.INTENT_USER_MIN, courseDto.getUser());
                 startActivity(intent);
             }
         });

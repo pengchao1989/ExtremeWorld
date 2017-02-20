@@ -1,11 +1,16 @@
 package com.jixianxueyuan.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -64,6 +69,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
+import me.drakeet.materialdialog.MaterialDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
@@ -78,6 +84,7 @@ public class RegisterActivity extends Activity {
 
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
+    private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE = 0x101;
 
     @BindView(R.id.register_avatar)SimpleDraweeView avatarImageView;
     @BindView(R.id.register_avatar_select)Button selectButton;
@@ -471,6 +478,63 @@ public class RegisterActivity extends Activity {
     }
 
     @OnClick(R.id.register_avatar_select)void onSelectClick(){
+
+        //检查读写存储权限
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)  != PackageManager.PERMISSION_GRANTED) {
+            //申请权限
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE);
+
+        }else{
+            selectAvatar();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    selectAvatar();
+
+                } else {
+
+                    boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0]);
+                    if (isTip){
+
+                    }else {
+                        //用户已经彻底禁止弹出权限请求
+                        final MaterialDialog mMaterialDialog = new MaterialDialog(this);
+                        mMaterialDialog.setTitle("缺少用户授权？");
+                        mMaterialDialog.setMessage("当前没有读写存储设备的权限，请到设置-应用-滑板圈-权限管理中开启");
+                        mMaterialDialog.setPositiveButton("设置", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                                Util.getAppDetailSettingIntent(RegisterActivity.this);
+
+                            }
+                        });
+                        mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+                        mMaterialDialog.show();
+                    }
+
+
+                }
+                return;
+            }
+        }
+    }
+
+    private void selectAvatar() {
         Intent intent = new Intent(this, MultiImageSelectorActivity.class);
 
         // whether show camera

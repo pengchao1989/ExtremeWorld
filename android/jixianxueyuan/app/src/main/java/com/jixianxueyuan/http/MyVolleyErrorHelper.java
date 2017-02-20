@@ -24,7 +24,10 @@ import java.util.Map;
 public class MyVolleyErrorHelper {
 
     public static void showError(Context context, Object error){
-        Toast.makeText(context, getMessage(error,context), Toast.LENGTH_SHORT).show();
+        if (context != null){
+            Toast.makeText(context, getMessage(error,context), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public static String getMessage(Object error, Context context) {

@@ -165,11 +165,13 @@ public class CollectionListActivity extends BaseActivity {
     }
 
     @OnItemClick(R.id.collection_list_listview)void onItemClick(int position){
-        if (position > adapter.getCount()) {
+        if (position >= adapter.getCount()) {
             return;
         }
         TopicDTO topicDTO = adapter.getItem(position).getTopic();
-
+        if (topicDTO == null){
+            return;
+        }
         Intent intent = null;
         switch (topicDTO.getType()) {
             case TopicType.MOOD:

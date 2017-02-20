@@ -1,8 +1,14 @@
 package com.jixianxueyuan.activity.profile;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +20,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.BaseActivity;
 import com.jixianxueyuan.activity.CropAvatarActivity;
+import com.jixianxueyuan.activity.RegisterActivity;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.commons.MyErrorHelper;
 import com.jixianxueyuan.config.ImageLoaderConfig;
@@ -26,6 +33,8 @@ import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.ImageUriParseUtil;
+import com.jixianxueyuan.util.StringUtils;
+import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUploadListener;
 import com.jixianxueyuan.widget.MyActionBar;
@@ -37,6 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.BindView;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
+import me.drakeet.materialdialog.MaterialDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
@@ -50,6 +60,7 @@ public class ProfileEditActivity extends BaseActivity {
     private static final int REQUEST_CODE_GENDER = 0x1001;
     private static final int REQUEST_CODE_SIGNATURE = 0x1002;
     private static final int REQUEST_CODE_NICKNAME = 0x1003;
+    private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE = 0x101;
 
 
 
@@ -91,11 +102,15 @@ public class ProfileEditActivity extends BaseActivity {
 
         nickNameEditText.setText(userDTO.getName());
         signatureTextView.setText(userDTO.getSignature());
-        if(userDTO.getGender().equals("male")){
-            genderTextView.setText(getString(R.string.male));
-        }else if(userDTO.getGender().equals("female")){
-            genderTextView.setText(getString(R.string.female));
-        }else {
+        if (!StringUtils.isEmpty(userDTO.getGender())){
+            if(userDTO.getGender().equals("male")){
+                genderTextView.setText(getString(R.string.male));
+            }else if(userDTO.getGender().equals("female")){
+                genderTextView.setText(getString(R.string.female));
+            }else {
+                genderTextView.setText(getString(R.string.unknown));
+            }
+        }else  {
             genderTextView.setText(getString(R.string.unknown));
         }
 
@@ -211,6 +226,19 @@ public class ProfileEditActivity extends BaseActivity {
 
 
     @OnClick(R.id.profile_edit_avatar)void onAvatarClick(){
+        //检查读写存储权限
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)  != PackageManager.PERMISSION_GRANTED) {
+            //申请权限
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE);
+
+        }else{
+            selectAvatar();
+        }
+    }
+
+    private void selectAvatar() {
         Intent intent = new Intent(this, MultiImageSelectorActivity.class);
 
         // whether show camera
@@ -244,6 +272,48 @@ public class ProfileEditActivity extends BaseActivity {
         startActivityForResult(intent, REQUEST_CODE_SIGNATURE);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    selectAvatar();
+
+                } else {
+
+                    boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0]);
+                    if (isTip){
+
+                    }else {
+                        //用户已经彻底禁止弹出权限请求
+                        final MaterialDialog mMaterialDialog = new MaterialDialog(this);
+                        mMaterialDialog.setTitle("缺少用户授权？");
+                        mMaterialDialog.setMessage("当前没有读写存储设备的权限，请到设置-应用-滑板圈-权限管理中开启");
+                        mMaterialDialog.setPositiveButton("设置", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                                Util.getAppDetailSettingIntent(ProfileEditActivity.this);
+
+                            }
+                        });
+                        mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+                        mMaterialDialog.show();
+                    }
+
+
+                }
+                return;
+            }
+        }
+    }
 
 
 }
