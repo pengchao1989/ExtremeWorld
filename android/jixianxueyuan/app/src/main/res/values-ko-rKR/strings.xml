@@ -43,6 +43,7 @@
     <string name="get_verification_code">가져오기 인증 코드</string>
     <string name="re_acquisition">다시 가져오기</string>
     <string name="description">설명</string>
+    <string name="type">형식</string>
     <string name="paste_url_here">붙다 url 여기까지</string>
     <string name="paste_weixin_url_tips">可以将微信中相关的订阅号资讯分享到此处，点击微信页面右上角-复制链接，然后粘贴过来！</string>
     <string name="name">이름</string>
@@ -68,6 +69,7 @@
     <string name="course">교육</string>
     <string name="challenge">도전</string>
     <string name="site">장소</string>
+    <string name="community">동아리</string>
     <string name="people">동네 사람들</string>
     <string name="store">상점</string>
     <string name="ranking_list">순위표</string>
@@ -133,6 +135,12 @@
     <string name="lat_lng_empty">미정 성공을 얻다 경위도</string>
     <string name="site_des_empty">작성해 주세요 설명</string>
     <string name="site_name_empty">좀 이름을 써 넣다</string>
+
+    <!--community-->
+    <string name="community_type_location">location community</string>
+    <string name="community_type_school">school community</string>
+    <string name="community_type_shop">skateboard shop</string>
+    <string name="community_type_professional">professional</string>
 
     <!--store-->
     <string name="shopping_cart">장바구니</string>

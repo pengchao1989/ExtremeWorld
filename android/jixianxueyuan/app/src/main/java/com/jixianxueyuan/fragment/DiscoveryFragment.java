@@ -12,11 +12,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.activity.CourseHomeActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RankingListActivity;
-import com.jixianxueyuan.activity.SiteListActivity;
+import com.jixianxueyuan.activity.CommunityListActivity;
 import com.jixianxueyuan.activity.TopicTaxonomyHomeActivity;
 import com.jixianxueyuan.adapter.DiscoveryListAdapter;
 import com.jixianxueyuan.config.TopicType;
@@ -95,7 +94,7 @@ public class DiscoveryFragment extends Fragment {
 
                     case 2:
                         MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_SITE_CLICK);
-                        intent = new Intent(DiscoveryFragment.this.getActivity(), SiteListActivity.class);
+                        intent = new Intent(DiscoveryFragment.this.getActivity(), CommunityListActivity.class);
                         break;
                     case 3:
                         MobclickAgent.onEvent(DiscoveryFragment.this.getContext(), UmengEventId.DISCOVERY_NEAR_FRIEND_CLICK);

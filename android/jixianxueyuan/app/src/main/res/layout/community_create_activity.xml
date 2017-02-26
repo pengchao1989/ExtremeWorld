@@ -37,14 +37,14 @@
                         android:background="@color/white_overlay">
 
                         <ImageView
-                            android:id="@+id/site_create_select_front_image"
+                            android:id="@+id/community_create_select_front_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:src="@mipmap/reply_photo"/>
 
                         <ImageView
-                            android:id="@+id/site_create_front_image"
+                            android:id="@+id/community_create_front_image"
                             android:layout_width="match_parent"
                             android:layout_height="160dp"
                             android:scaleType="centerCrop"
@@ -59,7 +59,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/site_create_name_layout"
+                            android:id="@+id/community_create_name_layout"
                             android:layout_marginTop="14dp"
                             style="@style/FormItemLayout">
 
@@ -68,7 +68,7 @@
                                 style="@style/FormDesText"/>
 
                             <EditText
-                                android:id="@+id/site_create_name_edit_text"
+                                android:id="@+id/community_create_name_edit_text"
                                 style="@style/FormValueEditTextRequired"/>
                         </LinearLayout>
 
@@ -80,7 +80,7 @@
                             android:layout_height="wrap_content">
 
                             <LinearLayout
-                                android:id="@+id/site_create_address_layout"
+                                android:id="@+id/community_create_address_layout"
                                 android:layout_marginRight="10dp"
                                 style="@style/FormItemLayout">
 
@@ -89,7 +89,7 @@
                                     style="@style/FormDesText"/>
 
                                 <TextView
-                                    android:id="@+id/site_create_address_text"
+                                    android:id="@+id/community_create_address_text"
                                     android:hint="@string/please_select"
                                     style="@style/FormValueEditText"/>
 
@@ -110,7 +110,7 @@
                             style="@style/HorizontalDividerView"/>
 
                         <LinearLayout
-                            android:id="@+id/site_create_longitude_layout"
+                            android:id="@+id/community_create_longitude_layout"
                             style="@style/FormItemLayout">
 
                             <TextView
@@ -118,7 +118,7 @@
                                 style="@style/FormDesText"/>
 
                             <TextView
-                                android:id="@+id/site_create_longitude_text"
+                                android:id="@+id/community_create_longitude_text"
                                 style="@style/FormValueEditTextRequired"/>
                         </LinearLayout>
 
@@ -126,7 +126,7 @@
                             style="@style/HorizontalDividerView"/>
 
                         <LinearLayout
-                            android:id="@+id/site_create_latitude_layout"
+                            android:id="@+id/community_create_latitude_layout"
                             style="@style/FormItemLayout">
 
                             <TextView
@@ -134,7 +134,7 @@
                                 style="@style/FormDesText"/>
 
                             <TextView
-                                android:id="@+id/site_create_latitude_text"
+                                android:id="@+id/community_create_latitude_text"
                                 style="@style/FormValueEditTextRequired"/>
                         </LinearLayout>
 
@@ -142,7 +142,26 @@
                             style="@style/HorizontalDividerView"/>
 
                         <LinearLayout
-                            android:id="@+id/site_create_des_layout"
+                            android:id="@+id/community_create_type_layout"
+                            style="@style/FormItemLayout">
+
+                            <TextView
+                                android:text="@string/type"
+                                style="@style/FormDesText"/>
+                            <Spinner
+                                android:id="@+id/community_create_select_type_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="right">
+
+                            </Spinner>
+                        </LinearLayout>
+
+                        <View
+                            style="@style/HorizontalDividerView"/>
+
+                        <LinearLayout
+                            android:id="@+id/community_create_des_layout"
                             style="@style/FormItemLayout">
 
                             <TextView
@@ -150,18 +169,13 @@
                                 style="@style/FormDesText"/>
 
                             <EditText
-                                android:id="@+id/site_create_des_edit"
-                                android:lines="2"
+                                android:id="@+id/community_create_des_edit"
+                                android:lines="4"
                                 android:singleLine="false"
                                 android:maxLines="5"
                                 style="@style/FormValueEditTextRequired"/>
                         </LinearLayout>
 
-                        <GridView
-                            android:id="@+id/site_create_hobby_select_gridview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:numColumns="4"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -171,7 +185,7 @@
 
 
                         <Button
-                            android:id="@+id/site_create_submit_button"
+                            android:id="@+id/community_create_submit_button"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/submit"
@@ -182,23 +196,23 @@
                 </LinearLayout>
 
                 <RelativeLayout
-                    android:id="@+id/create_site_upload_progress_layout"
+                    android:id="@+id/create_community_upload_progress_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/semi_transparent"
                     android:visibility="gone">
 
                     <ProgressBar
-                        android:id="@+id/create_site_upload_progress_view"
+                        android:id="@+id/create_community_upload_progress_view"
                         android:layout_width="wrap_content"
                         android:layout_height="80dp"
                         android:layout_centerInParent="true" />
 
                     <TextView
-                        android:id="@+id/create_site_upload_progress_textview"
+                        android:id="@+id/create_community_upload_progress_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/create_site_upload_progress_view"
+                        android:layout_alignBottom="@id/create_community_upload_progress_view"
                         android:layout_centerHorizontal="true"
                         android:text="正在上传"
                         android:textColor="@color/white" />

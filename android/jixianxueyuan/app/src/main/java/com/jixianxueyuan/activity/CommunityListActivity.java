@@ -10,11 +10,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.jixianxueyuan.R;
-import com.jixianxueyuan.adapter.SiteListAdapter;
+import com.jixianxueyuan.adapter.CommunityListAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.dto.CommunityDTO;
 import com.jixianxueyuan.dto.MyPage;
 import com.jixianxueyuan.dto.MyResponse;
-import com.jixianxueyuan.dto.SiteDTO;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.widget.MyActionBar;
@@ -25,17 +25,17 @@ import butterknife.ButterKnife;
 /**
  * Created by pengchao on 10/30/15.
  */
-public class SiteListActivity extends BaseActivity {
+public class CommunityListActivity extends BaseActivity {
 
     private static final int REQUEST_CODE_NEW = 1;
 
-    @BindView(R.id.site_list_activity_actionbar)MyActionBar actionBar;
-    @BindView(R.id.site_listview)
+    @BindView(R.id.community_list_activity_actionbar)MyActionBar actionBar;
+    @BindView(R.id.community_listview)
     ListView listView;
-    @BindView(R.id.site_list_swiperefresh)
+    @BindView(R.id.community_list_swiperefresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    private SiteListAdapter adapter;
+    private CommunityListAdapter adapter;
 
     private int currentPage = 0;
     private int totalPage = 0;
@@ -43,7 +43,7 @@ public class SiteListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.site_list_activity);
+        setContentView(R.layout.community_list_activity);
         ButterKnife.bind(this);
 
         initView();
@@ -63,16 +63,16 @@ public class SiteListActivity extends BaseActivity {
 
     private void initView(){
 
-        actionBar.setTitle(getString(R.string.site));
+        actionBar.setTitle(getString(R.string.community));
         actionBar.setActionOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SiteListActivity.this, SiteCreateActivity.class);
+                Intent intent = new Intent(CommunityListActivity.this, CommunityCreateActivity.class);
                 startActivityForResult(intent,REQUEST_CODE_NEW);
             }
         });
 
-        adapter = new SiteListAdapter(this);
+        adapter = new CommunityListAdapter(this);
         listView.setAdapter(adapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -94,14 +94,14 @@ public class SiteListActivity extends BaseActivity {
     private void requestSiteList(){
         swipeRefreshLayout.setRefreshing(true);
 
-        String url = ServerMethod.site();
+        String url = ServerMethod.community();
 
-        MyPageRequest<SiteDTO> myPageRequest = new MyPageRequest<SiteDTO>(Request.Method.GET, url, SiteDTO.class,
-                new Response.Listener<MyResponse<MyPage<SiteDTO>>>() {
+        MyPageRequest<CommunityDTO> myPageRequest = new MyPageRequest<CommunityDTO>(Request.Method.GET, url, CommunityDTO.class,
+                new Response.Listener<MyResponse<MyPage<CommunityDTO>>>() {
                     @Override
-                    public void onResponse(MyResponse<MyPage<SiteDTO>> response) {
+                    public void onResponse(MyResponse<MyPage<CommunityDTO>> response) {
                         if(response.getStatus() == MyResponse.status_ok){
-                            MyPage<SiteDTO> myPage = response.getContent();
+                            MyPage<CommunityDTO> myPage = response.getContent();
                             adapter.setData(myPage.getContents());
                         }
                         swipeRefreshLayout.setRefreshing(false);

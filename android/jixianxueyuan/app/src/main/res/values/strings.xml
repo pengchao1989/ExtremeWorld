@@ -43,6 +43,7 @@
     <string name="get_verification_code">get verification code</string>
     <string name="re_acquisition">Re acquisition</string>
     <string name="description">description</string>
+    <string name="type">type</string>
     <string name="paste_url_here">paste the URL here</string>
     <string name="paste_weixin_url_tips">可以将微信中相关的订阅号资讯分享到此处，点击微信页面右上角-复制链接，然后粘贴过来！</string>
     <string name="name">name</string>
@@ -68,6 +69,7 @@
     <string name="course">course</string>
     <string name="challenge">challenge</string>
     <string name="site">site</string>
+    <string name="community">community</string>
     <string name="people">near friend</string>
     <string name="ranking_list">ranking list</string>
     <string name="store">store</string>
@@ -133,6 +135,12 @@
     <string name="lat_lng_empty">Latitude and longitude is empty</string>
     <string name="site_des_empty">Please fill in the description</string>
     <string name="site_name_empty">Please fill in the name</string>
+
+    <!--community-->
+    <string name="community_type_location">location community</string>
+    <string name="community_type_school">school community</string>
+    <string name="community_type_shop">skateboard shop</string>
+    <string name="community_type_professional">professional</string>
 
     <!--store-->
     <string name="shopping_cart">shopping cart</string>

@@ -7,7 +7,7 @@
     style="@style/activity_root_layout">
 
     <com.jixianxueyuan.widget.MyActionBar
-        android:id="@+id/site_list_activity_actionbar"
+        android:id="@+id/community_list_activity_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:type="image"
@@ -15,14 +15,14 @@
         />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/site_list_swiperefresh"
+        android:id="@+id/community_list_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
         <ListView
-            android:id="@+id/site_listview"
+            android:id="@+id/community_listview"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:dividerHeight="6dp"

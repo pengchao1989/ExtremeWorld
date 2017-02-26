@@ -40,6 +40,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.google.gson.Gson;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CommunityListActivity;
 import com.jixianxueyuan.activity.CreateNewsActivity;
 import com.jixianxueyuan.activity.CreateTopicActivity;
 import com.jixianxueyuan.activity.CreateVideoActivity;
@@ -47,7 +48,6 @@ import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.RankingListActivity;
-import com.jixianxueyuan.activity.SiteListActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.WebActivity;
@@ -352,7 +352,7 @@ public class DynamicHomeFragment extends BaseFragment implements ScrollReceive {
     }
 
     @OnClick(R.id.home_header_site)void onSiteClick(){
-        Intent intent = new Intent(DynamicHomeFragment.this.getContext(), SiteListActivity.class);
+        Intent intent = new Intent(DynamicHomeFragment.this.getContext(), CommunityListActivity.class);
         DynamicHomeFragment.this.getActivity().startActivity(intent);
     }
 

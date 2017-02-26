@@ -122,8 +122,8 @@
         <activity android:name=".activity.CropBgActivity"/>
         <activity android:name=".activity.MarketHomeActivity"/>
         <activity android:name=".activity.GoodsListActivity"/>
-        <activity android:name=".activity.SiteListActivity"/>
-        <activity android:name=".activity.SiteCreateActivity"/>
+        <activity android:name=".activity.CommunityListActivity"/>
+        <activity android:name=".activity.CommunityCreateActivity"/>
         <activity android:name=".activity.AddressPicketActivity"/>
         <activity android:name=".activity.SponsorshipActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

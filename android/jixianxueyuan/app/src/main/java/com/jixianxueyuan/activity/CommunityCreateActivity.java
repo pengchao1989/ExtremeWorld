@@ -7,12 +7,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.jixianxueyuan.adapter.HobbyCheckboxGradAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.UploadPrefixName;
+import com.jixianxueyuan.dto.CommunityDTO;
 import com.jixianxueyuan.dto.HobbyDTO;
 import com.jixianxueyuan.dto.HobbyMinDTO;
 import com.jixianxueyuan.dto.MyResponse;
@@ -46,50 +50,53 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 /**
  * Created by pengchao on 5/29/16.
  */
-public class SiteCreateActivity extends BaseActivity{
+public class CommunityCreateActivity extends BaseActivity{
 
     private static final int REQUEST_CODE_PICKET_ADDRESS = 1;
     public static final int REQUEST_IMAGE_CODE = 2;
     public static final int CROP_IMAGE_CODE = 3;
 
-    @BindView(R.id.site_create_front_image)
+    @BindView(R.id.community_create_front_image)
     ImageView frontImageView;
-    @BindView(R.id.site_create_select_front_image)
+    @BindView(R.id.community_create_select_front_image)
     ImageView selectFrontImageVIew;
-    @BindView(R.id.site_create_name_layout)
+    @BindView(R.id.community_create_name_layout)
     LinearLayout nameLayout;
-    @BindView(R.id.site_create_address_layout)
+    @BindView(R.id.community_create_address_layout)
     LinearLayout addressLayout;
-    @BindView(R.id.site_create_longitude_layout)
+    @BindView(R.id.community_create_longitude_layout)
     LinearLayout longitudeLayout;
-    @BindView(R.id.site_create_latitude_layout)
+    @BindView(R.id.community_create_latitude_layout)
     LinearLayout latitudeLinearLayout;
-    @BindView(R.id.site_create_name_edit_text)
+    @BindView(R.id.community_create_name_edit_text)
     EditText nameEditText;
-    @BindView(R.id.site_create_address_text)
+    @BindView(R.id.community_create_address_text)
     TextView addressEditText;
-    @BindView(R.id.site_create_longitude_text)
+    @BindView(R.id.community_create_longitude_text)
     TextView longitudeEditText;
-    @BindView(R.id.site_create_latitude_text)
+    @BindView(R.id.community_create_latitude_text)
     TextView latitudeEditText;
-    @BindView(R.id.site_create_des_edit)
+    @BindView(R.id.community_create_des_edit)
     EditText desEditText;
-    @BindView(R.id.site_create_hobby_select_gridview)
-    GridView gridView;
+    @BindView(R.id.community_create_select_type_spinner)
+    Spinner typeSpinner;
+
 
     //progress
-    @BindView(R.id.create_site_upload_progress_layout)
+    @BindView(R.id.create_community_upload_progress_layout)
     RelativeLayout progressLayout;
-    @BindView(R.id.create_site_upload_progress_view)
+    @BindView(R.id.create_community_upload_progress_view)
     ProgressBar uploadProgress;
-    @BindView(R.id.create_site_upload_progress_textview)
+    @BindView(R.id.create_community_upload_progress_textview)
     TextView progressTextView;
 
-    private HobbyCheckboxGradAdapter hobbyCheckboxGradAdapter;
 
+    private String currentCommunityType = "";
     private String frontImagePath;
     private String frontImageUrl;
     private QiniuSingleImageUpload qiniuSingleImageUpload;
+
+    private ArrayAdapter adapter = null;
 
     private static final int HANDLER_UPDATE_PROGRESS = 0x1;
     private static final int HANDLE_PROGRESS_PICTURE = 0x2;
@@ -114,12 +121,35 @@ public class SiteCreateActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.site_create_activity);
+        setContentView(R.layout.community_create_activity);
 
         ButterKnife.bind(this);
 
-        hobbyCheckboxGradAdapter = new HobbyCheckboxGradAdapter(this);
-        gridView.setAdapter(hobbyCheckboxGradAdapter);
+        initTypeSpinner();
+    }
+
+    private void initTypeSpinner(){
+        final String[] communityTypes = getResources().getStringArray(R.array.community_type);
+        String[] typeNames = getResources().getStringArray(R.array.community_type_names);
+
+        adapter = new ArrayAdapter(this, R.layout.simple_spinner_text_item, typeNames);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        typeSpinner.setAdapter(adapter);
+
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentCommunityType = communityTypes[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     @Override
@@ -151,16 +181,16 @@ public class SiteCreateActivity extends BaseActivity{
         }
     }
 
-    @OnClick(R.id.site_create_front_image)void onSelectFrontClick(){
+    @OnClick(R.id.community_create_front_image)void onSelectFrontClick(){
         showImageSelectActivity();
     }
 
-    @OnClick(R.id.site_create_address_layout)void onAddressClick(){
-        Intent intent = new Intent(SiteCreateActivity.this, AddressPicketActivity.class);
+    @OnClick(R.id.community_create_address_layout)void onAddressClick(){
+        Intent intent = new Intent(CommunityCreateActivity.this, AddressPicketActivity.class);
         startActivityForResult(intent, REQUEST_CODE_PICKET_ADDRESS);
     }
 
-    @OnClick(R.id.site_create_submit_button)void onSubmitClick(){
+    @OnClick(R.id.community_create_submit_button)void onSubmitClick(){
         if (checkParams()){
             uploadUserBg();
         }
@@ -199,47 +229,34 @@ public class SiteCreateActivity extends BaseActivity{
             Toast.makeText(this, R.string.site_des_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (hobbyCheckboxGradAdapter.getSelectedHobbySets().size() == 0){
-            Toast.makeText(this, R.string.please_select_hobby, Toast.LENGTH_SHORT).show();
-            return false;
-        }
 
         return true;
     }
 
-    private SiteDTO buildParam(){
-        SiteDTO siteDTO = new SiteDTO();
-        siteDTO.setName(nameEditText.getText().toString());
-        siteDTO.setAddress(addressEditText.getText().toString());
-        siteDTO.setLatitude(latitudeEditText.getText().toString());
-        siteDTO.setLongitude(longitudeEditText.getText().toString());
-        siteDTO.setFrontImg(frontImageUrl);
-        siteDTO.setDescription(desEditText.getText().toString());
-        siteDTO.setType(1);
-        Set<HobbyDTO> hobbyDTOSet = hobbyCheckboxGradAdapter.getSelectedHobbySets();
-        List<HobbyMinDTO> hobbyMinDTOList = new ArrayList<HobbyMinDTO>();
-        for (HobbyDTO hobbyDTO : hobbyDTOSet){
-            HobbyMinDTO hobbyMinDTO = new HobbyMinDTO();
-            hobbyMinDTO.setId(hobbyDTO.getId());
+    private CommunityDTO buildParam(){
+        CommunityDTO communityDTO = new CommunityDTO();
+        communityDTO.setName(nameEditText.getText().toString());
+        communityDTO.setAddress(addressEditText.getText().toString());
+        communityDTO.setLatitude(latitudeEditText.getText().toString());
+        communityDTO.setLongitude(longitudeEditText.getText().toString());
+        communityDTO.setFrontImg(frontImageUrl);
+        communityDTO.setDescription(desEditText.getText().toString());
+        communityDTO.setType(currentCommunityType);
 
-            hobbyMinDTOList.add(hobbyMinDTO);
-        }
-        siteDTO.setHobbys(hobbyMinDTOList);
-
-        return siteDTO;
+        return communityDTO;
     }
 
 
     private void requestSiteCreate(){
-        String url = ServerMethod.site();
-        SiteDTO siteDTO = buildParam();
+        String url = ServerMethod.community();
+        CommunityDTO siteDTO = buildParam();
 
-        MyRequest request = new MyRequest<SiteDTO>(Request.Method.POST, url, SiteDTO.class, siteDTO, new com.android.volley.Response.Listener<MyResponse<SiteDTO>>() {
+        MyRequest request = new MyRequest<CommunityDTO>(Request.Method.POST, url, CommunityDTO.class, siteDTO, new com.android.volley.Response.Listener<MyResponse<CommunityDTO>>() {
             @Override
-            public void onResponse(MyResponse<SiteDTO> response) {
+            public void onResponse(MyResponse<CommunityDTO> response) {
                 hideUploadProgressView();
-                Toast.makeText(SiteCreateActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
-                SiteCreateActivity.this.setResult(Activity.RESULT_OK);
+                Toast.makeText(CommunityCreateActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
+                CommunityCreateActivity.this.setResult(Activity.RESULT_OK);
                 finish();
             }
         }, new com.android.volley.Response.ErrorListener() {
@@ -274,7 +291,7 @@ public class SiteCreateActivity extends BaseActivity{
             @Override
             public void onError(String error) {
                 hideUploadProgressView();
-                Toast.makeText(SiteCreateActivity.this, R.string.err, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CommunityCreateActivity.this, R.string.err, Toast.LENGTH_SHORT).show();
             }
         });
     }

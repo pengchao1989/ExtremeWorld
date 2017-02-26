@@ -7,19 +7,19 @@
     android:background="@drawable/bg_frs_list">
 
     <TextView
-        android:id="@+id/site_list_item_name_textview"
+        android:id="@+id/community_list_item_name_textview"
         android:layout_gravity="center_horizontal"
         style="@style/PrimaryText" />
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/site_list_item_front_imageview"
+        android:id="@+id/community_list_item_front_imageview"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         fresco:actualImageScaleType="centerCrop"
         fresco:placeholderImage="@mipmap/photo"/>
 
     <TextView
-        android:id="@+id/site_list_item_address_textview"
+        android:id="@+id/community_list_item_address_textview"
         style="@style/SecondText"/>
 
 </LinearLayout>

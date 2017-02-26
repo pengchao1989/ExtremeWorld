@@ -35,4 +35,16 @@
         <item>@color/course_taxonomy_5</item>
     </integer-array>
 
+    <string-array name="community_type">
+        <item>location</item>
+        <item>school</item>
+        <item>pro</item>
+    </string-array>
+
+    <string-array name="community_type_names">
+        <item>@string/community_type_location</item>
+        <item>@string/community_type_school</item>
+        <item>@string/community_type_professional</item>
+    </string-array>
+
 </resources>

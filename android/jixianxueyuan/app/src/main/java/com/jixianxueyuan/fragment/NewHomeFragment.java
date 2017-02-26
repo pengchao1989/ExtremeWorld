@@ -28,10 +28,10 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.google.gson.Gson;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.activity.CommunityListActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.NearFriendActivity;
 import com.jixianxueyuan.activity.RankingListActivity;
-import com.jixianxueyuan.activity.SiteListActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.activity.TopicDetailActivity;
 import com.jixianxueyuan.activity.WebActivity;
@@ -189,7 +189,7 @@ public class NewHomeFragment extends Fragment {
         headerView.findViewById(R.id.home_header_site).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NewHomeFragment.this.getContext(), SiteListActivity.class);
+                Intent intent = new Intent(NewHomeFragment.this.getContext(), CommunityListActivity.class);
                 NewHomeFragment.this.getActivity().startActivity(intent);
             }
         });
