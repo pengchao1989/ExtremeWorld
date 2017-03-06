@@ -261,12 +261,15 @@ public class MarketFragment extends Fragment {
 
     @OnItemClick(R.id.market_home_activity_gridview) void onShopClick(int position){
 
+        Toast.makeText(this.getContext(), "籌建中，經請關注",Toast.LENGTH_LONG).show();
+
+
             MobclickAgent.onEvent(MarketFragment.this.getContext(), UmengEventId.MARKET_SHOP_ITEM_CLICK, shopGridAdapter.getItem(position).getName());
 /*            Intent intent = new Intent(MarketFragment.this.getActivity(), GoodsListActivity.class);
             intent.putExtra(GoodsListActivity.SOURCE_TYPE, GoodsListActivity.SOURCE_TYPE_SHOP);
             intent.putExtra(GoodsListActivity.SOURCE_TYPE_SHOP, shopGridAdapter.getItem(position));
             startActivity(intent);*/
-
+/*
         String shopId = shopGridAdapter.getItem(position).getTaobaoUrl();
         AlibcBasePage alibcBasePage;
 
@@ -286,7 +289,7 @@ public class MarketFragment extends Fragment {
             public void onFailure(int i, String s) {
 
             }
-        });
+        });*/
 
     }
 }
