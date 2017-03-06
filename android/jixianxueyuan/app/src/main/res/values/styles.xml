@@ -97,6 +97,13 @@
         <item name="android:paddingBottom">@dimen/small_list_item_vertical_padding</item>
     </style>
 
+    <style name="BaseText">
+        <item name="android:enabled">true</item>
+        <item name="android:textIsSelectable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:longClickable">true</item>
+    </style>
+    
     <style name="PrimaryText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -130,14 +137,14 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="titleText">
+    <style name="titleText" parent="@style/BaseText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/primary_text</item>
     </style>
 
-    <style name="contentText">
+    <style name="contentText" parent="@style/BaseText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">17sp</item>

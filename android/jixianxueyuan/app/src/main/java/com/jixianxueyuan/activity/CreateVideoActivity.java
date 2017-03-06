@@ -230,7 +230,7 @@ public class CreateVideoActivity extends BaseActivity {
         if (resultCode == Activity.RESULT_OK) {
             // Get the Uri of the selected file
             Uri uri = data.getData();
-            localVideoPath = FileUtils.getVideoRealPathFromURI(this, uri);
+            localVideoPath = FileUtils.getRealPathFromURI(this, uri);
 
             if(TextUtils.isEmpty(localVideoPath)){
                 Toast.makeText(this, R.string.err_video_not_found, Toast.LENGTH_SHORT).show();

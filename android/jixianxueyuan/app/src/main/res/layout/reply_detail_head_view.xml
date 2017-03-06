@@ -11,6 +11,10 @@
         android:id="@+id/reply_detail_content"
         android:layout_marginTop="@dimen/list_content_margin_head"
         style="@style/ListPrimaryTextSmall"
+        android:enabled="true"
+        android:textIsSelectable="true"
+        android:focusable="true"
+        android:longClickable="true"
         tools:text="content"/>
 
     <LinearLayout

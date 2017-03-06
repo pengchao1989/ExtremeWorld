@@ -14,6 +14,26 @@
         app:action_image="@mipmap/ic_add_white"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="28sp"
+        android:text="社群功能建設中"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="有任何建議可加群 231343442 進行反饋\n\n超級管理員寫於2017年3月7日"
+        android:textSize="20sp"
+        android:enabled="true"
+        android:textIsSelectable="true"
+        android:focusable="true"
+        android:longClickable="true"/>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/community_list_swiperefresh"
         android:layout_width="match_parent"

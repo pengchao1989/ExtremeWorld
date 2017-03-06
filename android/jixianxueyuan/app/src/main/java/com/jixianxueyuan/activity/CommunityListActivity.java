@@ -48,7 +48,7 @@ public class CommunityListActivity extends BaseActivity {
 
         initView();
 
-        refreshSiteList();
+        //refreshSiteList();
     }
 
     @Override
