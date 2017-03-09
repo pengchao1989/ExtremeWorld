@@ -82,7 +82,27 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/topic_list_item_video_front_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                >
 
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/topic_list_item_video_front_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/list_item_large_image_height"
+                    android:layout_centerInParent="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_play_share_to_wechat_circle"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
 
 
             <!--多媒体信息-->
@@ -93,21 +113,7 @@
                 android:layout_marginTop="4dp"
                 >
 
-                <RelativeLayout
-                    android:id="@+id/topic_list_item_video_front_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    >
-                    
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/topic_list_item_video_front_image"
-                        android:layout_width="@dimen/list_thumbnail_width"
-                        android:layout_height="@dimen/list_thumbnail_width"
-                        android:layout_centerInParent="true"
-                        fresco:overlayImage="@mipmap/ic_play_share_to_wechat_circle"
-                        />
-                </RelativeLayout>
+
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/topic_list_item_image_1"

@@ -16,6 +16,7 @@
     <dimen name="list_horizontal_padding">@dimen/activity_horizontal_margin</dimen>
     <dimen name="list_item_horizontal_padding">@dimen/activity_horizontal_margin</dimen>
     <dimen name="list_item_vertical_padding">4dp</dimen>
+    <dimen name="list_item_large_image_height">140dp</dimen>
     <dimen name="small_list_item_vertical_padding">2dp</dimen>
 
     <dimen name="bottom_input_widget_heigh">60dp</dimen>

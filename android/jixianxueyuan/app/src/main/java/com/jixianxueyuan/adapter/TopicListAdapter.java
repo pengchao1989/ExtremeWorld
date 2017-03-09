@@ -186,7 +186,7 @@ public class TopicListAdapter extends BaseAdapter {
         {
             viewHolder.videoFrontLayout.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(videoDetailDTO.getThumbnail())){
-                Uri uri = Uri.parse(videoDetailDTO.getThumbnail() + QiniuImageStyle.LIST_ITEM);
+                Uri uri = Uri.parse(videoDetailDTO.getThumbnail() + "!detail");
                 if (uri == null){
                     uri = Uri.EMPTY;
                 }
