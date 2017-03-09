@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="0dp"
-            android:text="@string/challenge"
+            android:text="@string/upload_my_video"
             android:layout_gravity="center_horizontal"
             style="@style/TransparentButton"/>
 

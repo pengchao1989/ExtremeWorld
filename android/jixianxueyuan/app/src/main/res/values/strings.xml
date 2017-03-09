@@ -129,6 +129,9 @@
     <string name="region">Region</string>
     <string name="signature">Signature</string>
 
+    <!--course-->
+    <string name="upload_my_video">upload this action video</string>
+
     <!--site-->
     <string name="marking_site">marking site</string>
     <string name="site_create_tips">Let us record the next terrain, so that we can find everyone</string>

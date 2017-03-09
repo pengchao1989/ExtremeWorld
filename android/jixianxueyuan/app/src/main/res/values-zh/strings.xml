@@ -67,7 +67,7 @@
     <string name="video">视频</string>
     <string name="activity">活动</string>
     <string name="course">教学</string>
-    <string name="challenge">挑战</string>
+    <string name="challenge">练习</string>
     <string name="site">场地</string>
     <string name="community">社团</string>
     <string name="people">附近的人</string>
@@ -128,6 +128,9 @@
     <string name="select_avatar">设置头像</string>
     <string name="region">地区</string>
     <string name="signature">签名</string>
+
+    <!--course-->
+    <string name="upload_my_video">记录我的动作</string>
 
     <!--site-->
     <string name="marking_site">标记场地</string>

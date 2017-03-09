@@ -129,6 +129,10 @@
     <string name="region">지역</string>
     <string name="signature">서명</string>
 
+
+    <!--course-->
+    <string name="upload_my_video">upload my action video</string>
+
     <!--site-->
     <string name="marking_site">태그 운동장</string>
     <string name="site_create_tips">우리 기록하다 옆에 지형, 사람들이 더 쉽게 발견 친구</string>
