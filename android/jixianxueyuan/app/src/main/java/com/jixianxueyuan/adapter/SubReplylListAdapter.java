@@ -104,7 +104,7 @@ public class SubReplylListAdapter extends BaseAdapter {
             ss=new SpannableString(name+ to + targetName +":"+content);
             ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.blue)), 0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ss.setSpan(new ForegroundColorSpan(Color.GRAY), name.length(), name.length() + to.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.blue)), name.length() + to.length() , name.length() + to.length() + targetName.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.blue)), name.length() + to.length() , name.length() + to.length() + targetName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
 
