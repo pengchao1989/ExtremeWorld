@@ -52,6 +52,9 @@
     <string name="latitude">纬度</string>
     <string name="select_address">选择地址</string>
     <string name="score">战斗力</string>
+    <string name="series_skateboard">滑板</string>
+    <string name="series_longboard">长板</string>
+    <string name="series_fish">小鱼</string>
 
     <string name="not_more">没有更多了</string>
 

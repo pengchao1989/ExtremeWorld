@@ -52,6 +52,9 @@
     <string name="latitude">latitude</string>
     <string name="select_address">select address</string>
     <string name="score">score</string>
+    <string name="series_skateboard">SKATEBOARD</string>
+    <string name="series_longboard">LONGBOARD</string>
+    <string name="series_fish">FISH</string>
 
     <string name="not_more">not more</string>
 

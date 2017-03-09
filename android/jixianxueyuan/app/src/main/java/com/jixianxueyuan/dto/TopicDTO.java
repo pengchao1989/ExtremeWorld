@@ -20,6 +20,9 @@ public class TopicDTO implements Serializable
     private String createTime;
     private int status;
     private String url;
+    private String series;
+
+    //of me
     private boolean agreed;
     private boolean collected;
 
@@ -148,6 +151,14 @@ public class TopicDTO implements Serializable
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
     }
 
     public boolean isAgreed() {

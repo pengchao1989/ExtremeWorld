@@ -21,6 +21,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.activity.UserHomeActivity;
 import com.jixianxueyuan.config.ImageLoaderConfig;
 import com.jixianxueyuan.config.QiniuImageStyle;
+import com.jixianxueyuan.config.TopicSeries;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.MediaDTO;
@@ -275,6 +276,16 @@ public class TopicListAdapter extends BaseAdapter {
 
         SpannableString ss;
         badgeString = "[" + badgeString + "]";
+        if (!TextUtils.isEmpty(topicDTO.getSeries())){
+            if (TopicSeries.SKATEBOARD.equals(topicDTO.getSeries())){
+                //badgeString += "[" + context.getString(R.string.series_skateboard) + "]";
+            }else if (TopicSeries.LONGBOARD.equals(topicDTO.getSeries())){
+                badgeString += "[" + context.getString(R.string.series_longboard) + "]";
+            }else if (TopicSeries.FISH.equals(topicDTO.getSeries())){
+                badgeString += "[" + context.getString(R.string.series_fish) + "]";
+            }
+
+        }
         ss=new SpannableString(badgeString + topicDTO.getTitle());
         ss.setSpan(new ForegroundColorSpan(badgeColor), 0, badgeString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
