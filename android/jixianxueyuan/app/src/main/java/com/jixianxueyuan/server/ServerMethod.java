@@ -1,7 +1,11 @@
 package com.jixianxueyuan.server;
 
 
+import android.content.Context;
+import android.text.TextUtils;
+
 import com.jixianxueyuan.BuildConfig;
+import com.jixianxueyuan.util.PreferencesUtils;
 
 /**
  * Created by pengchao on 2015/4/12.
@@ -12,6 +16,7 @@ public class ServerMethod {
     static public final int STATUS_ERROR = -1;
     static public final int STATUS_NO_CONTENT = 204;
 
+    static String custom_server_url = "";
     static final String test_server_url = "http://www.jixianxueyuan.com/";
     static final String production_server_url = "http://www.jixianxueyuan.com/";
     //static final String test_server_url = "http://192.168.1.105:8080/";
@@ -26,7 +31,19 @@ public class ServerMethod {
 
     static final String method_url_secure = getHost() + api_version_secure;
 
+    public static void updateCustomServerUrl(Context context, String url){
+        PreferencesUtils.putString(context, "custom_server_url", url);
+        custom_server_url = new String(url);
+    }
+
+    static void loadCustomeServerUrl(Context context){
+        custom_server_url = PreferencesUtils.getString(context, "custom_server_url");
+    }
+
     static final String getHost(){
+        if (!TextUtils.isEmpty(custom_server_url)){
+            return custom_server_url;
+        }
         if (BuildConfig.DEBUG){
             return test_server_url;
         }else {

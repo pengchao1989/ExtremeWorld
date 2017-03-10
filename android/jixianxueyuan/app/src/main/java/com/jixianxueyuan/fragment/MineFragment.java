@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
 import com.jixianxueyuan.activity.WebActivity;
+import com.jixianxueyuan.activity.admin.AdminHomeActivity;
 import com.jixianxueyuan.activity.profile.ProfileEditActivity;
 import com.jixianxueyuan.app.Mine;
 import com.jixianxueyuan.app.MyApplication;
@@ -52,6 +54,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -78,6 +81,8 @@ public class MineFragment extends Fragment {
     TextView signatureTextView;
     @BindView(R.id.mine_fragment_point_count)
     TextView pointCountTextView;
+    @BindView(R.id.mine_fragment_admin)
+    RelativeLayout adminLayout;
 
     private NewHomeActivity activity;
 
@@ -109,6 +114,10 @@ public class MineFragment extends Fragment {
         View view = inflater.inflate(R.layout.mine_fragment, container, false);
 
         ButterKnife.bind(this, view);
+
+        if (mine.getUserInfo().getId() == 1L || mine.getUserInfo().getId() == 1664){
+            adminLayout.setVisibility(View.VISIBLE);
+        }
 
         avatarImageView.setImageURI(ImageUriParseUtil.parse(mine.getUserInfo().getAvatar()));
         if (!StringUtils.isEmpty(mine.getUserInfo().getBg())){
@@ -199,6 +208,11 @@ public class MineFragment extends Fragment {
 
     @OnClick(R.id.mine_fragment_point)void onPointClick(){
         requestDuibaAutoLoginUrl();
+    }
+
+    @OnClick(R.id.mine_fragment_admin)void onAdminClick() {
+        Intent intent = new Intent(this.getActivity(), AdminHomeActivity.class);
+        startActivity(intent);
     }
 
 

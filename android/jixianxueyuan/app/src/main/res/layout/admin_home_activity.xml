@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/activity_root_layout">
+
+    <com.jixianxueyuan.widget.MyActionBar
+        android:id="@+id/collection_list_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        my:action_title="@string/collection"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:background="@color/grey">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/topic_manage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="话题管理"
+                    style="@style/WhiteButton"/>
+
+                <Button
+                    android:id="@+id/connect_manage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="连接设置"
+                    style="@style/WhiteButton"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

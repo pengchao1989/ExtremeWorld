@@ -228,6 +228,36 @@
         </RelativeLayout>
         <View style="@style/HorizontalDividerView" />
 
+        <RelativeLayout
+            android:id="@+id/mine_fragment_admin"
+            style="@style/ImageItemLayout"
+            android:visibility="gone"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:src="@mipmap/umeng_socialize_wxcircle" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="管理员控制台" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
 
 
     </LinearLayout>
