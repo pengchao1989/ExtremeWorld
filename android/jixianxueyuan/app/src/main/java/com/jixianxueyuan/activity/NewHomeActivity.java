@@ -19,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.mobileim.YWAPI;
+import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.alibaba.wxlib.util.SysUtil;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,6 +42,7 @@ import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.location.LocationManager;
 import com.jixianxueyuan.location.MyLocation;
+import com.jixianxueyuan.push.PushTag;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.ShareUtils;
@@ -383,6 +387,9 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
                         Toast.makeText(NewHomeActivity.this, err, Toast.LENGTH_LONG).show();
                     }
                 });
+
+                //设置push tag
+                updatePushTag();
             }
         }.start();
 
@@ -394,7 +401,21 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
     }
 
     private void updatePushTag(){
+        String hobbyStamp = Util.getApplicationMetaString(this, "HOBBY");
+        String [] tags = new String[]{PushTag.HOBBY_PREFIX + hobbyStamp};
 
+        final CloudPushService pushService = PushServiceFactory.getCloudPushService();
+        pushService.bindTag(1, tags, "", new CommonCallback() {
+            @Override
+            public void onSuccess(String s) {
+                MyLog.d(tag, "push bind tag success");
+            }
+
+            @Override
+            public void onFailed(String s, String s1) {
+                MyLog.d(tag, "push bind tag failed" +  s);
+            }
+        });
     }
 
     @Override
