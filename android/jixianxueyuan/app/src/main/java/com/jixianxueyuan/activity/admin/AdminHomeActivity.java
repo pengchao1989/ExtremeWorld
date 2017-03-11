@@ -24,7 +24,8 @@ public class AdminHomeActivity extends BaseActivity {
     }
 
     @OnClick(R.id.topic_manage)void onTopicManageClick(){
-
+        Intent intent = new Intent(this, AdminTopicListActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.connect_manage)void onConnectManageClick(){

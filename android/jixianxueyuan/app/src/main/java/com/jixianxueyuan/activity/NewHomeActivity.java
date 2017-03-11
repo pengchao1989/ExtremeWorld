@@ -393,6 +393,10 @@ public class NewHomeActivity extends FragmentActivity implements View.OnClickLis
         return mIsInitIm;
     }
 
+    private void updatePushTag(){
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {

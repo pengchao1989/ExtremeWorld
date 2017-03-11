@@ -115,7 +115,7 @@ public class MineFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        if (mine.getUserInfo().getId() == 1L || mine.getUserInfo().getId() == 1664){
+        if (mine.getUserInfo().getId() == 32L || mine.getUserInfo().getId() == 1664){
             adminLayout.setVisibility(View.VISIBLE);
         }
 

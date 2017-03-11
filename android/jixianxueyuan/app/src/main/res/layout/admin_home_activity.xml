@@ -10,7 +10,7 @@
         android:id="@+id/collection_list_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        my:action_title="@string/collection"/>
+        my:action_title="管理员控制台"/>
 
     <LinearLayout
         android:layout_width="match_parent"
