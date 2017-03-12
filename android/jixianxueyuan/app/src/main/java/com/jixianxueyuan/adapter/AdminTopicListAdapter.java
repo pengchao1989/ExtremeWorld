@@ -33,6 +33,7 @@ import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.TopicDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
+import com.jixianxueyuan.dto.request.PushTopicDTO;
 import com.jixianxueyuan.dto.request.TopicFineDTO;
 import com.jixianxueyuan.dto.request.ZanRequest;
 import com.jixianxueyuan.http.MyRequest;
@@ -269,6 +270,20 @@ public class AdminTopicListAdapter extends BaseAdapter {
             }
         });
 
+        viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteTopic(context, topicDTOList.get(position).getId());
+            }
+        });
+
+        viewHolder.pushButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pushTopic(context, topicDTOList.get(position).getId());
+            }
+        });
+
         return convertView;
     }
 
@@ -293,16 +308,16 @@ public class AdminTopicListAdapter extends BaseAdapter {
     }
 
     private void requestSetFine(final Context context, long topicId){
-        String url = ServerMethod.topic_fine();
+        String url = ServerMethod.admin_topic_fine();
 
         TopicFineDTO topicFineDTO = new TopicFineDTO();
         topicFineDTO.setTopicId(topicId);
         topicFineDTO.setFine(1);
 
 
-        MyRequest<AgreeResultDTO> myRequest = new MyRequest(Request.Method.POST, url, AgreeResultDTO.class,topicFineDTO, new Response.Listener<MyResponse<AgreeResultDTO>>() {
+        MyRequest<Void> myRequest = new MyRequest(Request.Method.POST, url, Void.class,topicFineDTO, new Response.Listener<MyResponse<Void>>() {
             @Override
-            public void onResponse(MyResponse<AgreeResultDTO> response) {
+            public void onResponse(MyResponse<Void> response) {
                 Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_LONG).show();
             }
         },new Response.ErrorListener() {
@@ -316,6 +331,47 @@ public class AdminTopicListAdapter extends BaseAdapter {
 
     }
 
+    private void deleteTopic(final Context context, long topicId){
+        String url = ServerMethod.admin_topic() + "/" + topicId;
+
+        MyRequest<Void> myRequest = new MyRequest(Request.Method.DELETE, url, Void.class,null, new Response.Listener<MyResponse<Void>>() {
+            @Override
+            public void onResponse(MyResponse<Void> response) {
+                Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_LONG).show();
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
+    private void pushTopic(final Context context, long topicId){
+        String url = ServerMethod.admin_topic_push();
+
+        PushTopicDTO pushTopicDTO = new PushTopicDTO();
+        pushTopicDTO.setTopicId(topicId);
+        pushTopicDTO.setFine(1);
+
+
+        MyRequest<Void> myRequest = new MyRequest(Request.Method.POST, url, Void.class,pushTopicDTO, new Response.Listener<MyResponse<Void>>() {
+            @Override
+            public void onResponse(MyResponse<Void> response) {
+                Toast.makeText(context, context.getString(R.string.success), Toast.LENGTH_LONG).show();
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+
+    }
 
 
     public static class ViewHolder{

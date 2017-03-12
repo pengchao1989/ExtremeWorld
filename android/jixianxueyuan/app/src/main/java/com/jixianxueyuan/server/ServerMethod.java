@@ -23,6 +23,7 @@ public class ServerMethod {
     //static final String production_server_url = "http://192.168.1.105:8080/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
+    static final String api_version_secure_admin = "api/secure/admin/v1/";
     static String hobby = "skateboard/";
 
     public static void setHobby(String h){
@@ -30,6 +31,7 @@ public class ServerMethod {
     }
 
     static final String method_url_secure = getHost() + api_version_secure;
+    static final String method_url_secure_admin = getHost() + api_version_secure_admin;
 
     public static void updateCustomServerUrl(Context context, String url){
         PreferencesUtils.putString(context, "custom_server_url", url);
@@ -103,4 +105,9 @@ public class ServerMethod {
     public static final String point_duiba_auto_login(){return method_url_secure + hobby + "point/duiba_auto_login";}
     public static final String point_count(){return method_url_secure + hobby + "point/points";}
     public static final String community(){return method_url_secure + hobby  + "community";}
+
+    //admin
+    public static final String admin_topic(){return method_url_secure_admin + hobby + "topic";}
+    public static final String admin_topic_fine(){return method_url_secure_admin + hobby + "topic/fine";};
+    public static final String admin_topic_push(){return method_url_secure_admin + hobby + "topic/push";};
 }
