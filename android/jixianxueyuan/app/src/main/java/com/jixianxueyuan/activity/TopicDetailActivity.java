@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -37,6 +39,7 @@ import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.jixianxueyuan.R;
+import com.jixianxueyuan.adapter.LikeRecyclerAdapter;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
 import com.jixianxueyuan.config.HobbyType;
@@ -105,8 +108,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -121,7 +122,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     public final static String tag = TopicDetailActivity.class.getSimpleName();
     public final static String INTENT_TOPIC = "topic";
-    public final static String INTENT_TOPIC_ID = "INTENT_TOPIC_ID";
+    public final static String INTENT_TOPIC_ID = "topicId";
 
     @BindView(R.id.bottom_sheet)BottomSheetLayout bottomSheetLayout;
     @BindView(R.id.topic_detail_actionbar)MyActionBar actionBar;
@@ -247,10 +248,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         Intent intent = this.getIntent();
 
         Bundle bubdle = intent.getExtras();
-        if(bubdle.containsKey("topic")){
+        if(bubdle.containsKey(INTENT_TOPIC)){
             topicDTO = (TopicDTO) bubdle.getSerializable(INTENT_TOPIC);
-        }else if(bubdle.containsKey("topicId")){
-            topicId = bubdle.getLong("topicId");
+        }else if(bubdle.containsKey(INTENT_TOPIC_ID)){
+            topicId = bubdle.getLong(INTENT_TOPIC_ID);
         }
 
         initTopicHeadView();
@@ -447,7 +448,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 }
             });
         }
-
 
         //web view
         if(!StringUtils.isBlank(topicDTO.getUrl())){
@@ -666,6 +666,15 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             }else {
                 headViewHolder.myRatingLayout.setVisibility(View.VISIBLE);
             }
+
+            if (topicExtraDTO.getLikeList() != null && topicExtraDTO.getLikeList().size() > 0){
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                headViewHolder.likeRecyclerView.setLayoutManager(linearLayoutManager);
+                LikeRecyclerAdapter likeRecyclerAdapter = new LikeRecyclerAdapter(TopicDetailActivity.this, topicExtraDTO.getLikeList());
+                headViewHolder.likeRecyclerView.setAdapter(likeRecyclerAdapter);
+            }
+
         }
     }
 
@@ -1122,6 +1131,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @BindView(R.id.my_submit_rating_text)TextView mySubmitRatingText;
         @BindView(R.id.my_submit_rating_button)Button mySubmitRatingButton;
         @BindView(R.id.my_rating_score_text)TextView myRatingText;
+        @BindView(R.id.like_recycler_view)RecyclerView likeRecyclerView;
 
 
         public HeadViewHolder(View headView)
@@ -1152,7 +1162,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             coverImageView.setVisibility(View.GONE);
             videoView.setVisibility(View.VISIBLE);
 
-            videoView.setVideoPath(url);
+            videoView.setVideoPath(url + "?avvod/m3u8/s/640x360/vb/1000k");
             videoView.start();
         }else {
             Toast.makeText(this, R.string.video_is_empty, Toast.LENGTH_LONG).show();

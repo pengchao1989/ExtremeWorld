@@ -21,6 +21,7 @@ public class TopicDTO implements Serializable
     private int status;
     private String url;
     private String series;
+    private List<LikeDTO> likeList;
 
     //of me
     private boolean agreed;
@@ -159,6 +160,14 @@ public class TopicDTO implements Serializable
 
     public void setSeries(String series) {
         this.series = series;
+    }
+
+    public List<LikeDTO> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<LikeDTO> likeList) {
+        this.likeList = likeList;
     }
 
     public boolean isAgreed() {

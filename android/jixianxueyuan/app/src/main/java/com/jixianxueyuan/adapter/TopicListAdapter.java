@@ -182,7 +182,7 @@ public class TopicListAdapter extends BaseAdapter {
         }
 
 
-        //多媒体信息
+        //多媒体信息viewHolder
         if(videoDetailDTO != null)
         {
             viewHolder.videoFrontLayout.setVisibility(View.VISIBLE);

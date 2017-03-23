@@ -27,7 +27,7 @@
     <dimen name="list_thumbnail_width">60dp</dimen>
     <dimen name="large_avatar_size">160dp</dimen>
     <dimen name="avatar_alignment">45dp</dimen>
-    <dimen name="block_height">20dp</dimen>
+    <dimen name="block_height">16dp</dimen>
 
     <dimen name="list_content_margin_head">4dp</dimen>
 
