@@ -22,8 +22,7 @@
                 android:layout_height="148dp"
                 fresco:actualImageScaleType="focusCrop"
                 tools:src="@drawable/default_head"
-                android:background="@color/white"
-                />
+                android:background="@mipmap/home_page_header_cover" />
 
             <TextView
                 android:id="@+id/mine_fragment_signature"
@@ -79,7 +78,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/mine_message" />
+                    android:src="@mipmap/mine_message2" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -110,7 +109,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/star" />
+                    android:src="@mipmap/mine_star" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -123,6 +122,36 @@
             <ImageView style="@style/ImageItemRightIcon" />
 
         </RelativeLayout>
+
+        <View style="@style/HorizontalDividerView" />
+
+        <RelativeLayout
+            android:id="@+id/mine_fragment_offline_video"
+            style="@style/ImageItemLayout">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/mine_offline_video" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/offline_video" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
 
 
 
@@ -142,7 +171,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/mine_set" />
+                    android:src="@mipmap/mine_setting" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -173,8 +202,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:src="@mipmap/icon_mygift_gift" />
+                    android:src="@mipmap/mine_gift" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -212,8 +240,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-5dp"
-                    android:src="@mipmap/umeng_socialize_wxcircle" />
+                    android:src="@mipmap/mine_share" />
 
                 <TextView
                     style="@style/ListPrimaryText"
@@ -226,12 +253,14 @@
             <ImageView style="@style/ImageItemRightIcon" />
 
         </RelativeLayout>
+
         <View style="@style/HorizontalDividerView" />
 
         <RelativeLayout
             android:id="@+id/mine_fragment_admin"
             style="@style/ImageItemLayout"
             android:visibility="gone"
+            tools:visibility="visible"
             >
 
             <LinearLayout
@@ -243,8 +272,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-5dp"
-                    android:src="@mipmap/umeng_socialize_wxcircle" />
+                    android:src="@mipmap/mine_admin" />
 
                 <TextView
                     style="@style/ListPrimaryText"

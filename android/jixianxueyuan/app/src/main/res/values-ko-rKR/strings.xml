@@ -88,6 +88,7 @@
 
     <string name="reply_of_me">대답, 내</string>
     <string name="collection">수집</string>
+    <string name="offline_video">오프라인 비디오</string>
     <string name="agree_of_me">칭찬하다</string>
     <string name="setting">설치</string>
     <string name="sponsorship">기증 목록</string>

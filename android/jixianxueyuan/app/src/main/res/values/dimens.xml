@@ -7,7 +7,7 @@
 
     <dimen name="actionbar_height">44dp</dimen>
     <dimen name="tab_height">48dp</dimen>
-    <dimen name="flexible_space_layout_height">300dp</dimen>
+    <dimen name="flexible_space_layout_height">280dp</dimen>
     <dimen name="flexible_space_image_height">200dp</dimen>
     <dimen name="flexible_space_item_line_height">40dp</dimen>
     <dimen name="flexible_space_show_fab_offset">120dp</dimen>

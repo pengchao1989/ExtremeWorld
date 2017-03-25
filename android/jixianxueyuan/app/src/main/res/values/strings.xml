@@ -88,6 +88,7 @@
 
     <string name="reply_of_me">respond</string>
     <string name="collection">collection</string>
+    <string name="offline_video">download</string>
     <string name="agree_of_me">agree</string>
     <string name="setting">setting</string>
     <string name="sponsorship">sponsorship</string>
