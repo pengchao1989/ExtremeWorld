@@ -25,6 +25,7 @@ public class MyActionBar extends LinearLayout {
     TextView titleTextView;
     TextView actionTextView;
     ImageButton actionImageButton;
+    ImageButton actionSecondImageButton;
 
     private MyActionBarListener actionBarListener;
 
@@ -43,15 +44,18 @@ public class MyActionBar extends LinearLayout {
         titleTextView = (TextView) view.findViewById(R.id.page_head_title);
         actionTextView = (TextView) view.findViewById(R.id.page_head_action_text);
         actionImageButton = (ImageButton) view.findViewById(R.id.page_head_action_image);
+        actionSecondImageButton = (ImageButton) view.findViewById(R.id.page_head_action_second_image);
         LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.page_head_back);
         FrameLayout actionLayout = (FrameLayout) view.findViewById(R.id.page_head_action);
+        FrameLayout actionSecondLayout = (FrameLayout) view.findViewById(R.id.page_head_action_second);
 
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyActionBar);
 
         String title = a.getString(R.styleable.MyActionBar_action_title);
         String actionText = a.getString(R.styleable.MyActionBar_action_text);
-        Drawable actionDrawable = a.getDrawable(R.styleable.MyActionBar_action_image);
+        final Drawable actionDrawable = a.getDrawable(R.styleable.MyActionBar_action_image);
+        Drawable actionSecondDrawable = a.getDrawable(R.styleable.MyActionBar_action_second_image);
         if(title != null){
             titleTextView.setText(title);
         }
@@ -61,16 +65,29 @@ public class MyActionBar extends LinearLayout {
         if(actionDrawable != null){
             actionImageButton.setImageDrawable(actionDrawable);
         }
+        if (actionSecondDrawable != null){
+            actionSecondImageButton.setImageDrawable(actionSecondDrawable);
+            actionSecondLayout.setVisibility(VISIBLE);
+            actionSecondImageButton.setVisibility(VISIBLE);
+            actionSecondImageButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (actionBarListener != null){
+                        actionBarListener.onSecondActionClicked();
+                    }
+                }
+            });
+        }
 
         int type = a.getInt(R.styleable.MyActionBar_type, 0);
         if(type == 1) {
             actionTextView.setVisibility(VISIBLE);
             actionLayout.setVisibility(View.VISIBLE);
-            setOnActionClick(actionLayout);
+            setFirstOnActionClick(actionLayout);
         }else if (type == 2){
             actionLayout.setVisibility(View.VISIBLE);
             actionImageButton.setVisibility(VISIBLE);
-            setOnActionClick(actionImageButton);
+            setFirstOnActionClick(actionImageButton);
         }
 
         backLayout.setOnClickListener(new OnClickListener() {
@@ -90,7 +107,7 @@ public class MyActionBar extends LinearLayout {
         });
     }
 
-    private void setOnActionClick(View actionLayout) {
+    private void setFirstOnActionClick(View actionLayout) {
         actionLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,6 +4,7 @@
         <attr name="action_title" format="string" />
         <attr name="action_text" format="string" />
         <attr name="action_image" format="reference"/>
+        <attr name="action_second_image" format="reference"/>
         <attr name="type" format="string">
             <enum name="none" value="0"/>
             <enum name="text" value="1"/>

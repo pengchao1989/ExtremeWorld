@@ -22,6 +22,7 @@
             my:action_title="@string/topic_detail"
             my:type="image"
             my:action_image="@drawable/actionbar_share_button_background"
+            my:action_second_image="@mipmap/icon_download_cut"
             />
 
         <RelativeLayout
