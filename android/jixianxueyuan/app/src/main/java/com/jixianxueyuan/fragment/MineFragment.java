@@ -25,6 +25,7 @@ import com.jixianxueyuan.activity.CreditActivity;
 import com.jixianxueyuan.activity.CropBgActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
+import com.jixianxueyuan.activity.OfflineVideoListActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
 import com.jixianxueyuan.activity.SettingActivity;
 import com.jixianxueyuan.activity.SponsorshipActivity;
@@ -162,6 +163,12 @@ public class MineFragment extends Fragment {
     @OnClick(R.id.mine_fragment_collection)void collectionOnClick(){
         MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_COLLECTION_CLICK);
         Intent intent = new Intent(this.getActivity(), CollectionListActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.mine_fragment_offline_video)void offlineVideoOnClick(){
+        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_OFFLINE_VIDEO_CLICK);
+        Intent intent = new Intent(this.getActivity(), OfflineVideoListActivity.class);
         startActivity(intent);
     }
 

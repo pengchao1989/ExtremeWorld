@@ -22,6 +22,7 @@ import com.jixianxueyuan.commons.Contant;
 import com.jixianxueyuan.server.ServerMethod;
 import com.jixianxueyuan.util.MyLog;
 import com.jixianxueyuan.util.Util;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.bugly.Bugly;
@@ -78,6 +79,8 @@ public class MyApplication extends MultiDexApplication {
         initUmenScoial();
 
         initX5();
+
+        FileDownloader.init(this);
 
 	}
 

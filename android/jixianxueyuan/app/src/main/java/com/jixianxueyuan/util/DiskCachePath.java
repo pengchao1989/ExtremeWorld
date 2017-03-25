@@ -2,8 +2,12 @@ package com.jixianxueyuan.util;
 
 import android.content.Context;
 import android.os.Environment;
+import android.text.TextUtils;
+
+import com.jixianxueyuan.commons.FileUtils;
 
 import java.io.File;
+import java.lang.reflect.Field;
 
 /**
  * Created by pengchao on 5/26/15.
@@ -25,5 +29,22 @@ public class DiskCachePath {
             dir.mkdir();
         }
         return dir;
+    }
+
+    //dirType Environment.DIRECTORY_DOWNLOADS
+    static public File getExtDiskCacheDir(Context context, String dirType, String uniqueName){
+        String cachePath = "";
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            cachePath = Environment.getExternalStoragePublicDirectory(dirType).getPath();
+
+
+            cachePath = cachePath + uniqueName;
+        }
+        if (!TextUtils.isEmpty(cachePath)){
+            return  new File(cachePath);
+        }
+
+        return null;
     }
 }

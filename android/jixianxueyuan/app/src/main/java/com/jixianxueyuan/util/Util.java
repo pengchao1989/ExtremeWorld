@@ -87,6 +87,12 @@ public class Util {
         return sdf.format(now) + getShortUuid();
     }
 
+    public static String getTodayPreStr(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_");
+        Date now = new Date();
+        return sdf.format(now);
+    }
+
     static public String meterToString(double meter)
     {
         if(meter < 1000.0)

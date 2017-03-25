@@ -42,6 +42,7 @@ import com.jixianxueyuan.R;
 import com.jixianxueyuan.adapter.LikeRecyclerAdapter;
 import com.jixianxueyuan.adapter.TopicDetailListAdapter;
 import com.jixianxueyuan.app.MyApplication;
+import com.jixianxueyuan.commons.downloader.TopicDownloaderManager;
 import com.jixianxueyuan.config.HobbyType;
 import com.jixianxueyuan.config.ImageConfig;
 import com.jixianxueyuan.config.MediaType;
@@ -277,6 +278,16 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
             @Override
             public void onSecondActionClicked() {
+                if (topicDTO != null){
+                    VideoDetailDTO videoDetailDTO = topicDTO.getVideoDetail();
+                    if (videoDetailDTO == null){
+                        return;
+                    }
+                    String videoUrl = topicDTO.getVideoDetail().getVideoSource();
+                    if (videoUrl != null){
+                        TopicDownloaderManager.getInstance().downloadVideo(TopicDetailActivity.this, topicDTO.getTitle(), videoUrl);
+                    }
+                }
 
             }
         });

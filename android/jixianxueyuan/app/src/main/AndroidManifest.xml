@@ -128,6 +128,7 @@
         <activity android:name=".activity.admin.AdminHomeActivity"/>
         <activity android:name=".activity.admin.ConnectManageActivity"/>;
         <activity android:name=".activity.admin.AdminTopicListActivity"/>
+        <activity android:name=".activity.OfflineVideoListActivity"/>
         <activity android:name=".activity.SponsorshipActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
@@ -376,6 +377,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED"/>
                 <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.DownLoadCompleteReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
             </intent-filter>
         </receiver>
 
