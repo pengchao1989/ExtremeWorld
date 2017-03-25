@@ -64,11 +64,16 @@ public class CommunityListActivity extends BaseActivity {
     private void initView(){
 
         actionBar.setTitle(getString(R.string.community));
-        actionBar.setActionOnClickListener(new View.OnClickListener() {
+        actionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View v) {
+            public void onFirstActionClicked() {
                 Intent intent = new Intent(CommunityListActivity.this, CommunityCreateActivity.class);
                 startActivityForResult(intent,REQUEST_CODE_NEW);
+            }
+
+            @Override
+            public void onSecondActionClicked() {
+
             }
         });
 

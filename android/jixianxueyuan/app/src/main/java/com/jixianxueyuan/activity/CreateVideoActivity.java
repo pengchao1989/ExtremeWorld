@@ -134,13 +134,17 @@ public class CreateVideoActivity extends BaseActivity {
             myActionBar.setTitle(getString(R.string.challenge));
 
         }
-
-        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+        myActionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View v) {
+            public void onFirstActionClicked() {
                 if(checkParams()){
                     submitVideo(localVideoPath);
                 }
+            }
+
+            @Override
+            public void onSecondActionClicked() {
+
             }
         });
 

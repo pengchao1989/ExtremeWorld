@@ -26,7 +26,7 @@ public class MyActionBar extends LinearLayout {
     TextView actionTextView;
     ImageButton actionImageButton;
 
-    private OnClickListener actionOnClickListener;
+    private MyActionBarListener actionBarListener;
 
     public MyActionBar(Context context) {
         super(context);
@@ -94,9 +94,9 @@ public class MyActionBar extends LinearLayout {
         actionLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(actionOnClickListener != null)
+                if(actionBarListener != null)
                 {
-                    actionOnClickListener.onClick(v);
+                    actionBarListener.onFirstActionClicked();
                 }
 
             }
@@ -115,8 +115,14 @@ public class MyActionBar extends LinearLayout {
 
     }
 
-    public void setActionOnClickListener(OnClickListener listener)
+    public void setActionOnClickListener(MyActionBarListener listener)
     {
-        actionOnClickListener = listener;
+        actionBarListener = listener;
+    }
+
+
+    public interface MyActionBarListener{
+        void onFirstActionClicked();
+        void onSecondActionClicked();
     }
 }

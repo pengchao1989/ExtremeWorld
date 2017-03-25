@@ -86,9 +86,14 @@ public class CourseDetailActivity extends BaseActivity {
     }
 
     private void initHeadView() {
-        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+        myActionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View v) {
+            public void onFirstActionClicked() {
+
+            }
+
+            @Override
+            public void onSecondActionClicked() {
 
             }
         });

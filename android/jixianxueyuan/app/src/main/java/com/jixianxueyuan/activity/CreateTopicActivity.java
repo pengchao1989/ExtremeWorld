@@ -174,12 +174,15 @@ public class CreateTopicActivity extends Activity implements CreateActivityImage
         setContentView(R.layout.create_topic_activity);
 
         ButterKnife.bind(this);
-
-        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+        myActionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onFirstActionClicked() {
                 submitControlling();
+            }
+
+            @Override
+            public void onSecondActionClicked() {
+
             }
         });
 

@@ -31,13 +31,17 @@ public class ModifyProfileAttrEditTextActivity extends ModifyProfileAttrBaseActi
         editText.setHint(hint);
         editText.setText(attributeValue);
 
-        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+        myActionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View v) {
+            public void onFirstActionClicked() {
                 attributeValue = editText.getText().toString();
                 updateAttribute();
             }
+
+            @Override
+            public void onSecondActionClicked() {
+
+            }
         });
     }
-
 }

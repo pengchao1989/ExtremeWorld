@@ -29,11 +29,16 @@ public class ConnectManageActivity extends BaseActivity {
         setContentView(R.layout.admin_conncet_manage_activity);
         ButterKnife.bind(this);
 
-        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+        myActionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View view) {
+            public void onFirstActionClicked() {
                 String serverUrl = serverEditText.getText().toString();
                 ServerMethod.updateCustomServerUrl(ConnectManageActivity.this, serverUrl);
+            }
+
+            @Override
+            public void onSecondActionClicked() {
+
             }
         });
 

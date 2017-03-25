@@ -267,13 +267,17 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
         replyWidget = new ReplyWidget(this, replyWidgetLayout);
         replyWidget.setReplyWidgetListener(this);
-
-        actionBar.setActionOnClickListener(new View.OnClickListener() {
+        actionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View v) {
+            public void onFirstActionClicked() {
                 if (topicDTO != null) {
                     showShareMenu(topicDTO);
                 }
+            }
+
+            @Override
+            public void onSecondActionClicked() {
+
             }
         });
 

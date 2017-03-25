@@ -120,9 +120,9 @@ public class TopicTaxonomyHomeActivity extends BaseActivity {
 
             }
         });
-        myActionBar.setActionOnClickListener(new View.OnClickListener() {
+        myActionBar.setActionOnClickListener(new MyActionBar.MyActionBarListener() {
             @Override
-            public void onClick(View v) {
+            public void onFirstActionClicked() {
                 switch (topicType) {
                     case TopicType.NEWS:
                         CreateNewsActivity.startActivity(TopicTaxonomyHomeActivity.this, currentSelectTaxonomyId);
@@ -132,6 +132,11 @@ public class TopicTaxonomyHomeActivity extends BaseActivity {
                     default:
                         break;
                 }
+            }
+
+            @Override
+            public void onSecondActionClicked() {
+
             }
         });
     }
