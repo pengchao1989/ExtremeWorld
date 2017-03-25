@@ -41,6 +41,12 @@ public class LikeRecyclerAdapter extends RecyclerView.Adapter<LikeRecyclerAdapte
         }
     }
 
+    public void addToHead(LikeDTO likeDTO){
+        if (likeDTOList != null){
+            likeDTOList.add(0,likeDTO);
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.small_like_list_item, parent, false);

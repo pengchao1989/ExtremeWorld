@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.dto.UserMinDTO;
 
 /**
  * Created by pengchao on 7/19/15.
@@ -34,6 +35,19 @@ public class Mine {
 
     public UserDTO getUserInfo() {
         return userInfo;
+    }
+
+    public UserMinDTO getUserMinInfo(){
+        UserDTO userDTO = getUserInfo();
+        if (userDTO != null){
+            UserMinDTO userMinDTO = new UserMinDTO();
+            userMinDTO.setAvatar(userDTO.getAvatar());
+            userMinDTO.setGender(userDTO.getGender());
+            userMinDTO.setId(userDTO.getId());
+            userMinDTO.setName(userDTO.getName());
+            return userMinDTO;
+        }
+        return null;
     }
 
     public void setUserInfo(UserDTO userInfo) {

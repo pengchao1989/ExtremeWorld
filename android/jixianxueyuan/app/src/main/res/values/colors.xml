@@ -9,7 +9,7 @@
     <color name="background">#ffffff</color>
     <color name="item_background">#ffffff</color>
     <color name="item_background_pressed">#1e0e332e</color>
-    <color name="divider">#cccccc</color>
+    <color name="divider">#1e0e332e</color>
 
     <color name="white">#FFFAFAFA</color>
     <color name="black">#FF000000</color>

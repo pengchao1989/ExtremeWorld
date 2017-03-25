@@ -50,6 +50,7 @@ import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.config.TopicType;
 import com.jixianxueyuan.dto.AgreeResultDTO;
 import com.jixianxueyuan.dto.CollectionDTO;
+import com.jixianxueyuan.dto.LikeDTO;
 import com.jixianxueyuan.dto.MediaDTO;
 import com.jixianxueyuan.dto.MediaWrapDTO;
 import com.jixianxueyuan.dto.MyPage;
@@ -183,9 +184,11 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private String mReplyString = "";
 
-
     //video
     private MediaController mMediaController;
+
+    //like
+    LikeRecyclerAdapter likeRecyclerAdapter;
 
 
     final int HADLER_DOWNLOAD_VIDEO_SUCCESS = 0x1;
@@ -389,6 +392,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             }
         });
 
+        //like
+        headViewHolder.likeCountTextView.setText(topicDTO.getAgreeCount() + getString(R.string.agree_of_me));
 
         //score
         if (TopicType.CHALLENGE.equals(topicDTO.getType())){
@@ -663,7 +668,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 headViewHolder.likeRecyclerView.setLayoutManager(linearLayoutManager);
-                LikeRecyclerAdapter likeRecyclerAdapter = new LikeRecyclerAdapter(TopicDetailActivity.this, topicExtraDTO.getLikeList());
+                likeRecyclerAdapter = new LikeRecyclerAdapter(TopicDetailActivity.this, topicExtraDTO.getLikeList());
                 headViewHolder.likeRecyclerView.setAdapter(likeRecyclerAdapter);
             }
 
@@ -929,6 +934,15 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             @Override
             public void onResponse(MyResponse<AgreeResultDTO> response) {
                 replyWidget.setLiked(true);
+                headViewHolder.likeCountTextView.setText(response.getContent().getCount() + getString(R.string.agree_of_me));
+                //add to like list
+                if (likeRecyclerAdapter != null){
+                    LikeDTO likeDTO = new LikeDTO();
+                    UserMinDTO userMinDTO = MyApplication.getContext().getMine().getUserMinInfo();
+                    likeDTO.setUser(userMinDTO);
+                    likeRecyclerAdapter.addToHead(likeDTO);
+                }
+
             }
         },new Response.ErrorListener() {
             @Override
@@ -1103,8 +1117,9 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         //点赞
         if (replyWidget.isLiked()){
             Toast.makeText(TopicDetailActivity.this, "you liked it!!!", Toast.LENGTH_LONG).show();
+        }else {
+            submitZan();
         }
-        submitZan();
     }
 
     public static class HeadViewHolder
@@ -1129,6 +1144,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @BindView(R.id.my_submit_rating_button)Button mySubmitRatingButton;
         @BindView(R.id.my_rating_score_text)TextView myRatingText;
         @BindView(R.id.like_recycler_view)RecyclerView likeRecyclerView;
+        @BindView(R.id.like_count_text)TextView likeCountTextView;
 
 
         public HeadViewHolder(View headView)

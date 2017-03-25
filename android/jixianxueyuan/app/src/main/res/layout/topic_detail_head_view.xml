@@ -197,16 +197,38 @@
                 android:layout_height="@dimen/block_height"
                 android:background="@color/divider"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/like_recycler_view"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:layout_centerVertical="true"
-                android:scrollbars="none">
+                android:gravity="center_vertical"
+                android:weightSum="10">
 
-            </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/like_recycler_view"
+                    android:layout_weight="8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:scrollbars="none">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/like_count_text"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    style="@style/ListSecondaryTextSmall"/>
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
