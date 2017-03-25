@@ -288,6 +288,11 @@ public class ReplyDetailActivity extends BaseActivity implements ReplyWidgetList
         
     }
 
+    @Override
+    public void onLikeClicked() {
+
+    }
+
     @OnItemClick(R.id.reply_detail_listview)void onSubReplyClick(int position){
 
         if(position == 0){

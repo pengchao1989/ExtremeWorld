@@ -78,6 +78,7 @@ import com.jixianxueyuan.util.Util;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUpload;
 import com.jixianxueyuan.util.qiniu.QiniuMultiImageUploadListener;
 import com.jixianxueyuan.widget.ClickLoadMoreView;
+import com.jixianxueyuan.widget.KeyboardChangeListener;
 import com.jixianxueyuan.widget.MediaController;
 import com.jixianxueyuan.widget.MyActionBar;
 import com.jixianxueyuan.widget.ReplyWidget;
@@ -285,6 +286,13 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             finish();
         }
 
+        new KeyboardChangeListener(this).setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
+            @Override
+            public void onKeyboardChange(boolean isShow, int keyboardHeight) {
+                MyLog.d(tag, "isShow = [" + isShow + "], keyboardHeight = [" + keyboardHeight + "]");
+                replyWidget.onKeyboardChange(isShow);
+            }
+        });
     }
 
     @Override
@@ -381,21 +389,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             }
         });
 
-        headViewHolder.zanButton.setOnLikeListener(new OnLikeListener() {
-            @Override
-            public void liked(LikeButton likeButton) {
-                //点赞
-                submitZan();
-            }
-
-            @Override
-            public void unLiked(LikeButton likeButton) {
-
-            }
-        });
-
-
-        headViewHolder.zanCountTextView.setText(String.valueOf(topicDTO.getAgreeCount()));
 
         //score
         if (TopicType.CHALLENGE.equals(topicDTO.getType())){
@@ -654,8 +647,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     private void updateExtraInfoView(){
         if (topicExtraDTO != null){
             if (topicExtraDTO.isAgreed()){
-                headViewHolder.zanButton.setLiked(true);
-                headViewHolder.zanButton.setEnabled(false);
+                replyWidget.setLiked(true);
             }
             if (topicExtraDTO.isCollected()){
                 headViewHolder.collectionButton.setLiked(true);
@@ -936,8 +928,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         MyRequest<AgreeResultDTO> myRequest = new MyRequest(Request.Method.POST, url, AgreeResultDTO.class,zanRequest, new Response.Listener<MyResponse<AgreeResultDTO>>() {
             @Override
             public void onResponse(MyResponse<AgreeResultDTO> response) {
-                headViewHolder.zanButton.setEnabled(false);
-                headViewHolder.zanCountTextView.setText(String.valueOf(response.getContent().getCount()));
+                replyWidget.setLiked(true);
             }
         },new Response.ErrorListener() {
             @Override
@@ -1107,6 +1098,15 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         localImagePathList = imagePath;
     }
 
+    @Override
+    public void onLikeClicked() {
+        //点赞
+        if (replyWidget.isLiked()){
+            Toast.makeText(TopicDetailActivity.this, "you liked it!!!", Toast.LENGTH_LONG).show();
+        }
+        submitZan();
+    }
+
     public static class HeadViewHolder
     {
         @BindView(R.id.user_info_head_layout)RelativeLayout mUserHeadLayout;
@@ -1116,9 +1116,6 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         @BindView(R.id.user_head_avatar)SimpleDraweeView avatarImageView;
         @BindView(R.id.web_view)WebView webView;
         @BindView(R.id.topic_detail_head_course_name)TextView scoreNameTextView;
-        @BindView(R.id.topic_detail_head_zan)LikeButton zanButton;
-        @BindView(R.id.topic_detail_head_zan_count)TextView zanCountTextView;
-        @BindView(R.id.topic_detail_head_zhan_layout)LinearLayout zanLayout;
         @BindView(R.id.topic_detail_content_textview)TextView contentTextView;
         @BindView(R.id.topic_detail_content_container)LinearLayout contentLayout;
         @BindView(R.id.topic_detail_collection_button)LikeButton collectionButton;

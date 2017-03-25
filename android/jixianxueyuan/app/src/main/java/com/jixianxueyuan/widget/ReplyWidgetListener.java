@@ -9,4 +9,5 @@ public interface ReplyWidgetListener {
 
     void onCommit(String text);
     void onImageChange(List<String> imagePath);
+    void onLikeClicked();
 }

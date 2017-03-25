@@ -39,11 +39,15 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
     ImageView addButton;
     ImageView addImageButton;
     ImageView submitButton;
-    EditText EditText;
+    EditText contentEditText;
     ImageView hasDotImageView;
 
     RecyclerView recyclerView;
     ReplyWidgetImageListAdapter imageListAdapter;
+
+
+    private boolean isKeyboardShow = false;
+    private boolean isLiked = false;
 
     public ReplyWidget(Context context, LinearLayout contentContainer)
     {
@@ -85,7 +89,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
         recyclerView = (RecyclerView) view.findViewById(R.id.reply_widget_image_listview);
 
         submitButton = (ImageView) view.findViewById(R.id.reply_widget_submit_button);
-        EditText = (EditText) view.findViewById(R.id.reply_widget_edittext);
+        contentEditText = (EditText) view.findViewById(R.id.reply_widget_edittext);
         hasDotImageView = (ImageView) view.findViewById(R.id.reply_widget_has_dot);
         final View rootView = view.findViewById(R.id.reply_widget_root_view);
 
@@ -93,8 +97,12 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard(EditText);
-                switchActionContainer();
+                if (isKeyboardShow){
+                    hideKeyboard();
+                    switchActionContainer();
+                }else {
+                    replyWidgetListener.onLikeClicked();
+                }
             }
         });
 
@@ -103,7 +111,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
 
             @Override
             public void onClick(View v) {
-                String newText = EditText.getText().toString();
+                String newText = contentEditText.getText().toString();
 
                 if (replyWidgetListener != null) {
                     replyWidgetListener.onCommit(newText);
@@ -111,10 +119,10 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
             }
         });
 
-        EditText.setOnTouchListener(new View.OnTouchListener() {
+        contentEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                boolean isKeyBoardShow = showSoftKeyboard(EditText);
+                boolean isKeyBoardShow = showSoftKeyboard(contentEditText);
                 if (isKeyBoardShow) {
                     hideActionContainer();
                 }
@@ -135,36 +143,47 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
     }
 
     public String getText(){
-        return EditText.getText().toString();
+        return contentEditText.getText().toString();
     }
 
     public void setText(String text){
-        EditText.setText(text);
-        EditText.setSelection(text.length());
+        contentEditText.setText(text);
+        contentEditText.setSelection(text.length());
     }
 
     public void setHint(String hint){
-        EditText.setText("");
-        EditText.setHint(hint);
+        contentEditText.setText("");
+        contentEditText.setHint(hint);
     }
 
     public void resetHint(){
-        EditText.setText("");
-        EditText.setHint(R.string.we_speek);
+        contentEditText.setText("");
+        contentEditText.setHint(R.string.we_speek);
     }
 
     public void showKeyboard(){
-        showSoftKeyboard(EditText);
+        showSoftKeyboard(contentEditText);
     }
 
     public void hideKeyboard(){
-        hideSoftKeyboard(EditText);
+        hideSoftKeyboard(contentEditText);
+        switchAddButton();
     }
 
     public void setReplyWidgetListener(ReplyWidgetListener replyWidgetListener) {
         this.replyWidgetListener = replyWidgetListener;
     }
 
+    public void setLiked(boolean liked){
+        this.isLiked = liked;
+        if (isLiked){
+            switchAddButton();
+        }
+    }
+
+    public boolean isLiked(){
+        return isLiked;
+    }
 
     private void changeEmojiKeyboardIcon(ImageView iconToBeChanged, int drawableResourceId){
         iconToBeChanged.setImageResource(drawableResourceId);
@@ -181,6 +200,7 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
     private void showActionContainer(){
         bottomContainer.setVisibility(View.VISIBLE);
     }
+
     private void hideActionContainer(){
         bottomContainer.setVisibility(View.GONE);
     }
@@ -239,10 +259,25 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
         ((Activity)context).startActivityForResult(intent, REQUEST_IMAGE_CODE);
     }
 
+    private void switchAddButton(){
+        if (isKeyboardShow){
+            addButton.setImageResource(R.mipmap.more);
+        }else{
+            if (bottomContainer.getVisibility() == View.VISIBLE){
+                addButton.setImageResource(R.mipmap.more);
+            }else {
+                if (isLiked){
+                    addButton.setImageResource(R.mipmap.like_4);
+                }else {
+                    addButton.setImageResource(R.mipmap.like_3);
+                }
+            }
+        }
+    }
     public void clean()
     {
-        if(EditText != null) {
-            EditText.setText("");
+        if(contentEditText != null) {
+            contentEditText.setText("");
         }
         if (imageListAdapter != null){
             imageListAdapter.clean();
@@ -250,6 +285,11 @@ public class ReplyWidget implements ReplyWidgetImageListAdapter.OnImageDeleteLis
         if (hasDotImageView != null){
             hasDotImageView.setVisibility(View.GONE);
         }
+    }
+
+    public void onKeyboardChange(boolean isShow){
+        isKeyboardShow = isShow;
+        switchAddButton();
     }
 
     @Override
