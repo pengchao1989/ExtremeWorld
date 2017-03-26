@@ -82,6 +82,13 @@
                 android:maxLines="6"
                 android:hint="@string/description"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ripple"
+                android:layout_marginTop="100dp"
+                android:text="友情提示：尽量不要上传自己手机原生拍摄的1080p的高清视频，比如可以使用其他视频工具拍摄导出，这样的视频清晰又小巧。喜欢搬砖的同学不限，因为搬砖的视频一般都很OK。"/>
+
 
 
         </LinearLayout>

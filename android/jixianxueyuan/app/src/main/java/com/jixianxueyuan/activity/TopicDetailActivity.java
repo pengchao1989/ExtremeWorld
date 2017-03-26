@@ -1192,7 +1192,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             coverImageView.setVisibility(View.GONE);
             videoView.setVisibility(View.VISIBLE);
 
-            videoView.setVideoPath(url + "?avvod/m3u8/s/640x360/vb/1000k");
+            videoView.setVideoPath(url);
             videoView.start();
         }else {
             Toast.makeText(this, R.string.video_is_empty, Toast.LENGTH_LONG).show();
