@@ -74,7 +74,7 @@ public class MyApplication extends MultiDexApplication {
 
         initAlibcTrade();
 
-        //initIM();
+        initIM();
 
         initUmenScoial();
 
@@ -140,14 +140,14 @@ public class MyApplication extends MultiDexApplication {
     private void initIM(){
 
         SysUtil.setApplication(this);
-        if(SysUtil.isTCMSServiceProcess(this)){
+/*        if(SysUtil.isTCMSServiceProcess(this)){
             return;
         }
         //第一个参数是Application Context
         //这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
         if(SysUtil.isMainProcess()){
             YWAPI.init(this, "23213193");
-        }
+        }*/
     }
 
 
