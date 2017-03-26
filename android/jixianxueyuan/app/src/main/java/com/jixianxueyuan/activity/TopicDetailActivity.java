@@ -1428,7 +1428,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(TopicDetailActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(TopicDetailActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
         }
     };
 }

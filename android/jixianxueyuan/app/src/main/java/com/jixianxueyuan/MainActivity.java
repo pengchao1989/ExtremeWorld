@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
     ShimmerTextView appNameTextView;
 
     Tencent tencent;
+    private BaseUiListener mTencentBaseUiListener;
 
     //String openId = null;
     private QQOpenInfo qqOpenInfo = null;
@@ -289,35 +290,10 @@ public class MainActivity extends Activity {
 
         String qqAppId = String.valueOf(Util.getApplicationMetaInteger(this, "QQ_APP_ID"));
         MyLog.d(tag, "QQ_APP_ID=" + qqAppId);
+        mTencentBaseUiListener = new BaseUiListener();
         tencent = Tencent.createInstance(qqAppId, this.getApplicationContext());
         if (!tencent.isSessionValid()) {
-            tencent.login(this, "get_user_info,add_t", new IUiListener() {
-                @Override
-                public void onComplete(Object response) {
-
-                    MyLog.d("MainActivity", "login info =" + response.toString());
-
-                    Gson gson = new Gson();
-
-                    qqOpenInfo = gson.fromJson(response.toString(), QQOpenInfo.class);
-                    if (qqOpenInfo != null) {
-                        //tencent.setOpenId(qqOpenInfo.getOpenid());
-                        //tencent.setAccessToken(qqOpenInfo.getAccess_token(),"10");
-                        //qq登录成功后进行自家用户登录或注册
-                        requestLogin();
-                    }
-                }
-
-                @Override
-                public void onError(UiError uiError) {
-
-                }
-
-                @Override
-                public void onCancel() {
-
-                }
-            });
+            tencent.login(this, "get_user_info,add_t", mTencentBaseUiListener);
         }
     }
 
@@ -360,6 +336,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         tencent.onActivityResult(requestCode, resultCode, data);
+        Tencent.onActivityResultData(requestCode, resultCode, data, mTencentBaseUiListener);
     }
 
     public static String getDeviceInfo(Context context) {
@@ -398,5 +375,33 @@ public class MainActivity extends Activity {
             progressDialog.setTitle(getString(R.string.loading));
         }
         progressDialog.show();
+    }
+
+    private class BaseUiListener implements IUiListener{
+        @Override
+        public void onComplete(Object response) {
+
+            MyLog.d("MainActivity", "login info =" + response.toString());
+
+            Gson gson = new Gson();
+
+            qqOpenInfo = gson.fromJson(response.toString(), QQOpenInfo.class);
+            if (qqOpenInfo != null) {
+                //tencent.setOpenId(qqOpenInfo.getOpenid());
+                //tencent.setAccessToken(qqOpenInfo.getAccess_token(),"10");
+                //qq登录成功后进行自家用户登录或注册
+                requestLogin();
+            }
+        }
+
+        @Override
+        public void onError(UiError uiError) {
+            MyLog.d("MainActivity", "login uiError =");
+        }
+
+        @Override
+        public void onCancel() {
+            MyLog.d("MainActivity", "login cancel");
+        }
     }
 }
