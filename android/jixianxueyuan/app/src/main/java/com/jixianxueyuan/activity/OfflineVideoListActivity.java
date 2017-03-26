@@ -58,7 +58,7 @@ public class OfflineVideoListActivity extends BaseActivity {
 
                 final MaterialDialog mMaterialDialog = new MaterialDialog(OfflineVideoListActivity.this);
                 mMaterialDialog.setTitle("提示");
-                mMaterialDialog.setMessage("文件保存在根目录的Download/skateboardGroup中");
+                mMaterialDialog.setMessage("文件保存在根目录的Download/skateboardGroup中,用自取");
                 mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

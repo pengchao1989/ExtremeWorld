@@ -26,6 +26,8 @@ public class MyActionBar extends LinearLayout {
     TextView actionTextView;
     ImageButton actionImageButton;
     ImageButton actionSecondImageButton;
+    FrameLayout actionSecondLayout;
+
 
     private MyActionBarListener actionBarListener;
 
@@ -47,7 +49,7 @@ public class MyActionBar extends LinearLayout {
         actionSecondImageButton = (ImageButton) view.findViewById(R.id.page_head_action_second_image);
         LinearLayout backLayout = (LinearLayout) view.findViewById(R.id.page_head_back);
         FrameLayout actionLayout = (FrameLayout) view.findViewById(R.id.page_head_action);
-        FrameLayout actionSecondLayout = (FrameLayout) view.findViewById(R.id.page_head_action_second);
+        actionSecondLayout = (FrameLayout) view.findViewById(R.id.page_head_action_second);
 
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyActionBar);
@@ -67,8 +69,8 @@ public class MyActionBar extends LinearLayout {
         }
         if (actionSecondDrawable != null){
             actionSecondImageButton.setImageDrawable(actionSecondDrawable);
-            actionSecondLayout.setVisibility(VISIBLE);
-            actionSecondImageButton.setVisibility(VISIBLE);
+/*            actionSecondLayout.setVisibility(VISIBLE);
+            actionSecondImageButton.setVisibility(VISIBLE);*/
             actionSecondImageButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -135,6 +137,13 @@ public class MyActionBar extends LinearLayout {
     public void setActionOnClickListener(MyActionBarListener listener)
     {
         actionBarListener = listener;
+    }
+
+    public void showSecondAction(){
+        if (actionSecondLayout != null && actionSecondImageButton != null ){
+            actionSecondLayout.setVisibility(VISIBLE);
+            actionSecondImageButton.setVisibility(VISIBLE);
+        }
     }
 
 

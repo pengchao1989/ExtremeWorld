@@ -637,6 +637,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     }
                 });
             }
+
+            actionBar.showSecondAction();
         }
     }
 
