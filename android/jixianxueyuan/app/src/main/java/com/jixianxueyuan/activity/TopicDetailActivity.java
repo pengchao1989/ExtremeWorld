@@ -49,6 +49,7 @@ import com.jixianxueyuan.config.MediaType;
 import com.jixianxueyuan.config.QiniuImageStyle;
 import com.jixianxueyuan.config.StaticResourceConfig;
 import com.jixianxueyuan.config.TopicType;
+import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.dto.AgreeResultDTO;
 import com.jixianxueyuan.dto.CollectionDTO;
 import com.jixianxueyuan.dto.LikeDTO;
@@ -66,6 +67,7 @@ import com.jixianxueyuan.dto.VideoDetailDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
 import com.jixianxueyuan.dto.request.TopicScoreRequestDTO;
 import com.jixianxueyuan.dto.request.ZanRequest;
+import com.jixianxueyuan.fragment.MineFragment;
 import com.jixianxueyuan.http.MyPageRequest;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.server.ServerMethod;
@@ -91,6 +93,7 @@ import com.like.OnLikeListener;
 import com.pili.pldroid.player.widget.PLVideoView;
 import com.tencent.smtt.sdk.CookieSyncManager;
 import com.tencent.smtt.sdk.WebView;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -287,8 +290,8 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     if (videoUrl != null){
                         TopicDownloaderManager.getInstance().downloadVideo(TopicDetailActivity.this, topicDTO.getTitle(), videoUrl);
                     }
+                    MobclickAgent.onEvent(TopicDetailActivity.this, UmengEventId.TOPIC_DETAIL_DOWNLOAD_CLICK);
                 }
-
             }
         });
 

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -65,7 +66,7 @@ public class FileUtils {
         return fileName;
     }
 
-    public static String getVideoRealPathFromURI(Context context, Uri uri) {
+    private static String getVideoRealPathFromURI(Context context, Uri uri) {
 /*        String res = null;
         String[] proj = { MediaStore.Video.Media.DATA};
         Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
@@ -103,15 +104,30 @@ public class FileUtils {
 
     }
 
-    public static String getRealPathFromURI(Context context, Uri contentUri) {
+    private static String getRealPathFromURI(Context context, Uri contentUri) {
         String res = null;
         String[] proj = { MediaStore.Images.Media.DATA };
         Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
-        if(cursor.moveToFirst()){;
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
+        if (cursor != null){
+            if(cursor.moveToFirst()){;
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                res = cursor.getString(column_index);
+            }
+            cursor.close();
+            return res;
+        }else {
+            return "";
         }
-        cursor.close();
-        return res;
+
+    }
+
+    public static String getSelfRealPathFromURI(Context context, Uri contentUri){
+        String filePath = getRealPathFromURI(context, contentUri);
+        if (!TextUtils.isEmpty(filePath)){
+            return filePath;
+        }else {
+            filePath = getVideoRealPathFromURI(context, contentUri);
+        }
+        return filePath;
     }
 }

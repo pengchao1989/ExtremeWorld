@@ -28,7 +28,8 @@ public class UmengEventId {
     public static final String TOPIC_LIST_AVATAR_CLICK = "topic_list_avatar_click";
 
     /*topic detail*/
-    public static final String TOPIC_DETAIL_LIKE_ITEM_CLICK = "topic_detail_like_item_ckick";
+    public static final String TOPIC_DETAIL_LIKE_ITEM_CLICK = "topic_detail_like_item_click";
+    public static final String TOPIC_DETAIL_DOWNLOAD_CLICK = "topic_detail_download_click";
 
 
     /*mine*/

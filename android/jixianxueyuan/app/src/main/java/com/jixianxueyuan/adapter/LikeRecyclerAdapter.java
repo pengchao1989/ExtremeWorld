@@ -73,7 +73,7 @@ public class LikeRecyclerAdapter extends RecyclerView.Adapter<LikeRecyclerAdapte
         holder.avatarImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobclickAgent.onEvent(context, UmengEventId.TOPIC_LIST_AVATAR_CLICK);
+                MobclickAgent.onEvent(context, UmengEventId.TOPIC_DETAIL_LIKE_ITEM_CLICK);
                 Intent intent = new Intent(context, UserHomeActivity.class);
                 intent.putExtra(UserHomeActivity.INTENT_USER_MIN, userMinDTO);
                 context.startActivity(intent);
