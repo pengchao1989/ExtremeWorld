@@ -42,4 +42,11 @@ public class MyResponse<T> {
     public void setError(Error error) {
         this.error = error;
     }
+
+    public boolean isOK(){
+		if (status == status_ok){
+			return true;
+		}
+		return false;
+	}
 }

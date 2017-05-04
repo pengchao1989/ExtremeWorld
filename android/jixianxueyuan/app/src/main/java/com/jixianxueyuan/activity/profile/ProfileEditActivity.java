@@ -91,7 +91,11 @@ public class ProfileEditActivity extends BaseActivity {
 
         userDTO = MyApplication.getContext().getMine().getUserInfo();
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         initView();
     }
 
@@ -271,6 +275,16 @@ public class ProfileEditActivity extends BaseActivity {
         intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_VALUE, userDTO.getSignature());
         startActivityForResult(intent, REQUEST_CODE_SIGNATURE);
     }
+
+    @OnClick(R.id.profile_edit_delivery_address_layout)void onDeliveryAddressClick(){
+        Intent intent = new Intent(this, ModifyProfileAttrEditTextActivity.class);
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_TITLE, getString(R.string.delivery_address));
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_HINT, getString(R.string.please_enter));
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_KEY, ProfileAttributeName.DELIVERY_ADDRESS);
+        intent.putExtra(ModifyProfileAttrEditTextActivity.INTENT_ATTRIBUTE_VALUE, userDTO.getSignature());
+        startActivityForResult(intent, REQUEST_CODE_SIGNATURE);
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

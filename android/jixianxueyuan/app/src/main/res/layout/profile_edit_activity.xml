@@ -145,6 +145,70 @@
 
         <View style="@style/HorizontalDividerView"/>
 
+        <RelativeLayout
+            android:id="@+id/profile_edit_delivery_address_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_horizontal_padding"
+            android:background="@drawable/list_item_background"
+            android:clickable="true"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_address"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                style="@style/SecondText"
+                />
+
+            <TextView
+                android:id="@+id/profile_edit_delivery_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="50dp"
+                style="@style/SecondText" />
+
+            <ImageView style="@style/ImageItemRightIcon" />
+        </RelativeLayout>
+
+        <View style="@style/HorizontalDividerView"/>
+
+        <RelativeLayout
+            android:id="@+id/profile_edit_delivery_phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_horizontal_padding"
+            android:background="@drawable/list_item_background"
+            android:clickable="true"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_address"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                style="@style/SecondText"
+                />
+
+            <TextView
+                android:id="@+id/profile_edit_delivery_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="50dp"
+                style="@style/SecondText" />
+
+            <ImageView style="@style/ImageItemRightIcon" />
+        </RelativeLayout>
+
     </LinearLayout>
 
 

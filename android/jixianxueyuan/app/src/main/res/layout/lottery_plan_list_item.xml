@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_frs_list">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lottery_plan_list_item_title_textview"
+            tools:text="幸运星期六 第一期"
+            style="@style/PrimaryText" />
+
+        <TextView
+            android:id="@+id/lottery_plan_list_item_status_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/PrimaryText"
+            tools:text="已开奖"
+            android:textColor="@color/green"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lottery_plan_list_item_open_time_head"
+            android:text="@string/open_lottery_time_dot"
+            style="@style/SecondText"/>
+
+        <TextView
+            android:id="@+id/lottery_plan_list_item_open_time_value"
+            tools:text="2017-04-29 20:00"
+            style="@style/SecondText"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/sponsor_dot"
+            style="@style/SecondText"/>
+
+        <TextView
+            android:id="@+id/lottery_plan_list_item_sponsor"
+            tools:text="滑板圈"
+            style="@style/SecondText"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

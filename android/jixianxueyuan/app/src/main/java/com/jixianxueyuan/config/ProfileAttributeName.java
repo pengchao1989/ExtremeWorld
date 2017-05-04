@@ -8,4 +8,7 @@ public class ProfileAttributeName {
     public static final String SIGNATURE = "signature";
     public static final String BACKGROUND = "bg";
     public static final String AVATAR = "avatar";
+    public static final String SERIES = "series";
+    public static final String DELIVERY_ADDRESS = "deliveryAddress";
+    public static final String DELIVERY_PHONE = "deliveryPhone";
 }

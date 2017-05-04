@@ -132,6 +132,8 @@
     <string name="select_avatar">선택 아바타</string>
     <string name="region">지역</string>
     <string name="signature">서명</string>
+    <string name="delivery_address">물품 주소</string>
+    <string name="delivery_phone">물품 전화</string>
 
 
     <!--course-->

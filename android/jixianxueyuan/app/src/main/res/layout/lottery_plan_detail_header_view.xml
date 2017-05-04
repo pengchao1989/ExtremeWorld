@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/lottery_plan_detail_title"
+            android:textSize="24sp"
+            style="@style/titleText"
+            android:layout_gravity="center_horizontal"
+            tools:text="幸运星期6 第一期" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="幸运豆总数"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/PrimaryText" />
+
+                <TextView
+                    android:id="@+id/lottery_plan_detail_total_lucky_count"
+                    android:text="--"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/PrimaryText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="我的幸运豆"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/PrimaryText" />
+
+                <TextView
+                    android:id="@+id/lottery_plan_detail_my_lucky_factor_count"
+                    android:text="--"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/PrimaryText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="中奖概率"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/PrimaryText" />
+
+                <TextView
+                    android:id="@+id/lottery_plan_detail_my_winning_rate"
+                    android:text="--"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/PrimaryText" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl"
+            android:orientation="horizontal"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center"
+            >
+            <!--画左边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="抽奖规则"
+                />
+            <!--画右边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lottery_plan_detail_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:text="---------"
+            tools:text="1.获取双色球当期号码\n2.将双色球号码按顺序组合成一个大数X\n3.按照奖品数量（M）将幸运因子分成M个区间，每个区间的幸运因子数量N\n4.大数X对幸运因子区间数量N求余得到Y\n5.第一个中奖者即号码为Y的用户，第二个中奖者即为Y+1×N，第三个中奖者即为Y+2×N"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center"
+            >
+            <!--画左边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本期奖品"
+                />
+            <!--画右边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lottery_plan_detail_prize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            tools:text="小熊砂纸、小熊砂纸、小熊砂纸、小熊砂纸"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center"
+            >
+            <!--画左边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本期赞助商" />
+            <!--画右边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lottery_plan_detail_sponsor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:text="--"
+            android:gravity="center_horizontal"
+            tools:text="滑板圈"/>
+
+
+        <TextView
+            android:id="@+id/lottery_plan_detail_sponsor_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            tools:text="--"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center"
+            >
+            <!--画左边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中奖记录" />
+            <!--画右边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lottery_plan_detail_winning_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_color"
+            tools:text="A\B\C"/>
+
+
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center"
+            >
+            <!--画左边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="幸运豆派发记录" />
+            <!--画右边的那条线-->
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

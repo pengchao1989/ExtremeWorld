@@ -153,6 +153,7 @@
             android:layout_height="wrap_content"
             android:minWidth="140dp"
             android:text="@string/cancel"
+            android:layout_marginTop="14dp"
             style="@style/TransparentButtonSmall"/>
 
         <Space
@@ -165,6 +166,7 @@
             android:layout_height="wrap_content"
             android:minWidth="140dp"
             android:text="@string/ok"
+            android:layout_marginTop="14dp"
             style="@style/TransparentButtonSmall"/>
 
     </LinearLayout>

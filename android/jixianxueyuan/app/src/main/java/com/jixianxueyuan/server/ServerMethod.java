@@ -17,10 +17,10 @@ public class ServerMethod {
     static public final int STATUS_NO_CONTENT = 204;
 
     static String custom_server_url = "";
-    static final String test_server_url = "http://www.jixianxueyuan.com/";
-    static final String production_server_url = "http://www.jixianxueyuan.com/";
-    //static final String test_server_url = "http://192.168.1.105:8080/";
-    //static final String production_server_url = "http://192.168.1.105:8080/";
+    static final String test_server_url = "http://app.jixianxueyuan.com/";
+    static final String production_server_url = "http://app.jixianxueyuan.com/";
+    //static final String test_server_url = "http://192.168.1.109:8080/";
+    //static final String production_server_url = "http://192.168.1.109:8080/";
     static final String api_version_secure = "api/secure/v1/";
     static final String api_version_anon = "api/v1/";
     static final String api_version_secure_admin = "api/secure/admin/v1/";
@@ -105,6 +105,10 @@ public class ServerMethod {
     public static final String point_duiba_auto_login(){return method_url_secure + hobby + "point/duiba_auto_login";}
     public static final String point_count(){return method_url_secure + hobby + "point/points";}
     public static final String community(){return method_url_secure + hobby  + "community";}
+    public static final String lottery_plan() {return method_url_secure + hobby + "lottery/lotteryPlan";}
+    public static final String ongoing_lucky_saturday(){ return method_url_secure + hobby + "lottery/lotteryPlan/ongoing/luckySaturday";}
+    public static final String lottery_plan_detail_of_user(){return  method_url_secure + hobby + "lottery/lotteryPlan/detailOfUser/";}
+    public static final String lucky_factor() {return method_url_secure + hobby + "lottery/lucky_factor";}
 
     //admin
     public static final String admin_topic(){return method_url_secure_admin + hobby + "topic";}

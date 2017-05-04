@@ -129,6 +129,8 @@
         <activity android:name=".activity.admin.ConnectManageActivity"/>;
         <activity android:name=".activity.admin.AdminTopicListActivity"/>
         <activity android:name=".activity.OfflineVideoListActivity"/>
+        <activity android:name=".activity.LotteryPlanHomeActivity"/>
+        <activity android:name=".activity.LotteryPlanDetailActivity"/>
         <activity android:name=".activity.SponsorshipActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize"/>

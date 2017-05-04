@@ -132,6 +132,8 @@
     <string name="select_avatar">设置头像</string>
     <string name="region">地区</string>
     <string name="signature">签名</string>
+    <string name="delivery_address">收货地址</string>
+    <string name="delivery_phone">收货电话</string>
 
     <!--course-->
     <string name="upload_my_video">记录我的动作</string>
@@ -158,6 +160,11 @@
     <string name="month_tycoon_list">本月土豪榜</string>
     <string name="donation">捐赠</string>
     <string name="money_unit">元</string>
+
+    <!--lottery plan-->
+    <string name="lucky_saturday">幸运星期6</string>
+    <string name="open_lottery_time_dot">开奖时间:</string>
+    <string name="sponsor_dot">赞&#160;&#160;助&#160;&#160;商:</string>
 
     <string name="logout">退出当前账号</string>
     <string name="notify_setting">提醒设置</string>

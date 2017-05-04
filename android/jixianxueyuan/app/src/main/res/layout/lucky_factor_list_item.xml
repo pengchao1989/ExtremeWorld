@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/list_item_background">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/lucky_factor_list_item_avatar"
+        android:layout_width="@dimen/avatar_width"
+        android:layout_height="@dimen/avatar_height"
+        fresco:roundAsCircle="true"
+        fresco:placeholderImage="@mipmap/photo"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/lucky_factor_list_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="扳手扳死你"
+                    style="@style/ListPrimaryText"
+                    />
+
+                <ImageView
+                    android:id="@+id/lucky_factor_list_item_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lucky_factor_list_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2017-05-02 19:20:00"
+                android:textSize="14sp"
+                style="@style/ListSecondaryText"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lucky_factor_list_item_number_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="22sp"
+            tools:text="1234"
+            style="@style/PrimaryText"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

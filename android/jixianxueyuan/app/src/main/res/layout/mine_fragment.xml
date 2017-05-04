@@ -153,14 +153,11 @@
         </RelativeLayout>
 
 
-
-
         <View style="@style/HorizontalDividerView" />
 
         <RelativeLayout
-            android:id="@+id/mine_fragment_setting"
-            style="@style/ImageItemLayout"
-            >
+            android:id="@+id/mine_fragment_lottery_plan"
+            style="@style/ImageItemLayout">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -171,14 +168,37 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/mine_setting" />
+                    android:src="@mipmap/mine_lottery" />
 
                 <TextView
                     style="@style/ListPrimaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="@string/setting" />
+                    android:text="@string/lucky_saturday" />
+                <TextView
+                    android:id="@+id/mine_fragment_lucky_count"
+                    style="@style/ListPrimaryTextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/title_background_color"
+                    tools:text="(20幸运因子)" />
+                <Button
+                    android:id="@+id/mine_fragment_pick_luck_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:text="领取"
+                    android:visibility="gone"
+                    android:background="@drawable/trans_button_background"
+                    />
+
             </LinearLayout>
 
             <ImageView style="@style/ImageItemRightIcon" />
@@ -248,6 +268,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="@string/invite" />
+            </LinearLayout>
+
+            <ImageView style="@style/ImageItemRightIcon" />
+
+        </RelativeLayout>
+
+
+        <View style="@style/HorizontalDividerView" />
+
+        <RelativeLayout
+            android:id="@+id/mine_fragment_setting"
+            style="@style/ImageItemLayout"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/mine_setting" />
+
+                <TextView
+                    style="@style/ListPrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/setting" />
             </LinearLayout>
 
             <ImageView style="@style/ImageItemRightIcon" />

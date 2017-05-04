@@ -8,6 +8,8 @@ import java.io.Serializable;
 public class CourseMinDTO implements Serializable{
     private Long id;
     private String name;
+    private int explainCount;
+    private int challengeCount;
 
     public Long getId() {
         return id;
@@ -23,5 +25,21 @@ public class CourseMinDTO implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getExplainCount() {
+        return explainCount;
+    }
+
+    public void setExplainCount(int explainCount) {
+        this.explainCount = explainCount;
+    }
+
+    public int getChallengeCount() {
+        return challengeCount;
+    }
+
+    public void setChallengeCount(int challengeCount) {
+        this.challengeCount = challengeCount;
     }
 }

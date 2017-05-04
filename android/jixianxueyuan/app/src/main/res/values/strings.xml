@@ -132,6 +132,8 @@
     <string name="select_avatar">select avatar</string>
     <string name="region">Region</string>
     <string name="signature">Signature</string>
+    <string name="delivery_address">delivery address</string>
+    <string name="delivery_phone">delivery phone</string>
 
     <!--course-->
     <string name="upload_my_video">upload this action video</string>
@@ -158,6 +160,11 @@
     <string name="month_tycoon_list">month tycoon list</string>
     <string name="donation">donation</string>
     <string name="money_unit">USD</string>
+
+    <!--lottery plan-->
+    <string name="lucky_saturday">幸运星期6</string>
+    <string name="open_lottery_time_dot">开奖时间:</string>
+    <string name="sponsor_dot">赞&#160;&#160;助&#160;&#160;商:</string>
 
     <string name="logout">logout</string>
     <string name="notify_setting">notify</string>

@@ -74,7 +74,7 @@ public class CourseListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         CourseMinDTO courseMinDTO = courseDTOList.get(position);
-        viewHolder.nameTextView.setText(courseMinDTO.getName());
+        viewHolder.nameTextView.setText(courseMinDTO.getName() + "(" + courseMinDTO.getExplainCount() + ")");
         return convertView;
     }
 

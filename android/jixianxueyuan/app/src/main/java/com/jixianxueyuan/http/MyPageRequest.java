@@ -3,9 +3,11 @@ package com.jixianxueyuan.http;
 import android.util.Base64;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
@@ -256,4 +258,10 @@ public class MyPageRequest<T> extends JsonRequest<MyResponse<MyPage<T>>> {
         }
     }
 
+/*    @Override
+    public RetryPolicy getRetryPolicy() {
+        return new DefaultRetryPolicy(8000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+    }*/
 }

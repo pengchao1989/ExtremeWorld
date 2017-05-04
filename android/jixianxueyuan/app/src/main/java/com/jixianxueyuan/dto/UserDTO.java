@@ -25,6 +25,9 @@ public class UserDTO implements Serializable {
     private long point;
     private String device;
     private String versionName;
+    private String series;
+    private String deliveryAddress;
+    private String deliveryPhone;
 
 
     private UserDTO inviter;
@@ -214,6 +217,30 @@ public class UserDTO implements Serializable {
 
     public void setVersionName(String versionName) {
         this.versionName = versionName;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public String getDeliveryPhone() {
+        return deliveryPhone;
+    }
+
+    public void setDeliveryPhone(String deliveryPhone) {
+        this.deliveryPhone = deliveryPhone;
     }
 
     /*    @Override

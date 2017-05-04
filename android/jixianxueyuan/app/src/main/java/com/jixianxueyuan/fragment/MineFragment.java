@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.jixianxueyuan.activity.CollectionListActivity;
 import com.jixianxueyuan.activity.CreditActivity;
 import com.jixianxueyuan.activity.CropBgActivity;
 import com.jixianxueyuan.activity.InviteWebActivity;
+import com.jixianxueyuan.activity.LotteryPlanHomeActivity;
 import com.jixianxueyuan.activity.NewHomeActivity;
 import com.jixianxueyuan.activity.OfflineVideoListActivity;
 import com.jixianxueyuan.activity.RemindListActivity;
@@ -42,10 +44,13 @@ import com.jixianxueyuan.config.UmengEventId;
 import com.jixianxueyuan.config.UploadPrefixName;
 import com.jixianxueyuan.dto.MyResponse;
 import com.jixianxueyuan.dto.UserDTO;
+import com.jixianxueyuan.dto.lottery.LotteryPlanDTO;
+import com.jixianxueyuan.dto.lottery.LotteryPlanDetailOfUserDTO;
 import com.jixianxueyuan.dto.request.UserAttributeRequestDTO;
 import com.jixianxueyuan.http.MyRequest;
 import com.jixianxueyuan.http.MyVolleyErrorHelper;
 import com.jixianxueyuan.server.ServerMethod;
+import com.jixianxueyuan.util.ACache;
 import com.jixianxueyuan.util.ImageUriParseUtil;
 import com.jixianxueyuan.util.StringUtils;
 import com.jixianxueyuan.util.qiniu.QiniuSingleImageUpload;
@@ -74,6 +79,9 @@ public class MineFragment extends Fragment {
     public static final int REQUEST_IMAGE_CODE = 1;
     public static final int CROP_IMAGE_CODE = 2;
 
+    private static final String CACHE_POINT_COUNT = "cache_point_count";
+    private static final String CACHE_LUCKY_COUNT = "cache_lucky_count";
+
     @BindView(R.id.mine_fragment_head_image_view)
     SimpleDraweeView headImageView;
     @BindView(R.id.mine_avatar_imageview)
@@ -84,6 +92,10 @@ public class MineFragment extends Fragment {
     TextView pointCountTextView;
     @BindView(R.id.mine_fragment_admin)
     RelativeLayout adminLayout;
+    @BindView(R.id.mine_fragment_lucky_count)
+    TextView luckCountTextView;
+    @BindView(R.id.mine_fragment_pick_luck_button)
+    Button pickLuckButton;
 
     private NewHomeActivity activity;
 
@@ -97,6 +109,8 @@ public class MineFragment extends Fragment {
     private QiniuSingleImageUpload qiniuSingleImageUpload;
 
 
+    private LotteryPlanDTO lotteryPlanDTO;
+    private long myLuckFactorCount = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -130,6 +144,14 @@ public class MineFragment extends Fragment {
 
         signatureTextView.setText(mine.getUserInfo().getSignature());
 
+        //show cache
+        ACache aCache = ACache.get(MineFragment.this.getActivity());
+        if (aCache != null){
+            pointCountTextView.setText( "(" + String.valueOf(aCache.getAsString(CACHE_POINT_COUNT)) + "积分)");
+            luckCountTextView.setText( "(" + String.valueOf(aCache.getAsString(CACHE_LUCKY_COUNT)) + "幸运豆)");
+        }
+
+
         return view;
 
     }
@@ -139,6 +161,7 @@ public class MineFragment extends Fragment {
     {
         super.onResume();
         requestPointCount();
+        requestLuckCount();
     }
 
 
@@ -215,6 +238,12 @@ public class MineFragment extends Fragment {
 
     @OnClick(R.id.mine_fragment_point)void onPointClick(){
         requestDuibaAutoLoginUrl();
+    }
+
+    @OnClick(R.id.mine_fragment_lottery_plan)void onLotteryPlanClick(){
+        MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_LOTTERY_PLAN_CLICK);
+        Intent intent = new Intent(this.getActivity(), LotteryPlanHomeActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.mine_fragment_admin)void onAdminClick() {
@@ -425,6 +454,62 @@ public class MineFragment extends Fragment {
             @Override
             public void onResponse(MyResponse<Integer> response) {
                 pointCountTextView.setText( "(" + String.valueOf(response.getContent()) + "积分)");
+                ACache.get(MineFragment.this.getActivity()).put(CACHE_POINT_COUNT, String.valueOf(response.getContent()));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
+    private void requestLuckCount(){
+        String url = ServerMethod.ongoing_lucky_saturday();
+        MyRequest<LotteryPlanDetailOfUserDTO> myRequest = new MyRequest<LotteryPlanDetailOfUserDTO>(Request.Method.GET, url, LotteryPlanDetailOfUserDTO.class, null, new Response.Listener<MyResponse<LotteryPlanDetailOfUserDTO>>() {
+            @Override
+            public void onResponse(MyResponse<LotteryPlanDetailOfUserDTO> response) {
+                LotteryPlanDetailOfUserDTO lotteryPlanDetailOfUserDTO = response.getContent();
+                if (lotteryPlanDetailOfUserDTO != null){
+                    lotteryPlanDTO = lotteryPlanDetailOfUserDTO.getLotteryPlan();
+                    myLuckFactorCount = lotteryPlanDetailOfUserDTO.getUserLuckyFactorCount();
+                    luckCountTextView.setText( "(" + String.valueOf(myLuckFactorCount) + "幸运豆)");
+                    ACache.get(MineFragment.this.getActivity()).put(CACHE_LUCKY_COUNT, String.valueOf(myLuckFactorCount));
+                    if (lotteryPlanDetailOfUserDTO.isCanGetLuckyFactor() && lotteryPlanDTO != null){
+                        pickLuckButton.setVisibility(View.VISIBLE);
+                        pickLuckButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                requestPickLuckyFactor();
+                            }
+                        });
+                    }else {
+                        pickLuckButton.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MyApplication.getContext().getRequestQueue().add(myRequest);
+    }
+
+    private void requestPickLuckyFactor(){
+        String url = ServerMethod.lottery_plan() + "/" + lotteryPlanDTO.getId() + "/pickLuckyFactor";
+        MyRequest<Void> myRequest = new MyRequest<Void>(Request.Method.POST, url, Void.class, null, new Response.Listener<MyResponse<Void>>() {
+            @Override
+            public void onResponse(MyResponse<Void> response) {
+                if (response.isOK()){
+                    pickLuckButton.setVisibility(View.GONE);
+                    luckCountTextView.setText( "(" + String.valueOf(++myLuckFactorCount) + "幸运豆)");
+                }
             }
         }, new Response.ErrorListener() {
             @Override
