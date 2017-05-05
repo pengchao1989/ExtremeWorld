@@ -64,6 +64,7 @@ import com.jixianxueyuan.dto.TopicScoreDTO;
 import com.jixianxueyuan.dto.UserDTO;
 import com.jixianxueyuan.dto.UserMinDTO;
 import com.jixianxueyuan.dto.VideoDetailDTO;
+import com.jixianxueyuan.dto.VideoExtraDTO;
 import com.jixianxueyuan.dto.request.ReplyRequest;
 import com.jixianxueyuan.dto.request.TopicScoreRequestDTO;
 import com.jixianxueyuan.dto.request.ZanRequest;
@@ -211,8 +212,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
                     roundProgressBarWidthNumber.setVisibility(View.GONE);
 
-                    String url = topicDTO.getVideoDetail().getVideoSource()/*"http://7u2nc3.com1.z0.glb.clouddn.com/short_videofm11QHWk09-1CaKh6JpN-A__.mp4"*/;
-
+                    String url = getGoodVideoSource(topicDTO);
                     String key = Util.stringToMD5(url);
 
                     playLocalVideo(DiskCachePath.getDiskCacheDir(TopicDetailActivity.this, "short_video").getPath() + "/" + key + ".0");
@@ -286,7 +286,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
                     if (videoDetailDTO == null){
                         return;
                     }
-                    String videoUrl = topicDTO.getVideoDetail().getVideoSource();
+                    String videoUrl = getGoodVideoSource(topicDTO);
                     if (videoUrl != null){
                         TopicDownloaderManager.getInstance().downloadVideo(TopicDetailActivity.this, topicDTO.getTitle(), videoUrl);
                     }
@@ -611,7 +611,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
         //video
         if (topicDTO.getType() == TopicType.VIDEO || topicDTO.getVideoDetail() != null)
         {
-            if(topicDTO.getVideoDetail().getVideoSource() != null)
+            if(getGoodVideoSource(topicDTO) != null)
             {
                 videoLayout.setVisibility(View.VISIBLE);
                 coverImageView.setImageURI(ImageUriParseUtil.parse(topicDTO.getVideoDetail().getThumbnail() + "!detail"));
@@ -698,10 +698,10 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
     private void playVideo()
     {
         if(!topicDTO.getType().equals(TopicType.S_VIDEO)){
-            playWebVideo(topicDTO.getVideoDetail().getVideoSource());
+            playWebVideo(getGoodVideoSource(topicDTO));
         }else {
             openDiskLruCache();
-            String key = Util.stringToMD5(topicDTO.getVideoDetail().getVideoSource());
+            String key = Util.stringToMD5(getGoodVideoSource(topicDTO));
             try {
 
                 DiskLruCache.Snapshot snapShot = mDiskLruCache.get(key);
@@ -1206,7 +1206,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
     private void downloadVideoFile() {
 
-        Thread thread = new Thread(new DownloadRunnable(topicDTO.getVideoDetail().getVideoSource()));
+        Thread thread = new Thread(new DownloadRunnable(getGoodVideoSource(topicDTO)));
         thread.start();
 
     }
@@ -1358,7 +1358,7 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
 
                         ShareUtils.ShareItem shareItem = null;
                         UMVideo video = null;
-                        if (topicDTO.getVideoDetail() != null && !TextUtils.isEmpty(topicDTO.getVideoDetail().getVideoSource())){
+                        if (topicDTO.getVideoDetail() != null && !TextUtils.isEmpty(getGoodVideoSource(topicDTO))){
                             video = new UMVideo(url);
                             video.setThumb(new UMImage(TopicDetailActivity.this,topicDTO.getVideoDetail().getThumbnail()));
                         }
@@ -1434,4 +1434,21 @@ public class TopicDetailActivity extends BaseActivity implements ReplyWidgetList
             //Toast.makeText(TopicDetailActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
         }
     };
+
+    public String getGoodVideoSource(TopicDTO topicDTO){
+        if (topicDTO == null){
+            return "";
+        }
+        List<VideoExtraDTO> videoExtraDTOList = topicDTO.getVideoDetail().getVideoExtraList();
+        if (videoExtraDTOList != null && videoExtraDTOList.size() > 0){
+            for (VideoExtraDTO videoExtraDTO : videoExtraDTOList){
+                if ("high".equals(videoExtraDTO.getType())){
+                    return videoExtraDTO.getSrc();
+                }
+            }
+        }
+
+        return topicDTO.getVideoDetail().getVideoSource();
+
+    }
 }

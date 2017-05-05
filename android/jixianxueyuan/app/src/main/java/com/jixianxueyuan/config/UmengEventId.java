@@ -40,6 +40,7 @@ public class UmengEventId {
     public static final String MINE_SPONSORSHIP_CLICK = "mine_sponsorship_click";
     public static final String MINE_AVATAR_CLICK= "mine_avatar_click";
     public static final String MINE_LOTTERY_PLAN_CLICK = "mine_lottery_plan_click";
+    public static final String MINE_LOTTERY_PICK_LUCKY_CLICK = "mine_lottery_pick_lucky_click";
 
     /*discovery*/
     public static final String DISCOVERY_NEWS_CLICK = "discovery_news_click";

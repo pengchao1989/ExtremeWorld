@@ -482,6 +482,7 @@ public class MineFragment extends Fragment {
                         pickLuckButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                MobclickAgent.onEvent(MineFragment.this.getContext(), UmengEventId.MINE_LOTTERY_PICK_LUCKY_CLICK);
                                 requestPickLuckyFactor();
                             }
                         });
